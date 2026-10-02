@@ -6,6 +6,7 @@ import react from '@vitejs/plugin-react';
 import { calcWeaveOfflinePlugin } from './scripts/offline-build.ts';
 import { calcWeaveSecurityPlugin } from './scripts/security-build.ts';
 import { ENGINE_VERSION } from './packages/model/src/types.ts';
+import { getDeploymentBasePath } from './scripts/pages-base.ts';
 
 const APP_VERSION = (JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8')) as { version: string }).version;
 
@@ -24,6 +25,7 @@ export default defineConfig(({ command, isPreview }) => {
     'Permissions-Policy': 'camera=(), microphone=(), geolocation=()', 'X-Robots-Tag': 'noindex',
   };
   return {
+    base: getDeploymentBasePath(),
     root: fileURLToPath(new URL('./apps/web', import.meta.url)),
     plugins: [react(), calcWeaveSecurityPlugin(), calcWeaveOfflinePlugin({ appVersion: APP_VERSION, engineVersion: ENGINE_VERSION })], html: { cspNonce: nonce },
     server: { host: '127.0.0.1', port: 5173, strictPort: true, headers, cors: false,

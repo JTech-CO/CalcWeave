@@ -6,9 +6,10 @@ import { createHash } from 'node:crypto';
 import { compileModel } from '../../packages/compiler/src';
 import { BLOCK_REGISTRY } from '../../packages/block-library/src';
 import { ENGINE_VERSION } from '../../packages/model/src';
+import { APP_VERSION } from '../../packages/release/src';
 import type { CalcModel } from '../../packages/model/src';
 
-const evidencePath = (name: string) => `docs/evidence/${ENGINE_VERSION.split('-').at(-1)}-${name}`;
+const evidencePath = (name: string) => `docs/evidence/${APP_VERSION === '0.8.1' ? 'pages' : ENGINE_VERSION.split('-').at(-1)}-${name}`;
 
 async function openWorkspace(page: Page) {
   await page.goto('/');

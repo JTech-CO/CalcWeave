@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2026-10-02T21:20:32.608423+00:00",
+  "appVersion": "0.8.1",
+  "engineVersion": "0.8.0-catalog",
+  "baselineCommit": "fd573fa2d9b8783c0ad36e139e5ed95d6dbab331",
+  "unchangedPackageFilesExcludingRelease": 46,
+  "comparison": "UTF-8 with Git working-tree CRLF/LF normalized",
+  "newlineOnlyFiles": 19,
+  "changedPackageFilesExcludingRelease": [],
+  "registryDefinitions": 144,
+  "schemaVersion": 1,
+  "securityScan": {
+    "appFiles": 35,
+    "scriptFiles": 28,
+    "mediumOrHigherFindings": 0,
+    "patternScanIsNotFullAssurance": true
+  },
+  "dependencyAudit": {
+    "knownAdvisories": 0
+  },
+  "unit": {
+    "files": 27,
+    "passed": 1222,
+    "failed": 0,
+    "durationSeconds": 49.33
+  },
+  "roadmap": {
+    "sourceRows": 385,
+    "uniqueNames": 339,
+    "subsetRows": 134,
+    "unimplementedRows": 251,
+    "omissions": 0,
+    "duplicateIds": 0,
+    "milestones": [
+      "M8",
+      "M9",
+      "M10",
+      "M11",
+      "M12",
+      "M13",
+      "M14",
+      "M15",
+      "M16"
+    ],
+    "planOnly": true
+  }
+}

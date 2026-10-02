@@ -1,4 +1,5 @@
 import type { Plugin } from 'vite';
+import { parseDeploymentBase } from './pages-base';
 
 // GitHub Pages does not consume host-specific `_headers` files. Ship the supported
 // meta directives as well as the stronger Vite development/preview HTTP policy.
@@ -10,6 +11,7 @@ export const STATIC_CSP = [
 export function calcWeaveSecurityPlugin(): Plugin {
   return {
     name: 'calcweave-static-security', apply: 'build',
+    configResolved(config) { parseDeploymentBase(config.base); },
     transformIndexHtml: {
       order: 'pre',
       handler: () => [

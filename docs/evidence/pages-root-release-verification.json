@@ -1,0 +1,143 @@
+{
+  "generatedAt": "2026-10-02T21:14:13.821Z",
+  "appVersion": "0.8.1",
+  "engineVersion": "0.8.0-catalog",
+  "scope": "/",
+  "releaseId": "696f64b95cc4329e9ee0c7af432d0eb93307b490968538e6e88228fcf287fb0d",
+  "checks": [
+    "app/engine release versions",
+    "single registry 144 unique executable definitions",
+    "Python registry export metadata equals approved target capabilities",
+    "Python target does not claim continuous solver support",
+    "model packages bind approved immutable registry and local-only permissions",
+    "package/release catalog version agreement",
+    "offline release version and bounded deployment scope agreement",
+    "releaseId binds complete static asset manifest",
+    "bounded unique offline allowlist",
+    "safe static asset /assets/engine.worker-DZ9SpcDI.js",
+    "final built bytes match /assets/engine.worker-DZ9SpcDI.js",
+    "safe static asset /assets/index-BSvd8MHu.css",
+    "final built bytes match /assets/index-BSvd8MHu.css",
+    "safe static asset /assets/index-BoMqpQSj.js",
+    "final built bytes match /assets/index-BoMqpQSj.js",
+    "safe static asset /assets/src-CLeA__xH.js",
+    "final built bytes match /assets/src-CLeA__xH.js",
+    "safe static asset /assets/src-Ct5pXrvE.js",
+    "final built bytes match /assets/src-Ct5pXrvE.js",
+    "safe static asset /assets/src-DNT3y8KX.js",
+    "final built bytes match /assets/src-DNT3y8KX.js",
+    "safe static asset /assets/src-YvBwnEy1.js",
+    "final built bytes match /assets/src-YvBwnEy1.js",
+    "safe static asset /cookies/index.html",
+    "final built bytes match /cookies/index.html",
+    "safe static asset /index.html",
+    "final built bytes match /index.html",
+    "safe static asset /notices/index.html",
+    "final built bytes match /notices/index.html",
+    "safe static asset /privacy/index.html",
+    "final built bytes match /privacy/index.html",
+    "safe static asset /terms/index.html",
+    "final built bytes match /terms/index.html",
+    "offline shell size limit",
+    "production CSP meta blocks dynamic/inline script evaluation",
+    "CSP precedes external-only application scripts",
+    "production referrer policy",
+    "offline accessible protected policy terms",
+    "operator/contact in terms",
+    "offline accessible protected policy privacy",
+    "operator/contact in privacy",
+    "offline accessible protected policy cookies",
+    "operator/contact in cookies",
+    "offline accessible protected policy notices",
+    "no source maps or environment files distributed",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "no recognized secret material in assets\\engine.worker-DZ9SpcDI.js",
+    "no recognized secret material in assets\\index-BoMqpQSj.js",
+    "no recognized secret material in assets\\src-CLeA__xH.js",
+    "no recognized secret material in assets\\src-Ct5pXrvE.js",
+    "no recognized secret material in assets\\src-DNT3y8KX.js",
+    "no recognized secret material in assets\\src-YvBwnEy1.js",
+    "no recognized secret material in cookies\\index.html",
+    "no recognized secret material in index.html",
+    "no recognized secret material in notices\\index.html",
+    "no recognized secret material in offline-manifest.json",
+    "no recognized secret material in privacy\\index.html",
+    "no recognized secret material in sw.js",
+    "no recognized secret material in terms\\index.html",
+    "publication is explicitly dispatched",
+    "only official Actions at the independently verified commit allowlist",
+    "workflow executes actual approved Python target parity",
+    "workflow validates the exact approved project/custom-domain destination",
+    "configured-path build and verification precede artifact publication"
+  ],
+  "files": [
+    {
+      "url": "/assets/engine.worker-DZ9SpcDI.js",
+      "bytes": 286442,
+      "sha256": "7ecc46a31cc0e033a9c1c58d40859e3e871a1919f358d7393da2c032db398f1c"
+    },
+    {
+      "url": "/assets/index-BSvd8MHu.css",
+      "bytes": 83890,
+      "sha256": "477ffef561dac5dc6001c8476736c61014980bbf4ee0ecbdf07ccd51bbd891b5"
+    },
+    {
+      "url": "/assets/index-BoMqpQSj.js",
+      "bytes": 951350,
+      "sha256": "4aa5f3f77061dc1ef34c315d1625b7b60bda8fa317a0c2475acb5532546af7de"
+    },
+    {
+      "url": "/assets/src-CLeA__xH.js",
+      "bytes": 36483,
+      "sha256": "05e0822da6ff5b011b12afeed6a80998a086b5ebea5ae27e4ff7e449fe120b70"
+    },
+    {
+      "url": "/assets/src-Ct5pXrvE.js",
+      "bytes": 176104,
+      "sha256": "6168c755b5c6581bae793ccf37fbfa66354cd74d400791f5cbb6ea19ace7b45b"
+    },
+    {
+      "url": "/assets/src-DNT3y8KX.js",
+      "bytes": 1775,
+      "sha256": "719c897655a7f8d7b527993747cc568fcf67fed2d47fd589b9e4558ce3470300"
+    },
+    {
+      "url": "/assets/src-YvBwnEy1.js",
+      "bytes": 7159,
+      "sha256": "0ff88a9e95a1dbb4078a0cd3f6eb17eeb074c94d5244f529b22a2b03d3652584"
+    },
+    {
+      "url": "/cookies/index.html",
+      "bytes": 4316,
+      "sha256": "d324bdaa98ff28b95456d1a56a223159ed673cb72b12030c295903db673b8603"
+    },
+    {
+      "url": "/index.html",
+      "bytes": 1077,
+      "sha256": "34a1ccef1a4481145744a5d9403f537859dbb94036e9a16258482e2abd681662"
+    },
+    {
+      "url": "/notices/index.html",
+      "bytes": 35126,
+      "sha256": "3a30c90cb04594f6288b6b95857576c6f226d52302432ceb0854771cfb202feb"
+    },
+    {
+      "url": "/privacy/index.html",
+      "bytes": 6790,
+      "sha256": "8024a7aad6161e3e480a7824056e60aacaf81929fe4e65760bc4704fc68b4312"
+    },
+    {
+      "url": "/terms/index.html",
+      "bytes": 4824,
+      "sha256": "620e00e98f765be04bed9b926e16d4d6299fbadd8abf9be752e0359cc6bfadaf"
+    }
+  ],
+  "totalStaticBytes": 1595336,
+  "publicDeploymentClaimed": false
+}

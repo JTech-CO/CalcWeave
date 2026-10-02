@@ -1,5 +1,7 @@
 import { APP_VERSION } from '../../../packages/release/src';
 import { ENGINE_VERSION } from '../../../packages/model/src';
+import { parseDeploymentBase } from '../../../scripts/pages-base';
+import { appResourcePath, getAppBasePath } from './app-path';
 export const OFFLINE_APP_VERSION = APP_VERSION;
 export const OFFLINE_ENGINE_VERSION = ENGINE_VERSION;
 export interface OfflineStatus {
@@ -15,7 +17,8 @@ export interface OfflineController {
 }
 export function canRegisterOffline(environment: { production: boolean; secure: boolean; protocol: string; hostname: string; base: string }): boolean {
   const local = environment.hostname === 'localhost' || environment.hostname === '127.0.0.1' || environment.hostname === '[::1]';
-  return environment.production && environment.secure && environment.base === '/' && (environment.protocol === 'https:' || environment.protocol === 'http:' && local);
+  try { parseDeploymentBase(environment.base); } catch { return false; }
+  return environment.production && environment.secure && (environment.protocol === 'https:' || environment.protocol === 'http:' && local);
 }
 type ReleaseReply = { type: 'OFFLINE_RELEASE'; manifest: { releaseId: string; appVersion: string; engineVersion: string } };
 function offlineRequest(worker: ServiceWorker, data: Record<string, string>): Promise<Record<string, unknown>> {
@@ -32,7 +35,7 @@ function offlineRelease(reply: Record<string, unknown>): ReleaseReply['manifest'
   return manifest;
 }
 
-/** Production root shell only. IndexedDB/model data remains outside the SW cache. */
+/** Production app scope only. IndexedDB/model data remains outside the SW cache. */
 export async function registerOfflineSupport(onStatus: (status: OfflineStatus) => void = () => {}): Promise<OfflineController> {
   let status: OfflineStatus = { phase: 'disabled', online: navigator.onLine, offlineReady: false, appVersion: OFFLINE_APP_VERSION, engineVersion: OFFLINE_ENGINE_VERSION };
   let registration: ServiceWorkerRegistration | undefined, disposed = false, applying = false;
@@ -58,7 +61,8 @@ export async function registerOfflineSupport(onStatus: (status: OfflineStatus) =
     dispose() { disposed = true; cleanups.forEach(cleanup => cleanup()); },
   };
   onStatus({ ...status });
-  if (!('serviceWorker' in navigator) || !canRegisterOffline({ production: import.meta.env.PROD, secure: window.isSecureContext, protocol: location.protocol, hostname: location.hostname, base: import.meta.env.BASE_URL })) return controller;
+  const appBase = getAppBasePath();
+  if (!('serviceWorker' in navigator) || !canRegisterOffline({ production: import.meta.env?.PROD ?? false, secure: window.isSecureContext, protocol: location.protocol, hostname: location.hostname, base: appBase })) return controller;
   publish({ phase: 'installing' });
   async function refresh(): Promise<void> {
     if (disposed || !registration) return;
@@ -78,7 +82,7 @@ export async function registerOfflineSupport(onStatus: (status: OfflineStatus) =
   navigator.serviceWorker.addEventListener('controllerchange', changed);
   cleanups.push(() => navigator.serviceWorker.removeEventListener('controllerchange', changed));
   try {
-    registration = await navigator.serviceWorker.register('/sw.js', { scope: '/', updateViaCache: 'none' });
+    registration = await navigator.serviceWorker.register(appResourcePath('/sw.js', appBase), { scope: appBase, updateViaCache: 'none' });
     const watch = (worker: ServiceWorker): void => {
       const stateChanged = (): void => { if (worker.state === 'redundant') error(new Error('업데이트 설치에 실패했습니다. 기존 릴리스는 유지됩니다.')); else if (worker.state === 'installed' || worker.state === 'activated') void refresh(); };
       worker.addEventListener('statechange', stateChanged); cleanups.push(() => worker.removeEventListener('statechange', stateChanged));
