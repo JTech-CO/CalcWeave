@@ -1,10 +1,12 @@
 # CalcWeave 기술 백서
 
-> 버전: v0.9 · 작성일: 2026-10-03 · 상태: 수학·신호 70종 확장·144 registry·기존 M7 계약 유지
+> 버전: v0.10 · 작성일: 2026-10-03 · 상태: 수학·신호 70종 확장·144 registry·기존 M7 계약 유지
 > 대상: 제품 설계자, 프런트엔드 개발자, 수치 엔진 개발자  
 > 연결 문서: [디자인 백서](02-design-whitepaper.md) · [마일스톤](03-milestone-roadmap.md) · [블럭 대응표](block-coverage.md)
 
 ## 1. 제품 정의와 현재 상태
+
+앱0.8.1은 [GitHub Pages 웹 베타](https://jtech-co.github.io/CalcWeave/)를 게시하고 프로젝트 경로의 계산·정책·오프라인을 검증했다. 엔진0.8.0-catalog의144종 계약은 유지한다. [현재 배포 검증](pages-validation.md)과 [M8~M16 전체 대응 후속 로드맵](05-simulink-coverage-roadmap.md)을 현재 배포·확장 기준으로 사용한다. 목표 도메인·실제 초보자 조사·전체 옵션 동등성은 별도다.
 
 0.8.0의 수학·신호 확장은 승인된 수학·통계·벡터·행렬 64종과 시간 입력 6종을 추가한다. registry는 144종, 정적 지원은107종이며 Python 승인 51종은 그대로다. 기존74종의 파라미터·포트·모드·타입/형상/단위 계약을 유지한다. 신규 생성 타깃은 `typescript-catalog-v1`이며 import 없는 고정 실행 소스와 데이터만 내보낸다. 독립 oracle·모든 지원 모드·JSON roundtrip·실제 TS 결과를 검증한 범위만 대응표에 승인한다. 원자료385행/339이름과 registry 정의 수는 서로 다른 지표다. [확장 계약](catalog-contract.md)·[검증](catalog-validation.md)·[대응 계획](block-expansion-plan.md)을 현재 추가 범위의 기준으로 사용하고 아래 M0~M7 기록은 각 단계의 계약으로 보존한다.
 

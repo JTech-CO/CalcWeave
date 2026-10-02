@@ -36,7 +36,8 @@
     "verify:design:catalog": "tsx scripts/verify-design.ts --catalog",
     "verify:performance:catalog": "tsx scripts/verify-performance-m6.ts",
     "verify:roadmap": "tsx scripts/verify-roadmap.ts",
-    "test:e2e:pages": "playwright test --config=playwright.pages.config.ts"
+    "test:e2e:pages": "playwright test --config=playwright.pages.config.ts",
+    "verify:pages:browser": "tsx scripts/verify-public-pages.ts"
   },
   "dependencies": {
     "@xyflow/react": "12.12.0",
