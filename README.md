@@ -1,7 +1,7 @@
 # CalcWeave
 
 > 블럭을 연결해 수학을 계산하고, 시간에 따른 변화를 관찰하며, 모델을 데이터와 실행 코드로 이어가는 웹 도구.  
-> 기준일: 2026-10-03 · 앱 버전: 0.8.1 · 현재 상태: 블럭144종(수학·신호70종 추가), 예제32개·6개 카테고리. GitHub Pages 웹 베타 배포 구성, 실제 사용자 조사·목표 도메인 확인은 별도
+> 기준일: 2026-10-03 · 앱 버전: 0.8.1 · 현재 상태: 블럭144종(수학·신호70종 추가), 예제32개·6개 카테고리. GitHub Pages 웹 베타 게시·실제 주소 계산/오프라인 검증 완료, 실제 사용자 조사·목표 도메인 확인은 별도
 
 CalcWeave는 MATLAB 설치 없이 브라우저에서 사용할 수 있는 블럭 기반 수학 계산·시뮬레이션 도구를 목표로 합니다. Simulink 기본 라이브러리의 기능 개념을 참고하면서, 초보자가 입력·계산·결과를 이해하고 점차 고급 모델로 확장할 수 있는 독립적인 사용 경험을 설계합니다.
 
@@ -89,6 +89,7 @@ npm run verify:design:m6
 npm run verify:release
 npm run verify:performance:m6
 npm run verify:deployment
+npm run verify:pages:browser
 npm run verify:m7
 npm run verify:design:m7
 npm run verify:performance:m7

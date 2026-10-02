@@ -34,7 +34,7 @@ Remove-Item Env:CALCWEAVE_BASE_PATH
 
 [GitHub 공식 custom workflow 안내](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages), [Pages 설정 API](https://docs.github.com/en/rest/pages/pages#update-information-about-a-github-pages-site).
 
-실제 게시 후 `npm run verify:deployment -- https://jtech-co.github.io/CalcWeave/`로 HTTPS·HTTP 리다이렉트·앱 HTML·정책·manifest·SW·모든 allowlist 파일 SHA-256과 비공개 파일 404를 검사한다. Linux CI artifact와 로컬 빌드 바이트가 다를 경우 게시된 workflow의 `github-pages` artifact를 workspace 아래에서 풀어 세 번째 인자로 전달한다. 검증 대상을 이전 앱으로 바꿔 일치를 만들지 않는다. CI 커밋·run·artifact와 공개 응답을 함께 기록한다.
+실제 게시 후 `npm run verify:deployment -- https://jtech-co.github.io/CalcWeave/`로 HTTPS·HTTP 리다이렉트·앱 HTML·정책·manifest·SW·모든 allowlist 파일 SHA-256과 비공개 파일 404를 검사한다. Linux CI artifact와 로컬 빌드 바이트가 다를 경우 게시된 workflow의 `github-pages` artifact를 workspace 아래에서 풀어 세 번째 인자로 전달한다. 검증 대상을 이전 앱으로 바꿔 일치를 만들지 않는다. CI 커밋·run·artifact와 공개 응답을 함께 기록한다. `npm run verify:pages:browser`는 별도 fresh Chromium에서 실제 공개 앱의 Worker·정책·오프라인·Python ZIP을 확인한다.
 
 Pages가 제공하는 실제 응답 헤더는 그대로 기록한다. CSP meta와 no-referrer가 포함되지만 meta가 frame-ancestors·HSTS·nosniff 등을 대체한다고 주장하지 않는다. 호스트에서 설정할 수 없는 헤더가 필수인 배포에는 별도 프록시/호스팅이 필요하다. 앱 게시 성공을 실제 F06 초보자 조사나 전체 옵션 동등성 완료로 해석하지 않는다.
 
