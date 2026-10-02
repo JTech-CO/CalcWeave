@@ -1,4 +1,6 @@
 import type { BlockType, CalcModel, CalcNode, ExecutionMode } from '../../model/src/types';
+import { EXPANSION_BLOCK_DEFINITIONS } from './expansion';
+import { TIME_SOURCE_DEFINITIONS } from './time-sources';
 import { UNITS } from '../../model/src/signal';
 import { PYTHON_TARGET } from '../../codegen-python/src/capabilities';
 
@@ -136,7 +138,7 @@ function deepFreeze<T>(value: T): T {
 
 /** Typed algebraic, fixed-tick discrete and bounded continuous/mixed contracts. */
 const pythonBlockIds: ReadonlySet<string> = new Set(PYTHON_TARGET.blockIds);
-export const blockRegistry: readonly BlockDefinition[] = deepFreeze(definitions.map(definition => ({
+export const blockRegistry: readonly BlockDefinition[] = deepFreeze([...definitions, ...EXPANSION_BLOCK_DEFINITIONS, ...TIME_SOURCE_DEFINITIONS].map(definition => ({
   ...definition, exportTargets: pythonBlockIds.has(definition.id) ? ['typescript', 'python'] as const : ['typescript'] as const,
 })));
 export const BLOCK_REGISTRY = blockRegistry;

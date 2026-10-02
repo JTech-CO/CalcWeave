@@ -156,7 +156,7 @@ describe('M7 standalone Python approved static/discrete target', () => {
     const compiled = compileModel(model);
     expect(() => createPythonExportManifest(compiled)).toThrowError(expect.objectContaining({ diagnostics: [expect.objectContaining({ code: 'EXPORT_RESOURCE_LIMIT' })] }));
     expect(() => exportPython(compiled)).toThrow(ModelError);
-  });
+  }, 60_000); // The two defensive exports revalidate 100 duplicated 4,000-row inputs before rejecting allocation.
   it('preserves explicit units and homogeneous named buses without host lookups', async () => {
     const model = staticModel([block('a', 'source.constant', { value: 50 }), block('b', 'source.constant', { value: 100 }), block('bus', 'route.bus-create', { first: 'x', second: 'y' }), block('select', 'route.bus-select', { field: 'y' }), block('convert', 'unit.convert', { from: 'cm', to: 'm' }), block('result', 'sink.display'), block('note', 'annotation.note', { text: '\"\"\"; __import__(\"os\").system(\"exit\") #\n</script>한글' }), block('info', 'annotation.model-info')], [connect('a', 'bus', 'a'), connect('b', 'bus', 'b'), connect('bus', 'select'), connect('select', 'convert'), connect('convert', 'result')]);
     model.nodes[0]!.unit = 'cm'; model.nodes[1]!.unit = 'cm';

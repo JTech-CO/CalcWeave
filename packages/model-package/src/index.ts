@@ -11,7 +11,7 @@ export const MODEL_PACKAGE_LIMITS = Object.freeze({
   maxBytes: 6 * 1024 * 1024,
   maxDepth: MODEL_LIMITS.maxDepth + 4,
   maxValues: MODEL_LIMITS.maxValues + 10_000,
-  maxRegistryEntries: 100,
+  maxRegistryEntries: 256,
 });
 
 export interface ModelPackageInspection {

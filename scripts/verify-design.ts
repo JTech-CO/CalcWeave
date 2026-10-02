@@ -2,11 +2,12 @@ import { chromium } from '@playwright/test';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import config from '../playwright.config';
 import { createExample } from '../apps/web/src/examples';
-const m7 = process.argv.includes('--m7');
+const catalog = process.argv.includes('--catalog');
+const m7 = catalog || process.argv.includes('--m7');
 const m6 = m7 || process.argv.includes('--m6');
 const m5 = m6 || process.argv.includes('--m5');
 const m4 = m5 || process.argv.includes('--m4');
-const screenshotPrefix = m7 ? 'm7-sane' : m6 ? 'm6-sane' : m5 ? 'm5-sane' : m4 ? 'm4-sane' : 'sane';
+const screenshotPrefix = catalog ? 'catalog-sane' : m7 ? 'm7-sane' : m6 ? 'm6-sane' : m5 ? 'm5-sane' : m4 ? 'm4-sane' : 'sane';
 
 // Inspect the built local preview in a separate browser context, preserving the user's tab.
 const browser = await chromium.launch(config.use?.launchOptions);
@@ -294,6 +295,6 @@ try {
     pageErrors, observations: evidence };
   if (m6) report.scope += ' M6 adds release metadata, keyboard guidance, local policy links, backup/restore, damaged slot recovery, sanitized diagnostics and two-step local reset dialogs in both themes at 1440/1024/390/320, with native modal semantics and isolated backgrounds.';
   if (m7) report.scope += ' M7 adds TypeScript/Python target validation, ephemeral signed model package creation, independently trusted fingerprint import, and native import reports in both themes at 1440/1024/390/320.';
-  await writeFile(`docs/evidence/${m7 ? 'm7-design-verification' : m6 ? 'm6-design-verification' : m5 ? 'm5-design-verification' : m4 ? 'm4-design-verification' : 'sane-design-verification'}.json`, JSON.stringify(report, null, 2) + '\n');
+  await writeFile(`docs/evidence/${catalog ? 'catalog-design-verification' : m7 ? 'm7-design-verification' : m6 ? 'm6-design-verification' : m5 ? 'm5-design-verification' : m4 ? 'm4-design-verification' : 'sane-design-verification'}.json`, JSON.stringify(report, null, 2) + '\n');
   process.stdout.write(JSON.stringify(report, null, 2) + '\n');
 } finally { await context.close(); await browser.close(); }

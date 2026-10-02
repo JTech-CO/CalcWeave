@@ -4,6 +4,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { cpus, platform, release } from 'node:os';
 import ts from 'typescript';
 import { blockRegistry } from '../packages/block-library/src';
+import { EXPANSION_BLOCK_IDS } from '../packages/block-library/src/expansion';
 import { compileModel } from '../packages/compiler/src';
 import { runModel } from '../packages/runtime/src';
 import { createExportManifest, exportTypeScript } from '../packages/codegen-ts/src';
@@ -156,7 +157,7 @@ function equal(actual: unknown, expected: unknown, path: string): void {
 function stable(result: RunResult) { const { elapsedMs: _elapsed, ...rest } = result; return rest; }
 await mkdir('fixtures/m2', { recursive: true }); await mkdir('docs/evidence', { recursive: true });
 const m4Additions = new Set(['source.dataset', 'unit.convert', 'route.bus-create', 'route.bus-select', 'hierarchy.subsystem', 'annotation.note', 'annotation.model-info', 'math.matrix-multiply', 'matrix.transpose', 'matrix.determinant', 'matrix.inverse', 'matrix.solve', 'matrix.cholesky', 'matrix.lu', 'lookup.2d', 'lookup.prelookup', 'fixed.quantize']);
-assert(blockRegistry.length >= 45); assert.equal(blockRegistry.filter(block => !m4Additions.has(block.id) && block.supportedModes.includes('static')).length, 26);
+assert(blockRegistry.length >= 45); assert.equal(blockRegistry.filter(block => !(EXPANSION_BLOCK_IDS as readonly string[]).includes(block.id) && !m4Additions.has(block.id) && block.supportedModes.includes('static')).length, 26);
 const evidence = [];
 for (const oracle of oracles) {
   const compiled = compileModel(oracle.model); const result = await runModel(compiled);

@@ -10,6 +10,7 @@ import { M1_ENGINE_FIXTURES, M1_FAILURE_FIXTURES, unaryFixture } from './m1-engi
 import { M2_ENGINE_FIXTURES, m2Edge, m2Model, m2Node, m2Unary, rateTransitionFixture, seededFixture, unsignedFixture } from './m2-engine-fixtures';
 import { m4Oracles } from '../scripts/m4-oracles';
 import { m5Oracles } from '../scripts/m5-oracles';
+import { EXPANSION_FIXTURES, expansionModel } from './block-expansion-fixtures';
 
 function numeric(value: unknown): number {
   if (typeof value !== 'number') throw new Error('Expected a numeric scalar result');
@@ -193,7 +194,7 @@ describe('M1 typed static runtime', () => {
   });
 
   it('covers every current static canonical block with actual fixtures', () => {
-    const covered = new Set([...M1_ENGINE_FIXTURES, ...M2_ENGINE_FIXTURES, ...m4Oracles(), ...m5Oracles(), { model: unsignedFixture('and',1,1) }].flatMap((fixture) => fixture.model.nodes.map((entry) => entry.blockType)));
+    const covered = new Set([...M1_ENGINE_FIXTURES, ...M2_ENGINE_FIXTURES, ...m4Oracles(), ...m5Oracles(), ...EXPANSION_FIXTURES.map(fixture => ({ model: expansionModel(fixture) })), { model: unsignedFixture('and',1,1) }].flatMap((fixture) => fixture.model.nodes.map((entry) => entry.blockType)));
     expect(blockRegistry.filter((definition) => definition.supportedModes.includes('static')).map((definition) => definition.id).filter((id) => !covered.has(id))).toEqual([]);
   });
 

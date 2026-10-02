@@ -48,7 +48,7 @@ async function standalone(code: string, mode: string) {
 }
 
 await mkdir('fixtures/m4', { recursive: true }); await mkdir('docs/evidence', { recursive: true });
-assert.equal(blockRegistry.length, preserveM4Fixtures ? 64 : 74);
+assert.equal(blockRegistry.length, ENGINE_VERSION.endsWith('-catalog') ? 144 : preserveM4Fixtures ? 64 : 74);
 const evidence = [];
 for (const oracle of m4Oracles()) {
   const compiled = compileModel(oracle.model), result = await runModel(compiled); assert.equal(result.status, 'completed');

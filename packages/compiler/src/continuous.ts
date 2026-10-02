@@ -1,7 +1,8 @@
 import { CONTINUOUS_BOUNDARY_TYPES, CONTINUOUS_STATE_TYPES, MODEL_LIMITS, ModelError, normalizeSolverSettings, type CalcModel, type ExpressionNode, type IRNode, type SignalDescriptor } from '../../model/src';
-import { isDirectFeedthrough } from '../../block-library/src';
+import { getBlockDefinition, isDirectFeedthrough } from '../../block-library/src';
+import { EXPANDED_TIME_SOURCE_IDS } from '../../block-library/src/time-sources';
 
-const continuousSources = new Set(['source.step', 'source.ramp', 'source.sine-wave', 'source.repeating-sequence', 'source.clock']);
+const continuousSources: ReadonlySet<string> = new Set(['source.step', 'source.ramp', 'source.sine-wave', 'source.repeating-sequence', 'source.clock', ...EXPANDED_TIME_SOURCE_IDS]);
 const sampled = new Set(['source.random', 'source.digital-clock', 'source.pulse', 'logic.edge-detect', 'time.rate-transition', 'time.zero-order-hold']);
 const boundary = new Set(['time.zero-order-hold', 'time.first-order-hold']);
 const fail = (node: IRNode, code: string, message: string, portId?: string): never => { throw new ModelError([{ code, nodeId: node.id, message, ...(portId ? { portId } : {}) }]); };
@@ -65,7 +66,7 @@ export function inferContinuousDomains(model: CalcModel, ordered: IRNode[]): voi
   const byId = new Map(ordered.map((node) => [node.id, node]));
   const explicit = new Map(model.nodes.map((node) => [node.id, !!node.sampleTime && (node.sampleTime.period !== 1 || node.sampleTime.offset !== 0)]));
   for (const node of ordered) {
-    if (node.blockType === 'source.constant' || node.blockType === 'io.input' || node.blockType.startsWith('annotation.')) node.executionDomain = 'constant';
+    if (getBlockDefinition(node.blockType)!.sampleTime === 'constant' || node.blockType.startsWith('annotation.')) node.executionDomain = 'constant';
     else if (node.blockType === 'source.dataset') node.executionDomain = node.parameters.dataKind === 'boolean' ? 'discrete' : 'continuous';
     else if (node.blockType.startsWith('discrete.') || sampled.has(node.blockType)) node.executionDomain = 'discrete';
     else if (CONTINUOUS_STATE_TYPES.includes(node.blockType) || CONTINUOUS_BOUNDARY_TYPES.includes(node.blockType) || continuousSources.has(node.blockType)) node.executionDomain = 'continuous';
@@ -184,6 +185,7 @@ function validateRegisteredDiscontinuities(ordered: IRNode[], byId: Map<string, 
       const producer = byId.get(id)!;
       if (producer.executionDomain !== 'continuous' || CONTINUOUS_STATE_TYPES.includes(producer.blockType) || CONTINUOUS_BOUNDARY_TYPES.includes(producer.blockType)) continue;
       let unsupported = producer.blockType === 'math.round'
+        || ['math.sign', 'math.mod', 'math.remainder', 'nonlinear.quantizer', 'logic.interval', 'logic.is-integer', 'logic.approx-equal', 'reduce.all', 'reduce.any'].includes(producer.blockType)
         || (producer.blockType === 'lookup.interpolated' && producer.parameters.interpolation === 'previous')
         || (producer.blockType === 'math.expression' && roundedExpression(producer.expression));
       if (producer.blockType === 'route.switch') {

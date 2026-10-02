@@ -1,0 +1,141 @@
+{
+  "generatedAt": "2026-10-02T20:25:13.099Z",
+  "appVersion": "0.8.0",
+  "engineVersion": "0.8.0-catalog",
+  "releaseId": "f13657522d41025074069f4e2079d17452c1e11f51eae832c578d8ddf05a8217",
+  "checks": [
+    "app/engine release versions",
+    "single registry 144 unique executable definitions",
+    "Python registry export metadata equals approved target capabilities",
+    "Python target does not claim continuous solver support",
+    "model packages bind approved immutable registry and local-only permissions",
+    "package/release catalog version agreement",
+    "offline release version and root scope agreement",
+    "releaseId binds complete static asset manifest",
+    "bounded unique offline allowlist",
+    "safe static asset /assets/engine.worker-DZ9SpcDI.js",
+    "final built bytes match /assets/engine.worker-DZ9SpcDI.js",
+    "safe static asset /assets/index-BSvd8MHu.css",
+    "final built bytes match /assets/index-BSvd8MHu.css",
+    "safe static asset /assets/index-DzsZmcEh.js",
+    "final built bytes match /assets/index-DzsZmcEh.js",
+    "safe static asset /assets/src-BkHp_zyo.js",
+    "final built bytes match /assets/src-BkHp_zyo.js",
+    "safe static asset /assets/src-IJqsQG7y.js",
+    "final built bytes match /assets/src-IJqsQG7y.js",
+    "safe static asset /assets/src-aeEqzTdf.js",
+    "final built bytes match /assets/src-aeEqzTdf.js",
+    "safe static asset /assets/src-l9yU-CDC.js",
+    "final built bytes match /assets/src-l9yU-CDC.js",
+    "safe static asset /cookies/index.html",
+    "final built bytes match /cookies/index.html",
+    "safe static asset /index.html",
+    "final built bytes match /index.html",
+    "safe static asset /notices/index.html",
+    "final built bytes match /notices/index.html",
+    "safe static asset /privacy/index.html",
+    "final built bytes match /privacy/index.html",
+    "safe static asset /terms/index.html",
+    "final built bytes match /terms/index.html",
+    "offline shell size limit",
+    "production CSP meta blocks dynamic/inline script evaluation",
+    "CSP precedes external-only application scripts",
+    "production referrer policy",
+    "offline accessible protected policy terms",
+    "operator/contact in terms",
+    "offline accessible protected policy privacy",
+    "operator/contact in privacy",
+    "offline accessible protected policy cookies",
+    "operator/contact in cookies",
+    "offline accessible protected policy notices",
+    "no source maps or environment files distributed",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "no recognized secret material in assets\\engine.worker-DZ9SpcDI.js",
+    "no recognized secret material in assets\\index-DzsZmcEh.js",
+    "no recognized secret material in assets\\src-aeEqzTdf.js",
+    "no recognized secret material in assets\\src-BkHp_zyo.js",
+    "no recognized secret material in assets\\src-IJqsQG7y.js",
+    "no recognized secret material in assets\\src-l9yU-CDC.js",
+    "no recognized secret material in cookies\\index.html",
+    "no recognized secret material in index.html",
+    "no recognized secret material in notices\\index.html",
+    "no recognized secret material in offline-manifest.json",
+    "no recognized secret material in privacy\\index.html",
+    "no recognized secret material in sw.js",
+    "no recognized secret material in terms\\index.html",
+    "publication is explicitly dispatched",
+    "only official Actions at the independently verified commit allowlist",
+    "workflow executes actual approved Python target parity",
+    "workflow rejects repository subpath and unconfigured custom domain"
+  ],
+  "files": [
+    {
+      "url": "/assets/engine.worker-DZ9SpcDI.js",
+      "bytes": 286442,
+      "sha256": "7ecc46a31cc0e033a9c1c58d40859e3e871a1919f358d7393da2c032db398f1c"
+    },
+    {
+      "url": "/assets/index-BSvd8MHu.css",
+      "bytes": 83890,
+      "sha256": "477ffef561dac5dc6001c8476736c61014980bbf4ee0ecbdf07ccd51bbd891b5"
+    },
+    {
+      "url": "/assets/index-DzsZmcEh.js",
+      "bytes": 950724,
+      "sha256": "bb2ee0d4bac6e3d8dbd7d144c9cb3db4f3eefba115370b5600c80fb6b1097340"
+    },
+    {
+      "url": "/assets/src-BkHp_zyo.js",
+      "bytes": 176104,
+      "sha256": "8e5d5fa5507e30debd074726d8c6ff3c22e5602fc0b754e525f127383c535ff8"
+    },
+    {
+      "url": "/assets/src-IJqsQG7y.js",
+      "bytes": 7159,
+      "sha256": "42201db9965ca75b608e5e71713e5001c936db0dd06e91c219b2ccfad361abc9"
+    },
+    {
+      "url": "/assets/src-aeEqzTdf.js",
+      "bytes": 36483,
+      "sha256": "23fd864940b6bf2dd9ec61b1fd16140495f6179e99334c99e9f5c16c0c60111d"
+    },
+    {
+      "url": "/assets/src-l9yU-CDC.js",
+      "bytes": 1775,
+      "sha256": "465917899425551e2e69b2cd7a9b1201390f65c073495443f76eedd35e080d4a"
+    },
+    {
+      "url": "/cookies/index.html",
+      "bytes": 3775,
+      "sha256": "67483972e372462a6158499bbc20f300ffe728da66b08bb445592a812e1d72f4"
+    },
+    {
+      "url": "/index.html",
+      "bytes": 1078,
+      "sha256": "d358e3a265878d0ad34513fd58491d84ef37879f6685e6f6e0455b94f98fc550"
+    },
+    {
+      "url": "/notices/index.html",
+      "bytes": 35126,
+      "sha256": "160791cdc5dd35e67e72964f633e62fb187489955d1ff275e390e4bd07baa088"
+    },
+    {
+      "url": "/privacy/index.html",
+      "bytes": 6462,
+      "sha256": "660389762ed922bb39d8b4e8815adea57ce5dffbd48fb9a31968e87de55b8b6b"
+    },
+    {
+      "url": "/terms/index.html",
+      "bytes": 4671,
+      "sha256": "133aafce1a7295578289b7562bdd2740b3a7f94974ea0668a77f088dca07617a"
+    }
+  ],
+  "totalStaticBytes": 1593689,
+  "publicDeploymentClaimed": false
+}

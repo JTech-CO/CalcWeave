@@ -2,6 +2,8 @@ import { evaluateExpression, expressionNodeCount } from '../../expression/src';
 import { ModelError, type IRNode, type SignalDescriptor, type SignalValue } from '../../model/src/types';
 import { matrixMultiply, transpose, determinant, inverse, solve, cholesky, lu, lookup2D, prelookup } from '../../advanced-math/src';
 import { quantizeFixed, type FixedQuantizationOptions } from '../../quantization/src';
+import { evaluateExpansionNode } from './expansion';
+import { evaluateTimeSourceNode } from './time-sources';
 
 export function numericFailure(code: string, nodeId: string, message: string): never {
   throw new ModelError([{ code, nodeId, message }]);
@@ -41,12 +43,20 @@ export function nodeOperationCost(node: IRNode, byId: Map<string, IRNode>): numb
     const a = inputShape('a'), b = inputShape('b');
     return 8 * a[0]! * a[1]! * b[1]! + a[0]! * a[1]! + b[0]! * b[1]! + outputSize;
   }
+  if (node.blockType === 'vector.convolve') {
+    return 4 * signalElements(byId.get(node.inputs.a!.nodeId)!.outputs[node.inputs.a!.portId]!) * signalElements(byId.get(node.inputs.b!.nodeId)!.outputs[node.inputs.b!.portId]!) + outputSize;
+  }
   if (['matrix.determinant', 'matrix.inverse', 'matrix.solve', 'matrix.cholesky', 'matrix.lu'].includes(node.blockType)) {
     const size = inputShape(node.blockType === 'matrix.solve' ? 'a' : 'in')[0]!;
     // Pivoting, scale handling, residual/condition work and multi-RHS storage are charged.
     return 32 * size ** 3 + 32 * size ** 2 + 8 * size * inputSize + outputSize;
   }
   let factor = node.expression ? expressionNodeCount(node.expression) : 1;
+  if (['source.chirp', 'source.gaussian-pulse', 'source.damped-sine', 'source.exponential', 'source.logistic', 'source.sinc-pulse'].includes(node.blockType)) factor = 64;
+  if (node.blockType.startsWith('reduce.') || node.blockType.startsWith('vector.') || ['matrix.trace', 'matrix.diagonal', 'matrix.diag-create', 'matrix.identity', 'matrix.select', 'matrix.row', 'matrix.column', 'matrix.horizontal', 'matrix.vertical', 'matrix.triangle', 'matrix.symmetrize', 'matrix.kronecker', 'source.linspace', 'source.logspace', 'source.zeros'].includes(node.blockType)) factor = 32;
+  if (['math.cbrt', 'math.expm1', 'math.log1p', 'math.log2', 'math.exp2', 'math.sinh', 'math.cosh', 'math.tanh', 'math.asinh', 'math.acosh', 'math.atanh', 'math.sinc', 'math.power', 'math.hypot', 'math.atan2', 'math.mod', 'math.remainder', 'math.bias', 'math.sign', 'nonlinear.dead-zone', 'nonlinear.quantizer', 'logic.interval', 'logic.is-integer', 'logic.approx-equal'].includes(node.blockType)) factor = 64;
+  if (node.blockType === 'math.polynomial') factor = (node.parameters.coefficients as number[]).length * 4;
+  if (node.blockType === 'vector.sort' || node.blockType === 'reduce.median') factor = 8 * Math.max(1, Math.ceil(Math.log2(inputSize)));
   if (node.blockType === 'matrix.transpose') factor = 3;
   if (node.blockType === 'fixed.quantize') factor = 1_100; // bounded binary64 BigInt work (≤1,074-bit shifts), per emitted element
   if (node.blockType === 'lookup.prelookup') factor = (node.parameters.breakpoints as number[]).length + 8;
@@ -93,6 +103,10 @@ export function checkSignal(value: SignalValue | undefined, descriptor: SignalDe
 
 /** M1 finite real/boolean kernels. Arbitrary model text never becomes executable syntax. */
 export function evaluateSignalNode(node: IRNode, input: (port: string) => SignalValue, state?: SignalValue, time = 0): Record<string, SignalValue> {
+  const expansion = evaluateExpansionNode(node, input);
+  if (expansion) return expansion;
+  const timeSource = evaluateTimeSourceNode(node, time);
+  if (timeSource) return timeSource;
   const id = node.id;
   const descriptor = node.outputs.out;
   const shape = descriptor?.shape ?? [];

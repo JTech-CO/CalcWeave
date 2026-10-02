@@ -6,6 +6,8 @@ import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import ts from 'typescript';
 import { blockRegistry } from '../packages/block-library/src';
+import { EXPANSION_BLOCK_IDS } from '../packages/block-library/src/expansion';
+import { EXPANDED_TIME_SOURCE_IDS } from '../packages/block-library/src/time-sources';
 import { compileModel } from '../packages/compiler/src';
 import { runModel } from '../packages/runtime/src';
 import { createExportManifest, exportTypeScript } from '../packages/codegen-ts/src';
@@ -41,7 +43,8 @@ async function standalone(code: string) {
 
 await mkdir('fixtures/m3', { recursive: true }); await mkdir('docs/evidence', { recursive: true });
 const m4Additions = new Set(['source.dataset', 'unit.convert', 'route.bus-create', 'route.bus-select', 'hierarchy.subsystem', 'annotation.note', 'annotation.model-info', 'math.matrix-multiply', 'matrix.transpose', 'matrix.determinant', 'matrix.inverse', 'matrix.solve', 'matrix.cholesky', 'matrix.lu', 'lookup.2d', 'lookup.prelookup', 'fixed.quantize']);
-const m3Baseline = blockRegistry.filter(block => !m4Additions.has(block.id));
+const catalogAdditions: readonly string[] = [...EXPANSION_BLOCK_IDS, ...EXPANDED_TIME_SOURCE_IDS];
+const m3Baseline = blockRegistry.filter(block => !catalogAdditions.includes(block.id) && !m4Additions.has(block.id));
 assert.equal(m3Baseline.length, 57); assert.equal(m3Baseline.filter(b => b.supportedModes.includes('static')).length, 26);
 const evidence = [];
 for (const oracle of [...continuousOracles(), ...boundaryOracles()]) {

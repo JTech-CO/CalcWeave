@@ -12,7 +12,7 @@ export const LOCAL_OPERATION_LIMITS = Object.freeze({ records: 50, bytes: 16 * 1
 const LOG_KEY = 'calcweave.local-operations-v1', BACKUP_KEY = 'calcweave.backup-status-v1';
 const codeSet = new Set<string>(LOCAL_OPERATION_CODES), contextSet = new Set<string>(LOCAL_OPERATION_CONTEXTS);
 const enginePattern = /^\d{1,6}\.\d{1,6}\.\d{1,6}(?:-[A-Za-z0-9.-]{1,32})?$/;
-const diagnosticEnginePattern = /^\d{1,2}\.\d{1,2}\.\d{1,2}(?:-m\d{1,2})?$/;
+const diagnosticEnginePattern = /^\d{1,2}\.\d{1,2}\.\d{1,2}(?:-m\d{1,2}|-catalog)?$/;
 const iso = (value: unknown): value is string => typeof value === 'string' && value.length <= 32 && Number.isFinite(Date.parse(value)) && new Date(value).toISOString() === value;
 function error(code: string, message: string): never { throw new ModelError([{ code, message }]); }
 function byteLength(text: string): number { return new TextEncoder().encode(text).length; }
