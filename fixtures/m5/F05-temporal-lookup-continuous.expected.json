@@ -1,0 +1,250 @@
+{
+  "reference": "Time-domain algebraic continuous fixture: f(t,2.5)=12t-.5, prelookup actual knot .25/final1; continuous exact integral6t^2-.5t uses every stage.",
+  "absoluteTolerance": 2e-9,
+  "relativeTolerance": 0,
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "fraction": 0,
+          "index": 0,
+          "integral": 0,
+          "result": -0.5000000000000013
+        }
+      },
+      {
+        "time": 0.125,
+        "values": {
+          "fraction": 0.5,
+          "index": 0,
+          "integral": 0.031250000000000056,
+          "result": 1.0000000000000013
+        }
+      },
+      {
+        "time": 0.25,
+        "values": {
+          "fraction": 0,
+          "index": 1,
+          "integral": 0.25000000000000006,
+          "result": 2.5
+        }
+      },
+      {
+        "time": 0.375,
+        "values": {
+          "fraction": 0.16666666666666666,
+          "index": 1,
+          "integral": 0.65625,
+          "result": 3.999999999999999
+        }
+      },
+      {
+        "time": 0.5,
+        "values": {
+          "fraction": 0.3333333333333333,
+          "index": 1,
+          "integral": 1.25,
+          "result": 5.500000000000001
+        }
+      },
+      {
+        "time": 0.625,
+        "values": {
+          "fraction": 0.5,
+          "index": 1,
+          "integral": 2.03125,
+          "result": 7
+        }
+      },
+      {
+        "time": 0.75,
+        "values": {
+          "fraction": 0.6666666666666666,
+          "index": 1,
+          "integral": 3,
+          "result": 8.499999999999998
+        }
+      },
+      {
+        "time": 0.875,
+        "values": {
+          "fraction": 0.8333333333333334,
+          "index": 1,
+          "integral": 4.15625,
+          "result": 10.000000000000002
+        }
+      },
+      {
+        "time": 1,
+        "values": {
+          "fraction": 1,
+          "index": 1,
+          "integral": 5.500000000000001,
+          "result": 11.5
+        }
+      }
+    ],
+    "finalState": {
+      "integrator": 5.500000000000001
+    },
+    "stateMemory": {
+      "integrator": {
+        "state": [
+          5.500000000000001
+        ]
+      }
+    },
+    "stateTime": 1,
+    "status": "completed",
+    "steps": 9,
+    "solverStatistics": {
+      "method": "rk4",
+      "acceptedSteps": 16,
+      "rejectedSteps": 0,
+      "evaluations": 64,
+      "events": 0,
+      "lastStep": 0.04500000000000004,
+      "minAcceptedStep": 0.044999999999999984,
+      "maxAcceptedStep": 0.08
+    },
+    "events": []
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "36b9b97dac6ac6d605678e4c8af8e2a1ab87ba3c4579815475d79eaa908711d9",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.5.0-m5",
+    "targetVersion": "typescript-m5-v1",
+    "execution": {
+      "mode": "continuous",
+      "startTime": 0,
+      "stopTime": 1,
+      "step": 0.125,
+      "solver": {
+        "method": "rk4",
+        "initialStep": 0.08,
+        "minStep": 1e-10,
+        "maxStep": 0.08,
+        "atol": 1e-8,
+        "rtol": 0.000001,
+        "maxSteps": 100000,
+        "maxRejects": 10000,
+        "maxEvaluations": 1000000,
+        "eventTolerance": 1e-8,
+        "maxEvents": 10000,
+        "discreteStep": 0.125
+      }
+    },
+    "nodes": {
+      "column": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "constant"
+      },
+      "integrator": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "integral": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "row": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "lookup": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "prelookup": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "fraction": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "index": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "result": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      }
+    },
+    "outputTypes": {
+      "fraction": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      },
+      "index": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      },
+      "integral": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      },
+      "result": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    },
+    "continuousPolicy": {
+      "outputGrid": "execution.step",
+      "discreteGrid": "solver.discreteStep",
+      "eventOrder": "reset-tick-observe",
+      "acceptedBoundaryMemory": true,
+      "limits": {
+        "maxSteps": 100000,
+        "maxRejects": 10000,
+        "maxEvaluations": 1000000,
+        "maxEvents": 10000
+      }
+    }
+  }
+}

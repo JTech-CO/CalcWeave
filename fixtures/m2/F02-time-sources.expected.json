@@ -1,0 +1,269 @@
+{
+  "reference": "Hand piecewise/quarter-wave values at absolute times -1..1; repeating-sequence positive modulo and tick-based pulse.",
+  "tolerance": {
+    "absolute": 1e-12,
+    "relative": 1e-12
+  },
+  "result": {
+    "samples": [
+      {
+        "time": -1,
+        "values": {
+          "clock-out": -1,
+          "digital-out": -1,
+          "pulse-out": 0,
+          "ramp-out": 1,
+          "sequence-out": 0,
+          "sine-out": 1.0000000000000004,
+          "step-out": -1
+        }
+      },
+      {
+        "time": -0.75,
+        "values": {
+          "clock-out": -0.75,
+          "digital-out": -0.75,
+          "pulse-out": 3,
+          "ramp-out": 1,
+          "sequence-out": 1,
+          "sine-out": 3,
+          "step-out": -1
+        }
+      },
+      {
+        "time": -0.5,
+        "values": {
+          "clock-out": -0.5,
+          "digital-out": -0.5,
+          "pulse-out": 3,
+          "ramp-out": 1,
+          "sequence-out": 2,
+          "sine-out": 0.9999999999999998,
+          "step-out": -1
+        }
+      },
+      {
+        "time": -0.25,
+        "values": {
+          "clock-out": -0.25,
+          "digital-out": -0.25,
+          "pulse-out": 0,
+          "ramp-out": 1.5,
+          "sequence-out": 1,
+          "sine-out": -1,
+          "step-out": -1
+        }
+      },
+      {
+        "time": 0,
+        "values": {
+          "clock-out": 0,
+          "digital-out": 0,
+          "pulse-out": 0,
+          "ramp-out": 2,
+          "sequence-out": 0,
+          "sine-out": 1,
+          "step-out": 2
+        }
+      },
+      {
+        "time": 0.25,
+        "values": {
+          "clock-out": 0.25,
+          "digital-out": 0.25,
+          "pulse-out": 3,
+          "ramp-out": 2.5,
+          "sequence-out": 1,
+          "sine-out": 3,
+          "step-out": 2
+        }
+      },
+      {
+        "time": 0.5,
+        "values": {
+          "clock-out": 0.5,
+          "digital-out": 0.5,
+          "pulse-out": 3,
+          "ramp-out": 3,
+          "sequence-out": 2,
+          "sine-out": 1.0000000000000002,
+          "step-out": 2
+        }
+      },
+      {
+        "time": 0.75,
+        "values": {
+          "clock-out": 0.75,
+          "digital-out": 0.75,
+          "pulse-out": 0,
+          "ramp-out": 3.5,
+          "sequence-out": 1,
+          "sine-out": -1,
+          "step-out": 2
+        }
+      },
+      {
+        "time": 1,
+        "values": {
+          "clock-out": 1,
+          "digital-out": 1,
+          "pulse-out": 0,
+          "ramp-out": 4,
+          "sequence-out": 0,
+          "sine-out": 0.9999999999999996,
+          "step-out": 2
+        }
+      }
+    ],
+    "finalState": {},
+    "stateMemory": {},
+    "status": "completed",
+    "steps": 9
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "be6e61496d75273e645d9f6ddf8f54f1e872ec1cc76793f632e73f05c0767976",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.2.0-m2",
+    "targetVersion": "typescript-m2-v1",
+    "execution": {
+      "mode": "discrete",
+      "startTime": -1,
+      "stopTime": 1,
+      "step": 0.25
+    },
+    "nodes": {
+      "clock": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "clock-out": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "digital": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "digital-out": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "pulse": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "pulse-out": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "ramp": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "ramp-out": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "sequence": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "sequence-out": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "sine": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "sine-out": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "step": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "step-out": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      }
+    },
+    "outputTypes": {
+      "clock-out": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "s"
+      },
+      "digital-out": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "s"
+      },
+      "pulse-out": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      },
+      "ramp-out": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      },
+      "sequence-out": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      },
+      "sine-out": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      },
+      "step-out": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    }
+  }
+}

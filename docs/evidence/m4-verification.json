@@ -1,0 +1,917 @@
+{
+  "generatedAt": "2026-10-02T13:25:02.762Z",
+  "engineVersion": "0.4.0-m4",
+  "environment": {
+    "node": "v25.9.0",
+    "os": "win32 10.0.26200",
+    "cpu": "13th Gen Intel(R) Core(TM) i7-13620H",
+    "logicalCpus": 16
+  },
+  "registry": {
+    "total": 64,
+    "static": 33,
+    "continuous": 64
+  },
+  "datasetSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+  "methodology": "Independent linear/previous piecewise formulas and exact integrals, explicit affine conversions and approved dimensions, named scalar bus expectations, and hand-built repeated-state flat equations. Every raw output sample is checked. Portable JSON, reversed graph/definition insertion order, all three strict ES2022-only import-free generator forms executed as actual ESM, SHA-256/data/hierarchy references, defensive copies, and controlled error diagnostics/partial results are compared.",
+  "strictIndependentTypecheck": true,
+  "strictIndependentModes": [
+    "continuous",
+    "discrete",
+    "static"
+  ],
+  "fixtures": [
+    {
+      "id": "F04-static-playback-notes",
+      "reference": "Static playback reads its start-time table value 3. DocBlock/ModelInfo have no numerical output and cannot change execution semantics.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "tolerance": 1e-11,
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "051cf39f8c9dc59dcdb9b5e3a72ce322ecb1005e5efde4e1af2fc02bedff6f5e",
+      "dataReferences": [
+        {
+          "id": "data",
+          "version": 1,
+          "sourceHash": "2b6a7436f15dc5f17eee9ea3d2af08815a8232963bc54bcaebd31f6744e5e8fd",
+          "contentHash": "d51c3c61a1fda445066c5af70799d860f9334eb1e01cf54d9b2cf9e04410174a",
+          "timeColumn": "time",
+          "columns": [
+            {
+              "name": "time",
+              "kind": "number",
+              "unit": "s"
+            },
+            {
+              "name": "value",
+              "kind": "number",
+              "unit": "1"
+            }
+          ]
+        }
+      ],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": false
+    },
+    {
+      "id": "F04-linear-playback",
+      "reference": "Linear table through (0,1),(1,3): y(t)=2t+1 at every raw output sample.",
+      "nodes": 2,
+      "samples": 11,
+      "maximumAbsoluteError": 4.440892098500626e-16,
+      "tolerance": 1e-11,
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "fdfb90a9e83e13ce69688a69d780b341485d341957e90c12e4794ff1a0903d91",
+      "dataReferences": [
+        {
+          "id": "data",
+          "version": 1,
+          "sourceHash": "bbd1bfdaf9eea27c9cd03486b22ae09f191e4b469ebe59c3e1366813c15e2ad0",
+          "contentHash": "265a02bea95defb6562052999382560bb14f82df732d6316a7e0e61f944a3d50",
+          "timeColumn": "time",
+          "columns": [
+            {
+              "name": "time",
+              "kind": "number",
+              "unit": "s"
+            },
+            {
+              "name": "value",
+              "kind": "number",
+              "unit": "1"
+            }
+          ]
+        }
+      ],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": false
+    },
+    {
+      "id": "F04-linear-stage-integral",
+      "reference": "Integral of y(t)=2t+1 gives x(t)=t^2+t; actual RK stage times must read the interpolated dataset.",
+      "nodes": 3,
+      "samples": 11,
+      "maximumAbsoluteError": 1.2656542480726785e-14,
+      "tolerance": 1e-11,
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "dc381f04e7cac90947e9a2d18621ce0dc1b458c57244640789dfd22ccae09f7c",
+      "dataReferences": [
+        {
+          "id": "data",
+          "version": 1,
+          "sourceHash": "bbd1bfdaf9eea27c9cd03486b22ae09f191e4b469ebe59c3e1366813c15e2ad0",
+          "contentHash": "265a02bea95defb6562052999382560bb14f82df732d6316a7e0e61f944a3d50",
+          "timeColumn": "time",
+          "columns": [
+            {
+              "name": "time",
+              "kind": "number",
+              "unit": "s"
+            },
+            {
+              "name": "value",
+              "kind": "number",
+              "unit": "1"
+            }
+          ]
+        }
+      ],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": false
+    },
+    {
+      "id": "F04-previous-off-grid-integral",
+      "reference": "Previous table jumps from 1 to 3 at t=.37; x(t)=t+2*max(0,t-.37), solved at the off-grid knot with a one-sided RHS.",
+      "nodes": 3,
+      "samples": 11,
+      "maximumAbsoluteError": 8.881784197001252e-16,
+      "tolerance": 2e-9,
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "f5fb6633be377fed12323bb513eb22f27d4a24138f154ae66fe86175a200dedd",
+      "dataReferences": [
+        {
+          "id": "data",
+          "version": 1,
+          "sourceHash": "e1db5e2be4506843190f62f6d96ca9af70a80050fdbe00440465e8be007ffa22",
+          "contentHash": "cbee53de0cfa08396b81ffb2dab7187cbc20dbe9e527c5d29f893c2af2ad846c",
+          "timeColumn": "time",
+          "columns": [
+            {
+              "name": "time",
+              "kind": "number",
+              "unit": "s"
+            },
+            {
+              "name": "value",
+              "kind": "number",
+              "unit": "1"
+            }
+          ]
+        }
+      ],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": false
+    },
+    {
+      "id": "F04-outside-hold",
+      "reference": "Hold outside [.2,.8]: y=2 before,10t inside,8 afterward. Exact accumulated area is 2t;5t^2+.2;3.4+8(t-.8).",
+      "nodes": 4,
+      "samples": 11,
+      "maximumAbsoluteError": 6.661338147750939e-14,
+      "tolerance": 2e-9,
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "signal": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "ce97618f88c24550ba0576079ccead4744213ed667c7dc4fab40b1deae942457",
+      "dataReferences": [
+        {
+          "id": "data",
+          "version": 1,
+          "sourceHash": "57f72682f59a62e00ff8be4c968eb0373e71cd7bc4cda4588e9312c351be4174",
+          "contentHash": "790ca85505db76d4fd304984991ca5831b39c6aa454f495e132ba831bfcc9c99",
+          "timeColumn": "time",
+          "columns": [
+            {
+              "name": "time",
+              "kind": "number",
+              "unit": "s"
+            },
+            {
+              "name": "value",
+              "kind": "number",
+              "unit": "1"
+            }
+          ]
+        }
+      ],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": false
+    },
+    {
+      "id": "F04-outside-zero",
+      "reference": "Zero outside [.25,.75]: y=10t inside and 0 outside. Integral x=0 before .25,5(t^2-.25^2) inside,2.5 after .75.",
+      "nodes": 4,
+      "samples": 11,
+      "maximumAbsoluteError": 4.1611158962950867e-13,
+      "tolerance": 2e-9,
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "signal": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "3a6d75d813743953b642b49b7a3a775387a2b065e7489fcb5d0ebeef338d649a",
+      "dataReferences": [
+        {
+          "id": "data",
+          "version": 1,
+          "sourceHash": "d6b6c05becb65bc706a20dc68875bc68d2a6b07c36e53478383437a9874bbf74",
+          "contentHash": "dfc443e318a8ddc2f5a6b78f29d6e53c46c755f3572acfd8b3ee2313a9f02d2f",
+          "timeColumn": "time",
+          "columns": [
+            {
+              "name": "time",
+              "kind": "number",
+              "unit": "s"
+            },
+            {
+              "name": "value",
+              "kind": "number",
+              "unit": "1"
+            }
+          ]
+        }
+      ],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": false
+    },
+    {
+      "id": "F04-outside-zero-delayed-jump",
+      "reference": "Raw table retains lastpoint y(.75)=7.5 but stores a right-limit0 afterward. TransportDelay .2 reproduces jumps at .45/.95: delayed=10(t-.2) on [.45,.95),0 outside, accumulated area2.5 after .95.",
+      "nodes": 6,
+      "samples": 23,
+      "maximumAbsoluteError": 5.417444270960914e-12,
+      "tolerance": 2e-9,
+      "outputTypes": {
+        "delayed": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "raw": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "98ae1e8c9019be5246d13b6ee5bd36a1388544d41ad982abbaeb020f15d69da6",
+      "dataReferences": [
+        {
+          "id": "data",
+          "version": 1,
+          "sourceHash": "d6b6c05becb65bc706a20dc68875bc68d2a6b07c36e53478383437a9874bbf74",
+          "contentHash": "dfc443e318a8ddc2f5a6b78f29d6e53c46c755f3572acfd8b3ee2313a9f02d2f",
+          "timeColumn": "time",
+          "columns": [
+            {
+              "name": "time",
+              "kind": "number",
+              "unit": "s"
+            },
+            {
+              "name": "value",
+              "kind": "number",
+              "unit": "1"
+            }
+          ]
+        }
+      ],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": false
+    },
+    {
+      "id": "F04-boolean-previous-discrete",
+      "reference": "Boolean previous playback is published only on P2 base ticks (.2s): [false,false,true,true,false,false,true]. No interpolation/coercion.",
+      "nodes": 2,
+      "samples": 7,
+      "maximumAbsoluteError": 0,
+      "tolerance": 1e-11,
+      "outputTypes": {
+        "result": {
+          "valueType": "boolean",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "90b5fab56d7e9acf5b3b5706795498f63fb373b16702f03b92658c19d61456ec",
+      "dataReferences": [
+        {
+          "id": "data",
+          "version": 1,
+          "sourceHash": "411499b5db9e58cc0ce0168c9d2cdb36389e474608438850318c5a79124b2929",
+          "contentHash": "99d35a318237b2b93b3ab1944190d86124a870c170982d71a5c59e2678983dea",
+          "timeColumn": "time",
+          "columns": [
+            {
+              "name": "time",
+              "kind": "number",
+              "unit": "s"
+            },
+            {
+              "name": "value",
+              "kind": "boolean",
+              "unit": "1"
+            }
+          ]
+        }
+      ],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": false
+    },
+    {
+      "id": "F04-boolean-previous-continuous",
+      "reference": "Boolean previous playback is published only on P2 base ticks (.2s): [false,false,true,true,false,false,true]. No interpolation/coercion.",
+      "nodes": 2,
+      "samples": 7,
+      "maximumAbsoluteError": 0,
+      "tolerance": 1e-11,
+      "outputTypes": {
+        "result": {
+          "valueType": "boolean",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "50479283c1fe62fe58fd0dc8f63db03db355b336ce50848508f29669f19e0770",
+      "dataReferences": [
+        {
+          "id": "data",
+          "version": 1,
+          "sourceHash": "411499b5db9e58cc0ce0168c9d2cdb36389e474608438850318c5a79124b2929",
+          "contentHash": "99d35a318237b2b93b3ab1944190d86124a870c170982d71a5c59e2678983dea",
+          "timeColumn": "time",
+          "columns": [
+            {
+              "name": "time",
+              "kind": "number",
+              "unit": "s"
+            },
+            {
+              "name": "value",
+              "kind": "boolean",
+              "unit": "1"
+            }
+          ]
+        }
+      ],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": false
+    },
+    {
+      "id": "F04-millisecond-time",
+      "reference": "1000ms is normalized to one second, yielding y=2t+1 while preserving ms table provenance.",
+      "nodes": 2,
+      "samples": 11,
+      "maximumAbsoluteError": 4.440892098500626e-16,
+      "tolerance": 1e-11,
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "91324b37a9e660458009260875b346d6653d555e183168b663a41575b121b52c",
+      "dataReferences": [
+        {
+          "id": "data",
+          "version": 1,
+          "sourceHash": "a066c676222ee1fe21654225b4366c125827bae8779fa0bf046442a456aaf68c",
+          "contentHash": "dbf9aab4870a706b3c76657233dfd8056ff23c533997f5c51d69014d9e105ce0",
+          "timeColumn": "time",
+          "columns": [
+            {
+              "name": "time",
+              "kind": "number",
+              "unit": "ms"
+            },
+            {
+              "name": "value",
+              "kind": "number",
+              "unit": "1"
+            }
+          ]
+        }
+      ],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": false
+    },
+    {
+      "id": "F04-centimeter-conversion",
+      "reference": "Explicit scale .01 turns [125,250]cm into [1.25,2.5]m without changing shape.",
+      "nodes": 3,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "tolerance": 1e-11,
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            2
+          ],
+          "unit": "m"
+        }
+      },
+      "modelHash": "e9747c106e17f31a410101918156e5cecb7a85da2e5d1ec029ff492b32ff9396",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": false
+    },
+    {
+      "id": "F04-celsius-kelvin",
+      "reference": "Affine temperature conversion K=C+273.15 gives [273.15,373.15,233.15]; temperature dimensions are retained.",
+      "nodes": 3,
+      "samples": 1,
+      "maximumAbsoluteError": 2.842170943040401e-14,
+      "tolerance": 1e-11,
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            3
+          ],
+          "unit": "K"
+        }
+      },
+      "modelHash": "8a35e74a6a626c46c4f806eafea6a268643a2c302a9fabb36f5a7b670cfce582",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": false
+    },
+    {
+      "id": "F04-area-dimension",
+      "reference": "2m * 3m = 6m^2; approved dimension algebra retains both the value and area dimension.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "tolerance": 1e-11,
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "m^2"
+        }
+      },
+      "modelHash": "b5d2cf887a98f0636fd0c39e4618e616b5b6177ac471ac2e3c0c1e9cf0d61c31",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": false
+    },
+    {
+      "id": "F04-power-dimension",
+      "reference": "(2N*3m)/2s = 3W; composed approved dimensions N*m=J and J/s=W.",
+      "nodes": 6,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "tolerance": 1e-11,
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "W"
+        }
+      },
+      "modelHash": "4d156b230241bd91824eec97644840f08a07d29207d47cef2b15de983fdaab66",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": false
+    },
+    {
+      "id": "F04-named-numeric-bus",
+      "reference": "Named homogeneous scalar bus stores [3,7]m with firstValue/secondValue; selecting secondValue returns 7m.",
+      "nodes": 6,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "tolerance": 1e-11,
+      "outputTypes": {
+        "bus-view": {
+          "valueType": "float64",
+          "unit": "m",
+          "shape": [
+            2
+          ],
+          "fields": [
+            "firstValue",
+            "secondValue"
+          ]
+        },
+        "result": {
+          "valueType": "float64",
+          "unit": "m",
+          "shape": []
+        }
+      },
+      "modelHash": "a803489b07c15ae79596e24086be1666a7985fd550e1404fa64f96f3cf041f9b",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": false
+    },
+    {
+      "id": "F04-named-boolean-bus",
+      "reference": "Named boolean bus preserves booleans [false,true]; the ready field produces true.",
+      "nodes": 5,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "tolerance": 1e-11,
+      "outputTypes": {
+        "result": {
+          "valueType": "boolean",
+          "unit": "1",
+          "shape": []
+        }
+      },
+      "modelHash": "6873b9f4c3833117aebbf047100f2ec6fc0650399cc262fd328b90c6f4501a67",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": false
+    },
+    {
+      "id": "F04-repeated-state-subsystems",
+      "reference": "Two instances of the same P2/O1 UnitDelay definition have independent states. Samples first=[0,0,0,2,2], second=[0,0,0,5,5]; hand-built flat equations are the reference.",
+      "nodes": 6,
+      "samples": 5,
+      "maximumAbsoluteError": 0,
+      "tolerance": 1e-11,
+      "outputTypes": {
+        "first-view": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "second-view": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "415d4599406a616fd5f4a29d135e68447fab7ea2b477fafb23ce3857e924d866",
+      "dataReferences": [],
+      "hierarchyReferences": [
+        {
+          "nodeId": "first",
+          "path": [
+            "first"
+          ],
+          "definitionId": "delayDef",
+          "version": 1,
+          "definitionHash": "66d7a7f8a2db7b9d26a97d4c874ddc820fe1423f61c42b607bf9b6f8e5597ccd"
+        },
+        {
+          "nodeId": "second",
+          "path": [
+            "second"
+          ],
+          "definitionId": "delayDef",
+          "version": 1,
+          "definitionHash": "66d7a7f8a2db7b9d26a97d4c874ddc820fe1423f61c42b607bf9b6f8e5597ccd"
+        }
+      ],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": true
+    },
+    {
+      "id": "F04-dataset-inside-subsystem",
+      "reference": "Dataset references survive subsystem expansion. Internal gain2 applies y(t)=2*(2t+1)=4t+2; both data and hierarchy manifest references are retained.",
+      "nodes": 3,
+      "samples": 11,
+      "maximumAbsoluteError": 8.881784197001252e-16,
+      "tolerance": 1e-11,
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "65cd43a72856e313ad973696cdb324b2bf796c27d4b6d7f8dd0dbd3900c387a2",
+      "dataReferences": [
+        {
+          "id": "data",
+          "version": 1,
+          "sourceHash": "bbd1bfdaf9eea27c9cd03486b22ae09f191e4b469ebe59c3e1366813c15e2ad0",
+          "contentHash": "265a02bea95defb6562052999382560bb14f82df732d6316a7e0e61f944a3d50",
+          "timeColumn": "time",
+          "columns": [
+            {
+              "name": "time",
+              "kind": "number",
+              "unit": "s"
+            },
+            {
+              "name": "value",
+              "kind": "number",
+              "unit": "1"
+            }
+          ]
+        }
+      ],
+      "hierarchyReferences": [
+        {
+          "nodeId": "box",
+          "path": [
+            "box"
+          ],
+          "definitionId": "playbackDef",
+          "version": 1,
+          "definitionHash": "b8a4ac2189ba821406cee11c4e1943d4b458dc593d664833f2f757f89fc950df"
+        }
+      ],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "handBuiltFlatParity": false
+    }
+  ],
+  "failures": [
+    {
+      "id": "F04-failure-outside-error",
+      "kind": "runtime",
+      "code": "DATASET_TIME_RANGE",
+      "diagnosticVerified": true,
+      "diagnosticParity": true,
+      "partialResultParity": true,
+      "lastValidSamples": 7
+    },
+    {
+      "id": "invalid-csv",
+      "kind": "import",
+      "code": "INVALID_CSV",
+      "diagnosticVerified": true,
+      "modelPreserved": true
+    },
+    {
+      "id": "text-bytes",
+      "kind": "import",
+      "code": "DATASET_TOO_LARGE",
+      "diagnosticVerified": true,
+      "modelPreserved": true
+    },
+    {
+      "id": "nonfinite",
+      "kind": "import",
+      "code": "NONFINITE_DATASET",
+      "diagnosticVerified": true,
+      "modelPreserved": true
+    },
+    {
+      "id": "duplicate-time",
+      "kind": "import",
+      "code": "DUPLICATE_DATASET_TIME",
+      "diagnosticVerified": true,
+      "modelPreserved": true
+    },
+    {
+      "id": "mutated-content",
+      "kind": "import",
+      "code": "DATASET_HASH_MISMATCH",
+      "diagnosticVerified": true,
+      "modelPreserved": true
+    }
+  ],
+  "importFailureAtomicity": true,
+  "experiments": {
+    "reference": "Dataset y=2t+1, Gain k in [1,2,3], zero-state integral x=k(t^2+t). Compare against k1 with samplewise analytic RMSE and final delta2*(k-1).",
+    "runs": [
+      {
+        "value": 1,
+        "samples": 11,
+        "modelHash": "3e44134520ad427abe7171bb0e3490ab0de3599ac9c2b88d4e9ea3f1b861a882",
+        "operations": 1629,
+        "dataReferences": [
+          {
+            "id": "data",
+            "version": 1,
+            "sourceHash": "bbd1bfdaf9eea27c9cd03486b22ae09f191e4b469ebe59c3e1366813c15e2ad0",
+            "contentHash": "265a02bea95defb6562052999382560bb14f82df732d6316a7e0e61f944a3d50",
+            "timeColumn": "time",
+            "columns": [
+              {
+                "name": "time",
+                "kind": "number",
+                "unit": "s"
+              },
+              {
+                "name": "value",
+                "kind": "number",
+                "unit": "1"
+              }
+            ]
+          }
+        ],
+        "independentTSParity": true
+      },
+      {
+        "value": 2,
+        "samples": 11,
+        "modelHash": "14c2e8a40711dd7698831071b811bc043749ca191948f7cd568d675324e3d63b",
+        "operations": 1629,
+        "dataReferences": [
+          {
+            "id": "data",
+            "version": 1,
+            "sourceHash": "bbd1bfdaf9eea27c9cd03486b22ae09f191e4b469ebe59c3e1366813c15e2ad0",
+            "contentHash": "265a02bea95defb6562052999382560bb14f82df732d6316a7e0e61f944a3d50",
+            "timeColumn": "time",
+            "columns": [
+              {
+                "name": "time",
+                "kind": "number",
+                "unit": "s"
+              },
+              {
+                "name": "value",
+                "kind": "number",
+                "unit": "1"
+              }
+            ]
+          }
+        ],
+        "independentTSParity": true
+      },
+      {
+        "value": 3,
+        "samples": 11,
+        "modelHash": "eaeace8adcd73070ef9518e4d68dd954f26ed432b9e1d97ce762a2666f10fb76",
+        "operations": 1629,
+        "dataReferences": [
+          {
+            "id": "data",
+            "version": 1,
+            "sourceHash": "bbd1bfdaf9eea27c9cd03486b22ae09f191e4b469ebe59c3e1366813c15e2ad0",
+            "contentHash": "265a02bea95defb6562052999382560bb14f82df732d6316a7e0e61f944a3d50",
+            "timeColumn": "time",
+            "columns": [
+              {
+                "name": "time",
+                "kind": "number",
+                "unit": "s"
+              },
+              {
+                "name": "value",
+                "kind": "number",
+                "unit": "1"
+              }
+            ]
+          }
+        ],
+        "independentTSParity": true
+      }
+    ],
+    "comparison": {
+      "status": "completed",
+      "referenceId": "run1",
+      "outputs": [
+        {
+          "nodeId": "result",
+          "unit": "1",
+          "values": [
+            {
+              "recordId": "run1",
+              "status": "completed",
+              "finalValue": 1.9999999999999873,
+              "delta": 0,
+              "rmse": 0
+            },
+            {
+              "recordId": "run2",
+              "status": "completed",
+              "finalValue": 3.9999999999999747,
+              "delta": 1.9999999999999873,
+              "rmse": 1.0631556800393798
+            },
+            {
+              "recordId": "run3",
+              "status": "completed",
+              "finalValue": 5.999999999999961,
+              "delta": 3.9999999999999734,
+              "rmse": 2.1263113600787586
+            }
+          ]
+        }
+      ]
+    },
+    "repeatedHashes": true,
+    "originalModelPreserved": true,
+    "sharedRecordBudget": {
+      "limit": 4,
+      "completed": 2,
+      "status": "failed",
+      "code": "SWEEP_RECORD_BUDGET"
+    },
+    "sharedOperationBudget": {
+      "limit": 6,
+      "completed": 2,
+      "status": "failed",
+      "code": "SWEEP_OPERATION_BUDGET"
+    },
+    "cancellation": {
+      "status": "cancelled",
+      "preservedRuns": 1
+    }
+  }
+}

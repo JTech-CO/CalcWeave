@@ -1,0 +1,179 @@
+{
+  "reference": "Causal backward two-sample slope: zero until 0.2, then extrapolates clock.",
+  "absoluteTolerance": 1e-12,
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "result": 0
+        }
+      },
+      {
+        "time": 0.05,
+        "values": {
+          "result": 0
+        }
+      },
+      {
+        "time": 0.1,
+        "values": {
+          "result": 0
+        }
+      },
+      {
+        "time": 0.15000000000000002,
+        "values": {
+          "result": 0
+        }
+      },
+      {
+        "time": 0.2,
+        "values": {
+          "result": 0.2
+        }
+      },
+      {
+        "time": 0.25,
+        "values": {
+          "result": 0.25
+        }
+      },
+      {
+        "time": 0.30000000000000004,
+        "values": {
+          "result": 0.30000000000000004
+        }
+      },
+      {
+        "time": 0.35000000000000003,
+        "values": {
+          "result": 0.35000000000000003
+        }
+      },
+      {
+        "time": 0.4,
+        "values": {
+          "result": 0.4
+        }
+      },
+      {
+        "time": 0.45,
+        "values": {
+          "result": 0.45
+        }
+      },
+      {
+        "time": 0.5,
+        "values": {
+          "result": 0.5
+        }
+      }
+    ],
+    "finalState": {
+      "hold": 0.5
+    },
+    "stateMemory": {
+      "hold": {
+        "value": 0.4,
+        "slope": 1,
+        "previous": 0.2,
+        "priorTime": 0.2,
+        "previousTime": 0.4
+      }
+    },
+    "stateTime": 0.5,
+    "status": "completed",
+    "steps": 11,
+    "solverStatistics": {
+      "method": "rk4",
+      "acceptedSteps": 50,
+      "rejectedSteps": 0,
+      "evaluations": 200,
+      "events": 0,
+      "lastStep": 0.009999999999999953,
+      "minAcceptedStep": 0.009999999999999953,
+      "maxAcceptedStep": 0.01
+    },
+    "events": []
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "0b5c297de65e8260c9f03e6ea5c3a1e87acc058efb3ddd342c47fadb7d0c4ac6",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.3.0-m3",
+    "targetVersion": "typescript-m3-v1",
+    "execution": {
+      "mode": "continuous",
+      "startTime": 0,
+      "stopTime": 0.5,
+      "step": 0.05,
+      "solver": {
+        "method": "rk4",
+        "initialStep": 0.01,
+        "minStep": 1e-10,
+        "maxStep": 0.01,
+        "atol": 1e-8,
+        "rtol": 0.000001,
+        "maxSteps": 100000,
+        "maxRejects": 10000,
+        "maxEvaluations": 1000000,
+        "eventTolerance": 1e-8,
+        "maxEvents": 10000,
+        "discreteStep": 0.1
+      }
+    },
+    "nodes": {
+      "clock": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "hold": {
+        "sampleTime": {
+          "period": 2,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "result": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      }
+    },
+    "outputTypes": {
+      "result": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    },
+    "continuousPolicy": {
+      "outputGrid": "execution.step",
+      "discreteGrid": "solver.discreteStep",
+      "eventOrder": "reset-tick-observe",
+      "acceptedBoundaryMemory": true,
+      "limits": {
+        "maxSteps": 100000,
+        "maxRejects": 10000,
+        "maxEvaluations": 1000000,
+        "maxEvents": 10000
+      }
+    }
+  }
+}

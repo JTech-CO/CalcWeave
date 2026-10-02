@@ -1,0 +1,68 @@
+{
+  "edges": [
+    {
+      "id": "input-out-bad-in",
+      "source": {
+        "nodeId": "input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "bad",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "bad-fraction-result-in",
+      "source": {
+        "nodeId": "bad",
+        "portId": "fraction"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "static",
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F05-failure-prelookup-outside",
+  "name": "F05-failure-prelookup-outside",
+  "nodes": [
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "input",
+      "label": "input",
+      "parameters": {
+        "value": 10
+      }
+    },
+    {
+      "blockType": "lookup.prelookup",
+      "blockVersion": 1,
+      "id": "bad",
+      "label": "bad",
+      "parameters": {
+        "breakpoints": [
+          -2,
+          1,
+          5
+        ],
+        "extrapolation": "error"
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {}
+    }
+  ],
+  "schemaVersion": 1
+}

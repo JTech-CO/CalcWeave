@@ -1,0 +1,70 @@
+{
+  "edges": [
+    {
+      "id": "a-out-bad-in",
+      "source": {
+        "nodeId": "a",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "bad",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "bad-out-result-in",
+      "source": {
+        "nodeId": "bad",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "static",
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F05-failure-inverse-ill-conditioned",
+  "name": "F05-failure-inverse-ill-conditioned",
+  "nodes": [
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "a",
+      "label": "a",
+      "parameters": {
+        "value": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1e-14
+          ]
+        ]
+      }
+    },
+    {
+      "blockType": "matrix.inverse",
+      "blockVersion": 1,
+      "id": "bad",
+      "label": "bad",
+      "parameters": {}
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {}
+    }
+  ],
+  "schemaVersion": 1
+}

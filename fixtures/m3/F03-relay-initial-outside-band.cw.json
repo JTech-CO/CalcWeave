@@ -1,0 +1,162 @@
+{
+  "edges": [
+    {
+      "id": "high-out-start-on-in",
+      "source": {
+        "nodeId": "high",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "start-on",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "low-out-start-off-in",
+      "source": {
+        "nodeId": "low",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "start-off",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "start-on-out-on-out-in",
+      "source": {
+        "nodeId": "start-on",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "on-out",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "start-off-out-off-out-in",
+      "source": {
+        "nodeId": "start-off",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "off-out",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "continuous",
+    "solver": {
+      "atol": 1e-8,
+      "discreteStep": 0.1,
+      "eventTolerance": 1e-8,
+      "initialStep": 0.01,
+      "maxEvaluations": 1000000,
+      "maxEvents": 10000,
+      "maxRejects": 10000,
+      "maxStep": 0.01,
+      "maxSteps": 100000,
+      "method": "rk4",
+      "minStep": 1e-10,
+      "rtol": 0.000001
+    },
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F03-relay-initial-outside-band",
+  "name": "F03-relay-initial-outside-band",
+  "nodes": [
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "high",
+      "label": "high",
+      "parameters": {
+        "value": 2
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "low",
+      "label": "low",
+      "parameters": {
+        "value": -1
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "nonlinear.relay",
+      "blockVersion": 1,
+      "id": "start-on",
+      "label": "start-on",
+      "parameters": {
+        "initial": "off",
+        "offThreshold": 0,
+        "offValue": 0,
+        "onThreshold": 1,
+        "onValue": 1
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "nonlinear.relay",
+      "blockVersion": 1,
+      "id": "start-off",
+      "label": "start-off",
+      "parameters": {
+        "initial": "on",
+        "offThreshold": 0,
+        "offValue": 0,
+        "onThreshold": 1,
+        "onValue": 1
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "on-out",
+      "label": "on-out",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "off-out",
+      "label": "off-out",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    }
+  ],
+  "schemaVersion": 1
+}

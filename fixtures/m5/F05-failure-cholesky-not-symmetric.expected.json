@@ -1,0 +1,17 @@
+{
+  "expectedCode": "MATRIX_NOT_SYMMETRIC",
+  "nodeId": "bad",
+  "diagnostics": [
+    {
+      "code": "MATRIX_NOT_SYMMETRIC",
+      "message": "Cholesky 입력은 척도 상대 허용오차 이내의 대칭 행렬이어야 합니다.",
+      "nodeId": "bad"
+    }
+  ],
+  "partialResult": {
+    "samples": [],
+    "finalState": {},
+    "status": "failed",
+    "steps": 0
+  }
+}

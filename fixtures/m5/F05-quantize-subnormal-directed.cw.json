@@ -1,0 +1,148 @@
+{
+  "edges": [
+    {
+      "id": "input-out-ceil-in",
+      "source": {
+        "nodeId": "input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "ceil",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "ceil-out-ceil-out-in",
+      "source": {
+        "nodeId": "ceil",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "ceil-out",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "ceil-stored-ceil-stored-in",
+      "source": {
+        "nodeId": "ceil",
+        "portId": "stored"
+      },
+      "target": {
+        "nodeId": "ceil-stored",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "input-out-floor-in",
+      "source": {
+        "nodeId": "input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "floor",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "floor-out-floor-out-in",
+      "source": {
+        "nodeId": "floor",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "floor-out",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "floor-stored-floor-stored-in",
+      "source": {
+        "nodeId": "floor",
+        "portId": "stored"
+      },
+      "target": {
+        "nodeId": "floor-stored",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "static",
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F05-quantize-subnormal-directed",
+  "name": "F05-quantize-subnormal-directed",
+  "nodes": [
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "input",
+      "label": "input",
+      "parameters": {
+        "value": [
+          5e-324,
+          -5e-324
+        ]
+      }
+    },
+    {
+      "blockType": "fixed.quantize",
+      "blockVersion": 1,
+      "id": "ceil",
+      "label": "ceil",
+      "parameters": {
+        "fractionLength": 32,
+        "overflow": "error",
+        "rounding": "ceil",
+        "signedness": "signed",
+        "wordLength": 32
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "ceil-out",
+      "label": "ceil-out",
+      "parameters": {}
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "ceil-stored",
+      "label": "ceil-stored",
+      "parameters": {}
+    },
+    {
+      "blockType": "fixed.quantize",
+      "blockVersion": 1,
+      "id": "floor",
+      "label": "floor",
+      "parameters": {
+        "fractionLength": 32,
+        "overflow": "error",
+        "rounding": "floor",
+        "signedness": "signed",
+        "wordLength": 32
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "floor-out",
+      "label": "floor-out",
+      "parameters": {}
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "floor-stored",
+      "label": "floor-stored",
+      "parameters": {}
+    }
+  ],
+  "schemaVersion": 1
+}

@@ -1,0 +1,201 @@
+{
+  "reference": "Analytical x=cos(t), v=-sin(t) for x''=-x, x(0)=1,v(0)=0.",
+  "absoluteTolerance": 2e-9,
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "position": 1,
+          "velocity": 0
+        }
+      },
+      {
+        "time": 0.1,
+        "values": {
+          "position": 0.9950041652787885,
+          "velocity": -0.0998334166385298
+        }
+      },
+      {
+        "time": 0.2,
+        "values": {
+          "position": 0.9800665778444166,
+          "velocity": -0.1986693307786997
+        }
+      },
+      {
+        "time": 0.30000000000000004,
+        "values": {
+          "position": 0.9553364891327949,
+          "velocity": -0.2955202066373953
+        }
+      },
+      {
+        "time": 0.4,
+        "values": {
+          "position": 0.9210609940156097,
+          "velocity": -0.38941834227784106
+        }
+      },
+      {
+        "time": 0.5,
+        "values": {
+          "position": 0.8775825619100439,
+          "velocity": -0.4794255385674715
+        }
+      },
+      {
+        "time": 0.6000000000000001,
+        "values": {
+          "position": 0.8253356149375661,
+          "velocity": -0.5646424733535343
+        }
+      },
+      {
+        "time": 0.7000000000000001,
+        "values": {
+          "position": 0.7648421873216954,
+          "velocity": -0.6442176871927634
+        }
+      },
+      {
+        "time": 0.8,
+        "values": {
+          "position": 0.6967067093946012,
+          "velocity": -0.7173560908526785
+        }
+      },
+      {
+        "time": 0.9,
+        "values": {
+          "position": 0.6216099683290244,
+          "velocity": -0.7833269095803744
+        }
+      },
+      {
+        "time": 1,
+        "values": {
+          "position": 0.5403023059378858,
+          "velocity": -0.8414709847622882
+        }
+      }
+    ],
+    "finalState": {
+      "oscillator": 0.5403023059378858
+    },
+    "stateMemory": {
+      "oscillator": {
+        "state": [
+          0.5403023059378858,
+          -0.8414709847622882
+        ]
+      }
+    },
+    "stateTime": 1,
+    "status": "completed",
+    "steps": 11,
+    "solverStatistics": {
+      "method": "rk4",
+      "acceptedSteps": 100,
+      "rejectedSteps": 0,
+      "evaluations": 400,
+      "events": 0,
+      "lastStep": 0.009999999999999898,
+      "minAcceptedStep": 0.009999999999999898,
+      "maxAcceptedStep": 0.01
+    },
+    "events": []
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "8c25c4369ee1f1d35e81243fb275ed6b6e027f87e1203e23b25c04541f18ef3b",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.3.0-m3",
+    "targetVersion": "typescript-m3-v1",
+    "execution": {
+      "mode": "continuous",
+      "startTime": 0,
+      "stopTime": 1,
+      "step": 0.1,
+      "solver": {
+        "method": "rk4",
+        "initialStep": 0.01,
+        "minStep": 1e-10,
+        "maxStep": 0.01,
+        "atol": 1e-8,
+        "rtol": 0.000001,
+        "maxSteps": 100000,
+        "maxRejects": 10000,
+        "maxEvaluations": 1000000,
+        "eventTolerance": 1e-8,
+        "maxEvents": 10000,
+        "discreteStep": 0.1
+      }
+    },
+    "nodes": {
+      "oscillator": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "negative": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "position": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "velocity": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      }
+    },
+    "outputTypes": {
+      "position": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      },
+      "velocity": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    },
+    "continuousPolicy": {
+      "outputGrid": "execution.step",
+      "discreteGrid": "solver.discreteStep",
+      "eventOrder": "reset-tick-observe",
+      "acceptedBoundaryMemory": true,
+      "limits": {
+        "maxSteps": 100000,
+        "maxRejects": 10000,
+        "maxEvaluations": 1000000,
+        "maxEvents": 10000
+      }
+    }
+  }
+}

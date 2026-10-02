@@ -1,0 +1,100 @@
+{
+  "reference": "Clipped linear 1-D interpolation; unsigned 0x80000001 left shift wraps modulo 2^32 to 2.",
+  "tolerance": {
+    "absolute": 1e-12,
+    "relative": 1e-12
+  },
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "bits-out": 2,
+          "lookup-out": [
+            0,
+            2.5,
+            10
+          ]
+        }
+      }
+    ],
+    "finalState": {},
+    "status": "completed",
+    "steps": 1
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "1f23f8ba993003bd7b5619bc99465dd058033f4cc7a47dfedae3377f6aea3562",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.2.0-m2",
+    "targetVersion": "typescript-m2-v1",
+    "execution": {
+      "mode": "static",
+      "startTime": 0,
+      "stopTime": 0,
+      "step": 1
+    },
+    "nodes": {
+      "uint": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "bits": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "bits-out": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "values": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "lookup": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "lookup-out": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      }
+    },
+    "outputTypes": {
+      "bits-out": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      },
+      "lookup-out": {
+        "valueType": "float64",
+        "shape": [
+          3
+        ],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    }
+  }
+}

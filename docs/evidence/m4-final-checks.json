@@ -1,0 +1,90 @@
+{
+  "generatedAt": "2026-10-02T13:40:03.3622699Z",
+  "applicationVersion": "0.4.0",
+  "engineVersion": "0.4.0-m4",
+  "environment": {
+    "node": "v25.9.0",
+    "platform": "win32",
+    "browser": "153.0.8010.12"
+  },
+  "productionBuild": {
+    "status": "passed",
+    "command": "npm run build",
+    "strictTypeScript": true,
+    "assets": [
+      {
+        "path": "dist/assets/index-CSf_qTo5.js",
+        "bytes": 813288,
+        "sha256": "9145e94f7c0c009d93e6f42c1b87b92f8e94d05d0bb3e38434b3477a19fde271"
+      },
+      {
+        "path": "dist/assets/engine.worker-YEKYpuK7.js",
+        "bytes": 237171,
+        "sha256": "b8c94b8a3f9e80c63548836ce869e6d4d6254bd263da86dbd527afb338fe07bd"
+      },
+      {
+        "path": "dist/assets/src-BqGWkC1_.js",
+        "bytes": 120376,
+        "sha256": "032a33501318f374e54b6fb6453c5aeb6fd4795cc0732458b6383abb053b0825"
+      }
+    ],
+    "warning": "Main chunk exceeds the Vite size advisory; code export is a separate async chunk."
+  },
+  "unit": {
+    "status": "passed",
+    "command": "npm test",
+    "files": 16,
+    "tests": 680,
+    "log": "docs/evidence/m4-unit-run.log"
+  },
+  "browser": {
+    "status": "passed",
+    "command": "npm run test:e2e",
+    "tests": 55,
+    "existing": 42,
+    "m4": 13,
+    "isolatedContexts": true,
+    "failedTests": []
+  },
+  "numerical": {
+    "status": "passed",
+    "command": "npm run verify:m4",
+    "fixtures": 18,
+    "controlledFailures": 6,
+    "sweepVariants": 3,
+    "strictStandaloneModes": [
+      "static",
+      "discrete",
+      "continuous"
+    ],
+    "actualESM": true,
+    "evidence": "docs/evidence/m4-verification.json"
+  },
+  "regressions": [
+    "docs/evidence/m1-regression-on-m4.json",
+    "docs/evidence/m2-regression-on-m4.json",
+    "docs/evidence/m3-regression-on-m4.json"
+  ],
+  "design": {
+    "status": "passed",
+    "command": "npm run verify:design:m4",
+    "observations": 60,
+    "pageErrors": [],
+    "evidence": "docs/evidence/m4-design-verification.json"
+  },
+  "coverage": {
+    "status": "passed",
+    "command": "npm run verify:coverage",
+    "sourceRows": 385,
+    "trackedRows": 385,
+    "duplicates": 0,
+    "newlyApprovedM4Rows": 18,
+    "correctedM3Rows": 1,
+    "unsupportedRows": 278,
+    "sourceSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7"
+  },
+  "limitations": [
+    "Approved capability subsets only; no full Simulink equivalence.",
+    "No public deployment, external-engine comparison or novice user study was performed."
+  ]
+}

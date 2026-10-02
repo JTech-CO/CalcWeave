@@ -1,0 +1,96 @@
+{
+  "edges": [
+    {
+      "id": "uniform-uniform-out-in",
+      "source": {
+        "nodeId": "uniform",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "uniform-out",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "normal-normal-out-in",
+      "source": {
+        "nodeId": "normal",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "normal-out",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "discrete",
+    "startTime": 0,
+    "step": 1,
+    "stopTime": 3
+  },
+  "layout": {},
+  "modelId": "F02-seeded-random",
+  "name": "F02-seeded-random",
+  "nodes": [
+    {
+      "blockType": "source.random",
+      "blockVersion": 1,
+      "id": "uniform",
+      "label": "uniform",
+      "parameters": {
+        "distribution": "uniform",
+        "max": 1,
+        "mean": 0,
+        "min": -1,
+        "seed": 0,
+        "variance": 1
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "source.random",
+      "blockVersion": 1,
+      "id": "normal",
+      "label": "normal",
+      "parameters": {
+        "distribution": "normal",
+        "max": 1,
+        "mean": 2,
+        "min": 0,
+        "seed": 7,
+        "variance": 4
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "uniform-out",
+      "label": "uniform-out",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "normal-out",
+      "label": "normal-out",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    }
+  ],
+  "schemaVersion": 1
+}

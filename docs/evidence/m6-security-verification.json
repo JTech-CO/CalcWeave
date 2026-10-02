@@ -1,0 +1,56 @@
+{
+  "generatedAt": "2026-10-02T16:04:10.624Z",
+  "releaseId": "543f87fe6f3f27669b8c564b334bcf52b5c2adb4cf61b5116f00fc701c122c01",
+  "sourcePatternScan": {
+    "apps": 35,
+    "packages": 36,
+    "scripts": 22,
+    "confirmed": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    }
+  },
+  "rawFullScan": {
+    "files": 397,
+    "critical": 5,
+    "high": 5,
+    "classification": "Generated Playwright trace copies of React runtime; no application/user-data HTML write path; raw scanner output kept privately in .vsf/m6-scan.txt"
+  },
+  "dependencyAudit": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "dependencies": {
+      "prod": 29,
+      "dev": 104,
+      "optional": 53,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 132
+    }
+  },
+  "artifactChecks": 53,
+  "manualEightAreas": {
+    "sql": "not-applicable-no-server-query",
+    "xss": "source-escaped-text-and-closed-AST",
+    "secrets": "no-recognized-source-artifact-patterns-and-no-env-distribution",
+    "authorization": "not-applicable-no-account-or-server-data",
+    "input": "bounded-strict-schema-compiler-worker-and-backup",
+    "rate": "not-applicable-no-auth-or-paid-api-local-resource-budgets",
+    "headersHttps": "static-meta-and-local-preview-verified-public-domain-unverified",
+    "serverDatabase": "not-applicable-local-IDB-transactions-CAS-and-recovery-verified"
+  },
+  "publicSecurityClaimed": false,
+  "limitations": [
+    "Pattern scanner does not prove absence of unknown vulnerabilities",
+    "Full historical Git secret audit not performed",
+    "Public HTTPS/domain/headers and hosting traffic policies unverified"
+  ]
+}

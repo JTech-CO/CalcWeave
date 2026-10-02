@@ -1,0 +1,101 @@
+{
+  "edges": [
+    {
+      "id": "ramp-rate2-in",
+      "source": {
+        "nodeId": "ramp",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "rate2",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "rate2-rate5-in",
+      "source": {
+        "nodeId": "rate2",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "rate5",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "rate5-result-in",
+      "source": {
+        "nodeId": "rate5",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "discrete",
+    "startTime": 0,
+    "step": 1,
+    "stopTime": 10
+  },
+  "layout": {},
+  "modelId": "F02-rate-1-2-5",
+  "name": "F02-rate-1-2-5",
+  "nodes": [
+    {
+      "blockType": "source.ramp",
+      "blockVersion": 1,
+      "id": "ramp",
+      "label": "ramp",
+      "parameters": {
+        "initial": 0,
+        "slope": 1,
+        "startTime": 0
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "time.rate-transition",
+      "blockVersion": 1,
+      "id": "rate2",
+      "label": "rate2",
+      "parameters": {
+        "initial": -1
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 2
+      }
+    },
+    {
+      "blockType": "time.rate-transition",
+      "blockVersion": 1,
+      "id": "rate5",
+      "label": "rate5",
+      "parameters": {
+        "initial": -1
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 5
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 5
+      }
+    }
+  ],
+  "schemaVersion": 1
+}

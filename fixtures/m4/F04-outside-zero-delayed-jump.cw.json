@@ -1,0 +1,170 @@
+{
+  "datasets": [
+    {
+      "columns": [
+        {
+          "kind": "number",
+          "name": "time",
+          "unit": "s"
+        },
+        {
+          "kind": "number",
+          "name": "value",
+          "unit": "1"
+        }
+      ],
+      "contentHash": "dfc443e318a8ddc2f5a6b78f29d6e53c46c755f3572acfd8b3ee2313a9f02d2f",
+      "id": "data",
+      "name": "독립 계산 기준 자료",
+      "rows": [
+        [
+          0.25,
+          2.5
+        ],
+        [
+          0.75,
+          7.5
+        ]
+      ],
+      "sourceHash": "d6b6c05becb65bc706a20dc68875bc68d2a6b07c36e53478383437a9874bbf74",
+      "timeColumn": "time",
+      "version": 1
+    }
+  ],
+  "edges": [
+    {
+      "id": "input-out-delay-in",
+      "source": {
+        "nodeId": "input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "delay",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "input-out-raw-in",
+      "source": {
+        "nodeId": "input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "raw",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "delay-out-delayed-in",
+      "source": {
+        "nodeId": "delay",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "delayed",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "delay-out-integral-in",
+      "source": {
+        "nodeId": "delay",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "integral",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "integral-out-result-in",
+      "source": {
+        "nodeId": "integral",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "continuous",
+    "solver": {
+      "atol": 1e-8,
+      "discreteStep": 0.1,
+      "eventTolerance": 1e-8,
+      "initialStep": 0.08,
+      "maxEvaluations": 1000000,
+      "maxEvents": 10000,
+      "maxRejects": 10000,
+      "maxStep": 0.08,
+      "maxSteps": 100000,
+      "method": "rk4",
+      "minStep": 1e-10,
+      "rtol": 0.000001
+    },
+    "startTime": 0,
+    "step": 0.05,
+    "stopTime": 1.1
+  },
+  "layout": {},
+  "modelId": "F04-outside-zero-delayed-jump",
+  "name": "F04-outside-zero-delayed-jump",
+  "nodes": [
+    {
+      "blockType": "source.dataset",
+      "blockVersion": 1,
+      "id": "input",
+      "label": "input",
+      "parameters": {
+        "column": "value",
+        "datasetId": "data",
+        "interpolation": "linear",
+        "outside": "zero"
+      }
+    },
+    {
+      "blockType": "time.transport-delay",
+      "blockVersion": 1,
+      "id": "delay",
+      "label": "delay",
+      "parameters": {
+        "delay": 0.2,
+        "initial": 0
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "raw",
+      "label": "raw",
+      "parameters": {}
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "delayed",
+      "label": "delayed",
+      "parameters": {}
+    },
+    {
+      "blockType": "continuous.integrator",
+      "blockVersion": 1,
+      "id": "integral",
+      "label": "integral",
+      "parameters": {
+        "initial": 0,
+        "reset": "none"
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {}
+    }
+  ],
+  "schemaVersion": 1
+}

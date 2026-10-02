@@ -1,0 +1,154 @@
+{
+  "edges": [
+    {
+      "id": "pulse-reset-a",
+      "source": {
+        "nodeId": "pulse",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "reset",
+        "portId": "a"
+      }
+    },
+    {
+      "id": "threshold-reset-b",
+      "source": {
+        "nodeId": "threshold",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "reset",
+        "portId": "b"
+      }
+    },
+    {
+      "id": "ramp-delay-in",
+      "source": {
+        "nodeId": "ramp",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "delay",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "reset-delay-reset",
+      "source": {
+        "nodeId": "reset",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "delay",
+        "portId": "reset"
+      }
+    },
+    {
+      "id": "delay-result-in",
+      "source": {
+        "nodeId": "delay",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "discrete",
+    "startTime": 0,
+    "step": 1,
+    "stopTime": 8
+  },
+  "layout": {},
+  "modelId": "F02-delay-reset",
+  "name": "F02-delay-reset",
+  "nodes": [
+    {
+      "blockType": "source.ramp",
+      "blockVersion": 1,
+      "id": "ramp",
+      "label": "ramp",
+      "parameters": {
+        "initial": 1,
+        "slope": 1,
+        "startTime": 0
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "source.pulse",
+      "blockVersion": 1,
+      "id": "pulse",
+      "label": "pulse",
+      "parameters": {
+        "amplitude": 1,
+        "period": 4,
+        "phase": 2,
+        "width": 1
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "threshold",
+      "label": "threshold",
+      "parameters": {
+        "value": 0.5
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "logic.compare",
+      "blockVersion": 1,
+      "id": "reset",
+      "label": "reset",
+      "parameters": {
+        "operation": "gt"
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "discrete.delay",
+      "blockVersion": 1,
+      "id": "delay",
+      "label": "delay",
+      "parameters": {
+        "initial": -1,
+        "reset": "level",
+        "steps": 2
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    }
+  ],
+  "schemaVersion": 1
+}

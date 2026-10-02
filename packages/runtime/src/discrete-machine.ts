@@ -1,0 +1,252 @@
+import type { IRNode, SignalDescriptor, SignalValue, StateValue } from '../../model/src/types';
+import { checkSignal, copySignal, evaluateSignalNode, finiteNumber, interpolateTable, numericFailure, replayDataset, signalElements } from './kernels';
+
+type PortValues = Map<string, Record<string, SignalValue>>;
+type Memory = { value?: SignalValue; history?: SignalValue[]; u?: number[]; y?: number[]; x?: number[]; buffer?: SignalValue; seed?: number };
+
+export const DISCRETE_BLOCKS = new Set([
+  'source.step', 'source.ramp', 'source.sine-wave', 'source.pulse', 'source.clock', 'source.digital-clock',
+  'source.random', 'source.repeating-sequence', 'discrete.unit-delay', 'discrete.delay', 'discrete.integrator',
+  'discrete.difference', 'discrete.derivative', 'discrete.fir', 'discrete.transfer-function',
+  'discrete.state-space', 'logic.edge-detect', 'time.rate-transition',
+  'source.dataset',
+]);
+
+function mapNumeric(value: SignalValue, operation: (element: number, index: number) => number, nodeId: string): SignalValue {
+  let index = 0;
+  const element = (item: number): number => finiteNumber(operation(finiteNumber(item, nodeId), index++), nodeId);
+  if (!Array.isArray(value)) return element(finiteNumber(value, nodeId));
+  return Array.isArray(value[0]) ? (value as number[][]).map((row) => row.map(element)) : (value as number[]).map(element);
+}
+function flatNumeric(value: SignalValue, id: string): number[] {
+  const values = !Array.isArray(value) ? [value] : Array.isArray(value[0]) ? (value as number[][]).flat() : value;
+  return values.map((item) => finiteNumber(item, id));
+}
+function zeroSignal(descriptor: SignalDescriptor): SignalValue {
+  const element = descriptor.valueType === 'boolean' ? false : 0;
+  if (!descriptor.shape.length) return element;
+  if (descriptor.shape.length === 1) return Array(descriptor.shape[0]!).fill(element) as number[] | boolean[];
+  return Array.from({ length: descriptor.shape[0]! }, () => Array(descriptor.shape[1]!).fill(element)) as number[][] | boolean[][];
+}
+function due(node: IRNode, tick: number): boolean {
+  return tick >= node.sampleTime.offset && (tick - node.sampleTime.offset) % node.sampleTime.period === 0;
+}
+function independentOutput(node: IRNode): boolean {
+  switch (node.blockType) {
+    case 'discrete.unit-delay': case 'discrete.delay': case 'discrete.integrator': case 'time.rate-transition': return true;
+    case 'discrete.fir': return (node.parameters.coefficients as number[])[0] === 0;
+    case 'discrete.transfer-function': return (node.parameters.numerator as number[])[0] === 0;
+    case 'discrete.state-space': return node.parameters.D === 0;
+    default: return false;
+  }
+}
+
+/** A deterministic tick machine. The async browser and fixed standalone template use this contract. */
+export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseStep: number, startTime: number, charge: (node: IRNode) => void, producerNodes = nodes) {
+  const byId = new Map(producerNodes.map((node) => [node.id, node]));
+  const held: PortValues = new Map();
+  const memory = new Map<string, Memory>();
+  const randomTicks = new Map<string, number>();
+  const extendedMemory = nodes.some((node) => DISCRETE_BLOCKS.has(node.blockType) && (node.blockType !== 'discrete.unit-delay'
+    || Array.isArray(node.parameters.initial) || typeof node.parameters.initial === 'boolean'
+    || node.parameters.reset === 'level' || node.sampleTime.period !== 1 || node.sampleTime.offset !== 0));
+
+  function initialMemory(node: IRNode): Memory {
+    const initial = node.parameters.initial as SignalValue;
+    switch (node.blockType) {
+      case 'discrete.unit-delay': case 'discrete.integrator': case 'discrete.difference': case 'discrete.derivative': case 'logic.edge-detect': return { value: copySignal(initial) };
+      case 'discrete.delay': return { history: Array.from({ length: Number(node.parameters.steps) }, () => copySignal(initial)) };
+      case 'discrete.fir': return { history: Array.from({ length: (node.parameters.coefficients as number[]).length - 1 }, () => copySignal(initial)) };
+      case 'discrete.transfer-function': return { u: Array((node.parameters.numerator as number[]).length - 1).fill(initial), y: Array((node.parameters.denominator as number[]).length - 1).fill(initial) };
+      case 'discrete.state-space': return { x: [...node.parameters.initial as number[]] };
+      case 'time.rate-transition': return { buffer: copySignal(initial) };
+      case 'source.random': return { seed: Number(node.parameters.seed) };
+      default: return {};
+    }
+  }
+  for (const node of nodes) {
+    const outputs = Object.fromEntries(Object.entries(node.outputs).map(([port, descriptor]) => [port, zeroSignal(descriptor)]));
+    const state = initialMemory(node);
+    if (Object.keys(state).length) memory.set(node.id, state);
+    if (node.blockType === 'source.constant' || node.blockType === 'io.input') outputs.out = copySignal(node.parameters.value as SignalValue);
+    if (node.blockType === 'source.digital-clock') outputs.out = startTime;
+    if (node.blockType === 'discrete.unit-delay' || node.blockType === 'discrete.integrator') outputs.out = copySignal(state.value!);
+    if (node.blockType === 'discrete.delay') outputs.out = copySignal(state.history![0]!);
+    if (node.blockType === 'time.rate-transition') outputs.out = copySignal(state.buffer!);
+    if (node.blockType === 'discrete.state-space') outputs.out = dot(node.parameters.C as number[], state.x!, node.id);
+    if (node.blockType === 'discrete.fir') outputs.out = fir(node, state, undefined);
+    if (node.blockType === 'discrete.transfer-function') outputs.out = transfer(node, state, undefined);
+    held.set(node.id, outputs);
+  }
+
+  function dot(coefficients: number[], values: number[], id: string): number {
+    return coefficients.reduce((sum, coefficient, index) => finiteNumber(sum + coefficient * values[index]!, id), 0);
+  }
+  function fir(node: IRNode, state: Memory, input: SignalValue | undefined): SignalValue {
+    const coefficients = node.parameters.coefficients as number[];
+    const histories = state.history!.map((signal) => flatNumeric(signal, node.id));
+    const current = input === undefined ? undefined : flatNumeric(input, node.id);
+    return mapNumeric(node.parameters.initial as SignalValue, (_element, index) => {
+      let sum = coefficients[0] === 0 || current === undefined ? 0 : coefficients[0]! * current[index]!;
+      for (let lag = 1; lag < coefficients.length; lag += 1) sum = finiteNumber(sum + coefficients[lag]! * histories[lag - 1]![index]!, node.id);
+      return sum;
+    }, node.id);
+  }
+  function transfer(node: IRNode, state: Memory, input: SignalValue | undefined): number {
+    const numerator = node.parameters.numerator as number[], denominator = node.parameters.denominator as number[];
+    let sum = numerator[0] === 0 || input === undefined ? 0 : numerator[0]! * finiteNumber(input, node.id);
+    for (let index = 1; index < numerator.length; index += 1) sum = finiteNumber(sum + numerator[index]! * state.u![index - 1]!, node.id);
+    for (let index = 1; index < denominator.length; index += 1) sum = finiteNumber(sum - denominator[index]! * state.y![index - 1]!, node.id);
+    return finiteNumber(sum / denominator[0]!, node.id);
+  }
+  function readInput(values: PortValues, node: IRNode, port: string): SignalValue {
+    const endpoint = node.inputs[port];
+    const value = endpoint && values.get(endpoint.nodeId)?.[endpoint.portId];
+    if (value === undefined) numericFailure('RUNTIME_INVALID_IR', node.id, '연결된 입력 값을 읽을 수 없습니다.');
+    return value;
+  }
+  function output(node: IRNode, state: Memory, input: (port: string) => SignalValue, tick: number, time: number): SignalValue {
+    const parameter = (key: string): number => finiteNumber(node.parameters[key], node.id);
+    switch (node.blockType) {
+      case 'source.dataset': return replayDataset(node, time);
+      case 'source.step': return time < parameter('stepTime') ? parameter('before') : parameter('after');
+      case 'source.ramp': return finiteNumber(parameter('initial') + parameter('slope') * Math.max(0, time - parameter('startTime')), node.id);
+      case 'source.sine-wave': return finiteNumber(parameter('amplitude') * Math.sin(2 * Math.PI * parameter('frequency') * time + parameter('phase')) + parameter('bias'), node.id);
+      case 'source.pulse': return tick >= parameter('phase') && (tick - parameter('phase')) % parameter('period') < parameter('width') ? parameter('amplitude') : 0;
+      case 'source.clock': case 'source.digital-clock': return time;
+      case 'source.repeating-sequence': {
+        const times = node.parameters.times as number[], period = times.at(-1)!;
+        const remainder = time % period;
+        const phase = remainder < 0 ? remainder + period : remainder;
+        return interpolateTable(phase, times, node.parameters.values as number[], String(node.parameters.interpolation), 'clip', node.id);
+      }
+      case 'source.random': {
+        const uniform = (): number => {
+          state.seed = (Math.imul(1664525, state.seed!) + 1013904223) >>> 0;
+          return (state.seed + 0.5) / 4294967296;
+        };
+        if (node.parameters.distribution === 'normal') return finiteNumber(parameter('mean') + Math.sqrt(parameter('variance')) * Math.sqrt(-2 * Math.log(uniform())) * Math.cos(2 * Math.PI * uniform()), node.id);
+        const ratio = uniform();
+        return finiteNumber(parameter('min') * (1 - ratio) + parameter('max') * ratio, node.id);
+      }
+      case 'discrete.unit-delay': case 'discrete.integrator': return state.value!;
+      case 'discrete.delay': return state.history![0]!;
+      case 'discrete.difference': case 'discrete.derivative': {
+        const previous = flatNumeric(state.value!, node.id);
+        const divisor = node.blockType === 'discrete.derivative' ? node.sampleTime.period * baseStep : 1;
+        return mapNumeric(input('in'), (value, index) => (value - previous[index]!) / divisor, node.id);
+      }
+      case 'discrete.fir': return fir(node, state, independentOutput(node) ? undefined : input('in'));
+      case 'discrete.transfer-function': return transfer(node, state, independentOutput(node) ? undefined : input('in'));
+      case 'discrete.state-space': return finiteNumber(dot(node.parameters.C as number[], state.x!, node.id) + (node.parameters.D === 0 ? 0 : parameter('D') * finiteNumber(input('in'), node.id)), node.id);
+      case 'logic.edge-detect': {
+        const previous = state.value, current = input('in');
+        if (typeof previous !== 'boolean' || typeof current !== 'boolean') numericFailure('RUNTIME_TYPE_MISMATCH', node.id, '에지 검출에는 boolean scalar가 필요합니다.');
+        switch (node.parameters.mode) {
+          case 'rising': return current && !previous;
+          case 'falling': return !current && previous;
+          case 'either': return current !== previous;
+          default: return numericFailure('RUNTIME_INVALID_IR', node.id, '지원하지 않는 에지 검출 방식입니다.');
+        }
+      }
+      case 'time.rate-transition': return state.buffer!;
+      default: return numericFailure('RUNTIME_UNSUPPORTED_BLOCK', node.id, '지원하지 않는 이산 블럭입니다.');
+    }
+  }
+  function evaluate(tick: number, time: number, external?: PortValues, repeat = false): PortValues {
+    // Hybrid execution supplies frozen boundary inputs; continuous trial stages
+    // never call this mutating tick evaluation.
+    const values = new Map([...(external ?? []), ...held]);
+    const emit = (node: IRNode, outputs: Record<string, SignalValue>): void => {
+      for (const [port, descriptor] of Object.entries(node.outputs)) checkSignal(outputs[port], descriptor, node.id);
+      held.set(node.id, outputs); values.set(node.id, outputs);
+    };
+    // Non-feedthrough outputs must be visible even if their current input producer is later in the DAG.
+    for (const node of nodes) if (due(node, tick) && independentOutput(node)) {
+      charge(node);
+      emit(node, { out: output(node, memory.get(node.id)!, () => numericFailure('RUNTIME_INVALID_IR', node.id, '상태 출력이 현재 입력에 의존할 수 없습니다.'), tick, time) });
+    }
+    for (const node of nodes) {
+      if (!due(node, tick) || independentOutput(node)) continue;
+      if (repeat && node.blockType === 'source.random') continue;
+      charge(node);
+      const input = (port: string): SignalValue => readInput(values, node, port);
+      emit(node, DISCRETE_BLOCKS.has(node.blockType)
+        ? { out: output(node, memory.get(node.id) ?? {}, input, tick, time) }
+        : evaluateSignalNode(node, input));
+    }
+    return values;
+  }
+  /** One boundary node with lazy input reads. Seeded sources publish once per tick. */
+  function evaluateNode(node: IRNode, tick: number, time: number, input: (port: string) => SignalValue, commit = true): Record<string, SignalValue> {
+    if (!due(node, tick) || node.blockType === 'source.random' && randomTicks.get(node.id) === tick) return held.get(node.id)!;
+    charge(node);
+    const outputs = DISCRETE_BLOCKS.has(node.blockType) ? { out: output(node, memory.get(node.id) ?? {}, input, tick, time) } : evaluateSignalNode(node, input);
+    for (const [port, descriptor] of Object.entries(node.outputs)) checkSignal(outputs[port], descriptor, node.id);
+    if (commit || node.blockType === 'source.random') held.set(node.id, outputs);
+    if (node.blockType === 'source.random') randomTicks.set(node.id, tick);
+    return outputs;
+  }
+  function transition(values: PortValues, tick: number): void {
+    const next = new Map<string, Memory>();
+    for (const node of nodes) {
+      const state = memory.get(node.id);
+      if (!state || node.blockType === 'source.random') continue;
+      // Publication belongs to producer hits, independently of the receiving rate.
+      if (node.blockType === 'time.rate-transition') {
+        const producer = byId.get(node.inputs.in!.nodeId)!;
+        if (due(producer, tick)) { charge(node); next.set(node.id, { buffer: copySignal(readInput(values, node, 'in')) }); }
+        continue;
+      }
+      if (!due(node, tick)) continue;
+      charge(node);
+      if (node.parameters.reset === 'level') {
+        const reset = readInput(values, node, 'reset');
+        if (typeof reset !== 'boolean') numericFailure('RUNTIME_TYPE_MISMATCH', node.id, 'reset에는 boolean scalar가 필요합니다.');
+        if (reset) { next.set(node.id, initialMemory(node)); continue; }
+      }
+      const input = readInput(values, node, 'in');
+      switch (node.blockType) {
+        case 'discrete.unit-delay': case 'discrete.difference': case 'discrete.derivative': case 'logic.edge-detect': next.set(node.id, { value: copySignal(input) }); break;
+        case 'discrete.delay': next.set(node.id, { history: [...state.history!.slice(1), copySignal(input)] }); break;
+        case 'discrete.integrator': {
+          const current = flatNumeric(input, node.id), scale = Number(node.parameters.gain) * node.sampleTime.period * baseStep;
+          const value = mapNumeric(state.value!, (element, index) => element + scale * current[index]!, node.id);
+          checkSignal(value, node.outputs.out!, node.id); next.set(node.id, { value }); break;
+        }
+        case 'discrete.fir': next.set(node.id, { history: state.history!.length ? [copySignal(input), ...state.history!.slice(0, -1)] : [] }); break;
+        case 'discrete.transfer-function': next.set(node.id, {
+          u: state.u!.length ? [finiteNumber(input, node.id), ...state.u!.slice(0, -1)] : [],
+          y: state.y!.length ? [finiteNumber(values.get(node.id)!.out, node.id), ...state.y!.slice(0, -1)] : [],
+        }); break;
+        case 'discrete.state-space': {
+          const A = node.parameters.A as number[][], B = node.parameters.B as number[], scalar = finiteNumber(input, node.id);
+          next.set(node.id, { x: A.map((row, index) => finiteNumber(dot(row, state.x!, node.id) + B[index]! * scalar, node.id)) }); break;
+        }
+      }
+    }
+    for (const [id, state] of next) memory.set(id, state);
+  }
+  function finalState(): Record<string, SignalValue> {
+    return Object.fromEntries(stateIds.map((id) => {
+      return [id, copySignal(held.get(id)!.out!)];
+    }));
+  }
+  function stateMemory(force = false): Record<string, StateValue> | undefined {
+    if (!extendedMemory && !force) return undefined;
+    // Compiler-owned parameters never appear here; the snapshot owns every returned array.
+    return Object.fromEntries([...memory].map(([id, state]) => [id, JSON.parse(JSON.stringify(state)) as StateValue]));
+  }
+  const snapshot = (): PortValues => new Map([...held].map(([id, outputs]) => [id,
+    Object.fromEntries(Object.entries(outputs).map(([port, value]) => [port, copySignal(value)]))]));
+  function checkpoint() {
+    return { held: snapshot(), memory: new Map([...memory].map(([id, state]) => [id, JSON.parse(JSON.stringify(state)) as Memory])), randomTicks: new Map(randomTicks) };
+  }
+  function restore(saved: ReturnType<typeof checkpoint>): void {
+    held.clear(); memory.clear(); randomTicks.clear();
+    for (const [id, outputs] of saved.held) held.set(id, outputs);
+    for (const [id, state] of saved.memory) memory.set(id, state);
+    for (const [id, tick] of saved.randomTicks) randomTicks.set(id, tick);
+  }
+  return { evaluate, evaluateNode, transition, finalState, stateMemory, snapshot, checkpoint, restore };
+}

@@ -1,0 +1,81 @@
+{
+  "generatedAt": "2026-10-02T01:48:35.607Z",
+  "engineVersion": "0.0.1-m0",
+  "environment": {
+    "node": "v25.9.0",
+    "os": "win32 10.0.26200",
+    "cpu": "13th Gen Intel(R) Core(TM) i7-13620H",
+    "logicalCpus": 16,
+    "memoryGiB": 63.71
+  },
+  "methodology": "Node scalar chain, 5 warmups + 20 runs; compile and runtime timings separate. Not a browser/UI performance guarantee.",
+  "graphMeasurements": [
+    {
+      "nodeCount": 100,
+      "edgeCount": 99,
+      "compilation": {
+        "medianMs": 6.835,
+        "p95Ms": 9.487,
+        "repetitions": 20
+      },
+      "execution": {
+        "medianMs": 0.072,
+        "p95Ms": 0.134,
+        "repetitions": 20
+      },
+      "output": 1.009847682457907,
+      "reference": 1.009847682457907,
+      "absoluteError": 0
+    },
+    {
+      "nodeCount": 1000,
+      "edgeCount": 999,
+      "compilation": {
+        "medianMs": 60.931,
+        "p95Ms": 78.995,
+        "repetitions": 20
+      },
+      "execution": {
+        "medianMs": 0.518,
+        "p95Ms": 0.619,
+        "repetitions": 20
+      },
+      "output": 1.1049443926752398,
+      "reference": 1.1049443926752416,
+      "absoluteError": 1.7763568394002505e-15
+    }
+  ],
+  "convergence": [
+    {
+      "step": 0.2,
+      "stopTime": 5,
+      "value": 0.0067384778903842495,
+      "reference": 0.006737946999085467,
+      "absoluteError": 5.308912987824974e-7,
+      "samples": 26
+    },
+    {
+      "step": 0.1,
+      "stopTime": 5,
+      "value": 0.00673797751675499,
+      "reference": 0.006737946999085467,
+      "absoluteError": 3.051766952338886e-8,
+      "samples": 51
+    },
+    {
+      "step": 0.05,
+      "stopTime": 5,
+      "value": 0.006737948828460594,
+      "reference": 0.006737946999085467,
+      "absoluteError": 1.8293751270770375e-9,
+      "samples": 101
+    }
+  ],
+  "cancellation": {
+    "status": "cancelled",
+    "recordedSamples": 1,
+    "requestToReturnMs": 3.851,
+    "overallMs": 63.536,
+    "note": "Cooperative AbortSignal from progress callback; browser cancel and hard watchdog verified separately."
+  }
+}

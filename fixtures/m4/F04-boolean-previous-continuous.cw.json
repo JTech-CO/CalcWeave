@@ -1,0 +1,108 @@
+{
+  "datasets": [
+    {
+      "columns": [
+        {
+          "kind": "number",
+          "name": "time",
+          "unit": "s"
+        },
+        {
+          "kind": "boolean",
+          "name": "value",
+          "unit": "1"
+        }
+      ],
+      "contentHash": "99d35a318237b2b93b3ab1944190d86124a870c170982d71a5c59e2678983dea",
+      "id": "data",
+      "name": "독립 계산 기준 자료",
+      "rows": [
+        [
+          0,
+          false
+        ],
+        [
+          0.15,
+          true
+        ],
+        [
+          0.35,
+          false
+        ],
+        [
+          0.55,
+          true
+        ]
+      ],
+      "sourceHash": "411499b5db9e58cc0ce0168c9d2cdb36389e474608438850318c5a79124b2929",
+      "timeColumn": "time",
+      "version": 1
+    }
+  ],
+  "edges": [
+    {
+      "id": "input-out-result-in",
+      "source": {
+        "nodeId": "input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "continuous",
+    "solver": {
+      "atol": 1e-8,
+      "discreteStep": 0.1,
+      "eventTolerance": 1e-8,
+      "initialStep": 0.08,
+      "maxEvaluations": 1000000,
+      "maxEvents": 10000,
+      "maxRejects": 10000,
+      "maxStep": 0.08,
+      "maxSteps": 100000,
+      "method": "rk4",
+      "minStep": 1e-10,
+      "rtol": 0.000001
+    },
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 0.6
+  },
+  "layout": {},
+  "modelId": "F04-boolean-previous-continuous",
+  "name": "F04-boolean-previous-continuous",
+  "nodes": [
+    {
+      "blockType": "source.dataset",
+      "blockVersion": 1,
+      "id": "input",
+      "label": "input",
+      "parameters": {
+        "column": "value",
+        "datasetId": "data",
+        "interpolation": "previous",
+        "outside": "hold"
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 2
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 2
+      }
+    }
+  ],
+  "schemaVersion": 1
+}

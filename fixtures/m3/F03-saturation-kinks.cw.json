@@ -1,0 +1,121 @@
+{
+  "edges": [
+    {
+      "id": "ramp-out-clip-in",
+      "source": {
+        "nodeId": "ramp",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "clip",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "clip-out-state-in",
+      "source": {
+        "nodeId": "clip",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "state",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "state-out-result-in",
+      "source": {
+        "nodeId": "state",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "continuous",
+    "solver": {
+      "atol": 1e-8,
+      "discreteStep": 0.1,
+      "eventTolerance": 1e-8,
+      "initialStep": 0.01,
+      "maxEvaluations": 1000000,
+      "maxEvents": 10000,
+      "maxRejects": 10000,
+      "maxStep": 0.01,
+      "maxSteps": 100000,
+      "method": "rk4",
+      "minStep": 1e-10,
+      "rtol": 0.000001
+    },
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F03-saturation-kinks",
+  "name": "F03-saturation-kinks",
+  "nodes": [
+    {
+      "blockType": "source.ramp",
+      "blockVersion": 1,
+      "id": "ramp",
+      "label": "ramp",
+      "parameters": {
+        "initial": -1,
+        "slope": 4,
+        "startTime": 0
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "nonlinear.saturation",
+      "blockVersion": 1,
+      "id": "clip",
+      "label": "clip",
+      "parameters": {
+        "lower": 0,
+        "upper": 1
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "continuous.integrator",
+      "blockVersion": 1,
+      "id": "state",
+      "label": "state",
+      "parameters": {
+        "initial": 0,
+        "reset": "none"
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    }
+  ],
+  "schemaVersion": 1
+}

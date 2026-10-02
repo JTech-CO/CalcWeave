@@ -1,0 +1,126 @@
+{
+  "edges": [
+    {
+      "id": "force-out-work-a",
+      "source": {
+        "nodeId": "force",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "work",
+        "portId": "a"
+      }
+    },
+    {
+      "id": "distance-out-work-b",
+      "source": {
+        "nodeId": "distance",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "work",
+        "portId": "b"
+      }
+    },
+    {
+      "id": "work-out-power-a",
+      "source": {
+        "nodeId": "work",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "power",
+        "portId": "a"
+      }
+    },
+    {
+      "id": "time-out-power-b",
+      "source": {
+        "nodeId": "time",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "power",
+        "portId": "b"
+      }
+    },
+    {
+      "id": "power-out-result-in",
+      "source": {
+        "nodeId": "power",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "static",
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F04-power-dimension",
+  "name": "F04-power-dimension",
+  "nodes": [
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "force",
+      "label": "force",
+      "parameters": {
+        "value": 2
+      },
+      "unit": "N"
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "distance",
+      "label": "distance",
+      "parameters": {
+        "value": 3
+      },
+      "unit": "m"
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "time",
+      "label": "time",
+      "parameters": {
+        "value": 2
+      },
+      "unit": "s"
+    },
+    {
+      "blockType": "math.multiply",
+      "blockVersion": 1,
+      "id": "work",
+      "label": "work",
+      "parameters": {
+        "operation": "multiply"
+      }
+    },
+    {
+      "blockType": "math.multiply",
+      "blockVersion": 1,
+      "id": "power",
+      "label": "power",
+      "parameters": {
+        "operation": "divide"
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {}
+    }
+  ],
+  "schemaVersion": 1
+}

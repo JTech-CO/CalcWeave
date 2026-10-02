@@ -1,0 +1,104 @@
+{
+  "reference": "Impulse response equals the three FIR coefficients followed by zeros.",
+  "tolerance": {
+    "absolute": 1e-12,
+    "relative": 1e-12
+  },
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "result": 1
+        }
+      },
+      {
+        "time": 1,
+        "values": {
+          "result": 0.5
+        }
+      },
+      {
+        "time": 2,
+        "values": {
+          "result": 0.25
+        }
+      },
+      {
+        "time": 3,
+        "values": {
+          "result": 0
+        }
+      },
+      {
+        "time": 4,
+        "values": {
+          "result": 0
+        }
+      }
+    ],
+    "finalState": {
+      "fir": 0
+    },
+    "stateMemory": {
+      "fir": {
+        "history": [
+          0,
+          0
+        ]
+      }
+    },
+    "status": "completed",
+    "steps": 5
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "7bce7faa749975de51046bfa4a7c8216758641f11b53cb96ae24f100da2254b2",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.2.0-m2",
+    "targetVersion": "typescript-m2-v1",
+    "execution": {
+      "mode": "discrete",
+      "startTime": 0,
+      "stopTime": 4,
+      "step": 1
+    },
+    "nodes": {
+      "impulse": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "fir": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "result": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      }
+    },
+    "outputTypes": {
+      "result": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    }
+  }
+}

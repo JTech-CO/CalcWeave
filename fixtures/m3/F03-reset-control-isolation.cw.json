@@ -1,0 +1,183 @@
+{
+  "edges": [
+    {
+      "id": "one-out-state-in",
+      "source": {
+        "nodeId": "one",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "state",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "true-out-state-reset",
+      "source": {
+        "nodeId": "true",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "state",
+        "portId": "reset"
+      }
+    },
+    {
+      "id": "ramp-out-unrelated-in",
+      "source": {
+        "nodeId": "ramp",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "unrelated",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "state-out-result-in",
+      "source": {
+        "nodeId": "state",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "unrelated-out-crossing-in",
+      "source": {
+        "nodeId": "unrelated",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "crossing",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "continuous",
+    "solver": {
+      "atol": 1e-8,
+      "discreteStep": 0.1,
+      "eventTolerance": 1e-8,
+      "initialStep": 0.01,
+      "maxEvaluations": 1000000,
+      "maxEvents": 10000,
+      "maxRejects": 10000,
+      "maxStep": 0.01,
+      "maxSteps": 100000,
+      "method": "rk4",
+      "minStep": 1e-10,
+      "rtol": 0.000001
+    },
+    "startTime": 0,
+    "step": 0.25,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F03-reset-control-isolation",
+  "name": "F03-reset-control-isolation",
+  "nodes": [
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "one",
+      "label": "one",
+      "parameters": {
+        "value": 1
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "true",
+      "label": "true",
+      "parameters": {
+        "value": true
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "continuous.integrator",
+      "blockVersion": 1,
+      "id": "state",
+      "label": "state",
+      "parameters": {
+        "initial": 0,
+        "reset": "rising"
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "source.ramp",
+      "blockVersion": 1,
+      "id": "ramp",
+      "label": "ramp",
+      "parameters": {
+        "initial": 0,
+        "slope": 1,
+        "startTime": 0
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "logic.hit-crossing",
+      "blockVersion": 1,
+      "id": "unrelated",
+      "label": "unrelated",
+      "parameters": {
+        "direction": "rising",
+        "threshold": 0.5
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "crossing",
+      "label": "crossing",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    }
+  ],
+  "schemaVersion": 1
+}

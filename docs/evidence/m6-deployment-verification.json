@@ -1,0 +1,11 @@
+{
+  "generatedAt": "2026-10-02T16:20:35.540Z",
+  "url": "https://calcweave.com/",
+  "checks": {
+    "dnsResolved": false,
+    "dnsError": "ENOTFOUND",
+    "domainOwnership": "Requires verified GitHub Pages domain TXT and repository settings; DNS alone does not prove ownership.",
+    "actualNoviceStudy": "Requires observed F06 study; automation is not a novice participant."
+  },
+  "verifiedPublicLaunch": false
+}

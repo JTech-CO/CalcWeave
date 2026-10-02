@@ -1,0 +1,120 @@
+{
+  "edges": [
+    {
+      "id": "row-out-bad-row",
+      "source": {
+        "nodeId": "row",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "bad",
+        "portId": "row"
+      }
+    },
+    {
+      "id": "column-out-bad-column",
+      "source": {
+        "nodeId": "column",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "bad",
+        "portId": "column"
+      }
+    },
+    {
+      "id": "bad-out-result-in",
+      "source": {
+        "nodeId": "bad",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "discrete",
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 0.5
+  },
+  "layout": {},
+  "modelId": "F05-failure-discrete-lookup-after-range",
+  "name": "F05-failure-discrete-lookup-after-range",
+  "nodes": [
+    {
+      "blockType": "source.ramp",
+      "blockVersion": 1,
+      "id": "row",
+      "label": "row",
+      "parameters": {
+        "initial": 0,
+        "slope": 1,
+        "startTime": 0
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "column",
+      "label": "column",
+      "parameters": {
+        "value": 1
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "lookup.2d",
+      "blockVersion": 1,
+      "id": "bad",
+      "label": "bad",
+      "parameters": {
+        "columnBreakpoints": [
+          0,
+          2
+        ],
+        "extrapolation": "error",
+        "interpolation": "linear",
+        "rowBreakpoints": [
+          0,
+          0.25
+        ],
+        "table": [
+          [
+            0,
+            2
+          ],
+          [
+            0.25,
+            2.25
+          ]
+        ]
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    }
+  ],
+  "schemaVersion": 1
+}

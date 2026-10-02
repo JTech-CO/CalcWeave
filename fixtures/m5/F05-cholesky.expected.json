@@ -1,0 +1,113 @@
+{
+  "reference": "Hand triangular factor L=[[2,0,0],[6,1,0],[-8,5,3]], whose L*L^T equals all nine A entries.",
+  "absoluteTolerance": 2e-11,
+  "relativeTolerance": 0,
+  "residuals": [
+    {
+      "kind": "cholesky",
+      "matrix": [
+        [
+          4,
+          12,
+          -16
+        ],
+        [
+          12,
+          37,
+          -43
+        ],
+        [
+          -16,
+          -43,
+          98
+        ]
+      ],
+      "outputs": [
+        "result"
+      ],
+      "tolerance": 2e-11
+    }
+  ],
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "result": [
+            [
+              1.9999999999999998,
+              0,
+              0
+            ],
+            [
+              6,
+              0.9999999999999951,
+              0
+            ],
+            [
+              -7.999999999999999,
+              5.000000000000025,
+              2.99999999999996
+            ]
+          ]
+        }
+      }
+    ],
+    "finalState": {},
+    "status": "completed",
+    "steps": 1
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "29f38bd830fcadb9e47189458021d52e653ebef8900cffaee3628981702fabf9",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.5.0-m5",
+    "targetVersion": "typescript-m5-v1",
+    "execution": {
+      "mode": "static",
+      "startTime": 0,
+      "stopTime": 1,
+      "step": 0.1
+    },
+    "nodes": {
+      "a": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "factor": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "result": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      }
+    },
+    "outputTypes": {
+      "result": {
+        "valueType": "float64",
+        "shape": [
+          3,
+          3
+        ],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    }
+  }
+}

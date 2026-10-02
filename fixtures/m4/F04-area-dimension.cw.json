@@ -1,0 +1,85 @@
+{
+  "edges": [
+    {
+      "id": "width-out-area-a",
+      "source": {
+        "nodeId": "width",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "area",
+        "portId": "a"
+      }
+    },
+    {
+      "id": "height-out-area-b",
+      "source": {
+        "nodeId": "height",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "area",
+        "portId": "b"
+      }
+    },
+    {
+      "id": "area-out-result-in",
+      "source": {
+        "nodeId": "area",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "static",
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F04-area-dimension",
+  "name": "F04-area-dimension",
+  "nodes": [
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "width",
+      "label": "width",
+      "parameters": {
+        "value": 2
+      },
+      "unit": "m"
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "height",
+      "label": "height",
+      "parameters": {
+        "value": 3
+      },
+      "unit": "m"
+    },
+    {
+      "blockType": "math.multiply",
+      "blockVersion": 1,
+      "id": "area",
+      "label": "area",
+      "parameters": {
+        "operation": "multiply"
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {}
+    }
+  ],
+  "schemaVersion": 1
+}

@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-10-02T19:30:41.134Z",
+  "releaseId": "994a84fc8000c328b2e2368620c5947cf47eed7d9c1247c13c9caba539896f09",
+  "sourcePatternScan": {
+    "apps": 38,
+    "packages": 41,
+    "scripts": 23,
+    "confirmed": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "scope": "Application/package/script source only; generated traces excluded. Raw source scan retained privately under .vsf."
+  },
+  "dependencyAudit": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "dependencies": {
+      "prod": 29,
+      "dev": 104,
+      "optional": 53,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 132
+    }
+  },
+  "artifactChecks": 69,
+  "manualEightAreas": {
+    "sql": "not-applicable-no-server-query",
+    "xss": "React escaped text and closed expression AST; Python user data embedded as UTF-8 hex JSON",
+    "secrets": "Ephemeral nonextractable P256 private keys never stored/exported; no server credentials or env distribution",
+    "authorization": "No account/server data; package acceptance requires independently trusted fingerprint and exact local-only permission",
+    "input": "Bounded strict schema/engine/registry/hash/signature/size/depth validation; recompiled Python IR and manifest; late file and closed modal responses ignored",
+    "rate": "No auth or paid API; local operation/time/state/record/source generation budgets",
+    "headersHttps": "Final static manifest/security policies verified locally; public DNS/HTTPS unverified",
+    "serverDatabase": "No server database; existing local IDB transactions/CAS/recovery regressions retained"
+  },
+  "fixes": [
+    "Recompile and canonically bind Python IR/manifest",
+    "Float64 numeric semantics including large integer-shaped input",
+    "Bound package permissions/registry and independent signer trust",
+    "Prevent asynchronous import overwrite and closed-dialog acceptance"
+  ],
+  "publicSecurityClaimed": false,
+  "remoteTelemetryAdded": false,
+  "limitations": [
+    "Pattern scanner does not prove absence of unknown vulnerabilities",
+    "Full historical Git secret audit not performed",
+    "Public HTTPS/domain/headers and hosting traffic policies unverified"
+  ]
+}

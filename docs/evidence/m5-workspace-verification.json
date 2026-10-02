@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-10-02T15:09:49.517Z",
+  "engineVersion": "0.5.0-m5",
+  "appVersion": "0.5.0",
+  "unit": {
+    "files": 20,
+    "passed": 822
+  },
+  "browser": {
+    "passed": 80,
+    "newM5": 14,
+    "existing": 66,
+    "lastRun": {
+      "status": "passed",
+      "failedTests": []
+    },
+    "method": "Entire Playwright suite against fixed 127.0.0.1:4173 preview, isolated browser contexts; final clean run passed all80. Floating numerical expectation uses12-decimal tolerance; stored32bit/history/ZIP/manifest comparisons remain exact."
+  },
+  "design": {
+    "observations": 84,
+    "newM5": 24,
+    "pageErrors": [],
+    "documentOverflow": 0,
+    "blockTextOverflow": 0,
+    "evidence": "m5-design-verification.json"
+  },
+  "build": {
+    "typecheckPassed": true,
+    "vitePassed": true,
+    "files": [
+      {
+        "path": "dist/assets/index-FHqa3cNu.js",
+        "sha256": "36d5f0a572aae94dd27381c2e44284052f57d05ab2dd5d8f09216bc9d322ac90"
+      },
+      {
+        "path": "dist/assets/engine.worker-BK9-VQlu.js",
+        "sha256": "ff8c80330f73a6f4fd3cffdb66a216c537d4c3451992b9b1b4666eceaab8c27e"
+      },
+      {
+        "path": "dist/assets/src-B3CZV70y.js",
+        "sha256": "11b0b47877e7d73e6dbf0e4496e1c9eee1312ba0d674dd1c542bb0af24023180"
+      }
+    ]
+  },
+  "numerical": {
+    "successFixtures": 30,
+    "failureFixtures": 12,
+    "weightedBudgetChecks": 3,
+    "strictStandaloneModes": [
+      "static",
+      "discrete",
+      "continuous"
+    ],
+    "evidence": "m5-verification.json"
+  },
+  "sourceFingerprint": {
+    "files": 68,
+    "algorithm": "SHA-256",
+    "beforeAndAfterEqual": true,
+    "value": "2A978B8DE8AD7E6D9556001DE1F4B5D65103E210EB4B346FEEF245851EF7CFB6",
+    "reportedBy": "M5 UI verifier"
+  },
+  "security": "Bounded allowlisted parameters, dense finite arrays and safe JSON; accessors/hidden options rejected; no arbitrary evaluation, new network endpoint, DB, authentication or personal-data collection."
+}

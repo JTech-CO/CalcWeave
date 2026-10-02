@@ -1,0 +1,144 @@
+{
+  "edges": [
+    {
+      "id": "input-out-delay-in",
+      "source": {
+        "nodeId": "input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "delay",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "delay-out-integral-in",
+      "source": {
+        "nodeId": "delay",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "integral",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "delay-out-delayed-in",
+      "source": {
+        "nodeId": "delay",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "delayed",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "integral-out-integral-out-in",
+      "source": {
+        "nodeId": "integral",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "integral-out",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "continuous",
+    "solver": {
+      "atol": 1e-8,
+      "discreteStep": 0.1,
+      "eventTolerance": 1e-8,
+      "initialStep": 0.08,
+      "maxEvaluations": 1000000,
+      "maxEvents": 10000,
+      "maxRejects": 10000,
+      "maxStep": 0.08,
+      "maxSteps": 100000,
+      "method": "rk4",
+      "minStep": 1e-10,
+      "rtol": 0.000001
+    },
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F03-delay-prehistory-and-jump",
+  "name": "F03-delay-prehistory-and-jump",
+  "nodes": [
+    {
+      "blockType": "source.step",
+      "blockVersion": 1,
+      "id": "input",
+      "label": "input",
+      "parameters": {
+        "after": 2,
+        "before": 1,
+        "stepTime": 0.37
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "time.transport-delay",
+      "blockVersion": 1,
+      "id": "delay",
+      "label": "delay",
+      "parameters": {
+        "delay": 0.15,
+        "initial": 0
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "continuous.integrator",
+      "blockVersion": 1,
+      "id": "integral",
+      "label": "integral",
+      "parameters": {
+        "initial": 0,
+        "reset": "none"
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "delayed",
+      "label": "delayed",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "integral-out",
+      "label": "integral-out",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    }
+  ],
+  "schemaVersion": 1
+}

@@ -1,0 +1,99 @@
+{
+  "edges": [
+    {
+      "id": "input-out-quantize-in",
+      "source": {
+        "nodeId": "input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "quantize",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "quantize-out-result-in",
+      "source": {
+        "nodeId": "quantize",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "quantize-stored-stored-in",
+      "source": {
+        "nodeId": "quantize",
+        "portId": "stored"
+      },
+      "target": {
+        "nodeId": "stored",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "static",
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F05-quantize-nearest-even",
+  "name": "F05-quantize-nearest-even",
+  "nodes": [
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "input",
+      "label": "input",
+      "parameters": {
+        "value": [
+          [
+            -3.5,
+            -2.5,
+            -1.5,
+            -0.5
+          ],
+          [
+            0.5,
+            1.5,
+            2.5,
+            3.5
+          ]
+        ]
+      },
+      "unit": "m"
+    },
+    {
+      "blockType": "fixed.quantize",
+      "blockVersion": 1,
+      "id": "quantize",
+      "label": "quantize",
+      "parameters": {
+        "fractionLength": 0,
+        "overflow": "error",
+        "rounding": "nearest-even",
+        "signedness": "signed",
+        "wordLength": 8
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {}
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "stored",
+      "label": "stored",
+      "parameters": {}
+    }
+  ],
+  "schemaVersion": 1
+}

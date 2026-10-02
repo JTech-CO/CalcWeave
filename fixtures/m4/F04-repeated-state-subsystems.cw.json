@@ -1,0 +1,220 @@
+{
+  "edges": [
+    {
+      "id": "first-input-out-first-in",
+      "source": {
+        "nodeId": "first-input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "first",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "first-out-first-view-in",
+      "source": {
+        "nodeId": "first",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "first-view",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "second-input-out-second-in",
+      "source": {
+        "nodeId": "second-input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "second",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "second-out-second-view-in",
+      "source": {
+        "nodeId": "second",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "second-view",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "discrete",
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 0.4
+  },
+  "layout": {},
+  "modelId": "F04-repeated-state-subsystems",
+  "name": "F04-repeated-state-subsystems",
+  "nodes": [
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "first-input",
+      "label": "first-input",
+      "parameters": {
+        "value": 2
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "hierarchy.subsystem",
+      "blockVersion": 1,
+      "id": "first",
+      "label": "first",
+      "parameters": {
+        "definitionId": "delayDef",
+        "version": 1
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "first-view",
+      "label": "first-view",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 1,
+        "period": 2
+      }
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "second-input",
+      "label": "second-input",
+      "parameters": {
+        "value": 5
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "hierarchy.subsystem",
+      "blockVersion": 1,
+      "id": "second",
+      "label": "second",
+      "parameters": {
+        "definitionId": "delayDef",
+        "version": 1
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "second-view",
+      "label": "second-view",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 1,
+        "period": 2
+      }
+    }
+  ],
+  "schemaVersion": 1,
+  "subsystems": [
+    {
+      "edges": [
+        {
+          "id": "input-out-delay-in",
+          "source": {
+            "nodeId": "input",
+            "portId": "out"
+          },
+          "target": {
+            "nodeId": "delay",
+            "portId": "in"
+          }
+        },
+        {
+          "id": "delay-out-output-in",
+          "source": {
+            "nodeId": "delay",
+            "portId": "out"
+          },
+          "target": {
+            "nodeId": "output",
+            "portId": "in"
+          }
+        }
+      ],
+      "id": "delayDef",
+      "inputs": [
+        {
+          "id": "in",
+          "nodeId": "input"
+        }
+      ],
+      "layout": {},
+      "name": "같은 지연 정의",
+      "nodes": [
+        {
+          "blockType": "io.input",
+          "blockVersion": 1,
+          "id": "input",
+          "label": "input",
+          "parameters": {
+            "value": -999
+          },
+          "sampleTime": {
+            "offset": 0,
+            "period": 1
+          }
+        },
+        {
+          "blockType": "discrete.unit-delay",
+          "blockVersion": 1,
+          "id": "delay",
+          "label": "delay",
+          "parameters": {
+            "initial": 0,
+            "reset": "none"
+          },
+          "sampleTime": {
+            "offset": 1,
+            "period": 2
+          }
+        },
+        {
+          "blockType": "io.output",
+          "blockVersion": 1,
+          "id": "output",
+          "label": "output",
+          "parameters": {},
+          "sampleTime": {
+            "offset": 0,
+            "period": 1
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "nodeId": "output"
+        }
+      ],
+      "version": 1
+    }
+  ]
+}

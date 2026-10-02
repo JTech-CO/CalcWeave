@@ -1,0 +1,68 @@
+{
+  "reference": "Direct cofactor expansion: -2*(1)+1*(-2)=-4; first zero pivot requires partial pivoting.",
+  "absoluteTolerance": 2e-11,
+  "relativeTolerance": 0,
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "result": -4
+        }
+      }
+    ],
+    "finalState": {},
+    "status": "completed",
+    "steps": 1
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "466008e4734c8ab145f55844a95e192d1cb44d38a05fa894020032a620eb83ee",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.5.0-m5",
+    "targetVersion": "typescript-m5-v1",
+    "execution": {
+      "mode": "static",
+      "startTime": 0,
+      "stopTime": 1,
+      "step": 0.1
+    },
+    "nodes": {
+      "a": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "det": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "result": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      }
+    },
+    "outputTypes": {
+      "result": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    }
+  }
+}

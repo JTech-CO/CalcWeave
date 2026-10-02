@@ -1,0 +1,93 @@
+{
+  "reference": "Static playback reads its start-time table value 3. DocBlock/ModelInfo have no numerical output and cannot change execution semantics.",
+  "absoluteTolerance": 1e-11,
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "result": 3
+        }
+      }
+    ],
+    "finalState": {},
+    "status": "completed",
+    "steps": 1
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "051cf39f8c9dc59dcdb9b5e3a72ce322ecb1005e5efde4e1af2fc02bedff6f5e",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.4.0-m4",
+    "targetVersion": "typescript-m4-v1",
+    "execution": {
+      "mode": "static",
+      "startTime": 0,
+      "stopTime": 1,
+      "step": 0.1
+    },
+    "nodes": {
+      "info": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "input": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "note": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "result": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      }
+    },
+    "outputTypes": {
+      "result": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [
+      {
+        "id": "data",
+        "version": 1,
+        "sourceHash": "2b6a7436f15dc5f17eee9ea3d2af08815a8232963bc54bcaebd31f6744e5e8fd",
+        "contentHash": "d51c3c61a1fda445066c5af70799d860f9334eb1e01cf54d9b2cf9e04410174a",
+        "timeColumn": "time",
+        "columns": [
+          {
+            "name": "time",
+            "kind": "number",
+            "unit": "s"
+          },
+          {
+            "name": "value",
+            "kind": "number",
+            "unit": "1"
+          }
+        ]
+      }
+    ],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    }
+  }
+}
