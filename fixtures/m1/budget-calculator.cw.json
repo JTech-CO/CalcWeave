@@ -1,0 +1,148 @@
+{
+  "edges": [
+    {
+      "id": "price-subtotal",
+      "source": {
+        "nodeId": "price",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "subtotal",
+        "portId": "a"
+      }
+    },
+    {
+      "id": "quantity-subtotal",
+      "source": {
+        "nodeId": "quantity",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "subtotal",
+        "portId": "b"
+      }
+    },
+    {
+      "id": "subtotal-total",
+      "source": {
+        "nodeId": "subtotal",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "total",
+        "portId": "a"
+      }
+    },
+    {
+      "id": "discount-total",
+      "source": {
+        "nodeId": "discount",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "total",
+        "portId": "b"
+      }
+    },
+    {
+      "id": "total-result",
+      "source": {
+        "nodeId": "total",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "static",
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 0
+  },
+  "layout": {
+    "discount": {
+      "x": 260,
+      "y": 240
+    },
+    "price": {
+      "x": 20,
+      "y": 40
+    },
+    "quantity": {
+      "x": 20,
+      "y": 240
+    },
+    "result": {
+      "x": 740,
+      "y": 40
+    },
+    "subtotal": {
+      "x": 260,
+      "y": 40
+    },
+    "total": {
+      "x": 500,
+      "y": 40
+    }
+  },
+  "modelId": "budget-calculator",
+  "name": "구매 예산 계산",
+  "nodes": [
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "price",
+      "label": "가격",
+      "parameters": {
+        "value": 12500
+      }
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "quantity",
+      "label": "수량",
+      "parameters": {
+        "value": 3
+      }
+    },
+    {
+      "blockType": "math.multiply",
+      "blockVersion": 1,
+      "id": "subtotal",
+      "label": "소계",
+      "parameters": {
+        "operation": "multiply"
+      }
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "discount",
+      "label": "할인",
+      "parameters": {
+        "value": 2500
+      }
+    },
+    {
+      "blockType": "math.sum",
+      "blockVersion": 1,
+      "id": "total",
+      "label": "할인 적용",
+      "parameters": {
+        "signs": "+-"
+      }
+    },
+    {
+      "blockType": "sink.display",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "예산 합계",
+      "parameters": {}
+    }
+  ],
+  "schemaVersion": 1
+}

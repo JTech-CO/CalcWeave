@@ -1,0 +1,17 @@
+{
+  "expectedCode": "MATRIX_NUMERIC_NONFINITE",
+  "nodeId": "bad",
+  "diagnostics": [
+    {
+      "code": "MATRIX_NUMERIC_NONFINITE",
+      "message": "계산 결과가 유한한 float64 범위를 초과했습니다.",
+      "nodeId": "bad"
+    }
+  ],
+  "partialResult": {
+    "samples": [],
+    "finalState": {},
+    "status": "failed",
+    "steps": 0
+  }
+}

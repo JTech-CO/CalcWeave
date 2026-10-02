@@ -1,0 +1,107 @@
+{
+  "edges": [
+    {
+      "id": "a-out-product-a",
+      "source": {
+        "nodeId": "a",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "product",
+        "portId": "a"
+      }
+    },
+    {
+      "id": "b-out-product-b",
+      "source": {
+        "nodeId": "b",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "product",
+        "portId": "b"
+      }
+    },
+    {
+      "id": "product-out-result-in",
+      "source": {
+        "nodeId": "product",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "static",
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F05-rectangular-product",
+  "name": "F05-rectangular-product",
+  "nodes": [
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "a",
+      "label": "a",
+      "parameters": {
+        "value": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            6
+          ]
+        ]
+      },
+      "unit": "m"
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "b",
+      "label": "b",
+      "parameters": {
+        "value": [
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            11,
+            12
+          ]
+        ]
+      },
+      "unit": "m"
+    },
+    {
+      "blockType": "math.matrix-multiply",
+      "blockVersion": 1,
+      "id": "product",
+      "label": "product",
+      "parameters": {}
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {}
+    }
+  ],
+  "schemaVersion": 1
+}

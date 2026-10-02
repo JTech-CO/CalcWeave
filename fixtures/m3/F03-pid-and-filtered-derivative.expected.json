@@ -1,0 +1,214 @@
+{
+  "reference": "Parallel filtered PID: 2+t+2*exp(-4t); filtered derivative 4*exp(-4t), zero filter/integral states.",
+  "absoluteTolerance": 4e-8,
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "derivative-out": 4,
+          "pid-out": 4
+        }
+      },
+      {
+        "time": 0.1,
+        "values": {
+          "derivative-out": 2.681280207798719,
+          "pid-out": 3.4406401038993595
+        }
+      },
+      {
+        "time": 0.2,
+        "values": {
+          "derivative-out": 1.7973158881832854,
+          "pid-out": 3.0986579440916424
+        }
+      },
+      {
+        "time": 0.30000000000000004,
+        "values": {
+          "derivative-out": 1.204776879537004,
+          "pid-out": 2.902388439768502
+        }
+      },
+      {
+        "time": 0.4,
+        "values": {
+          "derivative-out": 0.8075861004790172,
+          "pid-out": 2.8037930502395083
+        }
+      },
+      {
+        "time": 0.5,
+        "values": {
+          "derivative-out": 0.5413411568269346,
+          "pid-out": 2.7706705784134673
+        }
+      },
+      {
+        "time": 0.6000000000000001,
+        "values": {
+          "derivative-out": 0.36287183236673126,
+          "pid-out": 2.7814359161833657
+        }
+      },
+      {
+        "time": 0.7000000000000001,
+        "values": {
+          "derivative-out": 0.24324026552314315,
+          "pid-out": 2.8216201327615718
+        }
+      },
+      {
+        "time": 0.8,
+        "values": {
+          "derivative-out": 0.163048827421727,
+          "pid-out": 2.8815244137108635
+        }
+      },
+      {
+        "time": 0.9,
+        "values": {
+          "derivative-out": 0.10929489846766627,
+          "pid-out": 2.954647449233833
+        }
+      },
+      {
+        "time": 1,
+        "values": {
+          "derivative-out": 0.07326256201868109,
+          "pid-out": 3.0366312810093405
+        }
+      }
+    ],
+    "finalState": {
+      "derivative": 0.07326256201868109,
+      "pid": 3.0366312810093405
+    },
+    "stateMemory": {
+      "derivative": {
+        "state": [
+          0.9816843594953297
+        ]
+      },
+      "pid": {
+        "state": [
+          0.9999999999999999,
+          0.9816843594953297
+        ]
+      }
+    },
+    "stateTime": 1,
+    "status": "completed",
+    "steps": 11,
+    "solverStatistics": {
+      "method": "rk4",
+      "acceptedSteps": 100,
+      "rejectedSteps": 0,
+      "evaluations": 400,
+      "events": 0,
+      "lastStep": 0.009999999999999898,
+      "minAcceptedStep": 0.009999999999999898,
+      "maxAcceptedStep": 0.01
+    },
+    "events": []
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "e992df723cdd8fab4681a4c1f22ef228effa6c6626ffb4b4fa555f7b36639d87",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.3.0-m3",
+    "targetVersion": "typescript-m3-v1",
+    "execution": {
+      "mode": "continuous",
+      "startTime": 0,
+      "stopTime": 1,
+      "step": 0.1,
+      "solver": {
+        "method": "rk4",
+        "initialStep": 0.01,
+        "minStep": 1e-10,
+        "maxStep": 0.01,
+        "atol": 1e-8,
+        "rtol": 0.000001,
+        "maxSteps": 100000,
+        "maxRejects": 10000,
+        "maxEvaluations": 1000000,
+        "eventTolerance": 1e-8,
+        "maxEvents": 10000,
+        "discreteStep": 0.1
+      }
+    },
+    "nodes": {
+      "one": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "constant"
+      },
+      "derivative": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "derivative-out": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "pid": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "pid-out": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      }
+    },
+    "outputTypes": {
+      "derivative-out": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      },
+      "pid-out": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    },
+    "continuousPolicy": {
+      "outputGrid": "execution.step",
+      "discreteGrid": "solver.discreteStep",
+      "eventOrder": "reset-tick-observe",
+      "acceptedBoundaryMemory": true,
+      "limits": {
+        "maxSteps": 100000,
+        "maxRejects": 10000,
+        "maxEvaluations": 1000000,
+        "maxEvents": 10000
+      }
+    }
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "modelId": "discrete-feedback",
+  "name": "이전 값을 기억하기",
+  "nodes": [
+    {
+      "id": "input",
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "label": "입력",
+      "parameters": {
+        "value": 1
+      }
+    },
+    {
+      "id": "delay",
+      "blockType": "discrete.unit-delay",
+      "blockVersion": 1,
+      "label": "이전 값",
+      "parameters": {
+        "initial": 0
+      }
+    },
+    {
+      "id": "gain",
+      "blockType": "math.gain",
+      "blockVersion": 1,
+      "label": "배율",
+      "parameters": {
+        "gain": 0.9
+      }
+    },
+    {
+      "id": "sum",
+      "blockType": "math.sum",
+      "blockVersion": 1,
+      "label": "더하기",
+      "parameters": {}
+    },
+    {
+      "id": "result",
+      "blockType": "sink.display",
+      "blockVersion": 1,
+      "label": "값 표시",
+      "parameters": {}
+    }
+  ],
+  "edges": [
+    {
+      "id": "input-sum",
+      "source": {
+        "nodeId": "input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "sum",
+        "portId": "a"
+      }
+    },
+    {
+      "id": "delay-gain",
+      "source": {
+        "nodeId": "delay",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "gain",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "gain-sum",
+      "source": {
+        "nodeId": "gain",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "sum",
+        "portId": "b"
+      }
+    },
+    {
+      "id": "sum-delay",
+      "source": {
+        "nodeId": "sum",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "delay",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "delay-result",
+      "source": {
+        "nodeId": "delay",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "discrete",
+    "startTime": 0,
+    "stopTime": 20,
+    "step": 1
+  },
+  "layout": {
+    "input": {
+      "x": 20,
+      "y": 10
+    },
+    "sum": {
+      "x": 260,
+      "y": 10
+    },
+    "delay": {
+      "x": 500,
+      "y": 10
+    },
+    "gain": {
+      "x": 260,
+      "y": 200
+    },
+    "result": {
+      "x": 740,
+      "y": 10
+    }
+  }
+}

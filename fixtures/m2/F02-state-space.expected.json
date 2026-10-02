@@ -1,0 +1,103 @@
+{
+  "reference": "x[n+1]=0.5*x[n]+1, y[n]=x[n], x[0]=0.",
+  "tolerance": {
+    "absolute": 1e-12,
+    "relative": 1e-12
+  },
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "result": 0
+        }
+      },
+      {
+        "time": 1,
+        "values": {
+          "result": 1
+        }
+      },
+      {
+        "time": 2,
+        "values": {
+          "result": 1.5
+        }
+      },
+      {
+        "time": 3,
+        "values": {
+          "result": 1.75
+        }
+      },
+      {
+        "time": 4,
+        "values": {
+          "result": 1.875
+        }
+      }
+    ],
+    "finalState": {
+      "system": 1.875
+    },
+    "stateMemory": {
+      "system": {
+        "x": [
+          1.875
+        ]
+      }
+    },
+    "status": "completed",
+    "steps": 5
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "112eb6f0455c1f134f655f9bd9a06cf344f9bdc479ae496cb5d99d7651c5fd8c",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.2.0-m2",
+    "targetVersion": "typescript-m2-v1",
+    "execution": {
+      "mode": "discrete",
+      "startTime": 0,
+      "stopTime": 4,
+      "step": 1
+    },
+    "nodes": {
+      "one": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "system": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "result": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      }
+    },
+    "outputTypes": {
+      "result": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    }
+  }
+}

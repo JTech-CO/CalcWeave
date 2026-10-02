@@ -1,0 +1,90 @@
+{
+  "edges": [
+    {
+      "id": "digital-out-hold-in",
+      "source": {
+        "nodeId": "digital",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "hold",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "hold-out-result-in",
+      "source": {
+        "nodeId": "hold",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "continuous",
+    "solver": {
+      "atol": 1e-8,
+      "discreteStep": 0.1,
+      "eventTolerance": 1e-8,
+      "initialStep": 0.01,
+      "maxEvaluations": 1000000,
+      "maxEvents": 10000,
+      "maxRejects": 10000,
+      "maxStep": 0.01,
+      "maxSteps": 100000,
+      "method": "rk4",
+      "minStep": 1e-10,
+      "rtol": 0.000001
+    },
+    "startTime": 0,
+    "step": 0.05,
+    "stopTime": 0.3
+  },
+  "layout": {},
+  "modelId": "F03-discrete-input-zero-order-hold",
+  "name": "F03-discrete-input-zero-order-hold",
+  "nodes": [
+    {
+      "blockType": "source.digital-clock",
+      "blockVersion": 1,
+      "id": "digital",
+      "label": "digital",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "time.zero-order-hold",
+      "blockVersion": 1,
+      "id": "hold",
+      "label": "hold",
+      "parameters": {
+        "initial": 0
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    }
+  ],
+  "schemaVersion": 1
+}

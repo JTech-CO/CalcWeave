@@ -1,0 +1,436 @@
+{
+  "edges": [
+    {
+      "id": "inside-input-out-inside-in",
+      "source": {
+        "nodeId": "inside-input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "inside",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "inside-index-inside-index-in",
+      "source": {
+        "nodeId": "inside",
+        "portId": "index"
+      },
+      "target": {
+        "nodeId": "inside-index",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "inside-fraction-inside-fraction-in",
+      "source": {
+        "nodeId": "inside",
+        "portId": "fraction"
+      },
+      "target": {
+        "nodeId": "inside-fraction",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "last-input-out-last-in",
+      "source": {
+        "nodeId": "last-input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "last",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "last-index-last-index-in",
+      "source": {
+        "nodeId": "last",
+        "portId": "index"
+      },
+      "target": {
+        "nodeId": "last-index",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "last-fraction-last-fraction-in",
+      "source": {
+        "nodeId": "last",
+        "portId": "fraction"
+      },
+      "target": {
+        "nodeId": "last-fraction",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "left-clip-input-out-left-clip-in",
+      "source": {
+        "nodeId": "left-clip-input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "left-clip",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "left-clip-index-left-clip-index-in",
+      "source": {
+        "nodeId": "left-clip",
+        "portId": "index"
+      },
+      "target": {
+        "nodeId": "left-clip-index",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "left-clip-fraction-left-clip-fraction-in",
+      "source": {
+        "nodeId": "left-clip",
+        "portId": "fraction"
+      },
+      "target": {
+        "nodeId": "left-clip-fraction",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "right-clip-input-out-right-clip-in",
+      "source": {
+        "nodeId": "right-clip-input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "right-clip",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "right-clip-index-right-clip-index-in",
+      "source": {
+        "nodeId": "right-clip",
+        "portId": "index"
+      },
+      "target": {
+        "nodeId": "right-clip-index",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "right-clip-fraction-right-clip-fraction-in",
+      "source": {
+        "nodeId": "right-clip",
+        "portId": "fraction"
+      },
+      "target": {
+        "nodeId": "right-clip-fraction",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "left-linear-input-out-left-linear-in",
+      "source": {
+        "nodeId": "left-linear-input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "left-linear",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "left-linear-index-left-linear-index-in",
+      "source": {
+        "nodeId": "left-linear",
+        "portId": "index"
+      },
+      "target": {
+        "nodeId": "left-linear-index",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "left-linear-fraction-left-linear-fraction-in",
+      "source": {
+        "nodeId": "left-linear",
+        "portId": "fraction"
+      },
+      "target": {
+        "nodeId": "left-linear-fraction",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "right-linear-input-out-right-linear-in",
+      "source": {
+        "nodeId": "right-linear-input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "right-linear",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "right-linear-index-right-linear-index-in",
+      "source": {
+        "nodeId": "right-linear",
+        "portId": "index"
+      },
+      "target": {
+        "nodeId": "right-linear-index",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "right-linear-fraction-right-linear-fraction-in",
+      "source": {
+        "nodeId": "right-linear",
+        "portId": "fraction"
+      },
+      "target": {
+        "nodeId": "right-linear-fraction",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "static",
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F05-prelookup-knots-extrapolation",
+  "name": "F05-prelookup-knots-extrapolation",
+  "nodes": [
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "inside-input",
+      "label": "inside-input",
+      "parameters": {
+        "value": 1
+      }
+    },
+    {
+      "blockType": "lookup.prelookup",
+      "blockVersion": 1,
+      "id": "inside",
+      "label": "inside",
+      "parameters": {
+        "breakpoints": [
+          -2,
+          1,
+          5
+        ],
+        "extrapolation": "clip"
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "inside-index",
+      "label": "inside-index",
+      "parameters": {}
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "inside-fraction",
+      "label": "inside-fraction",
+      "parameters": {}
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "last-input",
+      "label": "last-input",
+      "parameters": {
+        "value": 5
+      }
+    },
+    {
+      "blockType": "lookup.prelookup",
+      "blockVersion": 1,
+      "id": "last",
+      "label": "last",
+      "parameters": {
+        "breakpoints": [
+          -2,
+          1,
+          5
+        ],
+        "extrapolation": "clip"
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "last-index",
+      "label": "last-index",
+      "parameters": {}
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "last-fraction",
+      "label": "last-fraction",
+      "parameters": {}
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "left-clip-input",
+      "label": "left-clip-input",
+      "parameters": {
+        "value": -4
+      }
+    },
+    {
+      "blockType": "lookup.prelookup",
+      "blockVersion": 1,
+      "id": "left-clip",
+      "label": "left-clip",
+      "parameters": {
+        "breakpoints": [
+          -2,
+          1,
+          5
+        ],
+        "extrapolation": "clip"
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "left-clip-index",
+      "label": "left-clip-index",
+      "parameters": {}
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "left-clip-fraction",
+      "label": "left-clip-fraction",
+      "parameters": {}
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "right-clip-input",
+      "label": "right-clip-input",
+      "parameters": {
+        "value": 10
+      }
+    },
+    {
+      "blockType": "lookup.prelookup",
+      "blockVersion": 1,
+      "id": "right-clip",
+      "label": "right-clip",
+      "parameters": {
+        "breakpoints": [
+          -2,
+          1,
+          5
+        ],
+        "extrapolation": "clip"
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "right-clip-index",
+      "label": "right-clip-index",
+      "parameters": {}
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "right-clip-fraction",
+      "label": "right-clip-fraction",
+      "parameters": {}
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "left-linear-input",
+      "label": "left-linear-input",
+      "parameters": {
+        "value": -4
+      }
+    },
+    {
+      "blockType": "lookup.prelookup",
+      "blockVersion": 1,
+      "id": "left-linear",
+      "label": "left-linear",
+      "parameters": {
+        "breakpoints": [
+          -2,
+          1,
+          5
+        ],
+        "extrapolation": "linear"
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "left-linear-index",
+      "label": "left-linear-index",
+      "parameters": {}
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "left-linear-fraction",
+      "label": "left-linear-fraction",
+      "parameters": {}
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "right-linear-input",
+      "label": "right-linear-input",
+      "parameters": {
+        "value": 10
+      }
+    },
+    {
+      "blockType": "lookup.prelookup",
+      "blockVersion": 1,
+      "id": "right-linear",
+      "label": "right-linear",
+      "parameters": {
+        "breakpoints": [
+          -2,
+          1,
+          5
+        ],
+        "extrapolation": "linear"
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "right-linear-index",
+      "label": "right-linear-index",
+      "parameters": {}
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "right-linear-fraction",
+      "label": "right-linear-fraction",
+      "parameters": {}
+    }
+  ],
+  "schemaVersion": 1
+}

@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-10-02T15:58:06.028Z",
+  "repository": "https://github.com/JTech-CO/CalcWeave",
+  "defaultBranch": "main",
+  "cliAccess": {
+    "admin": true,
+    "push": true
+  },
+  "connectorAccess": {
+    "pull": true,
+    "push": false
+  },
+  "pages": {
+    "buildType": "legacy",
+    "customDomain": null,
+    "url": "https://jtech-co.github.io/CalcWeave/",
+    "httpsEnforced": true,
+    "certificate": null,
+    "source": {
+      "branch": "main",
+      "path": "/"
+    }
+  },
+  "publicDomain": "calcweave.com",
+  "domainDns": "ENOTFOUND",
+  "sourceBeforeChanges": [
+    "README.md"
+  ],
+  "deployedByAgent": false
+}

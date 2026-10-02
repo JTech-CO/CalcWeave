@@ -1,0 +1,91 @@
+{
+  "edges": [
+    {
+      "id": "clock-out-delay-in",
+      "source": {
+        "nodeId": "clock",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "delay",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "delay-out-result-in",
+      "source": {
+        "nodeId": "delay",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "continuous",
+    "solver": {
+      "atol": 1e-8,
+      "discreteStep": 0.1,
+      "eventTolerance": 1e-8,
+      "initialStep": 0.01,
+      "maxEvaluations": 1000000,
+      "maxEvents": 10000,
+      "maxRejects": 10000,
+      "maxStep": 0.01,
+      "maxSteps": 100000,
+      "method": "rk4",
+      "minStep": 1e-10,
+      "rtol": 0.000001
+    },
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F03-transport-delay",
+  "name": "F03-transport-delay",
+  "nodes": [
+    {
+      "blockType": "source.clock",
+      "blockVersion": 1,
+      "id": "clock",
+      "label": "clock",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "time.transport-delay",
+      "blockVersion": 1,
+      "id": "delay",
+      "label": "delay",
+      "parameters": {
+        "delay": 0.15,
+        "initial": 0
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    }
+  ],
+  "schemaVersion": 1
+}

@@ -1,0 +1,86 @@
+{
+  "datasets": [
+    {
+      "columns": [
+        {
+          "kind": "number",
+          "name": "time",
+          "unit": "ms"
+        },
+        {
+          "kind": "number",
+          "name": "value",
+          "unit": "1"
+        }
+      ],
+      "contentHash": "dbf9aab4870a706b3c76657233dfd8056ff23c533997f5c51d69014d9e105ce0",
+      "id": "data",
+      "name": "독립 계산 기준 자료",
+      "rows": [
+        [
+          0,
+          1
+        ],
+        [
+          1000,
+          3
+        ]
+      ],
+      "sourceHash": "a066c676222ee1fe21654225b4366c125827bae8779fa0bf046442a456aaf68c",
+      "timeColumn": "time",
+      "version": 1
+    }
+  ],
+  "edges": [
+    {
+      "id": "input-out-result-in",
+      "source": {
+        "nodeId": "input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "discrete",
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F04-millisecond-time",
+  "name": "F04-millisecond-time",
+  "nodes": [
+    {
+      "blockType": "source.dataset",
+      "blockVersion": 1,
+      "id": "input",
+      "label": "input",
+      "parameters": {
+        "column": "value",
+        "datasetId": "data",
+        "interpolation": "linear",
+        "outside": "hold"
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    }
+  ],
+  "schemaVersion": 1
+}

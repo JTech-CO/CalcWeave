@@ -1,0 +1,1415 @@
+{
+  "generatedAt": "2026-10-02T14:56:14.444Z",
+  "engineVersion": "0.5.0-m5",
+  "environment": {
+    "node": "v25.9.0",
+    "os": "win32 10.0.26200",
+    "cpu": "13th Gen Intel(R) Core(TM) i7-13620H",
+    "logicalCpus": 16
+  },
+  "registry": {
+    "total": 74,
+    "static": 43,
+    "continuous": 74
+  },
+  "datasetSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+  "methodology": "Hand rectangular dot products, cofactor determinant and solved inverse/RHS/factors; independent index-sum AX-B, A*inverse-I, LL^T-A and PA-LU residuals. Nonuniform global bilinear function, explicit nearest/previous knot tables and analytic time integrals. Exact rational rounding and modulo2^32 expected codes include large binary64 integers and subnormal directed rounding. Every raw output sample is checked. Portable JSON, graph insertion order, all three strict ES2022-only import-free generator forms executed as actual ESM, SHA-256/reference manifests, defensive copies, and failure code/node/time/partial result parity. Requested low operation limits are runner-only checks and are not claimed as optional-argument standalone parity.",
+  "strictIndependentTypecheck": true,
+  "strictIndependentModes": [
+    "continuous",
+    "discrete",
+    "static"
+  ],
+  "fixtures": [
+    {
+      "id": "F05-rectangular-product",
+      "reference": "Hand row/column dot products: (2x3)(3x2)=[[58,64],[139,154]], unit m*m=m^2; no elementwise broadcasting.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 2e-11,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            2,
+            2
+          ],
+          "unit": "m^2"
+        }
+      },
+      "modelHash": "75bad7e189b8a43695741fbc73a9daff4188d6f1ab11768b28e5a8a3250c40c9",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-rectangular-transpose",
+      "reference": "Transpose swaps explicit 2D row/column indices: [[1,4],[-2,5],[3,6]], preserving m.",
+      "nodes": 3,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 2e-11,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            3,
+            2
+          ],
+          "unit": "m"
+        }
+      },
+      "modelHash": "7e30e5641d539eb40d0fb9b96a61a413bb1d683aca06a5cab2ea403a717eeb4d",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-determinant-pivot",
+      "reference": "Direct cofactor expansion: -2*(1)+1*(-2)=-4; first zero pivot requires partial pivoting.",
+      "nodes": 3,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 2e-11,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "466008e4734c8ab145f55844a95e192d1cb44d38a05fa894020032a620eb83ee",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-determinant-singular-zero",
+      "reference": "Exact singular determinant 1*4-2*2=0 is a valid scalar result.",
+      "nodes": 3,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 2e-11,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "c648bd84d7b8771a42d30c6c9fb6ee2c42a742efd2b8d72672f9657f48330833",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-inverse-pivot",
+      "reference": "Three hand-solved unit RHS columns give inverse=[[-1/4,1/2,1/4],[1/4,1/2,-1/4],[1/2,-1,1/2]].",
+      "nodes": 3,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 2e-11,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [
+        {
+          "kind": "inverse",
+          "matrix": [
+            [
+              0,
+              2,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "outputs": [
+            "result"
+          ],
+          "tolerance": 2e-12
+        }
+      ],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            3,
+            3
+          ],
+          "unit": "1"
+        }
+      },
+      "modelHash": "6efa461e38b4fa4b726ed2bcd1b1581ad94607bf25bd3fac4085f350aaab263e",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-solve-multiple-rhs",
+      "reference": "Independent multiplication A*[[1,2],[3,-1]]=[[6,5],[7,0]]; solve retains multi-RHS 2D and B unit m.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 2e-11,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [
+        {
+          "kind": "solve",
+          "matrix": [
+            [
+              3,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "rhs": [
+            [
+              6,
+              5
+            ],
+            [
+              7,
+              0
+            ]
+          ],
+          "outputs": [
+            "result"
+          ],
+          "tolerance": 2e-12
+        }
+      ],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            2,
+            2
+          ],
+          "unit": "m"
+        }
+      },
+      "modelHash": "a99b1d7c2f8b27a4ec3ef5e6930a210e544344d477b1384ad0bad58346bc609a",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-cholesky",
+      "reference": "Hand triangular factor L=[[2,0,0],[6,1,0],[-8,5,3]], whose L*L^T equals all nine A entries.",
+      "nodes": 3,
+      "samples": 1,
+      "maximumAbsoluteError": 3.9968028886505635e-14,
+      "maximumRelativeError": 1.3322676295501878e-14,
+      "tolerance": 2e-11,
+      "relativeTolerance": 0,
+      "maximumResidual": 1.4210854715202004e-14,
+      "residualDefinitions": [
+        {
+          "kind": "cholesky",
+          "matrix": [
+            [
+              4,
+              12,
+              -16
+            ],
+            [
+              12,
+              37,
+              -43
+            ],
+            [
+              -16,
+              -43,
+              98
+            ]
+          ],
+          "outputs": [
+            "result"
+          ],
+          "tolerance": 2e-11
+        }
+      ],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            3,
+            3
+          ],
+          "unit": "1"
+        }
+      },
+      "modelHash": "29f38bd830fcadb9e47189458021d52e653ebef8900cffaee3628981702fabf9",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-lu-pivot-permutation",
+      "reference": "Hand partial pivoting visits original rows [2,0,1], with two row swaps. Matrix P*A=L*U; P is an explicit 0/1 matrix.",
+      "nodes": 5,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 2e-11,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [
+        {
+          "kind": "lu",
+          "matrix": [
+            [
+              0,
+              2,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "outputs": [
+            "lower",
+            "upper",
+            "permutation"
+          ],
+          "tolerance": 2e-12
+        }
+      ],
+      "outputTypes": {
+        "lower": {
+          "valueType": "float64",
+          "shape": [
+            3,
+            3
+          ],
+          "unit": "1"
+        },
+        "permutation": {
+          "valueType": "float64",
+          "shape": [
+            3,
+            3
+          ],
+          "unit": "1"
+        },
+        "upper": {
+          "valueType": "float64",
+          "shape": [
+            3,
+            3
+          ],
+          "unit": "1"
+        }
+      },
+      "modelHash": "d2b96582ba832ff6f7ae63ee14957a38bee1c11a4ce91858588fee36d2da2253",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-scaled-inverse-small",
+      "reference": "Scale-independent inverse for 1e-300*[[2,1],[1,2]] is (1e300/3)*[[2,-1],[-1,2]]. Nonzero expected entries use relative tolerance.",
+      "nodes": 3,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 0,
+      "relativeTolerance": 2e-12,
+      "maximumResidual": 0,
+      "residualDefinitions": [
+        {
+          "kind": "inverse",
+          "matrix": [
+            [
+              2e-300,
+              1e-300
+            ],
+            [
+              1e-300,
+              2e-300
+            ]
+          ],
+          "outputs": [
+            "result"
+          ],
+          "tolerance": 2e-12
+        }
+      ],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            2,
+            2
+          ],
+          "unit": "1"
+        }
+      },
+      "modelHash": "38020937020e9a60b7f76c8173ffc532872039342ad1484a34beba7cc37cbdf6",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-scaled-inverse-large",
+      "reference": "Scale-independent inverse for 1e300*[[2,1],[1,2]] is (1e-300/3)*[[2,-1],[-1,2]]. Nonzero expected entries use relative tolerance.",
+      "nodes": 3,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 0,
+      "relativeTolerance": 2e-12,
+      "maximumResidual": 0,
+      "residualDefinitions": [
+        {
+          "kind": "inverse",
+          "matrix": [
+            [
+              2e+300,
+              1e+300
+            ],
+            [
+              1e+300,
+              2e+300
+            ]
+          ],
+          "outputs": [
+            "result"
+          ],
+          "tolerance": 2e-12
+        }
+      ],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            2,
+            2
+          ],
+          "unit": "1"
+        }
+      },
+      "modelHash": "30f14d687d997a869cf09b25a9cca952f91efeaeb002008cc62ac45673e83cc0",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-bilinear-nonuniform",
+      "reference": "Nonuniform row[-2,1,5]/column[-3,2,6] samples global bilinear f(r,c)=2r-3c+4rc+7. At(.5,3), f=5.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 1.7763568394002505e-15,
+      "maximumRelativeError": 3.552713678800501e-16,
+      "tolerance": 2e-11,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "e42928b1286632c7a918feba9c4bb47c7f21db80f1983953a901534909b1f370",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-lookup-both-axes-outside",
+      "reference": "Both-axis extrapolation: f(-4,10)=-191 using first/last intervals; clip projects to(-2,6) with table value -63.",
+      "nodes": 6,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 2e-11,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "clipped": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "linear": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "8393c0e39b48d9e4c021e64886e61a649d00413bcf69e05bd0a53999f012cedd",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-nearest-low-tie",
+      "reference": "Independent nearest row/column interval selection at(-0.5,-0.5) gives original table value 36; midpoint ties select lower indices and exact knots select that knot.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 2e-11,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "521075e4ab93742a7ac14bcd4cd356ebb350a07ed9d4cde7fc85aa3e06d87a84",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-nearest-high-tie",
+      "reference": "Independent nearest row/column interval selection at(3,4) gives original table value 11; midpoint ties select lower indices and exact knots select that knot.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 2e-11,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "c5c72c88ec5ab2b11c2a37702fa4d6754c6708142ddb32f0c76196951082d96d",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-previous-internal-knot",
+      "reference": "Independent previous row/column interval selection at(1,2) gives original table value 11; midpoint ties select lower indices and exact knots select that knot.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 2e-11,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "2ff5f46a041271ab1c88e7cce0ba0bb2a78e8f49aeafc1f050d65fb7c80129a9",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-previous-between",
+      "reference": "Independent previous row/column interval selection at(4,5) gives original table value 11; midpoint ties select lower indices and exact knots select that knot.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 2e-11,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "faecf402377a32d86eeadf906c96a7dcc12971746ee87e599e0897a09ab72075",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-previous-last",
+      "reference": "Independent previous row/column interval selection at(5,6) gives original table value 119; midpoint ties select lower indices and exact knots select that knot.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 2e-11,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "4684380d39a49dbf2ef752c7823f1d1c9d6d69516236639d2059780710f59a92",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-prelookup-knots-extrapolation",
+      "reference": "Hand interval/fraction: internal knot1→(1,0), final5→(1,1), clipping endpoints, linear outside first/last intervals without clamping fractions.",
+      "nodes": 24,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 2e-11,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "inside-fraction": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "inside-index": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "last-fraction": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "last-index": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "left-clip-fraction": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "left-clip-index": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "left-linear-fraction": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "left-linear-index": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "right-clip-fraction": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "right-clip-index": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "right-linear-fraction": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "right-linear-index": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "b8dc50c4da0d0186634a0fcfc0675547653e20dc7b0648b81bca54b18f2a9588",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-temporal-lookup-discrete",
+      "reference": "Time-domain algebraic discrete fixture: f(t,2.5)=12t-.5, prelookup actual knot .25/final1; continuous exact integral6t^2-.5t uses every stage.",
+      "nodes": 7,
+      "samples": 9,
+      "maximumAbsoluteError": 1.7763568394002505e-15,
+      "maximumRelativeError": 2.6645352591003757e-15,
+      "tolerance": 2e-9,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "fraction": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "index": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "fafc7c7c55f826f134c6ad03da72866ba1a21ac5cb4ab3d7222cce7ed4d0f1f0",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-temporal-lookup-continuous",
+      "reference": "Time-domain algebraic continuous fixture: f(t,2.5)=12t-.5, prelookup actual knot .25/final1; continuous exact integral6t^2-.5t uses every stage.",
+      "nodes": 9,
+      "samples": 9,
+      "maximumAbsoluteError": 1.7763568394002505e-15,
+      "maximumRelativeError": 2.6645352591003757e-15,
+      "tolerance": 2e-9,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "fraction": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "index": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "integral": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "modelHash": "36b9b97dac6ac6d605678e4c8af8e2a1ab87ba3c4579815475d79eaa908711d9",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-quantize-nearest-even",
+      "reference": "Independent half-integer rounding table for nearest-even; same2D shape, out unit m and exact stored codes unit1.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 0,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            2,
+            4
+          ],
+          "unit": "m"
+        },
+        "stored": {
+          "valueType": "float64",
+          "shape": [
+            2,
+            4
+          ],
+          "unit": "1"
+        }
+      },
+      "modelHash": "eb80f9d2c4ff44fecc11d99a1461072126a5fb3fce2cd8efefefb66cbca0f86b",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-quantize-floor",
+      "reference": "Independent half-integer rounding table for floor; same2D shape, out unit m and exact stored codes unit1.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 0,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            2,
+            4
+          ],
+          "unit": "m"
+        },
+        "stored": {
+          "valueType": "float64",
+          "shape": [
+            2,
+            4
+          ],
+          "unit": "1"
+        }
+      },
+      "modelHash": "97f1d223598c4f0ca7ca83e5334fc14d2cdd143386830eb36272724fdeae5efc",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-quantize-ceil",
+      "reference": "Independent half-integer rounding table for ceil; same2D shape, out unit m and exact stored codes unit1.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 0,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            2,
+            4
+          ],
+          "unit": "m"
+        },
+        "stored": {
+          "valueType": "float64",
+          "shape": [
+            2,
+            4
+          ],
+          "unit": "1"
+        }
+      },
+      "modelHash": "5a2eca628b9477438d9ce6adeba1ce62084d09d737d086e4877602b34f66fc4b",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-quantize-toward-zero",
+      "reference": "Independent half-integer rounding table for toward-zero; same2D shape, out unit m and exact stored codes unit1.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 0,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            2,
+            4
+          ],
+          "unit": "m"
+        },
+        "stored": {
+          "valueType": "float64",
+          "shape": [
+            2,
+            4
+          ],
+          "unit": "1"
+        }
+      },
+      "modelHash": "01d2769335657ead59b414b9caf1d2eaf4d3f84fa17e0ec03a0ddcaf9f0a905e",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-quantize-32bit-unsigned-wrap",
+      "reference": "Exact modulo2^32 of IEEE integers: MAX_VALUE divisibleby2^32, ±(2^32+1) and ±(2^53-1) retain independent lower-bit residues. unsigned code interpretation, tiny values round0.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 0,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            8
+          ],
+          "unit": "1"
+        },
+        "stored": {
+          "valueType": "float64",
+          "shape": [
+            8
+          ],
+          "unit": "1"
+        }
+      },
+      "modelHash": "5aaad175c716bfea7f22d12983e3b865bcfe0a7ca56963b40ecd3aef30918315",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-quantize-32bit-signed-wrap",
+      "reference": "Exact modulo2^32 of IEEE integers: MAX_VALUE divisibleby2^32, ±(2^32+1) and ±(2^53-1) retain independent lower-bit residues. signed code interpretation, tiny values round0.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 0,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            8
+          ],
+          "unit": "1"
+        },
+        "stored": {
+          "valueType": "float64",
+          "shape": [
+            8
+          ],
+          "unit": "1"
+        }
+      },
+      "modelHash": "6fa0e675e3d195ea43d9c8b597c9b2d2b998437de82941c5817c55799e8e60e8",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-quantize-32bit-saturate-fraction",
+      "reference": "Signed32/F32 codes saturate +.5 to2^31-1; exact half ties .5code→0,1.5code→2 and symmetric negatives; subnormal/negativezero become+0.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 0,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            9
+          ],
+          "unit": "1"
+        },
+        "stored": {
+          "valueType": "float64",
+          "shape": [
+            9
+          ],
+          "unit": "1"
+        }
+      },
+      "modelHash": "020b621d429a1d553b318ba18f1e7c3f4ce1753d58c6223cc55c2ac2b4068bbb",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-quantize-subnormal-directed",
+      "reference": "Exact rational ±2^-1074: ceil producesstored[1,0], floor[0,-1] atF32 without losing the nonzero remainder through floatunderflow.",
+      "nodes": 7,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 0,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "ceil-out": {
+          "valueType": "float64",
+          "shape": [
+            2
+          ],
+          "unit": "1"
+        },
+        "ceil-stored": {
+          "valueType": "float64",
+          "shape": [
+            2
+          ],
+          "unit": "1"
+        },
+        "floor-out": {
+          "valueType": "float64",
+          "shape": [
+            2
+          ],
+          "unit": "1"
+        },
+        "floor-stored": {
+          "valueType": "float64",
+          "shape": [
+            2
+          ],
+          "unit": "1"
+        }
+      },
+      "modelHash": "1d9953cddf8f9c87651f4927ef8770a313eb7f40fd159a0b8c38f64386f70f0b",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-quantize-unsigned-saturation",
+      "reference": "Unsigned32 saturation independently clamps negative integers to0 and positive overflow to2^32-1, including finite MAX_VALUE.",
+      "nodes": 4,
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 0,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            5
+          ],
+          "unit": "1"
+        },
+        "stored": {
+          "valueType": "float64",
+          "shape": [
+            5
+          ],
+          "unit": "1"
+        }
+      },
+      "modelHash": "2bc867945dd505dd63ce6a27a026bdaaf0aea34143c8da5ef43ad60ec6b6e7ec",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    },
+    {
+      "id": "F05-discrete-matrix-memory",
+      "reference": "Typed3x2 UnitDelay publishes all-zero initial matrix at tick0 and the independently transposed matrix at every later tick; no extra final transition.",
+      "nodes": 4,
+      "samples": 5,
+      "maximumAbsoluteError": 0,
+      "maximumRelativeError": 0,
+      "tolerance": 2e-11,
+      "relativeTolerance": 0,
+      "maximumResidual": 0,
+      "residualDefinitions": [],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [
+            3,
+            2
+          ],
+          "unit": "1"
+        }
+      },
+      "modelHash": "c47ef34cf1eb5f67a985c4a697933a99fe3fec45a514763dda446f0448979337",
+      "dataReferences": [],
+      "jsonRoundtrip": true,
+      "nodeOrderIndependent": true,
+      "independentTSParity": true,
+      "immutableResults": true,
+      "manifestParity": true,
+      "sourceModelPreserved": true
+    }
+  ],
+  "failures": [
+    {
+      "id": "F05-failure-inverse-singular",
+      "kind": "runtime",
+      "code": "MATRIX_SINGULAR",
+      "nodeId": "bad",
+      "diagnosticVerified": true,
+      "diagnosticParity": true,
+      "partialResultParity": true,
+      "independentPartialValues": false,
+      "lastValidSamples": 0
+    },
+    {
+      "id": "F05-failure-inverse-ill-conditioned",
+      "kind": "runtime",
+      "code": "MATRIX_ILL_CONDITIONED",
+      "nodeId": "bad",
+      "diagnosticVerified": true,
+      "diagnosticParity": true,
+      "partialResultParity": true,
+      "independentPartialValues": false,
+      "lastValidSamples": 0
+    },
+    {
+      "id": "F05-failure-cholesky-not-positive",
+      "kind": "runtime",
+      "code": "MATRIX_NOT_POSITIVE_DEFINITE",
+      "nodeId": "bad",
+      "diagnosticVerified": true,
+      "diagnosticParity": true,
+      "partialResultParity": true,
+      "independentPartialValues": false,
+      "lastValidSamples": 0
+    },
+    {
+      "id": "F05-failure-cholesky-not-symmetric",
+      "kind": "runtime",
+      "code": "MATRIX_NOT_SYMMETRIC",
+      "nodeId": "bad",
+      "diagnosticVerified": true,
+      "diagnosticParity": true,
+      "partialResultParity": true,
+      "independentPartialValues": false,
+      "lastValidSamples": 0
+    },
+    {
+      "id": "F05-failure-determinant-underflow",
+      "kind": "runtime",
+      "code": "MATRIX_NUMERIC_UNDERFLOW",
+      "nodeId": "bad",
+      "diagnosticVerified": true,
+      "diagnosticParity": true,
+      "partialResultParity": true,
+      "independentPartialValues": false,
+      "lastValidSamples": 0
+    },
+    {
+      "id": "F05-failure-determinant-overflow",
+      "kind": "runtime",
+      "code": "MATRIX_NUMERIC_NONFINITE",
+      "nodeId": "bad",
+      "diagnosticVerified": true,
+      "diagnosticParity": true,
+      "partialResultParity": true,
+      "independentPartialValues": false,
+      "lastValidSamples": 0
+    },
+    {
+      "id": "F05-failure-lookup-both-axes",
+      "kind": "runtime",
+      "code": "LOOKUP_OUT_OF_RANGE",
+      "nodeId": "bad",
+      "diagnosticVerified": true,
+      "diagnosticParity": true,
+      "partialResultParity": true,
+      "independentPartialValues": false,
+      "lastValidSamples": 0
+    },
+    {
+      "id": "F05-failure-prelookup-outside",
+      "kind": "runtime",
+      "code": "LOOKUP_OUT_OF_RANGE",
+      "nodeId": "bad",
+      "diagnosticVerified": true,
+      "diagnosticParity": true,
+      "partialResultParity": true,
+      "independentPartialValues": false,
+      "lastValidSamples": 0
+    },
+    {
+      "id": "F05-failure-quantize-overflow-static",
+      "kind": "runtime",
+      "code": "FIXED_POINT_OVERFLOW",
+      "nodeId": "bad",
+      "diagnosticVerified": true,
+      "diagnosticParity": true,
+      "partialResultParity": true,
+      "independentPartialValues": false,
+      "lastValidSamples": 0
+    },
+    {
+      "id": "F05-failure-quantize-overflow-discrete",
+      "kind": "runtime",
+      "code": "FIXED_POINT_OVERFLOW",
+      "nodeId": "bad",
+      "diagnosticVerified": true,
+      "diagnosticParity": true,
+      "partialResultParity": true,
+      "independentPartialValues": true,
+      "lastValidSamples": 2
+    },
+    {
+      "id": "F05-failure-continuous-singular-after-step",
+      "kind": "runtime",
+      "code": "MATRIX_SINGULAR",
+      "nodeId": "bad",
+      "diagnosticVerified": true,
+      "diagnosticParity": true,
+      "partialResultParity": true,
+      "independentPartialValues": true,
+      "lastValidSamples": 3
+    },
+    {
+      "id": "F05-failure-discrete-lookup-after-range",
+      "kind": "runtime",
+      "code": "LOOKUP_OUT_OF_RANGE",
+      "nodeId": "bad",
+      "diagnosticVerified": true,
+      "diagnosticParity": true,
+      "partialResultParity": true,
+      "independentPartialValues": true,
+      "lastValidSamples": 3
+    }
+  ],
+  "weightedBudgets": [
+    {
+      "id": "F05-rectangular-product",
+      "weightedNodeCosts": [
+        {
+          "id": "a",
+          "blockType": "source.constant",
+          "operations": 6
+        },
+        {
+          "id": "b",
+          "blockType": "source.constant",
+          "operations": 6
+        },
+        {
+          "id": "product",
+          "blockType": "math.matrix-multiply",
+          "operations": 112
+        },
+        {
+          "id": "result",
+          "blockType": "sink.scope",
+          "operations": 4
+        }
+      ],
+      "operationTotal": 128,
+      "requestedLimit": 127,
+      "code": "RUNTIME_OPERATION_BUDGET",
+      "trackedSamplesUnchanged": true,
+      "defaultExportNumericalParityVerified": true,
+      "lowLimitStandaloneParityClaimed": false
+    },
+    {
+      "id": "F05-quantize-32bit-saturate-fraction",
+      "weightedNodeCosts": [
+        {
+          "id": "input",
+          "blockType": "source.constant",
+          "operations": 9
+        },
+        {
+          "id": "quantize",
+          "blockType": "fixed.quantize",
+          "operations": 19800
+        },
+        {
+          "id": "result",
+          "blockType": "sink.scope",
+          "operations": 9
+        },
+        {
+          "id": "stored",
+          "blockType": "sink.scope",
+          "operations": 9
+        }
+      ],
+      "operationTotal": 19827,
+      "requestedLimit": 19826,
+      "code": "RUNTIME_OPERATION_BUDGET",
+      "trackedSamplesUnchanged": true,
+      "defaultExportNumericalParityVerified": true,
+      "lowLimitStandaloneParityClaimed": false
+    },
+    {
+      "id": "F05-temporal-lookup-continuous",
+      "operationTotal": 9860,
+      "requestedLimit": 4930,
+      "code": "RUNTIME_OPERATION_BUDGET",
+      "preservedSamples": 4,
+      "lastTime": 0.375,
+      "reportedOperations": 4900,
+      "lowLimitStandaloneParityClaimed": false
+    }
+  ]
+}

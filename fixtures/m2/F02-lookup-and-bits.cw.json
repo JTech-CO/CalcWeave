@@ -1,0 +1,149 @@
+{
+  "edges": [
+    {
+      "id": "values-lookup-in",
+      "source": {
+        "nodeId": "values",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "lookup",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "lookup-lookup-out-in",
+      "source": {
+        "nodeId": "lookup",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "lookup-out",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "uint-bits-a",
+      "source": {
+        "nodeId": "uint",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "bits",
+        "portId": "a"
+      }
+    },
+    {
+      "id": "bits-bits-out-in",
+      "source": {
+        "nodeId": "bits",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "bits-out",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "static",
+    "startTime": 0,
+    "step": 1,
+    "stopTime": 0
+  },
+  "layout": {},
+  "modelId": "F02-lookup-and-bits",
+  "name": "F02-lookup-and-bits",
+  "nodes": [
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "values",
+      "label": "values",
+      "parameters": {
+        "value": [
+          -1,
+          0.25,
+          2
+        ]
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "lookup.interpolated",
+      "blockVersion": 1,
+      "id": "lookup",
+      "label": "lookup",
+      "parameters": {
+        "breakpoints": [
+          0,
+          1
+        ],
+        "extrapolation": "clip",
+        "interpolation": "linear",
+        "values": [
+          0,
+          10
+        ]
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "lookup-out",
+      "label": "lookup-out",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "uint",
+      "label": "uint",
+      "parameters": {
+        "value": 2147483649
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "logic.bitwise",
+      "blockVersion": 1,
+      "id": "bits",
+      "label": "bits",
+      "parameters": {
+        "operation": "shift-left",
+        "shift": 1,
+        "width": 32
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "bits-out",
+      "label": "bits-out",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    }
+  ],
+  "schemaVersion": 1
+}

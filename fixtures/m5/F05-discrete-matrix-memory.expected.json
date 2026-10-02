@@ -1,0 +1,199 @@
+{
+  "reference": "Typed3x2 UnitDelay publishes all-zero initial matrix at tick0 and the independently transposed matrix at every later tick; no extra final transition.",
+  "absoluteTolerance": 2e-11,
+  "relativeTolerance": 0,
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "result": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ]
+        }
+      },
+      {
+        "time": 0.125,
+        "values": {
+          "result": [
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              6
+            ]
+          ]
+        }
+      },
+      {
+        "time": 0.25,
+        "values": {
+          "result": [
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              6
+            ]
+          ]
+        }
+      },
+      {
+        "time": 0.375,
+        "values": {
+          "result": [
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              6
+            ]
+          ]
+        }
+      },
+      {
+        "time": 0.5,
+        "values": {
+          "result": [
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              6
+            ]
+          ]
+        }
+      }
+    ],
+    "finalState": {
+      "delay": [
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          6
+        ]
+      ]
+    },
+    "stateMemory": {
+      "delay": {
+        "value": [
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            6
+          ]
+        ]
+      }
+    },
+    "status": "completed",
+    "steps": 5
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "c47ef34cf1eb5f67a985c4a697933a99fe3fec45a514763dda446f0448979337",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.5.0-m5",
+    "targetVersion": "typescript-m5-v1",
+    "execution": {
+      "mode": "discrete",
+      "startTime": 0,
+      "stopTime": 0.5,
+      "step": 0.125
+    },
+    "nodes": {
+      "a": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "delay": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "result": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "transpose": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      }
+    },
+    "outputTypes": {
+      "result": {
+        "valueType": "float64",
+        "shape": [
+          3,
+          2
+        ],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    }
+  }
+}

@@ -1,0 +1,64 @@
+/* One shared cycle lets even a fast run finish its subtle decorative feedback. */
+.brand.run-brand {
+  --brand-cycle:1.4s;
+  --brand-mark-rest:var(--strong-line);
+  --brand-mark-flow:color-mix(in srgb,var(--accent) 76%,var(--text));
+  --brand-word-flow:color-mix(in srgb,var(--accent) 32%,var(--text));
+  --brand-glow:color-mix(in srgb,var(--accent) 18%,transparent);
+}
+.brand.run-brand.is-pulsing .brand-mark i {
+  animation-duration:var(--brand-cycle);
+  animation-timing-function:ease-in-out;
+  animation-iteration-count:infinite;
+}
+.brand.run-brand.is-pulsing .brand-mark i:nth-child(1) { animation-name:calcweave-mark-first; }
+.brand.run-brand.is-pulsing .brand-mark i:nth-child(2) { animation-name:calcweave-mark-second; }
+.brand.run-brand.is-pulsing .brand-mark i:nth-child(3) { animation-name:calcweave-mark-third; }
+.brand.run-brand.is-pulsing .brand-mark i:nth-child(4) { animation-name:calcweave-mark-fourth; }
+.brand.run-brand.is-pulsing .brand-mark:before,
+.brand.run-brand.is-pulsing .brand-mark:after { animation:calcweave-brand-link var(--brand-cycle) ease-in-out infinite; }
+.brand.run-brand.is-pulsing .brand-wordmark { animation:calcweave-word-first var(--brand-cycle) ease-in-out infinite; }
+.brand.run-brand.is-pulsing .brand-wordmark>span { animation:calcweave-word-second var(--brand-cycle) ease-in-out infinite; }
+.brand.run-brand.is-paused .brand-mark i { background:var(--brand-mark-flow); }
+.brand.run-brand.is-paused .research-badge { color:var(--accent); }
+
+@keyframes calcweave-mark-first {
+  0%,5%,45%,100% { background:var(--brand-mark-rest); box-shadow:none; }
+  25% { background:var(--brand-mark-flow); box-shadow:0 0 5px var(--brand-glow); }
+}
+@keyframes calcweave-mark-second {
+  0%,20%,65%,100% { background:var(--brand-mark-rest); box-shadow:none; }
+  45% { background:var(--brand-mark-flow); box-shadow:0 0 5px var(--brand-glow); }
+}
+@keyframes calcweave-mark-third {
+  0%,40%,85%,100% { background:var(--brand-mark-rest); box-shadow:none; }
+  65% { background:var(--brand-mark-flow); box-shadow:0 0 5px var(--brand-glow); }
+}
+@keyframes calcweave-mark-fourth {
+  0%,60%,100% { background:var(--brand-mark-rest); box-shadow:none; }
+  80% { background:var(--brand-mark-flow); box-shadow:0 0 5px var(--brand-glow); }
+}
+@keyframes calcweave-brand-link {
+  0%,15%,75%,100% { background:var(--brand-mark-rest); opacity:.55; }
+  45% { background:var(--brand-mark-flow); opacity:.8; }
+}
+@keyframes calcweave-word-first {
+  0%,10%,70%,100% { color:var(--text); text-shadow:none; }
+  40% { color:var(--brand-word-flow); text-shadow:0 0 8px var(--brand-glow); }
+}
+@keyframes calcweave-word-second {
+  0%,30%,95%,100% { color:var(--text); text-shadow:none; }
+  65% { color:var(--brand-word-flow); text-shadow:0 0 8px var(--brand-glow); }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  /* Match the normal nth-child animation selectors so motion preference wins. */
+  .brand.run-brand.is-pulsing .brand-mark i:nth-child(n),
+  .brand.run-brand.is-pulsing .brand-mark:before,
+  .brand.run-brand.is-pulsing .brand-mark:after,
+  .brand.run-brand.is-pulsing .brand-wordmark,
+  .brand.run-brand.is-pulsing .brand-wordmark>span { animation:none; box-shadow:none; text-shadow:none; }
+  .brand.run-brand.is-pulsing .brand-mark i,
+  .brand.run-brand.is-pulsing .brand-mark:before,
+  .brand.run-brand.is-pulsing .brand-mark:after { background:var(--brand-mark-flow); }
+}

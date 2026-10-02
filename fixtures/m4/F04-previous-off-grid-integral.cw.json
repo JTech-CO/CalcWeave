@@ -1,0 +1,117 @@
+{
+  "datasets": [
+    {
+      "columns": [
+        {
+          "kind": "number",
+          "name": "time",
+          "unit": "s"
+        },
+        {
+          "kind": "number",
+          "name": "value",
+          "unit": "1"
+        }
+      ],
+      "contentHash": "cbee53de0cfa08396b81ffb2dab7187cbc20dbe9e527c5d29f893c2af2ad846c",
+      "id": "data",
+      "name": "독립 계산 기준 자료",
+      "rows": [
+        [
+          0,
+          1
+        ],
+        [
+          0.37,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "sourceHash": "e1db5e2be4506843190f62f6d96ca9af70a80050fdbe00440465e8be007ffa22",
+      "timeColumn": "time",
+      "version": 1
+    }
+  ],
+  "edges": [
+    {
+      "id": "input-out-integral-in",
+      "source": {
+        "nodeId": "input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "integral",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "integral-out-result-in",
+      "source": {
+        "nodeId": "integral",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "continuous",
+    "solver": {
+      "atol": 1e-8,
+      "discreteStep": 0.1,
+      "eventTolerance": 1e-8,
+      "initialStep": 0.08,
+      "maxEvaluations": 1000000,
+      "maxEvents": 10000,
+      "maxRejects": 10000,
+      "maxStep": 0.08,
+      "maxSteps": 100000,
+      "method": "rk4",
+      "minStep": 1e-10,
+      "rtol": 0.000001
+    },
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F04-previous-off-grid-integral",
+  "name": "F04-previous-off-grid-integral",
+  "nodes": [
+    {
+      "blockType": "source.dataset",
+      "blockVersion": 1,
+      "id": "input",
+      "label": "input",
+      "parameters": {
+        "column": "value",
+        "datasetId": "data",
+        "interpolation": "previous",
+        "outside": "hold"
+      }
+    },
+    {
+      "blockType": "continuous.integrator",
+      "blockVersion": 1,
+      "id": "integral",
+      "label": "integral",
+      "parameters": {
+        "initial": 0,
+        "reset": "none"
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {}
+    }
+  ],
+  "schemaVersion": 1
+}

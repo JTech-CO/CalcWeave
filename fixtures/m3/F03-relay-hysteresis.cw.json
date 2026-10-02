@@ -1,0 +1,99 @@
+{
+  "edges": [
+    {
+      "id": "sine-out-relay-in",
+      "source": {
+        "nodeId": "sine",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "relay",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "relay-out-result-in",
+      "source": {
+        "nodeId": "relay",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "continuous",
+    "solver": {
+      "atol": 1e-8,
+      "discreteStep": 0.1,
+      "eventTolerance": 1e-8,
+      "initialStep": 0.03,
+      "maxEvaluations": 1000000,
+      "maxEvents": 10000,
+      "maxRejects": 10000,
+      "maxStep": 0.03,
+      "maxSteps": 100000,
+      "method": "rk4",
+      "minStep": 1e-10,
+      "rtol": 0.000001
+    },
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F03-relay-hysteresis",
+  "name": "F03-relay-hysteresis",
+  "nodes": [
+    {
+      "blockType": "source.sine-wave",
+      "blockVersion": 1,
+      "id": "sine",
+      "label": "sine",
+      "parameters": {
+        "amplitude": 1,
+        "bias": 0,
+        "frequency": 1,
+        "phase": 0
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "nonlinear.relay",
+      "blockVersion": 1,
+      "id": "relay",
+      "label": "relay",
+      "parameters": {
+        "initial": "off",
+        "offThreshold": -0.5,
+        "offValue": 0,
+        "onThreshold": 0.5,
+        "onValue": 1
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    }
+  ],
+  "schemaVersion": 1
+}

@@ -1,0 +1,22 @@
+import { signalElementCount, validateSignal } from './signal';
+import type { IRNode } from './types';
+
+/** Logical persistent memory, excluding temporary atomic-commit copies. Input is validated IR. */
+export function discreteStateElementCount(node: IRNode): number {
+  const initialCount = (): number => signalElementCount(validateSignal(node.parameters.initial));
+  switch (node.blockType) {
+    case 'discrete.unit-delay': case 'discrete.integrator': case 'discrete.difference': case 'discrete.derivative':
+    case 'time.rate-transition': return initialCount();
+    case 'discrete.delay': return (node.parameters.steps as number) * initialCount();
+    case 'discrete.fir': return Math.max(0, (node.parameters.coefficients as number[]).length - 1) * initialCount();
+    case 'discrete.transfer-function': return (node.parameters.numerator as number[]).length + (node.parameters.denominator as number[]).length - 2;
+    case 'discrete.state-space': return (node.parameters.initial as number[]).length;
+    case 'logic.edge-detect': case 'source.random': return 1;
+    default: return 0;
+  }
+}
+
+export function discreteMemoryElementCount(nodes: readonly IRNode[]): number {
+  return nodes.reduce((count, node) => count + discreteStateElementCount(node)
+    + Object.values(node.outputs).reduce((held, descriptor) => held + signalElementCount(descriptor), 0), 0);
+}

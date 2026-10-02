@@ -1,0 +1,154 @@
+{
+  "generatedAt": "2026-10-02T13:18:33.741Z",
+  "engineVersion": "0.4.0-m4",
+  "environment": {
+    "node": "v25.9.0",
+    "os": "win32 10.0.26200",
+    "cpu": "13th Gen Intel(R) Core(TM) i7-13620H",
+    "logicalCpus": 16
+  },
+  "registry": {
+    "total": 64,
+    "static": 33,
+    "m1StaticBaseline": 23
+  },
+  "methodology": "Hand-calculated learning fixture oracles and portable JSON roundtrip. Node vector Gain chains: 2 warmups, 10 repetitions; compile and runtime measured separately. Browser loading, memory and novice usability are separate gates.",
+  "fixtures": [
+    {
+      "id": "budget-calculator",
+      "nodes": 6,
+      "edges": 5,
+      "expected": [
+        35000
+      ],
+      "values": [
+        35000
+      ],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "roundtrip": true
+    },
+    {
+      "id": "vector-shape",
+      "nodes": 6,
+      "edges": 5,
+      "expected": [
+        [
+          [
+            3,
+            -6
+          ],
+          [
+            9,
+            12
+          ]
+        ],
+        -6
+      ],
+      "values": [
+        [
+          [
+            3,
+            -6
+          ],
+          [
+            9,
+            12
+          ]
+        ],
+        -6
+      ],
+      "outputTypes": {
+        "matrix-result": {
+          "valueType": "float64",
+          "shape": [
+            2,
+            2
+          ],
+          "unit": "1"
+        },
+        "min-result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "roundtrip": true
+    },
+    {
+      "id": "formula-calculator",
+      "nodes": 3,
+      "edges": 2,
+      "expected": [
+        4
+      ],
+      "values": [
+        4
+      ],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "roundtrip": true
+    },
+    {
+      "id": "unit-scale",
+      "nodes": 5,
+      "edges": 4,
+      "expected": [
+        3.5
+      ],
+      "values": [
+        3.5
+      ],
+      "outputTypes": {
+        "result": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "m"
+        }
+      },
+      "roundtrip": true
+    }
+  ],
+  "graphMeasurements": [
+    {
+      "nodes": 100,
+      "elementsPerSignal": 64,
+      "compilation": {
+        "medianMs": 9.774,
+        "p95Ms": 11.613,
+        "repetitions": 10
+      },
+      "execution": {
+        "medianMs": 0.62,
+        "p95Ms": 0.651,
+        "repetitions": 10
+      },
+      "maximumAbsoluteError": 4.973799150320701e-14
+    },
+    {
+      "nodes": 1000,
+      "elementsPerSignal": 64,
+      "compilation": {
+        "medianMs": 95.163,
+        "p95Ms": 109.302,
+        "repetitions": 10
+      },
+      "execution": {
+        "medianMs": 5.015,
+        "p95Ms": 7.566,
+        "repetitions": 10
+      },
+      "maximumAbsoluteError": 1.9895196601282805e-13
+    }
+  ]
+}

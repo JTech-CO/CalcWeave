@@ -1,0 +1,77 @@
+{
+  "edges": [
+    {
+      "id": "slow-fast-in",
+      "source": {
+        "nodeId": "slow",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "fast",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "fast-result-in",
+      "source": {
+        "nodeId": "fast",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "discrete",
+    "startTime": 0,
+    "step": 1,
+    "stopTime": 10
+  },
+  "layout": {},
+  "modelId": "F02-rate-5-2",
+  "name": "F02-rate-5-2",
+  "nodes": [
+    {
+      "blockType": "source.ramp",
+      "blockVersion": 1,
+      "id": "slow",
+      "label": "slow",
+      "parameters": {
+        "initial": 0,
+        "slope": 1,
+        "startTime": 0
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 5
+      }
+    },
+    {
+      "blockType": "time.rate-transition",
+      "blockVersion": 1,
+      "id": "fast",
+      "label": "fast",
+      "parameters": {
+        "initial": -1
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 2
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 2
+      }
+    }
+  ],
+  "schemaVersion": 1
+}

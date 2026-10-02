@@ -1,0 +1,102 @@
+{
+  "reference": "Exact modulo2^32 of IEEE integers: MAX_VALUE divisibleby2^32, ±(2^32+1) and ±(2^53-1) retain independent lower-bit residues. signed code interpretation, tiny values round0.",
+  "absoluteTolerance": 0,
+  "relativeTolerance": 0,
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "result": [
+            0,
+            0,
+            -1,
+            1,
+            1,
+            -1,
+            0,
+            0
+          ],
+          "stored": [
+            0,
+            0,
+            -1,
+            1,
+            1,
+            -1,
+            0,
+            0
+          ]
+        }
+      }
+    ],
+    "finalState": {},
+    "status": "completed",
+    "steps": 1
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "6fa0e675e3d195ea43d9c8b597c9b2d2b998437de82941c5817c55799e8e60e8",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.5.0-m5",
+    "targetVersion": "typescript-m5-v1",
+    "execution": {
+      "mode": "static",
+      "startTime": 0,
+      "stopTime": 1,
+      "step": 0.1
+    },
+    "nodes": {
+      "input": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "quantize": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "result": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "stored": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      }
+    },
+    "outputTypes": {
+      "result": {
+        "valueType": "float64",
+        "shape": [
+          8
+        ],
+        "unit": "1"
+      },
+      "stored": {
+        "valueType": "float64",
+        "shape": [
+          8
+        ],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    }
+  }
+}

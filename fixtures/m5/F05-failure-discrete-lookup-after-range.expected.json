@@ -1,0 +1,39 @@
+{
+  "expectedCode": "LOOKUP_OUT_OF_RANGE",
+  "nodeId": "bad",
+  "diagnostics": [
+    {
+      "code": "LOOKUP_OUT_OF_RANGE",
+      "message": "lookup 입력이 breakpoint 범위를 벗어났습니다.",
+      "nodeId": "bad",
+      "tick": 3,
+      "time": 0.30000000000000004
+    }
+  ],
+  "partialResult": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "result": 1
+        }
+      },
+      {
+        "time": 0.1,
+        "values": {
+          "result": 1.1
+        }
+      },
+      {
+        "time": 0.2,
+        "values": {
+          "result": 1.2000000000000002
+        }
+      }
+    ],
+    "finalState": {},
+    "stateMemory": {},
+    "status": "failed",
+    "steps": 3
+  }
+}

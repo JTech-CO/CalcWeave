@@ -1,0 +1,118 @@
+{
+  "reference": "Independent multiplication A*[[1,2],[3,-1]]=[[6,5],[7,0]]; solve retains multi-RHS 2D and B unit m.",
+  "absoluteTolerance": 2e-11,
+  "relativeTolerance": 0,
+  "expectedUnits": {
+    "result": "m"
+  },
+  "residuals": [
+    {
+      "kind": "solve",
+      "matrix": [
+        [
+          3,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "rhs": [
+        [
+          6,
+          5
+        ],
+        [
+          7,
+          0
+        ]
+      ],
+      "outputs": [
+        "result"
+      ],
+      "tolerance": 2e-12
+    }
+  ],
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "result": [
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              -1
+            ]
+          ]
+        }
+      }
+    ],
+    "finalState": {},
+    "status": "completed",
+    "steps": 1
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "a99b1d7c2f8b27a4ec3ef5e6930a210e544344d477b1384ad0bad58346bc609a",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.5.0-m5",
+    "targetVersion": "typescript-m5-v1",
+    "execution": {
+      "mode": "static",
+      "startTime": 0,
+      "stopTime": 1,
+      "step": 0.1
+    },
+    "nodes": {
+      "a": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "b": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "solve": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "result": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      }
+    },
+    "outputTypes": {
+      "result": {
+        "valueType": "float64",
+        "shape": [
+          2,
+          2
+        ],
+        "unit": "m"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    }
+  }
+}

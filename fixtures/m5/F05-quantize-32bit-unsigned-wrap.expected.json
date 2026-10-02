@@ -1,0 +1,102 @@
+{
+  "reference": "Exact modulo2^32 of IEEE integers: MAX_VALUE divisibleby2^32, ±(2^32+1) and ±(2^53-1) retain independent lower-bit residues. unsigned code interpretation, tiny values round0.",
+  "absoluteTolerance": 0,
+  "relativeTolerance": 0,
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "result": [
+            0,
+            0,
+            4294967295,
+            1,
+            1,
+            4294967295,
+            0,
+            0
+          ],
+          "stored": [
+            0,
+            0,
+            4294967295,
+            1,
+            1,
+            4294967295,
+            0,
+            0
+          ]
+        }
+      }
+    ],
+    "finalState": {},
+    "status": "completed",
+    "steps": 1
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "5aaad175c716bfea7f22d12983e3b865bcfe0a7ca56963b40ecd3aef30918315",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.5.0-m5",
+    "targetVersion": "typescript-m5-v1",
+    "execution": {
+      "mode": "static",
+      "startTime": 0,
+      "stopTime": 1,
+      "step": 0.1
+    },
+    "nodes": {
+      "input": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "quantize": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "result": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "stored": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      }
+    },
+    "outputTypes": {
+      "result": {
+        "valueType": "float64",
+        "shape": [
+          8
+        ],
+        "unit": "1"
+      },
+      "stored": {
+        "valueType": "float64",
+        "shape": [
+          8
+        ],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    }
+  }
+}

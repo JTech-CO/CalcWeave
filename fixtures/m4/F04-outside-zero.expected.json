@@ -1,0 +1,220 @@
+{
+  "reference": "Zero outside [.25,.75]: y=10t inside and 0 outside. Integral x=0 before .25,5(t^2-.25^2) inside,2.5 after .75.",
+  "absoluteTolerance": 2e-9,
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "result": 0,
+          "signal": 0
+        }
+      },
+      {
+        "time": 0.1,
+        "values": {
+          "result": 0,
+          "signal": 0
+        }
+      },
+      {
+        "time": 0.2,
+        "values": {
+          "result": 0,
+          "signal": 0
+        }
+      },
+      {
+        "time": 0.30000000000000004,
+        "values": {
+          "result": 0.13750000000000012,
+          "signal": 3.000000000000001
+        }
+      },
+      {
+        "time": 0.4,
+        "values": {
+          "result": 0.4875,
+          "signal": 4
+        }
+      },
+      {
+        "time": 0.5,
+        "values": {
+          "result": 0.9374999999999998,
+          "signal": 5
+        }
+      },
+      {
+        "time": 0.6000000000000001,
+        "values": {
+          "result": 1.4875000000000007,
+          "signal": 6.000000000000002
+        }
+      },
+      {
+        "time": 0.7000000000000001,
+        "values": {
+          "result": 2.137500000000001,
+          "signal": 7.000000000000001
+        }
+      },
+      {
+        "time": 0.8,
+        "values": {
+          "result": 2.499999999999584,
+          "signal": 0
+        }
+      },
+      {
+        "time": 0.9,
+        "values": {
+          "result": 2.499999999999584,
+          "signal": 0
+        }
+      },
+      {
+        "time": 1,
+        "values": {
+          "result": 2.499999999999584,
+          "signal": 0
+        }
+      }
+    ],
+    "finalState": {
+      "integral": 2.499999999999584
+    },
+    "stateMemory": {
+      "integral": {
+        "state": [
+          2.499999999999584
+        ]
+      }
+    },
+    "stateTime": 1,
+    "status": "completed",
+    "steps": 11,
+    "solverStatistics": {
+      "method": "rk4",
+      "acceptedSteps": 20,
+      "rejectedSteps": 0,
+      "evaluations": 80,
+      "events": 0,
+      "lastStep": 0.020000000000000018,
+      "minAcceptedStep": 0.019999999999999962,
+      "maxAcceptedStep": 0.08
+    },
+    "events": []
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "3a6d75d813743953b642b49b7a3a775387a2b065e7489fcb5d0ebeef338d649a",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.4.0-m4",
+    "targetVersion": "typescript-m4-v1",
+    "execution": {
+      "mode": "continuous",
+      "startTime": 0,
+      "stopTime": 1,
+      "step": 0.1,
+      "solver": {
+        "method": "rk4",
+        "initialStep": 0.08,
+        "minStep": 1e-10,
+        "maxStep": 0.08,
+        "atol": 1e-8,
+        "rtol": 0.000001,
+        "maxSteps": 100000,
+        "maxRejects": 10000,
+        "maxEvaluations": 1000000,
+        "eventTolerance": 1e-8,
+        "maxEvents": 10000,
+        "discreteStep": 0.1
+      }
+    },
+    "nodes": {
+      "input": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "integral": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "result": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "signal": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      }
+    },
+    "outputTypes": {
+      "result": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      },
+      "signal": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [
+      {
+        "id": "data",
+        "version": 1,
+        "sourceHash": "d6b6c05becb65bc706a20dc68875bc68d2a6b07c36e53478383437a9874bbf74",
+        "contentHash": "dfc443e318a8ddc2f5a6b78f29d6e53c46c755f3572acfd8b3ee2313a9f02d2f",
+        "timeColumn": "time",
+        "columns": [
+          {
+            "name": "time",
+            "kind": "number",
+            "unit": "s"
+          },
+          {
+            "name": "value",
+            "kind": "number",
+            "unit": "1"
+          }
+        ]
+      }
+    ],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    },
+    "continuousPolicy": {
+      "outputGrid": "execution.step",
+      "discreteGrid": "solver.discreteStep",
+      "eventOrder": "reset-tick-observe",
+      "acceptedBoundaryMemory": true,
+      "limits": {
+        "maxSteps": 100000,
+        "maxRejects": 10000,
+        "maxEvaluations": 1000000,
+        "maxEvents": 10000
+      }
+    }
+  }
+}

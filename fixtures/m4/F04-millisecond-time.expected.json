@@ -1,0 +1,142 @@
+{
+  "reference": "1000ms is normalized to one second, yielding y=2t+1 while preserving ms table provenance.",
+  "absoluteTolerance": 1e-11,
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "result": 1
+        }
+      },
+      {
+        "time": 0.1,
+        "values": {
+          "result": 1.2000000000000002
+        }
+      },
+      {
+        "time": 0.2,
+        "values": {
+          "result": 1.4000000000000001
+        }
+      },
+      {
+        "time": 0.30000000000000004,
+        "values": {
+          "result": 1.6
+        }
+      },
+      {
+        "time": 0.4,
+        "values": {
+          "result": 1.8000000000000003
+        }
+      },
+      {
+        "time": 0.5,
+        "values": {
+          "result": 2
+        }
+      },
+      {
+        "time": 0.6000000000000001,
+        "values": {
+          "result": 2.2
+        }
+      },
+      {
+        "time": 0.7000000000000001,
+        "values": {
+          "result": 2.4
+        }
+      },
+      {
+        "time": 0.8,
+        "values": {
+          "result": 2.6000000000000005
+        }
+      },
+      {
+        "time": 0.9,
+        "values": {
+          "result": 2.8000000000000003
+        }
+      },
+      {
+        "time": 1,
+        "values": {
+          "result": 3
+        }
+      }
+    ],
+    "finalState": {},
+    "stateMemory": {},
+    "status": "completed",
+    "steps": 11
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "91324b37a9e660458009260875b346d6653d555e183168b663a41575b121b52c",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.4.0-m4",
+    "targetVersion": "typescript-m4-v1",
+    "execution": {
+      "mode": "discrete",
+      "startTime": 0,
+      "stopTime": 1,
+      "step": 0.1
+    },
+    "nodes": {
+      "input": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "result": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      }
+    },
+    "outputTypes": {
+      "result": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [
+      {
+        "id": "data",
+        "version": 1,
+        "sourceHash": "a066c676222ee1fe21654225b4366c125827bae8779fa0bf046442a456aaf68c",
+        "contentHash": "dbf9aab4870a706b3c76657233dfd8056ff23c533997f5c51d69014d9e105ce0",
+        "timeColumn": "time",
+        "columns": [
+          {
+            "name": "time",
+            "kind": "number",
+            "unit": "ms"
+          },
+          {
+            "name": "value",
+            "kind": "number",
+            "unit": "1"
+          }
+        ]
+      }
+    ],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    }
+  }
+}

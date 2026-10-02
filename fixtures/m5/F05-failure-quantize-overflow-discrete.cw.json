@@ -1,0 +1,81 @@
+{
+  "edges": [
+    {
+      "id": "input-out-bad-in",
+      "source": {
+        "nodeId": "input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "bad",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "bad-out-result-in",
+      "source": {
+        "nodeId": "bad",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "discrete",
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 0.5
+  },
+  "layout": {},
+  "modelId": "F05-failure-quantize-overflow-discrete",
+  "name": "F05-failure-quantize-overflow-discrete",
+  "nodes": [
+    {
+      "blockType": "source.ramp",
+      "blockVersion": 1,
+      "id": "input",
+      "label": "input",
+      "parameters": {
+        "initial": 0,
+        "slope": 1000,
+        "startTime": 0
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "fixed.quantize",
+      "blockVersion": 1,
+      "id": "bad",
+      "label": "bad",
+      "parameters": {
+        "fractionLength": 0,
+        "overflow": "error",
+        "rounding": "nearest-even",
+        "signedness": "signed",
+        "wordLength": 8
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    }
+  ],
+  "schemaVersion": 1
+}

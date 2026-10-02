@@ -1,0 +1,371 @@
+{
+  "reference": "Raw table retains lastpoint y(.75)=7.5 but stores a right-limit0 afterward. TransportDelay .2 reproduces jumps at .45/.95: delayed=10(t-.2) on [.45,.95),0 outside, accumulated area2.5 after .95.",
+  "absoluteTolerance": 2e-9,
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "delayed": 0,
+          "raw": 0,
+          "result": 0
+        }
+      },
+      {
+        "time": 0.05,
+        "values": {
+          "delayed": 0,
+          "raw": 0,
+          "result": 0
+        }
+      },
+      {
+        "time": 0.1,
+        "values": {
+          "delayed": 0,
+          "raw": 0,
+          "result": 0
+        }
+      },
+      {
+        "time": 0.15000000000000002,
+        "values": {
+          "delayed": 0,
+          "raw": 0,
+          "result": 0
+        }
+      },
+      {
+        "time": 0.2,
+        "values": {
+          "delayed": 0,
+          "raw": 0,
+          "result": 0
+        }
+      },
+      {
+        "time": 0.25,
+        "values": {
+          "delayed": 0,
+          "raw": 2.5,
+          "result": 0
+        }
+      },
+      {
+        "time": 0.30000000000000004,
+        "values": {
+          "delayed": 0,
+          "raw": 3.000000000000001,
+          "result": 0
+        }
+      },
+      {
+        "time": 0.35000000000000003,
+        "values": {
+          "delayed": 0,
+          "raw": 3.5,
+          "result": 0
+        }
+      },
+      {
+        "time": 0.4,
+        "values": {
+          "delayed": 0,
+          "raw": 4,
+          "result": 0
+        }
+      },
+      {
+        "time": 0.45,
+        "values": {
+          "delayed": 2.5,
+          "raw": 4.5,
+          "result": 0
+        }
+      },
+      {
+        "time": 0.5,
+        "values": {
+          "delayed": 3,
+          "raw": 5,
+          "result": 0.13749999999999996
+        }
+      },
+      {
+        "time": 0.55,
+        "values": {
+          "delayed": 3.5,
+          "raw": 5.500000000000001,
+          "result": 0.3000000000000001
+        }
+      },
+      {
+        "time": 0.6000000000000001,
+        "values": {
+          "delayed": 4.000000000000001,
+          "raw": 6.000000000000002,
+          "result": 0.48750000000000027
+        }
+      },
+      {
+        "time": 0.65,
+        "values": {
+          "delayed": 4.5,
+          "raw": 6.5,
+          "result": 0.6999999999983333
+        }
+      },
+      {
+        "time": 0.7000000000000001,
+        "values": {
+          "delayed": 5,
+          "raw": 7.000000000000001,
+          "result": 0.9374999999983334
+        }
+      },
+      {
+        "time": 0.75,
+        "values": {
+          "delayed": 5.500000000000001,
+          "raw": 7.5,
+          "result": 1.1999999999979165
+        }
+      },
+      {
+        "time": 0.8,
+        "values": {
+          "delayed": 6.000000000000002,
+          "raw": 0,
+          "result": 1.4874999999979168
+        }
+      },
+      {
+        "time": 0.8500000000000001,
+        "values": {
+          "delayed": 6.500000000000001,
+          "raw": 0,
+          "result": 1.7999999999962504
+        }
+      },
+      {
+        "time": 0.9,
+        "values": {
+          "delayed": 6.999999999999999,
+          "raw": 0,
+          "result": 2.13749999999625
+        }
+      },
+      {
+        "time": 0.9500000000000001,
+        "values": {
+          "delayed": 0,
+          "raw": 0,
+          "result": 2.4999999999945826
+        }
+      },
+      {
+        "time": 1,
+        "values": {
+          "delayed": 0,
+          "raw": 0,
+          "result": 2.4999999999945826
+        }
+      },
+      {
+        "time": 1.05,
+        "values": {
+          "delayed": 0,
+          "raw": 0,
+          "result": 2.4999999999945826
+        }
+      },
+      {
+        "time": 1.1,
+        "values": {
+          "delayed": 0,
+          "raw": 0,
+          "result": 2.4999999999945826
+        }
+      }
+    ],
+    "finalState": {
+      "delay": 0,
+      "integral": 2.4999999999945826
+    },
+    "stateMemory": {
+      "integral": {
+        "state": [
+          2.4999999999945826
+        ]
+      },
+      "delay": {
+        "history": [
+          {
+            "time": 0.9,
+            "value": 0
+          },
+          {
+            "time": 0.95,
+            "value": 0
+          },
+          {
+            "time": 1,
+            "value": 0
+          },
+          {
+            "time": 1.05,
+            "value": 0
+          },
+          {
+            "time": 1.1,
+            "value": 0
+          }
+        ]
+      }
+    },
+    "stateTime": 1.1,
+    "status": "completed",
+    "steps": 23,
+    "solverStatistics": {
+      "method": "rk4",
+      "acceptedSteps": 22,
+      "rejectedSteps": 0,
+      "evaluations": 88,
+      "events": 0,
+      "lastStep": 0.050000000000000044,
+      "minAcceptedStep": 0.04999999999999993,
+      "maxAcceptedStep": 0.050000000000000044
+    },
+    "events": []
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "98ae1e8c9019be5246d13b6ee5bd36a1388544d41ad982abbaeb020f15d69da6",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.4.0-m4",
+    "targetVersion": "typescript-m4-v1",
+    "execution": {
+      "mode": "continuous",
+      "startTime": 0,
+      "stopTime": 1.1,
+      "step": 0.05,
+      "solver": {
+        "method": "rk4",
+        "initialStep": 0.08,
+        "minStep": 1e-10,
+        "maxStep": 0.08,
+        "atol": 1e-8,
+        "rtol": 0.000001,
+        "maxSteps": 100000,
+        "maxRejects": 10000,
+        "maxEvaluations": 1000000,
+        "eventTolerance": 1e-8,
+        "maxEvents": 10000,
+        "discreteStep": 0.1
+      }
+    },
+    "nodes": {
+      "delay": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "delayed": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "input": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "integral": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "raw": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      },
+      "result": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "executionDomain": "continuous"
+      }
+    },
+    "outputTypes": {
+      "delayed": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      },
+      "raw": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      },
+      "result": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [
+      {
+        "id": "data",
+        "version": 1,
+        "sourceHash": "d6b6c05becb65bc706a20dc68875bc68d2a6b07c36e53478383437a9874bbf74",
+        "contentHash": "dfc443e318a8ddc2f5a6b78f29d6e53c46c755f3572acfd8b3ee2313a9f02d2f",
+        "timeColumn": "time",
+        "columns": [
+          {
+            "name": "time",
+            "kind": "number",
+            "unit": "s"
+          },
+          {
+            "name": "value",
+            "kind": "number",
+            "unit": "1"
+          }
+        ]
+      }
+    ],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    },
+    "continuousPolicy": {
+      "outputGrid": "execution.step",
+      "discreteGrid": "solver.discreteStep",
+      "eventOrder": "reset-tick-observe",
+      "acceptedBoundaryMemory": true,
+      "limits": {
+        "maxSteps": 100000,
+        "maxRejects": 10000,
+        "maxEvaluations": 1000000,
+        "maxEvents": 10000
+      }
+    }
+  }
+}

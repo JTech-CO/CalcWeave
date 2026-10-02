@@ -1,0 +1,118 @@
+{
+  "reference": "Exact BigInt LCG modulo 2^32 plus specified open-interval uniforms and two-draw Box-Muller cosine; per-node seeds 0 and 7.",
+  "tolerance": {
+    "absolute": 1e-12,
+    "relative": 1e-12
+  },
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "normal-out": 4.897098859707521,
+          "uniform-out": -0.5278640540782362
+        }
+      },
+      {
+        "time": 1,
+        "values": {
+          "normal-out": 3.775554902861927,
+          "uniform-out": -0.4428661826532334
+        }
+      },
+      {
+        "time": 2,
+        "values": {
+          "normal-out": 5.026167451565862,
+          "uniform-out": 0.6390675201546401
+        }
+      },
+      {
+        "time": 3,
+        "values": {
+          "normal-out": 4.697584271629474,
+          "uniform-out": 0.3357337957713753
+        }
+      }
+    ],
+    "finalState": {
+      "normal": 4.697584271629474,
+      "uniform": 0.3357337957713753
+    },
+    "stateMemory": {
+      "normal": {
+        "seed": 228089999
+      },
+      "uniform": {
+        "seed": 2868466484
+      }
+    },
+    "status": "completed",
+    "steps": 4
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "a337e20277222d9a4e5fd7d787f1f35f3a969a4958ab4a7f4d2780cad9f7a86f",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.2.0-m2",
+    "targetVersion": "typescript-m2-v1",
+    "execution": {
+      "mode": "discrete",
+      "startTime": 0,
+      "stopTime": 3,
+      "step": 1
+    },
+    "nodes": {
+      "normal": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "seed": 7,
+        "randomAlgorithm": "lcg32-boxmuller-v1"
+      },
+      "normal-out": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "uniform": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        },
+        "seed": 0,
+        "randomAlgorithm": "lcg32-boxmuller-v1"
+      },
+      "uniform-out": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      }
+    },
+    "outputTypes": {
+      "normal-out": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      },
+      "uniform-out": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    }
+  }
+}

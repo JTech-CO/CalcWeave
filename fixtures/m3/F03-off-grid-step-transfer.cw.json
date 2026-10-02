@@ -1,0 +1,103 @@
+{
+  "edges": [
+    {
+      "id": "input-out-filter-in",
+      "source": {
+        "nodeId": "input",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "filter",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "filter-out-result-in",
+      "source": {
+        "nodeId": "filter",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "continuous",
+    "solver": {
+      "atol": 1e-8,
+      "discreteStep": 0.1,
+      "eventTolerance": 1e-8,
+      "initialStep": 0.08,
+      "maxEvaluations": 1000000,
+      "maxEvents": 10000,
+      "maxRejects": 10000,
+      "maxStep": 0.08,
+      "maxSteps": 100000,
+      "method": "rk4",
+      "minStep": 1e-10,
+      "rtol": 0.000001
+    },
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F03-off-grid-step-transfer",
+  "name": "F03-off-grid-step-transfer",
+  "nodes": [
+    {
+      "blockType": "source.step",
+      "blockVersion": 1,
+      "id": "input",
+      "label": "input",
+      "parameters": {
+        "after": 1,
+        "before": 0,
+        "stepTime": 0.37
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "continuous.transfer-function",
+      "blockVersion": 1,
+      "id": "filter",
+      "label": "filter",
+      "parameters": {
+        "denominator": [
+          1,
+          1
+        ],
+        "initial": [
+          0
+        ],
+        "numerator": [
+          1
+        ]
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      },
+      "unit": "1"
+    }
+  ],
+  "schemaVersion": 1
+}

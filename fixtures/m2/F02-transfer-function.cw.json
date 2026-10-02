@@ -1,0 +1,83 @@
+{
+  "edges": [
+    {
+      "id": "one-filter-in",
+      "source": {
+        "nodeId": "one",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "filter",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "filter-result-in",
+      "source": {
+        "nodeId": "filter",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "discrete",
+    "startTime": 0,
+    "step": 1,
+    "stopTime": 4
+  },
+  "layout": {},
+  "modelId": "F02-transfer-function",
+  "name": "F02-transfer-function",
+  "nodes": [
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "one",
+      "label": "one",
+      "parameters": {
+        "value": 1
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "discrete.transfer-function",
+      "blockVersion": 1,
+      "id": "filter",
+      "label": "filter",
+      "parameters": {
+        "denominator": [
+          1,
+          -0.5
+        ],
+        "initial": 0,
+        "numerator": [
+          1
+        ],
+        "reset": "none"
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    }
+  ],
+  "schemaVersion": 1
+}

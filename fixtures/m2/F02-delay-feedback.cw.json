@@ -1,0 +1,135 @@
+{
+  "edges": [
+    {
+      "id": "one-sum-a",
+      "source": {
+        "nodeId": "one",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "sum",
+        "portId": "a"
+      }
+    },
+    {
+      "id": "delay-gain-in",
+      "source": {
+        "nodeId": "delay",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "gain",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "gain-sum-b",
+      "source": {
+        "nodeId": "gain",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "sum",
+        "portId": "b"
+      }
+    },
+    {
+      "id": "sum-delay-in",
+      "source": {
+        "nodeId": "sum",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "delay",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "sum-result-in",
+      "source": {
+        "nodeId": "sum",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "discrete",
+    "startTime": 0,
+    "step": 1,
+    "stopTime": 5
+  },
+  "layout": {},
+  "modelId": "F02-delay-feedback",
+  "name": "F02-delay-feedback",
+  "nodes": [
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "one",
+      "label": "one",
+      "parameters": {
+        "value": 1
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "math.sum",
+      "blockVersion": 1,
+      "id": "sum",
+      "label": "sum",
+      "parameters": {
+        "signs": "++"
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "discrete.unit-delay",
+      "blockVersion": 1,
+      "id": "delay",
+      "label": "delay",
+      "parameters": {
+        "initial": 0,
+        "reset": "none"
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "math.gain",
+      "blockVersion": 1,
+      "id": "gain",
+      "label": "gain",
+      "parameters": {
+        "gain": 0.9
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    }
+  ],
+  "schemaVersion": 1
+}

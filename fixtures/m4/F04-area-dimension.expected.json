@@ -1,0 +1,76 @@
+{
+  "reference": "2m * 3m = 6m^2; approved dimension algebra retains both the value and area dimension.",
+  "absoluteTolerance": 1e-11,
+  "expectedUnits": {
+    "result": "m^2"
+  },
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "result": 6
+        }
+      }
+    ],
+    "finalState": {},
+    "status": "completed",
+    "steps": 1
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "b5d2cf887a98f0636fd0c39e4618e616b5b6177ac471ac2e3c0c1e9cf0d61c31",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.4.0-m4",
+    "targetVersion": "typescript-m4-v1",
+    "execution": {
+      "mode": "static",
+      "startTime": 0,
+      "stopTime": 1,
+      "step": 0.1
+    },
+    "nodes": {
+      "height": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "width": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "area": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "result": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      }
+    },
+    "outputTypes": {
+      "result": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "m^2"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    }
+  }
+}

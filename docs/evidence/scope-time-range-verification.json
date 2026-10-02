@@ -1,0 +1,104 @@
+{
+  "generatedAt": "2026-10-02T14:08:38.9553982Z",
+  "engineVersion": "0.4.0-m4",
+  "build": {
+    "command": "npm run build",
+    "status": "passed",
+    "strictTypeScript": true,
+    "assets": [
+      {
+        "name": "engine.worker-YEKYpuK7.js",
+        "bytes": 237171,
+        "sha256": "b8c94b8a3f9e80c63548836ce869e6d4d6254bd263da86dbd527afb338fe07bd"
+      },
+      {
+        "name": "index-D-9nJi53.js",
+        "bytes": 816551,
+        "sha256": "4dead23d29500f92bf52bde2780acc272a69b6420acb153072cd2a8c7c99588b"
+      },
+      {
+        "name": "src-DK2hhmvt.js",
+        "bytes": 120376,
+        "sha256": "892ba73d4c4e0867eaf840ae5239debe112283d2902bdcfe2441ff68244a36a8"
+      }
+    ]
+  },
+  "unit": {
+    "command": "npm test",
+    "files": 16,
+    "tests": 680,
+    "status": "passed"
+  },
+  "browser": {
+    "command": "npm run test:e2e",
+    "tests": 66,
+    "existing": 55,
+    "scopeRange": 11,
+    "status": "passed",
+    "isolatedContexts": true,
+    "sourceAndBuildUnchangedDuringRun": true,
+    "test": "tests/e2e/scope-time-range.spec.ts"
+  },
+  "delayedResponse": {
+    "mode": "discrete",
+    "originalStopTime": 2,
+    "extendedStopTime": 6,
+    "step": 0.5,
+    "delayTicks": 6,
+    "samples": 13,
+    "finalValue": 3,
+    "rawValues": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0.5,
+      1,
+      1.5,
+      2,
+      2.5,
+      3
+    ],
+    "historyOriginalUnchanged": true,
+    "newSemanticHash": true,
+    "modelExportAndReload": true
+  },
+  "rejectedInputs": [
+    "blank",
+    "Infinity",
+    "reversed range",
+    "off-grid range",
+    "over 10000 intervals"
+  ],
+  "rejectionPreservesModelAndHistory": true,
+  "dashboard": {
+    "sharedRootRange": true,
+    "startTime": 1,
+    "stopTime": 5,
+    "samples": 9,
+    "finalValue": 2
+  },
+  "responsive": {
+    "widths": [
+      320,
+      390
+    ],
+    "themes": [
+      "dark",
+      "light"
+    ],
+    "noPageOrFormOverflow": true,
+    "inputFontAtLeast14px": true,
+    "actualAxisAndPathColorsChecked": true
+  },
+  "screenshots": [
+    "docs/evidence/scope-time-range.png",
+    "docs/evidence/scope-time-range-320-dark.png",
+    "docs/evidence/scope-time-range-320-light.png",
+    "docs/evidence/scope-time-range-390-dark.png",
+    "docs/evidence/scope-time-range-390-light.png"
+  ]
+}

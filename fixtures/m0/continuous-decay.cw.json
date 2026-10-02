@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "modelId": "continuous-decay",
+  "name": "시간에 따른 감쇠",
+  "nodes": [
+    {
+      "id": "state",
+      "blockType": "continuous.integrator",
+      "blockVersion": 1,
+      "label": "현재 값",
+      "parameters": {
+        "initial": 1
+      }
+    },
+    {
+      "id": "gain",
+      "blockType": "math.gain",
+      "blockVersion": 1,
+      "label": "변화율",
+      "parameters": {
+        "gain": -1
+      }
+    },
+    {
+      "id": "result",
+      "blockType": "sink.display",
+      "blockVersion": 1,
+      "label": "값 표시",
+      "parameters": {}
+    }
+  ],
+  "edges": [
+    {
+      "id": "state-gain",
+      "source": {
+        "nodeId": "state",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "gain",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "gain-state",
+      "source": {
+        "nodeId": "gain",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "state",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "state-result",
+      "source": {
+        "nodeId": "state",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "continuous",
+    "startTime": 0,
+    "stopTime": 5,
+    "step": 0.05
+  },
+  "layout": {
+    "state": {
+      "x": 40,
+      "y": 120
+    },
+    "gain": {
+      "x": 300,
+      "y": 240
+    },
+    "result": {
+      "x": 560,
+      "y": 120
+    }
+  }
+}

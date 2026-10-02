@@ -1,0 +1,146 @@
+{
+  "reference": "Two FIFO slots initially -1; reset at n=2,6 restores next committed queue.",
+  "tolerance": {
+    "absolute": 1e-12,
+    "relative": 1e-12
+  },
+  "result": {
+    "samples": [
+      {
+        "time": 0,
+        "values": {
+          "result": -1
+        }
+      },
+      {
+        "time": 1,
+        "values": {
+          "result": -1
+        }
+      },
+      {
+        "time": 2,
+        "values": {
+          "result": 1
+        }
+      },
+      {
+        "time": 3,
+        "values": {
+          "result": -1
+        }
+      },
+      {
+        "time": 4,
+        "values": {
+          "result": -1
+        }
+      },
+      {
+        "time": 5,
+        "values": {
+          "result": 4
+        }
+      },
+      {
+        "time": 6,
+        "values": {
+          "result": 5
+        }
+      },
+      {
+        "time": 7,
+        "values": {
+          "result": -1
+        }
+      },
+      {
+        "time": 8,
+        "values": {
+          "result": -1
+        }
+      }
+    ],
+    "finalState": {
+      "delay": -1
+    },
+    "stateMemory": {
+      "delay": {
+        "history": [
+          -1,
+          8
+        ]
+      }
+    },
+    "status": "completed",
+    "steps": 9
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "modelHash": "b4ff22bfa67075deb9dba0b86a71ffe8516cad759493ed638f74e6060358f97b",
+    "modelHashAlgorithm": "SHA-256",
+    "engineVersion": "0.2.0-m2",
+    "targetVersion": "typescript-m2-v1",
+    "execution": {
+      "mode": "discrete",
+      "startTime": 0,
+      "stopTime": 8,
+      "step": 1
+    },
+    "nodes": {
+      "delay": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "pulse": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "ramp": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "result": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "threshold": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      },
+      "reset": {
+        "sampleTime": {
+          "period": 1,
+          "offset": 0
+        }
+      }
+    },
+    "outputTypes": {
+      "result": {
+        "valueType": "float64",
+        "shape": [],
+        "unit": "1"
+      }
+    },
+    "rateTransitionPolicy": "read-before-write",
+    "dataReferences": [],
+    "resourceLimits": {
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxStateElements": 100000,
+      "maxSignalElements": 1024,
+      "maxActiveWallMs": 30000
+    }
+  }
+}

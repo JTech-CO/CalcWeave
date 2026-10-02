@@ -1,0 +1,124 @@
+{
+  "edges": [
+    {
+      "id": "a-out-bus-a",
+      "source": {
+        "nodeId": "a",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "bus",
+        "portId": "a"
+      }
+    },
+    {
+      "id": "b-out-bus-b",
+      "source": {
+        "nodeId": "b",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "bus",
+        "portId": "b"
+      }
+    },
+    {
+      "id": "bus-out-select-in",
+      "source": {
+        "nodeId": "bus",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "select",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "bus-out-bus-view-in",
+      "source": {
+        "nodeId": "bus",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "bus-view",
+        "portId": "in"
+      }
+    },
+    {
+      "id": "select-out-result-in",
+      "source": {
+        "nodeId": "select",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "static",
+    "startTime": 0,
+    "step": 0.1,
+    "stopTime": 1
+  },
+  "layout": {},
+  "modelId": "F04-named-numeric-bus",
+  "name": "F04-named-numeric-bus",
+  "nodes": [
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "a",
+      "label": "a",
+      "parameters": {
+        "value": 3
+      },
+      "unit": "m"
+    },
+    {
+      "blockType": "source.constant",
+      "blockVersion": 1,
+      "id": "b",
+      "label": "b",
+      "parameters": {
+        "value": 7
+      },
+      "unit": "m"
+    },
+    {
+      "blockType": "route.bus-create",
+      "blockVersion": 1,
+      "id": "bus",
+      "label": "bus",
+      "parameters": {
+        "first": "firstValue",
+        "second": "secondValue"
+      }
+    },
+    {
+      "blockType": "route.bus-select",
+      "blockVersion": 1,
+      "id": "select",
+      "label": "select",
+      "parameters": {
+        "field": "secondValue"
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "bus-view",
+      "label": "bus-view",
+      "parameters": {}
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {}
+    }
+  ],
+  "schemaVersion": 1
+}
