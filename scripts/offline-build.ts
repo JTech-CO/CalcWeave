@@ -11,7 +11,7 @@ const offlineHash = (value: string | Uint8Array): string => createHash('sha256')
 
 /** Final build bytes only: model data and arbitrary runtime URLs never enter this list. */
 export function createOfflineManifest(files: Readonly<Record<string, string | Uint8Array>>, versions: { appVersion: string; engineVersion: string }): OfflineManifest {
-  if (!/^\d+\.\d+\.\d+$/.test(versions.appVersion) || !/^\d+\.\d+\.\d+-m\d+$/.test(versions.engineVersion)) throw new Error('Invalid offline release versions.');
+  if (!/^\d+\.\d+\.\d+$/.test(versions.appVersion) || !/^\d+\.\d+\.\d+-(?:m\d+|catalog)$/.test(versions.engineVersion)) throw new Error('Invalid offline release versions.');
   const assets = Object.entries(files).map(([name, source]) => {
     const url = `/${name}`;
     if (!OFFLINE_ASSET_PATH.test(url) || url.includes('..')) throw new Error(`Unsupported offline build asset: ${name}`);
@@ -142,7 +142,7 @@ export async function writeOfflineRelease(outputDirectory: string, fileNames: st
   return manifest;
 }
 
-export function calcWeaveOfflinePlugin(versions: { appVersion: string; engineVersion: string } = { appVersion: '0.7.0', engineVersion: '0.7.0-m7' }): Plugin {
+export function calcWeaveOfflinePlugin(versions: { appVersion: string; engineVersion: string } = { appVersion: '0.8.0', engineVersion: '0.8.0-catalog' }): Plugin {
   let outputDirectory = '';
   return {
     name: 'calcweave-verified-offline-release', apply: 'build', enforce: 'post',

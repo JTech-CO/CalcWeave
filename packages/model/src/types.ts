@@ -1,10 +1,22 @@
-export const ENGINE_VERSION = '0.7.0-m7';
+export const ENGINE_VERSION = '0.8.0-catalog';
 
 export type ExecutionMode = 'static' | 'discrete' | 'continuous';
 export type BlockType =
+  | 'math.bias' | 'math.sign' | 'math.cbrt' | 'math.expm1' | 'math.log1p' | 'math.log2' | 'math.exp2'
+  | 'math.sinh' | 'math.cosh' | 'math.tanh' | 'math.asinh' | 'math.acosh' | 'math.atanh' | 'math.sinc' | 'math.polynomial'
+  | 'math.power' | 'math.hypot' | 'math.atan2' | 'math.mod' | 'math.remainder'
+  | 'nonlinear.dead-zone' | 'nonlinear.quantizer' | 'logic.interval' | 'logic.is-integer' | 'logic.approx-equal'
+  | 'reduce.sum' | 'reduce.product' | 'reduce.mean' | 'reduce.median' | 'reduce.variance' | 'reduce.std' | 'reduce.rms'
+  | 'reduce.norm1' | 'reduce.norm2' | 'reduce.norm-inf' | 'reduce.all' | 'reduce.any'
+  | 'vector.dot' | 'vector.cross' | 'vector.normalize' | 'vector.reverse' | 'vector.sort' | 'vector.cumsum' | 'vector.cumprod'
+  | 'vector.difference' | 'vector.select' | 'vector.slice' | 'vector.repeat' | 'vector.convolve'
+  | 'matrix.trace' | 'matrix.diagonal' | 'matrix.diag-create' | 'matrix.identity' | 'matrix.select' | 'matrix.row' | 'matrix.column'
+  | 'matrix.horizontal' | 'matrix.vertical' | 'matrix.triangle' | 'matrix.symmetrize' | 'matrix.kronecker'
+  | 'source.linspace' | 'source.logspace' | 'source.zeros'
   | 'math.matrix-multiply' | 'matrix.transpose' | 'matrix.determinant' | 'matrix.inverse' | 'matrix.solve' | 'matrix.cholesky' | 'matrix.lu'
   | 'lookup.2d' | 'lookup.prelookup' | 'fixed.quantize'
   | 'source.constant' | 'io.input' | 'math.gain' | 'math.sum'
+  | 'source.chirp' | 'source.gaussian-pulse' | 'source.damped-sine' | 'source.exponential' | 'source.logistic' | 'source.sinc-pulse'
   | 'math.multiply' | 'sink.display' | 'discrete.unit-delay' | 'continuous.integrator'
   | 'math.abs' | 'math.function' | 'math.trigonometric' | 'math.round' | 'math.minmax'
   | 'math.sqrt' | 'logic.compare' | 'logic.boolean' | 'route.switch'

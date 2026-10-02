@@ -9,8 +9,8 @@ import { MODEL_PACKAGE_PERMISSIONS, MODEL_PACKAGE_REGISTRY } from '../packages/m
 
 const catalog = getReleaseCatalog(), checks: string[] = [];
 function check(condition: unknown, message: string): void { assert(condition, message); checks.push(message); }
-check(catalog.version === '0.7.0' && catalog.engineVersion === '0.7.0-m7', 'app/engine release versions');
-check(catalog.blocks.length === 74 && new Set(catalog.blocks.map(block => block.id)).size === 74, 'single registry 74 unique executable definitions');
+check(catalog.version === '0.8.0' && catalog.engineVersion === '0.8.0-catalog', 'app/engine release versions');
+check(catalog.blocks.length === 144 && new Set(catalog.blocks.map(block => block.id)).size === 144, 'single registry 144 unique executable definitions');
 check(PYTHON_TARGET.blockIds.length === 51 && new Set(PYTHON_TARGET.blockIds).size === 51 && catalog.blocks.every(block => block.exportTargets.includes('python') === PYTHON_TARGET.blockIds.includes(block.id)), 'Python registry export metadata equals approved target capabilities');
 check(PYTHON_TARGET.supportedModes.join(',') === 'static,discrete', 'Python target does not claim continuous solver support');
 check(MODEL_PACKAGE_REGISTRY.length === catalog.blocks.length && MODEL_PACKAGE_PERMISSIONS.join(',') === 'local-model' && Object.isFrozen(MODEL_PACKAGE_REGISTRY), 'model packages bind approved immutable registry and local-only permissions');

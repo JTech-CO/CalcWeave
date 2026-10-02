@@ -930,8 +930,8 @@ test('Korean aliases are searchable without adding new engine blocks', async ({ 
   await openWorkspace(page);
   const search = page.getByLabel('한국어 또는 영어로 블록 검색');
   await search.fill('더하기');
-  await expect(page.locator('.library-item')).toHaveCount(1);
-  await expect(page.locator('.library-item')).toContainText('Sum');
+  await expect(page.locator('.library-item')).toHaveCount(2);
+  await expect(page.locator('.library-item small')).toHaveText(['Sum', 'Bias']);
   await search.fill('값');
   await expect(page.locator('.library-item').filter({ hasText: 'Constant' })).toBeVisible();
   await search.fill('없는_블럭_이름');

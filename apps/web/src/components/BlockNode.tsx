@@ -39,6 +39,21 @@ export const BLOCK_SYMBOLS: Record<string, string> = {
   'math.matrix-multiply': 'AB', 'matrix.transpose': 'Aᵀ', 'matrix.determinant': '|A|',
   'matrix.inverse': 'A⁻¹', 'matrix.solve': 'A\\b', 'matrix.cholesky': 'LLᵀ', 'matrix.lu': 'LU',
   'lookup.2d': '▦', 'lookup.prelookup': 'k,f', 'fixed.quantize': 'Q',
+  'math.bias': '+b', 'math.sign': '±', 'math.cbrt': '∛', 'math.expm1': 'eˣ−1', 'math.log1p': 'ln1+',
+  'math.log2': 'log₂', 'math.exp2': '2ˣ', 'math.sinh': 'sh', 'math.cosh': 'ch', 'math.tanh': 'th',
+  'math.asinh': 'ash', 'math.acosh': 'ach', 'math.atanh': 'ath', 'math.sinc': 'sinc', 'math.polynomial': 'P(x)',
+  'math.power': 'xʸ', 'math.hypot': '√∑', 'math.atan2': 'θ', 'math.mod': 'mod', 'math.remainder': 'rem',
+  'nonlinear.dead-zone': 'DZ', 'nonlinear.quantizer': 'QΔ', 'logic.interval': '[ ]', 'logic.is-integer': 'ℤ', 'logic.approx-equal': '≈',
+  'reduce.sum': 'Σ', 'reduce.product': 'Π', 'reduce.mean': 'μ', 'reduce.median': 'Med', 'reduce.variance': 'σ²',
+  'reduce.std': 'σ', 'reduce.rms': 'RMS', 'reduce.norm1': 'L₁', 'reduce.norm2': 'L₂', 'reduce.norm-inf': 'L∞',
+  'reduce.all': '∀', 'reduce.any': '∃', 'vector.dot': '·', 'vector.cross': '×', 'vector.normalize': 'v̂',
+  'vector.reverse': '⇆', 'vector.sort': '↕', 'vector.cumsum': 'Σₖ', 'vector.cumprod': 'Πₖ', 'vector.difference': 'Δv',
+  'vector.select': 'vᵢ', 'vector.slice': '[i:j]', 'vector.repeat': '↻', 'vector.convolve': '∗',
+  'matrix.trace': 'tr', 'matrix.diagonal': '↘', 'matrix.diag-create': 'D', 'matrix.identity': 'I', 'matrix.select': 'Aᵢⱼ',
+  'matrix.row': 'Aᵢ', 'matrix.column': 'Aⱼ', 'matrix.horizontal': 'A|B', 'matrix.vertical': 'A/B',
+  'matrix.triangle': '△', 'matrix.symmetrize': 'S', 'matrix.kronecker': '⊗',
+  'source.linspace': 'Lin', 'source.logspace': 'Log', 'source.zeros': '0', 'source.chirp': 'f↗',
+  'source.gaussian-pulse': 'G', 'source.damped-sine': 'e∿', 'source.exponential': 'eˣ', 'source.logistic': 'S', 'source.sinc-pulse': 'sinc',
 };
 
 export function blockTone(type: string) {

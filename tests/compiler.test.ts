@@ -27,7 +27,7 @@ function expectCode(model: unknown, code: string): void {
 
 describe('versioned block contracts', () => {
   it('exposes immutable M1/M2 contracts and extends scalar ODE execution with M3', () => {
-    expect(blockRegistry).toHaveLength(74);
+    expect(blockRegistry).toHaveLength(144);
     expect(blockRegistry.filter((definition) => definition.state === 'continuous-state').every((definition) => definition.shape === 'scalar' && definition.valueType === 'float64')).toBe(true);
     expect(Object.isFrozen(blockRegistry)).toBe(true);
     expect(Object.isFrozen(blockRegistry[0]!.parameters)).toBe(true);

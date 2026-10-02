@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 
-export type IconName = 'search' | 'play' | 'pause' | 'reset' | 'stop' | 'download' | 'upload' | 'undo' | 'redo' | 'plus' | 'close' | 'check' | 'layers' | 'sliders' | 'chart' | 'arrow' | 'info' | 'sun' | 'moon' | 'trash' | 'link' | 'grid';
+export type IconName = 'search' | 'play' | 'pause' | 'reset' | 'stop' | 'download' | 'upload' | 'undo' | 'redo' | 'plus' | 'close' | 'check' | 'layers' | 'sliders' | 'chart' | 'arrow' | 'chevron-down' | 'info' | 'sun' | 'moon' | 'trash' | 'link' | 'grid';
 
 const paths: Record<IconName, string> = {
   search: 'm21 21-4.35-4.35 M19 11a8 8 0 1 1-16 0 8 8 0 0 1 16 0',
@@ -19,6 +19,7 @@ const paths: Record<IconName, string> = {
   sliders: 'M4 4v4m0 4v8M12 4v10m0 4v2M20 4v2m0 4v10M1 8h6m2 10h6m2-12h6',
   chart: 'M4 4v16h16M7 14l4-5 4 3 5-7',
   arrow: 'M4 12h16m-6-6 6 6-6 6',
+  'chevron-down': 'm6 9 6 6 6-6',
   info: 'M12 11v6m0-10v.1M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0',
   sun: 'M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5M17 12a5 5 0 1 1-10 0 5 5 0 0 1 10 0',
   moon: 'M21 13a9 9 0 1 1-10-10 7 7 0 0 0 10 10',

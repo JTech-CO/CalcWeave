@@ -107,8 +107,8 @@ describe('M7 declarative package integrity and independently supplied trust', ()
     await expectCode(() => inspectModelPackage(JSON.stringify(envelope)), 'PACKAGE_VERSION_UNSUPPORTED');
   });
 
-  it('requires the exact immutable 74-block registry including parameter kinds and ports', async () => {
-    expect(MODEL_PACKAGE_REGISTRY).toHaveLength(74); expect(Object.isFrozen(MODEL_PACKAGE_REGISTRY[0]!.inputs)).toBe(true);
+  it('requires the exact immutable executable registry including parameter kinds and ports', async () => {
+    expect(MODEL_PACKAGE_REGISTRY).toHaveLength(144); expect(Object.isFrozen(MODEL_PACKAGE_REGISTRY[0]!.inputs)).toBe(true);
     const exported = await createModelPackage(model());
     for (const change of ['remove', 'ports', 'parameter', 'version', 'custom']) {
       const envelope = JSON.parse(exported.text);

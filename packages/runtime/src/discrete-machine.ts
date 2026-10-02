@@ -173,7 +173,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
       const input = (port: string): SignalValue => readInput(values, node, port);
       emit(node, DISCRETE_BLOCKS.has(node.blockType)
         ? { out: output(node, memory.get(node.id) ?? {}, input, tick, time) }
-        : evaluateSignalNode(node, input));
+        : evaluateSignalNode(node, input, undefined, time));
     }
     return values;
   }
@@ -181,7 +181,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
   function evaluateNode(node: IRNode, tick: number, time: number, input: (port: string) => SignalValue, commit = true): Record<string, SignalValue> {
     if (!due(node, tick) || node.blockType === 'source.random' && randomTicks.get(node.id) === tick) return held.get(node.id)!;
     charge(node);
-    const outputs = DISCRETE_BLOCKS.has(node.blockType) ? { out: output(node, memory.get(node.id) ?? {}, input, tick, time) } : evaluateSignalNode(node, input);
+    const outputs = DISCRETE_BLOCKS.has(node.blockType) ? { out: output(node, memory.get(node.id) ?? {}, input, tick, time) } : evaluateSignalNode(node, input, undefined, time);
     for (const [port, descriptor] of Object.entries(node.outputs)) checkSignal(outputs[port], descriptor, node.id);
     if (commit || node.blockType === 'source.random') held.set(node.id, outputs);
     if (node.blockType === 'source.random') randomTicks.set(node.id, tick);

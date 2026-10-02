@@ -15,6 +15,8 @@ export async function buildFixedTemplates(): Promise<{ kernels: string; discrete
   const kernels = await statements('packages/runtime/src/kernels.ts', (statement) => !ts.isFunctionDeclaration(statement) || statement.name?.text !== 'nodeOperationCost');
   const advanced = await statements('packages/advanced-math/src/index.ts', () => true);
   const quantization = await statements('packages/quantization/src/index.ts', () => true);
+  const expansion = await statements('packages/runtime/src/expansion.ts', () => true);
+  const timeSources = await statements('packages/runtime/src/time-sources.ts', () => true);
   const discrete = await statements('packages/runtime/src/discrete-machine.ts', () => true);
   const modelTypes = await statements('packages/model/src/types.ts', (statement) =>
     (ts.isInterfaceDeclaration(statement) && statement.name.text !== 'RunOptions') || ts.isTypeAliasDeclaration(statement));
@@ -28,7 +30,7 @@ export async function buildFixedTemplates(): Promise<{ kernels: string; discrete
   const solver = await statements('packages/runtime/src/continuous-solver.ts', () => true);
   const machine = await statements('packages/runtime/src/continuous-machine.ts', () => true);
   const execution = await statements('packages/runtime/src/continuous-execution.ts', () => true);
-  return { kernels: `class ModelError extends Error {\n  constructor(public readonly diagnostics: { code: string; nodeId?: string; message: string; tick?: number; time?: number }[], public readonly partialResult?: unknown) {\n    super(diagnostics[0]?.code + (diagnostics[0]?.nodeId ? ': ' + diagnostics[0].nodeId : ''));\n    this.name = 'ModelError';\n  }\n}\n${expression}\n${advanced}\n${quantization}\n${kernels}`, discrete,
+  return { kernels: `class ModelError extends Error {\n  constructor(public readonly diagnostics: { code: string; nodeId?: string; message: string; tick?: number; time?: number }[], public readonly partialResult?: unknown) {\n    super(diagnostics[0]?.code + (diagnostics[0]?.nodeId ? ': ' + diagnostics[0].nodeId : ''));\n    this.name = 'ModelError';\n  }\n}\n${expression}\n${advanced}\n${quantization}\n${expansion}\n${timeSources}\n${kernels}`, discrete,
     continuous: [modelTypes, signal, memory, solverSettings, expressionCost, operationCost, solver, machine, execution].join('\n') };
 }
 

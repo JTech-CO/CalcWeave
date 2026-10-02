@@ -9,6 +9,8 @@ import { inferContinuousDomains, initialContinuousDescriptor, validateContinuous
 import { datasetSeries } from '../../data/src';
 import { flattenHierarchy } from './hierarchy';
 import { validateAdvancedParameters } from './advanced';
+import { inferExpansionSignal } from './expansion';
+import { inferTimeSourceDescriptor, validateTimeSourceParameters } from './time-sources';
 
 const compareId = (a: string, b: string): number => a < b ? -1 : a > b ? 1 : 0;
 
@@ -308,6 +310,7 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
         output = scalarState(); break;
       }
       case 'sink.display': case 'io.output': case 'io.terminator': case 'sink.scope': output = clone(input('in')); break;
+      default: output = inferExpansionSignal(node, input, originals.get(node.id)!.unit ?? '1') ?? inferTimeSourceDescriptor(node, originals.get(node.id)!.unit ?? '1'); break;
     }
     if (output) node.outputs.out = output;
     const declaredUnit = originals.get(node.id)!.unit;
@@ -384,6 +387,7 @@ function compileFlatModel(input: unknown): CompiledModel {
       validateDiscreteParameters(ir, model);
       validateContinuousParameters(ir, model);
       validateAdvancedParameters(ir);
+      validateTimeSourceParameters(ir, model);
       if (definition.id === 'math.expression') ir.expression = parseExpression(parameters.expression as string);
       nodeById.set(node.id, ir);
     } catch (error) {
@@ -464,7 +468,7 @@ function compileFlatModel(input: unknown): CompiledModel {
   if (model.execution.mode === 'discrete') {
     for (const edge of model.edges) {
       const source = nodeById.get(edge.source.nodeId)!; const target = nodeById.get(edge.target.nodeId)!;
-      if (source.blockType === 'source.constant' || source.blockType === 'io.input' || target.blockType === 'time.rate-transition') continue;
+      if (getBlockDefinition(source.blockType)!.sampleTime === 'constant' || target.blockType === 'time.rate-transition') continue;
       if (source.sampleTime.period !== target.sampleTime.period || source.sampleTime.offset !== target.sampleTime.offset) {
         diagnostics.push({ code: 'SAMPLE_TIME_MISMATCH', nodeId: target.id, portId: edge.target.portId, message: `입력 ${edge.target.portId}의 샘플시간이 다릅니다. ${source.sampleTime.period}/${source.sampleTime.offset} → ${target.sampleTime.period}/${target.sampleTime.offset} 사이에 Rate Transition을 연결해 주세요.` });
       }

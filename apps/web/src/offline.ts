@@ -1,5 +1,7 @@
-export const OFFLINE_APP_VERSION = '0.6.0';
-export const OFFLINE_ENGINE_VERSION = '0.6.0-m6';
+import { APP_VERSION } from '../../../packages/release/src';
+import { ENGINE_VERSION } from '../../../packages/model/src';
+export const OFFLINE_APP_VERSION = APP_VERSION;
+export const OFFLINE_ENGINE_VERSION = ENGINE_VERSION;
 export interface OfflineStatus {
   phase: 'disabled' | 'installing' | 'ready' | 'update-ready' | 'error';
   online: boolean; offlineReady: boolean; appVersion: string; engineVersion: string;

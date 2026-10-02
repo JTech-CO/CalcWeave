@@ -111,7 +111,7 @@ export function createContinuousMachine(compiled: CompiledModel, charge: (node: 
         const times = p.times as number[], period = times.at(-1)!, remainder = sourceTime % period, phase = remainder < 0 ? remainder + period : remainder;
         return { out: interpolateTable(phase, times, p.values as number[], String(p.interpolation), 'clip', node.id) };
       }
-      default: return evaluateSignalNode(node, read);
+      default: return evaluateSignalNode(node, read, undefined, sourceTime);
     }
   }
   function evaluateNode(node: IRNode, time: number, state: number[], reader: (port: string) => SignalValue, eventMask: Set<string>): Record<string, SignalValue> {

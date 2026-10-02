@@ -71,7 +71,7 @@ function mutateFirstValue(result: Pick<RunResult, 'samples'>): void {
 
 const preserveM5Fixtures = ENGINE_VERSION.endsWith('-m5');
 await mkdir('fixtures/m5', { recursive: true }); await mkdir('docs/evidence', { recursive: true });
-assert.equal(blockRegistry.length, 74);
+assert.equal(blockRegistry.length, ENGINE_VERSION.endsWith('-catalog') ? 144 : 74);
 const evidence = [];
 for (const oracle of m5Oracles()) {
   const originalSnapshot = JSON.stringify(oracle.model), compiled = compileModel(oracle.model), result = await runModel(compiled); assert.equal(result.status, 'completed');

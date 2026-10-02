@@ -1,10 +1,12 @@
 # CalcWeave 기술 백서
 
-> 버전: v0.8 · 작성일: 2026-10-03 · 상태: M7 Python subset·서명 모델 패키지·가져오기 경계 반영
+> 버전: v0.9 · 작성일: 2026-10-03 · 상태: 수학·신호 70종 확장·144 registry·기존 M7 계약 유지
 > 대상: 제품 설계자, 프런트엔드 개발자, 수치 엔진 개발자  
 > 연결 문서: [디자인 백서](02-design-whitepaper.md) · [마일스톤](03-milestone-roadmap.md) · [블럭 대응표](block-coverage.md)
 
 ## 1. 제품 정의와 현재 상태
+
+0.8.0의 수학·신호 확장은 승인된 수학·통계·벡터·행렬 64종과 시간 입력 6종을 추가한다. registry는 144종, 정적 지원은107종이며 Python 승인 51종은 그대로다. 기존74종의 파라미터·포트·모드·타입/형상/단위 계약을 유지한다. 신규 생성 타깃은 `typescript-catalog-v1`이며 import 없는 고정 실행 소스와 데이터만 내보낸다. 독립 oracle·모든 지원 모드·JSON roundtrip·실제 TS 결과를 검증한 범위만 대응표에 승인한다. 원자료385행/339이름과 registry 정의 수는 서로 다른 지표다. [확장 계약](catalog-contract.md)·[검증](catalog-validation.md)·[대응 계획](block-expansion-plan.md)을 현재 추가 범위의 기준으로 사용하고 아래 M0~M7 기록은 각 단계의 계약으로 보존한다.
 
 M7 앱 0.7.0·엔진 0.7.0-m7은 승인된 정적·이산 subset의 표준 라이브러리 Python 독립 실행, 일회용 P-256 서명·별도 공개키 fingerprint 확인이 필요한 선언형 모델 공유, native 모델의 구문/실행과 외부 변환 상태 보고를 추가한다. Python의 지원 상수와 registry의 코드 타깃 표시를 연결하며 연속·M5 고급 계산은 TS로 안내한다. 임의 kernel·네트워크/OS 권한·외부 모델 어댑터는 승인하지 않는다. 실제 계약과 근거는 [M7 계약](m7-contract.md)·[검증](m7-validation.md)을 따른다. M6의 아래 릴리스 기반은 유지한다.
 
@@ -12,7 +14,7 @@ M6 앱 0.6.0·엔진 0.6.0-m6은 74개 실행 정의의 공개 지원표, 최종
 
 CalcWeave는 사용자가 입력, 연산, 상태, 결과를 블럭과 연결선으로 표현하여 수치 계산과 시뮬레이션을 수행하고, 그 모델을 데이터 및 실행 가능한 코드로 가져갈 수 있는 웹 도구다. 기본 사용에 MATLAB 설치, 별도 계산 서버, 회원가입을 요구하지 않는 방향으로 설계한다. 수학적 의미와 결과의 재현성을 유지하면서 사용자가 처음부터 툴박스 체계를 학습하지 않아도 첫 결과에 도달하게 하는 것이 핵심이다.
 
-현재 구현은 registry 74종·정적 capability 43종이다. M5에서 각 축 32 이하 실수 2D 행렬 곱·전치·행렬식·역행렬·선형 방정식·Cholesky·LU, 비균일 2D Lookup·Prelookup, 정확한 1~32bit fixed-point 경계 양자화를 추가했다. 입력 형상·단위와 수치 조건을 검증하고 가중 연산 예산·실패 부분 기록을 독립 TypeScript 생성 코드에도 적용한다. 양자화의 정수 코드만 bit-true이며 이후 계산은 float64다. 복소수·일반 n-D·64bit·typed fixed-point 전파·메시지/조건부 실행·DAE는 미지원/연구로 남긴다.
+M5 시점의 구현은 registry74종·정적 capability43종이었다. M5에서 각 축32 이하 실수2D 행렬 곱·전치·행렬식·역행렬·선형 방정식·Cholesky·LU, 비균일2D Lookup·Prelookup, 정확한1~32bit fixed-point 경계 양자화를 추가했다. 입력 형상·단위와 수치 조건을 검증하고 가중 연산 예산·실패 부분 기록을 독립 TypeScript 생성 코드에도 적용한다. 양자화의 정수 코드만 bit-true이며 이후 계산은 float64다. 복소수·일반 n-D·64bit·typed fixed-point 전파·메시지/조건부 실행·DAE는 미지원/연구로 남긴다.
 
 M4 데이터·계층·실험·대시보드와 M3 solver/혼합 실행, M2 tick·독립 export, M1 편집·typed 계산·AST 계약을 유지한다. 실제 추가 범위는 [M5 구현 계약](m5-contract.md), 증거와 제한은 [M5 검증 기록](m5-validation.md)을 따른다. 이전 [M4](m4-validation.md)·[M3](m3-validation.md)·[M2](m2-validation.md)·[M1](m1-validation.md) 기록은 보존한다. 전체 Simulink 동등성이나 공개 배포를 뜻하지 않는다.
 

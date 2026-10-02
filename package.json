@@ -1,9 +1,9 @@
 {
   "name": "calcweave",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "private": true,
   "type": "module",
-  "description": "CalcWeave M7: independent Python export, signed model packages and explicit import boundaries",
+  "description": "CalcWeave: expanded mathematical and signal blocks with categorized learning examples",
   "engines": {
     "node": ">=22.12"
   },
@@ -31,7 +31,10 @@
     "verify:deployment": "tsx scripts/verify-deployment.ts",
     "verify:m7": "tsx scripts/verify-m7.ts",
     "verify:design:m7": "tsx scripts/verify-design.ts --m7",
-    "verify:performance:m7": "tsx scripts/verify-performance-m6.ts"
+    "verify:performance:m7": "tsx scripts/verify-performance-m6.ts",
+    "verify:catalog": "tsx scripts/verify-catalog.ts",
+    "verify:design:catalog": "tsx scripts/verify-design.ts --catalog",
+    "verify:performance:catalog": "tsx scripts/verify-performance-m6.ts"
   },
   "dependencies": {
     "@xyflow/react": "12.12.0",
