@@ -3,10 +3,10 @@ import { ENGINE_VERSION, MODEL_LIMITS } from '../../model/src';
 import { DATASET_LIMITS } from '../../model/src/dataset';
 import { SOLVER_LIMITS } from '../../model/src/continuous';
 
-export const APP_VERSION = '0.8.0';
+export const APP_VERSION = '0.8.1';
 export const RELEASE = Object.freeze({
   version: APP_VERSION, engineVersion: ENGINE_VERSION, schemaVersion: 1,
-  stage: 'local-beta-candidate', domain: 'calcweave.com', operator: 'JTech-Co',
+  stage: 'public-beta', domain: 'calcweave.com', deploymentUrl: 'https://jtech-co.github.io/CalcWeave/', operator: 'JTech-Co',
   contact: 'jtech-bryan@proton.me',
   repository: 'https://github.com/JTech-CO/CalcWeave',
   policyLinks: Object.freeze({ terms: '/terms/', privacy: '/privacy/', cookies: '/cookies/', notices: '/notices/' }),

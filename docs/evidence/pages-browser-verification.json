@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-10-02T21:25:49.373041+00:00",
+  "appVersion": "0.8.1",
+  "engineVersion": "0.8.0-catalog",
+  "root": {
+    "passed": 120,
+    "failed": 0,
+    "duration": "5.9m"
+  },
+  "project": {
+    "passed": 4,
+    "failed": 0,
+    "durationSeconds": 11.8,
+    "initialAttempt": "Policy fetch expected navigation-only alias; assertion corrected to actual offline page navigation. Initial process ended before final receipt, no initial 4/4 pass claimed."
+  },
+  "cases": [
+    "project asset paths and real Worker raw6",
+    "four scoped policy links and app navigation",
+    "scoped allowlist cache, offline edit raw10, outside path rejection, policy navigation",
+    "offline Python lazy module, native model and complete execution ZIP"
+  ]
+}

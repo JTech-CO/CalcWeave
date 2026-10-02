@@ -1,5 +1,7 @@
 # GitHub Pages 배포와 공개 확인
 
+> 이 문서는 앱0.6.0 당시 기록입니다. 앱0.8.1의 프로젝트 경로 지원과 현재 배포 절차는 [Pages 배포 구성](pages-deployment.md), 실제 공개 결과는 [배포 검증](pages-validation.md)을 따릅니다.
+
 앱 0.6.0 · 예정 주소 calcweave.com · 운영자 JTech-Co · 문의 jtech-bryan@proton.me
 
 ## 준비된 구성

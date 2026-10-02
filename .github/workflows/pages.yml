@@ -16,7 +16,7 @@ jobs:
   verify:
     if: github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -32,6 +32,7 @@ jobs:
       - run: npm audit --audit-level=moderate
       - run: npm test
       - run: npm run verify:coverage
+      - run: npm run verify:roadmap
       - run: npm run verify:m7
       - run: npm run verify:catalog
       - run: npm run build
@@ -42,16 +43,20 @@ jobs:
         id: pages
         with:
           enablement: false
-      - name: Require the configured root custom domain
+      - name: Validate the configured CalcWeave Pages destination
         env:
           CALCWEAVE_PAGES_BASE: ${{ steps.pages.outputs.base_path }}
           CALCWEAVE_PAGES_ORIGIN: ${{ steps.pages.outputs.origin }}
-        run: |
-          node --input-type=module - <<'NODE'
-          if (process.env.CALCWEAVE_PAGES_BASE !== '' || process.env.CALCWEAVE_PAGES_ORIGIN !== 'https://calcweave.com') {
-            throw new Error('Configure and verify calcweave.com in Pages settings before publishing this root-only app.');
-          }
-          NODE
+        run: npx tsx scripts/verify-pages-target.ts
+      - name: Build the configured Pages path
+        env:
+          CALCWEAVE_BASE_PATH: ${{ format('{0}/', steps.pages.outputs.base_path) }}
+        run: npm run build
+      - name: Verify the exact Pages artifact
+        run: npm run verify:release
+      - name: Verify the project-path application and offline scope
+        if: steps.pages.outputs.base_path == '/CalcWeave'
+        run: npm run test:e2e:pages
       - uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
           path: dist

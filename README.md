@@ -1,9 +1,11 @@
 # CalcWeave
 
 > 블럭을 연결해 수학을 계산하고, 시간에 따른 변화를 관찰하며, 모델을 데이터와 실행 코드로 이어가는 웹 도구.  
-> 기준일: 2026-10-03 · 앱 버전: 0.8.0 · 현재 상태: 블럭144종(수학·신호70종 추가), 예제32개·6개 카테고리. 실제 사용자 조사·도메인·공개 출시 확인은 별도
+> 기준일: 2026-10-03 · 앱 버전: 0.8.1 · 현재 상태: 블럭144종(수학·신호70종 추가), 예제32개·6개 카테고리. GitHub Pages 웹 베타 배포 구성, 실제 사용자 조사·목표 도메인 확인은 별도
 
 CalcWeave는 MATLAB 설치 없이 브라우저에서 사용할 수 있는 블럭 기반 수학 계산·시뮬레이션 도구를 목표로 합니다. Simulink 기본 라이브러리의 기능 개념을 참고하면서, 초보자가 입력·계산·결과를 이해하고 점차 고급 모델로 확장할 수 있는 독립적인 사용 경험을 설계합니다.
+
+웹 베타 주소: [CalcWeave 작업 공간](https://jtech-co.github.io/CalcWeave/). 배포 결과와 실제 공개 파일 검증은 [Pages 배포 기록](docs/pages-validation.md)에 남깁니다.
 
 ## 실행하기
 
@@ -21,7 +23,7 @@ npm run build
 npm run preview
 ```
 
-미리보기 주소는 http://127.0.0.1:4173 입니다. 개발·미리보기 서버는 로컬 호스트에만 연결됩니다. 공개 배포와 도메인 연결은 아직 수행하지 않았습니다.
+미리보기 주소는 http://127.0.0.1:4173 입니다. 개발·미리보기 서버는 로컬 호스트에만 연결됩니다. GitHub Pages의 `/CalcWeave/` 경로와 custom domain의 `/` 빌드를 모두 지원합니다. `calcweave.com` 연결은 별도 단계입니다.
 
 ## M7 코드와 모델 공유
 
@@ -35,7 +37,7 @@ npm run preview
 
 production preview와 HTTPS에서는 검증된 정적 릴리스를 오프라인으로 설치합니다. 설치 완료 후 모델 재열기·Worker 계산·TS 실행 묶음 export까지 네트워크 없이 사용할 수 있습니다. 새 릴리스는 저장 성공 후 사용자 선택으로 적용합니다. 과거 정적 캐시는 기존 탭을 위해 유지하므로 브라우저 사이트 저장소를 정리하기 전 백업하세요.
 
-예정 호스팅은 [JTech-CO/CalcWeave](https://github.com/JTech-CO/CalcWeave)의 GitHub Pages, 예정 주소는 **calcweave.com**, 운영자는 **JTech-Co**, 문의는 **jtech-bryan@proton.me**입니다. `.github/workflows/pages.yml`은 기본 브랜치에서 수동 실행하는 검증·배포 workflow입니다. 현재 도메인 DNS와 custom domain·HTTPS를 연결해 공개 배포한 상태는 아닙니다. [M6 계약](docs/m6-contract.md) · [검증 기록](docs/m6-validation.md) · [배포 설정](docs/m6-deployment.md) · [운영·복구](docs/m6-operations.md)를 참고하세요.
+웹 베타 호스팅은 [JTech-CO/CalcWeave](https://github.com/JTech-CO/CalcWeave)의 GitHub Pages, 주소는 **https://jtech-co.github.io/CalcWeave/**, 목표 도메인은 **calcweave.com**, 운영자는 **JTech-Co**, 문의는 **jtech-bryan@proton.me**입니다. `.github/workflows/pages.yml`은 기본 브랜치에서 수동 실행하는 검증·배포 workflow입니다. README를 변환하는 legacy 게시 대신 검증된 `dist`를 게시하는 GitHub Actions 구성을 사용합니다. 목표 도메인의 DNS·소유권 확인은 별도입니다. [현재 배포 구성](docs/pages-deployment.md)을 참고하세요. [M6 계약](docs/m6-contract.md) · [검증 기록](docs/m6-validation.md) · [배포 설정](docs/m6-deployment.md) · [운영·복구](docs/m6-operations.md)를 참고하세요.
 
 ## 현재 가능한 작업
 
@@ -74,6 +76,7 @@ npm run build
 npm run test:e2e
 npm run benchmark
 npm run verify:coverage
+npm run verify:roadmap
 npm run verify:design
 npm run verify:design:m4
 npm run verify:m1
@@ -100,7 +103,7 @@ npm run verify:performance:catalog
 
 `verify:design:m4`는 기존 측정과 데이터·실험·대시보드·노트·계층 화면을 함께 검사하고 [M4 디자인 증거](docs/evidence/m4-design-verification.json)와 별도의 스크린샷을 생성합니다.
 
-수학·신호 추가 범위는 [확장 계약](docs/catalog-contract.md), 고급 실행은 [M5](docs/m5-contract.md), 릴리스/저장은 [M6](docs/m6-contract.md), 타깃/패키지/가져오기는 [M7](docs/m7-contract.md)을 따릅니다. 현재 `verify:m1`~`verify:m5`와 `verify:m7`은 이전 증거를 보존하며 `*-regression-on-catalog.json`에 현 엔진 결과를 기록합니다. `verify:m7`은 실제 Python 환경이 필요하며 `CALCWEAVE_PYTHON_PATH`로 실행 파일을 지정합니다. `verify:catalog`는 신규70종과 기존 Divide의 독립 raw oracle/실제 TS/JSON 계약을 검사합니다. 현재 화면은 `verify:design:catalog`, 최종 빌드는 `verify:release`, production preview 성능은 `verify:performance:catalog`로 확인합니다. `verify:design:m7`는 역사 M7에 대한 명령이므로 현재 증거 생성에는 catalog 명령을 사용합니다. `verify:deployment`는 실제 calcweave.com을 읽으므로 공개 주소가 연결되기 전에는 실패합니다. [현재 검증](docs/catalog-validation.md)과 이전 M0~M7 기록을 구분합니다.
+수학·신호 추가 범위는 [확장 계약](docs/catalog-contract.md), 고급 실행은 [M5](docs/m5-contract.md), 릴리스/저장은 [M6](docs/m6-contract.md), 타깃/패키지/가져오기는 [M7](docs/m7-contract.md)을 따릅니다. 현재 `verify:m1`~`verify:m5`와 `verify:m7`은 이전 증거를 보존하며 `*-regression-on-catalog.json`에 현 엔진 결과를 기록합니다. `verify:m7`은 실제 Python 환경이 필요하며 `CALCWEAVE_PYTHON_PATH`로 실행 파일을 지정합니다. `verify:catalog`는 신규70종과 기존 Divide의 독립 raw oracle/실제 TS/JSON 계약을 검사합니다. 현재 화면은 `verify:design:catalog`, 최종 빌드는 `verify:release`, production preview 성능은 `verify:performance:catalog`로 확인합니다. `verify:design:m7`는 역사 M7에 대한 명령이므로 현재 증거 생성에는 catalog 명령을 사용합니다. `verify:deployment`는 기본값으로 실제 Pages 주소를 읽고 현재 scope와 배포 artifact의 바이트·SHA-256을 비교합니다. `/CalcWeave/` 빌드는 [현재 배포 구성](docs/pages-deployment.md)의 명령으로 검증합니다. [현재 검증](docs/catalog-validation.md)과 이전 M0~M7 기록을 구분합니다.
 
 ## 기획 문서
 
@@ -109,6 +112,7 @@ npm run verify:performance:catalog
 | [01. 기술 백서](docs/01-technical-whitepaper.md) | 모델·타입·실행 엔진·solver·데이터·저장·코드 export·보안·검증 계약 |
 | [02. 디자인 백서](docs/02-design-whitepaper.md) | 브랜드·정보 구조·편집기·첫 성공 흐름·시각 토큰·접근성·오류와 결과 UX |
 | [03. 마일스톤별 구축 방향](docs/03-milestone-roadmap.md) | M0~M7의 범위·의존성·산출물·완료 조건·검증·출시 gate |
+| [05. 전체 Simulink 대응 후속 로드맵](docs/05-simulink-coverage-roadmap.md) | M8~M16의 계약·독립 fixture·종료 gate, 385행/134기존subset/251미구현의 후속 배정 |
 | [04. SANE 화면 수정](docs/04-sane-design-revision.md) | 중성 다크·라이트 테마·읽기 크기·간결한 블럭·전체 결과 접근·화면 측정 |
 | [M1 구현 계약](docs/m1-contract.md) / [검증 기록](docs/m1-validation.md) | 23종 정적 블럭·typed 신호·AST·단위·편집·복구의 실제 범위와 증거 |
 | [M2 구현 계약](docs/m2-contract.md) / [검증 기록](docs/m2-validation.md) | 정수 tick·상태·다중 rate·pause/reset·난수·독립 export의 실제 범위와 증거 |
@@ -126,7 +130,7 @@ npm run verify:performance:catalog
 
 [dataset/Simulink_Basic_Blocks_R2024b.md](dataset/Simulink_Basic_Blocks_R2024b.md)는 21개 분류에 385개 문서 행을 수록한 참고 자료입니다. 중복·별칭·설정 변형·조건부 항목도 포함하므로 385개 독립 계산 엔진을 의미하지 않습니다. 참고 자료는 보존하고, CalcWeave의 구현 계획과 실제 지원 상태는 별도로 관리합니다.
 
-문서에 쓰인 `계획`, `목표`, 예산·일정 추정은 구현 완료나 측정 결과가 아닙니다. 현재 수치·브라우저·export·자원 상한과 릴리스 검증 증거는 [수학·신호 확장 검증](docs/catalog-validation.md)에 모읍니다. 이 앱을 공개 주소에 배포한 상태는 아니며 실제 초보 사용자 조사·도메인 소유 검증·외부 종료 게이트를 소급 완료하지 않습니다. DAE·일반 fixed-point 타입 전파·외부 코드 연동은 별도 실행 계약과 검증이 필요합니다.
+문서에 쓰인 `계획`, `목표`, 예산·일정 추정은 구현 완료나 측정 결과가 아닙니다. 현재 수치·브라우저·export·자원 상한과 릴리스 검증 증거는 [수학·신호 확장 검증](docs/catalog-validation.md)에 모읍니다. 웹 베타 배포 검증과 실제 초보 사용자 조사·목표 도메인 소유 검증·전체 Simulink 옵션 동등성은 별도로 기록합니다. DAE·일반 fixed-point 타입 전파·외부 코드 연동은 별도 실행 계약과 검증이 필요합니다.
 
 ## 브랜드와 배포 목표
 

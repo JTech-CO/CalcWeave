@@ -1,12 +1,14 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src &#39;self&#39;; script-src &#39;self&#39;; style-src &#39;self&#39; &#39;unsafe-inline&#39;; img-src &#39;self&#39; data:; worker-src &#39;self&#39;; connect-src &#39;self&#39;; object-src &#39;none&#39;; base-uri &#39;self&#39;; form-action &#39;self&#39;"><meta name="referrer" content="no-referrer"><title>쿠키와 브라우저 저장소 · CalcWeave</title><style>:root{color-scheme:light dark;font:16px/1.75 system-ui,sans-serif;background:#191919;color:#ededed}body{max-width:900px;margin:auto;padding:32px 24px 64px}a{color:#9ebded;text-underline-offset:4px}h1{font-size:2rem;line-height:1.3}h2{font-size:1.25rem;margin-top:2rem}p{overflow-wrap:anywhere}nav{display:flex;flex-wrap:wrap;gap:20px;border-bottom:1px solid #454545;padding-bottom:20px}pre{font:14px/1.6 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere}details{border-bottom:1px solid #454545;padding:16px 0}summary{cursor:pointer}a:focus-visible,summary:focus-visible{outline:3px solid #9ebded;outline-offset:4px}@media(prefers-color-scheme:light){:root{background:#e8e8e8;color:#242424}a{color:#245493}}</style></head><body><nav aria-label="문서 탐색"><a href="/">CalcWeave 작업 공간</a><a href="/terms/">이용 안내</a><a href="/privacy/">개인정보</a><a href="/cookies/">브라우저 저장소</a><a href="/notices/">오픈소스 고지</a></nav><main><h1>쿠키와 브라우저 저장소 안내</h1>
-<p>문서 버전 0.6 · 작성일 2026-10-03 · 운영자 JTech-Co · 문의 jtech-bryan@proton.me</p>
+<p>문서 버전 0.7 · 웹 베타 적용일 2026-10-03 · 운영자 JTech-Co · 문의 jtech-bryan@proton.me</p>
 <h2>현재 앱의 저장 방식</h2>
-<p>CalcWeave 앱 코드는 쿠키를 생성하지 않습니다. 광고·마케팅·방문자 분석 SDK와 선택적 추적 도구도 없습니다. 현재 기능에 선택적 쿠키 동의 배너를 추가하지 않았습니다. 호스팅 제공자가 실제로 보내는 쿠키와 헤더는 공개 도메인 배포 후 별도로 확인해야 합니다.</p>
+<p>CalcWeave 앱 코드는 쿠키를 생성하지 않습니다. 광고·마케팅·방문자 분석 SDK와 선택적 추적 도구도 없습니다. 현재 기능에 선택적 쿠키 동의 배너를 추가하지 않았습니다. GitHub Pages 호스팅 응답의 쿠키·헤더 확인 결과는 릴리스 배포 검증 기록에 남깁니다. 앱의 저장 항목과 호스팅 제공자의 통신 기록은 구분합니다.</p>
 <h2>IndexedDB와 설정</h2>
 <p>모델·포함 데이터·최근 실행·체크포인트·복구 원본은 기기의 IndexedDB에 저장합니다. 제한된 오류 기록, 백업 알림 시각과 테마 등 화면 설정은 로컬 저장소에 저장합니다. 용도는 작업 유지, 장애 복구와 화면 설정이며 광고나 방문자 추적이 아닙니다. 관리 화면의 로컬 데이터 초기화 또는 브라우저의 사이트 저장소 삭제로 제거할 수 있습니다.</p>
 <h2>오프라인 정적 캐시</h2>
 <p>Service Worker는 확인된 앱 HTML·JavaScript·CSS와 정책 페이지를 버전별 정적 캐시에 저장합니다. 모델·실행 결과·사용자 파일·임의 URL·외부 응답을 캐시에 추가하지 않습니다. 이전 탭이 필요한 코드 조각을 잃지 않도록 이전 릴리스 캐시는 자동 삭제하지 않습니다. 캐시 공간을 회수하려면 모든 CalcWeave 탭을 닫은 후 브라우저 사이트 저장소를 삭제하세요. 이 작업은 로컬 계산 자료도 지울 수 있으므로 먼저 백업하세요.</p>
 <h2>저장 거부와 한계</h2>
 <p>브라우저에서 사이트 저장을 막거나 시크릿 모드로 이용하면 저장·복구·오프라인 기능이 제한될 수 있습니다. 파일로 내보내기를 사용할 수 있으며 브라우저의 저장소 정책에 따라 동작은 달라집니다. 추적 도구를 도입할 경우 수집 목적과 선택·철회 절차를 먼저 변경하고 문서 버전에 표시합니다.</p>
-<p>현재 문서는 로컬 베타 후보의 초안이며, 실제 공개 호스팅 통신을 확인한 후 확정합니다.</p></main></body></html>
+<p>웹 베타 주소는 https://jtech-co.github.io/CalcWeave/ 입니다. 브라우저 저장은 주소의 origin 단위로 관리됩니다. 목표 도메인 calcweave.com으로 이동하기 전 작업 공간을 백업하고 새 주소에서 복구하세요.</p>
+<p>개정 이력: 0.6 로컬 베타 안내 → 0.7 GitHub Pages 주소와 주소 변경 시 백업 안내. 추적 도구나 쿠키 생성 기능은 추가하지 않았습니다.</p>
+<p>생성한 문서는 초안이며 법률 자문이 아닙니다. 실제 운영 형태에 따라 추가 의무가 있을 수 있습니다.</p></main></body></html>
