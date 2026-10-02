@@ -1,7 +1,10 @@
 import { expect, test, type Locator, type Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
+import { ENGINE_VERSION } from '../../packages/model/src';
 import type { CalcModel } from '../../packages/model/src';
 import type { HistoryRecord } from '../../apps/web/src/run-history';
+
+const evidencePath = (name: string) => `docs/evidence/${ENGINE_VERSION.split('-').at(-1)}-${name}`;
 
 function delayModel(): CalcModel {
   return {
@@ -79,7 +82,7 @@ test('Scope extends the actual delayed response and preserves the original histo
   expect(exported.execution).toEqual({ mode: 'discrete', startTime: 0, stopTime: 6, step: 0.5 });
   await expect.poll(async () => (await stored<CalcModel>(page, 'current'))?.execution.stopTime).toBe(6);
   await page.locator('.plot-frame').scrollIntoViewIfNeeded();
-  await page.screenshot({ path: 'docs/evidence/scope-time-range.png', fullPage: true });
+  await page.screenshot({ path: evidencePath('scope-time-range.png'), fullPage: true });
   await page.reload();
   await expect(page.getByLabel('종료 시간', { exact: true })).toHaveValue('6');
   await expect.poll(async () => (await history(page))?.length).toBe(2);
@@ -170,7 +173,7 @@ for (const width of [320, 390]) for (const theme of ['dark', 'light'] as const) 
       await expect(page.locator('.plot-x-labels').last()).toHaveText('0 s6 s');
     }
     await page.locator('.dashboard-card').scrollIntoViewIfNeeded();
-    await page.screenshot({ path: `docs/evidence/scope-time-range-${width}-${theme}.png`, fullPage: true });
+    await page.screenshot({ path: evidencePath(`scope-time-range-${width}-${theme}.png`), fullPage: true });
     expect(errors).toEqual([]);
   });
 }

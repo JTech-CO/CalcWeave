@@ -3,6 +3,8 @@ import { readFile } from 'node:fs/promises';
 import { createServer, type Server } from 'node:http';
 import { createExample } from '../../apps/web/src/examples';
 import type { CalcModel } from '../../packages/model/src';
+import { ENGINE_VERSION } from '../../packages/model/src';
+import { APP_VERSION } from '../../packages/release/src';
 import { createOfflineManifest, generateOfflineWorker, OFFLINE_CACHE_PREFIX, type OfflineManifest } from '../../scripts/offline-build';
 
 test.use({ serviceWorkers: 'allow' });
@@ -31,7 +33,7 @@ test('M6 first complete online install reopens the original IndexedDB model, run
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
   await page.goto('/'); await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨'); await waitForControlled(page);
   const manifest = await page.evaluate(async () => await (await fetch('/offline-manifest.json')).json()) as OfflineManifest;
-  expect(manifest.appVersion).toBe('0.6.0'); expect(manifest.engineVersion).toBe('0.6.0-m6');
+  expect(manifest.appVersion).toBe(APP_VERSION); expect(manifest.engineVersion).toBe(ENGINE_VERSION);
   expect(manifest.assets.some(asset => asset.url.includes('engine.worker') && asset.url.endsWith('.js'))).toBe(true);
   expect(manifest.assets.filter(asset => asset.url.endsWith('.js')).length).toBeGreaterThanOrEqual(3);
   const cached = await page.evaluate(async cacheName => (await (await caches.open(cacheName)).keys()).map(request => new URL(request.url).pathname), OFFLINE_CACHE_PREFIX + manifest.releaseId);
@@ -48,7 +50,7 @@ test('M6 first complete online install reopens the original IndexedDB model, run
   const downloading = page.waitForEvent('download'); await page.getByRole('button', { name: '실행 묶음', exact: true }).click();
   const archive = unzip(await readFile((await (await downloading).path())!));
   expect(JSON.parse(archive['model.cw.json']!).name).toBe(model.name);
-  expect(JSON.parse(archive['manifest.json']!).engineVersion).toBe('0.6.0-m6');
+  expect(JSON.parse(archive['manifest.json']!).engineVersion).toBe(ENGINE_VERSION);
   const outputs = JSON.parse(archive['expected-output.json']!).samples[0].values;
   expect(outputs.solution[0][0]).toBeCloseTo(1, 12); expect(outputs.solution[1][0]).toBeCloseTo(2, 12);
   expect(archive['model.ts']).toContain('matrix.lu'); expect(errors).toEqual([]);

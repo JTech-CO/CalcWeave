@@ -8,6 +8,8 @@ import { BLOCK_REGISTRY } from '../../packages/block-library/src';
 import { ENGINE_VERSION } from '../../packages/model/src';
 import type { CalcModel } from '../../packages/model/src';
 
+const evidencePath = (name: string) => `docs/evidence/${ENGINE_VERSION.split('-').at(-1)}-${name}`;
+
 async function openWorkspace(page: Page) {
   await page.goto('/');
   await expect(page.getByRole('button', { name: '계산하기' })).toBeVisible();
@@ -147,7 +149,7 @@ for (const width of [1440, 1920]) {
     await page.getByRole('button', { name: '시뮬레이션 실행' }).click();
     await expect(page.locator('.output-card strong')).toHaveText('0.006737949');
     await expectDiagramInsideCanvas(page);
-    if (width === 1920) await page.screenshot({ path: 'docs/evidence/initial-canvas-fit.png', fullPage: true });
+    if (width === 1920) await page.screenshot({ path: evidencePath('initial-canvas-fit.png'), fullPage: true });
 
     const fitted = await canvasViewport(page);
     await page.getByRole('button', { name: '캔버스 축소', exact: true }).click();
@@ -206,7 +208,7 @@ test('Canvas middle dragging pans while left dragging draws a blue marquee witho
       expect(color[2]).toBeGreaterThan(color[1]);
       expect(color[3]).toBeGreaterThan(0);
     }
-    await page.screenshot({ path: `docs/evidence/canvas-selection-${theme}.png`, fullPage: true });
+    await page.screenshot({ path: evidencePath(`canvas-selection-${theme}.png`), fullPage: true });
     await page.mouse.up({ button: 'left' });
     await expect(page.locator('.react-flow__node.selected')).toHaveCount(2);
     expect(await page.locator('.react-flow__node.selected').evaluateAll(elements => elements.map(element => element.getAttribute('data-id')).sort())).toEqual(['gain', 'value']);
@@ -888,7 +890,7 @@ test('Cancellation returns control and an older run cannot overwrite a new resul
     return { ...evidence, latencyMs: evidence.terminatedAt - evidence.requestedAt };
   });
   expect(cancellation.latencyMs).toBeLessThan(1000);
-  await writeFile('docs/evidence/m0-browser-cancellation.json', JSON.stringify({
+  await writeFile(evidencePath('browser-cancellation.json'), JSON.stringify({
     generatedAt: new Date().toISOString(), browser: page.context().browser()?.version(),
     fixture: { nodes: 1000, intervals: 10000, mode: 'discrete', outputs: 1 },
     metric: 'Real Worker cancel postMessage to termination; single run, not a percentile or universal guarantee.',

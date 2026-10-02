@@ -52,6 +52,6 @@ export function RunBrand({ activityKey, phase }: RunBrandProps) {
   return <div className={`brand run-brand${isPulsing ? ' is-pulsing' : ''}${phase === 'paused' ? ' is-paused' : ''}`} role="group" aria-label={busy ? 'CalcWeave · 계산 중' : phase === 'paused' ? 'CalcWeave · 일시정지' : 'CalcWeave'} data-activity={phase} data-animating={isPulsing ? 'true' : 'false'}>
     <span key={`mark-${activityKey}`} className="brand-mark" aria-hidden="true"><i/><i/><i/><i/></span>
     <strong key={`wordmark-${activityKey}`} className="brand-wordmark" aria-hidden="true">Calc<span>Weave</span></strong>
-    <span className="research-badge">M6 작업 공간</span>
+    <span className="research-badge">M7 작업 공간</span>
   </div>;
 }

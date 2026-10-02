@@ -1,6 +1,6 @@
 /** Fixed filenames and bounded, deterministic ZIP store records; no archive imports/extraction. */
 export const EXPORT_ARCHIVE_LIMITS = Object.freeze({ maxFileBytes: 16 * 1024 * 1024, maxArchiveBytes: 32 * 1024 * 1024, maxFiles: 6 });
-const ALLOWED_FILES = new Set(['model.ts', 'model.cw.json', 'manifest.json', 'expected-output.json', 'run-example.ts', 'README.md']);
+const ALLOWED_FILES = new Set(['model.ts', 'model.py', 'model.cw.json', 'manifest.json', 'expected-output.json', 'run-example.ts', 'run-example.py', 'README.md']);
 const crcTable = Uint32Array.from({ length: 256 }, (_, value) => {
   let crc = value;
   for (let bit = 0; bit < 8; bit++) crc = crc & 1 ? 0xedb88320 ^ (crc >>> 1) : crc >>> 1;
@@ -52,6 +52,17 @@ export const EXPORT_RUN_EXAMPLE = `import { run, getManifest } from './model.js'
 const result = run();
 console.log(JSON.stringify({ manifest: getManifest(), result }, null, 2));
 `;
+
+export const PYTHON_RUN_EXAMPLE = `import json
+from model import run, get_manifest
+
+# Run locally with the Python standard library.
+print(json.dumps({"manifest": get_manifest(), "result": run()}, ensure_ascii=False, indent=2, allow_nan=False))
+`;
+
+export function pythonArchiveReadme(hasExpected: boolean): string {
+  return `# CalcWeave Python 실행 묶음\n\nPython 3.10 이상에서 표준 라이브러리만 사용합니다.\n\n- model.py: 승인된 정적·이산 모델의 독립 계산 코드. run()과 get_manifest()를 제공합니다.\n- model.cw.json: CalcWeave에서 편집할 수 있는 원래 모델.\n- manifest.json: 타깃·엔진 버전, 모델 해시, 실행 설정과 지원 범위.\n- run-example.py: JSON 결과를 출력하는 실행 예제.\n${hasExpected ? '- expected-output.json: 현재 모델의 완료 결과. 수치 원시값을 비교하는 기준입니다.' : '현재 모델의 완료 결과가 없어 expected-output.json을 포함하지 않았습니다.'}\n\n\`\`\`sh\npython model.py\npython run-example.py\n\`\`\`\n\nPython 타깃의 지원표와 manifest에 있는 블록·모드·자료형 범위에서 실행합니다. 연속 solver와 지원하지 않는 블록을 자동으로 다른 수식으로 바꾸지 않습니다. 파일과 네트워크를 읽지 않으며 데이터는 모델에 내장됩니다. 이 묶음은 현재 브라우저에서 생성했습니다.\n`;
+}
 
 export function exportArchiveReadme(hasExpected: boolean, mode: 'static' | 'discrete' | 'continuous' = 'discrete', m4 = false, m5 = false): string {
   const executionNote = mode === 'continuous' ? '모델은 manifest의 RK4·RK45 설정과 연속·혼합 경계 규칙을 따릅니다. 출력 격자는 solver 내부 간격과 별개입니다. 같은 경계에서는 reset → tick → observe 순서로 초기화, 이산 갱신, 출력 관측을 처리합니다. Rate Transition 등 경계 버퍼는 read-before-write 규칙을 따릅니다. 결과의 stateTime은 finalState가 확정된 시각이며, raw 출력의 마지막 샘플 시각과 다를 수 있습니다.' : '모델은 정수 tick의 고정 샘플시간 규칙을 따릅니다. Rate Transition은 이전 발행값을 읽습니다.';

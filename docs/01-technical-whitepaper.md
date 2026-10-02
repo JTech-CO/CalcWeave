@@ -1,10 +1,12 @@
 # CalcWeave 기술 백서
 
-> 버전: v0.7 · 작성일: 2026-10-03 · 상태: M6 로컬 베타 후보·오프라인·복구·릴리스 검증 반영  
+> 버전: v0.8 · 작성일: 2026-10-03 · 상태: M7 Python subset·서명 모델 패키지·가져오기 경계 반영
 > 대상: 제품 설계자, 프런트엔드 개발자, 수치 엔진 개발자  
 > 연결 문서: [디자인 백서](02-design-whitepaper.md) · [마일스톤](03-milestone-roadmap.md) · [블럭 대응표](block-coverage.md)
 
 ## 1. 제품 정의와 현재 상태
+
+M7 앱 0.7.0·엔진 0.7.0-m7은 승인된 정적·이산 subset의 표준 라이브러리 Python 독립 실행, 일회용 P-256 서명·별도 공개키 fingerprint 확인이 필요한 선언형 모델 공유, native 모델의 구문/실행과 외부 변환 상태 보고를 추가한다. Python의 지원 상수와 registry의 코드 타깃 표시를 연결하며 연속·M5 고급 계산은 TS로 안내한다. 임의 kernel·네트워크/OS 권한·외부 모델 어댑터는 승인하지 않는다. 실제 계약과 근거는 [M7 계약](m7-contract.md)·[검증](m7-validation.md)을 따른다. M6의 아래 릴리스 기반은 유지한다.
 
 M6 앱 0.6.0·엔진 0.6.0-m6은 74개 실행 정의의 공개 지원표, 최종 정적 파일 SHA-256 오프라인 릴리스, 저장 성공 후 업데이트, 최대5개 실행을 포함한 26MiB 백업·원자적 복구, 탭 revision 충돌과 제한된 로컬 진단을 추가한다. 수학 계약·schema1·기존 수치 fixture는 유지한다. [M6 계약](m6-contract.md)·[검증](m6-validation.md)·[배포](m6-deployment.md)·[운영](m6-operations.md)을 따른다. 실제 초보자 관찰·공개 도메인·HTTPS·호스팅 정책의 확인은 구현 검증과 구분한다.
 
@@ -329,7 +331,7 @@ M4 기능을 사용하는 모델은 `typescript-m4-v1`을 선택한다. 데이�
 
 ### 14.3 M7 언어 확장
 
-Python, C, WASM 타깃은 타깃별 타입·메모리·solver·빌드·지원표를 만든 뒤 단계적으로 검토한다. C export가 Embedded Coder 수준의 하드웨어 인증이나 모든 solver 지원을 의미하지 않는다. `.slx` import/export와 MATLAB 코드 번역은 별도 연구이며 초기 portable 모델 형식의 대체 이름으로 쓰지 않는다.
+M7의 Python 타깃은 정적·이산 subset의 타입·형상·상태·실패·예산 계약을 구현하고 실제 Python 실행으로 검증했다. 연속·고급 수치와 C·WASM 확장은 타깃별 메모리·solver·빌드·지원표와 별도 검증이 필요한 후속 범위다. C export가 Embedded Coder 수준의 하드웨어 인증이나 모든 solver 지원을 의미하지 않는다. `.slx` import/export와 MATLAB 코드 번역은 별도 연구이며 초기 portable 모델 형식의 대체 이름으로 쓰지 않는다.
 
 ## 15. 실행 상태, 취소, 재현성
 

@@ -4,11 +4,16 @@ import { readFile, readdir, mkdir, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { getReleaseCatalog } from '../packages/release/src';
 import { OFFLINE_ASSET_PATH, type OfflineManifest } from './offline-build';
+import { PYTHON_TARGET } from '../packages/codegen-python/src/capabilities';
+import { MODEL_PACKAGE_PERMISSIONS, MODEL_PACKAGE_REGISTRY } from '../packages/model-package/src';
 
 const catalog = getReleaseCatalog(), checks: string[] = [];
 function check(condition: unknown, message: string): void { assert(condition, message); checks.push(message); }
-check(catalog.version === '0.6.0' && catalog.engineVersion === '0.6.0-m6', 'app/engine release versions');
+check(catalog.version === '0.7.0' && catalog.engineVersion === '0.7.0-m7', 'app/engine release versions');
 check(catalog.blocks.length === 74 && new Set(catalog.blocks.map(block => block.id)).size === 74, 'single registry 74 unique executable definitions');
+check(PYTHON_TARGET.blockIds.length === 51 && new Set(PYTHON_TARGET.blockIds).size === 51 && catalog.blocks.every(block => block.exportTargets.includes('python') === PYTHON_TARGET.blockIds.includes(block.id)), 'Python registry export metadata equals approved target capabilities');
+check(PYTHON_TARGET.supportedModes.join(',') === 'static,discrete', 'Python target does not claim continuous solver support');
+check(MODEL_PACKAGE_REGISTRY.length === catalog.blocks.length && MODEL_PACKAGE_PERMISSIONS.join(',') === 'local-model' && Object.isFrozen(MODEL_PACKAGE_REGISTRY), 'model packages bind approved immutable registry and local-only permissions');
 const packageJson = JSON.parse(await readFile('package.json', 'utf8')) as { version: string };
 check(packageJson.version === catalog.version, 'package/release catalog version agreement');
 const manifest = JSON.parse(await readFile('dist/offline-manifest.json', 'utf8')) as OfflineManifest;
@@ -45,14 +50,16 @@ check(!workflow.includes('pull_request_target') && /workflow_dispatch:/.test(wor
 const approvedActions = new Set([
   'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1',
   'actions/setup-node@820762786026740c76f36085b0efc47a31fe5020',
+  'actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97',
   'actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b',
   'actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b',
   'actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e',
 ]);
 const actualActions = [...workflow.matchAll(/uses:\s+([^\s#]+)/g)].map(match => match[1]!);
 check(actualActions.length === approvedActions.size && actualActions.every(action => approvedActions.has(action)), 'only official Actions at the independently verified commit allowlist');
+check(workflow.includes("python-version: '3.14'") && workflow.includes('npm run verify:m7'), 'workflow executes actual approved Python target parity');
 check(workflow.includes("process.env.CALCWEAVE_PAGES_BASE !== ''") && workflow.includes("process.env.CALCWEAVE_PAGES_ORIGIN !== 'https://calcweave.com'"), 'workflow rejects repository subpath and unconfigured custom domain');
 await mkdir('docs/evidence', { recursive: true });
 const evidence = { generatedAt: new Date().toISOString(), appVersion: catalog.version, engineVersion: catalog.engineVersion, releaseId, checks, files: manifest.assets, totalStaticBytes: manifest.assets.reduce((total, asset) => total + asset.bytes, 0), publicDeploymentClaimed: false };
-await writeFile('docs/evidence/m6-release-verification.json', JSON.stringify(evidence, null, 2) + '\n');
+await writeFile(`docs/evidence/${catalog.engineVersion.split('-').at(-1)}-release-verification.json`, JSON.stringify(evidence, null, 2) + '\n');
 process.stdout.write(JSON.stringify({ checks: checks.length, staticFiles: manifest.assets.length, totalStaticBytes: evidence.totalStaticBytes, releaseId }) + '\n');

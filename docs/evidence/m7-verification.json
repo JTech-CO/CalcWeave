@@ -1,0 +1,1162 @@
+{
+  "generatedAt": "2026-10-02T19:03:25.588Z",
+  "engineVersion": "0.7.0-m7",
+  "python": "Python 3.14.0",
+  "target": {
+    "id": "python-m7-v1",
+    "label": "Python",
+    "minimumVersion": "3.10",
+    "supportedModes": [
+      "static",
+      "discrete"
+    ],
+    "blockIds": [
+      "source.constant",
+      "io.input",
+      "math.gain",
+      "math.sum",
+      "math.multiply",
+      "math.abs",
+      "math.function",
+      "math.trigonometric",
+      "math.round",
+      "math.minmax",
+      "math.sqrt",
+      "logic.compare",
+      "logic.boolean",
+      "route.switch",
+      "nonlinear.saturation",
+      "route.mux",
+      "route.demux",
+      "math.concatenate",
+      "matrix.reshape",
+      "io.output",
+      "io.terminator",
+      "sink.display",
+      "sink.scope",
+      "math.expression",
+      "source.step",
+      "source.ramp",
+      "source.sine-wave",
+      "source.pulse",
+      "source.clock",
+      "source.digital-clock",
+      "source.random",
+      "source.repeating-sequence",
+      "discrete.unit-delay",
+      "discrete.delay",
+      "discrete.integrator",
+      "discrete.difference",
+      "discrete.derivative",
+      "discrete.fir",
+      "discrete.transfer-function",
+      "discrete.state-space",
+      "logic.edge-detect",
+      "time.rate-transition",
+      "lookup.interpolated",
+      "logic.bitwise",
+      "source.dataset",
+      "unit.convert",
+      "route.bus-create",
+      "route.bus-select",
+      "annotation.note",
+      "annotation.model-info",
+      "hierarchy.subsystem"
+    ]
+  },
+  "strictTypeScriptModes": [
+    "static",
+    "discrete"
+  ],
+  "evidence": [
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Gain keeps a matrix shape",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "8c536053ad1a79b3531566f3999f6f2a202db7cd93505224f3f6c3b4f852b383"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Sum signs ++",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "bb2993ca891c6d8f13bee49942d698366582caaf55f6f866cf386f9b474c28ad"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Sum signs +-",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "1e901d0e562321e1f7cb9bcea9b1f48f87c1c1b852dc5e7d824522fe9097c94c"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Sum signs -+",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "fb989a93e602b3ede6d505c997d29c8666c3f77107ec10cfdc62694076f1c529"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Sum signs --",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "bdcac16e4608c55cf1f15ebe9b4cb08c0078921626f2b28d3599b57aae116ffd"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Product multiplies a matrix by a scalar",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "351492fa0c12a56cc51acbf31a323559bf4e555f60c45f6f203c10095c45d9e5"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Product divides a vector by a scalar",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "26be288a547797af06a611cd906dafc7d15a11f2c56be5173852ace1767e1390"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Abs",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "e18f7b2a04629f2cd84c0c8d9ae886b13bc3899d85d25e8649dd94cf3bd94d4f"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Exp",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "d9b31e43b9bbea0cf9391f89abc8217be4f84613225aa762c38ac7b5a08353e7"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Log",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "d745166554a148a07eb65577a19e2a363fb3fa0f95fec13d8edd48ca3e8fdbcb"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Log10",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "54f9beaa40dcbfd5e5b4f84cfc0f2162d25e413b9d19132dff575bd4b3438864"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Square",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "b1d02a54fdd5993052ea82b013e859cccd19e7d3706ca6b318b95fd5ccc07d51"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Reciprocal",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "57758bff74c3da42aa2b3980a64a97a07c5a7fcd8a4e0597b00a28cde3efe2b7"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Sin",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "c92b3a5f01e026e54ea52338b934b53cdc8ed83452ca77b724c5573330ddbb8c"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Cos",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "8a97c607965a57742780a95170a42ed6b82d4dcab6e00f28f9793e26c1ba11c4"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Tan",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "91d28002095c66f5ac1c1c137e7f900a424422e1381e6ad5357896de38111330"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Asin",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "5a359170c8d0f2951d6a3c81fa223f82ca439384f031da00ca950933fe77216d"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Acos",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "e39f950fe7e27cea2a9b35399094b64e34e4a82de2f2808b4839f7a0f30b26e8"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Atan",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "455dd516c0d33bb2dc297395772258c6ef4ac9a94f81e74499746cb5553126fd"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Round half toward positive infinity",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "2cf389540f1a8ea6500a86b6f0e9f88ca882a1082562d2ad14720338636a304a"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Floor",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "b7c93c92dfeb466054aab1545ec8cbb35f179070a47640162dc75ffa25ea6bfd"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Ceil",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "b734d37a2c849715fa0c748c30420cfc6b26733b608434f34eef11f86ff5cf2c"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Trunc",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "b328d6749adae7e54e43e675534c37c4221ab77618b0ed2278c3c8eafc1e781c"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Pairwise Min broadcasts scalar",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "d6986ec7617471628b7050a27051eb96fdbe7a468a27c7e929084dc80c37fe84"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Pairwise Max",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "bec44357ce47e12581d48559c7684d74c78bafa64672a50e5c620a11ab0e0bbf"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Reduce Min visits all matrix elements",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "16e041b35c49e45057bdfc47c91d17d602f24ae3875a1a6c37074b95a3beae8a"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Reduce Max visits all matrix elements",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "c868c612a5beee8a7e8e4f24387498aecbf92c110246e1b09b43166510c757d0"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Sqrt",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "9f7dd290837dbc7f878b7fe0723e11f174d37b7f905462e03876ddab377f4475"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Comparison eq",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "58a1945923b02b1b32bfac96bb20b39c453a7e9279cab3be9115abcb23eac174"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Comparison ne",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "259b0a92bb56cd4c00d4335585577bde9077095f522fa48a6f333b9bf775cd0e"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Comparison lt",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "ad7d174b4ec8638b39a13e8481e039b0db8ec8689f71342a269ca2232b4fcfe9"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Comparison le",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "a119af0b0ad96729108145895244a079575748b058b6669bdde93e0b5171ac05"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Comparison gt",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "1e50c1fc53a3e249891dc284c8e92192a85a907c5b51f777951b7ec10863bebc"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Comparison ge",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "4ee491309444b63176953782f0d5594389d346e02955b0338720f4c1bfa61fd4"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Boolean And matrix/scalar",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "eef4b2e94f6411ef3922cead37bf2ec7e9947cdba7e8d12b97318e9235bcac0b"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Boolean Or",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "ee1838287fb74ffad27fddec4f551bdcdbee8dd0bf3dd45fca74a5d3aa6e24f3"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Boolean Xor",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "b420691ba306d54e203b47871af87eed6b530a8cb3ec175a28dab215f4076319"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Boolean Not needs only input a",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "72cce9baeb36b5265476d104330adf61a447f3567c2615d6fcddf8314458b2af"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Saturation",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "0d111dd3c89ae25115e78a9ac2911855662bf7ef2bae3eb91739508787b8bd8a"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Mux joins scalar/vector numbers",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "f6af84c13200944ce49bea659a087b33ff24da78d26f76221c534c7e3bc65959"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Concatenate joins boolean vectors",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "605f1acb97f309e6ca8b4148f145781373820ced25a011acddb9c79596a29fd2"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Reshape vector to row-major matrix",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "fce9b933a4fef1f20cc7a52285b2f20519fbeae071326aadfa0b24ccbf0eb358"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Reshape matrix to vector",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "29bf8ab3a601201f5aff11439a45983b76edec0163dd8f7f00bc2910956e6e27"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Expression applies to every vector element",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "05de2f65050b592a95e83a8b0f275346876801578a76619a7dea959a972c951b"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Expression precedence and right-associative power",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "ea466a52d3cda7a767f9f78dc21fe4205228765666e23b55110da894f8e2bff0"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Demux preserves selected source ports and Outport records while Terminator does not",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "8fb522d8ad222c402a6aa5538001f40c94cb1520a3ff89a9ceb3df0cd2a3a660"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Demux maximum 16 outputs preserves two-digit port numbers",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "9d1b669aa18fe3a007d16b5281d4a837a139d711c9ea5b250c14f9ecf66c3372"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Demux preserves boolean values",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "22aaa83bbfe56c2bdcefb887072659e909ad094c08d81e28ab6e93c17b4674cf"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Switch with boolean matrix data chooses a",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "d04737a902a647b3ed5f6465bc8b6f17668d2fa7d6849223fbbad81fdbbab2d0"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Switch with boolean matrix data chooses b",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "5d360a4a5e871531f5d0c502cfa567772e26fc0fcff754b570367bad51b97767"
+    },
+    {
+      "group": "M1 independent typed/math oracle",
+      "name": "Every allowed expression function is interpreted",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "4c9eb32e0f61124f4bceab2275607c0c84fcd642fd4d9368dff8327f1c95f5ef"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "absolute-time Step",
+      "mode": "discrete",
+      "samples": 6,
+      "maximumAbsoluteError": 0,
+      "modelHash": "de68b2acd28865197b81c789c706321720f5bf51c08de58337107c66ba810b47"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "absolute-time Ramp",
+      "mode": "discrete",
+      "samples": 6,
+      "maximumAbsoluteError": 0,
+      "modelHash": "60472c4695117fd0882544e7d5b73dad9f788c1824680ac404a9083ce3167931"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Sine Wave uses Hz and absolute time",
+      "mode": "discrete",
+      "samples": 5,
+      "maximumAbsoluteError": 0,
+      "modelHash": "bea6626dcc0a7d3348d0138ab429f60b2333ea2590d53dc66abddbc67847de17"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Pulse uses base ticks including phase",
+      "mode": "discrete",
+      "samples": 6,
+      "maximumAbsoluteError": 0,
+      "modelHash": "736e091f40dab482e0f1daaf7f562da6e4c1adc66b0b00285437cc863a5a1753"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Clock returns the simulation time",
+      "mode": "discrete",
+      "samples": 5,
+      "maximumAbsoluteError": 0,
+      "modelHash": "5814c316641225365b4b31c5e94e3306c6323577d7e9b01293c4b7f69ecd04d6"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Digital Clock initial hold and period/offset",
+      "mode": "discrete",
+      "samples": 6,
+      "maximumAbsoluteError": 0,
+      "modelHash": "6a655839d8c95588346dd9f1a05d126170b4404cbbd86f6c7f30c032539e0c10"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Repeating Sequence linear interpolation and exact wrap",
+      "mode": "discrete",
+      "samples": 7,
+      "maximumAbsoluteError": 0,
+      "modelHash": "79e9a1a288f4a5435368ca0633e2a73f440b243f52a289a90a7c948a7839f521"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Repeating Sequence previous interpolation",
+      "mode": "discrete",
+      "samples": 7,
+      "maximumAbsoluteError": 0,
+      "modelHash": "810f56fc41037dbc62854ae3d84b290c8d564223d1d1e74dabd651579756d5ad"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Repeating Sequence negative absolute time",
+      "mode": "discrete",
+      "samples": 5,
+      "maximumAbsoluteError": 0,
+      "modelHash": "f380177b56f3ddb54514674f0d8a1c89e1392a574f95f74777d8ee7c6846dc7d"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Unit Delay vector state",
+      "mode": "discrete",
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "modelHash": "3fc547319f6308f71cee08184d4b269eec6e8c35aef0c7e018acd73d2b5fac3e"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Unit Delay boolean matrix state",
+      "mode": "discrete",
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "modelHash": "5543a74c5c4a24d649871e23459e3c23ed049ff1bdafcc747a767ecf5fbb8821"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Fixed Delay FIFO",
+      "mode": "discrete",
+      "samples": 4,
+      "maximumAbsoluteError": 0,
+      "modelHash": "967a0d853270e4786ac024bc06f69737acfe5c739a72277d1ece8105ce2c3238"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Forward Euler vector independent channels",
+      "mode": "discrete",
+      "samples": 5,
+      "maximumAbsoluteError": 0,
+      "modelHash": "5e05b8a54e4656b78489c82de330fd84b33e7f564d6883e926cac74423741950"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Difference first and subsequent due samples",
+      "mode": "discrete",
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "modelHash": "62a4ff7b32a964b4097bacf78930701730aeebbee17236991b0dc16193c1e5d8"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Derivative divides by sample seconds",
+      "mode": "discrete",
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "modelHash": "c81a3df3bf146535104c4a1fc19583aac5333a209c8c17a9f30f4324e054e17a"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "FIR impulse response",
+      "mode": "discrete",
+      "samples": 6,
+      "maximumAbsoluteError": 0,
+      "modelHash": "820c3ade9ce57e28a388e77862f3feac93cd3dc5683c14f88b5589c321a4df21"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "FIR matrix independent channels",
+      "mode": "discrete",
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "modelHash": "047e9824cfe5b5347b31f4583fceeaeb2c8f7e328c692c8522e8fdaa10cd9864"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Transfer function z inverse impulse",
+      "mode": "discrete",
+      "samples": 6,
+      "maximumAbsoluteError": 0,
+      "modelHash": "b09ad1866fef31587b7eb42dc131a2cb9dbb5e2167d870807bf5d3b5a47bd993"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Strictly proper transfer reads old history",
+      "mode": "discrete",
+      "samples": 4,
+      "maximumAbsoluteError": 0,
+      "modelHash": "cab33812875cf36c62b243b15f0abad88a921358b20d7c0aa54ddd8cf1280946"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "State Space initial state then commit",
+      "mode": "discrete",
+      "samples": 4,
+      "maximumAbsoluteError": 0,
+      "modelHash": "53e30df55e61cc935da7dd1dc4fe25baf8eb4c596d83eef10e19371459319ee7"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "State Space D direct feedthrough",
+      "mode": "discrete",
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "modelHash": "d426dc7f02a29c0564514a6e761b556828ee6eb73d08d267d30b0e00016407b6"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Rising boolean edge",
+      "mode": "discrete",
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "modelHash": "3716bb3c08b8467eb6ee7797ee4d48ba8f21d6c33b28c44c44f4b35dbe4ccebb"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Falling boolean edge",
+      "mode": "discrete",
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "modelHash": "531a47a6e6f558782db501bec8d9f3d5afab48daa8172bd3b6d37f0461eb7281"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Either boolean edge",
+      "mode": "discrete",
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "modelHash": "68d310bd42f967f1daa4eb1382638e3bdd71e5e6dde4d8a945b9046556bf869e"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Lookup linear array and clipped boundaries",
+      "mode": "discrete",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "915394f52b33e5f5cadc52a3ae4c6082f678c4248ec0b1a27fa380edb2e30a78"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "Lookup previous interpolation exact knot",
+      "mode": "discrete",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "modelHash": "3f9b469cb08a1eb766cd82dabbd50231d5bce01b4351dc2b8f59839b54d763ce"
+    },
+    {
+      "group": "M2 independent time/state oracle",
+      "name": "timeless Constant publication respects its explicit rate",
+      "mode": "discrete",
+      "samples": 6,
+      "maximumAbsoluteError": 0,
+      "modelHash": "a6d58f3988a2051a9936895d1675f24e0293aa31b21528a2768976a967f84bb7"
+    },
+    {
+      "group": "M4 independent data/unit/bus/hierarchy oracle",
+      "name": "F04-static-playback-notes",
+      "reference": "Static playback reads its start-time table value 3. DocBlock/ModelInfo have no numerical output and cannot change execution semantics.",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "tolerance": 1e-11,
+      "modelHash": "051cf39f8c9dc59dcdb9b5e3a72ce322ecb1005e5efde4e1af2fc02bedff6f5e"
+    },
+    {
+      "group": "M4 independent data/unit/bus/hierarchy oracle",
+      "name": "F04-linear-playback",
+      "reference": "Linear table through (0,1),(1,3): y(t)=2t+1 at every raw output sample.",
+      "mode": "discrete",
+      "samples": 11,
+      "maximumAbsoluteError": 4.440892098500626e-16,
+      "tolerance": 1e-11,
+      "modelHash": "fdfb90a9e83e13ce69688a69d780b341485d341957e90c12e4794ff1a0903d91"
+    },
+    {
+      "group": "M4 independent data/unit/bus/hierarchy oracle",
+      "name": "F04-boolean-previous-discrete",
+      "reference": "Boolean previous playback is published only on P2 base ticks (.2s): [false,false,true,true,false,false,true]. No interpolation/coercion.",
+      "mode": "discrete",
+      "samples": 7,
+      "maximumAbsoluteError": 0,
+      "tolerance": 1e-11,
+      "modelHash": "90b5fab56d7e9acf5b3b5706795498f63fb373b16702f03b92658c19d61456ec"
+    },
+    {
+      "group": "M4 independent data/unit/bus/hierarchy oracle",
+      "name": "F04-millisecond-time",
+      "reference": "1000ms is normalized to one second, yielding y=2t+1 while preserving ms table provenance.",
+      "mode": "discrete",
+      "samples": 11,
+      "maximumAbsoluteError": 4.440892098500626e-16,
+      "tolerance": 1e-11,
+      "modelHash": "91324b37a9e660458009260875b346d6653d555e183168b663a41575b121b52c"
+    },
+    {
+      "group": "M4 independent data/unit/bus/hierarchy oracle",
+      "name": "F04-centimeter-conversion",
+      "reference": "Explicit scale .01 turns [125,250]cm into [1.25,2.5]m without changing shape.",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "tolerance": 1e-11,
+      "modelHash": "e9747c106e17f31a410101918156e5cecb7a85da2e5d1ec029ff492b32ff9396"
+    },
+    {
+      "group": "M4 independent data/unit/bus/hierarchy oracle",
+      "name": "F04-celsius-kelvin",
+      "reference": "Affine temperature conversion K=C+273.15 gives [273.15,373.15,233.15]; temperature dimensions are retained.",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 2.842170943040401e-14,
+      "tolerance": 1e-11,
+      "modelHash": "8a35e74a6a626c46c4f806eafea6a268643a2c302a9fabb36f5a7b670cfce582"
+    },
+    {
+      "group": "M4 independent data/unit/bus/hierarchy oracle",
+      "name": "F04-area-dimension",
+      "reference": "2m * 3m = 6m^2; approved dimension algebra retains both the value and area dimension.",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "tolerance": 1e-11,
+      "modelHash": "b5d2cf887a98f0636fd0c39e4618e616b5b6177ac471ac2e3c0c1e9cf0d61c31"
+    },
+    {
+      "group": "M4 independent data/unit/bus/hierarchy oracle",
+      "name": "F04-power-dimension",
+      "reference": "(2N*3m)/2s = 3W; composed approved dimensions N*m=J and J/s=W.",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "tolerance": 1e-11,
+      "modelHash": "4d156b230241bd91824eec97644840f08a07d29207d47cef2b15de983fdaab66"
+    },
+    {
+      "group": "M4 independent data/unit/bus/hierarchy oracle",
+      "name": "F04-named-numeric-bus",
+      "reference": "Named homogeneous scalar bus stores [3,7]m with firstValue/secondValue; selecting secondValue returns 7m.",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "tolerance": 1e-11,
+      "modelHash": "a803489b07c15ae79596e24086be1666a7985fd550e1404fa64f96f3cf041f9b"
+    },
+    {
+      "group": "M4 independent data/unit/bus/hierarchy oracle",
+      "name": "F04-named-boolean-bus",
+      "reference": "Named boolean bus preserves booleans [false,true]; the ready field produces true.",
+      "mode": "static",
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "tolerance": 1e-11,
+      "modelHash": "6873b9f4c3833117aebbf047100f2ec6fc0650399cc262fd328b90c6f4501a67"
+    },
+    {
+      "group": "M4 independent data/unit/bus/hierarchy oracle",
+      "name": "F04-repeated-state-subsystems",
+      "reference": "Two instances of the same P2/O1 UnitDelay definition have independent states. Samples first=[0,0,0,2,2], second=[0,0,0,5,5]; hand-built flat equations are the reference.",
+      "mode": "discrete",
+      "samples": 5,
+      "maximumAbsoluteError": 0,
+      "tolerance": 1e-11,
+      "modelHash": "415d4599406a616fd5f4a29d135e68447fab7ea2b477fafb23ce3857e924d866"
+    }
+  ],
+  "failures": [
+    {
+      "name": "Division by a zero element",
+      "diagnostics": [
+        {
+          "code": "NUMERIC_DIVIDE_BY_ZERO",
+          "nodeId": "operation"
+        }
+      ],
+      "partialSamples": 0
+    },
+    {
+      "name": "Reciprocal of zero",
+      "diagnostics": [
+        {
+          "code": "NUMERIC_DIVIDE_BY_ZERO",
+          "nodeId": "operation"
+        }
+      ],
+      "partialSamples": 0
+    },
+    {
+      "name": "Log zero",
+      "diagnostics": [
+        {
+          "code": "NUMERIC_DOMAIN",
+          "nodeId": "operation"
+        }
+      ],
+      "partialSamples": 0
+    },
+    {
+      "name": "Log10 negative",
+      "diagnostics": [
+        {
+          "code": "NUMERIC_DOMAIN",
+          "nodeId": "operation"
+        }
+      ],
+      "partialSamples": 0
+    },
+    {
+      "name": "Negative Sqrt",
+      "diagnostics": [
+        {
+          "code": "NUMERIC_DOMAIN",
+          "nodeId": "operation"
+        }
+      ],
+      "partialSamples": 0
+    },
+    {
+      "name": "Asin above range",
+      "diagnostics": [
+        {
+          "code": "NUMERIC_DOMAIN",
+          "nodeId": "operation"
+        }
+      ],
+      "partialSamples": 0
+    },
+    {
+      "name": "Acos below range",
+      "diagnostics": [
+        {
+          "code": "NUMERIC_DOMAIN",
+          "nodeId": "operation"
+        }
+      ],
+      "partialSamples": 0
+    },
+    {
+      "name": "Exp overflow",
+      "diagnostics": [
+        {
+          "code": "NUMERIC_NONFINITE",
+          "nodeId": "operation"
+        }
+      ],
+      "partialSamples": 0
+    },
+    {
+      "name": "Expression zero division",
+      "diagnostics": [
+        {
+          "code": "NUMERIC_DIVIDE_BY_ZERO",
+          "nodeId": "operation"
+        }
+      ],
+      "partialSamples": 0
+    },
+    {
+      "name": "Expression complex power rejected",
+      "diagnostics": [
+        {
+          "code": "NUMERIC_DOMAIN",
+          "nodeId": "operation"
+        }
+      ],
+      "partialSamples": 0
+    },
+    {
+      "name": "Expression function domain",
+      "diagnostics": [
+        {
+          "code": "NUMERIC_DOMAIN",
+          "nodeId": "operation"
+        }
+      ],
+      "partialSamples": 0
+    },
+    {
+      "name": "M2 engine fixture",
+      "diagnostics": [
+        {
+          "code": "NUMERIC_DIVIDE_BY_ZERO",
+          "nodeId": "formula",
+          "tick": 3,
+          "time": 3
+        }
+      ],
+      "partialSamples": 3,
+      "finalState": {
+        "delay": 1
+      }
+    },
+    {
+      "name": "F04-failure-outside-error",
+      "diagnostics": [
+        {
+          "code": "DATASET_TIME_RANGE",
+          "nodeId": "input",
+          "tick": 7,
+          "time": 0.9000000000000001
+        }
+      ],
+      "partialSamples": 7,
+      "finalState": {}
+    }
+  ],
+  "rejectedTargets": 31,
+  "m4Unsupported": [
+    {
+      "id": "F04-linear-stage-integral",
+      "diagnostics": [
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "input",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "integral",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "result",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_BLOCK",
+          "nodeId": "integral",
+          "message": "continuous.integrator는 Python export의 승인 지원 범위에 없습니다. TypeScript를 선택해 주세요."
+        }
+      ]
+    },
+    {
+      "id": "F04-previous-off-grid-integral",
+      "diagnostics": [
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "input",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "integral",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "result",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_BLOCK",
+          "nodeId": "integral",
+          "message": "continuous.integrator는 Python export의 승인 지원 범위에 없습니다. TypeScript를 선택해 주세요."
+        }
+      ]
+    },
+    {
+      "id": "F04-outside-hold",
+      "diagnostics": [
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "input",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "integral",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "result",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "signal",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_BLOCK",
+          "nodeId": "integral",
+          "message": "continuous.integrator는 Python export의 승인 지원 범위에 없습니다. TypeScript를 선택해 주세요."
+        }
+      ]
+    },
+    {
+      "id": "F04-outside-zero",
+      "diagnostics": [
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "input",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "integral",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "result",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "signal",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_BLOCK",
+          "nodeId": "integral",
+          "message": "continuous.integrator는 Python export의 승인 지원 범위에 없습니다. TypeScript를 선택해 주세요."
+        }
+      ]
+    },
+    {
+      "id": "F04-outside-zero-delayed-jump",
+      "diagnostics": [
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "delay",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "delayed",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "input",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "integral",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "raw",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "result",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_BLOCK",
+          "nodeId": "delay",
+          "message": "time.transport-delay는 Python export의 승인 지원 범위에 없습니다. TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_BLOCK",
+          "nodeId": "integral",
+          "message": "continuous.integrator는 Python export의 승인 지원 범위에 없습니다. TypeScript를 선택해 주세요."
+        }
+      ]
+    },
+    {
+      "id": "F04-boolean-previous-continuous",
+      "diagnostics": [
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "input",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "result",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        }
+      ]
+    },
+    {
+      "id": "F04-dataset-inside-subsystem",
+      "diagnostics": [
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "box",
+          "message": "box / data: Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "box",
+          "message": "box / gain: Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        },
+        {
+          "code": "PYTHON_UNSUPPORTED_MODE",
+          "nodeId": "result",
+          "message": "Python export는 정적·이산 실행만 지원합니다. 연속 실행은 TypeScript를 선택해 주세요."
+        }
+      ]
+    }
+  ],
+  "packageChecks": [
+    "signature and hash",
+    "independently trusted fingerprint",
+    "wrong trust rejected",
+    "tamper rejected",
+    "additional permission rejected"
+  ],
+  "importChecks": {
+    "native": {
+      "parsed": true,
+      "converted": false,
+      "executable": true
+    },
+    "foreign": {
+      "parsed": true,
+      "converted": false,
+      "executable": false
+    }
+  },
+  "datasetSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+  "methodology": "Actual isolated Python processes, actual strict ES2022-only generated TypeScript ESM and shared JS runtime. Typed/static/time-state/data-unit-bus-hierarchy hand oracles verify every sample; diagnostics and completed partial-state contracts compared. Cross-target floating arithmetic uses 2e-12 relative-scaled tolerance except each M4 independent oracle tolerance; boolean/string/shape/key sets exact. Actual browser downloads have separate E2E evidence. Python wall deadlines are not asserted to occur at identical host times.",
+  "publicDeploymentClaimed": false
+}

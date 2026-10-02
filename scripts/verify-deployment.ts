@@ -51,6 +51,6 @@ if (report.checks.dnsResolved) {
 report.checks.domainOwnership = 'Requires verified GitHub Pages domain TXT and repository settings; DNS alone does not prove ownership.';
 report.checks.actualNoviceStudy = 'Requires observed F06 study; automation is not a novice participant.';
 await mkdir('docs/evidence', { recursive: true });
-await writeFile('docs/evidence/m6-deployment-verification.json', JSON.stringify(report, null, 2) + '\n');
+await writeFile(`docs/evidence/${localManifest.engineVersion.split('-').at(-1)}-deployment-verification.json`, JSON.stringify(report, null, 2) + '\n');
 process.stdout.write(JSON.stringify(report) + '\n');
 if (required.some(check => report.checks[check] !== true) || report.checks.remoteFetch) process.exitCode = 1;

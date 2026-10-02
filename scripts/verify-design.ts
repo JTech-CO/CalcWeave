@@ -1,11 +1,12 @@
 import { chromium } from '@playwright/test';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import config from '../playwright.config';
 import { createExample } from '../apps/web/src/examples';
-const m6 = process.argv.includes('--m6');
+const m7 = process.argv.includes('--m7');
+const m6 = m7 || process.argv.includes('--m6');
 const m5 = m6 || process.argv.includes('--m5');
 const m4 = m5 || process.argv.includes('--m4');
-const screenshotPrefix = m6 ? 'm6-sane' : m5 ? 'm5-sane' : m4 ? 'm4-sane' : 'sane';
+const screenshotPrefix = m7 ? 'm7-sane' : m6 ? 'm6-sane' : m5 ? 'm5-sane' : m4 ? 'm4-sane' : 'sane';
 
 // Inspect the built local preview in a separate browser context, preserving the user's tab.
 const browser = await chromium.launch(config.use?.launchOptions);
@@ -260,11 +261,39 @@ try {
       }
     }
   }
+  if (m7) {
+    const model = createExample('first-calculation');
+    await page.getByLabel('CalcWeave 모델 파일 선택').setInputFiles({ name: 'm7-editor.cw.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(model)) });
+    for (const theme of ['dark', 'light'] as const) {
+      if (await page.locator('.app-shell').evaluate(element => element.classList.contains('dark')) !== (theme === 'dark')) await page.getByRole('button', { name: `${theme === 'dark' ? '다크' : '라이트'} 테마로 변경` }).click();
+      for (const width of [1440, 1024, 390, 320]) {
+        await page.setViewportSize({ width, height: 1000 });
+        await page.getByRole('button', { name: '코드 타깃 선택', exact: true }).click();
+        for (const target of ['typescript', 'python']) { await page.getByRole('combobox', { name: '코드 타깃', exact: true }).selectOption(target); await page.getByRole('button', { name: target === 'python' ? 'Python 코드 다운로드' : 'TypeScript 코드 다운로드', exact: true }).waitFor(); await inspectDialog(`${theme}-${width}-code-${target}`); }
+        await page.keyboard.press('Escape');
+        await page.getByRole('button', { name: '모델 패키지 공유', exact: true }).click();
+        await page.getByRole('button', { name: '서명된 패키지 생성', exact: true }).click();
+        await page.getByTestId('created-package-fingerprint').waitFor();
+        await inspectDialog(`${theme}-${width}-package-export`);
+        const packageDownload = page.waitForEvent('download'); await page.getByRole('button', { name: '공유 패키지 다운로드', exact: true }).click();
+        const packageBytes = await readFile((await (await packageDownload).path())!);
+        await page.getByRole('button', { name: '공유 파일 확인', exact: true }).click();
+        await page.getByLabel('공유 모델 패키지 파일 선택').setInputFiles({ name: 'm7-preview.cwpackage.json', mimeType: 'application/json', buffer: packageBytes });
+        await page.getByTestId('inspected-package-fingerprint').waitFor();
+        await inspectDialog(`${theme}-${width}-package-import`);
+        await page.keyboard.press('Escape');
+        await page.getByRole('button', { name: '가져오기 보고서', exact: true }).click();
+        await inspectDialog(`${theme}-${width}-import-report`);
+        await page.keyboard.press('Escape');
+      }
+    }
+  }
   if (pageErrors.length) throw new Error(pageErrors.join('\n'));
   const report = { generatedAt: new Date().toISOString(), browser: browser.version(),
     scope: 'SANE typography, compact blocks, neutral themes, local overflow, actual Korean font and measured canvas/results placement. Desktop 1440/1920 and horizontal tablet 1024/900 require full-height side panels; 390/320 and the 720x450 browser-zoom-equivalent viewport require stacking. Root 200% tests text enlargement separately with stacked panels. M1 measures typed arrays and Quick Insert; M2 FIR/multirate; M3 RK45 settings/statistics, crossing/reset events, long oscillator names and mobile solver settings.' + (m4 ? ' M4 adds dark/light data, experiments, dashboard, notes and hierarchy at 1440/1024/390/320.' : '') + (m5 ? ' M5 adds pivot LU matrix tables and multi-output ports, nonuniform 2D table axis editors, and quantizer rounding/overflow controls with exact stored result tables, in both themes at 1440/1024/390/320.' : ''),
     pageErrors, observations: evidence };
   if (m6) report.scope += ' M6 adds release metadata, keyboard guidance, local policy links, backup/restore, damaged slot recovery, sanitized diagnostics and two-step local reset dialogs in both themes at 1440/1024/390/320, with native modal semantics and isolated backgrounds.';
-  await writeFile(`docs/evidence/${m6 ? 'm6-design-verification' : m5 ? 'm5-design-verification' : m4 ? 'm4-design-verification' : 'sane-design-verification'}.json`, JSON.stringify(report, null, 2) + '\n');
+  if (m7) report.scope += ' M7 adds TypeScript/Python target validation, ephemeral signed model package creation, independently trusted fingerprint import, and native import reports in both themes at 1440/1024/390/320.';
+  await writeFile(`docs/evidence/${m7 ? 'm7-design-verification' : m6 ? 'm6-design-verification' : m5 ? 'm5-design-verification' : m4 ? 'm4-design-verification' : 'sane-design-verification'}.json`, JSON.stringify(report, null, 2) + '\n');
   process.stdout.write(JSON.stringify(report, null, 2) + '\n');
 } finally { await context.close(); await browser.close(); }

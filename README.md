@@ -1,7 +1,7 @@
 # CalcWeave
 
 > 블럭을 연결해 수학을 계산하고, 시간에 따른 변화를 관찰하며, 모델을 데이터와 실행 코드로 이어가는 웹 도구.  
-> 기준일: 2026-10-03 · 앱 버전: 0.6.0 · 현재 상태: M6 로컬 베타 후보 구현, 실제 사용자 조사·도메인·공개 출시 확인은 별도
+> 기준일: 2026-10-03 · 앱 버전: 0.7.0 · 현재 상태: M7 Python 타깃·선언형 패키지 구현, 실제 사용자 조사·도메인·공개 출시 확인은 별도
 
 CalcWeave는 MATLAB 설치 없이 브라우저에서 사용할 수 있는 블럭 기반 수학 계산·시뮬레이션 도구를 목표로 합니다. Simulink 기본 라이브러리의 기능 개념을 참고하면서, 초보자가 입력·계산·결과를 이해하고 점차 고급 모델로 확장할 수 있는 독립적인 사용 경험을 설계합니다.
 
@@ -23,7 +23,13 @@ npm run preview
 
 미리보기 주소는 http://127.0.0.1:4173 입니다. 개발·미리보기 서버는 로컬 호스트에만 연결됩니다. 공개 배포와 도메인 연결은 아직 수행하지 않았습니다.
 
-## M6 릴리스 준비
+## M7 코드와 모델 공유
+
+**코드 타깃 선택**에서 TypeScript와 Python을 선택합니다. Python은 표준 라이브러리만 쓰는 독립 `model.py`와 실행 묶음으로 내려받으며, 승인된 정적·이산 모델을 지원합니다. 연속 solver와 M5 고급 계산은 생성 전에 블럭별 이유를 표시하고 TypeScript를 안내합니다. 웹 계산은 Python 설치 없이 사용할 수 있고, 내려받은 Python 코드는 사용자가 준비한 Python 3.10 이상에서 실행합니다.
+
+**모델 패키지**는 현재 모델의 데이터·하위 도식·대시보드·노트를 함께 공유합니다. 일회용 공개키 fingerprint를 출처에서 별도로 확인한 뒤 수락하며, 서명만 확인한 파일을 자동 신뢰하지 않습니다. 패키지는 승인된 기존 블럭의 선언형 모델만 포함하고 임의 코드를 설치하지 않습니다. 원본 JSON 가져오기는 구문·실행 여부를 보고하고, 구조가 유효하지만 계산할 수 없는 모델은 진단과 함께 편집할 수 있습니다. 외부 도식 변환은 수행하지 않습니다. [M7 계약](docs/m7-contract.md) · [검증 기록](docs/m7-validation.md)을 참고하세요.
+
+## 로컬 베타 릴리스 기반
 
 **지원·릴리스**에서 동일 registry의 블럭 계약·한도·사용 방법·정책을 확인합니다. **로컬 데이터 관리**에서 전체 작업 공간 백업·해시 검증 복구, 손상 원본 다운로드, 저장 공간 상태, 제한된 진단 기록과 2단계 초기화를 제공합니다. 여러 탭 저장 충돌은 자동 저장을 중지하고 현재 작업 백업과 최신 저장본 불러오기로 해결합니다.
 
@@ -79,6 +85,9 @@ npm run verify:design:m6
 npm run verify:release
 npm run verify:performance:m6
 npm run verify:deployment
+npm run verify:m7
+npm run verify:design:m7
+npm run verify:performance:m7
 ```
 
 브라우저 테스트는 빌드 후 실행합니다. 이 환경의 기존 Playwright Chromium을 재사용하며, 별도 환경에서는 `npx playwright install chromium`으로 브라우저를 준비하거나 `CALCWEAVE_BROWSER_PATH`에 실행 파일을 지정합니다. `benchmark`는 [M0 수치·성능 기록](docs/evidence/m0-benchmark.json)과 [M0 fixture](fixtures/m0)를, `verify:m1`은 [M1 수치·성능 기록](docs/evidence/m1-verification.json)과 [M1 fixture](fixtures/m1)를 생성합니다. 반복 측정은 환경과 부하에 따라 달라집니다.
@@ -87,7 +96,7 @@ npm run verify:deployment
 
 `verify:design:m4`는 기존 측정과 데이터·실험·대시보드·노트·계층 화면을 함께 검사하고 [M4 디자인 증거](docs/evidence/m4-design-verification.json)와 별도의 스크린샷을 생성합니다.
 
-수학 실행 의미와 지원 한계는 [M5 구현 계약](docs/m5-contract.md), 릴리스와 저장·접근성 범위는 [M6 계약](docs/m6-contract.md), 현재 검사 결과는 [M6 검증 기록](docs/m6-validation.md)에 있습니다. `verify:m1`~`verify:m5`는 이전 fixture·증거를 보존하고 `m1-regression-on-m6.json`~`m5-regression-on-m6.json`에 현 엔진 회귀 결과를 기록합니다. `verify:design:m6`는 빌드된 미리보기에서 기존 화면과 지원·복구·정책 화면을 함께 측정합니다. `verify:release`는 최종 빌드 파일의 해시와 보안 설정을, `verify:performance:m6`는 실행 중인 production preview의 성능을 검사합니다. `verify:deployment`는 실제 calcweave.com을 읽으므로 공개 주소가 연결되기 전에는 실패합니다. [M5](docs/m5-validation.md)·[M4](docs/m4-validation.md)·[M3](docs/m3-validation.md)·[M2](docs/m2-validation.md)·[M1](docs/m1-validation.md)·[M0](docs/m0-validation.md)는 이전 단계의 이력입니다.
+수학 실행 의미와 지원 한계는 [M5 구현 계약](docs/m5-contract.md), 릴리스와 저장·접근성 범위는 [M6 계약](docs/m6-contract.md), 새 타깃·패키지·가져오기는 [M7 계약](docs/m7-contract.md)을 따릅니다. `verify:m1`~`verify:m5`는 이전 fixture·증거를 보존하고 `m1-regression-on-m7.json`~`m5-regression-on-m7.json`에 현 엔진 회귀 결과를 기록합니다. `verify:m7`은 실제 Python과 독립 TypeScript 실행을 비교하므로 Python 실행 환경이 필요합니다. `CALCWEAVE_PYTHON_PATH`로 실행 파일을 지정할 수 있습니다. `verify:design:m7`는 빌드된 미리보기에서 기존 화면과 새 타깃·패키지·가져오기 보고서를 측정합니다. `verify:release`는 최종 빌드 파일의 해시와 보안 설정을, `verify:performance:m7`는 실행 중인 production preview의 성능을 검사합니다. `verify:deployment`는 실제 calcweave.com을 읽으므로 공개 주소가 연결되기 전에는 실패합니다. [M7 검증](docs/m7-validation.md)과 이전 [M6](docs/m6-validation.md)·[M5](docs/m5-validation.md)·[M4](docs/m4-validation.md)·[M3](docs/m3-validation.md)·[M2](docs/m2-validation.md)·[M1](docs/m1-validation.md)·[M0](docs/m0-validation.md) 기록을 구분합니다.
 
 ## 기획 문서
 
@@ -103,6 +112,8 @@ npm run verify:deployment
 | [M4 구현 계약](docs/m4-contract.md) / [검증 기록](docs/m4-validation.md) | CSV/JSON·재생·단위·서브시스템·Bus·대시보드·이력·sweep·비교·데이터/계층 export |
 | [M5 구현 계약](docs/m5-contract.md) / [검증 기록](docs/m5-validation.md) | 실수 행렬·LU/Cholesky·2D Lookup·Prelookup·정확한 1~32bit 경계 양자화·독립 export |
 | [블럭 구현 대응표](docs/block-coverage.md) | dataset 385개 원본 행의 추적 ID·기능/프리셋 대응·지원 경계·예정 단계 |
+| [M6 구현 계약](docs/m6-contract.md) / [검증 기록](docs/m6-validation.md) | 지원·오프라인·백업·복구·공개 출시 확인 범위 |
+| [M7 구현 계약](docs/m7-contract.md) / [검증 기록](docs/m7-validation.md) | Python subset·실행 parity·서명된 선언형 모델 패키지·가져오기 단계 |
 
 제품과 화면부터 이해하려면 **디자인 → 기술 → 마일스톤** 순서로 읽습니다. 실제 구축을 시작할 때는 마일스톤의 **M0**에서 실행 의미와 검증 기준부터 확정합니다. 블럭을 추가할 때는 대응표의 원본 행과 기술 백서의 블럭 계약을 함께 확인합니다.
 
@@ -110,7 +121,7 @@ npm run verify:deployment
 
 [dataset/Simulink_Basic_Blocks_R2024b.md](dataset/Simulink_Basic_Blocks_R2024b.md)는 21개 분류에 385개 문서 행을 수록한 참고 자료입니다. 중복·별칭·설정 변형·조건부 항목도 포함하므로 385개 독립 계산 엔진을 의미하지 않습니다. 참고 자료는 보존하고, CalcWeave의 구현 계획과 실제 지원 상태는 별도로 관리합니다.
 
-문서에 쓰인 `계획`, `목표`, 예산·일정 추정은 구현 완료나 측정 결과가 아닙니다. 현재 수치·브라우저·export·자원 상한과 릴리스 검증 증거는 [M6 검증 기록](docs/m6-validation.md)에 모읍니다. 이 앱을 공개 주소에 배포한 상태는 아니며 실제 초보 사용자 조사·도메인 소유 검증·외부 종료 게이트를 소급 완료하지 않습니다. DAE·일반 fixed-point 타입 전파·외부 코드 연동은 별도 실행 계약과 검증이 필요합니다.
+문서에 쓰인 `계획`, `목표`, 예산·일정 추정은 구현 완료나 측정 결과가 아닙니다. 현재 수치·브라우저·export·자원 상한과 릴리스 검증 증거는 [M7 검증 기록](docs/m7-validation.md)에 모읍니다. 이 앱을 공개 주소에 배포한 상태는 아니며 실제 초보 사용자 조사·도메인 소유 검증·외부 종료 게이트를 소급 완료하지 않습니다. DAE·일반 fixed-point 타입 전파·외부 코드 연동은 별도 실행 계약과 검증이 필요합니다.
 
 ## 브랜드와 배포 목표
 
@@ -133,5 +144,7 @@ npm run verify:deployment
 | `packages/experiments` | 공유 예산 sweep·immutable 실행·scalar 수치 비교 |
 | `packages/runtime` | 정적·이산·RK4/RK45·혼합 실행과 예산 |
 | `packages/codegen-ts` | 데이터·계층을 포함한 독립 코드와 manifest 생성 |
+| `packages/codegen-python` | 승인된 정적·이산 모델의 독립 Python 생성·타깃 지원 검사 |
+| `packages/model-package`, `packages/interop` | 서명·출처 확인된 선언형 모델과 구문/변환/실행 단계 검사 |
 | `packages/release` | 실제 registry를 참조하는 버전·지원·한도·정책 정보 |
-| `tests`, `fixtures/m0`~`fixtures/m5`, `scripts` | 검증, 예제 모델, 측정·대응표·릴리스 무결성 검사 |
+| `tests`, `fixtures/m0`~`fixtures/m5` 및 `fixtures/m7`, `scripts` | 검증, 예제 모델, 측정·대응표·릴리스 무결성 검사 |

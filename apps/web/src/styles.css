@@ -554,6 +554,27 @@ textarea:focus-visible { outline:2px solid var(--focus); outline-offset:3px; }
 .sample-time-section { margin-top:24px; }
 .archive-download { gap:6px; }
 
+/* M7 file exchange retains the same readable surfaces and bounded controls. */
+.code-export-dialog,.model-package-dialog,.import-report-dialog { width:min(840px,calc(100vw - 32px)); }
+.export-content,.package-content { display:grid; gap:18px; }
+.export-content h3,.package-content h3 { overflow-wrap:anywhere; }
+.export-content>.field { margin:0; }
+.export-summary,.package-preview { min-width:0; border:1px solid var(--line); border-radius:8px; padding:18px; background:var(--canvas); }
+.export-summary p,.package-preview p { margin:10px 0; }
+.export-validation { font-size:var(--text-small); color:var(--success); border-block:1px solid var(--line); padding:12px 0; }
+.export-validation.has-errors,.dialog-error { color:var(--error); }
+.dialog-error { font-size:var(--text-small); overflow-wrap:anywhere; line-height:1.8; }
+.export-diagnostics { margin:0; padding-left:22px; display:grid; gap:16px; font-size:var(--text-small); min-width:0; }
+.export-diagnostics li,.export-diagnostics strong { overflow-wrap:anywhere; }
+.export-diagnostics p { margin-top:6px; }
+.dialog-actions { display:flex; flex-wrap:wrap; align-items:center; gap:12px; min-width:0; }
+.fingerprint-value { font-family:ui-monospace,Consolas,monospace; font-size:var(--text-small); overflow-wrap:anywhere; user-select:all; }
+.package-content input:not(.visually-hidden) { width:100%; }
+.import-report-banner { display:flex; flex:none; align-items:center; flex-wrap:wrap; gap:8px 16px; padding:8px 24px; color:var(--muted); background:var(--surface); border-bottom:1px solid var(--line); font-size:var(--text-small); }
+.import-report-banner>span { flex:1 1 auto; overflow-wrap:anywhere; }
+.import-report-banner .icon-button { width:30px; height:30px; }
+@media(max-width:600px) { .code-export-dialog,.model-package-dialog,.import-report-dialog { width:calc(100vw - 16px); } .export-summary,.package-preview { padding:14px; } .import-report-banner { padding:8px 16px; } }
+
 /* M4 workspace pages use the same restrained surfaces and readable type scale. */
 .workspace-tabs { flex:none; background:var(--surface); border-bottom:1px solid var(--line); padding:0 22px; }
 .scope-time-range { display:grid; gap:12px; min-width:0; margin:18px 0; padding:16px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }

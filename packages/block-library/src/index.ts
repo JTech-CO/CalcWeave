@@ -1,5 +1,6 @@
 import type { BlockType, CalcModel, CalcNode, ExecutionMode } from '../../model/src/types';
 import { UNITS } from '../../model/src/signal';
+import { PYTHON_TARGET } from '../../codegen-python/src/capabilities';
 
 export interface ParameterDefinition {
   readonly kind: 'number' | 'integer' | 'value' | 'numeric-vector' | 'enum' | 'expression' | 'text';
@@ -29,7 +30,7 @@ export interface BlockDefinition {
   readonly unit: 'dimensionless' | 'inherited';
   readonly sampleTime: 'constant' | 'inherited' | 'fixed-tick' | 'solver-step';
   readonly state: 'none' | 'previous-value' | 'continuous-state' | 'discrete-state';
-  readonly exportTargets: readonly 'typescript'[];
+  readonly exportTargets: readonly ('typescript' | 'python')[];
 }
 
 const modes: readonly ExecutionMode[] = ['static', 'discrete', 'continuous'];
@@ -134,7 +135,10 @@ function deepFreeze<T>(value: T): T {
 }
 
 /** Typed algebraic, fixed-tick discrete and bounded continuous/mixed contracts. */
-export const blockRegistry: readonly BlockDefinition[] = deepFreeze(definitions);
+const pythonBlockIds: ReadonlySet<string> = new Set(PYTHON_TARGET.blockIds);
+export const blockRegistry: readonly BlockDefinition[] = deepFreeze(definitions.map(definition => ({
+  ...definition, exportTargets: pythonBlockIds.has(definition.id) ? ['typescript', 'python'] as const : ['typescript'] as const,
+})));
 export const BLOCK_REGISTRY = blockRegistry;
 const registryById = new Map<string, BlockDefinition>(blockRegistry.map((definition) => [definition.id, definition]));
 export function getBlockDefinition(id: string): BlockDefinition | undefined { return registryById.get(id); }

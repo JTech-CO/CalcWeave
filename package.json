@@ -1,9 +1,9 @@
 {
   "name": "calcweave",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "type": "module",
-  "description": "CalcWeave M6: local beta release, verified offline shell, workspace recovery and accessible support",
+  "description": "CalcWeave M7: independent Python export, signed model packages and explicit import boundaries",
   "engines": {
     "node": ">=22.12"
   },
@@ -28,7 +28,10 @@
     "verify:design:m6": "tsx scripts/verify-design.ts --m6",
     "verify:release": "tsx scripts/verify-release.ts",
     "verify:performance:m6": "tsx scripts/verify-performance-m6.ts",
-    "verify:deployment": "tsx scripts/verify-deployment.ts"
+    "verify:deployment": "tsx scripts/verify-deployment.ts",
+    "verify:m7": "tsx scripts/verify-m7.ts",
+    "verify:design:m7": "tsx scripts/verify-design.ts --m7",
+    "verify:performance:m7": "tsx scripts/verify-performance-m6.ts"
   },
   "dependencies": {
     "@xyflow/react": "12.12.0",

@@ -142,7 +142,7 @@ export async function writeOfflineRelease(outputDirectory: string, fileNames: st
   return manifest;
 }
 
-export function calcWeaveOfflinePlugin(versions: { appVersion: string; engineVersion: string } = { appVersion: '0.6.0', engineVersion: '0.6.0-m6' }): Plugin {
+export function calcWeaveOfflinePlugin(versions: { appVersion: string; engineVersion: string } = { appVersion: '0.7.0', engineVersion: '0.7.0-m7' }): Plugin {
   let outputDirectory = '';
   return {
     name: 'calcweave-verified-offline-release', apply: 'build', enforce: 'post',

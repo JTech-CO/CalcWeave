@@ -1,0 +1,53 @@
+{
+  "edges": [
+    {
+      "id": "source-result-in",
+      "source": {
+        "nodeId": "source",
+        "portId": "out"
+      },
+      "target": {
+        "nodeId": "result",
+        "portId": "in"
+      }
+    }
+  ],
+  "execution": {
+    "mode": "discrete",
+    "startTime": 0,
+    "step": 1,
+    "stopTime": 5
+  },
+  "layout": {},
+  "modelId": "m2-engine-fixture",
+  "name": "M2 engine fixture",
+  "nodes": [
+    {
+      "blockType": "source.step",
+      "blockVersion": 1,
+      "id": "source",
+      "label": "source",
+      "parameters": {
+        "after": 3,
+        "before": -1,
+        "stepTime": 2
+      },
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    },
+    {
+      "blockType": "sink.scope",
+      "blockVersion": 1,
+      "id": "result",
+      "label": "result",
+      "parameters": {},
+      "sampleTime": {
+        "offset": 0,
+        "period": 1
+      }
+    }
+  ],
+  "schemaVersion": 1
+}

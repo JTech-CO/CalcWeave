@@ -1,12 +1,14 @@
 # CalcWeave 블록 구현 범위 및 원자료 추적표
 
-- 문서 버전: v0.6
+- 문서 버전: v0.8
 - 작성일: 2026-10-03
 - 상태: M5 선택 기능 구현 기록. 원본385행 중 M5 승인 subset 5행, M5 독립 대체 subset 2행, M4 승인 subset 18행, M3 승인 subset 15행, M2 승인 subset 29행, M1 정적 subset 40행, preset 4행, AST 독립 대체 1행, 미구현 271행이다. 추가 행렬 분해5종은 원자료 행 수에 합산하지 않는다. 실제 경계는 [M5 계약](m5-contract.md)·[검증 기록](m5-validation.md)·[수치 증거](evidence/m5-verification.json)에 기록한다. 전체 옵션·Simulink 동등성을 뜻하지 않는다.
 - 기준 원자료: [Simulink 기본 라이브러리 블록 목록](../dataset/Simulink_Basic_Blocks_R2024b.md), R2024b 기준, 원자료 작성일 2026-10-01.
 - 관련 문서: [기술 백서](01-technical-whitepaper.md), [디자인 백서](02-design-whitepaper.md), [마일스톤 로드맵](03-milestone-roadmap.md).
 
 ## 1. 이 표가 약속하는 범위
+
+M7에서 Python 타깃의 승인 50개 primitive와 조건부 계층 지원을 추가했다. registry의 exportTargets는 생성기와 같은 capability 상수를 사용하며 Python은 정적·이산만 지원한다. 모델 패키지는 기존 승인 블럭의 재사용이며 새 계산 블럭이나 MATLAB/S-function 어댑터를 설치하지 않는다. 따라서 아래 원자료 385행의 M5 수학 구현 상태·미구현 271행은 그대로 유지한다. 정확한 타깃/출처/가져오기 경계는 [M7 계약](m7-contract.md)·[검증](m7-validation.md)을 따른다.
 
 CalcWeave는 설치 없이 수학 도식을 작성·계산·시뮬레이션하는 독립 제품이다. 원자료의 수학적 기능과 작업 흐름을 빠짐없이 검토하되, MATLAB/Simulink 실행 환경이나 라이선스가 필요한 외부 코드를 브라우저에서 그대로 재현한다고 약속하지 않는다. 원본명은 검색·추적을 위한 참조 이름이며 CalcWeave의 사용자 표시명·엔진 식별자는 별도로 확정한다.
 

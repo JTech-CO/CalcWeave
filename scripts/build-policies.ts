@@ -1,6 +1,8 @@
 import { readFile, readdir, mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { STATIC_CSP } from './security-build';
+import { APP_VERSION } from '../packages/release/src';
+import { ENGINE_VERSION } from '../packages/model/src/types';
 
 const escape = (text: string): string => text.replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!);
 function inline(text: string): string {
@@ -38,9 +40,9 @@ for (const [directory, entry] of Object.entries(lock.packages).sort(([a], [b]) =
   for (const filename of files.sort()) sections.push(`${filename}\n${await readFile(join(directory, filename), 'utf8')}`);
   notices.push({ name: packageInfo.name, version: packageInfo.version, license: packageInfo.license ?? entry.license ?? 'See license text', text: sections.join('\n\n') });
 }
-const body = '<h1>오픈소스 고지</h1><p>CalcWeave 0.6.0의 잠금 파일에 고정된 프로덕션 의존성과 원본 라이선스 문구입니다. 각 패키지의 권리와 사용 조건은 아래 원문을 따릅니다. 개발·빌드 도구는 배포 앱과 구분됩니다.</p>' + notices.map(item => `<details><summary>${escape(item.name)} ${escape(item.version)} · ${escape(item.license)}</summary><pre>${escape(item.text)}</pre></details>`).join('\n');
+const body = `<h1>오픈소스 고지</h1><p>CalcWeave ${escape(APP_VERSION)}의 잠금 파일에 고정된 프로덕션 의존성과 원본 라이선스 문구입니다. 각 패키지의 권리와 사용 조건은 아래 원문을 따릅니다. 개발·빌드 도구는 배포 앱과 구분됩니다.</p>` + notices.map(item => `<details><summary>${escape(item.name)} ${escape(item.version)} · ${escape(item.license)}</summary><pre>${escape(item.text)}</pre></details>`).join('\n');
 await mkdir('apps/web/public/notices', { recursive: true });
 await writeFile('apps/web/public/notices/index.html', html('오픈소스 고지', body));
 await mkdir('docs/evidence', { recursive: true });
-await writeFile('docs/evidence/m6-licenses.json', JSON.stringify({ generatedAt: new Date().toISOString(), source: 'package-lock.json + installed package original license notices', dependencies: notices.map(({ text: _text, ...metadata }) => metadata) }, null, 2) + '\n');
+await writeFile(`docs/evidence/${ENGINE_VERSION.split('-').at(-1)}-licenses.json`, JSON.stringify({ generatedAt: new Date().toISOString(), appVersion: APP_VERSION, source: 'package-lock.json + installed package original license notices', dependencies: notices.map(({ text: _text, ...metadata }) => metadata) }, null, 2) + '\n');
 process.stdout.write(JSON.stringify({ policyPages: 4, productionLicenseNotices: notices.length }) + '\n');
