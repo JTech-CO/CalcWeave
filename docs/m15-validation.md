@@ -1,6 +1,6 @@
 # M15 실행 타깃·공유·외부 파일 검증
 
-2026-10-03 · 앱0.16.0 · 엔진0.16.0-m15 · schema1. 기존337개 정의·75예제/12범주·source subset367/385·미구현18행을 유지하고 선택 범위의 로컬 engineering 검증을 완료했다. 실제 타깃 실행·전체unit3854개·외부 파일 UI9개·내보내기4개·root/project artifact·디자인·성능6개 예산·최종typecheck를 통과했다. 전체 browser의 최초188/189와 대기 assertion 조정 뒤 영향 범위1/1 PASS는 분리 기록한다. 공개 CI·배포 파일 parity·격리 공개 browser는 대기 상태이며 현재 검증된 공개 버전은 M12 앱0.13.0이다. [M15 계약](m15-contract.md)의 선택 범위만 검증 대상으로 삼으며 전체 원본 옵션 닫힘은0행이고 `fullSimulinkEquivalenceClaimed:false`다.
+2026-10-03 · 앱0.16.0 · 엔진0.16.0-m15 · schema1. 기존337개 정의·75예제/12범주·source subset367/385·미구현18행을 유지하고 선택 범위의 로컬 engineering 검증을 완료했다. 실제 타깃 실행·전체unit3854개·외부 파일 UI9개·내보내기4개·root/project artifact·디자인·성능6개 예산·최종typecheck를 통과했다. 전체 browser의 최초188/189와 대기 assertion 조정 뒤 영향 범위1/1 PASS는 분리 기록한다. 공개0.16.0 통합 버전도 전체 CI·정확한 공개 파일 parity·격리 브라우저9검사 및 새 기능13케이스를 통과했다. [M15 계약](m15-contract.md)의 선택 범위만 검증 대상으로 삼으며 전체 원본 옵션 닫힘은0행이고 `fullSimulinkEquivalenceClaimed:false`다.
 
 ## 실제 코드 타깃 실행
 
@@ -41,7 +41,7 @@ C/C++는 PATH와 명시 compiler 경로의 읽기 전용 조사에서 실행 파
 | dependency audit·지원표 회귀 |취약점0·M10~M14 updater --verify·roadmap/coverage PASS |
 | 단독 성능 |[최종6/6예산 PASS](evidence/m15-performance.json);실제 host 측정과 적용 범위를 구분 |
 | 최종 typecheck·선택 engineering |[complete-selected-scope](evidence/m15-engineering-checks.json);최종 snapshot·PR·공개 CI는 별도 릴리스 기록 |
-| 공개 CI·배포 파일 parity·격리 공개 browser | pending;현재 공개 M12 앱0.13.0 |
+| 공개 CI·배포 파일 parity·격리 공개 browser |[공개0.16.0 PASS](evidence/m15-public-release.json);[CI unit3854·전체browser189·project4](evidence/m15-actions-verification.json),[공개9검사](evidence/m15-public-browser-verification.json)+[새기능13케이스](evidence/m15-public-feature-browser-results.json)·[14파일 byte/SHA parity](evidence/m15-deployment-verification.json) |
 | 전체 Simulink 옵션·MathWorks 수치 동등성·실제 초보자 조사 | 미수행/미승인 |
 
 전체 browser의 최초 실패는 M3 연속 실행 pause/resume의20000개 내부 step 결과를5초 안에 기다리던 assertion timeout이었다. snapshot은 계속 running 상태였고 제품 소스와 계산 기대값을 바꾸지 않은 별도 재검사에서도 통과했다. 해당 테스트만 전체 timeout60초·결과 metadata 대기30초로 기본 runtime active-wall 예산에 맞춘 뒤 최종1개를9.58초에 재검증했다. 최초189개를 한 번에 모두 PASS한 것으로 표시하지 않는다.
@@ -63,3 +63,7 @@ M15는 canonical registry의 기존 exportTargets를 수정하지 않고 버전 
 ## 이전 타깃 검사와 배포 CI
 
 첫 공개 CI는 M10의 uint64 source가 Python에서 미지원이라는 과거 부정 검사에서 실패했고 deploy는 수행하지 않았다. M15가 해당 scalar를 실제 지원하므로, catalog와 M8~M12의 역사 검사는 당시 승인한 `python-m7-v1`에 명시적으로 고정했다. 현재69개 지원은 M15의 별도142개 actual Python 검사로 확인한다. 생산 코드와 동결한 과거25개 자료는 바뀌지 않았다. 수정한 M10의 실제 TS209개/484표본과 M11의138개/419표본은 로컬에서 통과했다. 최종 전체 CI·공개 파일 검증은 후속 기록을 따른다. [첫 CI](evidence/m15-actions-initial-failure.json)·[타깃 계약 분리 증거](evidence/m15-ci-target-regression-fix.json).
+
+## M13·M14·M15 공개 통합 결과
+
+M13→M14→M15를 순서대로 검증·병합한 앱0.16.0/엔진0.16.0-m15를 [CalcWeave](https://jtech-co.github.io/CalcWeave/)에 게시했다. [최종 Actions 37120366954](https://github.com/JTech-CO/CalcWeave/actions/runs/37120366954)는 main `3ac0973114232e7eae3052852d169e4b3b56c958`에서 unit3854/3854·전체browser189/189·project4/4와 모든 stage 실제 코드 검증을 통과한 뒤 deploy에 성공했다. 공개 asset14개 및 service worker가 검증한 project artifact와 정확히 일치하며 releaseId는 `3ecb932e8c94a6bb2fea24e71e494f1555afea0240da888b7b8f9d4bddedd90f`다. 공개 기본9검사에서 fit·Worker·오프라인 편집·정책·Python ZIP을 확인했고 새13케이스에서는 다운로드한 WASM binary/runner의 실제 브라우저 계산·다운로드한 Python의 실제 격리 interpreter 실행·signed migration 검토/undo·SLX/MDL static/discrete/continuous Worker·MAT 및 원본 archive 보존·변조/코드 거부·8개 반응형 조건을 확인했다. 이전 M13/M14 각각의 별도 version artifact 게시를 주장하지 않는다. [공개 통합 증거](evidence/m15-public-release.json)·[파일 검증](evidence/m15-deployment-verification.json)·[공개 브라우저](evidence/m15-public-browser-verification.json)·[공개 새기능](evidence/m15-public-feature-browser-results.json)·[CI](evidence/m15-actions-verification.json). 전체 Simulink 옵션/MathWorks reference·C/C++ 및 정식 public-launch gates는 별도다.

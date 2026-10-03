@@ -1,0 +1,83 @@
+{
+  "checkedAt": "2026-10-03T11:59:13.689Z",
+  "removed": [
+    {
+      "branch": "codex/m10-typed-signals",
+      "headSha": "74055e4733511b57aa7dee4425da57be4b2e1bf4",
+      "mergedPr": 11,
+      "mergedAt": "2026-10-03T04:25:12Z"
+    },
+    {
+      "branch": "codex/m11-controlled-hierarchy",
+      "headSha": "fb7b787e1da757e3cf7ade2b545cb2908d8be4af",
+      "mergedPr": 12,
+      "mergedAt": "2026-10-03T05:32:52Z"
+    },
+    {
+      "branch": "codex/m12-numerics-analysis",
+      "headSha": "2025daa48124ca4c9adb2c99ab71a619f51783e1",
+      "mergedPr": 13,
+      "mergedAt": "2026-10-03T06:47:55Z"
+    },
+    {
+      "branch": "codex/m12-public-verification",
+      "headSha": "37d81360a35d05b17e274a22af7660198faf4210",
+      "mergedPr": 14,
+      "mergedAt": "2026-10-03T07:10:20Z"
+    },
+    {
+      "branch": "codex/m13-strings-dashboard-data",
+      "headSha": "2e1cd66a585482d0bb326e5a89abf0afa92cd346",
+      "mergedPr": 15,
+      "mergedAt": "2026-10-03T09:06:35Z"
+    },
+    {
+      "branch": "codex/m15-executable-interop",
+      "headSha": "50cc53daa8d6a9c8474fed478a6c3756a15f4f66",
+      "mergedPr": 17,
+      "mergedAt": "2026-10-03T11:28:32Z"
+    },
+    {
+      "branch": "codex/m15-historical-target-checks",
+      "headSha": "f77a1a23b441be5ebd1418cb60db07736b1ebc27",
+      "mergedPr": 18,
+      "mergedAt": "2026-10-03T11:39:21Z"
+    },
+    {
+      "branch": "codex/m8-math-and-lookup",
+      "headSha": "2b075321e11df160b3c464cd0fd519f8978a4a03",
+      "mergedPr": 5,
+      "mergedAt": "2026-10-03T00:20:56Z"
+    },
+    {
+      "branch": "codex/m9-dsp-and-sample-time",
+      "headSha": "46d38c68e120bb67df9d5d962466f60cb5f90137",
+      "mergedPr": 6,
+      "mergedAt": "2026-10-03T01:01:54Z"
+    },
+    {
+      "branch": "codex/m9-final-public-evidence",
+      "headSha": "0fea34d0aa4aacfbc2693b594f1716d2f98aa94c",
+      "mergedPr": 10,
+      "mergedAt": "2026-10-03T02:31:14Z"
+    },
+    {
+      "branch": "codex/m9-initial-canvas-measurement",
+      "headSha": "bb74c9bd462a1e6f9fafe0aba492670845151a90",
+      "mergedPr": 8,
+      "mergedAt": "2026-10-03T01:52:38Z"
+    },
+    {
+      "branch": "codex/m9-release-proof-and-version-labels",
+      "headSha": "fe0fa8faf3653357be3aa529a54f253380768b28",
+      "mergedPr": 7,
+      "mergedAt": "2026-10-03T01:22:52Z"
+    },
+    {
+      "branch": "codex/m9-stable-save-status-layout",
+      "headSha": "cda233b3bd0ceb0b53967b02f1b33003023fcd02",
+      "mergedPr": 9,
+      "mergedAt": "2026-10-03T02:18:09Z"
+    }
+  ]
+}

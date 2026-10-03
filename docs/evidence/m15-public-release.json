@@ -1,0 +1,24 @@
+{
+  "status": "passed-combined-M13-M14-M15-release",
+  "checkedAt": "2026-10-03T12:09:04.216Z",
+  "appVersion": "0.16.0",
+  "engineVersion": "0.16.0-m15",
+  "url": "https://jtech-co.github.io/CalcWeave/",
+  "headSha": "3ac0973114232e7eae3052852d169e4b3b56c958",
+  "actionsRunId": 37120366954,
+  "releaseId": "3ecb932e8c94a6bb2fea24e71e494f1555afea0240da888b7b8f9d4bddedd90f",
+  "exactLocalProjectArtifactParity": true,
+  "publicBrowserChecks": 9,
+  "publicFeatureCases": 13,
+  "ciUnit": 3854,
+  "ciWholeBrowser": 189,
+  "ciProjectBrowser": 4,
+  "records": {
+    "docs/evidence/m15-deployment-verification.json": "9374bc3e2bf4a5ec854508c4084479672e63d23e4bb122fea35e604f36559809",
+    "docs/evidence/m15-public-browser-verification.json": "d1926f638a0b688e33dffad5f7978fa106a6767cb962fba373f1f67848c32bf0",
+    "docs/evidence/m15-public-feature-browser-results.json": "d43ae5f58eb96a666d85a6a9432f5c970f2b9b750166427da9d6a498d5099c04",
+    "docs/evidence/m15-actions-verification.json": "990156d0e610a765062573603bb1cbf7f63083ab680a18f06916c93483321800"
+  },
+  "verifiedApplicationDeployment": true,
+  "verifiedPublicLaunch": false
+}
