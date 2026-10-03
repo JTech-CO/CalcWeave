@@ -7,6 +7,10 @@ CalcWeave는 MATLAB 설치 없이 브라우저에서 사용할 수 있는 블럭
 
 웹 베타 주소: [CalcWeave 작업 공간](https://jtech-co.github.io/CalcWeave/). 배포 결과와 실제 공개 파일 검증은 [Pages 배포 기록](docs/pages-validation.md)에 남깁니다.
 
+## M12 연속 솔버·제약·DAE·분석
+
+앱0.13.0·엔진0.13.0-m12의 선택 구현을 완료했습니다. M10 자료형과 M11 조건부 계층을 보존하고 암시적 Euler, 공동 대수 제약, 명시 index-1 Descriptor, 제한 상태·2DOF PID, 서로 다른 가변 시간/운송 지연, 실제 A/B/C/D·수식 기울기·해상도 분석을 추가했습니다. 블록304종·예제61개/9범주, 원본 선택 subset305/385·미구현80행입니다. 전체unit3007개, 전체browser156개,project경로4개,실제생성TS35개/155표본,design188관측·성능6예산·root/project각78검사를 통과했습니다. M10/M11/M12 전체 원본 옵션과 MathWorks 실행 동등성은 후속 증거가 필요합니다. [M12 계약](docs/m12-contract.md)·[검증](docs/m12-validation.md)·[26행 대응표](docs/m12-implementation-map.json)
+
 ## M11 조건부 계층·반복·구조화 메시지
 
 앱0.12.0·엔진0.12.0-m11의 선택 범위를 완료했습니다. 기존245종을 보존하고48종을 추가해293종·53예제/8범주입니다. 원본 선택 subset293/385·미구현92이며 전체 옵션은 후속 검증입니다. 전체unit2896개,실제TS138개·419표본,UI9개와M10회귀7개,project4개·design188관측·6성능 예산·root/project70검사를 확인했습니다. 첫 전체browser146개 중145PASS 뒤 결과 표 페이지 문제를 수정해 관련16/16을 재검사했습니다. 공개 배포는 M12 종료 후 통합 릴리스로 확인합니다. [M11 계약](docs/m11-contract.md)·[검증](docs/m11-validation.md)

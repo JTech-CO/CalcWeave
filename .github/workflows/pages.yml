@@ -16,7 +16,7 @@ jobs:
   verify:
     if: github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -41,6 +41,8 @@ jobs:
       - run: npx tsx scripts/update-m10-coverage.ts --verify
       - run: npm run verify:m11
       - run: npx tsx scripts/update-m11-coverage.ts --verify
+      - run: npm run verify:m12
+      - run: npx tsx scripts/update-m12-coverage.ts --verify
       - run: npm run build
       - run: npm run verify:release
       - run: npx playwright install --with-deps chromium

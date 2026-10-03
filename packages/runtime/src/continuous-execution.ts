@@ -4,7 +4,7 @@ import { discreteMemoryElementCount } from '../../model/src/discrete';
 import { checkSignal, copySignal, finiteNumber, nodeOperationCost, signalElements } from './kernels';
 import { createDiscreteMachine } from './discrete-machine';
 import { createContinuousMachine, type ContinuousEvent, type ContinuousValues } from './continuous-machine';
-import { rkErrorNorm, rkNextStep, rkTrial } from './continuous-solver';
+import { implicitEulerTrial, implicitNextStep, rkErrorNorm, rkNextStep, rkTrial } from './continuous-solver';
 
 /** Pure, bounded state machine shared by browser execution and independent TS. */
 export function createContinuousExecution(compiled: CompiledModel, hooks: { check?: () => void; maxRecordedValues?: number; maxOperations?: number; trackOperations?: boolean } = {}) {
@@ -25,7 +25,7 @@ export function createContinuousExecution(compiled: CompiledModel, hooks: { chec
   const costs = new Map(nodes.map((node) => [node.id, nodeOperationCost(node, byId)]));
   const minimumTrials = Math.max(intervalCount, Math.ceil((execution.stopTime - execution.startTime) / solver.maxStep));
   const minimumOperations = [...costs.values()].reduce((sum, cost) => sum + cost, 0)
-    * (intervalCount + 1 + minimumTrials * (solver.method === 'rk4' ? 4 : 7));
+    * (intervalCount + 1 + minimumTrials * (solver.method === 'rk4' ? 4 : solver.method === 'rk45' ? 7 : 1));
   if (minimumOperations > (hooks.maxOperations ?? 50_000_000)) fail('RUNTIME_OPERATION_BUDGET', '최소 계산 연산량이 한도를 초과했습니다.');
   let operations = 0;
   let scopeInvocations = 0;
@@ -40,6 +40,9 @@ export function createContinuousExecution(compiled: CompiledModel, hooks: { chec
   };
   const discrete = createDiscreteMachine(discreteNodes, discreteIds, solver.discreteStep, execution.startTime, charge, nodes);
   const machine = createContinuousMachine(compiled, charge, discrete.effectiveNode);
+  if (solver.method === 'implicit-euler' && machine.initial.length > 64) fail('M12_IMPLICIT_DIMENSION', '밀집 implicit Euler의 전체 연속 상태는64개 이하여야 합니다.');
+  const solverAnchor = nodes.find(node => node.executionDomain === 'continuous') ?? nodes[0]!;
+  const nextStep = (h: number, error: number, accepted: boolean): number => solver.method === 'implicit-euler' ? implicitNextStep(h, error, accepted, solver.minStep, solver.maxStep) : rkNextStep(h, error, accepted, solver.minStep, solver.maxStep);
   let frozen = discrete.snapshot(), state = [...machine.initial], time = execution.startTime, outputIndex = 0, tick = 0;
   let previousTickValues: ContinuousValues | undefined, previousTick: number | undefined;
   let stepSize = Math.min(solver.initialStep, machine.maximumDelayStep);
@@ -77,7 +80,7 @@ export function createContinuousExecution(compiled: CompiledModel, hooks: { chec
         }
         const outputs = node.executionDomain === 'discrete' && !hold
           ? old ? frozen.get(id)! : discrete.evaluateNode(node, tick, time, read)
-          : machine.evaluateNode(node, time, state, read, mask);
+          : machine.evaluateNode(node, time, state, read, mask, resolve);
         resolved.set(id, outputs); resolving.delete(id); return outputs;
       };
       if (old) {
@@ -105,7 +108,7 @@ export function createContinuousExecution(compiled: CompiledModel, hooks: { chec
     // Settle instantaneous publications without integrating or drawing RNG again.
     // This also initializes a Relay outside its hysteresis band at startTime.
     while (true) {
-      const detected = [...machine.eventCandidates(before, values), ...machine.relaySettlingEvents(values)];
+      const detected = [...machine.eventCandidates(before, values, state, state, time, time), ...machine.relaySettlingEvents(values)];
       const boundary = detected.filter((event, index) => detected.findIndex((other) => other.nodeId === event.nodeId && other.kind === event.kind) === index);
       if (!boundary.length) break;
       const previous = values, applied = machine.applyEvents(state, boundary, time, frozen);
@@ -146,6 +149,7 @@ export function createContinuousExecution(compiled: CompiledModel, hooks: { chec
     for (const node of nodes) {
       if (node.blockType === 'source.step') consider(Number(node.parameters.stepTime));
       if (node.blockType === 'source.ramp') consider(Number(node.parameters.startTime));
+      if (node.blockType === 'analysis.linearization' && node.parameters.mode === 'timed') for (const at of node.parameters.times as number[]) consider(at);
       if (node.blockType === 'source.dataset' && node.executionDomain === 'continuous') {
         const times = node.parameters.times as number[];
         let low = 0, high = times.length;
@@ -160,15 +164,16 @@ export function createContinuousExecution(compiled: CompiledModel, hooks: { chec
     return next;
   }
   function trial(h: number, leftEndpoint?: number): { state: number[]; error: number[] } {
-    return rkTrial(solver.method, time, state, h, (stageTime, trialState) => {
+    const derivative = (stageTime: number, trialState: number[]): number[] => {
       failureTime = stageTime;
       stats.evaluations += 1;
       if (stats.evaluations > solver.maxEvaluations) fail('RUNTIME_EVALUATION_BUDGET', '솔버 단계 평가 한도를 초과했습니다.');
       const sourceTime = leftEndpoint !== undefined && near(stageTime, leftEndpoint)
         ? stageTime - Math.max(h * 1e-10, Math.abs(stageTime) * Number.EPSILON * 2, Number.MIN_VALUE)
         : stageTime === time ? rightSourceTime(stageTime) : stageTime;
-      return machine.derivative(stageTime, trialState, frozen, sourceTime);
-    });
+      return machine.derivative(stageTime, trialState, frozen, sourceTime, state);
+    };
+    return solver.method === 'implicit-euler' ? implicitEulerTrial(time, state, h, derivative, { nodeId: solverAnchor.id, atol: Math.min(solver.atol * 0.1, solver.newtonTolerance!), rtol: solver.rtol * 0.1, maxIterations: solver.newtonMaxIterations, fdStep: solver.jacobianStep, charge: work => charge(solverAnchor, work) }) : rkTrial(solver.method, time, state, h, derivative);
   }
   function rightSourceTime(at: number): number {
     // Raw playback includes its final knot. After that isolated endpoint, an
@@ -184,7 +189,7 @@ export function createContinuousExecution(compiled: CompiledModel, hooks: { chec
     for (let iteration = 0; iteration < 64 && high - low > Math.max(solver.eventTolerance, Math.abs(time + high) * Number.EPSILON * 8); iteration += 1) {
       const middle = (low + high) / 2, candidate = trial(middle).state;
       const evaluated = machine.evaluate(time + middle, candidate, frozen);
-      if (machine.eventReached(event, evaluated)) high = middle; else low = middle;
+      if (machine.eventReached(event, evaluated, candidate, time + middle)) high = middle; else low = middle;
     }
     return high;
   }
@@ -195,7 +200,7 @@ export function createContinuousExecution(compiled: CompiledModel, hooks: { chec
       started = true;
       tickBoundary();
       const sourceTime = rightSourceTime(time);
-      machine.acceptMemory(time, values, sourceTime === time ? values : machine.evaluate(time, state, frozen, new Set(), sourceTime), values);
+      machine.acceptMemory(time, values, sourceTime === time ? values : machine.evaluate(time, state, frozen, new Set(), sourceTime), values, state);
       record();
       if (intervalCount === 0) finished = true;
       return !finished;
@@ -207,19 +212,27 @@ export function createContinuousExecution(compiled: CompiledModel, hooks: { chec
     if (!(h > 0) || time + h === time) fail('RUNTIME_TIME_RESOLUTION', '현재 시각에서 적분 간격을 표현할 수 없습니다.');
     const atSourceBoundary = near(time + h, discontinuity);
     const before = machine.evaluate(time, state, frozen);
-    let candidate = trial(h, atSourceBoundary ? discontinuity : undefined);
+    let candidate: { state: number[]; error: number[] };
+    try { candidate = trial(h, atSourceBoundary ? discontinuity : undefined); }
+    catch (error) {
+      if (solver.method !== 'implicit-euler' || !(error instanceof ModelError) || !error.diagnostics.every(item => ['M12_NEWTON_SINGULAR', 'M12_NEWTON_CONVERGENCE', 'M12_NUMERIC_NONFINITE'].includes(item.code))) throw error;
+      stats.rejectedSteps += 1;
+      if (stats.rejectedSteps > solver.maxRejects) fail('RUNTIME_REJECTION_BUDGET', 'Newton 단계 거절 한도를 초과했습니다.');
+      if (h <= solver.minStep * (1 + 1e-12)) throw error;
+      stepSize = Math.max(solver.minStep, h / 2); return true;
+    }
     machine.validateState(candidate.state);
-    const norm = solver.method === 'rk45' ? rkErrorNorm(state, candidate.state, candidate.error, solver.atol, solver.rtol) : 0;
+    const norm = solver.method !== 'rk4' ? rkErrorNorm(state, candidate.state, candidate.error, solver.atol, solver.rtol) : 0;
     if (!Number.isFinite(norm)) fail('NUMERIC_NONFINITE', '솔버 오차 추정이 유한하지 않습니다.');
     if (norm > 1) {
       stats.rejectedSteps += 1;
       if (stats.rejectedSteps > solver.maxRejects) fail('RUNTIME_REJECTION_BUDGET', '솔버 스텝 거절 한도를 초과했습니다.');
       if (h <= solver.minStep * (1 + 1e-12)) fail('RUNTIME_MIN_STEP', '최소 적분 간격에서도 허용오차를 만족하지 못했습니다.');
-      stepSize = rkNextStep(h, norm, false, solver.minStep, solver.maxStep);
+      stepSize = nextStep(h, norm, false);
       return true;
     }
     let after = machine.evaluate(time + h, candidate.state, frozen);
-    const candidates = machine.eventCandidates(before, after).filter((event) => !near(lastEventTimes.get(event.nodeId) ?? -Infinity, time));
+    const candidates = machine.eventCandidates(before, after, state, candidate.state, time, time + h).filter((event) => !near(lastEventTimes.get(event.nodeId) ?? -Infinity, time));
     let boundaryEvents: ContinuousEvent[] = [];
     if (candidates.length) {
       const located = candidates.map((event) => ({ event, h: refine(event, h) }));
@@ -245,10 +258,10 @@ export function createContinuousExecution(compiled: CompiledModel, hooks: { chec
     mask = settleRelayPublications(mask);
     if (hasDiscreteBoundary && near(time, tickTime())) mask = tickBoundary(mask);
     const sourceTime = rightSourceTime(time);
-    machine.acceptMemory(time, previousValues, sourceTime === time ? values : machine.evaluate(time, state, frozen, mask, sourceTime), leftValues);
+    machine.acceptMemory(time, previousValues, sourceTime === time ? values : machine.evaluate(time, state, frozen, mask, sourceTime), leftValues, state);
     values = machine.evaluate(time, state, frozen, mask);
     if (near(time, outputTime())) record();
-    stepSize = solver.method === 'rk45' ? rkNextStep(h, norm, true, solver.minStep, solver.maxStep) : solver.initialStep;
+    stepSize = solver.method !== 'rk4' ? nextStep(h, norm, true) : solver.initialStep;
     if (near(time, execution.stopTime)) finished = true;
     return !finished;
   }
@@ -272,6 +285,7 @@ export function createContinuousExecution(compiled: CompiledModel, hooks: { chec
       lastRecordedEvents.clear(); saved.recordedEvents.forEach((value, id) => lastRecordedEvents.set(id, value));
       stats.acceptedSteps = saved.acceptedSteps; stats.events = saved.eventCount; stats.lastStep = saved.lastStep; stats.minAcceptedStep = saved.minStep; stats.maxAcceptedStep = saved.maxStep;
       if (error instanceof ModelError) throw new ModelError(error.diagnostics.map((diagnostic) => ({ ...diagnostic, time: diagnostic.time ?? failureTime })), result('failed'));
+      if (error instanceof ModelError) throw new ModelError(error.diagnostics.map(item => ({ time: failureTime, ...item })), error.partialResult);
       throw error;
     }
   }

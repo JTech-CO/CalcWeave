@@ -1,0 +1,14 @@
+{
+  "generatedAt": "2026-10-03T06:25:58.867Z",
+  "browser": "153.0.8010.12",
+  "fixture": {
+    "nodes": 1000,
+    "intervals": 10000,
+    "mode": "discrete",
+    "outputs": 1
+  },
+  "metric": "Real Worker cancel postMessage to termination; single run, not a percentile or universal guarantee.",
+  "requestedAt": 5699.899999976158,
+  "terminatedAt": 5879.200000047684,
+  "latencyMs": 179.30000007152557
+}

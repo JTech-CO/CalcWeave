@@ -1,7 +1,10 @@
-export const ENGINE_VERSION = '0.12.0-m11';
+export const ENGINE_VERSION = '0.13.0-m12';
 
 export type ExecutionMode = 'static' | 'discrete' | 'continuous';
 export type BlockType =
+  | 'continuous.descriptor' | 'continuous.integrator-limited' | 'continuous.second-order-limited' | 'continuous.pid-2dof'
+  | 'time.variable-delay' | 'time.variable-transport-delay' | 'nonlinear.backlash' | 'nonlinear.rate-limiter-continuous' | 'nonlinear.rate-limiter-dynamic'
+  | 'solver.algebraic-constraint' | 'analysis.linearization'
   | 'source.signal' | 'hierarchy.atomic' | 'hierarchy.enabled' | 'hierarchy.triggered' | 'hierarchy.enabled-triggered' | 'hierarchy.resettable'
   | 'hierarchy.action' | 'hierarchy.function-call' | 'hierarchy.for-iterator' | 'hierarchy.while-iterator' | 'hierarchy.for-each' | 'hierarchy.variant'
   | 'hierarchy.array-processing' | 'hierarchy.neighborhood-processing' | 'hierarchy.pixel-processing'
@@ -134,7 +137,10 @@ export interface ExecutionSettings {
   solver?: Partial<SolverSettings>;
 }
 export interface SolverSettings {
-  method: 'rk4' | 'rk45';
+  method: 'rk4' | 'rk45' | 'implicit-euler';
+  newtonTolerance?: number;
+  newtonMaxIterations?: number;
+  jacobianStep?: number;
   initialStep: number;
   minStep: number;
   maxStep: number;
@@ -256,7 +262,7 @@ export interface RunResult {
   resources?: { operations: number };
 }
 export interface SolverStatistics {
-  method: 'rk4' | 'rk45';
+  method: 'rk4' | 'rk45' | 'implicit-euler';
   acceptedSteps: number;
   rejectedSteps: number;
   evaluations: number;

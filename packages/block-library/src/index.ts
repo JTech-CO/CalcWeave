@@ -5,6 +5,7 @@ import { getM8Ports, M8_BLOCK_DEFINITIONS, M8_BLOCK_PRESETS } from './m8';
 import { getM9Ports, getM9DirectFeedthroughPorts, M9_BLOCK_DEFINITIONS, M9_BLOCK_PRESETS } from './m9';
 import { getM10Ports, getM10DirectFeedthroughPorts, M10_BLOCK_DEFINITIONS, M10_BLOCK_PRESETS } from './m10';
 import { getM11Ports, getM11DirectFeedthroughPorts, M11_BLOCK_DEFINITIONS } from './m11';
+import { getM12Ports, getM12DirectFeedthroughPorts, M12_BLOCK_DEFINITIONS } from './m12';
 import { UNITS } from '../../model/src/signal';
 import { PYTHON_TARGET } from '../../codegen-python/src/capabilities';
 
@@ -142,7 +143,7 @@ function deepFreeze<T>(value: T): T {
 
 /** Typed algebraic, fixed-tick discrete and bounded continuous/mixed contracts. */
 const pythonBlockIds: ReadonlySet<string> = new Set(PYTHON_TARGET.blockIds);
-export const blockRegistry: readonly BlockDefinition[] = deepFreeze([...definitions, ...EXPANSION_BLOCK_DEFINITIONS, ...TIME_SOURCE_DEFINITIONS, ...M8_BLOCK_DEFINITIONS, ...M9_BLOCK_DEFINITIONS, ...M10_BLOCK_DEFINITIONS, ...M11_BLOCK_DEFINITIONS].map(definition => ({
+export const blockRegistry: readonly BlockDefinition[] = deepFreeze([...definitions, ...EXPANSION_BLOCK_DEFINITIONS, ...TIME_SOURCE_DEFINITIONS, ...M8_BLOCK_DEFINITIONS, ...M9_BLOCK_DEFINITIONS, ...M10_BLOCK_DEFINITIONS, ...M11_BLOCK_DEFINITIONS, ...M12_BLOCK_DEFINITIONS].map(definition => ({
   ...definition, exportTargets: pythonBlockIds.has(definition.id) ? ['typescript', 'python'] as const : ['typescript'] as const,
 })));
 export const BLOCK_REGISTRY = blockRegistry;
@@ -152,6 +153,8 @@ export function getBlockDefinition(id: string): BlockDefinition | undefined { re
 
 /** UI may call this before compilation; invalid dynamic values use bounded defaults. */
 export function getBlockPorts(node: Pick<CalcNode, 'blockType' | 'parameters'>, context?: Pick<CalcModel, 'subsystems'>): { inputs: string[]; outputs: string[] } {
+  const m12Ports = getM12Ports(node);
+  if (m12Ports) return m12Ports;
   const definition = getBlockDefinition(node.blockType);
   if (!definition) return { inputs: [], outputs: [] };
   const m11Ports = getM11Ports(node, context);
@@ -180,6 +183,8 @@ export function getBlockPorts(node: Pick<CalcNode, 'blockType' | 'parameters'>, 
 
 /** Coefficient-dependent feedthrough is part of the approved discrete realization. */
 export function isDirectFeedthrough(node: Pick<CalcNode, 'blockType' | 'parameters'>): boolean {
+  const m12Ports = getM12DirectFeedthroughPorts(node);
+  if (m12Ports) return m12Ports.length > 0;
   const m11Ports = getM11DirectFeedthroughPorts(node);
   if (m11Ports) return m11Ports.length > 0 || getBlockDefinition(node.blockType)?.directFeedthrough === true;
   const m10Ports = getM10DirectFeedthroughPorts(node);
@@ -198,6 +203,8 @@ export function isDirectFeedthrough(node: Pick<CalcNode, 'blockType' | 'paramete
 
 /** Existing definitions preserve their previous reset/commit dependency semantics. */
 export function getDirectFeedthroughPorts(node: Pick<CalcNode, 'blockType' | 'parameters'>): string[] {
+  const m12Ports = getM12DirectFeedthroughPorts(node);
+  if (m12Ports) return m12Ports;
   const m11Ports = getM11DirectFeedthroughPorts(node);
   if (m11Ports) return m11Ports;
   const m10Ports = getM10DirectFeedthroughPorts(node);

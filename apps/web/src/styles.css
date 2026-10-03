@@ -697,3 +697,15 @@ textarea:focus-visible { outline:2px solid var(--focus); outline-offset:3px; }
 .subsystem-button { flex:none; margin:0 14px; }
 @media(max-width:1200px) { .subsystem-button { font-size:var(--text-small); padding:8px; margin:0 4px; } .toolbar-left { gap:5px; } }
 @media(max-width:900px) { .workspace-tools { padding:24px 18px; } .tool-page-heading { flex-direction:column; } .tool-section { padding:18px; } .workspace-tabs { padding:0 12px; } .workspace-tabs [role=tablist] { gap:20px; } .subsystem-button { display:none; } }
+
+.analysis-dialog { width:min(820px,calc(100vw - 32px)); }
+.analysis-content,.analysis-result { min-width:0; max-width:100%; }
+.analysis-result { margin-top:24px; padding-top:20px; border-top:1px solid var(--line); }
+.analysis-result h3 { font-size:var(--text-heading); line-height:1.7; overflow-wrap:anywhere; }
+.analysis-result dd,.analysis-result td,.analysis-result th { overflow-wrap:anywhere; font-variant-numeric:tabular-nums; }
+.analysis-table { max-width:100%; overflow-x:auto; margin:18px 0; }
+.analysis-table table { width:100%; font-size:var(--text-body); border-collapse:collapse; }
+.analysis-table th,.analysis-table td { padding:12px; text-align:left; border-bottom:1px solid var(--line); }
+.analysis-table caption { color:var(--muted); text-align:left; padding:10px 0; }
+.analysis-content .field textarea { max-width:100%; min-width:0; font-size:var(--text-body); }
+@media(max-width:600px) { .analysis-dialog { width:calc(100vw - 20px); } .analysis-content .field-pair { grid-template-columns:minmax(0,1fr); } .analysis-table th,.analysis-table td { padding:10px 6px; } }

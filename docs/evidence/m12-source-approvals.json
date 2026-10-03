@@ -1,0 +1,1239 @@
+{
+  "generatedAt": "2026-10-03T06:20:53.921Z",
+  "stage": "M12",
+  "engineVersion": "0.13.0-m12",
+  "datasetSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+  "sourceRows": 385,
+  "uniqueSourceNameStrings": 339,
+  "firstWorkSourceRows": 26,
+  "registryDefinitions": 304,
+  "approvedAdditionalSourceRows": 12,
+  "existingMappingExtensions": 0,
+  "approvedSourceRows": 12,
+  "currentSourceSubset": 305,
+  "missingSourceRows": 80,
+  "fullSourceOptionsClosed": 0,
+  "evidencePath": "docs/evidence/m12-verification.json",
+  "evidenceSha256": "79253d162a1af3ca5f5bbe2eb9de14d0fbc3e5aaa107795586678ab8f896f0c7",
+  "fixturePath": "tests/m12-independent-fixtures.ts",
+  "fixtureSha256": "9be92717422097c164688c05c277711e22128e6a1e59ba8d568f27d14a0b1b84",
+  "protectedArtifacts": {
+    "dataset/Simulink_Basic_Blocks_R2024b.md": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+    "docs/baselines/catalog-block-coverage.md": "bfad433de22c3302b53369be3465ec1d4bb3e072dd8f3ce310bc4af1ea967774",
+    "docs/simulink-coverage-roadmap.json": "86ec3c3f75939dc72a00b39d6760d86d9ef21f2a63922daf110c5db2fe7932cd",
+    "docs/baselines/m10-registry.json": "d23bc34bdbd450b1ea2be671b419f8ccfb74fa97238d541c3f9ffd97230cf8dc",
+    "docs/evidence/m10-source-approvals.json": "d8c938fb999555aaf61f24b68b7b631e158611dc2760542bd08d0f94d3221f4b",
+    "docs/evidence/m10-verification.json": "659a11814e1420f217068f4cab4c6726cd3070154f69fd1064afd3a4aee52e6d",
+    "docs/evidence/m10-reference-review.json": "fb9572178cc5c5caf19658e9010709a67d0d6611f83b9f3ce8993dffee493325",
+    "docs/evidence/m8-source-approvals.json": "4f558f5040f9dda1a9c2b5bbd2b848b825b4961489a03228dd3c12370b2c4d60",
+    "docs/evidence/m9-source-approvals.json": "7d49f1b15a6b325050a55295bca4d29411fe123dd0752e2ac98766641ccc18ca",
+    "docs/evidence/m8-verification.json": "351b5ba6031dff1a2f4dfb8b51e4e63e2747998277ee93e56decc4b908ff75d6",
+    "docs/evidence/m8-presets-verification.json": "55cef48ebe57a97ca02922225330f36b1f1d0866d2ad92d69f74fcceb7771f01",
+    "docs/evidence/m9-verification.json": "1d3fee9b56017db6c12b8f7f778d4c064efd4fa7f7d0014a2a38b6ffdd13a23f",
+    "docs/baselines/m11-registry.json": "daaf1ec9df9b5b7b43efdfd57863d0467b3f5636b3bcb4fd3b5450322fe8bf2e",
+    "docs/evidence/m11-source-approvals.json": "492abedeb09b84e601d206cf85ead66b3ba7596af0894f0f9519fd9af8aac8c7",
+    "docs/evidence/m11-verification.json": "716939d06a20c53a3fb9655820fb5c366fde0b1bb0fd5fd37adb39abadafea76"
+  },
+  "preservedSourceRows": [
+    {
+      "sourceId": "01-011",
+      "rowSha256": "990a7384a585139337c26a1fd9f87f7007354f14ad7a377be2beaaa41c6ad4ce",
+      "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update."
+    },
+    {
+      "sourceId": "02-001",
+      "rowSha256": "11f81b5a4cdd328abcced4c3e6c1d16fd7e9b6c39045742b5fc908ef8cab24cb",
+      "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update."
+    },
+    {
+      "sourceId": "02-003",
+      "rowSha256": "697b8b22f7074841d5df332c505eced2158e2ecb2a47df94ff84c65f7efd845b",
+      "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update."
+    },
+    {
+      "sourceId": "02-004",
+      "rowSha256": "0714b5f12ede1fd5e664c2a7b543daa454bc668f9a33689e2ce9a75c083fc9ca",
+      "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update."
+    },
+    {
+      "sourceId": "02-006",
+      "rowSha256": "68d64b2969f98a650856bccb0ae71a3b7bdea862060095e2c3eaef21163ba486",
+      "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update."
+    },
+    {
+      "sourceId": "02-008",
+      "rowSha256": "224f51e34cf2cbfee37f72fed07d5f0277f0b65d30bd792b7bd36159300abd83",
+      "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update."
+    },
+    {
+      "sourceId": "02-010",
+      "rowSha256": "a6527db5f86122b353f22635a06c092dc03e123bbdacd8230660ab7c6e7863bd",
+      "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update."
+    },
+    {
+      "sourceId": "02-011",
+      "rowSha256": "b6734cd0a163df84498b98bb8590171f604ac800150e0973d975bf460cab4f6e",
+      "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update."
+    },
+    {
+      "sourceId": "02-012",
+      "rowSha256": "f19969a2759716e98da63a467147f2bd52b888c23759761dee766c30fa4cb116",
+      "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update."
+    },
+    {
+      "sourceId": "02-015",
+      "rowSha256": "4a2b87da09e4bbcd971c15ec73faf63725405c1b7e8cb87bf25122737d3f2950",
+      "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update."
+    },
+    {
+      "sourceId": "04-005",
+      "rowSha256": "307867543ed08750bdaee68fd7d0c51cf50eca039ec8f487ca3aaee862ffd060",
+      "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update."
+    },
+    {
+      "sourceId": "04-010",
+      "rowSha256": "d5f695a24fa86ca67d9f0bad59604f7dff3acfcf69ed5a8501844f7fc34e9220",
+      "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update."
+    },
+    {
+      "sourceId": "05-012",
+      "rowSha256": "041458067d5143d93bc3cac3d35718ffe8af03a9c5c0e0c8f121d14acfacdd1c",
+      "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update."
+    },
+    {
+      "sourceId": "10-001",
+      "rowSha256": "37e7e569dd0550840d7714843f3da6a5abae59bb390aaa07edb26b8f0eae1ab9",
+      "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update."
+    }
+  ],
+  "approvals": [
+    {
+      "sourceId": "02-002",
+      "sourceName": "Descriptor State-Space",
+      "sourceLine": 117,
+      "canonical": "continuous.descriptor",
+      "selectedParameters": {
+        "E": [
+          [
+            2
+          ]
+        ],
+        "A": [
+          [
+            -2
+          ]
+        ],
+        "B": [
+          [
+            2
+          ]
+        ],
+        "C": [
+          [
+            1
+          ]
+        ],
+        "D": [
+          [
+            0
+          ]
+        ],
+        "initial": [
+          0
+        ],
+        "differentialCount": 0,
+        "initialPolicy": "error",
+        "consistencyTolerance": 1e-8,
+        "pivotTolerance": 1e-12
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m12-independent-continuous-descriptor",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "E": [
+              [
+                2
+              ]
+            ],
+            "A": [
+              [
+                -2
+              ]
+            ],
+            "B": [
+              [
+                2
+              ]
+            ],
+            "C": [
+              [
+                1
+              ]
+            ],
+            "D": [
+              [
+                0
+              ]
+            ],
+            "initial": [
+              0
+            ],
+            "differentialCount": 0,
+            "initialPolicy": "error",
+            "consistencyTolerance": 1e-8,
+            "pivotTolerance": 1e-12
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-continuous-descriptor/continuous"
+          ]
+        },
+        {
+          "rawFixtureId": "m12-independent-index1-descriptor",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "E": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            "A": [
+              [
+                -1,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "B": [
+              [
+                1
+              ],
+              [
+                -1
+              ]
+            ],
+            "C": [
+              [
+                1,
+                1
+              ]
+            ],
+            "D": [
+              [
+                0
+              ]
+            ],
+            "initial": [
+              0,
+              1
+            ],
+            "differentialCount": 1,
+            "initialPolicy": "error",
+            "consistencyTolerance": 1e-8,
+            "pivotTolerance": 1e-12
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-index1-descriptor/continuous"
+          ]
+        },
+        {
+          "rawFixtureId": "m12-independent-index1-project",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "E": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            "A": [
+              [
+                -1,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "B": [
+              [
+                1
+              ],
+              [
+                -1
+              ]
+            ],
+            "C": [
+              [
+                1,
+                1
+              ]
+            ],
+            "D": [
+              [
+                0
+              ]
+            ],
+            "initial": [
+              0,
+              0
+            ],
+            "differentialCount": 1,
+            "initialPolicy": "project",
+            "consistencyTolerance": 1e-8,
+            "pivotTolerance": 1e-12
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-index1-project/continuous"
+          ]
+        }
+      ],
+      "configuredNodeId": "State",
+      "rawFixtureId": "m12-independent-continuous-descriptor",
+      "evidenceFixtureIds": [
+        "m12-independent-continuous-descriptor/continuous",
+        "m12-independent-index1-descriptor/continuous",
+        "m12-independent-index1-project/continuous"
+      ],
+      "declaredModes": [
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M12 승인 subset",
+      "boundary": "Legacy finite real scalar/vector input/output; nonsingular E or explicit index-1 partition with nonsingular E11 and A22. Initial consistency error or explicit projection. General and higher-index DAE unsupported. · 실제 선택 구성 [{\"parameters\":{\"E\":[[2]],\"A\":[[-2]],\"B\":[[2]],\"C\":[[1]],\"D\":[[0]],\"initial\":[0],\"differentialCount\":0,\"initialPolicy\":\"error\",\"consistencyTolerance\":1e-8,\"pivotTolerance\":1e-12},\"modes\":[\"continuous\"]},{\"parameters\":{\"E\":[[1,0],[0,0]],\"A\":[[-1,0],[0,1]],\"B\":[[1],[-1]],\"C\":[[1,1]],\"D\":[[0]],\"initial\":[0,1],\"differentialCount\":1,\"initialPolicy\":\"error\",\"consistencyTolerance\":1e-8,\"pivotTolerance\":1e-12},\"modes\":[\"continuous\"]},{\"parameters\":{\"E\":[[1,0],[0,0]],\"A\":[[-1,0],[0,1]],\"B\":[[1],[-1]],\"C\":[[1,1]],\"D\":[[0]],\"initial\":[0,0],\"differentialCount\":1,\"initialPolicy\":\"project\",\"consistencyTolerance\":1e-8,\"pivotTolerance\":1e-12},\"modes\":[\"continuous\"]}]; 독립 수치 oracle·TS/JSON·삽입 역순과 승인 상태 경계만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "02-005",
+      "sourceName": "Integrator Limited",
+      "sourceLine": 120,
+      "canonical": "continuous.integrator-limited",
+      "selectedParameters": {
+        "initial": 0,
+        "lower": 0,
+        "upper": 0.5,
+        "reset": "none"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m12-independent-continuous-integrator-limited",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "initial": 0,
+            "lower": 0,
+            "upper": 0.5,
+            "reset": "none"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-continuous-integrator-limited/continuous"
+          ]
+        },
+        {
+          "rawFixtureId": "m12-independent-limited-release",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "initial": 0,
+            "lower": 0,
+            "upper": 0.5,
+            "reset": "none"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-limited-release/continuous"
+          ]
+        },
+        {
+          "rawFixtureId": "m12-independent-reset-limit-tie",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "initial": 0,
+            "lower": 0,
+            "upper": 0.5,
+            "reset": "rising"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-reset-limit-tie/continuous"
+          ]
+        }
+      ],
+      "configuredNodeId": "State",
+      "rawFixtureId": "m12-independent-continuous-integrator-limited",
+      "evidenceFixtureIds": [
+        "m12-independent-continuous-integrator-limited/continuous",
+        "m12-independent-limited-release/continuous",
+        "m12-independent-reset-limit-tie/continuous"
+      ],
+      "declaredModes": [
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M12 승인 subset",
+      "boundary": "Finite scalar state projection at upper/lower crossing; inward derivative leaves bound; none/rising reset and boolean limited output. Full native reset modes and external initial state options remain open. · 실제 선택 구성 [{\"parameters\":{\"initial\":0,\"lower\":0,\"upper\":0.5,\"reset\":\"none\"},\"modes\":[\"continuous\"]},{\"parameters\":{\"initial\":0,\"lower\":0,\"upper\":0.5,\"reset\":\"none\"},\"modes\":[\"continuous\"]},{\"parameters\":{\"initial\":0,\"lower\":0,\"upper\":0.5,\"reset\":\"rising\"},\"modes\":[\"continuous\"]}]; 독립 수치 oracle·TS/JSON·삽입 역순과 승인 상태 경계만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "02-007",
+      "sourceName": "PID Controller (2DOF)",
+      "sourceLine": 122,
+      "canonical": "continuous.pid-2dof",
+      "selectedParameters": {
+        "kp": 2,
+        "ki": 1,
+        "kd": 0,
+        "filterN": 10,
+        "b": 0.5,
+        "c": 1,
+        "initialIntegral": 0,
+        "initialFilter": 0,
+        "form": "parallel",
+        "controller": "PID",
+        "limit": "off",
+        "lower": -10,
+        "upper": 10,
+        "antiWindup": "none",
+        "kb": 1,
+        "reset": "none"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m12-independent-continuous-pid-2dof",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "kp": 2,
+            "ki": 1,
+            "kd": 0,
+            "filterN": 10,
+            "b": 0.5,
+            "c": 1,
+            "initialIntegral": 0,
+            "initialFilter": 0,
+            "form": "parallel",
+            "controller": "PID",
+            "limit": "off",
+            "lower": -10,
+            "upper": 10,
+            "antiWindup": "none",
+            "kb": 1,
+            "reset": "none"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-continuous-pid-2dof/continuous"
+          ]
+        },
+        {
+          "rawFixtureId": "m12-independent-pid-filter",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "kp": 0,
+            "ki": 0,
+            "kd": 0.5,
+            "filterN": 4,
+            "b": 1,
+            "c": 1,
+            "initialIntegral": 0,
+            "initialFilter": 0,
+            "form": "parallel",
+            "controller": "PID",
+            "limit": "off",
+            "lower": -10,
+            "upper": 10,
+            "antiWindup": "none",
+            "kb": 1,
+            "reset": "none"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-pid-filter/continuous"
+          ]
+        },
+        {
+          "rawFixtureId": "m12-independent-pid-ideal-weights",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "kp": 2,
+            "ki": 1,
+            "kd": 0.5,
+            "filterN": 10,
+            "b": 0.5,
+            "c": 0,
+            "initialIntegral": 0,
+            "initialFilter": 0,
+            "form": "ideal",
+            "controller": "PID",
+            "limit": "off",
+            "lower": -10,
+            "upper": 10,
+            "antiWindup": "none",
+            "kb": 1,
+            "reset": "none"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-pid-ideal-weights/continuous"
+          ]
+        },
+        {
+          "rawFixtureId": "m12-independent-pid-clamp",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "kp": 2,
+            "ki": 1,
+            "kd": 0,
+            "filterN": 10,
+            "b": 1,
+            "c": 1,
+            "initialIntegral": 0,
+            "initialFilter": 0,
+            "form": "parallel",
+            "controller": "PI",
+            "limit": "on",
+            "lower": -1,
+            "upper": 1,
+            "antiWindup": "clamp",
+            "kb": 1,
+            "reset": "none"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-pid-clamp/continuous"
+          ]
+        },
+        {
+          "rawFixtureId": "m12-independent-pid-back-calculation",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "kp": 2,
+            "ki": 1,
+            "kd": 0,
+            "filterN": 10,
+            "b": 1,
+            "c": 1,
+            "initialIntegral": 0,
+            "initialFilter": 0,
+            "form": "parallel",
+            "controller": "PI",
+            "limit": "on",
+            "lower": -1,
+            "upper": 1,
+            "antiWindup": "back-calculation",
+            "kb": 2,
+            "reset": "none"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-pid-back-calculation/continuous"
+          ]
+        },
+        {
+          "rawFixtureId": "m12-independent-pid-reset",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "kp": 0,
+            "ki": 1,
+            "kd": 0,
+            "filterN": 10,
+            "b": 1,
+            "c": 1,
+            "initialIntegral": 0,
+            "initialFilter": 0,
+            "form": "parallel",
+            "controller": "I",
+            "limit": "off",
+            "lower": -10,
+            "upper": 10,
+            "antiWindup": "none",
+            "kb": 1,
+            "reset": "rising"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-pid-reset/continuous"
+          ]
+        }
+      ],
+      "configuredNodeId": "State",
+      "rawFixtureId": "m12-independent-continuous-pid-2dof",
+      "evidenceFixtureIds": [
+        "m12-independent-continuous-pid-2dof/continuous",
+        "m12-independent-pid-filter/continuous",
+        "m12-independent-pid-ideal-weights/continuous",
+        "m12-independent-pid-clamp/continuous",
+        "m12-independent-pid-back-calculation/continuous",
+        "m12-independent-pid-reset/continuous"
+      ],
+      "declaredModes": [
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "y",
+        "r"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M12 승인 subset",
+      "boundary": "Finite scalar reference/measurement, P/D setpoint weighting, parallel/ideal form, filtered derivative, explicit limits and selected anti-windup. Native tuning, multidimensional controller and target options remain open. · 실제 선택 구성 [{\"parameters\":{\"kp\":2,\"ki\":1,\"kd\":0,\"filterN\":10,\"b\":0.5,\"c\":1,\"initialIntegral\":0,\"initialFilter\":0,\"form\":\"parallel\",\"controller\":\"PID\",\"limit\":\"off\",\"lower\":-10,\"upper\":10,\"antiWindup\":\"none\",\"kb\":1,\"reset\":\"none\"},\"modes\":[\"continuous\"]},{\"parameters\":{\"kp\":0,\"ki\":0,\"kd\":0.5,\"filterN\":4,\"b\":1,\"c\":1,\"initialIntegral\":0,\"initialFilter\":0,\"form\":\"parallel\",\"controller\":\"PID\",\"limit\":\"off\",\"lower\":-10,\"upper\":10,\"antiWindup\":\"none\",\"kb\":1,\"reset\":\"none\"},\"modes\":[\"continuous\"]},{\"parameters\":{\"kp\":2,\"ki\":1,\"kd\":0.5,\"filterN\":10,\"b\":0.5,\"c\":0,\"initialIntegral\":0,\"initialFilter\":0,\"form\":\"ideal\",\"controller\":\"PID\",\"limit\":\"off\",\"lower\":-10,\"upper\":10,\"antiWindup\":\"none\",\"kb\":1,\"reset\":\"none\"},\"modes\":[\"continuous\"]},{\"parameters\":{\"kp\":2,\"ki\":1,\"kd\":0,\"filterN\":10,\"b\":1,\"c\":1,\"initialIntegral\":0,\"initialFilter\":0,\"form\":\"parallel\",\"controller\":\"PI\",\"limit\":\"on\",\"lower\":-1,\"upper\":1,\"antiWindup\":\"clamp\",\"kb\":1,\"reset\":\"none\"},\"modes\":[\"continuous\"]},{\"parameters\":{\"kp\":2,\"ki\":1,\"kd\":0,\"filterN\":10,\"b\":1,\"c\":1,\"initialIntegral\":0,\"initialFilter\":0,\"form\":\"parallel\",\"controller\":\"PI\",\"limit\":\"on\",\"lower\":-1,\"upper\":1,\"antiWindup\":\"back-calculation\",\"kb\":2,\"reset\":\"none\"},\"modes\":[\"continuous\"]},{\"parameters\":{\"kp\":0,\"ki\":1,\"kd\":0,\"filterN\":10,\"b\":1,\"c\":1,\"initialIntegral\":0,\"initialFilter\":0,\"form\":\"parallel\",\"controller\":\"I\",\"limit\":\"off\",\"lower\":-10,\"upper\":10,\"antiWindup\":\"none\",\"kb\":1,\"reset\":\"rising\"},\"modes\":[\"continuous\"]}]; 독립 수치 oracle·TS/JSON·삽입 역순과 승인 상태 경계만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "02-009",
+      "sourceName": "Second-Order Integrator Limited",
+      "sourceLine": 124,
+      "canonical": "continuous.second-order-limited",
+      "selectedParameters": {
+        "initialPosition": 0,
+        "initialVelocity": 0,
+        "positionLower": -1,
+        "positionUpper": 0.25,
+        "velocityLower": -3,
+        "velocityUpper": 3,
+        "reset": "none"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m12-independent-continuous-second-order-limited",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "initialPosition": 0,
+            "initialVelocity": 0,
+            "positionLower": -1,
+            "positionUpper": 0.25,
+            "velocityLower": -3,
+            "velocityUpper": 3,
+            "reset": "none"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-continuous-second-order-limited/continuous"
+          ]
+        },
+        {
+          "rawFixtureId": "m12-independent-velocity-limit",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "initialPosition": 0,
+            "initialVelocity": 0,
+            "positionLower": -10,
+            "positionUpper": 10,
+            "velocityLower": -3,
+            "velocityUpper": 0.5,
+            "reset": "none"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-velocity-limit/continuous"
+          ]
+        },
+        {
+          "rawFixtureId": "m12-independent-position-velocity-tie",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "initialPosition": 0,
+            "initialVelocity": 0,
+            "positionLower": -1,
+            "positionUpper": 0.25,
+            "velocityLower": -3,
+            "velocityUpper": 1,
+            "reset": "none"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-position-velocity-tie/continuous"
+          ]
+        }
+      ],
+      "configuredNodeId": "State",
+      "rawFixtureId": "m12-independent-continuous-second-order-limited",
+      "evidenceFixtureIds": [
+        "m12-independent-continuous-second-order-limited/continuous",
+        "m12-independent-velocity-limit/continuous",
+        "m12-independent-position-velocity-tie/continuous"
+      ],
+      "declaredModes": [
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M12 승인 subset",
+      "boundary": "Finite scalar acceleration; position/velocity guards and boolean bound flags. Position bound projects position and resets velocity to zero. Native additional reset, state and target options remain open. · 실제 선택 구성 [{\"parameters\":{\"initialPosition\":0,\"initialVelocity\":0,\"positionLower\":-1,\"positionUpper\":0.25,\"velocityLower\":-3,\"velocityUpper\":3,\"reset\":\"none\"},\"modes\":[\"continuous\"]},{\"parameters\":{\"initialPosition\":0,\"initialVelocity\":0,\"positionLower\":-10,\"positionUpper\":10,\"velocityLower\":-3,\"velocityUpper\":0.5,\"reset\":\"none\"},\"modes\":[\"continuous\"]},{\"parameters\":{\"initialPosition\":0,\"initialVelocity\":0,\"positionLower\":-1,\"positionUpper\":0.25,\"velocityLower\":-3,\"velocityUpper\":1,\"reset\":\"none\"},\"modes\":[\"continuous\"]}]; 독립 수치 oracle·TS/JSON·삽입 역순과 승인 상태 경계만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "02-013",
+      "sourceName": "Variable Time Delay",
+      "sourceLine": 128,
+      "canonical": "time.variable-delay",
+      "selectedParameters": {
+        "minDelay": 0.25,
+        "maxDelay": 1,
+        "initial": 0,
+        "historyLimit": 128,
+        "handleZero": "no"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m12-independent-time-variable-delay",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "minDelay": 0.25,
+            "maxDelay": 1,
+            "initial": 0,
+            "historyLimit": 128,
+            "handleZero": "no"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-time-variable-delay/continuous"
+          ]
+        },
+        {
+          "rawFixtureId": "m12-independent-zero-delay-direct",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "minDelay": 0.25,
+            "maxDelay": 1,
+            "initial": 0,
+            "historyLimit": 128,
+            "handleZero": "yes"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-zero-delay-direct/continuous"
+          ]
+        }
+      ],
+      "configuredNodeId": "State",
+      "rawFixtureId": "m12-independent-time-variable-delay",
+      "evidenceFixtureIds": [
+        "m12-independent-time-variable-delay/continuous",
+        "m12-independent-zero-delay-direct/continuous"
+      ],
+      "declaredModes": [
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in",
+        "delay"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M12 승인 subset",
+      "boundary": "Finite scalar approved history at t-delay with bounded positive delay. Explicit zero-direct option and left/right jump preservation; finite history budget diagnoses overflow. Arbitrary native interpolation/history/typed options remain open. · 실제 선택 구성 [{\"parameters\":{\"minDelay\":0.25,\"maxDelay\":1,\"initial\":0,\"historyLimit\":128,\"handleZero\":\"no\"},\"modes\":[\"continuous\"]},{\"parameters\":{\"minDelay\":0.25,\"maxDelay\":1,\"initial\":0,\"historyLimit\":128,\"handleZero\":\"yes\"},\"modes\":[\"continuous\"]}]; 독립 수치 oracle·TS/JSON·삽입 역순과 승인 상태 경계만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "02-014",
+      "sourceName": "Variable Transport Delay",
+      "sourceLine": 129,
+      "canonical": "time.variable-transport-delay",
+      "selectedParameters": {
+        "minDelay": 0.25,
+        "maxDelay": 1,
+        "initial": 0,
+        "historyLimit": 128
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m12-independent-time-variable-transport-delay",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "minDelay": 0.25,
+            "maxDelay": 1,
+            "initial": 0,
+            "historyLimit": 128
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-time-variable-transport-delay/continuous"
+          ]
+        }
+      ],
+      "configuredNodeId": "State",
+      "rawFixtureId": "m12-independent-time-variable-transport-delay",
+      "evidenceFixtureIds": [
+        "m12-independent-time-variable-transport-delay/continuous"
+      ],
+      "declaredModes": [
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in",
+        "delay"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M12 승인 subset",
+      "boundary": "Finite scalar transport-age state q prime equals 1/delay; approved history queried at age q-1. Positive delay bounds; not a t-delay alias. Native full variable transport options remain open. · 실제 선택 구성 [{\"parameters\":{\"minDelay\":0.25,\"maxDelay\":1,\"initial\":0,\"historyLimit\":128},\"modes\":[\"continuous\"]}]; 독립 수치 oracle·TS/JSON·삽입 역순과 승인 상태 경계만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "04-001",
+      "sourceName": "Backlash",
+      "sourceLine": 215,
+      "canonical": "nonlinear.backlash",
+      "selectedParameters": {
+        "width": 2,
+        "initial": 0
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m12-independent-nonlinear-backlash",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "width": 2,
+            "initial": 0
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-nonlinear-backlash/continuous"
+          ]
+        }
+      ],
+      "configuredNodeId": "State",
+      "rawFixtureId": "m12-independent-nonlinear-backlash",
+      "evidenceFixtureIds": [
+        "m12-independent-nonlinear-backlash/continuous"
+      ],
+      "declaredModes": [
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M12 승인 subset",
+      "boundary": "Finite scalar accepted-output deadband state; width and initial output explicit. Native array, data type, solver and target options remain open. · 실제 선택 구성 [{\"parameters\":{\"width\":2,\"initial\":0},\"modes\":[\"continuous\"]}]; 독립 수치 oracle·TS/JSON·삽입 역순과 승인 상태 경계만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "04-008",
+      "sourceName": "Rate Limiter",
+      "sourceLine": 222,
+      "canonical": "nonlinear.rate-limiter-continuous",
+      "selectedParameters": {
+        "rising": 1,
+        "falling": -1,
+        "initial": -8
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m12-independent-nonlinear-rate-limiter-continuous",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "rising": 1,
+            "falling": -1,
+            "initial": -8
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-nonlinear-rate-limiter-continuous/continuous"
+          ]
+        },
+        {
+          "rawFixtureId": "m12-independent-rate-limiter-discrete",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "rising": 1,
+            "falling": -1,
+            "initial": 0
+          },
+          "declaredModes": [
+            "discrete"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-rate-limiter-discrete/discrete"
+          ]
+        }
+      ],
+      "configuredNodeId": "State",
+      "rawFixtureId": "m12-independent-nonlinear-rate-limiter-continuous",
+      "evidenceFixtureIds": [
+        "m12-independent-nonlinear-rate-limiter-continuous/continuous",
+        "m12-independent-rate-limiter-discrete/discrete"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M12 승인 subset",
+      "boundary": "Finite scalar accepted major-step envelope in continuous mode; initial continuous output is first input. Discrete due-grid mode has explicit initial output. Native full solver/data type/rate semantics remain open. · 실제 선택 구성 [{\"parameters\":{\"rising\":1,\"falling\":-1,\"initial\":-8},\"modes\":[\"continuous\"]},{\"parameters\":{\"rising\":1,\"falling\":-1,\"initial\":0},\"modes\":[\"discrete\"]}]; 독립 수치 oracle·TS/JSON·삽입 역순과 승인 상태 경계만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "04-009",
+      "sourceName": "Rate Limiter Dynamic",
+      "sourceLine": 223,
+      "canonical": "nonlinear.rate-limiter-dynamic",
+      "selectedParameters": {
+        "initial": 0
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m12-independent-nonlinear-rate-limiter-dynamic",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "initial": 0
+          },
+          "declaredModes": [
+            "discrete",
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-nonlinear-rate-limiter-dynamic/discrete",
+            "m12-independent-nonlinear-rate-limiter-dynamic/continuous"
+          ]
+        }
+      ],
+      "configuredNodeId": "State",
+      "rawFixtureId": "m12-independent-nonlinear-rate-limiter-dynamic",
+      "evidenceFixtureIds": [
+        "m12-independent-nonlinear-rate-limiter-dynamic/discrete",
+        "m12-independent-nonlinear-rate-limiter-dynamic/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "falling",
+        "in",
+        "rising"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M12 승인 subset",
+      "boundary": "Finite scalar external nonnegative rising/nonpositive falling limits with read-before-write discrete state. Continuous models use an explicit discrete due grid. Native continuously varying rate semantics remain open. · 실제 선택 구성 [{\"parameters\":{\"initial\":0},\"modes\":[\"discrete\",\"continuous\"]}]; 독립 수치 oracle·TS/JSON·삽입 역순과 승인 상태 경계만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "08-003",
+      "sourceName": "Algebraic Constraint",
+      "sourceLine": 343,
+      "canonical": "solver.algebraic-constraint",
+      "selectedParameters": {
+        "initial": 2,
+        "tolerance": 1e-11,
+        "maxIterations": 24,
+        "constraint": "zero"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m12-independent-solver-algebraic-constraint",
+          "configuredNodeId": "State",
+          "selectedParameters": {
+            "initial": 2,
+            "tolerance": 1e-11,
+            "maxIterations": 24,
+            "constraint": "zero"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-solver-algebraic-constraint/continuous"
+          ]
+        },
+        {
+          "rawFixtureId": "m12-independent-joint-algebraic",
+          "configuredNodeId": "X",
+          "selectedParameters": {
+            "initial": 0,
+            "tolerance": 1e-10,
+            "maxIterations": 24,
+            "constraint": "zero"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-joint-algebraic/continuous"
+          ]
+        }
+      ],
+      "configuredNodeId": "State",
+      "rawFixtureId": "m12-independent-solver-algebraic-constraint",
+      "evidenceFixtureIds": [
+        "m12-independent-solver-algebraic-constraint/continuous",
+        "m12-independent-joint-algebraic/continuous"
+      ],
+      "declaredModes": [
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M12 승인 subset",
+      "boundary": "Actual smooth finite scalar diagram residual or fixed-point equation jointly solved by bounded Newton; at most8 unknowns and64 component nodes. Nonsmooth, matrix, typed and general implicit systems rejected. · 실제 선택 구성 [{\"parameters\":{\"initial\":2,\"tolerance\":1e-11,\"maxIterations\":24,\"constraint\":\"zero\"},\"modes\":[\"continuous\"]},{\"parameters\":{\"initial\":0,\"tolerance\":1e-10,\"maxIterations\":24,\"constraint\":\"zero\"},\"modes\":[\"continuous\"]}]; 독립 수치 oracle·TS/JSON·삽입 역순과 승인 상태 경계만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "12-004",
+      "sourceName": "Timed-Based Linearization",
+      "sourceLine": 480,
+      "canonical": "analysis.linearization",
+      "selectedParameters": {
+        "definitionId": "Plant",
+        "version": 1,
+        "operatingInputs": [
+          2
+        ],
+        "operatingState": [
+          0.25
+        ],
+        "fdStep": 0.00001,
+        "times": [
+          0.5
+        ],
+        "mode": "timed"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m12-independent-analysis-linearization",
+          "configuredNodeId": "Analysis",
+          "selectedParameters": {
+            "definitionId": "Plant",
+            "version": 1,
+            "operatingInputs": [
+              2
+            ],
+            "operatingState": [
+              0.25
+            ],
+            "fdStep": 0.00001,
+            "times": [
+              0.5
+            ],
+            "mode": "timed"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-analysis-linearization/continuous"
+          ]
+        },
+        {
+          "rawFixtureId": "m12-independent-analysis-nonlinear-point",
+          "configuredNodeId": "Analysis",
+          "selectedParameters": {
+            "definitionId": "Nonlinear",
+            "version": 1,
+            "operatingInputs": [
+              0.25
+            ],
+            "operatingState": [
+              0.5
+            ],
+            "fdStep": 0.00001,
+            "times": [
+              0
+            ],
+            "mode": "timed"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-analysis-nonlinear-point/continuous"
+          ]
+        },
+        {
+          "rawFixtureId": "m12-independent-analysis-descriptor-reconstruction",
+          "configuredNodeId": "Analysis",
+          "selectedParameters": {
+            "definitionId": "DescriptorPlant",
+            "version": 1,
+            "operatingInputs": [
+              2
+            ],
+            "operatingState": [
+              0.25
+            ],
+            "fdStep": 0.00001,
+            "times": [
+              0
+            ],
+            "mode": "timed"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-analysis-descriptor-reconstruction/continuous"
+          ]
+        }
+      ],
+      "configuredNodeId": "Analysis",
+      "rawFixtureId": "m12-independent-analysis-linearization",
+      "evidenceFixtureIds": [
+        "m12-independent-analysis-linearization/continuous",
+        "m12-independent-analysis-nonlinear-point/continuous",
+        "m12-independent-analysis-descriptor-reconstruction/continuous"
+      ],
+      "declaredModes": [
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M12 독립 대체 subset",
+      "boundary": "Independent local central-difference A/B/C/D of an actual compiled continuous definition at explicit operating input/state. At most64 declared timed requests; held between accepted requests. Native MATLAB linearization/file/analysis-tool equivalence is not claimed. · 실제 선택 구성 [{\"parameters\":{\"definitionId\":\"Plant\",\"version\":1,\"operatingInputs\":[2],\"operatingState\":[0.25],\"fdStep\":0.00001,\"times\":[0.5],\"mode\":\"timed\"},\"modes\":[\"continuous\"]},{\"parameters\":{\"definitionId\":\"Nonlinear\",\"version\":1,\"operatingInputs\":[0.25],\"operatingState\":[0.5],\"fdStep\":0.00001,\"times\":[0],\"mode\":\"timed\"},\"modes\":[\"continuous\"]},{\"parameters\":{\"definitionId\":\"DescriptorPlant\",\"version\":1,\"operatingInputs\":[2],\"operatingState\":[0.25],\"fdStep\":0.00001,\"times\":[0],\"mode\":\"timed\"},\"modes\":[\"continuous\"]}]; 독립 수치 oracle·TS/JSON·삽입 역순과 승인 상태 경계만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "12-005",
+      "sourceName": "Trigger-Based Linearization",
+      "sourceLine": 481,
+      "canonical": "analysis.linearization",
+      "selectedParameters": {
+        "definitionId": "Plant",
+        "version": 1,
+        "operatingInputs": [
+          2
+        ],
+        "operatingState": [
+          0.25
+        ],
+        "fdStep": 0.00001,
+        "times": [
+          0.5
+        ],
+        "mode": "triggered"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m12-independent-analysis-triggered",
+          "configuredNodeId": "Analysis",
+          "selectedParameters": {
+            "definitionId": "Plant",
+            "version": 1,
+            "operatingInputs": [
+              2
+            ],
+            "operatingState": [
+              0.25
+            ],
+            "fdStep": 0.00001,
+            "times": [
+              0.5
+            ],
+            "mode": "triggered"
+          },
+          "declaredModes": [
+            "continuous"
+          ],
+          "evidenceFixtureIds": [
+            "m12-independent-analysis-triggered/continuous"
+          ]
+        }
+      ],
+      "configuredNodeId": "Analysis",
+      "rawFixtureId": "m12-independent-analysis-triggered",
+      "evidenceFixtureIds": [
+        "m12-independent-analysis-triggered/continuous"
+      ],
+      "declaredModes": [
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "trigger"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M12 독립 대체 subset",
+      "boundary": "Same independent local A/B/C/D analysis on rising boolean trigger; continuous producer must be registered Hit Crossing, or constant/discrete boolean. Arbitrary continuous pulses and native MATLAB trigger-linearization equivalence remain unsupported. · 실제 선택 구성 [{\"parameters\":{\"definitionId\":\"Plant\",\"version\":1,\"operatingInputs\":[2],\"operatingState\":[0.25],\"fdStep\":0.00001,\"times\":[0.5],\"mode\":\"triggered\"},\"modes\":[\"continuous\"]}]; 독립 수치 oracle·TS/JSON·삽입 역순과 승인 상태 경계만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    }
+  ],
+  "primarySourceRuntimeExecuted": false,
+  "fullSimulinkEquivalenceClaimed": false
+}
