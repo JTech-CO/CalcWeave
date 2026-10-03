@@ -1,0 +1,383 @@
+{
+  "generatedAt": "2026-10-03T12:08:15.396Z",
+  "stage": "M15",
+  "appVersion": "0.16.0",
+  "engineVersion": "0.16.0-m15",
+  "run": {
+    "conclusion": "success",
+    "databaseId": 37120366954,
+    "headSha": "3ac0973114232e7eae3052852d169e4b3b56c958",
+    "jobs": [
+      {
+        "completedAt": "2026-10-03T12:05:04Z",
+        "conclusion": "success",
+        "databaseId": 111195138819,
+        "name": "verify",
+        "startedAt": "2026-10-03T11:39:49Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-03T11:39:51Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-03T11:39:50Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:40:10Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "number": 2,
+            "startedAt": "2026-10-03T11:39:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:40:11Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-node@820762786026740c76f36085b0efc47a31fe5020",
+            "number": 3,
+            "startedAt": "2026-10-03T11:40:10Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:40:11Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+            "number": 4,
+            "startedAt": "2026-10-03T11:40:11Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:40:16Z",
+            "conclusion": "success",
+            "name": "Run npm ci",
+            "number": 5,
+            "startedAt": "2026-10-03T11:40:11Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:40:17Z",
+            "conclusion": "success",
+            "name": "Run npm audit --audit-level=moderate",
+            "number": 6,
+            "startedAt": "2026-10-03T11:40:16Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:41:52Z",
+            "conclusion": "success",
+            "name": "Run npm test",
+            "number": 7,
+            "startedAt": "2026-10-03T11:40:17Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:41:53Z",
+            "conclusion": "success",
+            "name": "Run npm run verify:coverage",
+            "number": 8,
+            "startedAt": "2026-10-03T11:41:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:41:53Z",
+            "conclusion": "success",
+            "name": "Run npm run verify:roadmap",
+            "number": 9,
+            "startedAt": "2026-10-03T11:41:53Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:42:30Z",
+            "conclusion": "success",
+            "name": "Run npm run verify:m7",
+            "number": 10,
+            "startedAt": "2026-10-03T11:41:53Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:43:43Z",
+            "conclusion": "success",
+            "name": "Run npm run verify:catalog",
+            "number": 11,
+            "startedAt": "2026-10-03T11:42:30Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:45:35Z",
+            "conclusion": "success",
+            "name": "Run npm run verify:m8",
+            "number": 12,
+            "startedAt": "2026-10-03T11:43:43Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:46:31Z",
+            "conclusion": "success",
+            "name": "Run npm run verify:m9",
+            "number": 13,
+            "startedAt": "2026-10-03T11:45:35Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:47:50Z",
+            "conclusion": "success",
+            "name": "Run npm run verify:m10",
+            "number": 14,
+            "startedAt": "2026-10-03T11:46:31Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:47:51Z",
+            "conclusion": "success",
+            "name": "Run npx tsx scripts/update-m10-coverage.ts --verify",
+            "number": 15,
+            "startedAt": "2026-10-03T11:47:50Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:48:44Z",
+            "conclusion": "success",
+            "name": "Run npm run verify:m11",
+            "number": 16,
+            "startedAt": "2026-10-03T11:47:51Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:48:45Z",
+            "conclusion": "success",
+            "name": "Run npx tsx scripts/update-m11-coverage.ts --verify",
+            "number": 17,
+            "startedAt": "2026-10-03T11:48:44Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:49:36Z",
+            "conclusion": "success",
+            "name": "Run npm run verify:m12",
+            "number": 18,
+            "startedAt": "2026-10-03T11:48:45Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:49:36Z",
+            "conclusion": "success",
+            "name": "Run npx tsx scripts/update-m12-coverage.ts --verify",
+            "number": 19,
+            "startedAt": "2026-10-03T11:49:36Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:51:40Z",
+            "conclusion": "success",
+            "name": "Run npm run verify:m13",
+            "number": 20,
+            "startedAt": "2026-10-03T11:49:36Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:51:42Z",
+            "conclusion": "success",
+            "name": "Run npx tsx scripts/update-m13-coverage.ts --verify",
+            "number": 21,
+            "startedAt": "2026-10-03T11:51:40Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:51:57Z",
+            "conclusion": "success",
+            "name": "Run npm run verify:m14",
+            "number": 22,
+            "startedAt": "2026-10-03T11:51:42Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:51:58Z",
+            "conclusion": "success",
+            "name": "Run npx tsx scripts/update-m14-coverage.ts --verify",
+            "number": 23,
+            "startedAt": "2026-10-03T11:51:57Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:52:53Z",
+            "conclusion": "success",
+            "name": "Run npm run verify:m15",
+            "number": 24,
+            "startedAt": "2026-10-03T11:51:58Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:53:06Z",
+            "conclusion": "success",
+            "name": "Run npm run build",
+            "number": 25,
+            "startedAt": "2026-10-03T11:52:53Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:53:06Z",
+            "conclusion": "success",
+            "name": "Run npm run verify:release",
+            "number": 26,
+            "startedAt": "2026-10-03T11:53:06Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T11:53:27Z",
+            "conclusion": "success",
+            "name": "Run npx playwright install --with-deps chromium",
+            "number": 27,
+            "startedAt": "2026-10-03T11:53:06Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T12:04:30Z",
+            "conclusion": "success",
+            "name": "Run npm run test:e2e",
+            "number": 28,
+            "startedAt": "2026-10-03T11:53:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T12:04:30Z",
+            "conclusion": "success",
+            "name": "Run actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b",
+            "number": 29,
+            "startedAt": "2026-10-03T12:04:30Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T12:04:30Z",
+            "conclusion": "success",
+            "name": "Validate the configured CalcWeave Pages destination",
+            "number": 30,
+            "startedAt": "2026-10-03T12:04:30Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T12:04:44Z",
+            "conclusion": "success",
+            "name": "Build the configured Pages path",
+            "number": 31,
+            "startedAt": "2026-10-03T12:04:30Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T12:04:44Z",
+            "conclusion": "success",
+            "name": "Verify the exact Pages artifact",
+            "number": 32,
+            "startedAt": "2026-10-03T12:04:44Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T12:04:59Z",
+            "conclusion": "success",
+            "name": "Verify the project-path application and offline scope",
+            "number": 33,
+            "startedAt": "2026-10-03T12:04:44Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T12:05:00Z",
+            "conclusion": "success",
+            "name": "Run actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b",
+            "number": 34,
+            "startedAt": "2026-10-03T12:04:59Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T12:05:00Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+            "number": 66,
+            "startedAt": "2026-10-03T12:05:00Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T12:05:02Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-node@820762786026740c76f36085b0efc47a31fe5020",
+            "number": 67,
+            "startedAt": "2026-10-03T12:05:00Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T12:05:02Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "number": 68,
+            "startedAt": "2026-10-03T12:05:02Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T12:05:02Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 69,
+            "startedAt": "2026-10-03T12:05:02Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/JTech-CO/CalcWeave/actions/runs/37120366954/job/111195138819"
+      },
+      {
+        "completedAt": "2026-10-03T12:05:19Z",
+        "conclusion": "success",
+        "databaseId": 111198980339,
+        "name": "deploy",
+        "startedAt": "2026-10-03T12:05:08Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-03T12:05:10Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-03T12:05:08Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T12:05:17Z",
+            "conclusion": "success",
+            "name": "Publish verified static artifact",
+            "number": 2,
+            "startedAt": "2026-10-03T12:05:10Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-03T12:05:17Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 3,
+            "startedAt": "2026-10-03T12:05:17Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/JTech-CO/CalcWeave/actions/runs/37120366954/job/111198980339"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/JTech-CO/CalcWeave/actions/runs/37120366954"
+  },
+  "logSha256": "b31319f1a5e63ef6ded104ee5492620decb79826180f5bc4d923dac95b64aaef",
+  "actualLogSummaryLines": [
+    "verify\tRun npm ci\t2026-10-03T11:40:16.7208433Z found 0 vulnerabilities",
+    "verify\tRun npm audit --audit-level=moderate\t2026-10-03T11:40:17.2778372Z found 0 vulnerabilities",
+    "verify\tRun npm test\t2026-10-03T11:41:52.5018719Z  Test Files  67 passed (67)",
+    "verify\tRun npm test\t2026-10-03T11:41:52.5020229Z       Tests  3854 passed (3854)",
+    "verify\tRun npm run verify:m11\t2026-10-03T11:48:44.3001986Z {\"rawFixtures\":60,\"definitionFixtures\":48,\"boundaryFixtures\":12,\"failures\":4,\"modeExecutions\":135,\"actualTypeScript\":138,\"strictTypeScriptPrograms\":3,\"checkedSamples\":419,\"exactTypedCells\":202}",
+    "verify\tRun npm run verify:m12\t2026-10-03T11:49:35.9230451Z {\"rawFixtures\":29,\"definitionFixtures\":11,\"boundaryFixtures\":18,\"failures\":5,\"modeExecutions\":30,\"actualTypeScript\":35,\"strictTypeScriptPrograms\":2,\"checkedSamples\":155}",
+    "verify\tRun npm run verify:m13\t2026-10-03T11:51:40.6981773Z {\"rawFixtures\":139,\"definitionFixtures\":30,\"boundaryFixtures\":109,\"failures\":15,\"modeExecutions\":350,\"actualTypeScript\":361,\"strictTypeScriptPrograms\":3,\"checkedSamples\":846}",
+    "verify\tRun npm run verify:m14\t2026-10-03T11:51:57.7468119Z {\"rawFixtures\":20,\"definitionFixtures\":3,\"boundaryFixtures\":17,\"failures\":18,\"modeExecutions\":28,\"actualTypeScript\":32,\"strictTypeScriptPrograms\":3,\"checkedSamples\":85}",
+    "verify\tRun npm run verify:m15\t2026-10-03T11:52:53.1012075Z {\"pythonPrograms\":142,\"wasmPrograms\":128,\"interopProfiles\":3,\"legacyMigrationProfiles\":7,\"nativeJsonSemanticParity\":true,\"immutableDefinitions\":337,\"sourceSubset\":367}",
+    "verify\tRun npm run verify:release\t2026-10-03T11:53:06.6968787Z {\"checks\":83,\"staticFiles\":14,\"totalStaticBytes\":2890268,\"releaseId\":\"f5aa5f4383c9704ccff24ed695f570f3fb89919c4a9b37ac0646b71001866146\"}",
+    "verify\tRun npm run test:e2e\t2026-10-03T12:04:30.0321676Z   189 passed (11.0m)",
+    "verify\tVerify the exact Pages artifact\t2026-10-03T12:04:44.5678871Z {\"checks\":83,\"staticFiles\":14,\"totalStaticBytes\":2890528,\"releaseId\":\"3ecb932e8c94a6bb2fea24e71e494f1555afea0240da888b7b8f9d4bddedd90f\"}",
+    "verify\tVerify the project-path application and offline scope\t2026-10-03T12:04:59.0359355Z   4 passed (13.8s)"
+  ],
+  "technicalDeploymentCI": "passed",
+  "verifiedPublicLaunch": false
+}

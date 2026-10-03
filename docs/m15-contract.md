@@ -1,6 +1,6 @@
 # CalcWeave M15 실행 타깃 계약
 
-M15는 기존337개 블럭 정의와 선택 source367/385행을 보존하면서 실제 실행 타깃을 확장한다. 타깃 capability는 버전 있는 별도 목록으로 관리하며 과거 canonical 정의의 exportTargets를 수정하지 않는다. 원본31개 실행·코드 생성 옵션의 전체 동등성이나 검증하지 않은 compiler 환경은 지원 완료로 표시하지 않는다. Python·WASM 실제 host 실행·외부 파일 UI·artifact·디자인·성능을 포함한 선택 로컬 engineering 검증을 완료했다. 전체 browser의 최초188/189와 영향1/1 재검증을 구분하고 공개 CI·배포는 대기로 둔다. 실제 결과는 [검증 기록](m15-validation.md)과 [engineering 기록](evidence/m15-engineering-checks.json)에 연결한다.
+M15는 기존337개 블럭 정의와 선택 source367/385행을 보존하면서 실제 실행 타깃을 확장한다. 타깃 capability는 버전 있는 별도 목록으로 관리하며 과거 canonical 정의의 exportTargets를 수정하지 않는다. 원본31개 실행·코드 생성 옵션의 전체 동등성이나 검증하지 않은 compiler 환경은 지원 완료로 표시하지 않는다. Python·WASM 실제 host 실행·외부 파일 UI·artifact·디자인·성능을 포함한 선택 engineering 검증과 공개0.16.0 통합 배포를 완료했다. 로컬 browser 최초188/189·영향1/1 재검증과 최종 공개 CI의189/189를 구분한다. 실제 결과는 [검증 기록](m15-validation.md)·[engineering 기록](evidence/m15-engineering-checks.json)·[공개 통합 증거](evidence/m15-public-release.json)에 연결한다.
 
 ## 타깃과 외부 의존성
 

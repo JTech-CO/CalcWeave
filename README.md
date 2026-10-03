@@ -1,7 +1,7 @@
 # CalcWeave
 
 > 블럭을 연결해 수학을 계산하고, 시간에 따른 변화를 관찰하며, 모델을 데이터와 실행 코드로 이어가는 웹 도구.  
-> 기준일: 2026-10-03 · 로컬 앱: 0.16.0 · 엔진: 0.16.0-m15 · 현재 상태: M15 선택 범위의 로컬 engineering 검증 완료. 전체 unit3854개·실제 타깃·UI·artifact·디자인·성능6개 예산·최종typecheck를 통과했고, 전체 browser 최초188/189와 영향1/1 재검증을 구분합니다. 블럭337종·예제75개·12개 카테고리와 source subset367/385·미구현18행을 유지합니다. 검증된 공개 버전은 M12 앱0.13.0이며 통합 공개 CI·배포는 대기 상태입니다. 전체 Simulink 옵션 대응은 후속 로드맵을 따릅니다.
+> 기준일: 2026-10-03 · 앱: 0.16.0 · 엔진: 0.16.0-m15 · 현재 상태: M13→M14→M15 선택 범위 구축·검증·병합 및 GitHub Pages 통합 배포 완료. 블럭337종·예제75개·12개 카테고리. 공개 CI unit3854/3854·browser189/189·project4/4 및 공개 기본9+새기능13 검사 PASS. 전체 Simulink 옵션 대응은 후속 로드맵을 따릅니다.
 
 CalcWeave는 MATLAB 설치 없이 브라우저에서 사용할 수 있는 블럭 기반 수학 계산·시뮬레이션 도구를 목표로 합니다. Simulink 기본 라이브러리의 기능 개념을 참고하면서, 초보자가 입력·계산·결과를 이해하고 점차 고급 모델로 확장할 수 있는 독립적인 사용 경험을 설계합니다.
 
@@ -11,7 +11,7 @@ CalcWeave는 MATLAB 설치 없이 브라우저에서 사용할 수 있는 블럭
 
 Python은 기존51종을 보존하고 문자열15종과 typed/enum/일반 신호 source3종의 선택 구성을 더해69종을 지원합니다. 실제 Python과 독립 TypeScript142개씩·정상256표본을 비교했습니다. WASM은16종의 유한 scalar 정적·base tick 이산 도식을 자체 binary와 고정 runner로 내보내며, 실제 host128개·정상43표본을 확인했습니다. C/C++는 검증한 native 실행 환경이 없어 unavailable입니다. 각 타깃의 자료형·모드·옵션 제한과 원래 블럭 위치를 생성 전에 안내합니다. [M15 계약](docs/m15-contract.md)·[검증 기록](docs/m15-validation.md)
 
-기존 M9~M14의 승인된7개 엔진 식별자로 만든 공유 패키지는 원본 서명·registry를 먼저 확인하고 별도 migration 검토와 출처 확인을 거쳐 현재 모델로 읽습니다. 제한된 MAT v5 데이터와 SLX/MDL scalar 도식은 구조·미지원 항목·원본 위치를 보고하고, 명시 입력값을 받아 CalcWeave 사본으로 변환합니다. `.cwinterop.json`은 원본 바이트와 SHA·분석 보고서를 보관하며 복구할 때 원본을 다시 분석합니다. 편집한 SLX/MDL/MAT 생성과 MATLAB 실행 수치 동등성은 지원 승인 범위에 포함하지 않습니다. 전체unit3854개·interop73unit/9browser·내보내기4browser·root/project각83검사/14assets·project browser4개·디자인188관측과 이전 M13/M14 실제 생성 회귀를 통과했습니다. 전체 browser 최초188/189와 테스트 대기 조정 후 영향1/1 PASS를 분리 기록한다. 성능6개 예산·최종typecheck를 통과해 선택 로컬 engineering을 완료했고 공개 CI·배포는 대기 상태이며 파일 파싱으로 source 승인 수를 늘리지 않습니다.
+기존 M9~M14의 승인된7개 엔진 식별자로 만든 공유 패키지는 원본 서명·registry를 먼저 확인하고 별도 migration 검토와 출처 확인을 거쳐 현재 모델로 읽습니다. 제한된 MAT v5 데이터와 SLX/MDL scalar 도식은 구조·미지원 항목·원본 위치를 보고하고, 명시 입력값을 받아 CalcWeave 사본으로 변환합니다. `.cwinterop.json`은 원본 바이트와 SHA·분석 보고서를 보관하며 복구할 때 원본을 다시 분석합니다. 편집한 SLX/MDL/MAT 생성과 MATLAB 실행 수치 동등성은 지원 승인 범위에 포함하지 않습니다. 전체unit3854개·interop73unit/9browser·내보내기4browser·root/project각83검사/14assets·project browser4개·디자인188관측과 이전 M13/M14 실제 생성 회귀를 통과했습니다. 로컬 전체 browser 최초188/189와 테스트 대기 조정 후 영향1/1 PASS를 분리 기록합니다. 성능6개 예산·최종typecheck를 통과해 선택 로컬 engineering을 완료했고, 공개0.16.0의 전체 CI·파일 parity·기본9검사·새기능13케이스도 [검증했습니다](docs/evidence/m15-public-release.json). 파일 파싱으로 source 승인 수를 늘리지 않습니다.
 
 ## M14 고정 WASM·lifecycle·메시지 전달
 
@@ -208,3 +208,5 @@ npm run verify:performance:catalog
 최초0.10.1 시도는 초기 캔버스 fit 검사에서128/129개가 통과하고1개가 실패해 배포가 생략됐다. [실패 기록](docs/evidence/m9-presentation-patch-failed-attempt.json)을 보존한다. ResizeObserver 알림을 지연한 경합은 별도로 재현했지만 원래 CI의 정확한 timing/geometry 원인은 로그로 확정하지 않는다.
 
 다음 시도도129/130개 통과 후 같은 초기 fit 검사에서 실패해 게시되지 않았다. [두 번째 실패 기록](docs/evidence/m9-late-layout-failed-attempt.json)을 보존한다. 캔버스가22px 작아지며 y중심 오차11px이 된 측정과 일치하는 자동 저장 문구의 헤더 줄바꿈을 별도로 재현했다. [저장 상태 레이아웃 교정](docs/evidence/m9-save-status-layout-correction.json)은5개 상태 문구의 크기를 미리 확보해 헤더 높이를 유지하며 DOMtext는 현재 상태만 포함한다.
+
+M13·M14·M15의 공개0.16.0 통합 배포와 실제 파일·브라우저 검증은 [M15 공개 결과](docs/m15-validation.md#m13m14m15-공개-통합-결과)를 따릅니다. 공개 앱의 빌드 커밋은 `3ac0973114232e7eae3052852d169e4b3b56c958`이며 이후 문서 증거 병합은 같은 artifact를 다시 게시하지 않습니다.
