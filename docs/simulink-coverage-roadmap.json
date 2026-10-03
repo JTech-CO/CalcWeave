@@ -10,7 +10,7 @@
     "engineVersion": "0.8.0-catalog",
     "registryDefinitions": 144,
     "sourcePath": "dataset/Simulink_Basic_Blocks_R2024b.md",
-    "coveragePath": "docs/block-coverage.md",
+    "coveragePath": "docs/baselines/catalog-block-coverage.md",
     "datasetSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
     "coverageSha256": "bfad433de22c3302b53369be3465ec1d4bb3e072dd8f3ce310bc4af1ea967774",
     "sourceRows": 385,

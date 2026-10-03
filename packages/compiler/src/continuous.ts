@@ -1,6 +1,7 @@
 import { CONTINUOUS_BOUNDARY_TYPES, CONTINUOUS_STATE_TYPES, MODEL_LIMITS, ModelError, normalizeSolverSettings, type CalcModel, type ExpressionNode, type IRNode, type SignalDescriptor } from '../../model/src';
 import { getBlockDefinition, isDirectFeedthrough } from '../../block-library/src';
 import { EXPANDED_TIME_SOURCE_IDS } from '../../block-library/src/time-sources';
+import { m8HasUnregisteredJump, m8JumpControlPorts } from './m8';
 
 const continuousSources: ReadonlySet<string> = new Set(['source.step', 'source.ramp', 'source.sine-wave', 'source.repeating-sequence', 'source.clock', ...EXPANDED_TIME_SOURCE_IDS]);
 const sampled = new Set(['source.random', 'source.digital-clock', 'source.pulse', 'logic.edge-detect', 'time.rate-transition', 'time.zero-order-hold']);
@@ -184,7 +185,7 @@ function validateRegisteredDiscontinuities(ordered: IRNode[], byId: Map<string, 
       if (seen.has(id)) continue; seen.add(id);
       const producer = byId.get(id)!;
       if (producer.executionDomain !== 'continuous' || CONTINUOUS_STATE_TYPES.includes(producer.blockType) || CONTINUOUS_BOUNDARY_TYPES.includes(producer.blockType)) continue;
-      let unsupported = producer.blockType === 'math.round'
+      let unsupported = m8HasUnregisteredJump(producer) || producer.blockType === 'math.round'
         || ['math.sign', 'math.mod', 'math.remainder', 'nonlinear.quantizer', 'logic.interval', 'logic.is-integer', 'logic.approx-equal', 'reduce.all', 'reduce.any'].includes(producer.blockType)
         || (producer.blockType === 'lookup.interpolated' && producer.parameters.interpolation === 'previous')
         || (producer.blockType === 'math.expression' && roundedExpression(producer.expression));
@@ -192,6 +193,7 @@ function validateRegisteredDiscontinuities(ordered: IRNode[], byId: Map<string, 
         const condition = byId.get(producer.inputs.condition!.nodeId)!;
         unsupported ||= condition.executionDomain === 'continuous' && condition.blockType !== 'logic.hit-crossing';
       }
+      unsupported ||= m8JumpControlPorts(producer).some(port => changesContinuously(byId.get(producer.inputs[port]!.nodeId)!));
       if (unsupported && changesContinuously(producer)) fail(producer, 'UNREGISTERED_DISCONTINUITY', '이 연속 불연속 연산의 전환 위치는 현재 솔버가 추적하지 않습니다. Zero Order Hold를 사용해 이산 연산으로 실행하거나 등록된 Step·Relay·Hit Crossing 사건을 사용해 주세요.');
       pending.push(...Object.values(producer.inputs).map((endpoint) => endpoint.nodeId));
     }

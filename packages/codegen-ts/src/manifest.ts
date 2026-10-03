@@ -2,13 +2,14 @@ import { ENGINE_VERSION, ModelError, normalizeSolverSettings, type CompiledModel
 import { sha256 } from './sha256';
 import { EXPANSION_BLOCK_IDS } from '../../block-library/src/expansion';
 import { EXPANDED_TIME_SOURCE_IDS } from '../../block-library/src/time-sources';
+import { M8_BLOCK_IDS } from '../../block-library/src/m8';
 
 export interface ExportManifest {
   schemaVersion: 1;
   modelHash: string;
   modelHashAlgorithm: 'SHA-256';
   engineVersion: string;
-  targetVersion: 'typescript-m2-v1' | 'typescript-m3-v1' | 'typescript-m4-v1' | 'typescript-m5-v1' | 'typescript-catalog-v1';
+  targetVersion: 'typescript-m2-v1' | 'typescript-m3-v1' | 'typescript-m4-v1' | 'typescript-m5-v1' | 'typescript-catalog-v1' | 'typescript-m8-v1';
   execution: ExecutionSettings;
   nodes: Record<string, { sampleTime: { period: number; offset: number }; executionDomain?: 'continuous'|'discrete'|'constant'; seed?: number; randomAlgorithm?: 'lcg32-boxmuller-v1' }>;
   outputTypes: Record<string, SignalDescriptor>;
@@ -28,9 +29,11 @@ export function manifestForHash(compiled: CompiledModel, hash: string): ExportMa
   const m5 = compiled.nodes.some(node => ['math.matrix-multiply', 'matrix.transpose', 'matrix.determinant', 'matrix.inverse', 'matrix.solve', 'matrix.cholesky', 'matrix.lu', 'lookup.2d', 'lookup.prelookup', 'fixed.quantize'].includes(node.blockType));
   const catalogIds: ReadonlySet<string> = new Set([...EXPANSION_BLOCK_IDS, ...EXPANDED_TIME_SOURCE_IDS]);
   const catalog = compiled.nodes.some(node => catalogIds.has(node.blockType));
+  const m8Ids: ReadonlySet<string> = new Set(M8_BLOCK_IDS);
+  const m8 = compiled.nodes.some(node => m8Ids.has(node.blockType));
   return {
     schemaVersion: 1, modelHash: hash, modelHashAlgorithm: 'SHA-256', engineVersion: ENGINE_VERSION,
-    targetVersion: catalog ? 'typescript-catalog-v1' : m5 ? 'typescript-m5-v1' : m4 ? 'typescript-m4-v1' : continuous ? 'typescript-m3-v1' : 'typescript-m2-v1', execution: structuredClone(compiled.model.execution),
+    targetVersion: m8 ? 'typescript-m8-v1' : catalog ? 'typescript-catalog-v1' : m5 ? 'typescript-m5-v1' : m4 ? 'typescript-m4-v1' : continuous ? 'typescript-m3-v1' : 'typescript-m2-v1', execution: structuredClone(compiled.model.execution),
     nodes: Object.fromEntries(compiled.nodes.map((node) => [node.id, { sampleTime: { ...node.sampleTime },
       ...(node.executionDomain ? { executionDomain: node.executionDomain } : {}),
       ...(node.blockType === 'source.random' ? { seed: Number(node.parameters.seed), randomAlgorithm: 'lcg32-boxmuller-v1' as const } : {}) }])),

@@ -97,7 +97,7 @@ for (const fixture of [
       const headerArchive = await downloadedArchive(page, '실행 묶음');
       for (const files of [dialogArchive, headerArchive]) {
         expect(Object.keys(files).sort()).toEqual(['README.md', 'expected-output.json', 'manifest.json', 'model.cw.json', 'model.ts', 'run-example.ts']);
-        expect(JSON.parse(files['manifest.json']).targetVersion).toBe('typescript-catalog-v1'); expect(files['README.md']).toContain('144개 블록'); expect(files['README.md']).toContain('승인된 M4'); expect(files['README.md']).toContain('승인된 M5');
+        expect(JSON.parse(files['manifest.json']).targetVersion).toBe('typescript-catalog-v1'); expect(files['README.md']).toContain('등록된 블록 정의'); expect(files['README.md']).toContain('승인된 M4'); expect(files['README.md']).toContain('승인된 M5');
         expect(files['model.ts']).toContain('reduce.sum'); expect(JSON.parse(files['expected-output.json']).samples).toEqual(record.result.samples);
       }
     }

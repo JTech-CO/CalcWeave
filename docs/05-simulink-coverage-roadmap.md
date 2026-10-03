@@ -6,11 +6,11 @@
 
 ## 범위와 출발점
 
-현재 엔진은 **0.8.0-catalog, registry144항목**이다. R2024b 원자료01~21절은 **385행 /339개 영어 이름 문자열**이며, 현재 승인·대체·preset을 포함한 subset 기록은 **134행**, 미구현은 **251행**이다. catalog의 신규 승인20행은 이134에 포함된다. 단순 블럭명 수, registry, 독립 수치kernel, 분류 바로가기와 preset의 수를 같은 지표로 합산하지 않는다.
+이 계획의 수립 기준은 **0.8.0-catalog, registry144항목**이다. 수립 당시 지원표와 등록 정의는 [보존 기준](baselines/catalog-block-coverage.md)에 고정하고, 단계별 구현 진척은 [현재 지원표](block-coverage.md)·[M8 계약](m8-contract.md)·[M9 계약](m9-contract.md)에서 확인한다. R2024b 원자료01~21절은 **385행 /339개 영어 이름 문자열**이며, 수립 당시 승인·대체·preset을 포함한 subset 기록은 **134행**, 미구현은 **251행**이다. catalog의 신규 승인20행은 이134에 포함된다. 단순 블럭명 수, registry, 독립 수치kernel, 분류 바로가기와 preset의 수를 같은 지표로 합산하지 않는다.
 
 이 로드맵의 '전체 대응' 목표는 원자료385행 각각의 기능/옵션/자료형/실행 모드/코드 타깃/외부 조건을 끝까지 추적하고 지원 결정을 증거로 닫는 것이다. 원자료는 기본 라이브러리의 분류·대체 구성·조건부·레거시를 정리한 목록이며 전체 설치판·모든 Simulink toolbox와 모든 옵션의 전수 사양은 아니다. **R2024b 전체 옵션 inventory도 아직 미완료**다. 각 단계의 첫 계약 작업에서 공식 사양/실제 원본 환경의 옵션 행렬을 확보하고 미확정 항목을 표시해야 한다.
 
-독립 구현, 공유 설정, 목적 대체, 조건부 외부 adapter, 레거시 설명과 검증된 미지원은 서로 다른 결과다. 미지원 이유를 기록하면 추적 결정은 닫을 수 있지만 실행 지원이나 완전 동등성을 달성한 것으로 계산하지 않는다. 필수 옵션·자료형·mode·target에 미검증/미지원이 남으면 '전체 실행 동등 완료'를 선언할 수 없다. 현재134subset도 남은 옵션이 있으므로385행 모두 후속 단계와 M16 검증을 배정했다. source/현재coverage의 승인 상태는 바꾸지 않는다.
+독립 구현, 공유 설정, 목적 대체, 조건부 외부 adapter, 레거시 설명과 검증된 미지원은 서로 다른 결과다. 미지원 이유를 기록하면 추적 결정은 닫을 수 있지만 실행 지원이나 완전 동등성을 달성한 것으로 계산하지 않는다. 필수 옵션·자료형·mode·target에 미검증/미지원이 남으면 '전체 실행 동등 완료'를 선언할 수 없다. 수립 당시134subset도 남은 옵션이 있으므로385행 모두 후속 단계와 M16 검증을 배정했다. 이 문서의 baseline 승인 상태는 보존한다. 후속 승인 범위는 현재 지원표에 별도로 기록한다.
 
 21절의 보조 파라미터표와22~25절은385행에 합산하지 않는다.22절 내부 제어 포트는 M11 계층 fixture에 연결하고23절 레거시는 이전 안내와 adapter gate로 관리한다.24~25절의 구버전/실제 설치판 추출은 reference 확보 절차이며 브라우저 계산 블럭으로 구현하는 항목이 아니다.
 
@@ -20,7 +20,7 @@ M8→M9→M10의 순서로 계산·시간·자료형 기반을 늘린다. M11 �
 
 P0는 공통 기반과 실제 수학·신호 과제를 먼저 완결하는 일, P1은 상태/계층/사용 흐름의 확대, P2는 외부 환경·권리와 선택 adapter다. stage의 우선도와 구현 가능 여부는 다르다.
 
-| 단계 | 기능 묶음 | 우선도 | 계약 선행 | 최초 작업 배정385행 | 그중 현재 미구현251행 |
+| 단계 | 기능 묶음 | 우선도 | 계약 선행 | 최초 작업 배정385행 | 그중 수립 당시 미구현251행 |
 | --- | --- | --- | --- | ---: | ---: |
 | M8 | 수학·신호와 배열 조작의 잔여 기능 | P0 | 현 catalog 계약 | 107 | 46 |
 | M9 | DSP·이산 상태·샘플시간 | P0 | M8 | 58 | 31 |
@@ -37,9 +37,9 @@ M15와 M16의 최초 작업 행 수0은 작업이 없다는 뜻이 아니다. M1
 
 옵션 완료는 최초 작업 단계와 다르다. JSON의 `firstWorkMilestone`은 첫 계약/확장 stage, `optionCompletionMilestones`는 자료형·solver·adapter·target·QA의 후속 작업이다. M16 완료표시는 각 행의 옵션별 증거/미지원 이유가 갖춰진다는 뜻이며 실행 지원률은 별도로 계산한다.
 
-## 분류별 배정과 현재 상태
+## 분류별 배정과 수립 당시 상태
 
-| 원자료 분류 | 행 | 현재subset | 미구현 | 최초 작업 stage와 행 수 |
+| 원자료 분류 | 행 | 수립 당시 subset | 미구현 | 최초 작업 stage와 행 수 |
 | --- | ---: | ---: | ---: | --- |
 | 01 Commonly Used Blocks | 23 | 22 | 1 | M8:12 / M9:2 / M10:1 / M11:5 / M12:1 / M13:2 |
 | 02 Continuous | 16 | 9 | 7 | M12:15 / M14:1 |
@@ -287,8 +287,8 @@ M15의 import는 parse 성공·옵션 변환·실행 지원·왕복 손실을 �
 
 ## 증거와 운영
 
-행별 상태는 현재coverage의 baseline을 보존하고 후속 구현이 실제 계약/oracle/타깃/진단 gate를 통과한 뒤 별도 변경한다. 완료 결정은 `verified-native-scope`, `verified-shared-configuration`, `verified-independent-alternative`, `verified-conditional-adapter`, `documented-unsupported`, `documented-legacy`로 분리한다. 실행 지원률은 앞의 검증된 실행 범위만, 추적 결정률은 설명된 미지원/legacy도 포함해 별도로 계산한다. registry 정의 수와 source행 수로 완전 옵션 지원률을 만들지 않는다.
+행별 상태는 수립 baseline을 보존하고 현재 지원표는 후속 구현이 실제 계약/oracle/타깃/진단 gate를 통과한 뒤 별도 변경한다. 완료 결정은 `verified-native-scope`, `verified-shared-configuration`, `verified-independent-alternative`, `verified-conditional-adapter`, `documented-unsupported`, `documented-legacy`로 분리한다. 실행 지원률은 앞의 검증된 실행 범위만, 추적 결정률은 설명된 미지원/legacy도 포함해 별도로 계산한다. registry 정의 수와 source행 수로 완전 옵션 지원률을 만들지 않는다.
 
 계약 owner와 review owner를 기능 묶음 착수 때 지정한다. 실패 fixture·버전·환경·허용오차·옵션별 status를 지원표에 남기며 이전 증거를 덮어쓰지 않는다. 신규 stage는 미구현/연구 계획이며 공개 출시 게이트(M6)의 보안·운영·도메인·접근성·초보자 관찰을 완료로 바꾸지 않는다.
 
-검증 명령은 `npm exec -- tsx scripts/verify-roadmap.ts`다. 스크립트는 source digest/385행/339이름·기존coverage·JSON의251미구현과134subset·원본 identity·stage의존 DAG·385행 배정·후속옵션/M16 gate·문서집계를 읽기 전용으로 확인한다. `--write`는 현재coverage로부터 JSON/이 문서를 재생성하는 명시 갱신이며 review 뒤 실행한다. source와coverage는 어떤 모드에서도 수정하지 않는다.
+검증 명령은 `npm exec -- tsx scripts/verify-roadmap.ts`다. 스크립트는 source digest/385행/339이름·보존 baseline·JSON의251미구현과134subset·기존144개 등록 계약의 보존·원본 identity·stage의존 DAG·385행 배정·후속옵션/M16 gate·문서집계를 읽기 전용으로 확인한다. `--write`는 보존 baseline으로부터 JSON/이 문서를 재생성하는 명시 갱신이며 review 뒤 실행한다. source와coverage는 어떤 모드에서도 수정하지 않는다.

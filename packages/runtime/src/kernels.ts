@@ -4,6 +4,7 @@ import { matrixMultiply, transpose, determinant, inverse, solve, cholesky, lu, l
 import { quantizeFixed, type FixedQuantizationOptions } from '../../quantization/src';
 import { evaluateExpansionNode } from './expansion';
 import { evaluateTimeSourceNode } from './time-sources';
+import { evaluateM8Node, m8OperationCost } from './m8';
 
 export function numericFailure(code: string, nodeId: string, message: string): never {
   throw new ModelError([{ code, nodeId, message }]);
@@ -39,6 +40,8 @@ export function nodeOperationCost(node: IRNode, byId: Map<string, IRNode>): numb
     const endpoint = node.inputs[port];
     return endpoint ? byId.get(endpoint.nodeId)!.outputs[endpoint.portId]!.shape : [];
   };
+  const m8Cost = m8OperationCost(node, inputSize, outputSize);
+  if (m8Cost !== undefined) return m8Cost;
   if (node.blockType === 'math.matrix-multiply') {
     const a = inputShape('a'), b = inputShape('b');
     return 8 * a[0]! * a[1]! * b[1]! + a[0]! * a[1]! + b[0]! * b[1]! + outputSize;
@@ -103,6 +106,8 @@ export function checkSignal(value: SignalValue | undefined, descriptor: SignalDe
 
 /** M1 finite real/boolean kernels. Arbitrary model text never becomes executable syntax. */
 export function evaluateSignalNode(node: IRNode, input: (port: string) => SignalValue, state?: SignalValue, time = 0): Record<string, SignalValue> {
+  const m8 = evaluateM8Node(node, input);
+  if (m8) return m8;
   const expansion = evaluateExpansionNode(node, input);
   if (expansion) return expansion;
   const timeSource = evaluateTimeSourceNode(node, time);

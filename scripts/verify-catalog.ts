@@ -15,11 +15,12 @@ import { ENGINE_VERSION, ModelError, parseModelJson, serializeModel, type CalcMo
 import { EXPANSION_FIXTURES, expansionModel, type ExpansionFixture } from '../tests/block-expansion-fixtures';
 import { TIME_SOURCE_FIXTURES, timeSourceModel } from '../tests/time-source-fixtures';
 
-const directory = resolve('.test-generated/catalog-parity');
+const evidenceStage = String(ENGINE_VERSION) === '0.8.0-catalog' ? 'catalog' : `catalog-regression-on-${ENGINE_VERSION.split('-').at(-1)}`;
+const directory = resolve(`.test-generated/${evidenceStage}-parity`);
 await mkdir(directory, { recursive: true });
 await mkdir('docs/evidence', { recursive: true });
-assert.equal(blockRegistry.length, 144);
-assert.equal(new Set(blockRegistry.map(block => block.id)).size, 144);
+assert(blockRegistry.length >= 144);
+assert.equal(new Set(blockRegistry.map(block => block.id)).size, blockRegistry.length);
 assert.deepEqual([...EXPANSION_FIXTURES.map(fixture => fixture.id)].sort(), [...EXPANSION_BLOCK_IDS].sort());
 assert.deepEqual(TIME_SOURCE_FIXTURES.map(fixture => fixture.blockId).sort(), [...EXPANDED_TIME_SOURCE_IDS].sort());
 const strictModes = new Set<string>();
@@ -118,5 +119,5 @@ for (const entry of cases) {
 }
 const datasetBytes = await readFile('dataset/Simulink_Basic_Blocks_R2024b.md');
 const report = { generatedAt: new Date().toISOString(), engineVersion: ENGINE_VERSION, registryCount: blockRegistry.length, newMathCards: 64, newTimeCards: 6, datasetSha256: createHash('sha256').update(datasetBytes).digest('hex'), strictTypeScriptModes: [...strictModes], checkedSamples, actualGeneratedPrograms: ordinal, fixtures, failures, methodology: 'Every raw scalar/vector/matrix/boolean sample compared with independent analytic/hand fixtures in every supported mode. Actual standalone TypeScript ESM and manifests compared with JS; strict ES2022-only compilation per mode and all time sources. JSON roundtrip and original-node domain diagnostics verified. Floating tolerance is 2e-12 scaled by max(1,abs(expected)); shape/boolean/key sets are exact. Source-row approval checks use absolute error within 2e-12 for these fixtures. New cards are explicitly unavailable in Python. Existing M1-M7 contracts have separate regression evidence.', publicDeploymentClaimed: false };
-await writeFile('docs/evidence/catalog-verification.json', JSON.stringify(report, null, 2) + '\n');
+await writeFile(`docs/evidence/${evidenceStage}-verification.json`, JSON.stringify(report, null, 2) + '\n');
 process.stdout.write(JSON.stringify({ fixtures: fixtures.length, failureFixtures: failures.length, checkedSamples, actualGeneratedPrograms: ordinal, registryCards: blockRegistry.length, strictTypeScriptModes: [...strictModes] }) + '\n');

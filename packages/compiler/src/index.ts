@@ -11,6 +11,7 @@ import { flattenHierarchy } from './hierarchy';
 import { validateAdvancedParameters } from './advanced';
 import { inferExpansionSignal } from './expansion';
 import { inferTimeSourceDescriptor, validateTimeSourceParameters } from './time-sources';
+import { inferM8Outputs, validateM8Parameters } from './m8';
 
 const compareId = (a: string, b: string): number => a < b ? -1 : a > b ? 1 : 0;
 
@@ -310,7 +311,13 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
         output = scalarState(); break;
       }
       case 'sink.display': case 'io.output': case 'io.terminator': case 'sink.scope': output = clone(input('in')); break;
-      default: output = inferExpansionSignal(node, input, originals.get(node.id)!.unit ?? '1') ?? inferTimeSourceDescriptor(node, originals.get(node.id)!.unit ?? '1'); break;
+      default: {
+        const declaredUnit = originals.get(node.id)!.unit ?? '1';
+        const m8Outputs = inferM8Outputs(node, input, declaredUnit);
+        if (m8Outputs) Object.assign(node.outputs, m8Outputs);
+        else output = inferExpansionSignal(node, input, declaredUnit) ?? inferTimeSourceDescriptor(node, declaredUnit);
+        break;
+      }
     }
     if (output) node.outputs.out = output;
     const declaredUnit = originals.get(node.id)!.unit;
@@ -388,6 +395,7 @@ function compileFlatModel(input: unknown): CompiledModel {
       validateContinuousParameters(ir, model);
       validateAdvancedParameters(ir);
       validateTimeSourceParameters(ir, model);
+      validateM8Parameters(ir);
       if (definition.id === 'math.expression') ir.expression = parseExpression(parameters.expression as string);
       nodeById.set(node.id, ir);
     } catch (error) {

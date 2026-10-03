@@ -9,7 +9,7 @@ import { ENGINE_VERSION } from '../../packages/model/src';
 import { APP_VERSION } from '../../packages/release/src';
 import type { CalcModel } from '../../packages/model/src';
 
-const evidencePath = (name: string) => `docs/evidence/${APP_VERSION === '0.8.1' ? 'pages' : ENGINE_VERSION.split('-').at(-1)}-${name}`;
+const evidencePath = (name: string) => `docs/evidence/${String(APP_VERSION) === '0.8.1' ? 'pages' : ENGINE_VERSION.split('-').at(-1)}-${name}`;
 
 async function openWorkspace(page: Page) {
   await page.goto('/');
@@ -432,9 +432,9 @@ test('Keyboard-accessible connection editing, undo and unique block IDs', async 
   await expect(page.locator('.output-card strong')).toHaveText('2');
   await page.getByRole('button', { name: '실행 취소 (Ctrl+Z)', exact: true }).click();
   await expect(page.locator('.result-status')).toContainText('다시 계산 필요');
-  await page.locator('.library-item').filter({ hasText: 'Constant' }).click();
+  await page.locator('.library-item').filter({ has: page.getByText('Constant', { exact: true }) }).click();
   await page.getByRole('button', { name: '블록 삭제' }).click();
-  await page.locator('.library-item').filter({ hasText: 'Constant' }).click();
+  await page.locator('.library-item').filter({ has: page.getByText('Constant', { exact: true }) }).click();
   await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨');
   const saved = await stored(page) as CalcModel;
   expect(new Set(saved.nodes.map(node => node.id)).size).toBe(saved.nodes.length);
@@ -934,7 +934,7 @@ test('Korean aliases are searchable without adding new engine blocks', async ({ 
   await expect(page.locator('.library-item')).toHaveCount(2);
   await expect(page.locator('.library-item small')).toHaveText(['Sum', 'Bias']);
   await search.fill('값');
-  await expect(page.locator('.library-item').filter({ hasText: 'Constant' })).toBeVisible();
+  await expect(page.locator('.library-item').filter({ has: page.getByText('Constant', { exact: true }) })).toBeVisible();
   await search.fill('없는_블럭_이름');
   await expect(page.locator('.search-empty')).toBeVisible();
   await page.getByRole('button', { name: '전체 블록 보기' }).click();

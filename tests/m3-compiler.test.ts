@@ -1,3 +1,4 @@
+import { M8_BLOCK_IDS } from '../packages/block-library/src/m8';
 import { describe, expect, it } from 'vitest';
 import { blockRegistry, getBlockPorts, isDirectFeedthrough } from '../packages/block-library/src';
 import { compileModel } from '../packages/compiler/src';
@@ -180,7 +181,7 @@ describe('M3 mixed domains and event boundaries', () => {
     const delays = Array.from({ length: 99 }, (_, index) => node(`delay_${index}`, 'discrete.delay', { steps: 1024, initial: 0 }));
     const large = graph([node('input', 'source.constant'), ...delays, node('result', 'sink.scope')], [edge('input', delays[0]!.id), ...delays.slice(1).map((entry, index) => edge(delays[index]!.id, entry.id)), edge(delays.at(-1)!.id, 'result')]);
     expectCode(large, 'STATE_BUDGET_EXCEEDED');
-    expect(MODEL_LIMITS.maxStateElements).toBe(100000); expect(blockRegistry).toHaveLength(144);
+    expect(MODEL_LIMITS.maxStateElements).toBe(100000); expect(blockRegistry).toHaveLength(144 + M8_BLOCK_IDS.length);
   });
   it.each([
     ['math.round', {}], ['lookup.interpolated', { interpolation: 'previous' }],

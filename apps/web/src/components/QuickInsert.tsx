@@ -1,3 +1,4 @@
+import { M8_BLOCK_PRESETS } from '../../../../packages/block-library/src/m8';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { BLOCK_REGISTRY } from '../../../../packages/block-library/src';
 import { BLOCK_SYMBOLS, blockTone } from './BlockNode';
@@ -6,6 +7,7 @@ import { useModalDialog } from './ModalDialog';
 
 export interface InsertItem { id: string; blockType: string; title: string; description: string; parameters?: Record<string, unknown> }
 const PRESETS: InsertItem[] = [
+  ...M8_BLOCK_PRESETS.map(preset => ({ id: `preset-m8-${preset.id}`, blockType: preset.blockType, title: preset.label, description: '승인된 기본 설정', parameters: { ...preset.parameters } })),
   { id: 'preset-pi', blockType: 'source.constant', title: 'Pi · 원주율 π', description: 'Constant의 값 π', parameters: { value: Math.PI } },
   { id: 'preset-zero', blockType: 'source.constant', title: 'Zero · 0', description: 'Constant의 값 0', parameters: { value: 0 } },
   { id: 'preset-true', blockType: 'source.constant', title: 'True · 참', description: 'Constant의 boolean 값 true', parameters: { value: true } },
