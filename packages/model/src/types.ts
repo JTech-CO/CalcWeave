@@ -1,7 +1,17 @@
-export const ENGINE_VERSION = '0.10.0-m9';
+export const ENGINE_VERSION = '0.11.0-m10';
 
 export type ExecutionMode = 'static' | 'discrete' | 'continuous';
 export type BlockType =
+  | 'source.typed' | 'source.enum'
+  | 'signal.cast' | 'signal.cast-inherited' | 'signal.to-legacy' | 'signal.type-duplicate'
+  | 'signal.type-propagation' | 'signal.scaling-strip' | 'signal.representation' | 'signal.specification'
+  | 'signal.width' | 'signal.bus-to-vector' | 'signal.unit-system'
+  | 'logic.bit-mask' | 'logic.extract-bits' | 'logic.float-extract-bits'
+  | 'logic.integer-to-bits' | 'logic.bits-to-integer' | 'logic.shift-arithmetic' | 'logic.bitwise-typed'
+  | 'fixed.integer-increment' | 'fixed.trigonometric' | 'fixed.state-space'
+  | 'complex.from-parts' | 'complex.to-parts' | 'complex.from-polar' | 'complex.to-polar'
+  | 'complex.hermitian' | 'complex.is-hermitian' | 'complex.dot' | 'typed.math'
+  | 'tensor.reshape' | 'tensor.permute' | 'tensor.squeeze'
   | 'discrete.filter' | 'discrete.filter-time-varying' | 'discrete.pid' | 'discrete.pid-2dof' | 'discrete.zero-pole'
   | 'discrete.delay-configured' | 'discrete.tapped-delay' | 'discrete.propagation-delay' | 'discrete.integrator-configured'
   | 'discrete.state-space-mimo' | 'discrete.difference-configured' | 'logic.numeric-edge' | 'math.running-minmax'
@@ -50,16 +60,39 @@ export type BlockType =
   | 'source.dataset' | 'unit.convert' | 'route.bus-create' | 'route.bus-select'
   | 'hierarchy.subsystem' | 'annotation.note' | 'annotation.model-info';
 
-export type SignalValue = number | boolean | number[] | boolean[] | number[][] | boolean[][];
-export type StateValue = number | boolean | string | null | StateValue[] | { [key: string]: StateValue };
+export type LegacySignalValue = number | boolean | number[] | boolean[] | number[][] | boolean[][];
+/** JSON preserves tagged IEEE special values, signed zero, and exact integer codes. */
+export type TypedFloat = number | '-0' | 'NaN' | 'Infinity' | '-Infinity';
+export interface TypedComplex { re: TypedFloat; im: TypedFloat }
+export type TypedDType = 'float64' | 'float32' | 'boolean'
+  | 'int8' | 'uint8' | 'int16' | 'uint16' | 'int32' | 'uint32' | 'int64' | 'uint64'
+  | 'complex128' | 'fixed' | 'string' | 'enum';
+export interface TypedFixedSpec { signed: boolean; wordLength: number; fractionLength: number }
+export interface TypedEnumSpec { name: string; labels: string[] }
+export interface TypedDataType { dtype: TypedDType; fixed?: TypedFixedSpec; enum?: TypedEnumSpec }
+export type TypedRounding = 'floor' | 'ceil' | 'zero' | 'nearest' | 'away' | 'even';
+export type TypedOverflow = 'wrap' | 'saturate' | 'error';
+export type TypedCell = TypedFloat | boolean | string | TypedComplex;
+export interface TypedSignal extends TypedDataType {
+  kind: 'typed';
+  /** Fixed, row-major rank 0..8; data stores exact decimal integer/fixed codes. */
+  shape: number[];
+  data: TypedCell[];
+}
+export type SignalValue = LegacySignalValue | TypedSignal;
+export type StateValue = number | boolean | string | null | TypedSignal | StateValue[] | { [key: string]: StateValue };
 export interface SampleTime { period: number; offset: number }
 export interface SignalDescriptor {
-  valueType: 'float64' | 'boolean';
+  valueType: 'float64' | 'boolean' | 'typed';
   /** Scalar [], vector [length], or row-major matrix [rows, columns]. */
   shape: number[];
   unit: string;
+  /** Present only when valueType is typed. No implicit conversion to legacy kernels. */
+  typed?: TypedDataType;
   /** A homogeneous scalar bus is represented as a vector with named fields. */
   fields?: string[];
+  /** Compiler representation contract for explicitly converted homogeneous buses. */
+  representation?: 'copy' | 'virtual' | 'nonvirtual';
 }
 export type ExpressionNode =
   | { type: 'number'; value: number }

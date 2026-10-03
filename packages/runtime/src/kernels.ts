@@ -6,6 +6,8 @@ import { evaluateExpansionNode } from './expansion';
 import { evaluateTimeSourceNode } from './time-sources';
 import { evaluateM8Node, m8OperationCost } from './m8';
 import { m9OperationCost } from './m9';
+import { cloneTypedSignal, equalDataType, typedDescriptor, typedStorageElements, validateTypedSignal } from '../../model/src/typed';
+import { evaluateM10Node, m10OperationCost } from './m10';
 
 export function numericFailure(code: string, nodeId: string, message: string): never {
   throw new ModelError([{ code, nodeId, message }]);
@@ -19,11 +21,13 @@ export function finiteNumber(value: unknown, nodeId: string): number {
 }
 
 export function signalElements(descriptor: SignalDescriptor): number {
+  if (descriptor.valueType === 'typed') return typedStorageElements(descriptor);
   return descriptor.shape.reduce((size, dimension) => size * dimension, 1);
 }
 
 /** Results own their array storage; editing a result cannot mutate the next run's inputs. */
 export function copySignal(value: SignalValue): SignalValue {
+  if (typeof value === 'object' && !Array.isArray(value)) return cloneTypedSignal(value);
   if (!Array.isArray(value)) return value;
   return Array.isArray(value[0])
     ? (value as number[][] | boolean[][]).map((row) => [...row]) as number[][] | boolean[][]
@@ -45,6 +49,8 @@ export function nodeOperationCost(node: IRNode, byId: Map<string, IRNode>): numb
   if (m8Cost !== undefined) return m8Cost;
   const m9Cost = m9OperationCost(node, inputSize, outputSize);
   if (m9Cost !== undefined) return m9Cost;
+  const m10Cost = m10OperationCost(node, inputSize, outputSize);
+  if (m10Cost !== undefined) return m10Cost;
   if (node.blockType === 'math.matrix-multiply') {
     const a = inputShape('a'), b = inputShape('b');
     return 8 * a[0]! * a[1]! * b[1]! + a[0]! * a[1]! + b[0]! * b[1]! + outputSize;
@@ -81,6 +87,7 @@ export function nodeOperationCost(node: IRNode, byId: Map<string, IRNode>): numb
 }
 
 function flatten(value: SignalValue): (number | boolean)[] {
+  if (typeof value === 'object' && !Array.isArray(value)) throw new ModelError([{ code: 'RUNTIME_TYPE_MISMATCH', message: '기존 계산 경로에는 자료형 경계 블럭을 연결하세요.' }]);
   if (!Array.isArray(value)) return [value];
   return Array.isArray(value[0]) ? (value as number[][] | boolean[][]).flat() : value as number[] | boolean[];
 }
@@ -94,6 +101,18 @@ function shaped(values: (number | boolean)[], shape: number[]): SignalValue {
 /** Verify every emitted port against immutable compiler metadata, including multi-output nodes. */
 export function checkSignal(value: SignalValue | undefined, descriptor: SignalDescriptor, nodeId: string): SignalValue {
   if (value === undefined) numericFailure('RUNTIME_INVALID_IR', nodeId, '실행 출력이 중간 표현에 없습니다.');
+  if (descriptor.valueType === 'typed') {
+    try {
+      const typed = validateTypedSignal(value), actual = typedDescriptor(typed);
+      if (actual.shape.length !== descriptor.shape.length || actual.shape.some((axis, index) => axis !== descriptor.shape[index])) numericFailure('RUNTIME_SHAPE_MISMATCH', nodeId, '자료형 출력의 형상이 검증한 포트와 다릅니다.');
+      if (!descriptor.typed || !equalDataType(actual.typed!, descriptor.typed)) numericFailure('RUNTIME_TYPE_MISMATCH', nodeId, '출력 자료형·고정소수점 스케일·열거 선언이 검증한 포트와 다릅니다.');
+      return value;
+    } catch (error) {
+      if (error instanceof ModelError) throw new ModelError(error.diagnostics.map(diagnostic => ({ ...diagnostic, nodeId })));
+      throw error;
+    }
+  }
+  if (typeof value === 'object' && !Array.isArray(value)) numericFailure('RUNTIME_TYPE_MISMATCH', nodeId, '기존 계산 경로에는 명시적인 자료형 경계 블럭을 연결하세요.');
   const shape = descriptor.shape;
   if (shape.length === 0 ? Array.isArray(value)
     : shape.length === 1 ? !Array.isArray(value) || value.length !== shape[0] || value.some(Array.isArray)
@@ -109,6 +128,8 @@ export function checkSignal(value: SignalValue | undefined, descriptor: SignalDe
 
 /** M1 finite real/boolean kernels. Arbitrary model text never becomes executable syntax. */
 export function evaluateSignalNode(node: IRNode, input: (port: string) => SignalValue, state?: SignalValue, time = 0): Record<string, SignalValue> {
+  const m10 = evaluateM10Node(node, input);
+  if (m10) return m10;
   const m8 = evaluateM8Node(node, input);
   if (m8) return m8;
   const expansion = evaluateExpansionNode(node, input);

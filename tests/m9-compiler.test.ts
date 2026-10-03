@@ -52,7 +52,8 @@ describe('M9 state, rate, shape and closed compiler boundaries', () => {
     const baseline = JSON.parse(readFileSync(new URL('../docs/baselines/m8-registry.json', import.meta.url), 'utf8')) as Record<string, unknown>[];
     expect(baseline).toHaveLength(185);
     for (const definition of baseline) expect(getBlockDefinition(String(definition.id))).toEqual(definition);
-    expect(M9_BLOCK_IDS).toHaveLength(26); expect(blockRegistry).toHaveLength(211); expect(M9_BLOCK_PRESETS).toHaveLength(15);
+    const baselineIds = new Set(baseline.map(definition => definition.id));
+    expect(M9_BLOCK_IDS).toHaveLength(26); expect(blockRegistry.filter(definition => baselineIds.has(definition.id) || (M9_BLOCK_IDS as readonly string[]).includes(definition.id))).toHaveLength(211); expect(M9_BLOCK_PRESETS).toHaveLength(15);
     expect(new Set(contractGraphs.map(([id]) => id))).toEqual(new Set(M9_BLOCK_IDS));
     expect(new Set(blockRegistry.map(definition => definition.id)).size).toBe(blockRegistry.length);
   });

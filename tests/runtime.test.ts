@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { M8_FIXTURES, m8Model } from './m8-fixtures';
+import { M10_INDEPENDENT_FIXTURES } from './m10-independent-fixtures';
 import { compileModel } from '../packages/compiler/src/index';
 import { ModelError } from '../packages/model/src/types';
 import type { CalcEdge, CalcModel, CalcNode } from '../packages/model/src/types';
@@ -195,7 +196,7 @@ describe('M1 typed static runtime', () => {
   });
 
   it('covers every current static canonical block with actual fixtures', () => {
-    const covered = new Set([...M1_ENGINE_FIXTURES, ...M2_ENGINE_FIXTURES, ...m4Oracles(), ...m5Oracles(), ...EXPANSION_FIXTURES.map(fixture => ({ model: expansionModel(fixture) })), ...M8_FIXTURES.map(fixture => ({ model: m8Model(fixture) })), { model: unsignedFixture('and',1,1) }].flatMap((fixture) => fixture.model.nodes.map((entry) => entry.blockType)));
+    const covered = new Set([...M1_ENGINE_FIXTURES, ...M2_ENGINE_FIXTURES, ...m4Oracles(), ...m5Oracles(), ...EXPANSION_FIXTURES.map(fixture => ({ model: expansionModel(fixture) })), ...M8_FIXTURES.map(fixture => ({ model: m8Model(fixture) })), ...M10_INDEPENDENT_FIXTURES, { model: unsignedFixture('and',1,1) }].flatMap((fixture) => fixture.model.nodes.map((entry) => entry.blockType)));
     expect(blockRegistry.filter((definition) => definition.supportedModes.includes('static')).map((definition) => definition.id).filter((id) => !covered.has(id))).toEqual([]);
   });
 

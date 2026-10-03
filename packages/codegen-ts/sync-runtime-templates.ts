@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
 
 /** Development-only extraction of repository-owned numerical functions, never user input. */
-export async function buildFixedTemplates(): Promise<{ kernels: string; discrete: string; continuous: string }> {
+export async function buildFixedTemplates(): Promise<{ kernels: string; discrete: string; continuous: string; signalTypes: string }> {
   const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
   async function statements(path: string, include: (statement: ts.Statement) => boolean): Promise<string> {
     const source = ts.createSourceFile(path, await readFile(resolve(path), 'utf8'), ts.ScriptTarget.ES2022, true);
@@ -20,9 +20,14 @@ export async function buildFixedTemplates(): Promise<{ kernels: string; discrete
   const m8 = await statements('packages/runtime/src/m8.ts', () => true);
   const m9 = await statements('packages/runtime/src/m9.ts', (statement) => !ts.isFunctionDeclaration(statement) || statement.name?.text !== 'm9OperationCost');
   const m9OperationCost = await statements('packages/runtime/src/m9.ts', (statement) => ts.isFunctionDeclaration(statement) && statement.name?.text === 'm9OperationCost');
+  const typedValues = await statements('packages/model/src/typed.ts', () => true);
+  const m10 = await statements('packages/runtime/src/m10.ts', () => true);
   const discrete = await statements('packages/runtime/src/discrete-machine.ts', () => true);
   const modelTypes = await statements('packages/model/src/types.ts', (statement) =>
     (ts.isInterfaceDeclaration(statement) && statement.name.text !== 'RunOptions') || ts.isTypeAliasDeclaration(statement));
+  const signalTypeNames = new Set(['LegacySignalValue', 'SignalValue', 'StateValue', 'TypedFloat', 'TypedComplex', 'TypedDType', 'TypedFixedSpec', 'TypedEnumSpec', 'TypedDataType', 'TypedRounding', 'TypedOverflow', 'TypedCell', 'TypedSignal', 'SignalDescriptor']);
+  const signalTypes = await statements('packages/model/src/types.ts', (statement) =>
+    (ts.isInterfaceDeclaration(statement) || ts.isTypeAliasDeclaration(statement)) && signalTypeNames.has(statement.name.text));
   const signal = await statements('packages/model/src/signal.ts', () => true);
   const m9Memory = await statements('packages/model/src/m9.ts', () => true);
   const memory = await statements('packages/model/src/discrete.ts', () => true);
@@ -34,7 +39,7 @@ export async function buildFixedTemplates(): Promise<{ kernels: string; discrete
   const solver = await statements('packages/runtime/src/continuous-solver.ts', () => true);
   const machine = await statements('packages/runtime/src/continuous-machine.ts', () => true);
   const execution = await statements('packages/runtime/src/continuous-execution.ts', () => true);
-  return { kernels: `class ModelError extends Error {\n  constructor(public readonly diagnostics: { code: string; nodeId?: string; message: string; tick?: number; time?: number }[], public readonly partialResult?: unknown) {\n    super(diagnostics[0]?.code + (diagnostics[0]?.nodeId ? ': ' + diagnostics[0].nodeId : ''));\n    this.name = 'ModelError';\n  }\n}\n${expression}\n${advanced}\n${quantization}\n${expansion}\n${timeSources}\n${m8}\n${m9}\n${kernels}`, discrete,
+  return { kernels: `class ModelError extends Error {\n  constructor(public readonly diagnostics: { code: string; nodeId?: string; message: string; tick?: number; time?: number }[], public readonly partialResult?: unknown) {\n    super(diagnostics[0]?.code + (diagnostics[0]?.nodeId ? ': ' + diagnostics[0].nodeId : ''));\n    this.name = 'ModelError';\n  }\n}\n${typedValues}\n${expression}\n${advanced}\n${quantization}\n${expansion}\n${timeSources}\n${m8}\n${m9}\n${m10}\n${kernels}`, discrete, signalTypes,
     continuous: [modelTypes, signal, m9Memory, memory, solverSettings, expressionCost, m9OperationCost, operationCost, solver, machine, execution].join('\n') };
 }
 
@@ -47,4 +52,5 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   await writeFile(resolve('packages/codegen-ts/src/kernels-template.ts'), fixedString('KERNEL_TEMPLATE', templates.kernels));
   await writeFile(resolve('packages/codegen-ts/src/discrete-template.ts'), fixedString('DISCRETE_TEMPLATE', templates.discrete));
   await writeFile(resolve('packages/codegen-ts/src/continuous-template.ts'), fixedString('CONTINUOUS_TEMPLATE', templates.continuous));
+  await writeFile(resolve('packages/codegen-ts/src/signal-types-template.ts'), fixedString('SIGNAL_TYPES_TEMPLATE', templates.signalTypes));
 }

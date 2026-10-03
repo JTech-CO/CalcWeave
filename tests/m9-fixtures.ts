@@ -1,4 +1,4 @@
-import type { CalcEdge, CalcModel, CalcNode, SignalValue, StateValue } from '../packages/model/src';
+import type { CalcEdge, CalcModel, CalcNode, SignalValue, StateValue, LegacySignalValue } from '../packages/model/src';
 
 export interface M9Fixture { name: string; model: CalcModel; expected: Record<string, SignalValue[]>; expectedMemory?: Record<string, StateValue> }
 export interface M9FailureFixture { name: string; model: CalcModel; code: string; nodeId?: string; tick?: number; time?: number }
@@ -11,7 +11,10 @@ export function m9Model(type: string, parameters: Record<string, unknown> = {}, 
   const step = options.step ?? 1, nodes: CalcNode[] = [], edges: CalcEdge[] = [];
   for (const [port, series] of Object.entries(inputs)) {
     const first = series[0]!;
-    const flat = (value: SignalValue): (number | boolean)[] => !Array.isArray(value) ? [value] : Array.isArray(value[0]) ? (value as number[][] | boolean[][]).flat() : value as number[] | boolean[];
+    const flat = (value: SignalValue): (number | boolean)[] => {
+      if (typeof value === 'object' && !Array.isArray(value)) throw new Error('The frozen M9 fixture builder accepts legacy values only.');
+      return !Array.isArray(value) ? [value] : Array.isArray(value[0]) ? (value as number[][] | boolean[][]).flat() : value as number[] | boolean[];
+    };
     const width = flat(first).length;
     const channelIds: string[] = [];
     for (let channel = 0; channel < width; channel++) {

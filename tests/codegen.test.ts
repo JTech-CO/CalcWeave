@@ -11,6 +11,7 @@ import { buildFixedTemplates } from '../packages/codegen-ts/sync-runtime-templat
 import { KERNEL_TEMPLATE } from '../packages/codegen-ts/src/kernels-template';
 import { DISCRETE_TEMPLATE } from '../packages/codegen-ts/src/discrete-template';
 import { CONTINUOUS_TEMPLATE } from '../packages/codegen-ts/src/continuous-template';
+import { SIGNAL_TYPES_TEMPLATE } from '../packages/codegen-ts/src/signal-types-template';
 import { compileModel } from '../packages/compiler/src/index';
 import type { CalcEdge, CalcModel, CalcNode, RunResult } from '../packages/model/src/types';
 import { runModel } from '../packages/runtime/src/index';
@@ -158,7 +159,7 @@ describe('M2 standalone typed discrete export and manifest', () => {
     expect((await independentRun(exportTypeScript(compiled))).samples).toEqual((await runModel(compiled)).samples);
   });
   it('keeps fixed export templates synchronized with repository numerical sources', async () => {
-    const templates=await buildFixedTemplates();expect(KERNEL_TEMPLATE).toBe(templates.kernels);expect(DISCRETE_TEMPLATE).toBe(templates.discrete);expect(CONTINUOUS_TEMPLATE).toBe(templates.continuous);
+    const templates=await buildFixedTemplates();expect(KERNEL_TEMPLATE).toBe(templates.kernels);expect(DISCRETE_TEMPLATE).toBe(templates.discrete);expect(CONTINUOUS_TEMPLATE).toBe(templates.continuous);expect(SIGNAL_TYPES_TEMPLATE).toBe(templates.signalTypes);
   });
   it.each(['','abc','CalcWeave 수학 😀', 'x'.repeat(100000)])('fixed SHA-256 matches the platform implementation for UTF-8 data', (input) => {
     expect(sha256(input)).toBe(createHash('sha256').update(input,'utf8').digest('hex'));

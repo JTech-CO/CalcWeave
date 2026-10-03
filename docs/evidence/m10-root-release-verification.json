@@ -1,0 +1,143 @@
+{
+  "generatedAt": "2026-10-03T04:11:20.991Z",
+  "appVersion": "0.11.0",
+  "engineVersion": "0.11.0-m10",
+  "scope": "/",
+  "releaseId": "b1855e111a91d32dfb4abef30f9713384d8c0e0ca565590fe6cb5bc654c8d6ab",
+  "checks": [
+    "app/engine release versions",
+    "single registry retains catalog definitions with unique executable IDs",
+    "Python registry export metadata equals approved target capabilities",
+    "Python target does not claim continuous solver support",
+    "model packages bind approved immutable registry and local-only permissions",
+    "package/release catalog version agreement",
+    "offline release version and bounded deployment scope agreement",
+    "releaseId binds complete static asset manifest",
+    "bounded unique offline allowlist",
+    "safe static asset /assets/engine.worker-B-RmCUai.js",
+    "final built bytes match /assets/engine.worker-B-RmCUai.js",
+    "safe static asset /assets/index-61mH1NZf.css",
+    "final built bytes match /assets/index-61mH1NZf.css",
+    "safe static asset /assets/index-CC1KFiUx.js",
+    "final built bytes match /assets/index-CC1KFiUx.js",
+    "safe static asset /assets/src--CzlRD4q.js",
+    "final built bytes match /assets/src--CzlRD4q.js",
+    "safe static asset /assets/src-Bh96YVVx.js",
+    "final built bytes match /assets/src-Bh96YVVx.js",
+    "safe static asset /assets/src-ClMJOGnE.js",
+    "final built bytes match /assets/src-ClMJOGnE.js",
+    "safe static asset /assets/src-DbnvF9fG.js",
+    "final built bytes match /assets/src-DbnvF9fG.js",
+    "safe static asset /cookies/index.html",
+    "final built bytes match /cookies/index.html",
+    "safe static asset /index.html",
+    "final built bytes match /index.html",
+    "safe static asset /notices/index.html",
+    "final built bytes match /notices/index.html",
+    "safe static asset /privacy/index.html",
+    "final built bytes match /privacy/index.html",
+    "safe static asset /terms/index.html",
+    "final built bytes match /terms/index.html",
+    "offline shell size limit",
+    "production CSP meta blocks dynamic/inline script evaluation",
+    "CSP precedes external-only application scripts",
+    "production referrer policy",
+    "offline accessible protected policy terms",
+    "operator/contact in terms",
+    "offline accessible protected policy privacy",
+    "operator/contact in privacy",
+    "offline accessible protected policy cookies",
+    "operator/contact in cookies",
+    "offline accessible protected policy notices",
+    "no source maps or environment files distributed",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "no recognized secret material in assets\\engine.worker-B-RmCUai.js",
+    "no recognized secret material in assets\\index-CC1KFiUx.js",
+    "no recognized secret material in assets\\src--CzlRD4q.js",
+    "no recognized secret material in assets\\src-Bh96YVVx.js",
+    "no recognized secret material in assets\\src-ClMJOGnE.js",
+    "no recognized secret material in assets\\src-DbnvF9fG.js",
+    "no recognized secret material in cookies\\index.html",
+    "no recognized secret material in index.html",
+    "no recognized secret material in notices\\index.html",
+    "no recognized secret material in offline-manifest.json",
+    "no recognized secret material in privacy\\index.html",
+    "no recognized secret material in sw.js",
+    "no recognized secret material in terms\\index.html",
+    "publication is explicitly dispatched",
+    "only official Actions at the independently verified commit allowlist",
+    "workflow executes actual approved Python target parity",
+    "workflow validates the exact approved project/custom-domain destination",
+    "configured-path build and verification precede artifact publication"
+  ],
+  "files": [
+    {
+      "url": "/assets/engine.worker-B-RmCUai.js",
+      "bytes": 441068,
+      "sha256": "055cff975cde9d51ee90267de2b17a0a85c2bfdc457cd9fa3ac53677e3b5067b"
+    },
+    {
+      "url": "/assets/index-61mH1NZf.css",
+      "bytes": 85034,
+      "sha256": "723e8cf0e2416f39c4a2a79fc6c72d673bfdfaa229808654c1a1efca49250706"
+    },
+    {
+      "url": "/assets/index-CC1KFiUx.js",
+      "bytes": 1144562,
+      "sha256": "a58ca0a85f5b67832685095b7085ae64176842c41380fe2c18b18b68c6b69688"
+    },
+    {
+      "url": "/assets/src--CzlRD4q.js",
+      "bytes": 36483,
+      "sha256": "ea486cf43ed14120d5dabd222851badae79ca9615f38baaf4699dcd8610302a4"
+    },
+    {
+      "url": "/assets/src-Bh96YVVx.js",
+      "bytes": 1775,
+      "sha256": "d6311d38ffaa1d75869414ce3afe7bbb62d596d8f78509085a23078e868ea3aa"
+    },
+    {
+      "url": "/assets/src-ClMJOGnE.js",
+      "bytes": 7182,
+      "sha256": "814b4956011fabf8c78319c16408f26b04c182dc4c710aa3754c8ddce5faafff"
+    },
+    {
+      "url": "/assets/src-DbnvF9fG.js",
+      "bytes": 325150,
+      "sha256": "dd8595ee8bfdfb76992e086fa408775adbd2b7837f6509d47b934ffb8dee14ab"
+    },
+    {
+      "url": "/cookies/index.html",
+      "bytes": 4316,
+      "sha256": "d324bdaa98ff28b95456d1a56a223159ed673cb72b12030c295903db673b8603"
+    },
+    {
+      "url": "/index.html",
+      "bytes": 1077,
+      "sha256": "43d405e5e298426419fc5d1b3082abbddbbfe6a216eff7b71c296a6dbed7e389"
+    },
+    {
+      "url": "/notices/index.html",
+      "bytes": 35127,
+      "sha256": "4034ab7acf39c9cfbde2b6ebb5171ac7d68e081a36ff08c67ed8d6a1350d56d5"
+    },
+    {
+      "url": "/privacy/index.html",
+      "bytes": 6790,
+      "sha256": "8024a7aad6161e3e480a7824056e60aacaf81929fe4e65760bc4704fc68b4312"
+    },
+    {
+      "url": "/terms/index.html",
+      "bytes": 4824,
+      "sha256": "620e00e98f765be04bed9b926e16d4d6299fbadd8abf9be752e0359cc6bfadaf"
+    }
+  ],
+  "totalStaticBytes": 2093388,
+  "publicDeploymentClaimed": false
+}

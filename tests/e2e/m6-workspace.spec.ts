@@ -21,8 +21,8 @@ test('M6 support reads all registry metadata, searches parameters and filters ac
   const dialog = page.getByRole('dialog', { name: '지원·릴리스' }); await expect(dialog).toBeVisible();
   await expect(dialog).toContainText(getReleaseCatalog().engineVersion);
   await expect(page.locator('.support-block-list > button')).toHaveCount(BLOCK_REGISTRY.length);
-  await page.getByLabel('지원 블록 검색').fill('wordLength'); await expect(page.locator('.support-block-list > button')).toHaveCount(1);
-  await page.locator('.support-block-list > button').click(); await expect(page.locator('.support-block-detail')).toContainText('stored'); await expect(page.locator('.support-block-detail')).toContainText('nearest-even');
+  await page.getByLabel('지원 블록 검색').fill('wordLength'); await expect(page.locator('.support-block-list > button')).toHaveCount(BLOCK_REGISTRY.filter(block => Object.hasOwn(block.parameters, 'wordLength')).length);
+  await page.locator('.support-block-list > button').filter({ hasText: 'Quantize' }).click(); await expect(page.locator('.support-block-detail')).toContainText('stored'); await expect(page.locator('.support-block-detail')).toContainText('nearest-even');
   await page.getByLabel('지원 블록 검색').fill(''); await page.getByLabel('지원 실행 방식').selectOption('static');
   await expect(page.locator('.support-block-list > button')).toHaveCount(BLOCK_REGISTRY.filter(block => block.supportedModes.includes('static')).length);
   await page.getByRole('button', { name: '범위와 상한', exact: true }).click(); await expect(dialog).toContainText('복소수'); await expect(dialog).toContainText('클라우드'); await expect(dialog).toContainText('maxNodes');

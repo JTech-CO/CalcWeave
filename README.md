@@ -7,6 +7,10 @@ CalcWeave는 MATLAB 설치 없이 브라우저에서 사용할 수 있는 블럭
 
 웹 베타 주소: [CalcWeave 작업 공간](https://jtech-co.github.io/CalcWeave/). 배포 결과와 실제 공개 파일 검증은 [Pages 배포 기록](docs/pages-validation.md)에 남깁니다.
 
+## M10 자료형·복소수·고정소수점·n-D
+
+앱0.11.0·엔진0.11.0-m10의 선택 범위를 로컬 검증했습니다. 기존211종을 보존하고34종·10preset·6예제를 추가해245종·45예제/7범주입니다. 원본행 승인subset245/385·미구현140이며 전체옵션 동등성은 열린후속입니다. 전체unit2669개,209actual TypeScript와484samples,typed UI7개,design188관측,성능6예산 및root/project release70검사를 확인했습니다. 전체rootbrowser138개 중135PASS 뒤3건을해결해 관련21개재검사PASS로 기록합니다. 공개 배포는 M11·M12 종료후 통합릴리스 예정입니다. [M10계약](docs/m10-contract.md)·[검증](docs/m10-validation.md)
+
 ## M9 DSP·이산 상태 확장
 
 M9의 최초 engineering 납품 앱0.10.0·엔진0.10.0-m9는 기존185개 정의를 보존하고 필터 실현 구조·이산 PID/2DOF·MIMO 상태공간·제어 가능한 정수 지연·발행 예약 지연·물리적 샘플시간 계산 등26개 정의를 추가합니다. registry211종과M9 명명 preset15개는 원본행 승인 수·독립 kernel 수와 다른 지표입니다. 학습 예제4개를 더해39개를6범주에서 탐색합니다.

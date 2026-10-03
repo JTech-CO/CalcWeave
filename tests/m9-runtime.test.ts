@@ -9,7 +9,8 @@ import { M9_FIXTURES, M9_FAILURE_FIXTURES, M9_PRESET_FIXTURES, m9Model, m9Rollba
 function close(actual: SignalValue, expected: SignalValue): void {
   if (typeof expected === 'number') { expect(typeof actual).toBe('number'); expect(Number.isFinite(actual)).toBe(true); if (expected !== 0 && Math.abs(expected) < 2 ** -1022) expect(actual).toBe(expected); else expect(Math.abs((actual as number) - expected) / Math.max(1, Math.abs(expected))).toBeLessThanOrEqual(3e-12); }
   else if (typeof expected === 'boolean') expect(actual).toBe(expected);
-  else { expect(Array.isArray(actual)).toBe(true); expect((actual as unknown[]).length).toBe(expected.length); expected.forEach((value, i) => close((actual as SignalValue[])[i]!, value)); }
+  else if (Array.isArray(expected)) { expect(Array.isArray(actual)).toBe(true); expect((actual as unknown[]).length).toBe(expected.length); expected.forEach((value, i) => close((actual as SignalValue[])[i]!, value)); }
+  else throw new Error('The frozen M9 numerical oracle accepts legacy values only.');
 }
 describe('M9 independent series and immutable state', () => {
   it.each(M9_FIXTURES)('$name', async entry => {

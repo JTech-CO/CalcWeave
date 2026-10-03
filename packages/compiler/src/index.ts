@@ -13,6 +13,8 @@ import { inferExpansionSignal } from './expansion';
 import { inferTimeSourceDescriptor, validateTimeSourceParameters } from './time-sources';
 import { inferM8Outputs, validateM8Parameters } from './m8';
 import { initialM9Outputs, inferM9Outputs, validateM9Parameters, validateM9StateInputs } from './m9';
+import { validateDataType, validateTypedSignal } from '../../model/src/typed';
+import { applyM10TypePropagation, guardM10LegacyInputs, initialM10Outputs, inferM10Outputs, validateM10Parameters, validateM10StateInputs, validateM10UnitSystems } from './m10';
 
 const compareId = (a: string, b: string): number => a < b ? -1 : a > b ? 1 : 0;
 
@@ -57,6 +59,8 @@ function parseParameters(definition: BlockDefinition, values: Record<string, unk
       case 'expression': if (typeof value !== 'string' || value.length === 0 || value.length > (descriptor.maxLength ?? 512)) fail(); break;
       case 'text': if (typeof value !== 'string' || value.length > (descriptor.maxLength ?? 64)) fail(); break;
       case 'value': try { validateSignal(value); } catch { fail(); } break;
+      case 'typed-value': try { validateTypedSignal(value); } catch { fail(); } break;
+      case 'data-type': try { validateDataType(value); } catch { fail(); } break;
       case 'numeric-vector':
         if (!Array.isArray(value) || value.length < (descriptor.minLength ?? 0) || value.length > (descriptor.maxLength ?? 16) || value.some((item) => typeof item !== 'number' || !Number.isFinite(item))) fail();
         break;
@@ -103,11 +107,14 @@ function deepFreeze<T>(value: T): T {
 }
 
 function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRNode>, definitions: Map<string, BlockDefinition>): void {
+  applyM10TypePropagation(ordered, byId);
   const originals = new Map(model.nodes.map((node) => [node.id, node]));
   const scalarState = (): SignalDescriptor => ({ valueType: 'float64', shape: [], unit: '1' });
   const sameShape = (a: SignalDescriptor, b: SignalDescriptor): boolean => a.shape.length === b.shape.length && a.shape.every((length, index) => length === b.shape[index]);
   const clone = (descriptor: SignalDescriptor): SignalDescriptor => ({ ...descriptor, shape: [...descriptor.shape] });
   for (const node of ordered) {
+    const m10Outputs = initialM10Outputs(node, originals.get(node.id)!.unit ?? '1');
+    if (m10Outputs) { Object.assign(node.outputs, m10Outputs); continue; }
     const m9Outputs = initialM9Outputs(node, originals.get(node.id)!.unit ?? '1');
     if (m9Outputs) { Object.assign(node.outputs, m9Outputs); continue; }
     const descriptor = initialDiscreteDescriptor(node, originals.get(node.id)!.unit ?? '1');
@@ -119,6 +126,7 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
     }
   }
   for (const node of ordered) {
+    guardM10LegacyInputs(node, port => { const endpoint = node.inputs[port]; return endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; });
     const fail = (code: string, message: string, portId?: string): never => { throw new ModelError([{ code, message, nodeId: node.id, ...(portId ? { portId } : {}) }]); };
     const input = (port: string): SignalDescriptor => {
       const endpoint = node.inputs[port];
@@ -316,7 +324,7 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
       case 'sink.display': case 'io.output': case 'io.terminator': case 'sink.scope': output = clone(input('in')); break;
       default: {
         const declaredUnit = originals.get(node.id)!.unit ?? '1';
-        const m8Outputs = inferM8Outputs(node, input, declaredUnit) ?? inferM9Outputs(node, input, declaredUnit);
+        const m8Outputs = inferM10Outputs(node, input, declaredUnit) ?? inferM8Outputs(node, input, declaredUnit) ?? inferM9Outputs(node, input, declaredUnit);
         if (m8Outputs) Object.assign(node.outputs, m8Outputs);
         else output = inferExpansionSignal(node, input, declaredUnit) ?? inferTimeSourceDescriptor(node, declaredUnit);
         break;
@@ -325,11 +333,14 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
     if (output) node.outputs.out = output;
     const declaredUnit = originals.get(node.id)!.unit;
     for (const [port, descriptor] of Object.entries(node.outputs)) {
-      if (signalElementCount(descriptor) > SIGNAL_LIMITS.maxElements || descriptor.shape.some((length) => length > SIGNAL_LIMITS.maxAxis)) fail('SIGNAL_SIZE_EXCEEDED', '한 신호는 1,024개 원소 이하여야 합니다.', port);
+      if (descriptor.shape.reduce((size, axis) => size * axis, 1) > SIGNAL_LIMITS.maxElements || descriptor.shape.some((length) => length > SIGNAL_LIMITS.maxAxis)) fail('SIGNAL_SIZE_EXCEEDED', '한 신호는 1,024개 원소 이하여야 합니다.', port);
       if (declaredUnit !== undefined && !(node.blockType === 'fixed.quantize' && port === 'stored') && declaredUnit !== descriptor.unit) fail('UNIT_ANNOTATION_MISMATCH', `지정한 단위 ${declaredUnit}가 추론 단위 ${descriptor.unit}와 다릅니다.`, port);
     }
   }
   for (const node of ordered) {
+    const inferredInput = (port: string): SignalDescriptor => { const endpoint = node.inputs[port]; const descriptor = endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; if (!descriptor) throw new ModelError([{ code: 'SIGNAL_INFERENCE_FAILED', nodeId: node.id, portId: port, message: '입력 신호의 자료형을 추론할 수 없습니다.' }]); return descriptor; };
+    guardM10LegacyInputs(node, inferredInput);
+    if (validateM10StateInputs(node, inferredInput)) continue;
     if (validateM9StateInputs(node, port => { const endpoint = node.inputs[port]; const descriptor = endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; if (!descriptor) throw new ModelError([{ code: 'SIGNAL_INFERENCE_FAILED', nodeId: node.id, portId: port, message: 'M9 입력의형상을추론할수없습니다.' }]); return descriptor; })) continue;
     if (definitions.get(node.id)!.state === 'none' || node.blockType === 'source.random') continue;
     const endpoint = node.inputs.in!;
@@ -353,6 +364,7 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
     }
   }
   const intermediateCount = ordered.reduce((sum, node) => sum + Object.values(node.outputs).reduce((count, descriptor) => count + signalElementCount(descriptor), 0), 0);
+  validateM10UnitSystems(ordered);
   if (intermediateCount > SIGNAL_LIMITS.maxIntermediateElements) throw new ModelError([{ code: 'INTERMEDIATE_BUDGET_EXCEEDED', message: '모델의 중간 신호는 합계 100,000개 원소 이하여야 합니다. 신호 크기나 블럭 수를 줄여 주세요.' }]);
 }
 
@@ -401,6 +413,7 @@ function compileFlatModel(input: unknown): CompiledModel {
       validateTimeSourceParameters(ir, model);
       validateM8Parameters(ir);
       validateM9Parameters(ir, model);
+      validateM10Parameters(ir);
       if (definition.id === 'math.expression') ir.expression = parseExpression(parameters.expression as string);
       nodeById.set(node.id, ir);
     } catch (error) {

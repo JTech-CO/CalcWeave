@@ -10,7 +10,10 @@ function expansionFinite(value: unknown, nodeId: string): number {
   if (typeof value !== 'number' || !Number.isFinite(value)) expansionFail(nodeId, 'NUMERIC_NONFINITE', '신규 연산의 입력·중간값·출력은 유한한 실수여야 합니다.');
   return value as number;
 }
-function expansionFlat(value: SignalValue): (number | boolean)[] { return !Array.isArray(value) ? [value] : Array.isArray(value[0]) ? (value as number[][] | boolean[][]).flat() : [...value] as number[] | boolean[]; }
+function expansionFlat(value: SignalValue): (number | boolean)[] {
+  if (typeof value === 'object' && !Array.isArray(value)) throw new ModelError([{ code: 'RUNTIME_TYPE_MISMATCH', message: '이 연산은 기존 실수·논리 신호만 지원합니다. 명시적인 자료형 경계를 연결하세요.' }]);
+  return !Array.isArray(value) ? [value] : Array.isArray(value[0]) ? (value as number[][] | boolean[][]).flat() : [...value] as number[] | boolean[];
+}
 function expansionShape(values: (number | boolean)[], shape: number[]): SignalValue {
   if (!shape.length) return values[0]!;
   if (shape.length === 1) return values as number[] | boolean[];

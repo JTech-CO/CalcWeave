@@ -1,6 +1,6 @@
 import {
   DATASET_LIMITS, ModelError, conversionCoefficients, datasetContentHash, isDatasetColumnName,
-  sha256, validateDataset, type Dataset, type DatasetCell, type DatasetColumn, type RunResult, type SignalValue,
+  sha256, validateDataset, validateSignal, validateTypedSignal, type Dataset, type DatasetCell, type DatasetColumn, type RunResult, type SignalValue, type TypedDataType, type TypedSignal,
 } from '../../model/src';
 
 export interface DatasetImportOptions {
@@ -211,11 +211,14 @@ export function exportDatasetCsv(input: Dataset): string {
   return [dataset.columns.map((column) => safeCsvCell(column.name)).join(','), ...dataset.rows.map((row) => row.map(safeCsvCell).join(','))].join('\r\n') + '\r\n';
 }
 function flattenSignal(value: SignalValue): (number | boolean)[] {
-  return typeof value === 'number' || typeof value === 'boolean' ? [value] : value.flat() as (number | boolean)[];
+  if (typeof value === 'number' || typeof value === 'boolean') return [value];
+  if (!Array.isArray(value)) fail('INVALID_RESULT_CSV', '기존 신호와 자료형 신호를 같은 열에 혼합할 수 없습니다.');
+  return value.flat() as (number | boolean)[];
 }
 /** Export every sample; vectors/matrices use stable row-major indexed columns. */
 export function exportResultCsv(result: RunResult, labels: Record<string, string> = {}): string {
   if (!result.samples.length) return 'time (s)\r\n';
+  if (Object.values(result.samples[0]!.values).some(value => typeof value === 'object' && !Array.isArray(value))) return exportTypedResultCsv(result, labels);
   const ids = Object.keys(result.samples[0]!.values).sort(), widths = ids.map((id) => flattenSignal(result.samples[0]!.values[id]!).length);
   const headers = ['time (s)', ...ids.flatMap((id, index) => Array.from({ length: widths[index]! }, (_, cell) => widths[index] === 1 ? labels[id] ?? id : `${labels[id] ?? id}[${cell}]`))];
   const lines = [headers.map(safeCsvCell).join(',')];
@@ -232,4 +235,78 @@ export function exportResultCsv(result: RunResult, labels: Record<string, string
     lines.push(cells.map(safeCsvCell).join(','));
   }
   return lines.join('\r\n') + '\r\n';
+}
+
+interface ResultColumn { id: string; typed?: TypedSignal; shape: number[]; valueType: string; width: number }
+function typedMetadata(type: TypedDataType): string {
+  return type.dtype === 'fixed' ? `fixed; signed=${type.fixed!.signed}; WL=${type.fixed!.wordLength}; FL=${type.fixed!.fractionLength}` : type.dtype === 'enum' ? `enum; name=${type.enum!.name}; labels=${JSON.stringify(type.enum!.labels)}` : type.dtype;
+}
+function resultColumn(id: string, value: SignalValue): ResultColumn {
+  if (typeof value === 'object' && !Array.isArray(value)) {
+    const typed = validateTypedSignal(value);
+    return { id, typed, shape: typed.shape, valueType: typed.dtype, width: typed.data.length * (typed.dtype === 'complex128' ? 2 : 1) };
+  }
+  const descriptor = validateSignal(value);
+  return { id, shape: descriptor.shape, valueType: descriptor.valueType, width: flattenSignal(value).length };
+}
+/** Typed cells are explicit text (dtype:payload), preserving codes and preventing spreadsheet coercion. */
+function* typedCsvValues(value: TypedSignal): Generator<string> {
+  for (const cell of value.data) {
+    if (value.dtype === 'complex128' && typeof cell === 'object') { yield `float64:${cell.re}`; yield `float64:${cell.im}`; }
+    else yield `${value.dtype}:${String(cell)}`;
+  }
+}
+/** Presentation CSV with exact typed payloads; model JSON is the supported restoration format. */
+function exportTypedResultCsv(result: RunResult, labels: Record<string, string>): string {
+  const ids = Object.keys(result.samples[0]!.values).sort();
+  if (ids.length > 1_000 || result.samples.length > 1_000_000) fail('RESULT_RESOURCE_LIMIT', '결과 CSV의 출력 열과 샘플 수 상한을 초과했습니다.');
+  const columns = ids.map(id => resultColumn(id, result.samples[0]!.values[id]!));
+  if (result.samples.length * (1 + columns.reduce((sum, column) => sum + column.width, 0)) > 1_000_000) fail('RESULT_RESOURCE_LIMIT', '결과 CSV는 1,000,000개 값 이하여야 합니다.');
+  const encoder = new TextEncoder(), headers: string[] = ['time (s)'];
+  let headerBytes = 12;
+  const addHeader = (text: string): void => {
+    headerBytes += encoder.encode(safeCsvCell(text)).byteLength + 1;
+    if (headerBytes > 64 * 1_024 * 1_024) fail('RESULT_RESOURCE_LIMIT', '결과 CSV는 64 MiB 이하여야 합니다.');
+    headers.push(text);
+  };
+  for (const column of columns) {
+    const name = labels[column.id] ?? column.id;
+    if (typeof name !== 'string' || name.length > 1_000) fail('INVALID_RESULT_CSV', '결과 열 이름은 1,000자 이하여야 합니다.');
+    if (!column.typed) for (let index = 0; index < column.width; index++) addHeader(column.width === 1 ? name : `${name}[${index}]`);
+    else {
+      const metadata = `${typedMetadata(column.typed)}; shape=${JSON.stringify(column.shape)}`;
+      for (let index = 0; index < column.typed.data.length; index++) {
+        const indexed = column.shape.length ? `${name}[${index}]` : name;
+        if (column.typed.dtype === 'complex128') { addHeader(`${indexed}.re [${metadata}]`); addHeader(`${indexed}.im [${metadata}]`); }
+        else addHeader(`${indexed} [${metadata}]`);
+      }
+    }
+  }
+  const lines: string[] = [];
+  let bytes = 0;
+  const addLine = (values: Iterable<DatasetCell>): void => {
+    const parts: string[] = [];
+    for (const value of values) {
+      const part = safeCsvCell(value);
+      bytes += encoder.encode(part).byteLength + (parts.length ? 1 : 0);
+      if (bytes > 64 * 1_024 * 1_024 - 2) fail('RESULT_RESOURCE_LIMIT', '결과 CSV는 64 MiB 이하여야 합니다.');
+      parts.push(part);
+    }
+    bytes += 2; lines.push(parts.join(',') + '\r\n');
+  };
+  addLine(headers);
+  for (const sample of result.samples) {
+    if (!Number.isFinite(sample.time) || Object.keys(sample.values).length !== ids.length) fail('INVALID_RESULT_CSV', '결과의 시간과 출력 열을 확인하세요.');
+    function* sampleCells(): Generator<DatasetCell> {
+      yield sample.time;
+      for (const column of columns) {
+        if (!Object.hasOwn(sample.values, column.id)) fail('INVALID_RESULT_CSV', '결과 출력 열이 샘플마다 다릅니다.');
+        const current = resultColumn(column.id, sample.values[column.id]!);
+        if (current.valueType !== column.valueType || JSON.stringify(current.shape) !== JSON.stringify(column.shape) || !!current.typed !== !!column.typed || current.typed && typedMetadata(current.typed) !== typedMetadata(column.typed!)) fail('INVALID_RESULT_CSV', '결과 신호의 자료형·형상·스케일·열거 선언은 샘플마다 같아야 합니다.');
+        if (current.typed) yield* typedCsvValues(current.typed); else yield* flattenSignal(sample.values[column.id]!);
+      }
+    }
+    addLine(sampleCells());
+  }
+  return lines.join('');
 }

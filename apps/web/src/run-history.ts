@@ -1,6 +1,7 @@
 import { parseModel, canonicalSemantic, ModelError, UNITS, type CalcModel, type RunResult, type SignalDescriptor } from '../../../packages/model/src';
 import { sha256 } from '../../../packages/codegen-ts/src/sha256';
 import type { ExportManifest } from '../../../packages/codegen-ts/src';
+import { equalDataType, typedStorageElements, validateDataType, validateTypedShape, validateTypedSignal } from '../../../packages/model/src';
 
 export const RUN_HISTORY_LIMITS = Object.freeze({ records: 5, bytes: 20 * 1024 * 1024, recordedValues: 200_000 });
 const allowedUnits = new Set<string>(UNITS);
@@ -48,14 +49,30 @@ export function validateRunHistory(raw: unknown): HistoryRecord[] {
     if (!result || !['completed', 'cancelled', 'failed'].includes(result.status) || !Array.isArray(result.samples) || result.samples.length > 10001 || result.steps !== result.samples.length || !Array.isArray(record.outputIds) || record.outputIds.length > 1000 || !record.outputTypes || typeof record.outputTypes !== 'object') invalid('실행 기록 결과 형식을 확인해 주세요.');
     if (new Set(record.outputIds).size !== record.outputIds.length || record.outputIds.some(id => typeof id !== 'string' || id.length > 1024 || !Object.hasOwn(record.outputTypes, id))) invalid('기록된 출력 연결이 올바르지 않습니다.');
     for (const descriptor of Object.values(record.outputTypes)) {
-      if (!descriptor || !['float64', 'boolean'].includes(descriptor.valueType) || !Array.isArray(descriptor.shape) || descriptor.shape.length > 2 || descriptor.shape.some(size => !Number.isInteger(size) || size < 1 || size > 1024) || !allowedUnits.has(descriptor.unit) || descriptor.fields && (!Array.isArray(descriptor.fields) || descriptor.fields.length > 16 || descriptor.fields.some(field => typeof field !== 'string' || field.length > 64))) invalid('기록된 출력 자료형이 올바르지 않습니다.');
+      if (!descriptor || !['float64', 'boolean', 'typed'].includes(descriptor.valueType) || !Array.isArray(descriptor.shape) || descriptor.shape.length > (descriptor.valueType === 'typed' ? 8 : 2) || descriptor.shape.some(size => !Number.isInteger(size) || size < 1 || size > 1024) || descriptor.fields && (!Array.isArray(descriptor.fields) || descriptor.fields.length > 16 || descriptor.fields.some(field => typeof field !== 'string' || field.length > 64))) invalid('기록된 출력 자료형이 올바르지 않습니다.');
+      try {
+        if (!allowedUnits.has(descriptor.unit)) invalid('기록된 출력 단위가 올바르지 않습니다.');
+        if (descriptor.valueType === 'typed') { validateTypedShape(descriptor.shape); validateDataType(descriptor.typed); }
+        else if (descriptor.typed !== undefined) invalid('기록된 출력 자료형이 올바르지 않습니다.');
+        if (descriptor.representation !== undefined && !['copy', 'virtual', 'nonvirtual'].includes(descriptor.representation)) invalid('기록된 출력 표현이 올바르지 않습니다.');
+      } catch { invalid('기록된 출력 자료형이 올바르지 않습니다.'); }
     }
     let elements = 0;
-    const count = (value: unknown): number => Array.isArray(value) ? value.reduce((sum, item) => sum + count(item), 0) : typeof value === 'number' || typeof value === 'boolean' ? 1 : invalid('기록된 신호의 자료형이 올바르지 않습니다.');
+    const count = (value: unknown, descriptor?: SignalDescriptor): number => {
+      if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
+        try {
+          const typed = validateTypedSignal(value);
+          if (descriptor && (descriptor.valueType !== 'typed' || JSON.stringify(descriptor.shape) !== JSON.stringify(typed.shape) || !equalDataType(validateDataType(descriptor.typed), { dtype: typed.dtype, ...(typed.fixed ? { fixed: typed.fixed } : {}), ...(typed.enum ? { enum: typed.enum } : {}) }))) invalid('기록된 신호의 자료형·크기가 선언과 다릅니다.');
+          return typedStorageElements(typed);
+        } catch { return invalid('기록된 신호의 자료형·크기가 올바르지 않습니다.'); }
+      }
+      if (descriptor?.valueType === 'typed') invalid('기록된 신호에 선언한 typed 자료형이 없습니다.');
+      return Array.isArray(value) ? value.reduce((sum, item) => sum + count(item), 0) : typeof value === 'number' || typeof value === 'boolean' ? 1 : invalid('기록된 신호의 자료형이 올바르지 않습니다.');
+    };
     let previous = -Infinity;
     for (const sample of result.samples) {
       if (!sample || typeof sample.time !== 'number' || !Number.isFinite(sample.time) || sample.time < previous || !sample.values || typeof sample.values !== 'object') invalid('기록된 시간 격자가 올바르지 않습니다.'); previous = sample.time;
-      elements += 1 + Object.values(sample.values).reduce<number>((sum, value) => sum + count(value), 0);
+      elements += 1 + Object.entries(sample.values).reduce<number>((sum, [id, value]) => sum + count(value, record.outputTypes[id]), 0);
       if (elements > RUN_HISTORY_LIMITS.recordedValues) invalid('한 실행 기록은 200,000개의 수치·boolean 원소 이하여야 합니다.');
     }
     if (!Number.isFinite(result.elapsedMs) || result.elapsedMs < 0 || !result.finalState || typeof result.finalState !== 'object') invalid('최종 실행 상태가 올바르지 않습니다.');
