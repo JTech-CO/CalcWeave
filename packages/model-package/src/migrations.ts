@@ -7,6 +7,7 @@ export const PACKAGE_MIGRATION_BASELINES = Object.freeze([
   Object.freeze({ stage: 'M12', engineVersion: '0.13.0-m12', entries: 304, registrySha256: 'bb604da6425b9429293b9daaea4ca163548fafda1d26673fecd90a8ea71d6a4d' }),
   Object.freeze({ stage: 'M13', engineVersion: '0.14.0-m13', entries: 334, registrySha256: '66efa7ee48cddca607af560e153acdab42802f9e2c9b2d9e1cec9795d24261d6' }),
   Object.freeze({ stage: 'M14', engineVersion: '0.15.0-m14', entries: 337, registrySha256: '19aa84816ba8be1d3ea10536efb6f65caab0922f67b02ce8783f15b11e52165b' }),
+  Object.freeze({ stage: 'M15', engineVersion: '0.16.0-m15', entries: 337, registrySha256: '19aa84816ba8be1d3ea10536efb6f65caab0922f67b02ce8783f15b11e52165b' }),
 ]);
 
 export interface PackageMigrationReport {

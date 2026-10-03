@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M16",
+  "status": "passed",
+  "scope": "Focused source support UI and bounded metadata report workflow; no native Simulink runtime equivalence or user-study claim.",
+  "version": "0.17.0",
+  "engineVersion": "0.17.0-m16",
+  "owner": "JTech-Co",
+  "testedMatrix": {
+    "path": "docs/support-matrix.json",
+    "sha256": "9decd21f1c1280d7be84009997beeb96947ab817cbbfe185084ee61dcb32fd98",
+    "counts": {
+      "trackedSourceRows": 385,
+      "uniqueSourceNames": 339,
+      "selectedSubsetRows": 367,
+      "unsupportedRows": 18,
+      "unverifiedInventoryRows": 385,
+      "fullOptionEquivalentRows": 0,
+      "registryDefinitions": 337,
+      "canonicalContracts": 352,
+      "widgetContracts": 5,
+      "unavailableContracts": 10,
+      "pythonDefinitionMembership": 69,
+      "wasmDefinitionMembership": 16,
+      "trackingDecisionCompleteRows": 385
+    },
+    "immutableSourceRows": 385,
+    "fullSimulinkEquivalenceClaimed": false,
+    "numericalReferenceRuntimeExecuted": false,
+    "exhaustiveSourceOptionInventoryVerified": false,
+    "note": "These are the actual generated metadata bytes used by the focused run. Subsequent coverage-header artifact-hash regeneration and final public verification are separate root gates."
+  },
+  "sources": {
+    "apps/web/src/components/SupportDialog.tsx": "8d00bdb3ebbe67e035b3cec457cc03b7034f5759889227402dc6781086eba78e",
+    "apps/web/src/styles.css": "b1a080d42cef9e5f47f878b986a55728aeb0afe8eab12a17e51aec888967572f",
+    "tests/e2e/m16-support.spec.ts": "7cf45330369c3c27302ce7e48c839006b65b67c169b47be109541388b8dd53ae"
+  },
+  "typecheck": {
+    "command": "npm run typecheck",
+    "exitCode": 0,
+    "log": "docs/evidence/m16-support-typecheck.log",
+    "sha256": "5ca9391b54d54b67a98a1fde532413073d0b3449432c95ca9ac008181f376d43",
+    "note": "Focused typecheck passed before the final CSS specificity/viewport assertion changes; the root final build also ran tsc on those final sources."
+  },
+  "rootFinalBuild": {
+    "command": "npm run build",
+    "exitCode": 0,
+    "log": "docs/evidence/m16-support-build.log",
+    "sha256": "620a58af11972a7dc57e03488afce0d26e0afe408be8ee62e75ce4cee28b7d71",
+    "note": "Actual final width-corrected preview build used for the focused browser run; root records release/project checks separately."
+  },
+  "rootWholeUnit": {
+    "passed": 3882,
+    "failed": 0,
+    "report": "docs/evidence/m16-initial-unit-results.json",
+    "sha256": "47f980bc135f4768ee0fa988bcd56102a39327f1a8cca78d23749bbf3691b3b0",
+    "performedBy": "root"
+  },
+  "browser": {
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "elapsedMs": 23892.197,
+    "report": "docs/evidence/m16-support-browser-results.json",
+    "sha256": "58c8dfc0233c1385ce8808f879be016dd06ee08c9bb64bc1419bf1a51669c4f9",
+    "sourceReport": ".test-generated/m16-support-final-browser.json",
+    "baseURL": "http://127.0.0.1:4175",
+    "testFilter": "tests/e2e/m16-support.spec.ts",
+    "tests": [
+      {
+        "title": "M16 keeps all 385 source identities and distinguishes the three Display mappings from 337 registered blocks",
+        "file": "m16-support.spec.ts",
+        "status": "passed"
+      },
+      {
+        "title": "M16 displays the approved preset configuration without treating its shared canonical implementation as full native support",
+        "file": "m16-support.spec.ts",
+        "status": "passed"
+      },
+      {
+        "title": "M16 separates an unavailable MATLAB adapter from the executable independent C Caller alternative",
+        "file": "m16-support.spec.ts",
+        "status": "passed"
+      },
+      {
+        "title": "M16 Python filtering retains current approved string capabilities and their selected configuration limits",
+        "file": "m16-support.spec.ts",
+        "status": "passed"
+      },
+      {
+        "title": "M16 report downloads all source rows even after filtering and never upgrades source inventory or full equivalence claims",
+        "file": "m16-support.spec.ts",
+        "status": "passed"
+      },
+      {
+        "title": "M16 category, implementation and status filters agree with the downloaded source decisions and clear stale details",
+        "file": "m16-support.spec.ts",
+        "status": "passed"
+      },
+      {
+        "title": "M16 malicious search stays inert and support keyboard commands preserve the current diagram",
+        "file": "m16-support.spec.ts",
+        "status": "passed"
+      },
+      {
+        "title": "M16 source filters and detailed support evidence remain readable in both themes at 320px and 200 percent text",
+        "file": "m16-support.spec.ts",
+        "status": "passed"
+      }
+    ]
+  },
+  "priorRun": {
+    "passed": 8,
+    "failed": 0,
+    "report": "docs/evidence/m16-support-browser-initial-width-results.json",
+    "sha256": "5c3d47d402fd8b0fb30435f706ae9ad5f954dca203edd28528916517519a6a7a",
+    "limitation": "Automated checks passed, then personal image inspection found an existing .workspace-dialog rule overriding the intended support dialog width to 640px. The support-only CSS specificity fix and meaningful width assertions were subsequently verified in the final run above."
+  },
+  "workflows": [
+    {
+      "id": "all-source-identities",
+      "passed": true,
+      "evidenceTest": "M16 keeps all 385 source identities and distinguishes the three Display mappings from 337 registered blocks",
+      "checked": "385 unique source rows; 337 registry definitions; Dashboard03-005/model-widget, custom03-024 and sink16-001 remain distinct."
+    },
+    {
+      "id": "approved-preset",
+      "passed": true,
+      "evidenceTest": "M16 displays the approved preset configuration without treating its shared canonical implementation as full native support",
+      "checked": "06-001 operation=clear and shared logic.bit-mask selected scope displayed with unverified original option inventory."
+    },
+    {
+      "id": "native-unavailable-vs-independent",
+      "passed": true,
+      "evidenceTest": "M16 separates an unavailable MATLAB adapter from the executable independent C Caller alternative",
+      "checked": "19-009 unavailable MATLAB System external conditions separated from19-001 built-in independent WASM alternative, no run/upload controls."
+    },
+    {
+      "id": "current-python-string-target",
+      "passed": true,
+      "evidenceTest": "M16 Python filtering retains current approved string capabilities and their selected configuration limits",
+      "checked": "18-006 Python selected configuration eligible, actual model validation required; WASM filter removes unsupported string entry and stale details."
+    },
+    {
+      "id": "bounded-whole-json-report",
+      "passed": true,
+      "evidenceTest": "M16 report downloads all source rows even after filtering and never upgrades source inventory or full equivalence claims",
+      "checked": "Full385-row report downloads despite filters; registry/model-widget contracts distinct; all whole-equivalence/inventory/native-runtime claims remain false."
+    },
+    {
+      "id": "combined-filter-decisions",
+      "passed": true,
+      "evidenceTest": "M16 category, implementation and status filters agree with the downloaded source decisions and clear stale details",
+      "checked": "Category19/conditional-adapter/unsupported IDs agree with downloaded decisions; C/C++ has no eligible selected configurations."
+    },
+    {
+      "id": "escaped-search-keyboard",
+      "passed": true,
+      "evidenceTest": "M16 malicious search stays inert and support keyboard commands preserve the current diagram",
+      "checked": "Malicious text inert; no page errors/dialogs/outside-origin requests; Arrow/Home roving selection, Tab details, modal trap/Escape restore; stored model unchanged by background shortcuts."
+    },
+    {
+      "id": "responsive-themes",
+      "passed": true,
+      "evidenceTest": "M16 source filters and detailed support evidence remain readable in both themes at 320px and 200 percent text",
+      "checked": "Desktop1040/992 and mobile374/304 width assertions; no horizontal document/control overflow in all8 conditions;16 personally inspected overview/detail captures."
+    }
+  ],
+  "bounds": {
+    "queryMaxCharacters": 120,
+    "listMaxRows": 385,
+    "filterValues": "validated section/classification/decision/target allowlists",
+    "reportMaxBytes": 8388608,
+    "reportSerialization": "shared validated pure API",
+    "dataLoad": "dynamic import on source matrix tab"
+  },
+  "screenshots": [
+    {
+      "theme": "dark",
+      "viewportWidth": 1440,
+      "viewportHeight": 1200,
+      "textScale": 1,
+      "images": [
+        {
+          "view": "overview",
+          "path": "docs/evidence/m16-support-overview-dark-1440-1x.png",
+          "sha256": "ffacb79adb732563ccb15dfcf66c054321fd9ee7384dcb7642f101b2f7e83fae",
+          "personallyInspected": true
+        },
+        {
+          "view": "detail",
+          "path": "docs/evidence/m16-support-detail-dark-1440-1x.png",
+          "sha256": "ffacb79adb732563ccb15dfcf66c054321fd9ee7384dcb7642f101b2f7e83fae",
+          "personallyInspected": true
+        }
+      ],
+      "expectedDialogWidth": 1040,
+      "actualWidthAssertionPassed": true,
+      "horizontalDocumentOverflow": false,
+      "horizontalControlOverflow": false,
+      "verticalScrollingRequired": false
+    },
+    {
+      "theme": "dark",
+      "viewportWidth": 1024,
+      "viewportHeight": 1200,
+      "textScale": 1,
+      "images": [
+        {
+          "view": "overview",
+          "path": "docs/evidence/m16-support-overview-dark-1024-1x.png",
+          "sha256": "b1a93dd13cc7bc71392c901618c4adf2f0f492e2ff327d226a04b3b187eb4aea",
+          "personallyInspected": true
+        },
+        {
+          "view": "detail",
+          "path": "docs/evidence/m16-support-detail-dark-1024-1x.png",
+          "sha256": "b1a93dd13cc7bc71392c901618c4adf2f0f492e2ff327d226a04b3b187eb4aea",
+          "personallyInspected": true
+        }
+      ],
+      "expectedDialogWidth": 992,
+      "actualWidthAssertionPassed": true,
+      "horizontalDocumentOverflow": false,
+      "horizontalControlOverflow": false,
+      "verticalScrollingRequired": false
+    },
+    {
+      "theme": "dark",
+      "viewportWidth": 390,
+      "viewportHeight": 1200,
+      "textScale": 1,
+      "images": [
+        {
+          "view": "overview",
+          "path": "docs/evidence/m16-support-overview-dark-390-1x.png",
+          "sha256": "5a8f6a3b784aabe1bfdea969bfe47ebddf13f6fc34e02d98cebedd2807314c8e",
+          "personallyInspected": true
+        },
+        {
+          "view": "detail",
+          "path": "docs/evidence/m16-support-detail-dark-390-1x.png",
+          "sha256": "9ae59026084721b600bfc37cdc31aa815eccf2b589a1540cc7414998b91798d1",
+          "personallyInspected": true
+        }
+      ],
+      "expectedDialogWidth": 374,
+      "actualWidthAssertionPassed": true,
+      "horizontalDocumentOverflow": false,
+      "horizontalControlOverflow": false,
+      "verticalScrollingRequired": true
+    },
+    {
+      "theme": "dark",
+      "viewportWidth": 320,
+      "viewportHeight": 1200,
+      "textScale": 2,
+      "images": [
+        {
+          "view": "overview",
+          "path": "docs/evidence/m16-support-overview-dark-320-2x.png",
+          "sha256": "da648d78998c1722336bc8c3a8015c41e62edce5e68da06dec49091f58a137ce",
+          "personallyInspected": true
+        },
+        {
+          "view": "detail",
+          "path": "docs/evidence/m16-support-detail-dark-320-2x.png",
+          "sha256": "be1af9243360619d0e99ddfcaadfc79dcabec639eb18ae80ca0b4c0e24e365e2",
+          "personallyInspected": true
+        }
+      ],
+      "expectedDialogWidth": 304,
+      "actualWidthAssertionPassed": true,
+      "horizontalDocumentOverflow": false,
+      "horizontalControlOverflow": false,
+      "verticalScrollingRequired": true
+    },
+    {
+      "theme": "light",
+      "viewportWidth": 1440,
+      "viewportHeight": 1200,
+      "textScale": 1,
+      "images": [
+        {
+          "view": "overview",
+          "path": "docs/evidence/m16-support-overview-light-1440-1x.png",
+          "sha256": "c30d9e3200436202ca1e9937e4c643d9dfb8c0305270096474752b55a140818f",
+          "personallyInspected": true
+        },
+        {
+          "view": "detail",
+          "path": "docs/evidence/m16-support-detail-light-1440-1x.png",
+          "sha256": "c30d9e3200436202ca1e9937e4c643d9dfb8c0305270096474752b55a140818f",
+          "personallyInspected": true
+        }
+      ],
+      "expectedDialogWidth": 1040,
+      "actualWidthAssertionPassed": true,
+      "horizontalDocumentOverflow": false,
+      "horizontalControlOverflow": false,
+      "verticalScrollingRequired": false
+    },
+    {
+      "theme": "light",
+      "viewportWidth": 1024,
+      "viewportHeight": 1200,
+      "textScale": 1,
+      "images": [
+        {
+          "view": "overview",
+          "path": "docs/evidence/m16-support-overview-light-1024-1x.png",
+          "sha256": "54a09771996784decf56948e67a6f8451925370852a92aeeabc1bfc889e5d694",
+          "personallyInspected": true
+        },
+        {
+          "view": "detail",
+          "path": "docs/evidence/m16-support-detail-light-1024-1x.png",
+          "sha256": "54a09771996784decf56948e67a6f8451925370852a92aeeabc1bfc889e5d694",
+          "personallyInspected": true
+        }
+      ],
+      "expectedDialogWidth": 992,
+      "actualWidthAssertionPassed": true,
+      "horizontalDocumentOverflow": false,
+      "horizontalControlOverflow": false,
+      "verticalScrollingRequired": false
+    },
+    {
+      "theme": "light",
+      "viewportWidth": 390,
+      "viewportHeight": 1200,
+      "textScale": 1,
+      "images": [
+        {
+          "view": "overview",
+          "path": "docs/evidence/m16-support-overview-light-390-1x.png",
+          "sha256": "8150e164664a669648df5534df8ef27e1da96355994dd3623da69c128ea5f0d2",
+          "personallyInspected": true
+        },
+        {
+          "view": "detail",
+          "path": "docs/evidence/m16-support-detail-light-390-1x.png",
+          "sha256": "1a1f4650b77ae9488ef1cd47fe801bfbc36502276d5ac6250c31e6aad4e96f87",
+          "personallyInspected": true
+        }
+      ],
+      "expectedDialogWidth": 374,
+      "actualWidthAssertionPassed": true,
+      "horizontalDocumentOverflow": false,
+      "horizontalControlOverflow": false,
+      "verticalScrollingRequired": true
+    },
+    {
+      "theme": "light",
+      "viewportWidth": 320,
+      "viewportHeight": 1200,
+      "textScale": 2,
+      "images": [
+        {
+          "view": "overview",
+          "path": "docs/evidence/m16-support-overview-light-320-2x.png",
+          "sha256": "64a1228014c2e6aafa4d07e95137f27ee2cfca2b1a82853eb44985835742484c",
+          "personallyInspected": true
+        },
+        {
+          "view": "detail",
+          "path": "docs/evidence/m16-support-detail-light-320-2x.png",
+          "sha256": "ec46d5b83fbbf84cfb7d1278102d1324a6bc58f045371b6c76c74df9a03f9cfe",
+          "personallyInspected": true
+        }
+      ],
+      "expectedDialogWidth": 304,
+      "actualWidthAssertionPassed": true,
+      "horizontalDocumentOverflow": false,
+      "horizontalControlOverflow": false,
+      "verticalScrollingRequired": true
+    }
+  ],
+  "humanStudyPerformed": false,
+  "browserFamiliesVerifiedHere": [
+    "Windows Chromium"
+  ],
+  "firefoxSafariVerifiedHere": false,
+  "finalPublicDeploymentVerifiedHere": false,
+  "fullNativeOptionEquivalenceClaimed": false,
+  "ownedUiAndTestSourcesChangedAfterFinalBrowser": false,
+  "metadataRegenerationAfterFocusedRun": {
+    "path": "docs/support-matrix.json",
+    "sha256": "e5d706d7fc127081fc8470189b3f580d03ed61ba938a8168a5aa8e3730bb875e",
+    "byteLength": 5181337,
+    "describedChange": "Coverage/document metadata regenerated by the blocks agent after documentation cleanup; row counts, canonical contracts, API and approved profiles reported unchanged.",
+    "semanticComparisonPerformedByThisUiAgent": false,
+    "focusedBrowserReexecutedAgainstRegeneratedMetadataHere": false,
+    "originalFocusedRawReportPreserved": true,
+    "downstreamFinalBuildAndPublicVerification": "Separate root gates; this focused record preserves the exact metadata snapshot used by its 8 tests."
+  }
+}

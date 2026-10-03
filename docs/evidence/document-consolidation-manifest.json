@@ -1,0 +1,2220 @@
+{
+  "schemaVersion": 1,
+  "status": "applied-verified",
+  "operation": "consolidated-current-markdown-and-coherent-document-consumers",
+  "historicalGitCommit": "9f314bbb2c41d4e6b087c90b9da435e61a850996",
+  "historicalRecoveryCommand": "git show 9f314bbb2c41d4e6b087c90b9da435e61a850996:<repository-relative-path>",
+  "historicalDocsMarkdownCount": 52,
+  "removedMarkdownCount": 44,
+  "removed": [
+    {
+      "path": "docs/03-milestone-roadmap.md",
+      "beforeSha256": "6ddce229207ee5825d6a5ac0225a3ea650cf35d9def4e128002b033cfeb8b6f9",
+      "bytes": 74487,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/04-sane-design-revision.md",
+      "beforeSha256": "e2e25720b460f7eb9191fde39a8dfe5922f4126f4c66394f9fe1bef471192623",
+      "bytes": 13436,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/05-simulink-coverage-roadmap.md",
+      "beforeSha256": "d8d6ef09ddf12e5817779730a029a191e10e1d4c99ce9fe2c3209ba7fd5102ac",
+      "bytes": 22427,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/block-expansion-plan.md",
+      "beforeSha256": "dc394c7336d863bf42da93b303dfe33b73dc1f0a10aa0d82851f552843f8ba78",
+      "bytes": 30401,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/catalog-contract.md",
+      "beforeSha256": "37041409b5b46746ce66874cad29057dc0223db0c6344b5409951c461ecb6c65",
+      "bytes": 5091,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/catalog-validation.md",
+      "beforeSha256": "63231d5416f9e303c4307d6426735ca4fa34923301fa6b74316543650f7901a9",
+      "bytes": 7690,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m0-contract.md",
+      "beforeSha256": "89a11be9f452d37a9d6c59c3341a396316b03403ea368323c751057ddf159024",
+      "bytes": 20927,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m0-validation.md",
+      "beforeSha256": "8e52fc080267b1eeb032f83745494f4710ba97fffc974cb124c8af8fb24ef435",
+      "bytes": 12751,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m1-contract.md",
+      "beforeSha256": "5c3fc36c4bc2b12c8becf502c227308ee3f5dbcd272e57ec68cb6fa8c94737a4",
+      "bytes": 8340,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m1-validation.md",
+      "beforeSha256": "cbcfa94dc0a100a6270d048afc30dffed7849869a2d7ff820392be79bea95ad2",
+      "bytes": 8075,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m10-contract.md",
+      "beforeSha256": "53c479bb5dbd5a3294da3ad15e181db060a2890eba4aaf02b0d09828b1b1a260",
+      "bytes": 13255,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m10-validation.md",
+      "beforeSha256": "af86f6e0921a0fb90a7d89223243bc9d50bfd2af6d5759e7bf097914484508a8",
+      "bytes": 12235,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m11-contract.md",
+      "beforeSha256": "ef05287f3f92d6e1cb91bc7989aac35bc627e4fa34b26a22764c01bbad064dd4",
+      "bytes": 14134,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m11-validation.md",
+      "beforeSha256": "1f2b0130080988e596598d2b930c421235c062f662d2c64c9538d780f0448e03",
+      "bytes": 5372,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m12-contract.md",
+      "beforeSha256": "5a788c6497d9d42ccf91e41b6823a6217490dc1b3a47d160d77880fc408d7069",
+      "bytes": 15188,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m12-validation.md",
+      "beforeSha256": "ee6ce4a6b074025f794e3711302c5ca73aeec1e00181b575a905a1d71aa11aaf",
+      "bytes": 5104,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m13-contract.md",
+      "beforeSha256": "768c11d73da14abd072cb5820bb4a71bc05f5e23066cc0053e053b553143295c",
+      "bytes": 14577,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m13-validation.md",
+      "beforeSha256": "4d4835c4efe05c8e490507973f08667c8dd92c0eaa19de96da94701b462dc7cc",
+      "bytes": 7311,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m14-contract.md",
+      "beforeSha256": "9d280a58b24a0453502212548aa8fcba31b3affae3c03c44fbf97b156a5fb4ac",
+      "bytes": 10656,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m14-validation.md",
+      "beforeSha256": "11bab97f29f481c2c903f24db9c43b7ee3ac6986f78431769fff9159f106e27c",
+      "bytes": 8936,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m15-contract.md",
+      "beforeSha256": "063f32a2c162f4ca386d53e89cdf40ec81173f963e18eec38f2408e049b7dad4",
+      "bytes": 13832,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m15-validation.md",
+      "beforeSha256": "5c742980b2bd16f20b18ceffc042a37b46c76e480b6da81780e9d173b9deb5f6",
+      "bytes": 12656,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m2-contract.md",
+      "beforeSha256": "b8f4837427726545087227512639d06b6069693a5f679b710c6368fcf8072ce3",
+      "bytes": 14544,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m2-validation.md",
+      "beforeSha256": "3f55a491576c903f3a67f969a2f0e8ec09c1f4d76fd7c6245e365008e95c13fe",
+      "bytes": 9006,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m3-contract.md",
+      "beforeSha256": "a349bd0346a3e9b62d04120f84648ecbee0697471a2c3a03c314276fe3707e48",
+      "bytes": 12894,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m3-validation.md",
+      "beforeSha256": "1622b818e746bca1d4067ea45eb1f56bf84c2df1979ceeb9c21efd534a656584",
+      "bytes": 10336,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m4-contract.md",
+      "beforeSha256": "ba1a1da7ac094babb5954fc31075a7385daafb393cfde9911e3645f4abe2b02f",
+      "bytes": 18079,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m4-validation.md",
+      "beforeSha256": "7da91f026d662f52419e2311614d8620750b529052998ab1a6ad3a46b488f9a5",
+      "bytes": 16247,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m5-contract.md",
+      "beforeSha256": "988ea75d3209495de515fb5f4cea696b8cb633be21a74ff69cbff844b495b047",
+      "bytes": 7850,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m5-validation.md",
+      "beforeSha256": "a7c335700fefa6c441afa86e75d4200bfb68c1d8f1d9276d16e12b23c9de8004",
+      "bytes": 9152,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m6-contract.md",
+      "beforeSha256": "ae068ab22c986890325e07b95689c27b61e8c8305ec2467d7ef765f3bf5641f9",
+      "bytes": 5159,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m6-deployment.md",
+      "beforeSha256": "90cae2d8153b49f6d8f2c12632c69395c3cbd6dbd6c695434aac8b20fbad182d",
+      "bytes": 4883,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m6-operations.md",
+      "beforeSha256": "343d10c1ccd85d700207ef97bcd62b017ac56edfa34c5eb5fb31a0a1d8c2d5bb",
+      "bytes": 4921,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m6-security.md",
+      "beforeSha256": "70c6c670136045ea1f9bb3b51e732e238e45298b9fb178c12dc2f7002ac500ce",
+      "bytes": 6187,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m6-validation.md",
+      "beforeSha256": "f55133887e1bdeab7e126cd20230b6917d9e2cc98a3b9d34de74bfab30fdec0f",
+      "bytes": 9872,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m7-contract.md",
+      "beforeSha256": "bb6bfe47b245991d95d2c31d2f11b2e97474705b496a4bfbd4da61f8ec57bcea",
+      "bytes": 7578,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m7-validation.md",
+      "beforeSha256": "c57d632b1fa1c5a1683a42b64eb3832458b873043ab99fa5ae61455bd2756588",
+      "bytes": 10530,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m8-contract.md",
+      "beforeSha256": "12f7e9a5c1e356a52b83944e7eaba0a41c462f886783c212c851a96cac34f3d3",
+      "bytes": 66161,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m8-validation.md",
+      "beforeSha256": "65a2c582ee5745eb06b9f44ffb037322933d7eb9e43c0b440f9612f3b0ad6a71",
+      "bytes": 9074,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m9-contract.md",
+      "beforeSha256": "37616f026010d7055a391bd6b225aca3388c21606821f09e035bfe13041f5fd0",
+      "bytes": 51306,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/m9-validation.md",
+      "beforeSha256": "aaf8dea4bcab8eb4bcd8f7d63cf7b8fd2282f94c873f3153ecfcf3399c789262",
+      "bytes": 14322,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/pages-deployment.md",
+      "beforeSha256": "a4e91346bb4190f1a99b372b7ec859210cbb62bdb6a0d5f8374f9f111b1dcbd7",
+      "bytes": 3906,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/pages-launch-review.md",
+      "beforeSha256": "bef5a7a8c316878aabade2553c5b3c03a89a5a82545253b136de816f198e0af0",
+      "bytes": 12009,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    },
+    {
+      "path": "docs/pages-validation.md",
+      "beforeSha256": "62a73601a97c24ef2919741ccf93bb51ba8c3c33bac7cf3433d31d9618da5c08",
+      "bytes": 17351,
+      "existsAfter": false,
+      "resolvedTargetWasDirectWorkspaceDocsChild": true,
+      "regularFileBefore": true,
+      "beforeShaVerifiedBeforeDelete": true,
+      "deletedBy": "PowerShell Remove-Item -LiteralPath"
+    }
+  ],
+  "replaced": [
+    {
+      "path": "README.md",
+      "beforeSha256": "67bdac427c4cc24f1c1aa7bf444b38e06eda83d832f71c983d22d01f2af11e92",
+      "beforeHashSource": "immutable Git 9f314bbb2c41d4e6b087c90b9da435e61a850996",
+      "afterSha256": "0a948d3e2165692d1a86648087c2a41fa2eb387c168b432ba13d244423cc0872",
+      "bytesAfter": 6384
+    },
+    {
+      "path": "docs/01-technical-whitepaper.md",
+      "beforeSha256": "3d86060ff858fb35069a3129d0488df0ee766f98bacd37354d4900e8af4f366e",
+      "beforeHashSource": "immutable Git 9f314bbb2c41d4e6b087c90b9da435e61a850996",
+      "afterSha256": "c751fe40cabb2115d61b94fd54b8437ef47ff1cf7b709f90f31f35a05519b5f0",
+      "bytesAfter": 31488
+    },
+    {
+      "path": "docs/02-design-whitepaper.md",
+      "beforeSha256": "029f381c3295833623d8b35965850eb6cbeedcfc51b2ae4d0d28e19f69cb3614",
+      "beforeHashSource": "immutable Git 9f314bbb2c41d4e6b087c90b9da435e61a850996",
+      "afterSha256": "d3ec20dcdd91920cd51ae733c7c5c38adf2f4b6ecaa2b1a35f95c3606b7f9e2d",
+      "bytesAfter": 17994
+    },
+    {
+      "path": "docs/block-coverage.md",
+      "beforeSha256": "3267160a6df275eedf45947334c2f7b2fe7e1a926b6da30faa96eed420826c73",
+      "beforeHashSource": "immutable Git 9f314bbb2c41d4e6b087c90b9da435e61a850996",
+      "afterSha256": "8b593d607794c01ae54cb253be275c90fe9dbc8963393437b716309f3822ae32",
+      "bytesAfter": 224048
+    }
+  ],
+  "added": [
+    {
+      "path": "docs/operations.md",
+      "sha256AtCleanup": "d5982385bbaa9393443a1b0db007dcf66ade89efe8623d6640154e446d5c8d0c",
+      "bytes": 11729
+    },
+    {
+      "path": "docs/validation.md",
+      "sha256AtCleanup": "e7f6484780567d0dccf1ffd3ba8072b62ad8252c9b8c5d11b1ba18051604ad5a",
+      "bytes": 6396,
+      "owner": "root",
+      "rootFinalMeasurementUpdatesPending": true
+    },
+    {
+      "path": "docs/support-matrix.md",
+      "sha256AtCleanup": "b5b7d2da44b66a3ae7c8e403a7e49f531287fc8b7ddc1eeb36b35ab2c5af765c",
+      "bytes": 40723
+    }
+  ],
+  "sourceRows": {
+    "path": "docs/block-coverage.md",
+    "count": 385,
+    "rawRowAggregateSha256": "f3e7f53426ae40a485526bfc7405678ff64acf90ed38a8c58bebc0ce27ced2fe",
+    "individual": [
+      {
+        "id": "01-001",
+        "sha256": "b311371a52ef5dd97b34d737c236dbd1f7b8003e94eca2fa04959425a9c2b96f"
+      },
+      {
+        "id": "01-002",
+        "sha256": "a1a60d8afbd9f94ce1a67c5c4c27f18bf178fe3c9a13bc5bc4983bff9570d275"
+      },
+      {
+        "id": "01-003",
+        "sha256": "a9b7627b8e7459f44e87cae61fae194a825e020fef7733decee8c6debe9decd3"
+      },
+      {
+        "id": "01-004",
+        "sha256": "eeb96381dfc2299ca3d620c4048a3163d4e44918f97d47731bbc8809085e25ad"
+      },
+      {
+        "id": "01-005",
+        "sha256": "1e955c60dd30abfbe47fc1f2ed9ef82ee55f5254a2e75c34faf9758067b41dad"
+      },
+      {
+        "id": "01-006",
+        "sha256": "198f1b57aa81999d47a6410f90116b0f438420b24d0d3e1a286f4ce28d52276b"
+      },
+      {
+        "id": "01-007",
+        "sha256": "d2d8a15b6c67014df3f23f1be4a97ce351ce6a8d809c3df2422e852842e200bb"
+      },
+      {
+        "id": "01-008",
+        "sha256": "81f643e8064160858206286d97c11684f08bc6f65e59e4a418827601f47c2b92"
+      },
+      {
+        "id": "01-009",
+        "sha256": "8130012d3c585fff17116f5fa2245e75bb7aaad9a73d9ce16a0600ab05a6db1a"
+      },
+      {
+        "id": "01-010",
+        "sha256": "f1ba53f2f95e415a2a024505ebdef166fee33a2d865de535575f80a563cd5690"
+      },
+      {
+        "id": "01-011",
+        "sha256": "6d9c0662e5a6cc9007585d0ccb487e4314e7cae1ca5d8289f078f5a800e255b2"
+      },
+      {
+        "id": "01-012",
+        "sha256": "11bff8f031d22c8052537eeb62583314d2067820dc37d800c20a3c5c2d392012"
+      },
+      {
+        "id": "01-013",
+        "sha256": "ff77069d655af6521224dcf4a5f3ebbaa6722b19f17a6233d74cd07d4625daf3"
+      },
+      {
+        "id": "01-014",
+        "sha256": "f5c15c07ed4ff40b67caabba8db6d9dd42413a00b560b28224f932d37cb800e4"
+      },
+      {
+        "id": "01-015",
+        "sha256": "1115a28cbbd30d815f5cd2ee660ab43b2874f6e064ba323fa652fe893af4d351"
+      },
+      {
+        "id": "01-016",
+        "sha256": "9003ce388914b6edae0427aa4a152f733d320eb284916f40c3ab98e7cf5432c1"
+      },
+      {
+        "id": "01-017",
+        "sha256": "8e3ad124c9df9841df1f58d1e1f585c57d91ba2173b59acdd23db17d2baf472d"
+      },
+      {
+        "id": "01-018",
+        "sha256": "9e2a8a5fc6f25d921fabc1b751fe3516290aec8675498e6f05ea49bfa3cc2704"
+      },
+      {
+        "id": "01-019",
+        "sha256": "76d98931eb234d3d47b2d66b396d4b7ef7a445b37116ac023b30c28d6b6a1067"
+      },
+      {
+        "id": "01-020",
+        "sha256": "c1289f2eaf7d887df76a7f1e20de127e25ea1b2f127099bef4dbf3db3d1d41fb"
+      },
+      {
+        "id": "01-021",
+        "sha256": "fe9545079c4400ff98ebcc5c29e4846e62563a5f4a19b4037fc70bbdabe7a09c"
+      },
+      {
+        "id": "01-022",
+        "sha256": "650d3bb34d42ee0a2a6f5ba2a1d5abc2ae95905e0cb5b98bed883f7c3e627045"
+      },
+      {
+        "id": "01-023",
+        "sha256": "f5e16662847a81509f2f500a2db8d69870e0c474a14d75afa6995cad3f59fc55"
+      },
+      {
+        "id": "02-001",
+        "sha256": "b41d10804ac16bfea97146f335e49dafd33b48d6bbdf8ae930efa90e8ac5970e"
+      },
+      {
+        "id": "02-002",
+        "sha256": "31175ea3b4321cfae86c82c134f3340a60d8433a10341a4f88518e9450ed6c9e"
+      },
+      {
+        "id": "02-003",
+        "sha256": "95d275f7b5ab7f367964bbb74e5c374b6eb237cda012f75e3c90134b82efa3f6"
+      },
+      {
+        "id": "02-004",
+        "sha256": "8a0328b58076d8d0168649f1df29ddae003bfb82bfe3ae6ef8aff7132d1d370e"
+      },
+      {
+        "id": "02-005",
+        "sha256": "c944f5f0ae60ad9cc50704b060e393e7cd215fcf35ec418a4bfde6a9894ad6b2"
+      },
+      {
+        "id": "02-006",
+        "sha256": "4a8fa205d76ded9ec1984407ce59cd6b28f08b58ca6d8bf8921afb950e23d0b3"
+      },
+      {
+        "id": "02-007",
+        "sha256": "a615aab2c2a4e00a4ff9bd46dc6ecdbb127212f418e1b0b52cd5407b211687f9"
+      },
+      {
+        "id": "02-008",
+        "sha256": "947391952f7efef2dc54932addaa6ace3a7184f864bfce4d2c40e082280e3f1b"
+      },
+      {
+        "id": "02-009",
+        "sha256": "ace868e8e477f05e022301a309a3eafff311f8f644b372514cf447d176344ed4"
+      },
+      {
+        "id": "02-010",
+        "sha256": "a457622382e578bf9db88f4b5d6dab6fee3516fa3fe806f750c52f9adbd8fb26"
+      },
+      {
+        "id": "02-011",
+        "sha256": "02e90898e0ce6521865f1b71c7eb1e7796c679643157b54ce3b9f10d174aa04b"
+      },
+      {
+        "id": "02-012",
+        "sha256": "d8fe4ed0974094f5e7aae30b3b05cdc84f23f3e0384696365c8c6d06c429a276"
+      },
+      {
+        "id": "02-013",
+        "sha256": "ceb2c2fed6bcc73f9e39035a1b32bece060e2900ad079e9d23025b15b3e5cb9d"
+      },
+      {
+        "id": "02-014",
+        "sha256": "e5d6059e9e7f3488d74b1e1325fa048a313b1cee9c43e76c745cfb1d16259ff3"
+      },
+      {
+        "id": "02-015",
+        "sha256": "a56fb41b66c7ca88ae36eb25e9c4e79c437f8f57334841e4657e79ec699cb9b0"
+      },
+      {
+        "id": "02-016",
+        "sha256": "407be08781da7e7a5a551ab14b2534151369bdfad846705300cd48bb0995e7cb"
+      },
+      {
+        "id": "03-001",
+        "sha256": "e29bec4bba0e8c72122d7d8690e7b7b81a56bc96344d42a8c8dc3935571ee073"
+      },
+      {
+        "id": "03-002",
+        "sha256": "9588f935512533de936bb6c77c4789a1eb9f4dddde461c68beb2e3c9253df4b0"
+      },
+      {
+        "id": "03-003",
+        "sha256": "63506c0c8140414a7dc2da6e73ceca8eaf1ad92138f13afacfc7c9bfbbf7aeae"
+      },
+      {
+        "id": "03-004",
+        "sha256": "8f9f6eef2bc4d6a42c8d7849990a52f3b747deed6a2fcd9c877dc18e23617bac"
+      },
+      {
+        "id": "03-005",
+        "sha256": "e47cd787c52baddefc1ed0af45f9cbec5db7b4b33fd31d1c2bb2627fa34a923b"
+      },
+      {
+        "id": "03-006",
+        "sha256": "cf494bc1001dfb5bd4b4a56a4811b7eb83543b22b8a511db1aabd5c3f57f732d"
+      },
+      {
+        "id": "03-007",
+        "sha256": "d03979a21dc17bd718afe0f202eed27bacc29f99d67516e28533f2bf85d6f209"
+      },
+      {
+        "id": "03-008",
+        "sha256": "8a8556cfc05a0f50b729749d19fcc68f48fc08e9c53629224bd7250f7c6afdf6"
+      },
+      {
+        "id": "03-009",
+        "sha256": "250120cdbb2a9ab4877c2823cff6779239c05ead792356d0309e1d4121004e4d"
+      },
+      {
+        "id": "03-010",
+        "sha256": "0db8f273698f5f3099580a18370500542e6373f711de41bfe930650814b8e9d2"
+      },
+      {
+        "id": "03-011",
+        "sha256": "ee50e134693703a3f1eaaab59aabe1e89758e5b270609da0d32a034eadc907d0"
+      },
+      {
+        "id": "03-012",
+        "sha256": "87f4f984f39c68e72e1ba35291d03d394cb07654f5e38cb5a443ae1549b5f690"
+      },
+      {
+        "id": "03-013",
+        "sha256": "cf19bf7ce6ba93a0e512eb7ab398f5629c733453bc252e597c84bb178b145d0e"
+      },
+      {
+        "id": "03-014",
+        "sha256": "a88275d5cfc6958578895653402733b86bae15c43309928f0fb547cd3df2cf29"
+      },
+      {
+        "id": "03-015",
+        "sha256": "038f288a2475c0127c0fd7c4dc3043d9e472a5586719174fe0ed614233eee471"
+      },
+      {
+        "id": "03-016",
+        "sha256": "006bb23a448fd40bfda9feaf113a64e1dda48682a698d8954949e84f2bb709f5"
+      },
+      {
+        "id": "03-017",
+        "sha256": "0a7ee023c60d3c66f0c2f21e2ba56e558035d397f98fd0fea0136217e1de4cc8"
+      },
+      {
+        "id": "03-018",
+        "sha256": "57048fb027513161902e8b1200bf459865392575ba74e642e97dc207621bcb25"
+      },
+      {
+        "id": "03-019",
+        "sha256": "6f73fae24be2267d61a8b4b7ad4a0de9146a8e9d1fcb1f56dcbd0c6d29f47624"
+      },
+      {
+        "id": "03-020",
+        "sha256": "5a236270809881dacff54bc99c73876dff84accecadfb56059453a0d94174b92"
+      },
+      {
+        "id": "03-021",
+        "sha256": "a04cb4bd32e86036a4df62b085d1ca11792cb9bef4a590adb5f8be0817303930"
+      },
+      {
+        "id": "03-022",
+        "sha256": "5d36b19b50b09399f059cdc72f447739863711fd66c49e8ce7331ce4c9457933"
+      },
+      {
+        "id": "03-023",
+        "sha256": "386d9b84341141cfb6cc57ce5940b638cbc8b435609a330f85a386ce7f0ffbb0"
+      },
+      {
+        "id": "03-024",
+        "sha256": "e941be8f6bf87236bfae0e99c1ae9792981189cf678201386e46a457d2b20e72"
+      },
+      {
+        "id": "03-025",
+        "sha256": "c9cb730d8a3b0600d78ca74facbc193228664cbe4020905e6c431509616ea60c"
+      },
+      {
+        "id": "03-026",
+        "sha256": "7b14e8d34df0b2a295f458f8b71ba721aed2d895d31199a9015145d07877ebd0"
+      },
+      {
+        "id": "03-027",
+        "sha256": "8140464483476063386eddc487ef2c1e9124788dbd691cc9fe87c234878b222f"
+      },
+      {
+        "id": "03-028",
+        "sha256": "9d121214fd287f6aacef9f99bd6389cf27f8cfaf00d755ae16d0e588a7f9c1fd"
+      },
+      {
+        "id": "03-029",
+        "sha256": "52b57103e63dc3825204cc914c57a7e580366923b1b7c78f0d6d0aa6bfa6848d"
+      },
+      {
+        "id": "03-030",
+        "sha256": "176093568c67c06c22565d0a970e7821ef3c3d37aea60312ea318086c554b11d"
+      },
+      {
+        "id": "03-031",
+        "sha256": "eee3772ca62b0bdca8997ddf5112b4d6a66a3acc517010f048e37370d2cbfd46"
+      },
+      {
+        "id": "03-032",
+        "sha256": "48edc7de3677586164891b21fb3005fee077aafd8aed4e482363595bd869f2af"
+      },
+      {
+        "id": "03-033",
+        "sha256": "161b18ed615c19110331ecdc8fa8e99d80054f6799cf91df4d0b1ff2d946fdf8"
+      },
+      {
+        "id": "03-034",
+        "sha256": "505f1adf817fcdf030d93fe013a4b83a20849e4d4c0456c3e51fe4cfa2c57cf4"
+      },
+      {
+        "id": "03-035",
+        "sha256": "fb0d8f6171bb2463b9e4f385c0ed4dd19b15d642e3dd7e490d2b480d10cc2f0f"
+      },
+      {
+        "id": "03-036",
+        "sha256": "52228538f831edefd6de8808bff8f492a70aae41f06a721f14f81bde41c1c78d"
+      },
+      {
+        "id": "03-037",
+        "sha256": "47a0e039d8c48eae51e8cb95bd5e2cc78be6585418027605f6c35100840eab83"
+      },
+      {
+        "id": "04-001",
+        "sha256": "9ce3c55b436c8f6a044643fbd8076ffe9658ae6cf94193961656a64eaea681e2"
+      },
+      {
+        "id": "04-002",
+        "sha256": "0d0956f369784d1cea51280875670dac086b20866616a71caa9a6a0afa50068f"
+      },
+      {
+        "id": "04-003",
+        "sha256": "6babcc2b08623d406d89a603e1a2295bdc525e7f09c429b0dafb3d31ac4dfded"
+      },
+      {
+        "id": "04-004",
+        "sha256": "4addbc9f5160176fc79baacfb8234e0e624f1d5fa647813c99e2380175097794"
+      },
+      {
+        "id": "04-005",
+        "sha256": "4bdef0d09741991f5340948dd91ed05076fb268e9cfb4086a72af7e956ee4b4e"
+      },
+      {
+        "id": "04-006",
+        "sha256": "c1e71f36345ac606da92c07fe719f501d00b47d9c6d1a5113a717e7a42fcb55c"
+      },
+      {
+        "id": "04-007",
+        "sha256": "18a306c5baf158f9215bad930d1930446c23df5633111ec637c8e3d895c04b8f"
+      },
+      {
+        "id": "04-008",
+        "sha256": "f08edadaf874e2189c57aa98b1d8fc595b4ba4b990e0547ff9302dacc2b937a9"
+      },
+      {
+        "id": "04-009",
+        "sha256": "4f3a88f74cfe1b25cb6d5a7cbe8cf404535af1189a6c1150ec39816cd54c55d5"
+      },
+      {
+        "id": "04-010",
+        "sha256": "f3f849c19b1b4c78bf6b5aa2372503f7fdced412a6bb5c0ba26ca3263fc3b457"
+      },
+      {
+        "id": "04-011",
+        "sha256": "6ad26961d5cd04365d058872a8c98e551921977d67ce655651dcdecbc0234211"
+      },
+      {
+        "id": "04-012",
+        "sha256": "ef722fdbaef2842b8114d501790f26c86e0fe944022da1068b53907401b1a21c"
+      },
+      {
+        "id": "04-013",
+        "sha256": "611fe8d29f21805e8da7c0e70c7b960791708e2a125c0f6e617632dfd0734d5a"
+      },
+      {
+        "id": "04-014",
+        "sha256": "2abcba89b55b97fa1b054cd14a96aec43dd3461744c286a2e572366bd55f0829"
+      },
+      {
+        "id": "05-001",
+        "sha256": "7bb179481862d3ad71315bfce8efb24db320df8c349e2345e5c766479c937973"
+      },
+      {
+        "id": "05-002",
+        "sha256": "d15dc32f24ccbf1a2fa26408cdf2df0265c9d9531bd3378faf456cf423d26b72"
+      },
+      {
+        "id": "05-003",
+        "sha256": "cb026febe5aefad5c2cf73bad421a138aa30b0c8341d9da6d03ce2b3d38c5065"
+      },
+      {
+        "id": "05-004",
+        "sha256": "4d8b03c4892e667197521e75d5f44ffe2d426e1ad682041bf96f1e6f54e1ceeb"
+      },
+      {
+        "id": "05-005",
+        "sha256": "7cffc8c2aaa28efcfedaabbcc2e94fb121c8a2ec05277d331bb839401b2007fe"
+      },
+      {
+        "id": "05-006",
+        "sha256": "f41430c142b31bfd6f960983decc8ef2d0b51a567b4a5f5a9862dd340bdc4048"
+      },
+      {
+        "id": "05-007",
+        "sha256": "097ad43e58d1f924e5d425d4a981ccc230f8745fb427cd9da630437b8627e9b6"
+      },
+      {
+        "id": "05-008",
+        "sha256": "b7a4d026ebb9a133e4507e574029a7ca884969ba3bccbb75221e0f458765ec80"
+      },
+      {
+        "id": "05-009",
+        "sha256": "9bd4303c9645afb922d946e2a41c729f5beaae7e1d34cc602acb4ecb46d15156"
+      },
+      {
+        "id": "05-010",
+        "sha256": "a8e8ba7538b11d7594d40221a6ba4b646b3d7f9ea053b2c70a28c362272c3be7"
+      },
+      {
+        "id": "05-011",
+        "sha256": "746bb3b1652094acebafc6b33bbee75daa379edf9e3998279c701dd5378bfa32"
+      },
+      {
+        "id": "05-012",
+        "sha256": "79ea7231db835fe4aa9f140ac9dd5fab8e042b18f6acfeaf63fe637a8d796519"
+      },
+      {
+        "id": "05-013",
+        "sha256": "e19afb09cf4a18e380cf3b30d36bc417d4958a0853bc22520e248196567f8b78"
+      },
+      {
+        "id": "05-014",
+        "sha256": "9f92fbfd471c3bdcb14daf00cfb3896ae5434441e73ab756bca34d9803c0317d"
+      },
+      {
+        "id": "05-015",
+        "sha256": "24780e7ccaec1204a23cc599c1ac165bbfdf82d2ce0bc8fa26ebdd447f762a8b"
+      },
+      {
+        "id": "05-016",
+        "sha256": "237859982c80d5ca5b3693d456900079a4fca91b8e587467cc1d854ae4fee1a7"
+      },
+      {
+        "id": "05-017",
+        "sha256": "49a950e2df90bcf187795310e1ba12267c70b5e02984680de66c16f408d8f94b"
+      },
+      {
+        "id": "05-018",
+        "sha256": "5cf8a2e238abcdd715d439b0beb17c9a1b18c47b05aef325f6607eeb8061e101"
+      },
+      {
+        "id": "05-019",
+        "sha256": "3330b2c41d19d08a193a578643171fb4bc2f7b82f1b7d422ccdcc0a3f3a92ec8"
+      },
+      {
+        "id": "05-020",
+        "sha256": "1193cac1c58735dbd8855ef26535f5c4f58bb6038ac71e455fc9cdb8b59c45d9"
+      },
+      {
+        "id": "05-021",
+        "sha256": "d7ab3da97f6e9cac51a9d0b40166330910a4fb607eb92a613d127142647abb21"
+      },
+      {
+        "id": "06-001",
+        "sha256": "c05e542090e1b8d904e8ec5d89ce5c5deb9917fab561d00e6087b2378670c67f"
+      },
+      {
+        "id": "06-002",
+        "sha256": "ca5b829ce7c36ed230b53546aa34a66c63c4fe47de95e45b8a2b7b24e02e0f78"
+      },
+      {
+        "id": "06-003",
+        "sha256": "328aa81252bfe1363af9471710e3d8983c3f2ea573e898cfbbe481f4a2417eab"
+      },
+      {
+        "id": "06-004",
+        "sha256": "1a1791ead654f837d533eae0a0b6114b3d031f00af846ce39c47d3aec7da26be"
+      },
+      {
+        "id": "06-005",
+        "sha256": "f3b79ea41ff8fd570f046340e8961c8b5d972e76bcdb7b0f2a4cc62b03187163"
+      },
+      {
+        "id": "06-006",
+        "sha256": "92ac20988f262817c9812ef48c8c857eb0190c7784577f4e6cf4f5a8957aaf95"
+      },
+      {
+        "id": "06-007",
+        "sha256": "d73860a7240eebf56db69a614ede4440e9c7613419ff4c299112656d98e702f4"
+      },
+      {
+        "id": "06-008",
+        "sha256": "ef3bc62cf8df44c1b4f0d43ed2300bf6e28ea2c965ccac55fa94b78c4bd1e5f0"
+      },
+      {
+        "id": "06-009",
+        "sha256": "177f519f40114876cf612df9f1114aeb690eca4d14dbd9c3bf355669c4408c88"
+      },
+      {
+        "id": "06-010",
+        "sha256": "c43a0a9bdba755f6e408e6953cd9bb49bdd0be1027ae1a270d8752ebccf07d76"
+      },
+      {
+        "id": "06-011",
+        "sha256": "7d1f4659bfd99aaeac000ff61a4ab1271cb92656dddf94a5ea08ca5c903719b0"
+      },
+      {
+        "id": "06-012",
+        "sha256": "802050afe73452e591999bb3f120863d3b5a956091cbf563c24b9f92037aab60"
+      },
+      {
+        "id": "06-013",
+        "sha256": "7bb68e6d6d790327d1335aa8618dc564e86aeb34b02adb1f64574ceb4c6e758f"
+      },
+      {
+        "id": "06-014",
+        "sha256": "95e8cfd542cf97cb3ebe37ba577e34503d4e9a5858eb6ef430b5d15a21e806e8"
+      },
+      {
+        "id": "06-015",
+        "sha256": "798f29c0a321e394184f8af77327f9295b14005d3ac0e942184c6b1360426f39"
+      },
+      {
+        "id": "06-016",
+        "sha256": "0b4226e325a7795605f373f7db91294f465581368e4c2b3061fdf3fb69180a6f"
+      },
+      {
+        "id": "06-017",
+        "sha256": "64b2ca1ca859eec7fe96c77dd535da8c8e8ed5fd97b2edafab2e98e0af2926a4"
+      },
+      {
+        "id": "06-018",
+        "sha256": "52cb6d03f60f0a9eed388dcabbae41976bc405f365f7306c424a5223e9679ba3"
+      },
+      {
+        "id": "06-019",
+        "sha256": "c96ce44692ca486030917d42a0381385213505609da7ace7db6bcde32b18a1bf"
+      },
+      {
+        "id": "06-020",
+        "sha256": "0a4207820140967974cfb45aacd63f0031239441879b2effa03dda83fa784266"
+      },
+      {
+        "id": "06-021",
+        "sha256": "da655bf8cddead2d765fcf30e658651180610e763cd8b15a9a9efc0bf805b981"
+      },
+      {
+        "id": "06-022",
+        "sha256": "5ede1184a13390887c951a5cbe2d4a2f253744235035c3f61f4dbb8190ceead4"
+      },
+      {
+        "id": "07-001",
+        "sha256": "118a06787c45d313fb2f9037a5867aa56caca88fd538cf71335bd3ffba457219"
+      },
+      {
+        "id": "07-002",
+        "sha256": "b4a46bd9ad19e8748444dafab1ef106c19f5d27820717e95a809c8ad6e05380f"
+      },
+      {
+        "id": "07-003",
+        "sha256": "2c58b61a90d4dc30d9f67125257222c96bf9734141d41f5d01a8e3b4b95dc22a"
+      },
+      {
+        "id": "07-004",
+        "sha256": "77633733384cf15806d960d29e694c80860798ce4e958d60fd2c47f0dd91d655"
+      },
+      {
+        "id": "07-005",
+        "sha256": "fcbfdbf77bce4b434bfe00ffe6aa50b0af0b6dec5e7ae3a80a6c80a3a5d5f592"
+      },
+      {
+        "id": "07-006",
+        "sha256": "86a0225e1b768fd085af504c153450b7fc0a40a56ca19d7eb33027f3608774b4"
+      },
+      {
+        "id": "07-007",
+        "sha256": "5e2b745c84d637cf6a394ddb1c11de99c87acdecf3a28ed453883909b00c49bf"
+      },
+      {
+        "id": "07-008",
+        "sha256": "521836e949ad47a7abfb45cd7218e27ec8a613e448ea888df4d4ee31855e3dd2"
+      },
+      {
+        "id": "07-009",
+        "sha256": "a5bef28a7e039883611ffbee9f73d42512554095196e57e76f0d70018bbfcd71"
+      },
+      {
+        "id": "08-001",
+        "sha256": "297dff33830770e9dc8c149eef2903ee4ce830ab72e61f15ee54e12d2e26403f"
+      },
+      {
+        "id": "08-002",
+        "sha256": "1596fbe683b0c39e9585e2db077f4683cb8acfcf87c48d9c71f8dca74eec85ae"
+      },
+      {
+        "id": "08-003",
+        "sha256": "59de71dcb8d47e92da07cb7e4436b9452ab78e6ac2d8c5bd62a01cd23a9b0a3d"
+      },
+      {
+        "id": "08-004",
+        "sha256": "c12c3a6d194257e532e161a9b0a3368290579e14107590164d6872f88c4645c3"
+      },
+      {
+        "id": "08-005",
+        "sha256": "10ea45ce9c013d6d98844f0a03e71460591345ee9c217ff2550b28bf42f2a4f4"
+      },
+      {
+        "id": "08-006",
+        "sha256": "bfd7d66a052e49c4c8c1defaf4f5f93ff9855cd67dd55f77074f44001353a84f"
+      },
+      {
+        "id": "08-007",
+        "sha256": "e7b8befcdc6096b3f14ce2060d106b7695e8e7b43c35cf5b8c256d6159c4cde9"
+      },
+      {
+        "id": "08-008",
+        "sha256": "ca81223ac109f194f4947874ea1fcaf1955c8633f94e7cbbc225413292819119"
+      },
+      {
+        "id": "08-009",
+        "sha256": "10fa601f46c90b71f3d48d38a7cb3e06e8a50ba610bde7ba6e1c366063970f3b"
+      },
+      {
+        "id": "08-010",
+        "sha256": "fa5f7cfbf804d7112759816fcd0fb61d470c501f2a5a90f8c928570fda1c8b52"
+      },
+      {
+        "id": "08-011",
+        "sha256": "a2b43f77b387b96443bc789e823603f1ec4f7780cb8b338a8dea0753a537080d"
+      },
+      {
+        "id": "08-012",
+        "sha256": "a22ffe434aca8c0181b53b4c0ff6839e2eb1f7aa9138a07ceed39644c00f616d"
+      },
+      {
+        "id": "08-013",
+        "sha256": "fb7b01fc91b7b12f716358370fe69aff773fbf24b0c229f9631eb3dfa24ff5c1"
+      },
+      {
+        "id": "08-014",
+        "sha256": "3581d2929678078bba12e0607c63931baea88a8f9ae0cbf51709efc2bd914f33"
+      },
+      {
+        "id": "08-015",
+        "sha256": "8c87f6ea14db5727362d33a403e6f2c28f3af93da0d8fb8a7cfae2d1fab006b3"
+      },
+      {
+        "id": "08-016",
+        "sha256": "42b4b22749a5ca3da504634daabfac7973c8450318def253284f9879c80517bc"
+      },
+      {
+        "id": "08-017",
+        "sha256": "650503b2915d43259046c9245484dd6e187a9d5b286e0c18258a18eb19410284"
+      },
+      {
+        "id": "08-018",
+        "sha256": "a73643343f32fdab4826f726414411f8075e5eec1236ad65f88d44afaa41ab9d"
+      },
+      {
+        "id": "08-019",
+        "sha256": "c19f976aa68bffc97257b7db466f4cf28ef8d598311ed812e93979d53919953f"
+      },
+      {
+        "id": "08-020",
+        "sha256": "76d98302f8eb3c7f84ce5fbc6fe5a28fdf3123cf379779b0dcd1b7fe95a4e8dc"
+      },
+      {
+        "id": "08-021",
+        "sha256": "d22fcc91b747d10b845b1f00485ad31138ccd2f7b77785d14158e36285195412"
+      },
+      {
+        "id": "08-022",
+        "sha256": "d535acdebb359e2d1e510f60c03f8074db6529a69e86235a7fa9a3637fffb415"
+      },
+      {
+        "id": "08-023",
+        "sha256": "dcb2c38416e9cf9f07e0008abf254449c77156f4beb092caeec6d5d1e6eec7ad"
+      },
+      {
+        "id": "08-024",
+        "sha256": "b2ed28afc8e951f7932eea641f619429a8e13979520590c2e807ffcde2259b01"
+      },
+      {
+        "id": "08-025",
+        "sha256": "b73dc6c6db45ade4db64105465cb3c9a69a9dce69332d07439444008cda7fc77"
+      },
+      {
+        "id": "08-026",
+        "sha256": "129664fe8f36a2f6d48ea3772d40e853e800f3c6508c40d73752fbf039031e4d"
+      },
+      {
+        "id": "08-027",
+        "sha256": "8185496036b5025ca62fec3454340b8a36b1b753d30d7fb1b5ec31c26716d795"
+      },
+      {
+        "id": "08-028",
+        "sha256": "077fac12bb8290213ce750b23bb9054226c690966f7d71296e6310a38bd49f73"
+      },
+      {
+        "id": "08-029",
+        "sha256": "61c60bd7fa5c3796620903963681b085c77c7eb423fee9d3986ae5fe416a0e9f"
+      },
+      {
+        "id": "08-030",
+        "sha256": "0fc6504b15f0790b8934750089c40fad578a57a73faebdc85a0c381132c2950f"
+      },
+      {
+        "id": "08-031",
+        "sha256": "305d905a456d90ade0b33c12d9cdffe19c87a397085425b704bb805e9d86a6cf"
+      },
+      {
+        "id": "08-032",
+        "sha256": "5869b8ae4025cf06282e72ebffb1dfa03415b0439d58f299dd33abe4acb00b26"
+      },
+      {
+        "id": "08-033",
+        "sha256": "0f887652bba2c18a5f754b27d6397208d4807d4f611b94e2198e4be4100ba20d"
+      },
+      {
+        "id": "08-034",
+        "sha256": "d9cb2cf8ba9ff3c737251269c081888501f0e30bab59d2703f53ad9b950d5663"
+      },
+      {
+        "id": "08-035",
+        "sha256": "fb1109bec6f42a38be5ad419f58ed910bdf61228e4af06ca9c586dc988074140"
+      },
+      {
+        "id": "08-036",
+        "sha256": "c7af14f8f62a629ee6f90d85fc6fcaa8511ea7d0ad047d7167e5a0bb6a4cbb58"
+      },
+      {
+        "id": "08-037",
+        "sha256": "babe985fd12a0b305ca37e83a5079cfc1375ee695e1388e9e24a3032c6f9ec1f"
+      },
+      {
+        "id": "08-038",
+        "sha256": "867f7d243cf57339e372a0effc8b50f135279afa863a3ef4d3f1ac2466967f9a"
+      },
+      {
+        "id": "09-001",
+        "sha256": "e3f9f27b4af12ebd3f1e8ebc5e853dcc57b1b9ddfeda1f629c1b0006d5891041"
+      },
+      {
+        "id": "09-002",
+        "sha256": "c8eaa74d8e3fe59861c4c6d3ff96c48366e7e2305f2b376f40aa8a87e950f968"
+      },
+      {
+        "id": "09-003",
+        "sha256": "002610b7fa402a9e841d8e3ef04f8d1bd3f5efa3fb9005963153cef7c34b5add"
+      },
+      {
+        "id": "09-004",
+        "sha256": "a3a97feafdec092b1051fa64026824caeab7716eb445d4eee191eaf348c7cfcb"
+      },
+      {
+        "id": "09-005",
+        "sha256": "d333d6d9f703f97394c522468c98b345dd8257f0ad980eed8c780a32ad461824"
+      },
+      {
+        "id": "09-006",
+        "sha256": "ca6195f2cdcd91fc253ba1494b937f2ee8ab7a535a9c5e30c5dc4e162827cce5"
+      },
+      {
+        "id": "09-007",
+        "sha256": "95b90828c1b2a5c683e393682b24cb5432bc44ee96d671610acbb9e4bdcaa818"
+      },
+      {
+        "id": "09-008",
+        "sha256": "f9e61cf49e4d55f23bc8a9047590bf442cff492f35aea7bbfd78351bd562e22a"
+      },
+      {
+        "id": "09-009",
+        "sha256": "73b8ebe58e7453c843402a1cf730ae1d65a570863e7cfe7d0c5ceed1a02c4e85"
+      },
+      {
+        "id": "09-010",
+        "sha256": "861af28ea9916de59627d814bf4b7d9346ce2e8259fa213a3493617912e149bc"
+      },
+      {
+        "id": "09-011",
+        "sha256": "30e3be958d078f722f8d64805550f3ee7a08ced4e072352b91653933b4cae641"
+      },
+      {
+        "id": "09-012",
+        "sha256": "798ba952359ce838e0d7a12283d595486954b2d9aa946f129fb0e03ad1434bb8"
+      },
+      {
+        "id": "09-013",
+        "sha256": "181f5da8c6478466c54fb98dd0e157834576da86cbcfe9d75beb4cb702b13b12"
+      },
+      {
+        "id": "09-014",
+        "sha256": "75fee32a5022f4b1dd048281e9e9d30826637f0a758e287c24f8d6d4c0353527"
+      },
+      {
+        "id": "09-015",
+        "sha256": "4faa7d7b60589d0e1295db950fa94f54c2fd3cbf44ee1fcdb64f6a0f229d65e0"
+      },
+      {
+        "id": "09-016",
+        "sha256": "992bef23b278fbbb4b322cbf86855c308151a6d3db44ec316e501e46509c442b"
+      },
+      {
+        "id": "09-017",
+        "sha256": "47ccb8efa3c37830323b88e015cc028c64f09b1568840ec5e90f50478f351648"
+      },
+      {
+        "id": "09-018",
+        "sha256": "498816d8241fb59bb9e341aed691c69034ada1341461ef8c6f36800f35514a6c"
+      },
+      {
+        "id": "09-019",
+        "sha256": "e9154ae0909f34286fa078b344ab4b47f33da22408eb623e2d2bf12c10cb9da1"
+      },
+      {
+        "id": "10-001",
+        "sha256": "c0665b3702f1ed201620c6b6f4e10647a8e376b68a8eb54ec6da234db45e71a5"
+      },
+      {
+        "id": "10-002",
+        "sha256": "c6dc606fd58cbe79010069e81e231e78fd931d43ba006a8d1ea4141ab29d33f3"
+      },
+      {
+        "id": "10-003",
+        "sha256": "f6bf11101d4862f3e93aeb44f24b89a7c8c40b85e25f2094d6f6c9f43c1caf8c"
+      },
+      {
+        "id": "10-004",
+        "sha256": "b015f7f0027cddd84f9eee4e5e6ea911469ef44f696cb1c74db5280fb3bfe415"
+      },
+      {
+        "id": "10-005",
+        "sha256": "19f6f94a6839f18d1efe5a9ec06f7f65238c645769494dd98723f7ab8276ab55"
+      },
+      {
+        "id": "10-006",
+        "sha256": "b44af72f122113d3af3ee266d7dff98a4333c2211d2f7d0166507d0c165d9407"
+      },
+      {
+        "id": "10-007",
+        "sha256": "96fd2d19b40e050d2e4a84f08b7e3df63215dacec47bbec8fcefc59b5a9d7d46"
+      },
+      {
+        "id": "10-008",
+        "sha256": "e3ad171e1467828733b82a612b2d8bbc3abe75c55e3a9d8237bca8b28d52ea9e"
+      },
+      {
+        "id": "11-001",
+        "sha256": "006382e116f484394cbd5fd1a3a8381bc43bb663579db666e7eff5f254d63732"
+      },
+      {
+        "id": "11-002",
+        "sha256": "3d3619659c129b58e2a58027d94bca12eca451aeb629b40a2d2a09ef88909b43"
+      },
+      {
+        "id": "11-003",
+        "sha256": "98365d9b071480b308e91c01818135c1869e1bd570b72cbe359d506f4bc88a78"
+      },
+      {
+        "id": "11-004",
+        "sha256": "8f3edcb5aadbc3fe1224e393b54b3843c04d479a1704071f9f652aad4b4a7add"
+      },
+      {
+        "id": "11-005",
+        "sha256": "6aeb49e81e3888c67413175be34025a28f3bf0400d1db2a4927dbd8ffdbcf025"
+      },
+      {
+        "id": "11-006",
+        "sha256": "a051c7f2f565a0d1718ad6243d4ddc0a500052c3d7d339ac91f9fa47e8b9daa2"
+      },
+      {
+        "id": "11-007",
+        "sha256": "07073fbd85e6cf7ff2ad6d1cbfd9a5b84f06f1335d99af651191a979d61eaa90"
+      },
+      {
+        "id": "11-008",
+        "sha256": "dcb6af755e1df043ddabfe417006b919f98ccf5dcdcf72be2be550328ab45f6f"
+      },
+      {
+        "id": "11-009",
+        "sha256": "206e604af2b7ab73791d4c43afe63dc199c827ae5e65ac2eedd1a273e6d20b80"
+      },
+      {
+        "id": "11-010",
+        "sha256": "d1f17f12dfe6c4db52e59f62541c043221334344600d752e494eb66a095a48a4"
+      },
+      {
+        "id": "11-011",
+        "sha256": "aeb95ace205e9f265fd42ab37ffbbfc80cf88c36d3d54ec51fd08eb56b629032"
+      },
+      {
+        "id": "12-001",
+        "sha256": "9defad72d3301208e85304af722423bbd96d427a83557e4c1df917b9e9702f55"
+      },
+      {
+        "id": "12-002",
+        "sha256": "1273e4dc5c61be13414918097c3c57ed6244905e3ff2ecf8f5ef32b7b21baf7f"
+      },
+      {
+        "id": "12-003",
+        "sha256": "6696b2915524d078e69c9f3cf443a60ef2ff039613188ad201bde9becda64088"
+      },
+      {
+        "id": "12-004",
+        "sha256": "a6fb6b87102c68cf981c0968a3ac3d76970a2ef5ba83c5cd5e1f950c5d4b4962"
+      },
+      {
+        "id": "12-005",
+        "sha256": "264e690c4d02682d58653a92ff8f4218fc2819290d33a623ca4c34cf083db98d"
+      },
+      {
+        "id": "13-001",
+        "sha256": "ac3259cf4b3c13800a1c15ce6ff4da4e522bd25774b23445d96ddb7274e0d354"
+      },
+      {
+        "id": "13-002",
+        "sha256": "db992c39edf481b7242430929191ddca11a9a6bafd05e2c99dafb1743fc59718"
+      },
+      {
+        "id": "13-003",
+        "sha256": "d34b8b47200612c79916baf775b3acd4fe29f7e3f92b05608ee4524f8fddc0bc"
+      },
+      {
+        "id": "13-004",
+        "sha256": "1ea8925c66a5e5f3c20f31e7045f1f7dedaabed6bc49b56f4c742b52334e1cf9"
+      },
+      {
+        "id": "13-005",
+        "sha256": "271ee73ff2e423acade583bc48de6818a94f17bc2b33645df0524900b60fb132"
+      },
+      {
+        "id": "13-006",
+        "sha256": "bcf432cf4f5184223f1da6de68611c6639c542f4a1f98087486261104abe4a12"
+      },
+      {
+        "id": "13-007",
+        "sha256": "403b30824e17daba0028d5d1ac086f66aa5053e7616d1a52f3be0d8bc5a786a4"
+      },
+      {
+        "id": "13-008",
+        "sha256": "c90003e2ed7eb5c7c3a4b143ab87fade8b28d6709d21b3d73f30c646b405e3a0"
+      },
+      {
+        "id": "13-009",
+        "sha256": "dd73dc644bcf4587fb783c7b0e470265d1f7023f3141c1dcb270bf836eac83d1"
+      },
+      {
+        "id": "13-010",
+        "sha256": "e91c23acc36eeea9e41c5f106a5d0dd8041025e49a9ce31631896e638f838727"
+      },
+      {
+        "id": "13-011",
+        "sha256": "94ea0a68d356a3e5969fb07ade3c06e74ec0d744fb84ade0fc8fb5d57a00dfd5"
+      },
+      {
+        "id": "13-012",
+        "sha256": "2a5849421db956eb489888ecdcdb8876eb2c5bcdfe9d8ba0850c0022ac70fa02"
+      },
+      {
+        "id": "13-013",
+        "sha256": "36788ce065751d79cc722c35f5317b84aa736a1a5bcb5514fd4af33e3f435a22"
+      },
+      {
+        "id": "13-014",
+        "sha256": "4464ef8806a124827ffe57b10b5870ade4802a4c1e331c7922e43f2c36f157fc"
+      },
+      {
+        "id": "13-015",
+        "sha256": "df452e5e9d822f3098775dcfc0922d10d5f1cae12180b075c24fbf1c96d636df"
+      },
+      {
+        "id": "13-016",
+        "sha256": "6c7de41a79e709ebbd7ecf3aa62d9129b647714b6fc54e55714b4a12f6186a88"
+      },
+      {
+        "id": "13-017",
+        "sha256": "c1c89b8d78c51f554066023a1015ccc558685ade03d831843258a78ae2a0be45"
+      },
+      {
+        "id": "13-018",
+        "sha256": "d7f201b167ab10b9378d88366100f725bfd08120a5637214caa61aebacdd6cb7"
+      },
+      {
+        "id": "13-019",
+        "sha256": "d8523b475115cd782d2ee3a72f1af0918f95f63ac0038b168e5b3cc61450c9d3"
+      },
+      {
+        "id": "13-020",
+        "sha256": "b81cb958286102f7e39069d90cab2110f1db952957e24daf3f28ae78b6e39998"
+      },
+      {
+        "id": "13-021",
+        "sha256": "245b8cbf9a962d7aa13b328aa5e7ca00b4b3741307398f9f7ca1f90ef84e54db"
+      },
+      {
+        "id": "13-022",
+        "sha256": "08817a9eae9bb3ed5ced74ff591cbfd04fa87afc6156a9ecdf65bfcec3d138c7"
+      },
+      {
+        "id": "13-023",
+        "sha256": "c759a1ac2348ac40ed984429d45ed6e4e793c304b7f123d8ebb9f33e81420e77"
+      },
+      {
+        "id": "13-024",
+        "sha256": "c3b4cfc61c3f733d76c21eb13ce9ae7a9082b2f5eb05e8edb16b6a51bced8080"
+      },
+      {
+        "id": "13-025",
+        "sha256": "29c317921be1287b1c244a4c968f8a704eb71ea7abe573d4a241756569e9c744"
+      },
+      {
+        "id": "13-026",
+        "sha256": "12dcf8527af0bc67a511b6fdce322102e79fbb78c66212025c4f019a787daab8"
+      },
+      {
+        "id": "13-027",
+        "sha256": "43d938edf92c2edd2ff91c4814da4ca36f7f6a9e838248020c0bf02276f0c4e7"
+      },
+      {
+        "id": "13-028",
+        "sha256": "af51f147cf23b7b59873a4d8a7d2b0ae50c86546a7054d69924e84ad3bdfee7a"
+      },
+      {
+        "id": "13-029",
+        "sha256": "dc0dfeb8d7fdf3078e098674375f9143aa692ccd7e41edb413fbd2075c1bda0f"
+      },
+      {
+        "id": "14-001",
+        "sha256": "b0f004908970ed8118e6ae711636d9e5cddc005fbea7dc740e4f62540e7361d5"
+      },
+      {
+        "id": "14-002",
+        "sha256": "532e4408f9ed4066d5b160e62ee3a369e26b890bd2695003b1d5e4662b560d0d"
+      },
+      {
+        "id": "14-003",
+        "sha256": "3fc921a46f56a0e26f98c1c8e7914eee37383749320c55c79f1cb395fa7437b3"
+      },
+      {
+        "id": "14-004",
+        "sha256": "408072882f537cc212a8daa4aa04c5f18a65ecbb22ec8414f688936a75acca5d"
+      },
+      {
+        "id": "14-005",
+        "sha256": "21c1bda6172b5cd4188e65243f18a151d608a9b5ff3c8453e49ef2257c2dd5a4"
+      },
+      {
+        "id": "14-006",
+        "sha256": "2e6e55725fceedac2eb6629ef95d8559a3966c66f77a4da4a3a5141fa259b107"
+      },
+      {
+        "id": "14-007",
+        "sha256": "c061f2543bd8cf2546b3b773cf51d7dac118e1048d278ecfd39e6c44339b8b99"
+      },
+      {
+        "id": "14-008",
+        "sha256": "43f49803a31e30a32d7f8625140c0aae879b896e18c030d3c52b1fd566977760"
+      },
+      {
+        "id": "14-009",
+        "sha256": "49fa1bce97686d29702bb77999e366e5e4c4bfdc78005b231ec28ff7fa2a031a"
+      },
+      {
+        "id": "14-010",
+        "sha256": "34eccfd55632ea2ff28c62a34df76fc38ba0d58cf845158408a96b84924c95a2"
+      },
+      {
+        "id": "14-011",
+        "sha256": "bf69ef22409d9b29fb6db8c00a4861e3112617bec5e0b5fbb97bb19a97a9447e"
+      },
+      {
+        "id": "14-012",
+        "sha256": "fa2090260ddac2375128ae0ffb0cdab852667baedd010eaecedbec447a430167"
+      },
+      {
+        "id": "14-013",
+        "sha256": "412eff23b45734c7e2332c7dca9732462cff0e67dd77787fe5f854dd1af289b7"
+      },
+      {
+        "id": "14-014",
+        "sha256": "4bc6368f527eb212f2d38ec65d9e8820f4343b85fcbaa71331c55605999f7327"
+      },
+      {
+        "id": "15-001",
+        "sha256": "8b9821a2025a269d26046a314e89c1043713f6e10164b212c5f60c183293dbe2"
+      },
+      {
+        "id": "15-002",
+        "sha256": "c1b204a3d19f5c1ed21341b3bad00c796587a2aa4f535c44915f1e58a1b09eee"
+      },
+      {
+        "id": "15-003",
+        "sha256": "6abd4ec4b83aec044853335e88193c04fdcbbbdc5ec66b5b6512426569dde51a"
+      },
+      {
+        "id": "15-004",
+        "sha256": "8ce145259f8c09fcce226268c1c897398515e58a5cec3885070eae353ba25a4e"
+      },
+      {
+        "id": "15-005",
+        "sha256": "0fb648a401d1a219346310eb4f7edabad31ed444ac9d0cf684764ef4d4ece3e8"
+      },
+      {
+        "id": "15-006",
+        "sha256": "634443b7c21e898fd03420d2a86403406e3e74149e31a73b337486c7b5ad6a13"
+      },
+      {
+        "id": "15-007",
+        "sha256": "813424b5be52f3e38e4e35c0542256a155fef1f1c37fe00587674de07c49ffa7"
+      },
+      {
+        "id": "15-008",
+        "sha256": "4c12679b82c69816453c44a89e34d6b0cad49cced1d8859ad3e1013b4c117bd6"
+      },
+      {
+        "id": "15-009",
+        "sha256": "081e334c4845035ca4474f529305de941c174014b8a819a62c876e6553f69504"
+      },
+      {
+        "id": "15-010",
+        "sha256": "961b76f61a0c118b02d6a61b84bd50e3f8ffaef9277067de4e7b7d2c8c561296"
+      },
+      {
+        "id": "15-011",
+        "sha256": "c63140b8429ff2d689825a9e9f16ae4c472214cf34d61e74493a03e0e2956eba"
+      },
+      {
+        "id": "15-012",
+        "sha256": "a0064e0b2d5f59ec8661e870d6abc2ceeea85862f04765a92d877f273b306085"
+      },
+      {
+        "id": "15-013",
+        "sha256": "1529e1712295209a595bb231c7ca7961e6e39eba2875932b8260c0143e9d16bc"
+      },
+      {
+        "id": "15-014",
+        "sha256": "03c21bdb83f844eb1adfc0438fbe797825cacb619c591f4f70d26afab0354b8d"
+      },
+      {
+        "id": "15-015",
+        "sha256": "169312f66d842dd45622e4bf4201d2fd0dba6ea5a521569f6f525eda5c79dee7"
+      },
+      {
+        "id": "15-016",
+        "sha256": "9e7e19c378b0ff75e28aa305f1dad441e4d9a67632207dbca38d6ff3587aeb48"
+      },
+      {
+        "id": "15-017",
+        "sha256": "ea9ce38a712ed9a8bd4f75326227e875fde636f32a822b9dcdc14a164cf1cd7c"
+      },
+      {
+        "id": "15-018",
+        "sha256": "d5a314db94c0eba6db3faa5d6b4654978adebafc76e996164ce0619aa3a57af9"
+      },
+      {
+        "id": "15-019",
+        "sha256": "7f3217fc8c3dc64b12ce54e2fc6d7244731d943325ab6dde7720c8f9a36eaaa7"
+      },
+      {
+        "id": "15-020",
+        "sha256": "f3090fcde43f63adfbdcb87ec29cab2c24902a8d3a448ff81ebaa3e99ba7efde"
+      },
+      {
+        "id": "15-021",
+        "sha256": "f3cd8ec8f7ded3616a84d7a34017c4d26437ea6eab681fa1d2807992bbecbb32"
+      },
+      {
+        "id": "15-022",
+        "sha256": "0a4f1e61855418bc35758fe179bd5dc2371ce6491e446aa4c78ed82fef557d3a"
+      },
+      {
+        "id": "15-023",
+        "sha256": "865e1a6aae1427e41878386037227bd51095579e66342d9f2b3732f53879764a"
+      },
+      {
+        "id": "15-024",
+        "sha256": "805e8712666ef8aa7c1fb90b2cdb788549f733127b35efebf3d439b12c35cbe1"
+      },
+      {
+        "id": "15-025",
+        "sha256": "bfbddef0cd89f4b1f05cc9f29eb8d73e1ec1e55a55cb8fa9d6002841810782a8"
+      },
+      {
+        "id": "15-026",
+        "sha256": "521c6c07104a7470147a986135ffc2e94d52339f1789b640f208a0437216de41"
+      },
+      {
+        "id": "15-027",
+        "sha256": "e8606195af0a41fe25fa74f069df71d9f9e3daa29a68ce1867a34ae6c4d69f33"
+      },
+      {
+        "id": "16-001",
+        "sha256": "ccbabba7a5c50a560fa66d74002cf802f219f13b35c44423bc32d75f4045323d"
+      },
+      {
+        "id": "16-002",
+        "sha256": "ab0140f41b06fc09c5d45b7a5417b0c5d9e3038da8fb4572a9e4193c69b94fee"
+      },
+      {
+        "id": "16-003",
+        "sha256": "fcd35382c718daea89b9d611d63f542d09c8cdf872875ebe438df7dba875adb9"
+      },
+      {
+        "id": "16-004",
+        "sha256": "03bb3359545f3d0af2ff43017927ac38c945e3e3c2e78da5272d104c87e46be2"
+      },
+      {
+        "id": "16-005",
+        "sha256": "d8f48bc945f259d6de33130d99b93403c9440a372b28af65ec274930d9775254"
+      },
+      {
+        "id": "16-006",
+        "sha256": "6a9d239916eb7adc5c1ee66a0ce44782705f906ae640b365a87e25cd262c317c"
+      },
+      {
+        "id": "16-007",
+        "sha256": "4d8b7cf2f5baa056a1cf8420a264f2d37a2424d0b46431aa31f78068d9b303f4"
+      },
+      {
+        "id": "16-008",
+        "sha256": "9c21023de5f75cb106e9203df09dc7bb919e825bbda621bc05cd96f6d2a46664"
+      },
+      {
+        "id": "16-009",
+        "sha256": "9495014643525e13b2936338b70fd5a1e5e67bca0325b5253e2cfc61bef728a2"
+      },
+      {
+        "id": "16-010",
+        "sha256": "4cb69822703d028364d5722a4bbf45f67fbf34540c81c63a6d9bd7cad45ea33d"
+      },
+      {
+        "id": "16-011",
+        "sha256": "815003640fbaf0e172fc09a2084a8a74e7799f1b296aa9646292d469a111b55d"
+      },
+      {
+        "id": "17-001",
+        "sha256": "fcb3690e94ef9283591ebb7867748b4f41df1e83ce6ff7376f3c4020cb0f0142"
+      },
+      {
+        "id": "17-002",
+        "sha256": "b523c2ab4e478fe7304a48534d93a95d5c63673a63af703006b6815c385e1e06"
+      },
+      {
+        "id": "17-003",
+        "sha256": "56f95d550878f7b256c427e1a80b799a85d5f0d515b3055813a4f269eb896bf0"
+      },
+      {
+        "id": "17-004",
+        "sha256": "a00eeb28dea01cc909226a92eebb8cec54c886a3bef9ccb1822fff2822f208f8"
+      },
+      {
+        "id": "17-005",
+        "sha256": "017019bc4ee614ed357f5ac9ad96800267736bb3ca03655a587e1f37847e95e5"
+      },
+      {
+        "id": "17-006",
+        "sha256": "6879ba2fdd15b5347f459535eef9ad9f67fe6c976b589b17e2ba588d95b5d1bb"
+      },
+      {
+        "id": "17-007",
+        "sha256": "2f97fed04b2c8dd780b7792eacc79df080309d558650aa3c1a76afb5ded247e8"
+      },
+      {
+        "id": "17-008",
+        "sha256": "23c35703281941a3f0173e8f4af31ad1ac2f3c58e8dd9da8d9ed4f3b7e7c9bf8"
+      },
+      {
+        "id": "17-009",
+        "sha256": "404be6c318b2eab10f1ba4c4cdadaf63d601fa450220299d114d487cef6e661a"
+      },
+      {
+        "id": "17-010",
+        "sha256": "424a96eb98a40a4606e31ada14cc3d717bce8e1cdbff2c7946fcce275bc3f920"
+      },
+      {
+        "id": "17-011",
+        "sha256": "b1fdca6b6c4c218d541c91c530ca2663dccb085563a83524a32dbd08d3741310"
+      },
+      {
+        "id": "17-012",
+        "sha256": "50f31c6b0cf028fa31d35073e0ee7617cdd990ae5714ab6e7c3a647e0e9bfa47"
+      },
+      {
+        "id": "17-013",
+        "sha256": "2aa7fbb3a2125fe5a1e8626a03fb59f98dc83d4911f73ec927021d0463196d35"
+      },
+      {
+        "id": "17-014",
+        "sha256": "5a05ee75537f425f3de60f5bfba2fa3bc530149b99b4bfb15821c2f80ba893c2"
+      },
+      {
+        "id": "17-015",
+        "sha256": "27ecbaa7906c1638d0db0ad3acae26cb1ca512fea83ed60b5c1f64c7fa0d09d5"
+      },
+      {
+        "id": "17-016",
+        "sha256": "41bb8b338a0dc700f83743e49f12c4aa6a3bc07d9f49d6cd4e92a28a15b0457b"
+      },
+      {
+        "id": "17-017",
+        "sha256": "24927c96a4108d92cae77a26acd332ec2b34f627947f08a285b579c3f5fc1415"
+      },
+      {
+        "id": "17-018",
+        "sha256": "7c6872167ea5407cea02c4416b465be2f58cc1421d48658a7bc96d9d7d46602e"
+      },
+      {
+        "id": "17-019",
+        "sha256": "4e554380bc8a8dd9f986d46c8df95fb468ee839dd6ac9de04fe2416063c1d754"
+      },
+      {
+        "id": "17-020",
+        "sha256": "70114a8c2e9139986d21b853ec45d99cb908761d9d2c440f709e9219d8e8820e"
+      },
+      {
+        "id": "17-021",
+        "sha256": "5c70a826308a0e2c3e5d67e88da84ae814dbaa6e152e61ccedf8ba891474fe49"
+      },
+      {
+        "id": "17-022",
+        "sha256": "594f88199788dfa4ae097e5dd9543c88d4130cab9fac8c681ae5b721344970c9"
+      },
+      {
+        "id": "17-023",
+        "sha256": "68acba87f3779b194748bb3658b3761752f8b77b628b591784c39ae9bc737c10"
+      },
+      {
+        "id": "17-024",
+        "sha256": "7bcebce2b5199255c01c561cb272e30f48edb7e03fb69c123f8cde5b3b666f69"
+      },
+      {
+        "id": "17-025",
+        "sha256": "9c14cc5e74df8744f8d1f2decc6055e0530b26a942d463782665d449f59881b3"
+      },
+      {
+        "id": "17-026",
+        "sha256": "a5f447f8055e658e9e22b02b169b2390aa47cee8ab866c41586591b603045a7b"
+      },
+      {
+        "id": "17-027",
+        "sha256": "09c46de8de4a7bf038a7ebbe6565bfe562731a5e82f979ddc3acc35285118a4a"
+      },
+      {
+        "id": "18-001",
+        "sha256": "14ebcaa0cad36e4b5ee9386880b1c8f6d980149c368090d1ec27ea56baa69d76"
+      },
+      {
+        "id": "18-002",
+        "sha256": "3d6c5ec91137e0de87a0f3a09e9f64440fa670e08180b96434fe88c8db2d1c1a"
+      },
+      {
+        "id": "18-003",
+        "sha256": "2f70dbbf69f53591f34cf3a16da2dcb528c968624a8cb27bd8f1ce92267a2dc2"
+      },
+      {
+        "id": "18-004",
+        "sha256": "15aeabd9789793b1056864b3cb0e70a366ddd6eced60eed9c0146e4256ffe3dc"
+      },
+      {
+        "id": "18-005",
+        "sha256": "6902d018713277f9cd0564075f803ed002e6d1f103ed3f7d26d6f04c40c852d0"
+      },
+      {
+        "id": "18-006",
+        "sha256": "6e0ab92e63838b5cd4b0302560029d9b4a9876ba433394ecb0dabf0dea8328fc"
+      },
+      {
+        "id": "18-007",
+        "sha256": "223266580e6e571e422fccfc6b191b2e2bb46d91096b3f8c4fab670fb00392eb"
+      },
+      {
+        "id": "18-008",
+        "sha256": "a648ee29e9f0a7eb46059ac793521648732921f1060251a886291ca4bd3128b5"
+      },
+      {
+        "id": "18-009",
+        "sha256": "67333de5246951cdb44b8379350eda6aa1837d0f571aed8c9f9c0d49412afe83"
+      },
+      {
+        "id": "18-010",
+        "sha256": "11d9cef6ccbdbd620eb0d08502cb5f533c768acfef9e7a657a4f56a527321460"
+      },
+      {
+        "id": "18-011",
+        "sha256": "b63a3aa39c0e090ff97bf4c3edb022244cd192e906702d844657f32c6c5adb92"
+      },
+      {
+        "id": "18-012",
+        "sha256": "2b9b428d2a54e613e6e1c1963bb32364453e6302029b0eff5d63249ad92bb0cb"
+      },
+      {
+        "id": "18-013",
+        "sha256": "7a2e07910e80272d9ec74e6b521132792277128e4645c43a3cd5f9156181823b"
+      },
+      {
+        "id": "18-014",
+        "sha256": "afd058e38231a088977c21acbe7fec4560227c6585f83dcd9f01a8b95ad3b3c7"
+      },
+      {
+        "id": "18-015",
+        "sha256": "3fb62084f8f1a02359815396812bd321a0671891f25655394d610d66d2705a46"
+      },
+      {
+        "id": "18-016",
+        "sha256": "65492054437cf4cedf3aa51f56ccf0e406e24ce5bcbb5a88a2a9337fabc6acfd"
+      },
+      {
+        "id": "19-001",
+        "sha256": "3b4c4949b004d86849a66cb4c61d6b19d61edf1c086b1ddb6af9099840ba6b97"
+      },
+      {
+        "id": "19-002",
+        "sha256": "752a7a491dac2eb348d6b8c30bbf5a77d9ab994a065fd9457799872e29be6950"
+      },
+      {
+        "id": "19-003",
+        "sha256": "8c87e86dd0f3a431678da4e5502ec41ee1b808535267cce9e4e320d3a6caa598"
+      },
+      {
+        "id": "19-004",
+        "sha256": "5fa55bc1f17ca56ddb013072f5ba51ff9d6b25663b9e1bc8af886ff0ecf980c5"
+      },
+      {
+        "id": "19-005",
+        "sha256": "54d583b628fc0ab991ea4074fc3b1b2309359bee4353d2b1b0fd17e336921e51"
+      },
+      {
+        "id": "19-006",
+        "sha256": "c6710da1e6180356ed796b31cee48b185ce8151ee1fd872f7bbed38e3166d19b"
+      },
+      {
+        "id": "19-007",
+        "sha256": "045326ed0213facf12b2b21d86450c55f5a9f65220941a37f5019880f4eb0954"
+      },
+      {
+        "id": "19-008",
+        "sha256": "55f96c928b2d7ee12778065df408df0d336035bc545acfb5b3418caed0b9b521"
+      },
+      {
+        "id": "19-009",
+        "sha256": "9fdc1e1cd18b6489010c679f5a51f8686153c6f25c208c646f1dcf58850bf3be"
+      },
+      {
+        "id": "19-010",
+        "sha256": "8b21026f55eccd5f8e940fd7689a32dcf259382dcdc3f0830ec94a84fe26bda6"
+      },
+      {
+        "id": "19-011",
+        "sha256": "3827b9261cd2ab08b701fc36f53e89eaac445ff52ed9e66df4d8c1cb6b0de676"
+      },
+      {
+        "id": "19-012",
+        "sha256": "ffb8b6d3f639274439c5d92e81c975f37bd4c01cf45d148f5f6e345323d7005c"
+      },
+      {
+        "id": "19-013",
+        "sha256": "f79b8a9df6627c58e0b9498d9fe7112757e8fc5340114b7a770d7a2e58450c8e"
+      },
+      {
+        "id": "19-014",
+        "sha256": "b70419a9da68dcbd6f681c0a4d42b8871e49f826a92364ba86887751ef12b6de"
+      },
+      {
+        "id": "19-015",
+        "sha256": "5e07d2dd4e548de8bd7b65d41eb596a976ef2263a4cd02badb7626a55f2313b1"
+      },
+      {
+        "id": "20-001",
+        "sha256": "329cf038f8645b465a979ca0a1207886289a0cfbe764e09c6841241c7921e031"
+      },
+      {
+        "id": "20-002",
+        "sha256": "f0126265128519166cd7503ecd73d268b7b3e5d35c18e201edf71402435e9594"
+      },
+      {
+        "id": "20-003",
+        "sha256": "74c167aaf1adc3043a155aede9566b3ac553b646f3aca6b2836c07cf59dd0c2c"
+      },
+      {
+        "id": "20-004",
+        "sha256": "64b6975bd45e5517d249788f3423239db15422822f3209f7ea4273c7c59c1ef0"
+      },
+      {
+        "id": "20-005",
+        "sha256": "de6cf79398d38ce0497c11dd16bfcabc05236f002c108a2bed261fc900875aac"
+      },
+      {
+        "id": "20-006",
+        "sha256": "e003e4699f74a7ac1f34c50a45a8c6d1fd237d3ad58be6a8cef1e2f166dcec55"
+      },
+      {
+        "id": "20-007",
+        "sha256": "dd0cf47474cdda312fad3ecaedb87e3f39b7eabd85086e2a2bdcad4dedbc1956"
+      },
+      {
+        "id": "20-008",
+        "sha256": "9bb49d06370634213162eb7b62ae390c8dd97d3b082336a8c2ccfdae81d83370"
+      },
+      {
+        "id": "20-009",
+        "sha256": "d928843a3adcb2ca6fc7c65ce38aff2481fdce35dc5e1e1774ad45883d6e2329"
+      },
+      {
+        "id": "21-001",
+        "sha256": "1c45ce5100edab5d33ac7998b124569b251360cf2443560fc1d954d193834e5b"
+      },
+      {
+        "id": "21-002",
+        "sha256": "087c5c5511c69aa019deaeb992962ba84e26ce5308b1cb694755626a1455d8ca"
+      },
+      {
+        "id": "21-003",
+        "sha256": "484a8b214d4d1860a93c32f1e55ed7f7197c089c71658cf5b6b93303894e7c74"
+      },
+      {
+        "id": "21-004",
+        "sha256": "9817ed011e0aa7365846d0a29c9279593437d93a786645e9c24e26beb90b0160"
+      },
+      {
+        "id": "21-005",
+        "sha256": "765c4cb6f3249ca8fbc6d2d4cd73b5859ddf40c57bcdf3a1bd3be412212a5e40"
+      },
+      {
+        "id": "21-006",
+        "sha256": "4ee8489b2b133f4f6c3b4fc91f28b55bb4cc1b2bada18079671dfef00b85111e"
+      },
+      {
+        "id": "21-007",
+        "sha256": "578040f788b22549dcf0cac6dd71ed04469a49ca698cd2b46973bb4791d83e9f"
+      },
+      {
+        "id": "21-008",
+        "sha256": "f095a261799122c483df12557d9d0b02bfca5e357ddb462d9841b36c8b5c7c5e"
+      },
+      {
+        "id": "21-009",
+        "sha256": "eca3f9a1087b12a5131eb658fcc1099a49f385b8cf2526fd9b6ea1a27a81379c"
+      },
+      {
+        "id": "21-010",
+        "sha256": "e3fc4a8a604b42d9c5b2212eecb801d832374676cc65ff004696cd045205892c"
+      },
+      {
+        "id": "21-011",
+        "sha256": "abce230efd0cb35c17a6c2f861bb8dac4b8377ec62a51aeb1abfabb5120f6467"
+      },
+      {
+        "id": "21-012",
+        "sha256": "2b39307dbe347537fd348d3ec679cd82a54dd58bd13c5faf3e620f5f3e89125f"
+      },
+      {
+        "id": "21-013",
+        "sha256": "7910bea105a160b67e85a8c849cfdcef7b55ea528ec2540a68e0117ae0a044eb"
+      },
+      {
+        "id": "21-014",
+        "sha256": "5fdd56ad2e41b38c6e057e6f8a051e41548559449bf88a5e7ad10425a55439f7"
+      }
+    ]
+  },
+  "protectedArtifacts": {
+    "dataset/Simulink_Basic_Blocks_R2024b.md": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+    "docs/baselines/catalog-block-coverage.md": "bfad433de22c3302b53369be3465ec1d4bb3e072dd8f3ce310bc4af1ea967774",
+    "docs/simulink-coverage-roadmap.json": "86ec3c3f75939dc72a00b39d6760d86d9ef21f2a63922daf110c5db2fe7932cd",
+    "docs/baselines/m10-registry.json": "d23bc34bdbd450b1ea2be671b419f8ccfb74fa97238d541c3f9ffd97230cf8dc",
+    "docs/evidence/m10-source-approvals.json": "d8c938fb999555aaf61f24b68b7b631e158611dc2760542bd08d0f94d3221f4b",
+    "docs/evidence/m10-verification.json": "659a11814e1420f217068f4cab4c6726cd3070154f69fd1064afd3a4aee52e6d",
+    "docs/evidence/m10-reference-review.json": "fb9572178cc5c5caf19658e9010709a67d0d6611f83b9f3ce8993dffee493325",
+    "docs/evidence/m8-source-approvals.json": "4f558f5040f9dda1a9c2b5bbd2b848b825b4961489a03228dd3c12370b2c4d60",
+    "docs/evidence/m9-source-approvals.json": "7d49f1b15a6b325050a55295bca4d29411fe123dd0752e2ac98766641ccc18ca",
+    "docs/evidence/m8-verification.json": "351b5ba6031dff1a2f4dfb8b51e4e63e2747998277ee93e56decc4b908ff75d6",
+    "docs/evidence/m8-presets-verification.json": "55cef48ebe57a97ca02922225330f36b1f1d0866d2ad92d69f74fcceb7771f01",
+    "docs/evidence/m9-verification.json": "1d3fee9b56017db6c12b8f7f778d4c064efd4fa7f7d0014a2a38b6ffdd13a23f",
+    "docs/baselines/m11-registry.json": "daaf1ec9df9b5b7b43efdfd57863d0467b3f5636b3bcb4fd3b5450322fe8bf2e",
+    "docs/evidence/m11-source-approvals.json": "492abedeb09b84e601d206cf85ead66b3ba7596af0894f0f9519fd9af8aac8c7",
+    "docs/evidence/m11-verification.json": "716939d06a20c53a3fb9655820fb5c366fde0b1bb0fd5fd37adb39abadafea76",
+    "docs/baselines/m12-registry.json": "5eb19914ff0643307bb8c5c01b22557ad935558230a217e50ff8de6ee1867a73",
+    "docs/evidence/m12-source-approvals.json": "a3e2201b9672a4eac21f90a37b893ee0daf2c2a9b6d912654b46b1e1618a449b",
+    "docs/evidence/m12-verification.json": "79253d162a1af3ca5f5bbe2eb9de14d0fbc3e5aaa107795586678ab8f896f0c7",
+    "docs/baselines/m13-registry.json": "a4f8cadc0e8333cdc029c64de294077d90a98ae6d1f1746753649549f4f6a0d2",
+    "docs/evidence/m13-source-approvals.json": "bffe058d20baa23783f5682537787dbb9b6ac7aea06746d738b0972286af72bc",
+    "docs/evidence/m13-verification.json": "aa67d7976bd891f122f8a25eff41deb8b2054bc31ba660082b873e269883b598",
+    "docs/baselines/m13-block-coverage.md": "8d736de7dbf8dbda6eaca70790b0162afe7c78a168a09006e752c5fe8401e8c6",
+    "docs/baselines/m14-registry.json": "711fcb2062a90dcebdc4b2265f3a8660aadb3d8f2c4ede0de436a4f768ce0b40",
+    "docs/evidence/m14-source-approvals.json": "f7bf8f2a18377afd4d151b1b5bbea6e6eb72396e5c66b97c9a1a5b138c40448a",
+    "docs/evidence/m14-verification.json": "6886130299827a0d52e99533c0b0cf0ea827e27b5bceb56ca687e18fa4954f65"
+  },
+  "policyOriginals": {
+    "docs/legal/terms.md": "c10cdd2056cec92c6a6a542e6d9aa7e921789fb9917f8620d03cecc78102b896",
+    "docs/legal/privacy.md": "e08dc359ac9d8c3529678170903916faec035f467c048edca3e5433c15cd7413",
+    "docs/legal/cookies.md": "91cef29667ba0f9d77a8533836835fbf75229e259bade4277ca08f5372e1312c"
+  },
+  "historicalMetadataPolicy": "Immutable baselines/evidence and prior implementation-map JSON retain original-version document paths; current documentation links use consolidated documents. No source identity, baseline, approval or proof bytes are changed.",
+  "appliedAt": "2026-10-03T13:26:55.540Z",
+  "historicalGitBytesVerified": true,
+  "consumerSources": [
+    {
+      "path": "scripts/verify-roadmap.ts",
+      "sha256AtCleanup": "d0208d33ef684804fdd09699dd4ad3606cd4b57c36b87549f0adc89faee12339"
+    },
+    {
+      "path": "scripts/verify-docs.ts",
+      "sha256AtCleanup": "98d2458962d5a072b10779a13a5b66001bfb6e544b0e9a13374d94f4be241d4c"
+    },
+    {
+      "path": "scripts/update-catalog-coverage.ts",
+      "sha256AtCleanup": "8b4a50bc428615034c4efd11c3a1bd779bff7999f014b0c272c76ea0e732168f"
+    },
+    {
+      "path": "scripts/update-m1-coverage.ts",
+      "sha256AtCleanup": "672cd54c3705bd6700105bb7fa63c1cef126cffda6d2014c248278879ff8fb30"
+    },
+    {
+      "path": "scripts/update-m10-coverage.ts",
+      "sha256AtCleanup": "441af33a4f8fbabfbd5efe429f8e435a6c2668bca3c38d0bd7eebba4d99bfdf5"
+    },
+    {
+      "path": "scripts/update-m11-coverage.ts",
+      "sha256AtCleanup": "c31ed6a1f31d3389e36a17f1c09c95adf948e9d9eafdf0d68ca4706e94e35cef"
+    },
+    {
+      "path": "scripts/update-m12-coverage.ts",
+      "sha256AtCleanup": "8d0e2330fa0b2624129453abc73fe9b6604aed77951eb66dc73ffe108b27029c"
+    },
+    {
+      "path": "scripts/update-m13-coverage.ts",
+      "sha256AtCleanup": "a55fa99796a61f57b06623f7b993e59e063d028f505bf445dca64fa283371347"
+    },
+    {
+      "path": "scripts/update-m14-coverage.ts",
+      "sha256AtCleanup": "b26089870cf761ea656657033dd0fbbcb9dc8b0a8c8b2d668c8e1deecbd55fdb"
+    },
+    {
+      "path": "scripts/update-m2-coverage.ts",
+      "sha256AtCleanup": "742995d9dd898db99159762f1d2670ba9edebb769e81515eaa595cd46570ae49"
+    },
+    {
+      "path": "scripts/update-m3-coverage.ts",
+      "sha256AtCleanup": "e59a9d5b6e472a0308e06ce57bc1855da73979b400911019059ff5c7dd1e46a5"
+    },
+    {
+      "path": "scripts/update-m4-coverage.ts",
+      "sha256AtCleanup": "a55847471ff68165948697770f82e8a3e6b556d5157904df7855a60c55307f10"
+    },
+    {
+      "path": "scripts/update-m5-coverage.ts",
+      "sha256AtCleanup": "c6602817223054e05d36b32dd534f0d328ce4635213fe5bf8676526f36db2266"
+    },
+    {
+      "path": "scripts/update-m8-coverage.ts",
+      "sha256AtCleanup": "bb92e877fa3122307e3ccdaf5eba587d30172043b4572fe835dbb71424713ab9"
+    },
+    {
+      "path": "scripts/update-m9-coverage.ts",
+      "sha256AtCleanup": "d88f00194c37a2a752232845abf32657ed64e2cdf1091422569aa90032955b26"
+    }
+  ],
+  "counts": {
+    "historicalDocsMarkdown": 52,
+    "retired": 44,
+    "currentDocsMarkdown": 11,
+    "currentDocumentationSurface": 10,
+    "protectedArtifacts": 25,
+    "legalPolicies": 3,
+    "originalSourceRows": 385
+  },
+  "verification": {
+    "deletedPathsAbsent": true,
+    "workspaceBoundaryAndBeforeShaVerified": true,
+    "protected25Exact": true,
+    "policies3Exact": true,
+    "raw385RowsExact": true,
+    "planningJsonExact": true,
+    "coverage": "passed",
+    "roadmap": "passed-read-only",
+    "sourceApprovalVerification": {
+      "M8": "passed",
+      "M9": "passed",
+      "M10": "passed",
+      "M11": "passed",
+      "M12": "passed",
+      "M13": "passed",
+      "M14": "passed",
+      "commands": "npx tsx scripts/update-m{8..14}-coverage.ts --verify (each executed separately)"
+    },
+    "documentLinks": {
+      "status": "passed",
+      "documents": 10,
+      "retiredAbsent": 44,
+      "localLinks": 591,
+      "currentAnchors": 3,
+      "externalLinksDeclaredOnly": 15,
+      "externalAvailabilityVerified": false,
+      "command": "npm run verify:docs"
+    },
+    "typecheck": "passed-final"
+  },
+  "compatibilityCorrection": {
+    "observed": "M13/M14 historical verification initially attempted to insert retired milestone summaries into the consolidated header.",
+    "resolution": "M8–M14 preserve a recognized current support-matrix header; exact source-row reconstruction, approval JSON equivalence, predecessor rows and protected hashes remain checked.",
+    "numericalImplementationChanged": false,
+    "priorEvidenceRewritten": false
+  },
+  "limitations": [
+    "The policy documents and frozen historical metadata retain their original-version terms/paths.",
+    "This operation does not verify external URLs, actual novice usability, native MathWorks equivalence or public deployment.",
+    "Root may update current validation and final QA metadata after the final measurements; frozen historical artifacts remain unchanged."
+  ],
+  "finalCurrentDocuments": {
+    "checkedAt": "2026-10-03T13:55:26.742Z",
+    "command": "npm run verify:docs",
+    "result": {
+      "currentDocuments": 10,
+      "requiredDocuments": 10,
+      "retiredDocumentsAbsent": 44,
+      "localLinks": 601,
+      "localAnchors": 3,
+      "externalLinksDeclaredOnly": 15,
+      "updaterSources": 13,
+      "historicalBaselinesAndEvidenceExcluded": true,
+      "externalAvailabilityVerified": false
+    },
+    "currentHashes": {
+      "README.md": "0a948d3e2165692d1a86648087c2a41fa2eb387c168b432ba13d244423cc0872",
+      "docs/validation.md": "0b8bad431a989a6d2cee10c9a956653d9a77dd5722f171973ede5eb21c4ecee0",
+      "docs/01-technical-whitepaper.md": "c751fe40cabb2115d61b94fd54b8437ef47ff1cf7b709f90f31f35a05519b5f0",
+      "docs/02-design-whitepaper.md": "d3ec20dcdd91920cd51ae733c7c5c38adf2f4b6ecaa2b1a35f95c3606b7f9e2d",
+      "docs/operations.md": "d5982385bbaa9393443a1b0db007dcf66ade89efe8623d6640154e446d5c8d0c",
+      "docs/support-matrix.md": "b5b7d2da44b66a3ae7c8e403a7e49f531287fc8b7ddc1eeb36b35ab2c5af765c",
+      "docs/block-coverage.md": "8b593d607794c01ae54cb253be275c90fe9dbc8963393437b716309f3822ae32"
+    },
+    "historicalBeforeHashesAndProtectedArtifactsRetained": true
+  }
+}

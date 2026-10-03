@@ -1,0 +1,35 @@
+
+> calcweave@0.17.0 build
+> tsx scripts/build-policies.ts && tsc --noEmit && vite build
+
+{"policyPages":4,"productionLicenseNotices":28}
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./pages-base" without a file extension (scripts/security-build.ts:2:37). Add the file extension
+  - import "./pages-base" without a file extension (scripts/offline-build.ts:5:37). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+vite v8.3.2 building client environment for production...
+transforming...
+✓ 410 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                            1.25 kB │ gzip:   0.68 kB
+dist/assets/engine.worker-BYNS5Yfw.js    633.13 kB
+dist/assets/index-CguXXpAU.css            97.36 kB │ gzip:  17.05 kB
+dist/assets/src-D7XDkljn.js                3.42 kB │ gzip:   1.83 kB
+dist/assets/src-Dn1ldnVX.js               10.18 kB │ gzip:   4.27 kB
+dist/assets/src-nDsl351a.js               13.63 kB │ gzip:   6.12 kB
+dist/assets/src-DSUsFsaI.js               58.12 kB │ gzip:  15.48 kB
+dist/assets/schemas-B44qH8my.js           89.57 kB │ gzip:  25.29 kB
+dist/assets/src-DSgLMJ8v.js              207.23 kB │ gzip:  63.14 kB
+dist/assets/src-CWEy31Y1.js              514.22 kB │ gzip: 113.72 kB
+dist/assets/index-CHU0PGQq.js          1,231.04 kB │ gzip: 372.84 kB
+dist/assets/src-tw3HYtdP.js            3,849.53 kB │ gzip: 271.84 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[INEFFECTIVE_DYNAMIC_IMPORT] packages/interop/src/index.ts is dynamically imported by apps/web/src/App.tsx but also statically imported by apps/web/src/components/InteropImportDialog.tsx, dynamic import will not move module into another chunk.
+
+✓ built in 859ms
