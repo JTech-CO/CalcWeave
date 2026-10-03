@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-03T00:58:12.083Z",
-  "appVersion": "0.10.0",
+  "generatedAt": "2026-10-03T01:18:33.357Z",
+  "appVersion": "0.10.1",
   "basePath": "/",
   "source": "package-lock.json + installed package original license notices",
   "dependencies": [

@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-10-03T01:13:24.399902+00:00",
-  "appVersion": "0.10.1",
+  "appVersion": "0.10.0",
   "engineVersion": "0.10.0-m9",
   "declaredDeliveryVerified": true,
   "fullSimulinkEquivalenceClaimed": false,
@@ -143,24 +143,12 @@
     "pageErrors": [],
     "outsideAppRequests": [],
     "evidence": [
-      "m9-actions-verification.json",
-      "m9-deployment-verification.json",
-      "m9-public-browser-verification.json"
+      "m9-initial-release-actions-verification.json",
+      "m9-initial-release-deployment-verification.json",
+      "m9-initial-release-public-browser-verification.json"
     ],
     "verifiedPublicLaunch": false,
     "customDomainVerified": false,
     "actualNoviceStudyClaimed": false
-  },
-  "initialEngineeringAppVersion": "0.10.0",
-  "releasePatch": {
-    "reason": "Replace legacy 0.8 header and library labels with APP_VERSION. Numerical engine and registry contracts unchanged.",
-    "appVersion": "0.10.1",
-    "engineVersion": "0.10.0-m9",
-    "targetedBrowserPassed": 4,
-    "targetedBrowserFailed": 0,
-    "targetedBrowserDurationSeconds": 18.5,
-    "rootEvidence": "m9-root-release-verification.json",
-    "projectEvidence": "m9-project-release-verification.json",
-    "publicationPending": true
   }
 }

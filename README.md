@@ -1,7 +1,7 @@
 # CalcWeave
 
 > 블럭을 연결해 수학을 계산하고, 시간에 따른 변화를 관찰하며, 모델을 데이터와 실행 코드로 이어가는 웹 도구.  
-> 기준일: 2026-10-03 · 앱: 0.10.0 · 엔진: 0.10.0-m9 · 현재 상태: M8·M9의 선언된 제한 범위 로컬검증 완료. registry211종(185+26)·M9 preset15개·예제39개·6개 카테고리. 공개 Pages의 이번 버전 배포·실제 주소 검증은 대기 중이며 실제 사용자 조사·목표 도메인 확인은 별도입니다.
+> 기준일: 2026-10-03 · 앱: 0.10.0 · 엔진: 0.10.0-m9 · 현재 상태: M8·M9의 선언된 제한 범위 로컬검증 완료. registry211종(185+26)·M9 preset15개·예제39개·6개 카테고리. 공개 Pages의 이번 버전 배포·실제 주소 검증도 완료했으며 실제 사용자 조사·목표 도메인 확인은 별도입니다.
 
 CalcWeave는 MATLAB 설치 없이 브라우저에서 사용할 수 있는 블럭 기반 수학 계산·시뮬레이션 도구를 목표로 합니다. Simulink 기본 라이브러리의 기능 개념을 참고하면서, 초보자가 입력·계산·결과를 이해하고 점차 고급 모델로 확장할 수 있는 독립적인 사용 경험을 설계합니다.
 
@@ -11,7 +11,7 @@ CalcWeave는 MATLAB 설치 없이 브라우저에서 사용할 수 있는 블럭
 
 앱0.10.0·엔진0.10.0-m9는 기존185개 정의를 보존하고 필터 실현 구조·이산 PID/2DOF·MIMO 상태공간·제어 가능한 정수 지연·발행 예약 지연·물리적 샘플시간 계산 등26개 정의를 추가합니다. registry211종과M9 명명 preset15개는 원본행 승인 수·독립 kernel 수와 다른 지표입니다. 학습 예제4개를 더해39개를6범주에서 탐색합니다.
 
-M9의 선언된 범위는 마지막 수치 수정 후 로컬 수치·독립 TypeScript·상태·진단·전체unit 및 영향받은 브라우저 검증을 완료했습니다. 현재 source 승인 기록은 신규31행과 기존05-009 추적 교정1행을 반영해 subset211행·미구현174행입니다. 151raw fixture records·30preset mode records·693raw samples·191actual TypeScript 프로그램과전체unit2,175개가 통과했으며, 원본 전체 옵션 동등성이나 MathWorks seed/bit parity를 주장하지 않습니다. [M9 계약](docs/m9-contract.md) · [구현 맵](docs/m9-implementation-map.json) · [검증 기록](docs/m9-validation.md)
+M9의 선언된 범위는 마지막 수치 수정 후 로컬 수치·독립 TypeScript·상태·진단 검증과 최종 CI의 전체unit2,175개·루트browser129개·project browser4개, 공개 브라우저9개 검증을 완료했습니다. 현재 source 승인 기록은 신규31행과 기존05-009 추적 교정1행을 반영해 subset211행·미구현174행입니다. 151raw fixture records·30preset mode records·693raw samples·191actual TypeScript 프로그램과전체unit2,175개가 통과했으며, 원본 전체 옵션 동등성이나 MathWorks seed/bit parity를 주장하지 않습니다. [M9 계약](docs/m9-contract.md) · [구현 맵](docs/m9-implementation-map.json) · [검증 기록](docs/m9-validation.md)
 
 ## M8 수학·조회표 납품 기록
 
@@ -148,7 +148,7 @@ npm run verify:performance:catalog
 
 [dataset/Simulink_Basic_Blocks_R2024b.md](dataset/Simulink_Basic_Blocks_R2024b.md)는 21개 분류에 385개 문서 행을 수록한 참고 자료입니다. 중복·별칭·설정 변형·조건부 항목도 포함하므로 385개 독립 계산 엔진을 의미하지 않습니다. 참고 자료는 보존하고, CalcWeave의 구현 계획과 실제 지원 상태는 별도로 관리합니다.
 
-문서에 쓰인 `계획`, `목표`, 예산·일정 추정은 구현 완료나 측정 결과가 아닙니다. 현재 M9 수치·브라우저·export·자원 상한과 릴리스 검증 진행은 [M9 검증 기록](docs/m9-validation.md)에 모으며 이전 [수학·신호 확장 검증](docs/catalog-validation.md)은 단계 증거로 보존합니다. 웹 베타 배포 검증과 실제 초보 사용자 조사·목표 도메인 소유 검증·전체 Simulink 옵션 동등성은 별도로 기록합니다. DAE·일반 fixed-point 타입 전파·외부 코드 연동은 별도 실행 계약과 검증이 필요합니다.
+문서에 쓰인 `계획`, `목표`, 예산·일정 추정은 구현 완료나 측정 결과가 아닙니다. 현재 M9 수치·브라우저·export·자원 상한과 릴리스 검증 결과는 [M9 검증 기록](docs/m9-validation.md)에 모으며 이전 [수학·신호 확장 검증](docs/catalog-validation.md)은 단계 증거로 보존합니다. 웹 베타 배포 검증과 실제 초보 사용자 조사·목표 도메인 소유 검증·전체 Simulink 옵션 동등성은 별도로 기록합니다. DAE·일반 fixed-point 타입 전파·외부 코드 연동은 별도 실행 계약과 검증이 필요합니다.
 
 ## 브랜드와 배포 목표
 
@@ -175,3 +175,6 @@ npm run verify:performance:catalog
 | `packages/model-package`, `packages/interop` | 서명·출처 확인된 선언형 모델과 구문/변환/실행 단계 검사 |
 | `packages/release` | 실제 registry를 참조하는 버전·지원·한도·정책 정보 |
 | `tests`, `fixtures/m0`~`fixtures/m5` 및 `fixtures/m7`, `scripts` | 검증, 예제 모델, 측정·대응표·릴리스 무결성 검사 |
+## 0.10.1 버전 표시 수정
+
+헤더와 라이브러리에 남은 과거 `0.8` 표시를 릴리스 정본인 `APP_VERSION`에 연결했습니다. 앱0.10.1의 표시 수정이며 엔진0.10.0-m9와211개 정의·39예제·수치 계약은 그대로입니다. 최초0.10.0 공개 증거는 `docs/evidence/m9-initial-release-*`로 보존하며, 새0.10.1 공개 게시 검증은 진행 중입니다.

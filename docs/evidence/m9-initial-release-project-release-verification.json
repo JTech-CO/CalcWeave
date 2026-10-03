@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-03T01:18:30.803Z",
-  "appVersion": "0.10.1",
+  "generatedAt": "2026-10-03T00:54:49.602Z",
+  "appVersion": "0.10.0",
   "engineVersion": "0.10.0-m9",
   "scope": "/CalcWeave/",
-  "releaseId": "52369a5a304551c504fe96194113a7dc2a493cad224ef5fd98abfb7c2af8d82f",
+  "releaseId": "f3a4ddb31b92e27b6a5a429b1522b86cf5d0bbc9786c5a26b4139a737f670d4d",
   "checks": [
     "app/engine release versions",
     "single registry retains catalog definitions with unique executable IDs",
@@ -18,16 +18,16 @@
     "final built bytes match /CalcWeave/assets/engine.worker-f0TJDrgW.js",
     "safe static asset /CalcWeave/assets/index-BSvd8MHu.css",
     "final built bytes match /CalcWeave/assets/index-BSvd8MHu.css",
-    "safe static asset /CalcWeave/assets/index-Dhx2HN0v.js",
-    "final built bytes match /CalcWeave/assets/index-Dhx2HN0v.js",
-    "safe static asset /CalcWeave/assets/src-CHXCu6Rn.js",
-    "final built bytes match /CalcWeave/assets/src-CHXCu6Rn.js",
-    "safe static asset /CalcWeave/assets/src-CMSNNzC6.js",
-    "final built bytes match /CalcWeave/assets/src-CMSNNzC6.js",
-    "safe static asset /CalcWeave/assets/src-DFG3Qg1t.js",
-    "final built bytes match /CalcWeave/assets/src-DFG3Qg1t.js",
-    "safe static asset /CalcWeave/assets/src-H7wF2wbe.js",
-    "final built bytes match /CalcWeave/assets/src-H7wF2wbe.js",
+    "safe static asset /CalcWeave/assets/index-BgcRiJ39.js",
+    "final built bytes match /CalcWeave/assets/index-BgcRiJ39.js",
+    "safe static asset /CalcWeave/assets/src-B-HHhBqV.js",
+    "final built bytes match /CalcWeave/assets/src-B-HHhBqV.js",
+    "safe static asset /CalcWeave/assets/src-BDj2NPI2.js",
+    "final built bytes match /CalcWeave/assets/src-BDj2NPI2.js",
+    "safe static asset /CalcWeave/assets/src-CC_xGh4I.js",
+    "final built bytes match /CalcWeave/assets/src-CC_xGh4I.js",
+    "safe static asset /CalcWeave/assets/src-DAAZGgxy.js",
+    "final built bytes match /CalcWeave/assets/src-DAAZGgxy.js",
     "safe static asset /CalcWeave/cookies/index.html",
     "final built bytes match /CalcWeave/cookies/index.html",
     "safe static asset /CalcWeave/index.html",
@@ -58,11 +58,11 @@
     "all code/Worker/lazy chunks are in static release",
     "all code/Worker/lazy chunks are in static release",
     "no recognized secret material in assets\\engine.worker-f0TJDrgW.js",
-    "no recognized secret material in assets\\index-Dhx2HN0v.js",
-    "no recognized secret material in assets\\src-CHXCu6Rn.js",
-    "no recognized secret material in assets\\src-CMSNNzC6.js",
-    "no recognized secret material in assets\\src-DFG3Qg1t.js",
-    "no recognized secret material in assets\\src-H7wF2wbe.js",
+    "no recognized secret material in assets\\index-BgcRiJ39.js",
+    "no recognized secret material in assets\\src-B-HHhBqV.js",
+    "no recognized secret material in assets\\src-BDj2NPI2.js",
+    "no recognized secret material in assets\\src-CC_xGh4I.js",
+    "no recognized secret material in assets\\src-DAAZGgxy.js",
     "no recognized secret material in cookies\\index.html",
     "no recognized secret material in index.html",
     "no recognized secret material in notices\\index.html",
@@ -88,29 +88,29 @@
       "sha256": "477ffef561dac5dc6001c8476736c61014980bbf4ee0ecbdf07ccd51bbd891b5"
     },
     {
-      "url": "/CalcWeave/assets/index-Dhx2HN0v.js",
-      "bytes": 1054136,
-      "sha256": "cee0581436cff80480a50ae4cbf6ab5f6997e45ae9d958bea06ae92e5aecc656"
+      "url": "/CalcWeave/assets/index-BgcRiJ39.js",
+      "bytes": 1054130,
+      "sha256": "b4c09ce612b7ad071bf59a43da607fc8d92f8c354078f85e4b0bb7dc085da430"
     },
     {
-      "url": "/CalcWeave/assets/src-CHXCu6Rn.js",
+      "url": "/CalcWeave/assets/src-B-HHhBqV.js",
       "bytes": 258340,
-      "sha256": "ba16419f71f645428578290b83a2c9924d21749d082e154473187d193925ff3c"
+      "sha256": "d21a940f1a35006711f1dbb91ea294ac11b39462415e181f57125fd782b066e2"
     },
     {
-      "url": "/CalcWeave/assets/src-CMSNNzC6.js",
-      "bytes": 7155,
-      "sha256": "b96be5de9e7efdd675bfa665975b1bd70ea9ca5777bce98d1ee95b94c373c184"
-    },
-    {
-      "url": "/CalcWeave/assets/src-DFG3Qg1t.js",
+      "url": "/CalcWeave/assets/src-BDj2NPI2.js",
       "bytes": 1775,
-      "sha256": "c27da9e754c4ae285cd17d5d9ac2b19058d00af291227251e6f5abb14290180b"
+      "sha256": "e6e3448d6ba0b9ac2b29ff6300ab99dbae003ba38bd459053bb498bebfdc6baa"
     },
     {
-      "url": "/CalcWeave/assets/src-H7wF2wbe.js",
+      "url": "/CalcWeave/assets/src-CC_xGh4I.js",
       "bytes": 36483,
-      "sha256": "8357980a2f536cfa894b1bfac9687f6d2c576d0612964ea2f3e30be2a52852c4"
+      "sha256": "e109bdb1b8283a480c919fba75440965f0c2aa1fac452baa7831de31a9744d92"
+    },
+    {
+      "url": "/CalcWeave/assets/src-DAAZGgxy.js",
+      "bytes": 7155,
+      "sha256": "d1b5dd2ce0d46bb26adafbd653d5efa75b29e639b19da20a5b6976be94771ba7"
     },
     {
       "url": "/CalcWeave/cookies/index.html",
@@ -120,12 +120,12 @@
     {
       "url": "/CalcWeave/index.html",
       "bytes": 1097,
-      "sha256": "e7987568cce6321863d1d4c3e8213a3ef1871f4b59d8560c2109c8cdef2f960e"
+      "sha256": "49e93eeb1ea391aad96ecced4346a8fe664ddc90c1d44ef21a44b81f0ba2d65d"
     },
     {
       "url": "/CalcWeave/notices/index.html",
       "bytes": 35177,
-      "sha256": "74f5b6cd206e3b1ee8729263dd510f37a531e4dfc4e963762a3cc2f5ee604f59"
+      "sha256": "3dbc51e77ea2ae1ee81e519b434523d73892bfb415ff9ca36269935806a2e1ec"
     },
     {
       "url": "/CalcWeave/privacy/index.html",
@@ -138,6 +138,6 @@
       "sha256": "5cebc3f463cd4737151e9dccbc25715b17584be9c029099d01bdb9ee4cdea632"
     }
   ],
-  "totalStaticBytes": 1873270,
+  "totalStaticBytes": 1873264,
   "publicDeploymentClaimed": false
 }

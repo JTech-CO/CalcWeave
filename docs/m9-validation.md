@@ -1,10 +1,10 @@
 # M9 DSP·이산 상태 구축 및 검증 기록
 
-2026-10-03 KST · 문서 v0.2 · 앱0.10.0 · 엔진0.10.0-m9 · 모델schema1 · 상태: **로컬 선언 범위 검증 완료(`verified-declared-scope`)**. 공개 배포 검증은 별도 대기다.
+2026-10-03 KST · 문서 v0.2 · 앱0.10.0 · 엔진0.10.0-m9 · 모델schema1 · 상태: **로컬 선언 범위 검증 완료(`verified-declared-scope`)**. 공개 앱 배포·실제 주소 검증도 완료했다. 전체 서비스 출시 게이트는 별도다.
 
 [M9 계약](m9-contract.md)의 최초 납품은26개 정의와15개 명명 preset이다. 직전185개 정의를 보존해 registry211개이며 학습 예제는39개·6개 카테고리다. 선언 모드별 정의 수는 정적148·이산198·연속210이다. 새26개는 정적 모드를 선언하지 않으며 `verify.gradient`는 이산만, 나머지25개는 이산 및 연속 모델의 고정 due-grid 영역을 선언한다. 이 숫자는 모든 ODE 연결·solver 사건·원본 전체 옵션의 지원 수가 아니다. Python은 기존 승인51개를 유지하고 M9 정의는 TypeScript만 선언한다.
 
-최종 actual TypeScript 보고서는 [m9-verification.json](evidence/m9-verification.json)에 있다. 마지막 수치 경계 수정 후151raw fixture records·30preset mode records(명명15개×이산/연속)·10실패 parity·693raw samples·191실제 생성 TypeScript 프로그램이strict 이산/연속 실행에서 통과했다. 전체unit은31파일2,175/2,175 PASS(33.29초)다. 마지막 수정 전 전체browser129/129 PASS(331.46초)와 수정 후 영향받은M9 5/5 PASS(14.3초)는 다른 실행이며 최종 코드로 전체129개를 실행하는CI는 대기다. 공개 Pages의0.10.0 배포·실제 주소 검증도 아직 대기다.
+최종 actual TypeScript 보고서는 [m9-verification.json](evidence/m9-verification.json)에 있다. 마지막 수치 경계 수정 후151raw fixture records·30preset mode records(명명15개×이산/연속)·10실패 parity·693raw samples·191실제 생성 TypeScript 프로그램이strict 이산/연속 실행에서 통과했다. 전체unit은31파일2,175/2,175 PASS(33.29초)다. 마지막 수정 전 전체browser129/129 PASS(331.46초)와 수정 후 영향받은M9 5/5 PASS(14.3초)는 다른 실행이며 최종M9 merge의 GitHub Actions에서 전체unit2,175개·루트browser129/129·project browser4/4가 통과했다. 앱0.10.0·엔진0.10.0-m9의 공개 Pages artifact와 실제 브라우저9개 검증을 완료했다.
 
 ## 원본행 승인과 추적
 
@@ -24,15 +24,15 @@ M9 firstWork 배정은58행이며 catalog baseline의 기존subset27행·미구�
 | 상태 수명·publication | 구조별 IC·reset/enable·seed 소비·repeat/checkpoint rollback·due/offset·최종 memory | 선택 독립 memory oracle·전체 finalState/stateMemory parity 및 unit PASS |
 | 진단·실패 rollback | 원본 node/port/tick/time·마지막 due·부분 결과·동일 생성 코드의 실패 | 10failure parity와 전체unit PASS |
 | 자원 상한 | 상태/queue metadata·연산 비용·계수/shape/period·unsafe due index·기록량 | compiler/runtime 경계 unit 및 최종actual TS PASS |
-| UI·브라우저 | 새4예제·preset·동적 포트/설정·저장·계산·TS export·기존 작업 흐름 | 수정 전129/129 PASS(331.46초), 마지막 수정 후M9 5/5 PASS(14.3초); 최종 전체CI 대기 |
+| UI·브라우저 | 새4예제·preset·동적 포트/설정·저장·계산·TS export·기존 작업 흐름 | 수정 전129/129 PASS(331.46초), 마지막 수정 후M9 5/5 PASS(14.3초); 최종 CI 전체129/129 PASS; project4/4 PASS |
 | build·릴리스 | strict typecheck·정적 파일/manifest·오프라인·정책·바이트/hash | 최종root release70checks·12files·1,873,014bytes PASS |
 | 디자인 | 대표 너비·테마·폰트·확대·새 예제 및 설정 화면 | [188관측/pageErrors0 PASS](evidence/m9-design-verification.json); 접근성 인증·실제 사용자 조사 아님 |
 | 성능 | cold/warm load·1,000node·취소·retained heap·page errors | [로컬6개 예산 PASS](evidence/m9-performance.json); 공개 네트워크 성능 미주장 |
 | project 경로 | `/CalcWeave/` 자산·Worker·계산·오프라인/경로 회귀 | 4/4 PASS(183.03초), project release70checks·12files·1,873,264bytes |
 | source 대응 |58개 identity·원자료digest·31신규/1교정·이전 승인 보존 | source 재승인·적용/검사 PASS, 현재211subset/174미구현 |
-| 공개 배포 | 실제 Pages artifact 버전·파일/hash·Worker/계산·오프라인 | 배포 및 실제 주소 검증 대기; 로컬 검증으로 완료 처리하지 않음 |
+| 공개 배포 | 실제 Pages artifact 버전·파일/hash·Worker/계산·오프라인 | 공개 artifact parity·실제 브라우저9개 PASS; 전체 서비스 출시 미승인 |
 
-최종 [root 릴리스 증거](evidence/m9-root-release-verification.json)의 releaseId는 `91846e548f4ed5f6d998549ab72969e9dccf2f73e46d4401524b1d6db1c5bb60`이다. [디자인 기록](evidence/m9-design-verification.json)의188관측/pageErrors0와 [성능 기록](evidence/m9-performance.json)의6개 로컬 측정 예산은 모두 통과했다. `/CalcWeave/` 경로 검증4/4(183.03초)와 [project release](evidence/m9-project-release-verification.json)의70checks·12files·1,873,264bytes도 통과했으며 project releaseId는 `f3a4ddb31b92e27b6a5a429b1522b86cf5d0bbc9786c5a26b4139a737f670d4d`다. root/project artifact는 경로가 달라 별도로 기록한다. [최종 작업 공간 증거](evidence/m9-workspace-verification.json)에 이 결과를 모았다. 실제 공개 Pages 검증은 대기이며 로컬 측정을 공개 네트워크 성능으로 해석하지 않는다. `npm run verify:m9`는 실제 TS 수치 보고서를 생성하고 source 승격은 원본 identity·선택 canonical/필수 설정·preset·fixture·지원 mode의 근거를 별도로 검사한다.
+최종 [root 릴리스 증거](evidence/m9-root-release-verification.json)의 releaseId는 `91846e548f4ed5f6d998549ab72969e9dccf2f73e46d4401524b1d6db1c5bb60`이다. [디자인 기록](evidence/m9-design-verification.json)의188관측/pageErrors0와 [성능 기록](evidence/m9-performance.json)의6개 로컬 측정 예산은 모두 통과했다. `/CalcWeave/` 경로 검증4/4(183.03초)와 [project release](evidence/m9-project-release-verification.json)의70checks·12files·1,873,264bytes도 통과했으며 project releaseId는 `f3a4ddb31b92e27b6a5a429b1522b86cf5d0bbc9786c5a26b4139a737f670d4d`다. root/project artifact는 경로가 달라 별도로 기록한다. [최종 작업 공간 증거](evidence/m9-workspace-verification.json)에 이 결과를 모았다. 실제 공개 Pages artifact·브라우저9개 검증도 통과했으며 로컬 측정을 공개 네트워크 성능으로 해석하지 않는다. `npm run verify:m9`는 실제 TS 수치 보고서를 생성하고 source 승격은 원본 identity·선택 canonical/필수 설정·preset·fixture·지원 mode의 근거를 별도로 검사한다.
 
 ## 독립 검토에서 고정한 경계
 
@@ -52,4 +52,10 @@ First Order/Lead-Lag/Real Zero의3개 configured response와 MinMax Running Rese
 
 자체 PRNG stream·seed 재현은 MathWorks 난수 sequence bit parity가 아니다. sample-channel 처리·unitless scalar Parallel PID·각축1~16 MIMO·고정 형상 boolean/float64·정수 due delay·fixed-interval 발행 queue만 선언한다. 일반 frame·추가 제어 옵션은 M9-followup, complex/typed fixed-point/일반n-D/variable-size는 M10, 조건부 실행은 M11, arbitrary-time event/DAE·새 solver는 M12, 외부 workspace/ABI·라이선스와 추가 타깃은 후속 gate를 따른다.
 
-engineering 종료는 마지막 수정 이후 수치·생성 TS·전체unit·영향받은browser·디자인·로컬 성능·root/project build/release·project-path·source identity를 확인한 선언 범위로 판정했다. 원본 전체 옵션 동등성·실제 초보자 조사·목표 도메인·공개 Pages 배포와 최종 전체browser CI는 남은 확인 항목이다.
+engineering 종료는 마지막 수정 이후 수치·생성 TS·전체unit·영향받은browser·디자인·로컬 성능·root/project build/release·project-path·source identity를 확인한 선언 범위로 판정했다. 공개 Pages 배포와 최종 전체browser CI도 완료했다. 원본 전체 옵션 동등성·실제 초보자 조사·목표 도메인·문의 운영 정책은 남은 확인 항목이다.
+
+## 최종 CI와 실제 공개 주소 증거
+
+앱0.10.0·엔진0.10.0-m9의 공개 Pages artifact와 실제 브라우저9개 검증을 완료했다. 최종M9 merge의 GitHub Actions에서 전체unit2,175개·루트browser129/129·project browser4/4가 통과했다.
+
+[Actions 기록](evidence/m9-actions-verification.json) · [공개 artifact 검증](evidence/m9-deployment-verification.json) · [공개 브라우저 검증](evidence/m9-public-browser-verification.json). 마지막 수치 수정 전 로컬129개 실행은 역사로 보존하며 최종 CI의 전체129개 실행과 구분한다. 공개 기술 배포 성공으로 실제 F06 조사·목표 도메인 소유·문의 이메일 보유/처리 정책·전체 서비스 출시를 승인하지 않는다.

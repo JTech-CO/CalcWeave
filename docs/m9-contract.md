@@ -1,6 +1,6 @@
 # CalcWeave M9 구현 계약
 
-작성일: 2026-10-03 · 문서 v0.6 · 상태: 선언 범위 검증 완료(`verified-declared-scope`) · 원본 전체 옵션/공개 배포 별도
+작성일: 2026-10-03 · 문서 v0.6 · 상태: 선언 범위 검증 완료(`verified-declared-scope`) · 공개 앱 배포 검증 완료 · 원본 전체 옵션/전체 서비스 출시 별도
 
 M9의 최초 작업 배정은 원본 **58행**이며, 서로 다른 이름 문자열은 55개다. 이 중 baseline의 기존 subset은 27행, 미구현은 31행이다. 분류 family 29개는 작업 묶음이며 engine 수로 합산하지 않는다. 원자료 전체 기준 385행·339이름과 SHA-256 `cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7`를 보존한다.
 
@@ -67,7 +67,7 @@ Read-before-write는 기존 Delay/Unit Delay/Rate Transition 경계의 결정성
 - 잡음/난수·PWM/variable pulse·signal generator·sample sine·sample sequence는 선언된 held sample 동작이다. Gaussian variance=noisePower/Ts, seed stream은 자체 규약이며 MathWorks seed bit parity가 아니다. sample sequence는 균등 due 간격의 scalar 확장이며 기존 arbitrary time vector 계약을 바꾸지 않는다.
 - `verify.gradient`는 discrete-only strict absΔu<abs(maximumGradient)다. `verify.resolution`은scalar/1D float64 입력과 scalar positive resolution의mod<tolerance이며 검사 실패 시 실행을 중단한다. 원본 vector membership과 optional output/warning/callback 설정은 열린 후속이다.
 
-새26개는 정적 실행을 선언하지 않는다. `verify.gradient`는 이산만, 나머지25개는 이산/연속 모델 안에서 고정 due-grid 동작을 선언한다. 연속 지원 표기는 모든 ODE feedback·사건 solver 지원을 뜻하지 않는다. 선택한 선언 API는 최종 수치·코드 생성·단위 및 영향받은 브라우저 검사로 검증했다. 전체 source 옵션과 공개 배포는 별도다.
+새26개는 정적 실행을 선언하지 않는다. `verify.gradient`는 이산만, 나머지25개는 이산/연속 모델 안에서 고정 due-grid 동작을 선언한다. 연속 지원 표기는 모든 ODE feedback·사건 solver 지원을 뜻하지 않는다. 선택한 선언 API는 최종 수치·코드 생성·단위 및 영향받은 브라우저 검사로 검증했다. 전체 source 옵션은 후속이며 공개 앱 배포 검증은 별도 증거로 완료했다.
 
 ## 독립 review fixture 후보
 
@@ -85,7 +85,7 @@ Read-before-write는 기존 Delay/Unit Delay/Rate Transition 경계의 결정성
 
 읽기 전용 독립 검토에서 선택12fixture의40개 raw sample을 정확 비교하고 마지막 기록 tick의 Propagation Delay 진단2건을 원본 node/tick/time으로 재현했다. causal 필터 임시 overflow·sequence subnormal·boolean 변화 검출은 구현 담당이 교정했고 해당 probe가 통과했다. 전체 선언 옵션·actual TS·배포 build·UI 회귀의 단계 승인 결과는 root 검증에 따라 별도로 기록한다.
 
-신규31행의 제한 범위와 기존05-009의 추적 교정1행을 승인해 현재source subset211행·미구현174행이다. 원본08-028 Sine Wave Function의 sample-based 후속도 추적하지만 M9 firstWork58행에는 추가 합산하지 않는다. 최종151raw fixture records·30preset mode records·10실패 parity·693raw samples·191actual TypeScript 프로그램과31파일2,175개 전체 unit이 통과했다. 마지막 수치 수정 전 전체browser129/129와 수정 후 영향받은5/5는 별도 기록이며 최종 전체CI 실행은 대기다. [검증 기록](m9-validation.md)에 근거와 남은 공개검증을 기록한다.
+신규31행의 제한 범위와 기존05-009의 추적 교정1행을 승인해 현재source subset211행·미구현174행이다. 원본08-028 Sine Wave Function의 sample-based 후속도 추적하지만 M9 firstWork58행에는 추가 합산하지 않는다. 최종151raw fixture records·30preset mode records·10실패 parity·693raw samples·191actual TypeScript 프로그램과31파일2,175개 전체 unit이 통과했다. 마지막 수치 수정 전 전체browser129/129와 수정 후 영향받은5/5는 별도 기록이며 최종M9 merge의 GitHub Actions에서 전체unit2,175개·루트browser129/129·project browser4/4가 통과했다. 앱0.10.0·엔진0.10.0-m9의 공개 Pages artifact와 실제 브라우저9개 검증을 완료했다. [검증 기록](m9-validation.md)에 최종 CI·공개 근거와 남은 전체 옵션/서비스 게이트를 기록한다.
 
 ## 작업 family와 추가 옵션 inventory
 

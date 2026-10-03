@@ -1,6 +1,6 @@
 {
   "name": "calcweave",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "private": true,
   "type": "module",
   "description": "CalcWeave: expanded mathematical and signal blocks with categorized learning examples",
