@@ -3,6 +3,7 @@ import { createContinuousExecution } from './continuous-execution';
 
 /** Cooperative browser runner. Numerical trials stay synchronous and transactional. */
 export async function runContinuous(compiled: CompiledModel, options: RunOptions = {}): Promise<RunResult> {
+  if (options.control?.takeDashboardEvents) throw new ModelError([{ code: 'M13_LIVE_MODE_UNSUPPORTED', message: '실행 중 대시보드 입력은 이산 실행에서만 지원합니다.' }]);
   const started = performance.now();
   const maxWallMs = options.maxWallMs ?? 30_000, maxRecordedValues = options.maxRecordedValues ?? 1_000_000;
   const maxOperations = options.maxOperations ?? 50_000_000;

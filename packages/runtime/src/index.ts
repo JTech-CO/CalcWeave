@@ -1,9 +1,10 @@
 import { ModelError } from '../../model/src/types';
-import type { CompiledModel, IRNode, RunOptions, RunResult, RunSample, SignalValue } from '../../model/src/types';
+import type { CompiledModel, DashboardLiveEvent, IRNode, RunOptions, RunResult, RunSample, SignalValue } from '../../model/src/types';
 import { discreteMemoryElementCount } from '../../model/src/discrete';
 import { checkSignal, copySignal, evaluateSignalNode, finiteNumber, nodeOperationCost, signalElements } from './kernels';
 import { createDiscreteMachine } from './discrete-machine';
 import { runContinuous } from './continuous-runner';
+import { m13StopRequest } from './m13';
 
 export const RUNTIME_LIMITS = Object.freeze({
   defaultMaxWallMs: 30_000,
@@ -34,6 +35,9 @@ function objectValues(values: Map<string, number>): Record<string, number> {
  * committed after the final sample. The compiler is the model validation boundary.
  */
 export async function runModel(compiled: CompiledModel, options: RunOptions = {}): Promise<RunResult> {
+  if (options.control?.takeDashboardEvents && compiled.model.execution.mode !== 'discrete') {
+    throw new ModelError([{ code: 'M13_LIVE_MODE_UNSUPPORTED', message: '실행 중 대시보드 입력은 이산 실행에서만 지원합니다.' }]);
+  }
   if (compiled.model.execution.mode === 'continuous') return runContinuous(compiled, options);
   const started = performance.now();
   const settings = { ...compiled.model.execution };
@@ -199,6 +203,8 @@ export async function runModel(compiled: CompiledModel, options: RunOptions = {}
   }
 
   let previousValues: PortValues | undefined;
+  let pendingDashboardEvents: DashboardLiveEvent[] = [];
+  let stopReason: RunResult['stopReason'];
   let tickCheckpoint: ReturnType<NonNullable<typeof discrete>['checkpoint']> | undefined;
   try {
   for (let index = 0; index <= intervalCount; index += 1) {
@@ -212,11 +218,37 @@ export async function runModel(compiled: CompiledModel, options: RunOptions = {}
       if (discrete) sampleStep(index - 1, settings.startTime + (index - 1) * settings.step, () => discrete.transition(previousValues!, index - 1)); else transition(previousValues);
     }
     const time = settings.startTime + index * settings.step;
+    let appliedDashboardEvents: ReturnType<NonNullable<typeof discrete>['applyDashboardEvents']>['applied'] = [];
+    if (discrete && options.control?.takeDashboardEvents) {
+      const incoming = sampleStep(index, time, () => {
+        let received: unknown;
+        try { received = options.control!.takeDashboardEvents!(); }
+        catch { throw new ModelError([{ code: 'M13_LIVE_EVENT_SOURCE', message: '대시보드 입력 대기열을 읽을 수 없습니다.' }]); }
+        if (!Array.isArray(received) || received.length > 32 || pendingDashboardEvents.length + received.length > 256) {
+          throw new ModelError([{ code: 'M13_LIVE_EVENT_BUDGET', message: '대시보드 입력은 한 번에32개, 대기256개 이하여야 합니다.' }]);
+        }
+        const descriptors = Object.getOwnPropertyDescriptors(received);
+        if (Object.getPrototypeOf(received) !== Array.prototype || Reflect.ownKeys(descriptors).length !== received.length + 1) {
+          throw new ModelError([{ code: 'M13_LIVE_EVENT_SHAPE', message: '대시보드 대기열에는 일반 dense 배열만 사용할 수 있습니다.' }]);
+        }
+        return Array.from({ length: received.length }, (_, position) => {
+          const descriptor = descriptors[String(position)];
+          if (!descriptor || !('value' in descriptor) || !descriptor.enumerable) throw new ModelError([{ code: 'M13_LIVE_EVENT_SHAPE', message: '대시보드 대기열에 접근자나 빈 항목을 사용할 수 없습니다.' }]);
+          return descriptor.value as DashboardLiveEvent;
+        });
+      });
+      const applied = sampleStep(index, time, () => discrete.applyDashboardEvents([...pendingDashboardEvents, ...incoming], index, time));
+      pendingDashboardEvents = applied.pending; appliedDashboardEvents = applied.applied;
+    }
     const values = discrete ? sampleStep(index, time, () => discrete.evaluate(index, time)) : evaluate(states);
     samples.push({ time, values: Object.fromEntries(outputIds.map((id) => [id, copySignal(checkSignal(values.get(id)?.out, compiled.outputTypes[id]!, id))])) });
     steps += 1;
     // Publish state only with a complete recorded sample. Failed ticks roll back held/rate/random memory.
     tickCheckpoint = undefined;
+    // A failed observation never acknowledges events that its checkpoint rolls back.
+    for (const event of appliedDashboardEvents) options.onDashboardEventApplied?.({ ...event });
+    const stopNodeId = m13StopRequest(nodes, values);
+    if (stopNodeId) { stopReason = { nodeId: stopNodeId, tick: index, time }; return { ...result('completed'), stopReason }; }
     const shouldYield = steps % RUNTIME_LIMITS.yieldEverySteps === 0 || performance.now() - chunkStarted >= RUNTIME_LIMITS.yieldAfterMs;
     if (index === 0 || shouldYield || index === intervalCount) options.onProgress?.({ steps, time });
     if (options.signal?.aborted) return result('cancelled');

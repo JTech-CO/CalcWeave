@@ -56,7 +56,7 @@ type ExpressionNode =
   | { type: 'call'; name: string; args: ExpressionNode[] };
 type IRNode = { id: string; blockType: string; parameters: Record<string, unknown>; inputs: Record<string, { nodeId: string; portId: string }>; outputs: Record<string, SignalDescriptor>; sampleTime: { period: number; offset: number }; expression?: ExpressionNode; cost?: number };
 type Sample = { time: number; values: Record<string, SignalValue> };
-type Result = { samples: Sample[]; finalState: Record<string, SignalValue>; stateMemory?: Record<string, StateValue>; status: 'completed' | 'failed'; steps: number };
+type Result = { samples: Sample[]; finalState: Record<string, SignalValue>; stateMemory?: Record<string, StateValue>; status: 'completed' | 'failed'; steps: number; stopReason?: { nodeId: string; tick: number; time: number } };
 const data: { settings: { mode: string; startTime: number; stopTime: number; step: number }; nodes: IRNode[]; states: string[]; outputs: string[]; outputTypes: Record<string, SignalDescriptor>; recordedElements: number; stateElements: number } = ${literal};
 const exportManifest = ${manifestLiteral};
 /** The generator computed SHA-256 synchronously over the same canonical semantic key as Web Crypto. */
@@ -83,6 +83,7 @@ export function run(): Result {
   const now = typeof clock?.now === 'function' ? () => clock.now() : () => Date.now();
   const started = now();
   let operations = 0, nextBudgetCheck = 64, scopeInvocations = 0;
+  let stopReason: Result['stopReason'];
   const checkBudget = (): void => {
     if (now() - started > 30000) failure('RUNTIME_WALL_BUDGET','실행 시간 한도를 초과했습니다.');
     if (operations > 50000000) failure('RUNTIME_OPERATION_BUDGET','계산 연산 한도를 초과했습니다.');
@@ -91,13 +92,15 @@ export function run(): Result {
     if (scopeInvocation && ++scopeInvocations > 4096) numericFailure('M11_INVOCATION_LIMIT', node.id, '한 실행 경계의 계층 호출4096회를 초과했습니다.');
     const work = explicitWork ?? node.cost;
     if (!Number.isSafeInteger(work) || work! < 0) numericFailure('RUNTIME_INVALID_IR', node.id, '연산 비용이 유효하지 않습니다.');
-    operations += work!;
+    const nextOperations = operations + work!;
+    if (nextOperations > 50000000) numericFailure('RUNTIME_OPERATION_BUDGET', node.id, '계산 연산 한도를 초과했습니다.');
+    operations = nextOperations;
     if (operations >= nextBudgetCheck) { checkBudget(); nextBudgetCheck = operations + 64; }
   };
   const machine = settings.mode === 'discrete' ? sampleStep(0,settings.startTime,()=>createDiscreteMachine(nodes, states, settings.step, settings.startTime, charge)) : undefined;
   const snapshot = (status: Result['status']): Result => {
     const stateMemory = machine?.stateMemory();
-    return { samples, finalState: machine?.finalState() ?? {}, ...(stateMemory === undefined ? {} : { stateMemory }), status, steps: samples.length };
+    return { samples, finalState: machine?.finalState() ?? {}, ...(stateMemory === undefined ? {} : { stateMemory }), status, steps: samples.length, ...(stopReason ? { stopReason: { ...stopReason } } : {}) };
   };
   let previousValues: Map<string, Record<string, SignalValue>> | undefined;
   let tickCheckpoint: ReturnType<NonNullable<typeof machine>['checkpoint']> | undefined;
@@ -123,6 +126,8 @@ export function run(): Result {
     }
     samples.push({ time, values: Object.fromEntries(outputs.map((id) => [id, copySignal(checkSignal(values.get(id)?.out, data.outputTypes[id]!, id))])) });
     tickCheckpoint = undefined;
+    const stopNodeId = m13StopRequest(nodes, values);
+    if (stopNodeId) { stopReason = { nodeId: stopNodeId, tick, time }; return snapshot('completed'); }
     previousValues = values;
   }
   checkBudget();

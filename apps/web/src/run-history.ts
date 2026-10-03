@@ -79,6 +79,26 @@ export function validateRunHistory(raw: unknown): HistoryRecord[] {
       elements += 1 + Object.entries(sample.values).reduce<number>((sum, [id, value]) => sum + count(value, record.outputTypes[id]), 0);
       if (elements > RUN_HISTORY_LIMITS.recordedValues) invalid('한 실행 기록은 200,000개의 수치·boolean 원소 이하여야 합니다.');
     }
+    if (result.stateMemory) for (const [id, memory] of Object.entries(result.stateMemory)) {
+      if (!memory || typeof memory !== 'object' || Array.isArray(memory) || !Object.hasOwn(memory, 'm13Records')) continue;
+      const node = record.model.nodes.find(node => node.id === id);
+      if (!node || !['sink.record', 'sink.xy-graph', 'data.output-file', 'data.output-dataset'].includes(node.blockType)) invalid('기록 메모리의 블록 연결이 올바르지 않습니다.');
+      const entry = memory as { m13Records: unknown; m13RecordTick: unknown };
+      if (Object.keys(memory).some(key => !['m13Records', 'm13RecordTick'].includes(key)) || !Array.isArray(entry.m13Records) || entry.m13Records.length > Number(node!.parameters.capacity) || !Number.isInteger(entry.m13RecordTick) || Number(entry.m13RecordTick) < -1 || Number(entry.m13RecordTick) > 10000 || !record.outputTypes[id]) invalid('제한된 신호 기록의 크기·시점을 확인하세요.');
+      let previousRecordTime = -Infinity;
+      for (const item of entry.m13Records as { time: number; value: unknown }[]) {
+        if (!item || typeof item !== 'object' || Object.keys(item).length !== 2 || !Object.hasOwn(item, 'time') || !Object.hasOwn(item, 'value') || !Number.isFinite(item.time) || item.time <= previousRecordTime || item.time < record.model.execution.startTime || item.time > record.model.execution.stopTime) invalid('신호 기록의 시간 순서가 올바르지 않습니다.');
+        previousRecordTime = item.time;
+        try { checkSignal(validateAnySignal(item.value), record.outputTypes[id]!, id); } catch { invalid('신호 기록이 선언된 자료형·형상과 다릅니다.'); }
+        elements += 1 + count(item.value, record.outputTypes[id]);
+        if (elements > RUN_HISTORY_LIMITS.recordedValues) invalid('관측 샘플과 신호 기록은 합계200,000개 원소 이하여야 합니다.');
+      }
+      if ((entry.m13Records as unknown[]).length && Number(entry.m13RecordTick) < 0) invalid('신호 기록에 마지막 계산 시점이 없습니다.');
+    }
+    if (result.stopReason) {
+      const reason = result.stopReason, last = result.samples.at(-1);
+      if (result.status !== 'completed' || !last || Object.keys(reason).some(key => !['nodeId', 'tick', 'time'].includes(key)) || !record.model.nodes.some(node => node.id === reason.nodeId && node.blockType === 'sink.stop') || !Number.isInteger(reason.tick) || reason.tick < 0 || reason.tick > 10000 || !Number.isFinite(reason.time) || Math.abs(reason.time - last.time) > 1e-9) invalid('정상 종료 원인과 마지막 관측 샘플이 다릅니다.');
+    }
     if (!Number.isFinite(result.elapsedMs) || result.elapsedMs < 0 || !result.finalState || typeof result.finalState !== 'object') invalid('최종 실행 상태가 올바르지 않습니다.');
   }
   return detached;

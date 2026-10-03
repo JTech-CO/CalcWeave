@@ -31,7 +31,7 @@ const registryEntrySchema = z.object({
   outputs: z.array(identifier).max(16),
   parameters: z.array(z.object({
     name: identifier,
-    kind: z.enum(['number', 'integer', 'value', 'numeric-vector', 'enum', 'expression', 'text', 'typed-value', 'data-type', 'signal-value']),
+    kind: z.enum(['number', 'integer', 'value', 'numeric-vector', 'enum', 'expression', 'text', 'bounded-json', 'typed-value', 'data-type', 'signal-value']),
   }).strict()).max(16),
 }).strict();
 const packageSchema = z.object({

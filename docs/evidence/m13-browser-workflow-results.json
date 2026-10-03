@@ -1,0 +1,489 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\MSI\\AppData\\Local\\fnm_multishells\\59468_1790895586082\\node.exe",
+      "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config=.test-generated/m13-root.config.ts"
+    ],
+    "configFile": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m13-root.config.ts",
+    "rootDir": "C:/Users/MSI/Desktop/내 폴더/코딩/기획/CalcWeave/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/MSI/Desktop/내 폴더/코딩/기획/CalcWeave/test-results-m13-root",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/MSI/Desktop/내 폴더/코딩/기획/CalcWeave/tests/e2e",
+        "testIgnore": [
+          "**/pages-subpath.spec.ts"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "m13-editor.spec.ts",
+      "file": "m13-editor.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "M13 Unicode, Compose/Scan and ASCII examples preserve actual tagged output values",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3722,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T08:27:00.238Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da52132166bb64b552a9-86fa95b32aba47c7ae5b",
+          "file": "m13-editor.spec.ts",
+          "line": 15,
+          "column": 1
+        },
+        {
+          "title": "M13 bounded JSON drafts block execution and escaped string previews stay inert",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3269,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T08:27:03.972Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da52132166bb64b552a9-2a0ed0c47a65845c52b6",
+          "file": "m13-editor.spec.ts",
+          "line": 21,
+          "column": 1
+        },
+        {
+          "title": "M13 CSV formulas are blocked beyond preview while numeric negatives are imported with provenance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2199,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T08:40:10.861Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da52132166bb64b552a9-d96c49832b7c4ca03b96",
+          "file": "m13-editor.spec.ts",
+          "line": 26,
+          "column": 1
+        },
+        {
+          "title": "M13 XLSX reads verified actual ZIP cells and rejects formula/external workbook files",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1963,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T08:27:09.112Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da52132166bb64b552a9-46baffdc260934dd89ae",
+          "file": "m13-editor.spec.ts",
+          "line": 31,
+          "column": 1
+        },
+        {
+          "title": "M13 scenario editor checks increasing time and saves true named points for interpolation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2131,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T08:27:11.092Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da52132166bb64b552a9-42e1f133f0e713c715ea",
+          "file": "m13-editor.spec.ts",
+          "line": 37,
+          "column": 1
+        },
+        {
+          "title": "M13 scheduled dashboard controls expose real gauges/bands and replay stable time orders",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2992,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T08:27:13.241Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da52132166bb64b552a9-647611c1185733570c71",
+          "file": "m13-editor.spec.ts",
+          "line": 42,
+          "column": 1
+        },
+        {
+          "title": "M13 XY/floating/record workflow downloads raw points and saves real scalar dataset",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2971,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T08:27:16.247Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da52132166bb64b552a9-4c00d122c7bf80dcacc5",
+          "file": "m13-editor.spec.ts",
+          "line": 47,
+          "column": 1
+        },
+        {
+          "title": "M13 Stop Simulation returns completed with an exact final valid sample and reason",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2512,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T08:27:19.238Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da52132166bb64b552a9-c252642cdca6c9dc52ec",
+          "file": "m13-editor.spec.ts",
+          "line": 53,
+          "column": 1
+        },
+        {
+          "title": "M13 live Worker edits apply at next tick, preserve initial values and replay exact raw samples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5381,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T08:40:13.755Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da52132166bb64b552a9-f379591f75a41602c780",
+          "file": "m13-editor.spec.ts",
+          "line": 57,
+          "column": 1
+        },
+        {
+          "title": "M13 data and dashboard controls fit both themes at 320px and 200% text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4066,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T08:27:26.582Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da52132166bb64b552a9-d96a6af7b25460bb9784",
+          "file": "m13-editor.spec.ts",
+          "line": 64,
+          "column": 1
+        },
+        {
+          "title": "M13 all37 source dashboard profiles render real independent controls and observed values",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7708,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T08:40:19.168Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da52132166bb64b552a9-9345447959edff24b863",
+          "file": "m13-editor.spec.ts",
+          "line": 70,
+          "column": 1
+        }
+      ],
+      "suites": []
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-03T08:25:20.277Z",
+    "duration": 38914,
+    "expected": 11,
+    "unexpected": 0,
+    "flaky": 0,
+    "skipped": 0
+  },
+  "reportOrigin": {
+    "path": ".test-generated/m13-full-browser.json",
+    "sha256": "8b015d76d1a7c44fba6cd79f71cef04eb68c30e7b9f011eb150148080dbbe1ab",
+    "fullSuiteStats": {
+      "startTime": "2026-10-03T08:25:20.277Z",
+      "duration": 522057.288,
+      "expected": 167,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "postChangeReport": {
+      "path": ".test-generated/m13-final-boundary-browser.json",
+      "committedReport": "docs/evidence/m13-browser-boundary-results.json",
+      "sha256": "16cff98d3c595f794188697d615a7945dcd8cd6c0fef15e206b764a5aea83f68",
+      "stats": {
+        "startTime": "2026-10-03T08:40:09.857Z",
+        "duration": 61714.239,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "replacedTests": [
+        "M13 CSV formulas are blocked beyond preview while numeric negatives are imported with provenance",
+        "M13 live Worker edits apply at next tick, preserve initial values and replay exact raw samples",
+        "M13 all37 source dashboard profiles render real independent controls and observed values"
+      ],
+      "sourceChange": "UTF8 TextDecoder retains BOM so CSV/JSON SHA256 includes all raw bytes; runtime live control validation normalizes numeric -0 to0 for replay. Whole167-case browser suite precedes these isolated final boundary repairs. Three affected CSV/live/all37 cases are re-executed after final build."
+    }
+  },
+  "durationBasis": "sum-of-filtered-test-execution-durations; original full-suite wall time retained in reportOrigin"
+}

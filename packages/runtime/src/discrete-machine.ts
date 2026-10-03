@@ -1,5 +1,6 @@
 import { M11_STATE_BLOCKS, m11InitialMemory, m11InitialOutput, m11IndependentOutput, m11Read, m11Commit, evaluateM11Node, type M11Memory, type M11Frame } from './m11';
 import { M12_DISCRETE_STATE_BLOCKS, m12InitialMemory, m12InitialOutput, m12IndependentOutput, m12ReadState, m12CommitState } from './m12';
+import { M13_STATE_BLOCKS, M13_CONTROL_BLOCKS, m13InitialMemory, m13InitialOutput, m13Read, m13Commit, m13AppendControlEvent, m13ValidateControlValue, type M13Memory, type M13LiveEvent, type M13ControlReceipt } from './m13';
 import { copyStateValue, zeroAnySignal } from '../../model/src/structured';
 import type { IRNode, SignalDescriptor, SignalValue, StateValue } from '../../model/src/types';
 import { checkSignal, copySignal, evaluateSignalNode, finiteNumber, interpolateTable, numericFailure, replayDataset, signalElements } from './kernels';
@@ -8,7 +9,7 @@ import { validateDataType, validateTypedSignal } from '../../model/src/typed';
 import { m10InitialMemory, m10InitialOutput, m10ReadState, m10CommitState, m10IndependentOutput, type M10Memory } from './m10';
 
 type PortValues = Map<string, Record<string, SignalValue>>;
-type Memory = M9Memory & M11Memory & { u?: number[]; y?: number[]; x?: number[]; buffer?: SignalValue };
+type Memory = M9Memory & M11Memory & M13Memory & { u?: number[]; y?: number[]; x?: number[]; buffer?: SignalValue };
 
 export const DISCRETE_BLOCKS = new Set([
   'source.step', 'source.ramp', 'source.sine-wave', 'source.pulse', 'source.clock', 'source.digital-clock',
@@ -68,11 +69,12 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
   const parameters = new Map<string, Record<string, unknown>>();
   const writtenStates = new Map<string, Memory>();
   const effective = (node: IRNode): IRNode => parameters.has(node.id) ? { ...node, parameters: { ...node.parameters, ...parameters.get(node.id)! } } : node;
-  const extendedMemory = nodes.some(node => node.blockType.startsWith('state.')) || nodes.some((node) => (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType) || M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) && (node.blockType !== 'discrete.unit-delay'
+  const extendedMemory = nodes.some(node => node.blockType.startsWith('state.')) || nodes.some((node) => (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType) || M12_DISCRETE_STATE_BLOCKS.has(node.blockType) || M13_STATE_BLOCKS.has(node.blockType)) && (node.blockType !== 'discrete.unit-delay'
     || Array.isArray(node.parameters.initial) || typeof node.parameters.initial === 'boolean'
     || node.parameters.reset === 'level' || node.sampleTime.period !== 1 || node.sampleTime.offset !== 0));
 
   function initialMemory(node: IRNode): Memory {
+    if (M13_STATE_BLOCKS.has(node.blockType)) return m13InitialMemory(node);
     if (M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) return m12InitialMemory(node);
     if (M11_STATE_BLOCKS.has(node.blockType)) return m11InitialMemory(node);
     if (node.blockType === 'fixed.state-space') return m10InitialMemory(node);
@@ -94,6 +96,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     const state = initialMemory(node);
     if (Object.keys(state).length) memory.set(node.id, state);
     if (node.blockType === 'source.constant' || node.blockType === 'io.input') outputs.out = copySignal(node.parameters.value as SignalValue);
+    if (node.blockType === 'dashboard.control') outputs.out = node.parameters.initial === 0 ? 0 : node.parameters.initial as number;
     if (node.blockType === 'source.digital-clock') outputs.out = startTime;
     if (M9_BLOCKS.has(node.blockType)) outputs.out = copySignal(state.previousOutput!);
     if (node.blockType === 'discrete.unit-delay' || node.blockType === 'discrete.integrator') outputs.out = copySignal(state.value!);
@@ -105,6 +108,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     if (node.blockType === 'discrete.transfer-function') outputs.out = transfer(node, state, undefined);
     if (M11_STATE_BLOCKS.has(node.blockType)) Object.assign(outputs, m11InitialOutput(node, state));
     if (M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) Object.assign(outputs, m12InitialOutput(node, state));
+    if (M13_STATE_BLOCKS.has(node.blockType)) Object.assign(outputs, m13InitialOutput(node, state));
     held.set(node.id, outputs);
   }
 
@@ -196,6 +200,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
       writeParameter: (id, key, value) => { if (!byId.has(id)) numericFailure('RUNTIME_INVALID_IR', id, '실행 값 대상이 없습니다.'); parameters.set(id, { ...parameters.get(id), [key]: value }); },
     };
     const read = (node: IRNode, input: (port: string) => SignalValue): Record<string, SignalValue> => {
+      if (M13_STATE_BLOCKS.has(node.blockType)) { const result = m13Read(node, publications.get(node.id) ?? memory.get(node.id)!, input, tick, time); if (result.publicationMemory) publications.set(node.id, result.publicationMemory); return result.outputs; }
       if (M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) return m12ReadState(node, memory.get(node.id)!, input, node.sampleTime.period * baseStep);
       if (M11_STATE_BLOCKS.has(node.blockType)) { const result = m11Read(node, publications.get(node.id) ?? memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep, charge, frame); if (result.publicationMemory) publications.set(node.id, result.publicationMemory); return result.outputs; }
       if (node.blockType === 'fixed.state-space') return m10ReadState(node, memory.get(node.id)! as M10Memory, input);
@@ -217,11 +222,11 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     for (const original of nodes) {
       const node = effective(original);
       if (!due(node, tick) || independentOutput(node)) continue;
-      if (M11_STATE_BLOCKS.has(node.blockType) && (repeat || randomTicks.get(node.id) === tick)) continue;
+      if ((M11_STATE_BLOCKS.has(node.blockType) || M13_STATE_BLOCKS.has(node.blockType)) && (repeat || randomTicks.get(node.id) === tick)) continue;
       if (repeat && (node.blockType === 'source.random' || M9_RANDOM_BLOCKS.has(node.blockType))) continue;
       charge(node);
       const input = (port: string): SignalValue => readInput(values, node, port);
-      emit(node, (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType) || M12_DISCRETE_STATE_BLOCKS.has(node.blockType))
+      emit(node, (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType) || M12_DISCRETE_STATE_BLOCKS.has(node.blockType) || M13_STATE_BLOCKS.has(node.blockType))
         ? read(node, input)
         : evaluateM11Node(node, input, time, frame) ?? evaluateSignalNode(node, input, undefined, time));
     }
@@ -234,11 +239,11 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
   /** One boundary node with lazy input reads. Seeded sources publish once per tick. */
   function evaluateNode(node: IRNode, tick: number, time: number, input: (port: string) => SignalValue, commit = true): Record<string, SignalValue> {
     node = effective(node);
-    const random = node.blockType === 'source.random' || M9_RANDOM_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType);
+    const random = node.blockType === 'source.random' || M9_RANDOM_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType) || M13_STATE_BLOCKS.has(node.blockType);
     if (!due(node, tick) || random && randomTicks.get(node.id) === tick) return held.get(node.id)!;
     charge(node);
     const frame: M11Frame = { readMemory: id => memory.get(id), writeMemory: (id, state) => { if (commit) { memory.set(id, state); writtenStates.set(id, state); } }, readParameter: (id, key) => parameters.get(id)?.[key] ?? byId.get(id)?.parameters[key], writeParameter: (id, key, value) => { if (commit) parameters.set(id, { ...parameters.get(id), [key]: value }); } };
-    const result = M11_STATE_BLOCKS.has(node.blockType) ? m11Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep, charge, frame) : M9_BLOCKS.has(node.blockType) ? m9Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep) : undefined;
+    const result = M13_STATE_BLOCKS.has(node.blockType) ? m13Read(node, memory.get(node.id)!, input, tick, time) : M11_STATE_BLOCKS.has(node.blockType) ? m11Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep, charge, frame) : M9_BLOCKS.has(node.blockType) ? m9Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep) : undefined;
     const outputs: Record<string, SignalValue> = result ? result.outputs : M12_DISCRETE_STATE_BLOCKS.has(node.blockType) ? m12ReadState(node, memory.get(node.id)!, input, node.sampleTime.period * baseStep) : node.blockType === 'fixed.state-space' ? m10ReadState(node, memory.get(node.id)! as M10Memory, input) : (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType) || M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) ? { out: output(node, memory.get(node.id) ?? {}, input, tick, time) } : evaluateM11Node(node, input, time, frame, charge) ?? evaluateSignalNode(node, input, undefined, time);
     for (const [port, descriptor] of Object.entries(node.outputs)) checkSignal(outputs[port], descriptor, node.id);
     if (commit || random) held.set(node.id, outputs);
@@ -260,6 +265,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
       }
       if (!due(node, tick)) continue;
       charge(node);
+      if (M13_STATE_BLOCKS.has(node.blockType)) { next.set(node.id, m13Commit(node, state)); continue; }
       if (M11_STATE_BLOCKS.has(node.blockType)) { next.set(node.id, m11Commit(node, state, port => readInput(values, node, port), values.get(node.id)!, tick, parentTime ?? startTime + tick * baseStep, node.sampleTime.period * baseStep, charge)); continue; }
       if (M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) { next.set(node.id, m12CommitState(node, state, port => readInput(values, node, port), node.sampleTime.period * baseStep)); continue; }
       if (node.blockType === 'fixed.state-space') {
@@ -307,10 +313,11 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     }));
   }
   function stateMemory(force = false): Record<string, StateValue> | undefined {
-    if (!extendedMemory && !force && !parameters.size) return undefined;
+    const visibleOverlays = [...parameters].map(([id, values]) => [id, M13_CONTROL_BLOCKS.has(byId.get(id)!.blockType) ? Object.fromEntries(Object.entries(values).filter(([key]) => key !== 'controlEvents' && key !== 'events')) : values] as const).filter(([, values]) => Object.keys(values).length);
+    if (!extendedMemory && !force && !visibleOverlays.length) return undefined;
     // Compiler-owned parameters never appear here; the snapshot owns every returned array.
     const result: Record<string, StateValue> = Object.fromEntries([...memory].map(([id, state]) => [id, copyStateValue(state as StateValue)]));
-    for (const [id, overlay] of parameters) result[id] = { ...(result[id] as Record<string, StateValue> | undefined), parameterOverlay: copyStateValue(overlay as StateValue) };
+    for (const [id, overlay] of visibleOverlays) result[id] = { ...(result[id] as Record<string, StateValue> | undefined), parameterOverlay: copyStateValue(overlay as StateValue) };
     return result;
   }
   const snapshot = (): PortValues => new Map([...held].map(([id, outputs]) => [id,
@@ -326,5 +333,27 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     for (const [id, state] of saved.memory) memory.set(id, state);
     for (const [id, tick] of saved.randomTicks) randomTicks.set(id, tick);
   }
-  return { evaluate, evaluateNode, transition, finalState, stateMemory, snapshot, checkpoint, restore, effectiveNode: effective };
+  function applyDashboardEvents(incoming: M13LiveEvent[], tick: number, time: number): { applied: M13ControlReceipt[]; pending: M13LiveEvent[] } {
+    if (!Array.isArray(incoming) || incoming.length > 256) numericFailure('M13_CONTROL_BUDGET', nodes[0]?.id ?? 'dashboard', 'live 제어 대기열은 256개 이하여야 합니다.');
+    const arrayProperties = Object.getOwnPropertyDescriptors(incoming), arrayKeys = Reflect.ownKeys(arrayProperties);
+    if (Object.getPrototypeOf(incoming) !== Array.prototype || arrayKeys.length !== incoming.length + 1 || arrayKeys.some(key => key !== 'length' && (typeof key !== 'string' || !/^(?:0|[1-9][0-9]*)$/.test(key) || Number(key) >= incoming.length || !('value' in arrayProperties[key]!) || !arrayProperties[key]!.enumerable))) numericFailure('M13_CONTROL_EVENT', nodes[0]?.id ?? 'dashboard', 'live 제어 대기열에는 빈 항목·접근자·추가 필드를 사용할 수 없습니다.');
+    const prepared = incoming.map(event => {
+      if (!event || typeof event !== 'object' || Object.getPrototypeOf(event) !== Object.prototype && Object.getPrototypeOf(event) !== null) numericFailure('M13_CONTROL_EVENT', nodes[0]?.id ?? 'dashboard', 'live 제어에는 일반 nodeId/value 객체가 필요합니다.');
+      const properties = Object.getOwnPropertyDescriptors(event), keys = Reflect.ownKeys(properties);
+      if (keys.length !== 2 || !Object.hasOwn(properties, 'nodeId') || !Object.hasOwn(properties, 'value') || keys.some(key => typeof key !== 'string' || !('value' in properties[key]!) || !properties[key]!.enumerable)) numericFailure('M13_CONTROL_EVENT', nodes[0]?.id ?? 'dashboard', 'live 제어에는 숨김 필드·접근자·추가 필드를 사용할 수 없습니다.');
+      const id = properties.nodeId!.value as unknown, value = properties.value!.value as unknown;
+      if (typeof id !== 'string' || id.length > 64) numericFailure('M13_CONTROL_TARGET', nodes[0]?.id ?? 'dashboard', 'live 제어 대상 ID를 확인하세요.');
+      const node = byId.get(id); if (!node || !M13_CONTROL_BLOCKS.has(node.blockType)) numericFailure('M13_CONTROL_TARGET', id, 'live 제어 대상 블럭이 없습니다.'); charge(node, 32); const checked = m13ValidateControlValue(effective(node), value); return { node, value: checked };
+    });
+    const applied: M13ControlReceipt[] = [], pending: M13LiveEvent[] = [], staged = new Map<string, Record<string, unknown>>();
+    for (const item of prepared) {
+      if (!due(item.node, tick)) { pending.push({ nodeId: item.node.id, value: item.value }); continue; }
+      const node = staged.has(item.node.id) ? { ...effective(item.node), parameters: { ...effective(item.node).parameters, ...staged.get(item.node.id) } } : effective(item.node);
+      charge(node, ((node.parameters.controlEvents as unknown[] | undefined)?.length ?? 0) * 4 + 32);
+      const next = m13AppendControlEvent(node, item.value, time); staged.set(node.id, { ...parameters.get(node.id), controlEvents: next.controlEvents, events: next.events }); applied.push(next.receipt);
+    }
+    for (const [id, overlay] of staged) parameters.set(id, overlay);
+    return { applied, pending };
+  }
+  return { evaluate, evaluateNode, transition, finalState, stateMemory, snapshot, checkpoint, restore, effectiveNode: effective, applyDashboardEvents };
 }

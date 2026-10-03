@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Handle, Position, useUpdateNodeInternals, type Node, type NodeProps } from '@xyflow/react';
 import { getBlockDefinition, getBlockPorts } from '../../../../packages/block-library/src';
 import { isDefinitionReference } from '../../../../packages/block-library/src/m11';
+import { M13_BLOCK_IDS } from '../../../../packages/block-library/src/m13';
 import { M12_BLOCK_IDS } from '../../../../packages/block-library/src/m12';
 import type { CalcNode, SignalValue } from '../../../../packages/model/src';
 import { validateTypedSignal } from '../../../../packages/model/src';
@@ -23,6 +24,7 @@ function compactNumber(value: number) {
 }
 
 export const BLOCK_SYMBOLS: Record<string, string> = {
+  'dashboard.control': '↕', 'dashboard.indicator': '▥', 'dashboard.action': '▶', 'sink.record': '●', 'sink.xy-graph': 'XY', 'sink.floating-scope': '▥', 'sink.stop': '■', 'signal.probe': 'i', 'math.slider-gain': '×', 'data.output-file': '↓', 'data.output-dataset': '▤', 'data.input-table': '▤', 'data.signal-editor': '∿', 'source.waveform': '∿', 'source.string-constant': 'S', 'string.ascii-to-string': 'S', 'string.compose': 'fmt', 'string.scan': 'scan', 'string.string-compare': '=', 'string.string-concatenate': '+', 'string.string-contains': '∈', 'string.string-count': 'n', 'string.string-find': 'i', 'string.string-length': 'n', 'string.string-to-ascii': 'ASCII', 'string.parse-number': 'N', 'string.parse-enum': 'E', 'string.substring': '[ ]', 'string.to-string': 'S', 'model.support-catalog': 'i',
   'continuous.descriptor': 'Eẋ', 'continuous.integrator-limited': '∫', 'continuous.second-order-limited': '∫²', 'continuous.pid-2dof': 'PID', 'time.variable-delay': 'τ(t)', 'time.variable-transport-delay': 'q', 'nonlinear.backlash': '⇄', 'nonlinear.rate-limiter-continuous': 'Δ/t', 'nonlinear.rate-limiter-dynamic': 'Δ/t', 'solver.algebraic-constraint': 'f=0', 'analysis.linearization': 'J',
   'source.constant': '1', 'io.input': '↗', 'math.gain': '×', 'math.sum': '+',
   'math.multiply': '∏', 'sink.display': '▥', 'discrete.unit-delay': 'z⁻¹', 'continuous.integrator': '∫',
@@ -106,8 +108,8 @@ export function BlockNode({ id, data, selected }: NodeProps<FlowBlock>) {
   useEffect(() => { updateNodeInternals(id); }, [id, portKey, updateNodeInternals]);
   const definition = getBlockDefinition(data.block.blockType);
   if (!definition) return <div className="block-node name-only error" role="group" aria-label={`${data.block.label}: 지원되지 않는 블럭 ${data.block.blockType}`} title={data.block.label}><div className="block-name">Unknown</div></div>;
-  const firstParameter = Object.entries(definition.parameters)[0];
-  const parameter = firstParameter && ['number', 'integer', 'value', 'numeric-vector', 'typed-value', 'signal-value'].includes(firstParameter[1].kind) ? firstParameter : undefined;
+  const firstParameter = data.block.blockType === 'dashboard.control' ? ['initial', definition.parameters.initial] as const : Object.entries(definition.parameters)[0];
+  const parameter = firstParameter && ['number', 'integer', 'value', 'numeric-vector', 'typed-value', 'signal-value'].includes(firstParameter[1].kind) || data.block.blockType === 'source.string-constant' && firstParameter ? firstParameter : undefined;
   const value = parameter ? Object.hasOwn(data.block.parameters, parameter[0]) ? data.block.parameters[parameter[0]] : parameter[1].default : undefined;
   const hasValue = !data.boundary && (Boolean(parameter) || ['sink.display', 'sink.scope', 'io.output', 'sink.sequence-viewer', 'io.structured-output'].includes(data.block.blockType));
   const preview = parameter ? value : data.current ? data.result : undefined;
@@ -119,8 +121,8 @@ export function BlockNode({ id, data, selected }: NodeProps<FlowBlock>) {
       else if ('kind' in preview && preview.kind === 'typed') { const typed = validateTypedSignal(preview), dimensions = `[${typed.shape.join('×')}]`; typedPreview = typed.shape.length ? dimensions.length <= 14 ? dimensions : `${typed.shape.length}D · ${typed.data.length}` : typed.dtype === 'fixed' ? fixedCellText(typed.data[0] as string, typed.fixed!.fractionLength) : typedCellText(typed.data[0]!, typed); }
     } catch { /* Imported invalid configuration is diagnosed by the compiler. */ }
   }
-  const visibleValue = typedPreview ?? (typeof preview === 'number' && Number.isFinite(preview) ? compactNumber(preview) : typeof preview === 'boolean' ? String(preview) : Array.isArray(preview) ? Array.isArray(preview[0]) ? `[${preview.length}×${preview[0].length}]` : `[${preview.length}]` : '—');
-  const plainName = (M12_BLOCK_IDS as readonly string[]).includes(data.block.blockType) ? definition.englishName.replace(/\s*\((?:Selected|Discrete Selected|Independent Alternative)\)$/, '') : definition.englishName;
+  const visibleValue = typedPreview ?? (typeof preview === 'string' ? preview.length <= 16 ? preview : `${preview.slice(0, 15)}…` : typeof preview === 'number' && Number.isFinite(preview) ? compactNumber(preview) : typeof preview === 'boolean' ? String(preview) : Array.isArray(preview) ? Array.isArray(preview[0]) ? `[${preview.length}×${preview[0].length}]` : `[${preview.length}]` : '—');
+  const plainName = ([...M12_BLOCK_IDS, ...M13_BLOCK_IDS] as readonly string[]).includes(data.block.blockType) ? definition.englishName.replace(/\s*\((?:Selected|Discrete Selected|Independent Alternative|Replay|Allowlist|Bounded|Local)\)$/, '') : definition.englishName;
   const canvasName = data.boundary || isDefinitionReference(data.block) ? data.block.label : plainName;
   const height = Math.max(canvasName.length > 18 ? 124 : 96, (Math.max(ports.inputs.length, ports.outputs.length) + 1) * 26);
   return <div className={`block-node ${blockTone(data.block.blockType)} ${hasValue ? '' : 'name-only'} ${selected ? 'selected' : ''} ${data.error ? 'error' : ''}`} style={{ minHeight: height }} role="group" aria-label={`${definition.englishName} 블럭: ${data.block.label}`} title={data.block.label}>

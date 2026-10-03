@@ -17,6 +17,7 @@ import type { CalcEdge, CalcModel, CalcNode, RunResult } from '../packages/model
 import { runModel } from '../packages/runtime/src/index';
 import { M1_ENGINE_FIXTURES, M1_FAILURE_FIXTURES, unaryFixture } from './m1-engine-fixtures';
 import { M2_ENGINE_FIXTURES, m2Edge, m2Model, m2Node, m2Unary, rateTransitionFixture, seededFixture, unsignedFixture } from './m2-engine-fixtures';
+import { M13_INDEPENDENT_DEFINITION_FIXTURES } from './m13-independent-fixtures';
 
 function node(id: string, blockType: string, parameters: Record<string, unknown> = {}): CalcNode {
   return { id, blockType, parameters, label: id, blockVersion: 1 };
@@ -27,6 +28,29 @@ function edge(source: string, target: string, port = 'in'): CalcEdge {
 function model(nodes: CalcNode[], edges: CalcEdge[], mode: CalcModel['execution']['mode'], stopTime = 5): CalcModel {
   return { schemaVersion: 1, modelId: 'codegen-test', name: 'Codegen test', nodes, edges, execution: { mode, startTime: 0, stopTime, step: 1 }, layout: {} };
 }
+
+describe('M13 executable child metadata', () => {
+  it.each(['initial', 'scheduled'] as const)('canonicalizes %s control zero through actual standalone JSON replay', async origin => {
+    const value = model([node('Control', 'dashboard.control', { min: -1, max: 1, step: 1, initial: origin === 'initial' ? -0 : 1, events: origin === 'scheduled' ? '[{"time":0,"order":0,"value":-0}]' : '[]' }), node('Text', 'string.to-string'), node('Result', 'sink.display')], [edge('Control', 'Text'), edge('Text', 'Result')], 'discrete', 1);
+    const compiled = compileModel(value), native = await runModel(compiled), standalone = await independentRun(exportTypeScript(compiled));
+    expect(native.samples.every(sample => Object.is(sample.values.Control, 0))).toBe(true);
+    expect(native.samples.map(sample => sample.values.Result)).toEqual([{ kind: 'typed', dtype: 'string', shape: [], data: ['0'] }, { kind: 'typed', dtype: 'string', shape: [], data: ['0'] }]);
+    expect(standalone.samples).toEqual(native.samples); expect(standalone.finalState).toEqual(native.finalState);
+  });
+  it.each(['string', 'dataset'] as const)('includes nested %s capabilities and actually executes the standalone program', async kind => {
+    const source = kind === 'string' ? node('Source', 'source.string-constant', { value: 'ASCII' }) : node('Source', 'data.input-table', { datasetId: 'data', column: 'value', interpolation: 'linear' });
+    const value = model([node('Call', 'hierarchy.atomic', { definitionId: 'Child' }), node('Result', 'sink.display')], [edge('Call', 'Result')], 'discrete', 1);
+    value.execution.step = .5;
+    value.subsystems = [{ id: 'Child', name: 'Child', version: 1, nodes: [source, node('Output', 'io.output')], edges: [edge('Source', 'Output')], inputs: [], outputs: [{ id: 'out', nodeId: 'Output' }], layout: {} }];
+    if (kind === 'dataset') value.datasets = structuredClone(M13_INDEPENDENT_DEFINITION_FIXTURES.find(fixture => fixture.model.nodes.some(item => item.blockType === 'data.input-table'))!.model.datasets);
+    const compiled = compileModel(value), manifest = await createExportManifest(compiled);
+    expect(manifest.targetVersion).toBe('typescript-m13-v1');
+    expect(manifest.dataReferences.map(data => data.id)).toEqual(kind === 'dataset' ? ['data'] : []);
+    const native = await runModel(compiled), standalone = await independentRun(exportTypeScript(compiled, manifest), undefined, manifest);
+    expect(standalone.samples).toEqual(native.samples); expect(standalone.finalState).toEqual(native.finalState); expect(standalone.stateMemory).toEqual(native.stateMemory);
+    expect(native.samples.map(sample => sample.values.Result)).toEqual(kind === 'dataset' ? [2, 4, 6] : Array.from({ length: 3 }, () => ({ kind: 'typed', dtype: 'string', shape: [], data: ['ASCII'] })));
+  });
+});
 
 let checkedStandaloneTypes = false;
 async function independentRun(source: string, mutateFirstResult?: (result: Omit<RunResult, 'elapsedMs'>) => void, expectedManifest?: ExportManifest): Promise<Omit<RunResult, 'elapsedMs'>> {
