@@ -736,7 +736,7 @@ function Workspace() {
         <button className="icon-button" aria-label="코드 타깃 선택" title="TypeScript 또는 Python의 지원 범위를 확인하고 코드를 내보냅니다." onClick={() => setCodeExportOpen(true)}><Icon name="chevron-down" size={16}/></button>
         <button className="button subtle archive-download" disabled={archivePending} onClick={() => void downloadExecutionArchive()} title="정규화 모델, manifest, 독립 코드와 실행 예제를 ZIP으로 보관합니다."><Icon name="download"/><span>{archivePending ? '묶음 준비 중' : '실행 묶음'}</span></button>
         <button className="icon-button" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} aria-label={`${theme === 'light' ? '다크' : '라이트'} 테마로 변경`}><Icon name={theme === 'light' ? 'moon' : 'sun'}/></button>
-        <button className="icon-button" aria-label="지원·릴리스" onClick={() => setHelpOpen(true)}><Icon name="info"/></button>
+        <button className="icon-button" aria-label="도움말" title="CalcWeave 도움말" onClick={() => setHelpOpen(true)}><Icon name="info"/></button>
         <WorkspaceMenu onManage={() => setManagementOpen(true)} onPackage={() => setPackageOpen(true)}/>
       </nav>
       <input ref={fileRef} className="visually-hidden" type="file" accept=".json,.cw.json,application/json" onChange={(event) => void importModel(event)} aria-label="CalcWeave 모델 파일 선택"/>

@@ -257,8 +257,8 @@ try {
       if (await page.locator('.app-shell').evaluate(element => element.classList.contains('dark')) !== (theme === 'dark')) await page.getByRole('button', { name: `${theme === 'dark' ? '다크' : '라이트'} 테마로 변경` }).click();
       for (const width of [1440, 1024, 390, 320]) {
         await page.setViewportSize({ width, height: 1000 });
-        await page.getByRole('button', { name: '지원·릴리스', exact: true }).click();
-        for (const [label, suffix] of [['지원 블록', 'catalog'], ['사용 방법', 'keyboard'], ['범위와 상한', 'limits'], ['정책·로컬 저장', 'policy']] as const) { await page.getByRole('button', { name: label, exact: true }).click(); await inspectDialog(`${theme}-${width}-support-${suffix}`); }
+        await page.getByRole('button', { name: '도움말', exact: true }).click();
+        for (const [label, suffix] of [['사용 안내', 'guide'], ['블록 찾기', 'catalog'], ['파일·코드', 'files'], ['앱 정보', 'about']] as const) { await page.getByRole('button', { name: label, exact: true }).click(); await inspectDialog(`${theme}-${width}-help-${suffix}`); }
         await page.keyboard.press('Escape');
         await openWorkspaceBackup(page);
         await inspectDialog(`${theme}-${width}-management-backup`);

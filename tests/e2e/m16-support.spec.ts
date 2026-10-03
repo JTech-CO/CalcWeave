@@ -1,15 +1,13 @@
 import { expect, test, type Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
+import { helpTrigger, openCompatibilityReference } from './help-tools';
 
 async function workspace(page: Page) {
   await page.goto('./');
   await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨');
 }
 async function matrix(page: Page) {
-  await page.getByRole('button', { name: '지원·릴리스', exact: true }).click();
-  await expect(page.getByLabel('지원 블록 검색')).toBeFocused();
-  await page.getByRole('button', { name: '원자료 대응표', exact: true }).click();
-  return page.getByRole('dialog', { name: '지원·릴리스', exact: true });
+  return openCompatibilityReference(page, 'matrix');
 }
 async function selectSource(page: Page, id: string) {
   await page.locator(`.source-support-list>button[data-source-id="${id}"]`).click();
@@ -30,7 +28,7 @@ async function savedModel(page: Page): Promise<unknown> {
 
 test('M16 keeps all 385 source identities and distinguishes the three Display mappings from 337 registered blocks', async ({ page }) => {
   await workspace(page); const dialog = await matrix(page);
-  await expect(dialog).toContainText('337개 블록');
+  await expect(dialog.locator('.source-support-summary')).toContainText('등록 계산 블록 337개');
   await expect(page.locator('.source-support-list>button')).toHaveCount(385);
   await page.getByLabel('원자료 검색').fill('Display');
   const identities = await page.locator('.source-support-list>button').evaluateAll(buttons => buttons.map(button => button.getAttribute('data-source-id')));
@@ -118,9 +116,9 @@ test('M16 malicious search stays inert and support keyboard commands preserve th
   await page.keyboard.press('Control+K'); await page.keyboard.press('Delete'); await page.keyboard.press('Space');
   await expect(page.locator('.canvas-topline strong')).toHaveText(before!);
   expect(await savedModel(page)).toEqual(beforeModel);
-  await page.getByRole('button', { name: '지원·릴리스 닫기', exact: true }).focus(); await page.keyboard.press('Shift+Tab');
+  await page.getByRole('button', { name: '도움말 닫기', exact: true }).focus(); await page.keyboard.press('Shift+Tab');
   await expect(page.getByRole('dialog').getByRole('button', { name: '닫기', exact: true })).toBeFocused();
-  await page.keyboard.press('Escape'); await expect(page.getByRole('button', { name: '지원·릴리스', exact: true })).toBeFocused();
+  await page.keyboard.press('Escape'); await expect(helpTrigger(page)).toBeFocused();
   expect(dialogs).toEqual([]); expect(errors).toEqual([]); expect(outsideRequests).toEqual([]);
 });
 
@@ -137,6 +135,6 @@ test('M16 source filters and detailed support evidence remain readable in both t
       const detail = page.getByRole('region', { name: '원자료 선택 항목 상세' }); await detail.getByRole('heading', { name: '19-001 · C Caller', exact: true }).scrollIntoViewIfNeeded(); await expect(detail).toBeVisible();
       await dialog.screenshot({ path: testInfo.outputPath(`support-matrix-${theme}-${width}-${scale}x.png`) });
     }
-    await page.keyboard.press('Escape'); await expect(page.getByRole('button', { name: '지원·릴리스', exact: true })).toBeFocused();
+    await page.keyboard.press('Escape'); await expect(helpTrigger(page)).toBeFocused();
   }
 });

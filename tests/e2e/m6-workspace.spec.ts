@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { createExample } from '../../apps/web/src/examples';
 import { BLOCK_REGISTRY } from '../../packages/block-library/src';
 import { getReleaseCatalog } from '../../packages/release/src';
+import { expandHelpDetail, helpTrigger, openAppInfo, openBlockHelp, openHelp } from './help-tools';
 
 async function open(page: Page) { await page.goto('./'); await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨'); }
 async function importExample(page: Page, id: Parameters<typeof createExample>[0]) {
@@ -40,21 +41,21 @@ test('Workspace backup starts with essential actions while storage diagnostics a
 });
 
 test('M6 support reads all registry metadata, searches parameters and filters actual execution modes', async ({ page }) => {
-  await open(page); await page.getByRole('button', { name: '지원·릴리스', exact: true }).click();
-  const dialog = page.getByRole('dialog', { name: '지원·릴리스' }); await expect(dialog).toBeVisible();
-  await expect(dialog).toContainText(getReleaseCatalog().engineVersion);
+  await open(page); const dialog = await openBlockHelp(page);
   await expect(page.locator('.support-block-list > button')).toHaveCount(BLOCK_REGISTRY.length);
   await page.getByLabel('지원 블록 검색').fill('wordLength'); await expect(page.locator('.support-block-list > button')).toHaveCount(BLOCK_REGISTRY.filter(block => Object.hasOwn(block.parameters, 'wordLength')).length);
-  await page.locator('.support-block-list > button').filter({ hasText: 'Quantize' }).click(); await expect(page.locator('.support-block-detail')).toContainText('stored'); await expect(page.locator('.support-block-detail')).toContainText('nearest-even');
+  await page.locator('.support-block-list > button').filter({ hasText: 'Quantize' }).click(); await expandHelpDetail(page, '파라미터 기술 정보'); await expect(page.locator('.support-block-detail')).toContainText('stored'); await expect(page.locator('.support-block-detail')).toContainText('nearest-even');
   await page.getByLabel('지원 블록 검색').fill(''); await page.getByLabel('지원 실행 방식').selectOption('static');
   await expect(page.locator('.support-block-list > button')).toHaveCount(BLOCK_REGISTRY.filter(block => block.supportedModes.includes('static')).length);
-  await page.getByRole('button', { name: '범위와 상한', exact: true }).click(); await expect(dialog).toContainText('복소수'); await expect(dialog).toContainText('클라우드'); await expect(dialog).toContainText('maxNodes');
+  await dialog.getByRole('button', { name: '앱 정보', exact: true }).click(); await expandHelpDetail(page, '버전 기술 정보'); await expect(dialog).toContainText(getReleaseCatalog().engineVersion);
+  await expandHelpDetail(page, '계산·데이터 세부 범위'); await expect(dialog).toContainText('복소수'); await expect(dialog).toContainText('클라우드');
+  const blockLimit = dialog.locator('dl > div').filter({ has: page.getByText('블록 수', { exact: true }) }); await expect(blockLimit.locator('dd')).toHaveText(String(getReleaseCatalog().limits.maxNodes));
 });
 
 test('M6 native dialogs trap Tab, isolate background commands and restore the trigger after Escape', async ({ page }) => {
-  await open(page); const trigger = page.getByRole('button', { name: '지원·릴리스', exact: true }); await trigger.focus(); await page.keyboard.press('Enter');
-  await expect(page.getByLabel('지원 블록 검색')).toBeFocused(); await expect(page.locator('.app-header')).toHaveAttribute('aria-hidden', 'true');
-  await page.getByRole('button', { name: '지원·릴리스 닫기' }).focus(); await page.keyboard.press('Shift+Tab'); await expect(page.getByRole('dialog').getByRole('button', { name: '닫기', exact: true })).toBeFocused();
+  await open(page); const trigger = helpTrigger(page); await trigger.focus(); await page.keyboard.press('Enter');
+  await expect(page.locator('[data-help-start]')).toBeFocused(); await expect(page.locator('.app-header')).toHaveAttribute('aria-hidden', 'true');
+  await page.getByRole('button', { name: '도움말 닫기' }).focus(); await page.keyboard.press('Shift+Tab'); await expect(page.getByRole('dialog').getByRole('button', { name: '닫기', exact: true })).toBeFocused();
   const before = await stored(page, 'current'); await page.keyboard.press('Control+K'); await page.keyboard.press('Delete'); expect(await stored(page, 'current')).toEqual(before);
   await page.keyboard.press('Escape'); await expect(trigger).toBeFocused(); await expect(page.locator('.app-header')).not.toHaveAttribute('aria-hidden', 'true');
   const quick = page.getByRole('button', { name: '빠른 추가', exact: false }); await quick.focus(); await page.keyboard.press('Enter'); await expect(page.getByLabel('빠른 추가 검색')).toBeFocused(); await page.keyboard.press('Escape'); await expect(quick).toBeFocused();
@@ -124,7 +125,7 @@ test('M6 local reset requires an explicit second step and preserves unrelated br
 for (const width of [320, 390]) for (const theme of ['dark', 'light'] as const) {
   test(`M6 support and local management fit ${width}px in ${theme} with readable native controls`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 }); await open(page); if (theme === 'light') await page.getByRole('button', { name: '라이트 테마로 변경' }).click();
-    await page.getByRole('button', { name: '지원·릴리스', exact: true }).click();
+    await openHelp(page);
     for (const current of ['support', 'management'] as const) {
       if (current === 'management') { await page.keyboard.press('Escape'); await manage(page); }
       const metrics = await page.getByRole('dialog').evaluate(dialog => ({ viewport: innerWidth, document: document.documentElement.scrollWidth, bounds: dialog.getBoundingClientRect().toJSON(), controls: [...dialog.querySelectorAll('button,input,select,textarea')].filter(item => item.getBoundingClientRect().width > 0).map(item => ({ font: parseFloat(getComputedStyle(item).fontSize), width: item.getBoundingClientRect().width, overflow: item.scrollWidth > item.clientWidth + 2 && !['INPUT', 'SELECT', 'TEXTAREA'].includes(item.tagName) })) }));
@@ -134,9 +135,9 @@ for (const width of [320, 390]) for (const theme of ['dark', 'light'] as const) 
 }
 
 test('M6 policies use local static routes and identify the actual operator without remote form submissions', async ({ page, context }) => {
-  await open(page); await page.getByRole('button', { name: '지원·릴리스', exact: true }).click(); await page.getByRole('button', { name: '정책·로컬 저장', exact: true }).click();
+  await open(page); await openAppInfo(page);
   await expect(page.getByRole('dialog')).toContainText('JTech-Co'); await expect(page.getByRole('dialog')).toContainText('jtech-bryan@proton.me');
-  for (const [label, path] of [['개인정보 처리방침', 'privacy/'], ['이용약관', 'terms/'], ['쿠키·로컬 저장 안내', 'cookies/'], ['릴리스·오픈소스 고지', 'notices/']] as const) {
+  for (const [label, path] of [['개인정보 처리방침', 'privacy/'], ['이용약관', 'terms/'], ['쿠키·로컬 저장 안내', 'cookies/'], ['오픈소스 고지', 'notices/']] as const) {
     const policyUrl = new URL(path, page.url());
     await expect(page.getByRole('link', { name: label, exact: true })).toHaveAttribute('href', policyUrl.pathname);
     const policy = await context.newPage(); await policy.goto(policyUrl.href); await expect(policy.locator('h1')).toBeVisible(); expect(new URL(policy.url()).origin).toBe(new URL(page.url()).origin); await policy.close();

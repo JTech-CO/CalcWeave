@@ -1,0 +1,184 @@
+{
+  "generatedAt": "2026-10-03T17:13:33.766Z",
+  "appVersion": "0.17.2",
+  "engineVersion": "0.17.0-m16",
+  "scope": "/",
+  "releaseId": "93f1fd6aed28fcc4033a25f9b4e3ab1b669839fd385ad65b62e301cfb3313b28",
+  "checks": [
+    "app/engine release versions",
+    "single registry retains catalog definitions with unique executable IDs",
+    "Python release metadata matches versioned capabilities and preserves all51 predecessor IDs",
+    "WASM release metadata matches selected scalar target capabilities",
+    "C/C++ emission is not advertised as verified execution",
+    "Python target does not claim continuous solver support",
+    "model packages bind approved immutable registry and local-only permissions",
+    "trusted adapter execution and unavailable native requirements remain distinct",
+    "pinned straight-line WASM artifact calcweave.wasm-affine-f64-v1",
+    "pinned straight-line WASM artifact calcweave.wasm-accumulator-f64-v1",
+    "package/release catalog version agreement",
+    "offline release version and bounded deployment scope agreement",
+    "releaseId binds complete static asset manifest",
+    "bounded unique offline allowlist",
+    "safe static asset /assets/engine.worker-BYNS5Yfw.js",
+    "final built bytes match /assets/engine.worker-BYNS5Yfw.js",
+    "safe static asset /assets/index-Bfb0Lkj7.js",
+    "final built bytes match /assets/index-Bfb0Lkj7.js",
+    "safe static asset /assets/index-D5WwklyN.css",
+    "final built bytes match /assets/index-D5WwklyN.css",
+    "safe static asset /assets/schemas-B44qH8my.js",
+    "final built bytes match /assets/schemas-B44qH8my.js",
+    "safe static asset /assets/src-Bcx-wexT.js",
+    "final built bytes match /assets/src-Bcx-wexT.js",
+    "safe static asset /assets/src-CAHVt6y8.js",
+    "final built bytes match /assets/src-CAHVt6y8.js",
+    "safe static asset /assets/src-ChK-V8pn.js",
+    "final built bytes match /assets/src-ChK-V8pn.js",
+    "safe static asset /assets/src-DIjFgo0h.js",
+    "final built bytes match /assets/src-DIjFgo0h.js",
+    "safe static asset /assets/src-DSgLMJ8v.js",
+    "final built bytes match /assets/src-DSgLMJ8v.js",
+    "safe static asset /assets/src-dxDl5kMt.js",
+    "final built bytes match /assets/src-dxDl5kMt.js",
+    "safe static asset /assets/src-llisJuK3.js",
+    "final built bytes match /assets/src-llisJuK3.js",
+    "safe static asset /cookies/index.html",
+    "final built bytes match /cookies/index.html",
+    "safe static asset /index.html",
+    "final built bytes match /index.html",
+    "safe static asset /notices/index.html",
+    "final built bytes match /notices/index.html",
+    "safe static asset /privacy/index.html",
+    "final built bytes match /privacy/index.html",
+    "safe static asset /terms/index.html",
+    "final built bytes match /terms/index.html",
+    "offline shell size limit",
+    "production CSP permits pinned WASM while blocking dynamic/inline JavaScript evaluation",
+    "CSP precedes external-only application scripts",
+    "production referrer policy",
+    "offline accessible protected policy terms",
+    "operator/contact in terms",
+    "offline accessible protected policy privacy",
+    "operator/contact in privacy",
+    "offline accessible protected policy cookies",
+    "operator/contact in cookies",
+    "offline accessible protected policy notices",
+    "no source maps or environment files distributed",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "no recognized secret material in assets\\engine.worker-BYNS5Yfw.js",
+    "no recognized secret material in assets\\index-Bfb0Lkj7.js",
+    "no recognized secret material in assets\\schemas-B44qH8my.js",
+    "no recognized secret material in assets\\src-Bcx-wexT.js",
+    "no recognized secret material in assets\\src-CAHVt6y8.js",
+    "no recognized secret material in assets\\src-ChK-V8pn.js",
+    "no recognized secret material in assets\\src-DIjFgo0h.js",
+    "no recognized secret material in assets\\src-DSgLMJ8v.js",
+    "no recognized secret material in assets\\src-dxDl5kMt.js",
+    "no recognized secret material in assets\\src-llisJuK3.js",
+    "no recognized secret material in cookies\\index.html",
+    "no recognized secret material in index.html",
+    "no recognized secret material in notices\\index.html",
+    "no recognized secret material in offline-manifest.json",
+    "no recognized secret material in privacy\\index.html",
+    "no recognized secret material in sw.js",
+    "no recognized secret material in terms\\index.html",
+    "publication is explicitly dispatched",
+    "only official Actions at the independently verified commit allowlist",
+    "workflow executes actual approved Python target parity",
+    "workflow validates the exact approved project/custom-domain destination",
+    "configured-path build and verification precede artifact publication"
+  ],
+  "files": [
+    {
+      "url": "/assets/engine.worker-BYNS5Yfw.js",
+      "bytes": 633138,
+      "sha256": "b1569d9f9b1b9db5afab30d75f7c00501c854a903666dfab91bd00e5b704fe3f"
+    },
+    {
+      "url": "/assets/index-Bfb0Lkj7.js",
+      "bytes": 1244714,
+      "sha256": "e0601a57240958f654beee45815c9cdba532de77f4f38a8121aa71111f4a691f"
+    },
+    {
+      "url": "/assets/index-D5WwklyN.css",
+      "bytes": 104302,
+      "sha256": "61951ac3f9f35ec3e692ddaa0df0280c3d4d8aecd0dd550131cd8d7738302d93"
+    },
+    {
+      "url": "/assets/schemas-B44qH8my.js",
+      "bytes": 89575,
+      "sha256": "3fe9116fec43c1e03dfdcbfb3d962963c6399c72fec836d781706a228d67b6b6"
+    },
+    {
+      "url": "/assets/src-Bcx-wexT.js",
+      "bytes": 3849878,
+      "sha256": "e8ffe226096710de03e621ccd2e869d2939d89e7a72cc1eb716898ea0bc6cb07"
+    },
+    {
+      "url": "/assets/src-CAHVt6y8.js",
+      "bytes": 58127,
+      "sha256": "bb06ee73e1298c4b19fa09e401b50bcecc3f50f7c198ea714ac7e4586bb13707"
+    },
+    {
+      "url": "/assets/src-ChK-V8pn.js",
+      "bytes": 10180,
+      "sha256": "0ac1290dc955dd0af99f7e94644c299aac1c65d02ae51de65d60aabe92eab5d8"
+    },
+    {
+      "url": "/assets/src-DIjFgo0h.js",
+      "bytes": 3423,
+      "sha256": "6dd72bf13f842272e7f352b537ed228f91c45a302d46e467db557007a83fc322"
+    },
+    {
+      "url": "/assets/src-DSgLMJ8v.js",
+      "bytes": 207232,
+      "sha256": "5da0900fc5d73796ae0742afd2b9ac516966a17faab7d7feec09e676359b0f50"
+    },
+    {
+      "url": "/assets/src-dxDl5kMt.js",
+      "bytes": 514227,
+      "sha256": "1205e276cccc713859a3bf7578ce80d305e9323a2c33617b55eda87e743568e9"
+    },
+    {
+      "url": "/assets/src-llisJuK3.js",
+      "bytes": 13633,
+      "sha256": "4f42d72b6caad7e54e9f9078ae8370870caced79916f41af7a7e5dd2416b11cd"
+    },
+    {
+      "url": "/cookies/index.html",
+      "bytes": 4343,
+      "sha256": "0fe04dffb9d2c788dc24f7be52310f615801be87b2e02ed010f869e264ff6f55"
+    },
+    {
+      "url": "/index.html",
+      "bytes": 1256,
+      "sha256": "e94646d0838f181e5722f0478698ef70e3cdb22824198bd706262fb94b31e2ce"
+    },
+    {
+      "url": "/notices/index.html",
+      "bytes": 35154,
+      "sha256": "a0817e428ccea4f92c4206bd9994f9e0e81983b42adb8e3c2187e3c2ac7c1ce0"
+    },
+    {
+      "url": "/privacy/index.html",
+      "bytes": 6817,
+      "sha256": "fbf8327c0b16c23e30d40d026d09aa8f6fb5d6d51c108f39b4422e83b36f0b7e"
+    },
+    {
+      "url": "/terms/index.html",
+      "bytes": 4860,
+      "sha256": "f1bafd10c40a29950dbbb6b554accdd6802eaf422f983392bc4dd026fcd3008c"
+    }
+  ],
+  "totalStaticBytes": 6780859,
+  "publicDeploymentClaimed": false
+}

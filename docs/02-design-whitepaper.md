@@ -1,6 +1,6 @@
 # CalcWeave 디자인 백서
 
-현행 CalcWeave 앱 `0.17.1` / 엔진 `0.17.0-m16`의 화면·상호작용·문구 원칙을 설명한다. 계산 의미와 제한은 [기술 백서](01-technical-whitepaper.md), 실제 관측은 [검증 문서](validation.md), 데이터 보호·배포는 [운영 안내](operations.md)를 따른다. 자동 브라우저 검사·화면 관측을 실제 초보자 연구나 접근성 인증으로 표현하지 않는다.
+현행 CalcWeave 앱 `0.17.2` / 엔진 `0.17.0-m16`의 화면·상호작용·문구 원칙을 설명한다. 계산 의미와 제한은 [기술 백서](01-technical-whitepaper.md), 실제 관측은 [검증 문서](validation.md), 데이터 보호·배포는 [운영 안내](operations.md)를 따른다. 자동 브라우저 검사·화면 관측을 실제 초보자 연구나 접근성 인증으로 표현하지 않는다.
 
 ## 경험의 출발점
 
@@ -92,7 +92,9 @@ idle/validating/running/pause-requested/paused/cancel-requested/completed/failed
 
 Dashboard control의 kind/min/max/step/choices·appearance/orientation과 indicator gaugeStyle/thresholds/labels를 실제 기능에 연결한다. live 입력은 이산 실행에서 다음 due에 적용되고 receipt가 생겨야 적용됨으로 표시한다. 예정 schedule·현재 UI 초안·실제 applied receipt를 구분한다. 복구/다운로드 모델에는 재생 가능한 event plan을 포함한다. 허용 작업 목록의 action button만 사용하고 arbitrary callback을 실행하지 않는다.
 
-지원·릴리스 화면은 원본385행 추적과 registry337개를 탭/검색으로 구분한다. source ID·범주·classification·decision·모드·타깃·파라미터 profile·dtype·외부 환경·증거와 열린 이유를 읽을 수 있게 한다. ‘공유 설정’, ‘독립 대체’, ‘조건부 어댑터’, ‘레거시/미지원’을 실행 성공과 같은 badge로 표시하지 않는다. full options0·inventory unverified와 실제 selected subset367을 함께 제공한다. block 이름이 같은 두 source row도 서로 다른 바인딩/환경이면 따로 조회한다.
+**CalcWeave 도움말**은 사용 안내·블록 찾기·파일·코드·앱 정보의 네 작업 중심 항목으로 구성한다. 첫 화면은 설치 없이 웹 브라우저에서 계산·시뮬레이션하는 CalcWeave 자체의 사용 흐름을 설명한다. 엔진 ID·개발 단계·검증 gate·원시 상한·목표 도메인 계획을 제품 소개에 나열하지 않는다. 블록 설명·입출력·설정·코드 내보내기를 먼저 보여 주고 ID·버전·자료형 선언은 접힌 기술 정보에서 확인한다. 현재 앱 버전과 문의·정책·백업 경로는 앱 정보에 둔다. 실제 확인한 브라우저 범위와 계산 상한은 읽기 쉬운 이름으로 별도 상세에서 확인할 수 있게 한다.
+
+Simulink 관련 자료는 기능·파일 형식의 비교를 위한 참고이며 CalcWeave 실행의 필요조건으로 제시하지 않는다. 앱 정보의 닫힌 **호환성 참고**에서 원자료 비교와 확장 기능 상세를 열 수 있다. 원본385행과 registry337개의 구분·source ID·분류·선택 범위·모드·타깃·설정·외부 환경·검증 증거는 이 고급 참고에 유지한다. ‘공유 설정’, ‘독립 대체’, ‘조건부 어댑터’, ‘레거시/미지원’을 실행 성공과 같은 표시로 취급하지 않는다. 전체 옵션 동등 승인0·원본 전수 옵션 미검증과 실제 선택 범위367을 함께 제공한다. 같은 이름의 원자료도 바인딩/환경이 다르면 따로 조회한다.
 
 해석 도구는 선택 expression의 실제 gradient·resolution 비교와 smooth plant operating point의 A/B/C/D를 설명한다. 필드가 있다는 이유로 선형화가 계산됐다고 표시하지 않으며 타깃/shape/interior·모드 조건의 진단을 먼저 보여 준다. solver·수치 알고리즘·원본 외부 환경의 미지원은 [기술 백서](01-technical-whitepaper.md)의 경계를 따른다.
 

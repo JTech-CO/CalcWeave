@@ -20,7 +20,7 @@ CalcWeave는 블럭을 연결하여 정적 계산, 이산·연속 시뮬레이�
 
 ## 베타 상태와 변경 안내
 
-GitHub Pages 웹 베타 주소는 https://jtech-co.github.io/CalcWeave/ 입니다. 목표 도메인 calcweave.com의 연결은 별도 단계입니다. 웹 베타는 전체 Simulink 호환 또는 실제 초보 사용자 검증 완료를 의미하지 않습니다. 중대한 서비스·정책 변경은 지원·릴리스 안내와 문서 버전에 표시합니다. 강행 법규상 이용자 권리를 이 문서로 제한하지 않습니다.
+GitHub Pages 웹 베타 주소는 https://jtech-co.github.io/CalcWeave/ 입니다. 목표 도메인 calcweave.com의 연결은 별도 단계입니다. 웹 베타는 전체 Simulink 호환 또는 실제 초보 사용자 검증 완료를 의미하지 않습니다. 중대한 서비스·정책 변경은 CalcWeave 도움말의 앱 정보와 문서 버전에 표시합니다. 강행 법규상 이용자 권리를 이 문서로 제한하지 않습니다.
 
 개정 이력: 0.7 로컬 베타 안내 → 0.8 GitHub Pages 웹 베타 주소 명시. 무료·계정 없음·로컬 저장 조건은 동일합니다.
 
