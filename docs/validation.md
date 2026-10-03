@@ -1,6 +1,6 @@
 # CalcWeave 검증 상태
 
-앱 `0.17.0` · 엔진 `0.17.0-m16`. 이 문서는 현행 구현의 검증 범위와 최신 배포 증거를 연결한다. 과거 단계의 수치·실패 기록은 `evidence/`에 보존한다. 최종 공개 CI와 정확한 배포 파일·브라우저 검사를 완료했다.
+현행 소스는 앱 `0.17.1` · 엔진 `0.17.0-m16`이다. 이 문서는 구현의 검증 범위와 배포 증거를 연결한다. 과거 단계의 수치·실패 기록은 `evidence/`에 보존한다. M16의 공개 결과와 후속 화면 정리의 검사는 별도로 기록한다.
 
 ## 지원 감사
 
@@ -10,7 +10,7 @@
 
 [M16 감사 기록](evidence/m16-verification.json)은 25개 보호 자료·337개 이전 정의·385개 identity·352개 계약·실제 profile selector를 검증한다. 컴파일러 정규화가 있는 48개 profile은 동결 raw fixture SHA와 실제 실행 모델 semantic SHA를 추가 대조했다. Add·Subtract·Pi·Zero의 네 고정 설정은 [독립 기대값·실제 TypeScript 재검증](evidence/m16-preset-verification.json)을 별도로 연결했다. 추적 완료를 전체 실행 동등성으로 표시하지 않는다.
 
-## 실제 실행과 화면
+## M16 실제 실행과 화면
 
 | 검사 | 확인 범위와 근거 |
 | --- | --- |
@@ -74,3 +74,17 @@ M16 구현 검사 후 중복된 M0~M15 계약·진행 기록과 이전 계획·�
 공개 기본 9검사는 초기 fit·Worker·오프라인 편집·정책·Python ZIP을 확인했다. 추가 21케이스는 M16 대응표 8케이스와 다운로드한 Python의 실제 격리 실행, WASM binary/runner의 실제 브라우저 계산, 서명된 migration 검토·undo, MAT/SLX/MDL 선택 분석 경로·원본 보존·변조/코드 거부·반응형 조건을 확인했다. 대응표 SHA는 `e5d706d7fc127081fc8470189b3f580d03ed61ba938a8168a5aa8e3730bb875e`다. 로컬 지원 UI 결과는 문서 헤더 갱신 전 데이터였으며, 이 공개 검사는 최종 데이터에 대한 결과다.
 
 [공개 결과](evidence/m16-public-release.json)·[CI 원본 요약](evidence/m16-actions-verification.json)·[정확한 파일 검사](evidence/m16-deployment-verification.json)·[공개 기본 브라우저](evidence/m16-public-browser-verification.json)·[공개 추가 브라우저](evidence/m16-public-feature-browser-results.json)·[로컬 종합 검증](evidence/m16-engineering-checks.json). 공개 앱의 빌드 커밋은 위 main SHA이며 이후 증거 문서 병합은 동일 artifact를 다시 게시하지 않는다. 기술적 앱 배포는 PASS이고 calcweave.com 소유/DNS·실제 초보자 관찰·정식 출시·원본 전수 옵션/MathWorks reference 동등성은 별도 판정이다.
+
+## 보조 기능 정리
+
+앱 `0.17.1`은 계산과 관계가 먼 기능의 노출을 조사한 뒤 정리한 화면 변경이다. 공개 키 지문은 별도 채널로 받은 키와 서명 파일을 대조하려고 의도적으로 넣은 기능이지만 일반 모델 전달이나 계산 정확성 확인에 필요하지 않다. 서명 형식과 출처·migration 검증은 보존하고 **작업 공간 → 고급 파일**로 옮겼다. 브라우저에만 저장하는 앱의 백업·복구는 필요하므로 기본 경로로 남겼다. 할당량·영구 저장 여부·복구 원본·진단 기록은 접힌 **저장 문제 해결**, SHA는 접힌 **백업 검증 정보**, 삭제는 별도 접힌 영역과 두 단계 확인으로 정리했다. 분석·데이터·실험·코드 내보내기와 지원 범위 조회는 계산 작업과 직접 연결되어 유지했다.
+
+| 검사 | 실제 결과 |
+| --- | --- |
+| 단위 | [3,883/3,883 PASS](evidence/workspace-simplification-unit-results.json). |
+| 파일·복구·UI 집중 회귀 | [34/34 PASS](evidence/workspace-simplification-browser-results.json). 지문 불일치·변조·migration 검토·원본 보존·원자적 복구·탭 충돌·Python/WASM 실제 실행·기본 접힘·고급 진입·초점 복귀를 확인했다. |
+| 화면 실측 | [10조건 PASS](evidence/workspace-simplification-ui-verification.json): 1440/1024/390/320px의 다크·라이트 및 1440px 글자200%. 헤더 줄바꿈 시 메뉴가 왼쪽 밖으로 나가던 문제를 viewport 위치 계산으로 교정했다. |
+| 경로·배포 후보 | [root](evidence/workspace-simplification-root-release-verification.json)·[project](evidence/workspace-simplification-project-release-verification.json) 각각91검사·16assets PASS. [프로젝트 경로 브라우저4/4 PASS](evidence/workspace-simplification-project-browser-results.json). 공개 배포 검사는 이 로컬 결과와 분리한다. |
+| 의존성 | [npm audit](evidence/workspace-simplification-dependency-audit.json) 알려진 취약점0개. |
+
+첫 집중 회귀의 탭 충돌 사례는30초 제한으로 시간 초과였다. [초기33/34](evidence/workspace-simplification-initial-browser-results.json), [독립 재실행1/1](evidence/workspace-simplification-cross-tab-browser-results.json), 최종34/34를 구분해 보존했다. 최종 UI의 page error와 앱 console error는0이다. 첫 브라우저의 자동 favicon.ico 요청404는 기존 정적 리소스 누락으로 별도 기록했다. 사용자 브라우저의 저장 데이터를 삭제하거나 읽지 않았다. 엔진·블럭337개·지원표와 보호 원자료/승인25개는 변경하지 않았으며 M16 문서 정리 기록도 당시 증거로 보존했다.

@@ -1,3 +1,4 @@
+import { openSignedPackage } from './workspace-tools';
 import { test, expect, type Page } from '@playwright/test';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
@@ -60,7 +61,7 @@ test('M15 downloaded Python string program executes the exact typed result in an
 
 test('M15 legacy package requires independent fingerprint and migration review, preserves original bytes, and imports undoably', async ({ page }) => {
   await workspace(page); const before = await page.getByLabel('모델 이름').inputValue(), legacy = await signedLegacyPackage(migrationFixture(), '0.14.0-m13', 'M13');
-  await page.getByRole('button', { name: '모델 패키지 공유', exact: true }).click(); await page.getByRole('button', { name: '공유 파일 확인', exact: true }).click();
+  await openSignedPackage(page); await page.getByRole('button', { name: '공유 파일 확인', exact: true }).click();
   await page.getByLabel('공유 모델 패키지 파일 선택').setInputFiles({ name: 'old.cwpackage.json', mimeType: 'application/json', buffer: Buffer.from(legacy.text) });
   await expect(page.getByLabel('이전 엔진 변환 보고서', { exact: true })).toContainText('0.14.0-m13'); await expect(page.getByLabel('모델 이름')).toHaveValue(before);
   const apply = page.getByRole('button', { name: '지문 확인 후 모델 가져오기', exact: true }); await expect(apply).toBeDisabled();

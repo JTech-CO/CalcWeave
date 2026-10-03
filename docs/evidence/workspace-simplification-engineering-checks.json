@@ -1,0 +1,192 @@
+{
+  "operation": "Simplify auxiliary workspace UI after scope investigation",
+  "checkedAt": "2026-10-03T15:16:46.468Z",
+  "appVersion": "0.17.1",
+  "engineVersion": "0.17.0-m16",
+  "baselineMain": "811af52066b32bb838116e3e9774c033bcbb7cb1",
+  "findings": [
+    {
+      "feature": "Signed model package and public-key fingerprint",
+      "intent": "Optional independent provenance checking for declarative files",
+      "assessment": "Intentional advanced feature, overexposed in the default calculation UI",
+      "decision": "Retain compatibility and independent trust; move under Workspace > Advanced files",
+      "limits": "Ephemeral key per export. Neither real identity nor numerical correctness is certified."
+    },
+    {
+      "feature": "Workspace backup and restore",
+      "intent": "Recovery and transfer of browser-local work and optional recent runs",
+      "assessment": "Necessary",
+      "decision": "Keep visible as the main Workspace > Backup/restore path"
+    },
+    {
+      "feature": "Storage estimates, persistence status, raw recovery slots and local diagnostics",
+      "intent": "Troubleshooting storage failures",
+      "assessment": "Useful for exceptional failures; excessive as peer-level tabs",
+      "decision": "Collapse under Storage troubleshooting"
+    },
+    {
+      "feature": "Backup SHA and engine/version details",
+      "intent": "Integrity and compatibility inspection",
+      "assessment": "Automatic validation is necessary; default technical detail is excessive",
+      "decision": "Keep checks active and collapse details under Backup verification information"
+    },
+    {
+      "feature": "Local data reset",
+      "intent": "Intentional deletion of browser-local work and app preferences",
+      "assessment": "Necessary but infrequent and destructive",
+      "decision": "Separate collapsed section; keep explicit second-step acknowledgement and conflict checks"
+    },
+    {
+      "feature": "Data, experiments, analysis, dashboards, notes, code targets and source support table",
+      "intent": "Simulation inputs, parameter exploration, interpretation, documentation, export and honest support limits",
+      "assessment": "Directly supports diagram computation",
+      "decision": "Retain existing working paths; advanced evidence remains in support details"
+    }
+  ],
+  "security": {
+    "injection": {
+      "status": "not-applicable",
+      "reason": "No server query/API/database added"
+    },
+    "output": {
+      "status": "preserved",
+      "reason": "React text escaping retained; no innerHTML or arbitrary URL introduced"
+    },
+    "secrets": {
+      "status": "preserved",
+      "reason": "Ephemeral keys remain memory-only; release secret scan passes"
+    },
+    "authorization": {
+      "status": "not-applicable",
+      "reason": "No accounts or remote shared data; local revision/conflict protection preserved"
+    },
+    "validation": {
+      "status": "preserved",
+      "reason": "26 MiB backup and 6 MiB package bounds, schema/compile/hash/trust checks unchanged"
+    },
+    "rateLimits": {
+      "status": "not-applicable",
+      "reason": "No authentication or billable remote API added"
+    },
+    "settings": {
+      "status": "preserved",
+      "reason": "Existing static CSP/offline asset checks retained; no cookies/CORS change"
+    },
+    "database": {
+      "status": "not-applicable",
+      "reason": "No server database; IndexedDB transactions and explicit reset preserved"
+    },
+    "sourceScan": {
+      "minimumSeverity": "medium",
+      "app": {
+        "summary": {
+          "scannedFiles": 58,
+          "totalFindings": 0,
+          "counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0
+          }
+        },
+        "findings": []
+      },
+      "packages": {
+        "summary": {
+          "scannedFiles": 94,
+          "totalFindings": 0,
+          "counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0
+          }
+        },
+        "findings": []
+      },
+      "notComprehensiveVulnerabilityProof": true
+    },
+    "personalDataFlowChanged": false
+  },
+  "sourceFiles": {
+    "apps/web/src/App.tsx": "097944b96f34639a0ba7ca81b701ab1a4a8a6e3896883bae76941f7e92b5ba3a",
+    "apps/web/src/components/WorkspaceMenu.tsx": "9429828387bb32cfa389a6921a8793925bde165a2717854ca698ee963813b248",
+    "apps/web/src/components/WorkspaceMenu.css": "981c8f8ef0b80f044e432f82652221cfd1ce0e2fd35f37600d97c4918fc60052",
+    "apps/web/src/components/LocalDataDialog.tsx": "45e10a686041527199be2d5e727a7ed44745aca2e9ede3b7d4b7ef07e8d115ab",
+    "apps/web/src/components/WorkspaceManagement.css": "c0e90c8348e64fdd090a71c12cbcf782dbb75fff6ff8ed86686a6297bfb3bfd0",
+    "apps/web/src/components/SupportDialog.tsx": "563c3e4c2f596ed6bf50171e314fecf48f13f4598e9290af8f56b6ce26436c75",
+    "tests/e2e/workspace-tools.ts": "19fecbb4450d99fb60d87498af612c313b7592e19f5234923dbfa37095461557",
+    "tests/e2e/m6-workspace.spec.ts": "3f5e0163a32d192ed86908680c58aeb54f7b37a04e2adb5e67acab11458aed34",
+    "tests/e2e/m6-recovery.spec.ts": "b22aad65845e08bbb5b96a0fbfeb42a131313950c310293a0ddec4b68d9a1d98",
+    "tests/e2e/m7-workspace.spec.ts": "de31820336d785e9ae871c46c5ad4ce56ecb7ba3b18b02bad9a6a24f4f24ddd0",
+    "tests/e2e/m15-exports.spec.ts": "5a5b4f994b52ca5eda618062e23133b66e957220b3db13df792b7b4a506ac168",
+    "scripts/verify-design.ts": "91e9a3f9cf85c516fcaf9052b70c50d9018a86b252977910e1931f5e65f36ef6",
+    "packages/release/src/index.ts": "231854c217e99ded0e9cee57540dbb89b57a699ab43b0edf0bade437f5903084"
+  },
+  "coreContractsUnchanged": {
+    "packages/model/src/types.ts": "2c67ce9470b7b040945ecea2a9d2eb1afc826aaaa732959c61425e25bd3e5f3f",
+    "packages/model-package/src/index.ts": "adb08e2bcec46dfb5f7e1da90dd2d4ffcc2967ea7048dd3fc0eaf763beb486f4",
+    "packages/model-package/src/migrations.ts": "b720d4ff9dac8b846d0a7ebe471cbb290669a856c403c7b76b8a568a2f201c09",
+    "apps/web/src/persistence.ts": "6f455e073c27ccee61c9cfd25898bd405dbcf0ce92d866bf2547d61b14215b58",
+    "apps/web/src/local-operations.ts": "ac8e0aa1d4b06ee7d48c52fba986f90b7adf9dcee138bbd7c92859289fde2c60"
+  },
+  "results": {
+    "unit": 3883,
+    "focusedBrowser": 34,
+    "projectBrowser": 4,
+    "uiConditions": 10,
+    "rootReleaseChecks": 91,
+    "projectReleaseChecks": 91
+  },
+  "records": {
+    "docs/evidence/workspace-simplification-unit-results.json": "82afe7ce71b12c259c9252f0147648819061760989c2f81cd44043a90677a08b",
+    "docs/evidence/workspace-simplification-browser-results.json": "fedd1e770d73fee1270b3e12e07af4db9854bf71beacf5e8c3c06dda3679af1e",
+    "docs/evidence/workspace-simplification-project-browser-results.json": "cd2f9102a8d6b827ce1dc7e806cf0cdf32d66dafef2da2fef73fcbe5b7b2749f",
+    "docs/evidence/workspace-simplification-ui-verification.json": "dc27d301f6a3474d6c240cca9f74ab8216c27bd657c9e7a523dc755c8b00bc20",
+    "docs/evidence/workspace-simplification-root-release-verification.json": "322505f403a53b0992fe8ae167ab5d016e2072922c1a326d4aef74e4c87537b8",
+    "docs/evidence/workspace-simplification-project-release-verification.json": "59dc0ee57c706138352204beaacc69dd310573121498ab3cc8f00ee7c2ea957a",
+    "docs/evidence/workspace-simplification-dependency-audit.json": "d92c7a80e2ac756cb6d2f48893d845b4c546c07f32c0b7fc5a1ca48f842ea0b5",
+    "docs/evidence/workspace-simplification-initial-browser-results.json": "e55d4f59a40eb9c3e5d2862bcd3e20fee98b1e2ad02bc7919e1b8dfc203c05f0",
+    "docs/evidence/workspace-simplification-cross-tab-browser-results.json": "4a2cef295821c1751ab8edc9c1b57b5caba852588d3caaf6b6addd62218184da",
+    "docs/evidence/workspace-simplification-ui-initial-findings.json": "6f308cb1959c1711607031dd968312403b369ce347850fe413da5c0158ded670"
+  },
+  "protectedArtifacts": {
+    "dataset/Simulink_Basic_Blocks_R2024b.md": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+    "docs/baselines/catalog-block-coverage.md": "bfad433de22c3302b53369be3465ec1d4bb3e072dd8f3ce310bc4af1ea967774",
+    "docs/simulink-coverage-roadmap.json": "86ec3c3f75939dc72a00b39d6760d86d9ef21f2a63922daf110c5db2fe7932cd",
+    "docs/baselines/m10-registry.json": "d23bc34bdbd450b1ea2be671b419f8ccfb74fa97238d541c3f9ffd97230cf8dc",
+    "docs/evidence/m10-source-approvals.json": "d8c938fb999555aaf61f24b68b7b631e158611dc2760542bd08d0f94d3221f4b",
+    "docs/evidence/m10-verification.json": "659a11814e1420f217068f4cab4c6726cd3070154f69fd1064afd3a4aee52e6d",
+    "docs/evidence/m10-reference-review.json": "fb9572178cc5c5caf19658e9010709a67d0d6611f83b9f3ce8993dffee493325",
+    "docs/evidence/m8-source-approvals.json": "4f558f5040f9dda1a9c2b5bbd2b848b825b4961489a03228dd3c12370b2c4d60",
+    "docs/evidence/m9-source-approvals.json": "7d49f1b15a6b325050a55295bca4d29411fe123dd0752e2ac98766641ccc18ca",
+    "docs/evidence/m8-verification.json": "351b5ba6031dff1a2f4dfb8b51e4e63e2747998277ee93e56decc4b908ff75d6",
+    "docs/evidence/m8-presets-verification.json": "55cef48ebe57a97ca02922225330f36b1f1d0866d2ad92d69f74fcceb7771f01",
+    "docs/evidence/m9-verification.json": "1d3fee9b56017db6c12b8f7f778d4c064efd4fa7f7d0014a2a38b6ffdd13a23f",
+    "docs/baselines/m11-registry.json": "daaf1ec9df9b5b7b43efdfd57863d0467b3f5636b3bcb4fd3b5450322fe8bf2e",
+    "docs/evidence/m11-source-approvals.json": "492abedeb09b84e601d206cf85ead66b3ba7596af0894f0f9519fd9af8aac8c7",
+    "docs/evidence/m11-verification.json": "716939d06a20c53a3fb9655820fb5c366fde0b1bb0fd5fd37adb39abadafea76",
+    "docs/baselines/m12-registry.json": "5eb19914ff0643307bb8c5c01b22557ad935558230a217e50ff8de6ee1867a73",
+    "docs/evidence/m12-source-approvals.json": "a3e2201b9672a4eac21f90a37b893ee0daf2c2a9b6d912654b46b1e1618a449b",
+    "docs/evidence/m12-verification.json": "79253d162a1af3ca5f5bbe2eb9de14d0fbc3e5aaa107795586678ab8f896f0c7",
+    "docs/baselines/m13-registry.json": "a4f8cadc0e8333cdc029c64de294077d90a98ae6d1f1746753649549f4f6a0d2",
+    "docs/evidence/m13-source-approvals.json": "bffe058d20baa23783f5682537787dbb9b6ac7aea06746d738b0972286af72bc",
+    "docs/evidence/m13-verification.json": "aa67d7976bd891f122f8a25eff41deb8b2054bc31ba660082b873e269883b598",
+    "docs/baselines/m13-block-coverage.md": "8d736de7dbf8dbda6eaca70790b0162afe7c78a168a09006e752c5fe8401e8c6",
+    "docs/baselines/m14-registry.json": "711fcb2062a90dcebdc4b2265f3a8660aadb3d8f2c4ede0de436a4f768ce0b40",
+    "docs/evidence/m14-source-approvals.json": "f7bf8f2a18377afd4d151b1b5bbea6e6eb72396e5c66b97c9a1a5b138c40448a",
+    "docs/evidence/m14-verification.json": "6886130299827a0d52e99533c0b0cf0ea827e27b5bceb56ca687e18fa4954f65"
+  },
+  "supportMatrixSha256": "e5d706d7fc127081fc8470189b3f580d03ed61ba938a8168a5aa8e3730bb875e",
+  "registryDefinitions": 337,
+  "userBrowserAndDataUntouched": true,
+  "initialFailuresRetained": true,
+  "wholeBrowser": {
+    "status": "pending-CI",
+    "expectedCount": 199
+  },
+  "publicDeployment": {
+    "status": "pending-verification"
+  },
+  "verifiedPublicLaunch": false
+}

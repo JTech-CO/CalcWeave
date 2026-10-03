@@ -1,3 +1,4 @@
+import { openSignedPackage, workspaceMenuTrigger } from './workspace-tools';
 import { expect, test, type Page } from '@playwright/test';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
@@ -7,7 +8,7 @@ import { createModelPackage } from '../../packages/model-package/src';
 import type { CalcModel } from '../../packages/model/src';
 import { PYTHON_TARGET } from '../../packages/codegen-python/src/capabilities';
 
-async function open(page: Page) { await page.goto('/'); await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨'); }
+async function open(page: Page) { await page.goto('./'); await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨'); }
 async function importModel(page: Page, model: CalcModel | unknown) { await page.getByLabel('CalcWeave 모델 파일 선택').setInputFiles({ name: 'm7.cw.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(model)) }); }
 function zipTexts(bytes: Buffer): Record<string, string> {
   let offset = 0; const files: Record<string, string> = {};
@@ -58,20 +59,37 @@ test('M7 stale result is omitted from Python archive after a model parameter cha
   const files = zipTexts((await bytesFromDownload(page, 'Python 실행 묶음')).bytes); expect(files['expected-output.json']).toBeUndefined(); expect(Object.keys(files)).toHaveLength(5); expect(files['README.md']).toContain('완료 결과가 없어');
 });
 
+test('Advanced signed files require deliberate workspace navigation and Escape restores the workspace trigger', async ({ page }) => {
+  await open(page);
+  const trigger = workspaceMenuTrigger(page);
+  await expect(page.getByRole('button', { name: '모델 패키지 공유', exact: true })).toBeHidden();
+  await trigger.focus(); await page.keyboard.press('Enter');
+  const advanced = page.getByText('고급 파일', { exact: true });
+  await expect(advanced).toBeVisible();
+  await expect(page.getByRole('button', { name: '모델 패키지 공유', exact: true })).toBeHidden();
+  await advanced.focus(); await page.keyboard.press('Enter');
+  await page.getByRole('button', { name: '모델 패키지 공유', exact: true }).click();
+  await expect(page.getByRole('dialog', { name: '모델 패키지 공유', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: '서명된 패키지 생성', exact: true })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(trigger).toBeFocused();
+  expect(await trigger.evaluate(element => element.parentElement instanceof HTMLDetailsElement && element.parentElement.open)).toBe(false);
+});
+
 test('M7 package creation uses an ephemeral signature without adding a private key to browser storage', async ({ page }) => {
-  await open(page); await page.getByRole('button', { name: '모델 패키지 공유', exact: true }).click(); await page.getByRole('button', { name: '서명된 패키지 생성', exact: true }).click();
+  await open(page); await openSignedPackage(page); await page.getByRole('button', { name: '서명된 패키지 생성', exact: true }).click();
   const first = await page.getByTestId('created-package-fingerprint').innerText(); expect(first).toMatch(/^[0-9a-f]{64}$/);
   const file = await bytesFromDownload(page, '공유 패키지 다운로드'); expect(file.name).toBe('CalcWeave-model.cwpackage.json');
   expect(file.bytes.toString('utf8')).not.toMatch(/privateKey|BEGIN PRIVATE KEY|"d"\s*:/);
   await page.getByRole('button', { name: '서명된 패키지 생성', exact: true }).click(); await expect(page.getByTestId('created-package-fingerprint')).not.toHaveText(first);
   const storage = await page.evaluate(() => JSON.stringify({ local: { ...localStorage }, session: { ...sessionStorage } })); expect(storage).not.toMatch(/privateKey|BEGIN PRIVATE KEY/);
-  await page.keyboard.press('Escape'); await expect(page.getByRole('button', { name: '모델 패키지 공유', exact: true })).toBeFocused();
+  await page.keyboard.press('Escape'); await expect(workspaceMenuTrigger(page)).toBeFocused();
 });
 
 test('M7 signed package inspection preserves the model until an independently trusted fingerprint matches and import is undoable', async ({ page }) => {
   await open(page); const before = createExample('first-calculation'), next = createExample('discrete-feedback');
   const created = await createModelPackage(next);
-  await page.getByRole('button', { name: '모델 패키지 공유', exact: true }).click(); await page.getByRole('button', { name: '공유 파일 확인', exact: true }).click();
+  await openSignedPackage(page); await page.getByRole('button', { name: '공유 파일 확인', exact: true }).click();
   await page.getByLabel('공유 모델 패키지 파일 선택').setInputFiles({ name: 'checked.cwpackage.json', mimeType: 'application/json', buffer: Buffer.from(created.text) });
   await expect(page.getByTestId('inspected-package-fingerprint')).toHaveText(created.fingerprint);
   const accept = page.getByRole('button', { name: '지문 확인 후 모델 가져오기', exact: true }); await expect(accept).toBeDisabled(); await expect(page.getByLabel('모델 이름')).toHaveValue(before.name);
@@ -84,7 +102,7 @@ test('M7 signed package inspection preserves the model until an independently tr
 test('M7 tampered package is rejected without exposing an import button or replacing the current model', async ({ page }) => {
   await open(page); const created = await createModelPackage(createExample('discrete-feedback'));
   const altered = JSON.parse(created.text); const changeName = (value: unknown): boolean => { if (!value || typeof value !== 'object') return false; if ('modelId' in value && 'name' in value) { (value as { name: string }).name = 'tampered'; return true; } return Object.values(value).some(changeName); }; expect(changeName(altered)).toBe(true);
-  await page.getByRole('button', { name: '모델 패키지 공유', exact: true }).click(); await page.getByRole('button', { name: '공유 파일 확인', exact: true }).click();
+  await openSignedPackage(page); await page.getByRole('button', { name: '공유 파일 확인', exact: true }).click();
   await page.getByLabel('공유 모델 패키지 파일 선택').setInputFiles({ name: 'tampered.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(altered)) });
   await expect(page.getByRole('alert')).toBeVisible(); await expect(page.getByTestId('inspected-package-fingerprint')).toHaveCount(0); await expect(page.getByRole('button', { name: '지문 확인 후 모델 가져오기', exact: true })).toHaveCount(0);
   await expect(page.getByLabel('모델 이름')).toHaveValue(createExample('first-calculation').name);
@@ -104,7 +122,8 @@ test('M7 file dialogs keep execution and editing shortcuts inside their modal bo
   await open(page); await page.locator('.model-node-list').getByRole('button', { name: '배율', exact: true }).click();
   const nodesBefore = await page.locator('.react-flow__node').count();
   for (const trigger of ['코드 타깃 선택', '모델 패키지 공유']) {
-    await page.getByRole('button', { name: trigger, exact: true }).click();
+    if (trigger === '모델 패키지 공유') await openSignedPackage(page);
+    else await page.getByRole('button', { name: trigger, exact: true }).click();
     await page.getByRole('dialog').getByRole('button').first().focus(); await page.keyboard.press('Control+Enter'); await page.keyboard.press('Delete'); await page.keyboard.press('Control+z');
     await expect(page.locator('.result-status.current')).toHaveCount(0); expect(await page.locator('.react-flow__node').count()).toBe(nodesBefore); await expect(page.getByLabel('모델 이름')).toHaveValue(createExample('first-calculation').name);
     await page.keyboard.press('Escape');
@@ -140,7 +159,7 @@ test('M7 a delayed native file read cannot replace a newer file selection or an 
 
 test('M7 closing a signed package acceptance prevents the delayed verification from committing a model', async ({ page }) => {
   await open(page); const created = await createModelPackage(createExample('discrete-feedback'));
-  await page.getByRole('button', { name: '모델 패키지 공유', exact: true }).click(); await page.getByRole('button', { name: '공유 파일 확인', exact: true }).click();
+  await openSignedPackage(page); await page.getByRole('button', { name: '공유 파일 확인', exact: true }).click();
   await page.getByLabel('공유 모델 패키지 파일 선택').setInputFiles({ name: 'checked.cwpackage.json', mimeType: 'application/json', buffer: Buffer.from(created.text) });
   await expect(page.getByTestId('inspected-package-fingerprint')).toHaveText(created.fingerprint); await page.getByLabel('신뢰할 수 있는 공개 키 지문').fill(created.fingerprint);
   await page.evaluate(() => {

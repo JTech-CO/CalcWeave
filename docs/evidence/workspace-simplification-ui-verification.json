@@ -1,0 +1,1286 @@
+{
+  "schemaVersion": 1,
+  "scope": "Workspace menu and simplified backup/recovery layout only",
+  "origin": "http://127.0.0.1:4175/",
+  "appVersion": "0.17.1",
+  "createdAt": "2026-10-03T15:06:30.876Z",
+  "userPreviewAndDataUntouched": true,
+  "destructiveOperationsExecuted": false,
+  "fontScaleMethod": "html font-size:200% for the two 1440 px text enlargement cases; device scale factor remains 1",
+  "cases": [
+    {
+      "name": "dark-1440-text100",
+      "width": 1440,
+      "height": 1000,
+      "theme": "dark",
+      "fontScale": 1,
+      "consoleErrors": [
+        {
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://127.0.0.1:4175/favicon.ico",
+            "line": 0,
+            "column": 0,
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        }
+      ],
+      "pageErrors": [],
+      "failedResponses": [],
+      "checks": {
+        "advancedDefaultCollapsed": true,
+        "advancedActionAccessible": true,
+        "escapeClosesAndRestoresFocus": true,
+        "tabOutsideClosesAndHiddenActionsSkipped": true,
+        "outsideClickCloses": true,
+        "modalDefaultCollapsedAndHiddenActionsUnavailable": true,
+        "troubleshootingExplicitlyAccessible": true,
+        "deletionRequiresFurtherConfirmation": true,
+        "modalFocusTrap": true,
+        "modalCloseRestoresVisibleTriggerFocus": true
+      },
+      "measurements": {
+        "font": {
+          "rootPixels": 16,
+          "bodyPixels": 16
+        },
+        "menuDefault": {
+          "x": 717.828125,
+          "y": 113,
+          "width": 304,
+          "height": 174.59375,
+          "right": 1021.828125,
+          "bottom": 287.59375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "menuAdvanced": {
+          "x": 717.828125,
+          "y": 113,
+          "width": 304,
+          "height": 218.59375,
+          "right": 1021.828125,
+          "bottom": 331.59375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "modalDefault": {
+          "x": 400,
+          "y": 121.265625,
+          "width": 640,
+          "height": 757.46875,
+          "right": 1040,
+          "bottom": 878.734375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "troubleshooting": {
+          "x": 400,
+          "y": 24,
+          "width": 640,
+          "height": 952,
+          "right": 1040,
+          "bottom": 976,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "deletionDisclosure": {
+          "x": 400,
+          "y": 63.875,
+          "width": 640,
+          "height": 872.234375,
+          "right": 1040,
+          "bottom": 936.109375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        }
+      },
+      "screenshots": [
+        {
+          "path": "docs/evidence/workspace-simplification-dark-1440-text100-menu-default.png",
+          "sha256": "ad13e2c4394b6964cb21e5532e701834ad9048d41f7a88180c516b52dd047c44"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-dark-1440-text100-menu-advanced.png",
+          "sha256": "32c29f5349ed450f36e682e5b66055539e72a931323c407ff12353b28c992357"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-dark-1440-text100-backup-default.png",
+          "sha256": "64948bc7e39eac0f65c659ae9c40575c22429a42420a3e8426722f76b939dd23"
+        }
+      ],
+      "passed": true,
+      "knownUnrelatedResourceErrors": [
+        {
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://127.0.0.1:4175/favicon.ico",
+            "line": 0,
+            "column": 0,
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        }
+      ],
+      "applicationConsoleErrors": []
+    },
+    {
+      "name": "light-1440-text100",
+      "width": 1440,
+      "height": 1000,
+      "theme": "light",
+      "fontScale": 1,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "checks": {
+        "advancedDefaultCollapsed": true,
+        "advancedActionAccessible": true,
+        "escapeClosesAndRestoresFocus": true,
+        "tabOutsideClosesAndHiddenActionsSkipped": true,
+        "outsideClickCloses": true,
+        "modalDefaultCollapsedAndHiddenActionsUnavailable": true,
+        "troubleshootingExplicitlyAccessible": true,
+        "deletionRequiresFurtherConfirmation": true,
+        "modalFocusTrap": true,
+        "modalCloseRestoresVisibleTriggerFocus": true
+      },
+      "measurements": {
+        "font": {
+          "rootPixels": 16,
+          "bodyPixels": 16
+        },
+        "menuDefault": {
+          "x": 717.828125,
+          "y": 113,
+          "width": 304,
+          "height": 174.59375,
+          "right": 1021.828125,
+          "bottom": 287.59375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "menuAdvanced": {
+          "x": 717.828125,
+          "y": 113,
+          "width": 304,
+          "height": 218.59375,
+          "right": 1021.828125,
+          "bottom": 331.59375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "modalDefault": {
+          "x": 400,
+          "y": 121.265625,
+          "width": 640,
+          "height": 757.46875,
+          "right": 1040,
+          "bottom": 878.734375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "troubleshooting": {
+          "x": 400,
+          "y": 24,
+          "width": 640,
+          "height": 952,
+          "right": 1040,
+          "bottom": 976,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "deletionDisclosure": {
+          "x": 400,
+          "y": 63.875,
+          "width": 640,
+          "height": 872.234375,
+          "right": 1040,
+          "bottom": 936.109375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        }
+      },
+      "screenshots": [
+        {
+          "path": "docs/evidence/workspace-simplification-light-1440-text100-menu-default.png",
+          "sha256": "6a6d4098b5e1f99350390a0c57b7758ca4ccac5bbe57e1ab99cbc81d91954873"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-light-1440-text100-menu-advanced.png",
+          "sha256": "74c25934839f7800682224a63330144f76d3956400942fe6db4f690a70132c3f"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-light-1440-text100-backup-default.png",
+          "sha256": "868a58ce5d0884a3b73643b2ec6871ddb58c2a0f6fc20bda3ff9e2e23c993c86"
+        }
+      ],
+      "passed": true,
+      "knownUnrelatedResourceErrors": [],
+      "applicationConsoleErrors": []
+    },
+    {
+      "name": "dark-1024-text100",
+      "width": 1024,
+      "height": 1000,
+      "theme": "dark",
+      "fontScale": 1,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "checks": {
+        "advancedDefaultCollapsed": true,
+        "advancedActionAccessible": true,
+        "escapeClosesAndRestoresFocus": true,
+        "tabOutsideClosesAndHiddenActionsSkipped": true,
+        "outsideClickCloses": true,
+        "modalDefaultCollapsedAndHiddenActionsUnavailable": true,
+        "troubleshootingExplicitlyAccessible": true,
+        "deletionRequiresFurtherConfirmation": true,
+        "modalFocusTrap": true,
+        "modalCloseRestoresVisibleTriggerFocus": true
+      },
+      "measurements": {
+        "font": {
+          "rootPixels": 16,
+          "bodyPixels": 16
+        },
+        "menuDefault": {
+          "x": 8,
+          "y": 156,
+          "width": 304,
+          "height": 174.59375,
+          "right": 312,
+          "bottom": 330.59375,
+          "viewportWidth": 1024,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "menuAdvanced": {
+          "x": 8,
+          "y": 156,
+          "width": 304,
+          "height": 218.59375,
+          "right": 312,
+          "bottom": 374.59375,
+          "viewportWidth": 1024,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "modalDefault": {
+          "x": 192,
+          "y": 121.265625,
+          "width": 640,
+          "height": 757.46875,
+          "right": 832,
+          "bottom": 878.734375,
+          "viewportWidth": 1024,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "troubleshooting": {
+          "x": 192,
+          "y": 24,
+          "width": 640,
+          "height": 952,
+          "right": 832,
+          "bottom": 976,
+          "viewportWidth": 1024,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "deletionDisclosure": {
+          "x": 192,
+          "y": 63.875,
+          "width": 640,
+          "height": 872.234375,
+          "right": 832,
+          "bottom": 936.109375,
+          "viewportWidth": 1024,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        }
+      },
+      "screenshots": [
+        {
+          "path": "docs/evidence/workspace-simplification-dark-1024-text100-menu-default.png",
+          "sha256": "d5cb70b36bc5a60728140d263ada445151953e51d4e14e6acb8d31771d6620a0"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-dark-1024-text100-menu-advanced.png",
+          "sha256": "15d2fafe26eab908afcd9d12bc91bb3b96fbaf4bcba189343a37983884df9c7a"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-dark-1024-text100-backup-default.png",
+          "sha256": "1d18ab98e770ea8823ab2ebe1dc79397524b45023ef6e0fab7e06d236d82bc16"
+        }
+      ],
+      "passed": true,
+      "knownUnrelatedResourceErrors": [],
+      "applicationConsoleErrors": []
+    },
+    {
+      "name": "light-1024-text100",
+      "width": 1024,
+      "height": 1000,
+      "theme": "light",
+      "fontScale": 1,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "checks": {
+        "advancedDefaultCollapsed": true,
+        "advancedActionAccessible": true,
+        "escapeClosesAndRestoresFocus": true,
+        "tabOutsideClosesAndHiddenActionsSkipped": true,
+        "outsideClickCloses": true,
+        "modalDefaultCollapsedAndHiddenActionsUnavailable": true,
+        "troubleshootingExplicitlyAccessible": true,
+        "deletionRequiresFurtherConfirmation": true,
+        "modalFocusTrap": true,
+        "modalCloseRestoresVisibleTriggerFocus": true
+      },
+      "measurements": {
+        "font": {
+          "rootPixels": 16,
+          "bodyPixels": 16
+        },
+        "menuDefault": {
+          "x": 8,
+          "y": 156,
+          "width": 304,
+          "height": 174.59375,
+          "right": 312,
+          "bottom": 330.59375,
+          "viewportWidth": 1024,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "menuAdvanced": {
+          "x": 8,
+          "y": 156,
+          "width": 304,
+          "height": 218.59375,
+          "right": 312,
+          "bottom": 374.59375,
+          "viewportWidth": 1024,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "modalDefault": {
+          "x": 192,
+          "y": 121.265625,
+          "width": 640,
+          "height": 757.46875,
+          "right": 832,
+          "bottom": 878.734375,
+          "viewportWidth": 1024,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "troubleshooting": {
+          "x": 192,
+          "y": 24,
+          "width": 640,
+          "height": 952,
+          "right": 832,
+          "bottom": 976,
+          "viewportWidth": 1024,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "deletionDisclosure": {
+          "x": 192,
+          "y": 63.875,
+          "width": 640,
+          "height": 872.234375,
+          "right": 832,
+          "bottom": 936.109375,
+          "viewportWidth": 1024,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        }
+      },
+      "screenshots": [
+        {
+          "path": "docs/evidence/workspace-simplification-light-1024-text100-menu-default.png",
+          "sha256": "97a1dcbd2bedd3f6616025f5f13ec31dbc99654dd37cf05fc380db01fde8ae37"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-light-1024-text100-menu-advanced.png",
+          "sha256": "4ab826fcf08e2b34dcfe59ce90e971b1359cd08ffae944d12c00165ec62de2b0"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-light-1024-text100-backup-default.png",
+          "sha256": "03a2292271273dca2cf7ec8b7e753041bd462ec5e871a3fda7fcfbd03f00be7b"
+        }
+      ],
+      "passed": true,
+      "knownUnrelatedResourceErrors": [],
+      "applicationConsoleErrors": []
+    },
+    {
+      "name": "dark-390-text100",
+      "width": 390,
+      "height": 900,
+      "theme": "dark",
+      "fontScale": 1,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "checks": {
+        "advancedDefaultCollapsed": true,
+        "advancedActionAccessible": true,
+        "escapeClosesAndRestoresFocus": true,
+        "tabOutsideClosesAndHiddenActionsSkipped": true,
+        "outsideClickCloses": true,
+        "modalDefaultCollapsedAndHiddenActionsUnavailable": true,
+        "troubleshootingExplicitlyAccessible": true,
+        "deletionRequiresFurtherConfirmation": true,
+        "modalFocusTrap": true,
+        "modalCloseRestoresVisibleTriggerFocus": true
+      },
+      "measurements": {
+        "font": {
+          "rootPixels": 16,
+          "bodyPixels": 16
+        },
+        "menuDefault": {
+          "x": 70,
+          "y": 240,
+          "width": 304,
+          "height": 174.59375,
+          "right": 374,
+          "bottom": 414.59375,
+          "viewportWidth": 390,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "menuAdvanced": {
+          "x": 70,
+          "y": 240,
+          "width": 304,
+          "height": 218.59375,
+          "right": 374,
+          "bottom": 458.59375,
+          "viewportWidth": 390,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "modalDefault": {
+          "x": 12,
+          "y": 37.171875,
+          "width": 366,
+          "height": 825.640625,
+          "right": 378,
+          "bottom": 862.8125,
+          "viewportWidth": 390,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 364,
+          "clientWidth": 364,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "troubleshooting": {
+          "x": 12,
+          "y": 12,
+          "width": 366,
+          "height": 876,
+          "right": 378,
+          "bottom": 888,
+          "viewportWidth": 390,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 364,
+          "clientWidth": 364,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "deletionDisclosure": {
+          "x": 12,
+          "y": 12,
+          "width": 366,
+          "height": 876,
+          "right": 378,
+          "bottom": 888,
+          "viewportWidth": 390,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 364,
+          "clientWidth": 364,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        }
+      },
+      "screenshots": [
+        {
+          "path": "docs/evidence/workspace-simplification-dark-390-text100-menu-default.png",
+          "sha256": "f31c75c09e23ec6ae2354e169332618692c3f4058c6ade2aa9b2af1a6c1d535c"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-dark-390-text100-menu-advanced.png",
+          "sha256": "f705353e789a5e2e680d454d37afefe5b31ff239e95f18f77eeeff233bb39ea0"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-dark-390-text100-backup-default.png",
+          "sha256": "00e2679391d399131bd94999cdf96709250a7201d080c25b9776e76f3a166869"
+        }
+      ],
+      "passed": true,
+      "knownUnrelatedResourceErrors": [],
+      "applicationConsoleErrors": []
+    },
+    {
+      "name": "light-390-text100",
+      "width": 390,
+      "height": 900,
+      "theme": "light",
+      "fontScale": 1,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "checks": {
+        "advancedDefaultCollapsed": true,
+        "advancedActionAccessible": true,
+        "escapeClosesAndRestoresFocus": true,
+        "tabOutsideClosesAndHiddenActionsSkipped": true,
+        "outsideClickCloses": true,
+        "modalDefaultCollapsedAndHiddenActionsUnavailable": true,
+        "troubleshootingExplicitlyAccessible": true,
+        "deletionRequiresFurtherConfirmation": true,
+        "modalFocusTrap": true,
+        "modalCloseRestoresVisibleTriggerFocus": true
+      },
+      "measurements": {
+        "font": {
+          "rootPixels": 16,
+          "bodyPixels": 16
+        },
+        "menuDefault": {
+          "x": 70,
+          "y": 240,
+          "width": 304,
+          "height": 174.59375,
+          "right": 374,
+          "bottom": 414.59375,
+          "viewportWidth": 390,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "menuAdvanced": {
+          "x": 70,
+          "y": 240,
+          "width": 304,
+          "height": 218.59375,
+          "right": 374,
+          "bottom": 458.59375,
+          "viewportWidth": 390,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "modalDefault": {
+          "x": 12,
+          "y": 37.171875,
+          "width": 366,
+          "height": 825.640625,
+          "right": 378,
+          "bottom": 862.8125,
+          "viewportWidth": 390,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 364,
+          "clientWidth": 364,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "troubleshooting": {
+          "x": 12,
+          "y": 12,
+          "width": 366,
+          "height": 876,
+          "right": 378,
+          "bottom": 888,
+          "viewportWidth": 390,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 364,
+          "clientWidth": 364,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "deletionDisclosure": {
+          "x": 12,
+          "y": 12,
+          "width": 366,
+          "height": 876,
+          "right": 378,
+          "bottom": 888,
+          "viewportWidth": 390,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 364,
+          "clientWidth": 364,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        }
+      },
+      "screenshots": [
+        {
+          "path": "docs/evidence/workspace-simplification-light-390-text100-menu-default.png",
+          "sha256": "7d6e2f0576f3f258e6d6c86bbecf5a918d1d820893da68a72d22114aef8c3ab2"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-light-390-text100-menu-advanced.png",
+          "sha256": "2b6f2f290cb484c7481dbbcdafee90add1ff66d68985785bdd95d687bf32932d"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-light-390-text100-backup-default.png",
+          "sha256": "a0854809a2bd58504b35d89d55cd5721d8975b4dda318e485dc2910a27e527d0"
+        }
+      ],
+      "passed": true,
+      "knownUnrelatedResourceErrors": [],
+      "applicationConsoleErrors": []
+    },
+    {
+      "name": "dark-320-text100",
+      "width": 320,
+      "height": 900,
+      "theme": "dark",
+      "fontScale": 1,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "checks": {
+        "advancedDefaultCollapsed": true,
+        "advancedActionAccessible": true,
+        "escapeClosesAndRestoresFocus": true,
+        "tabOutsideClosesAndHiddenActionsSkipped": true,
+        "outsideClickCloses": true,
+        "modalDefaultCollapsedAndHiddenActionsUnavailable": true,
+        "troubleshootingExplicitlyAccessible": true,
+        "deletionRequiresFurtherConfirmation": true,
+        "modalFocusTrap": true,
+        "modalCloseRestoresVisibleTriggerFocus": true
+      },
+      "measurements": {
+        "font": {
+          "rootPixels": 16,
+          "bodyPixels": 16
+        },
+        "menuDefault": {
+          "x": 8,
+          "y": 284,
+          "width": 304,
+          "height": 174.59375,
+          "right": 312,
+          "bottom": 458.59375,
+          "viewportWidth": 320,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "menuAdvanced": {
+          "x": 8,
+          "y": 284,
+          "width": 304,
+          "height": 218.59375,
+          "right": 312,
+          "bottom": 502.59375,
+          "viewportWidth": 320,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "modalDefault": {
+          "x": 12,
+          "y": 12,
+          "width": 296,
+          "height": 876,
+          "right": 308,
+          "bottom": 888,
+          "viewportWidth": 320,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 294,
+          "clientWidth": 294,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "troubleshooting": {
+          "x": 12,
+          "y": 12,
+          "width": 296,
+          "height": 876,
+          "right": 308,
+          "bottom": 888,
+          "viewportWidth": 320,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 294,
+          "clientWidth": 294,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "deletionDisclosure": {
+          "x": 12,
+          "y": 12,
+          "width": 296,
+          "height": 876,
+          "right": 308,
+          "bottom": 888,
+          "viewportWidth": 320,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 294,
+          "clientWidth": 294,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        }
+      },
+      "screenshots": [
+        {
+          "path": "docs/evidence/workspace-simplification-dark-320-text100-menu-default.png",
+          "sha256": "07f0c5ddcdc76f7d4ee809fbc78301deeff6831c0b4e97539754e4e32674a27f"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-dark-320-text100-menu-advanced.png",
+          "sha256": "1f862266fc28dc614817482e42a4bee110cf1d8739920a3fe30cd30ca548debd"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-dark-320-text100-backup-default.png",
+          "sha256": "b5d1144b71e7716b60b09562d1c901500df4c0b1f44e30bab509a40ba74de0c6"
+        }
+      ],
+      "passed": true,
+      "knownUnrelatedResourceErrors": [],
+      "applicationConsoleErrors": []
+    },
+    {
+      "name": "light-320-text100",
+      "width": 320,
+      "height": 900,
+      "theme": "light",
+      "fontScale": 1,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "checks": {
+        "advancedDefaultCollapsed": true,
+        "advancedActionAccessible": true,
+        "escapeClosesAndRestoresFocus": true,
+        "tabOutsideClosesAndHiddenActionsSkipped": true,
+        "outsideClickCloses": true,
+        "modalDefaultCollapsedAndHiddenActionsUnavailable": true,
+        "troubleshootingExplicitlyAccessible": true,
+        "deletionRequiresFurtherConfirmation": true,
+        "modalFocusTrap": true,
+        "modalCloseRestoresVisibleTriggerFocus": true
+      },
+      "measurements": {
+        "font": {
+          "rootPixels": 16,
+          "bodyPixels": 16
+        },
+        "menuDefault": {
+          "x": 8,
+          "y": 284,
+          "width": 304,
+          "height": 174.59375,
+          "right": 312,
+          "bottom": 458.59375,
+          "viewportWidth": 320,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "menuAdvanced": {
+          "x": 8,
+          "y": 284,
+          "width": 304,
+          "height": 218.59375,
+          "right": 312,
+          "bottom": 502.59375,
+          "viewportWidth": 320,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "modalDefault": {
+          "x": 12,
+          "y": 12,
+          "width": 296,
+          "height": 876,
+          "right": 308,
+          "bottom": 888,
+          "viewportWidth": 320,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 294,
+          "clientWidth": 294,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "troubleshooting": {
+          "x": 12,
+          "y": 12,
+          "width": 296,
+          "height": 876,
+          "right": 308,
+          "bottom": 888,
+          "viewportWidth": 320,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 294,
+          "clientWidth": 294,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "deletionDisclosure": {
+          "x": 12,
+          "y": 12,
+          "width": 296,
+          "height": 876,
+          "right": 308,
+          "bottom": 888,
+          "viewportWidth": 320,
+          "viewportHeight": 900,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 294,
+          "clientWidth": 294,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        }
+      },
+      "screenshots": [
+        {
+          "path": "docs/evidence/workspace-simplification-light-320-text100-menu-default.png",
+          "sha256": "f5f201536239ef6a8043218875d22b6018d3fffbc470302c82a5efb02989b957"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-light-320-text100-menu-advanced.png",
+          "sha256": "1730f79ce9c7aa3cfbe7a46eb6aecf207df896e52973ac3869a95bb7fb8729e4"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-light-320-text100-backup-default.png",
+          "sha256": "02687834bf1be918b72e6410e021ac89f1b1838f00d343cc48c0c5ed3d20623c"
+        }
+      ],
+      "passed": true,
+      "knownUnrelatedResourceErrors": [],
+      "applicationConsoleErrors": []
+    },
+    {
+      "name": "dark-1440-text200",
+      "width": 1440,
+      "height": 1000,
+      "theme": "dark",
+      "fontScale": 2,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "checks": {
+        "advancedDefaultCollapsed": true,
+        "advancedActionAccessible": true,
+        "escapeClosesAndRestoresFocus": true,
+        "tabOutsideClosesAndHiddenActionsSkipped": true,
+        "outsideClickCloses": true,
+        "modalDefaultCollapsedAndHiddenActionsUnavailable": true,
+        "troubleshootingExplicitlyAccessible": true,
+        "deletionRequiresFurtherConfirmation": true,
+        "modalFocusTrap": true,
+        "modalCloseRestoresVisibleTriggerFocus": true
+      },
+      "measurements": {
+        "font": {
+          "rootPixels": 32,
+          "bodyPixels": 32
+        },
+        "menuDefault": {
+          "x": 8,
+          "y": 226,
+          "width": 304,
+          "height": 359.375,
+          "right": 312,
+          "bottom": 585.375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "menuAdvanced": {
+          "x": 8,
+          "y": 226,
+          "width": 304,
+          "height": 475.375,
+          "right": 312,
+          "bottom": 701.375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "modalDefault": {
+          "x": 400,
+          "y": 24,
+          "width": 640,
+          "height": 952,
+          "right": 1040,
+          "bottom": 976,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "troubleshooting": {
+          "x": 400,
+          "y": 24,
+          "width": 640,
+          "height": 952,
+          "right": 1040,
+          "bottom": 976,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "deletionDisclosure": {
+          "x": 400,
+          "y": 24,
+          "width": 640,
+          "height": 952,
+          "right": 1040,
+          "bottom": 976,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        }
+      },
+      "screenshots": [
+        {
+          "path": "docs/evidence/workspace-simplification-dark-1440-text200-menu-default.png",
+          "sha256": "1b5eb842ed4e2b33e5448051e1b2a40a507b1d92a340bd0c3eeef9abb79f950a"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-dark-1440-text200-menu-advanced.png",
+          "sha256": "4d82fb1c5a9b3e3c634fb5d20703795bcfe8c41d92be031d3cc4e638830c07c2"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-dark-1440-text200-backup-default.png",
+          "sha256": "d90abe4eb5f0f8e9234a5f751a8de02621e45a3d477b6998e06d94987ccd04c4"
+        }
+      ],
+      "passed": true,
+      "knownUnrelatedResourceErrors": [],
+      "applicationConsoleErrors": []
+    },
+    {
+      "name": "light-1440-text200",
+      "width": 1440,
+      "height": 1000,
+      "theme": "light",
+      "fontScale": 2,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "checks": {
+        "advancedDefaultCollapsed": true,
+        "advancedActionAccessible": true,
+        "escapeClosesAndRestoresFocus": true,
+        "tabOutsideClosesAndHiddenActionsSkipped": true,
+        "outsideClickCloses": true,
+        "modalDefaultCollapsedAndHiddenActionsUnavailable": true,
+        "troubleshootingExplicitlyAccessible": true,
+        "deletionRequiresFurtherConfirmation": true,
+        "modalFocusTrap": true,
+        "modalCloseRestoresVisibleTriggerFocus": true
+      },
+      "measurements": {
+        "font": {
+          "rootPixels": 32,
+          "bodyPixels": 32
+        },
+        "menuDefault": {
+          "x": 8,
+          "y": 226,
+          "width": 304,
+          "height": 359.375,
+          "right": 312,
+          "bottom": 585.375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "menuAdvanced": {
+          "x": 8,
+          "y": 226,
+          "width": 304,
+          "height": 475.375,
+          "right": 312,
+          "bottom": 701.375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "modalDefault": {
+          "x": 400,
+          "y": 24,
+          "width": 640,
+          "height": 952,
+          "right": 1040,
+          "bottom": 976,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "troubleshooting": {
+          "x": 400,
+          "y": 24,
+          "width": 640,
+          "height": 952,
+          "right": 1040,
+          "bottom": 976,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "deletionDisclosure": {
+          "x": 400,
+          "y": 24,
+          "width": 640,
+          "height": 952,
+          "right": 1040,
+          "bottom": 976,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        }
+      },
+      "screenshots": [
+        {
+          "path": "docs/evidence/workspace-simplification-light-1440-text200-menu-default.png",
+          "sha256": "54eb1a0867e2a842e80e01400f743c74f10c80221d29f060281ddac130524e62"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-light-1440-text200-menu-advanced.png",
+          "sha256": "33abc4202cce42001b0038b9c92a027adbc4c6453a038b7f7a0ce5c2ac04981b"
+        },
+        {
+          "path": "docs/evidence/workspace-simplification-light-1440-text200-backup-default.png",
+          "sha256": "7bd6917841a8e6156769ac1ba241f6ff2f9a1ccad1124c86ab970c942ac38c89"
+        }
+      ],
+      "passed": true,
+      "knownUnrelatedResourceErrors": [],
+      "applicationConsoleErrors": []
+    }
+  ],
+  "errors": [],
+  "passed": true,
+  "sourceFiles": [
+    {
+      "path": "apps/web/src/components/LocalDataDialog.tsx",
+      "sha256": "45e10a686041527199be2d5e727a7ed44745aca2e9ede3b7d4b7ef07e8d115ab"
+    },
+    {
+      "path": "apps/web/src/components/WorkspaceManagement.css",
+      "sha256": "c0e90c8348e64fdd090a71c12cbcf782dbb75fff6ff8ed86686a6297bfb3bfd0"
+    },
+    {
+      "path": "apps/web/src/components/WorkspaceMenu.tsx",
+      "sha256": "9429828387bb32cfa389a6921a8793925bde165a2717854ca698ee963813b248"
+    },
+    {
+      "path": "apps/web/src/components/WorkspaceMenu.css",
+      "sha256": "981c8f8ef0b80f044e432f82652221cfd1ce0e2fd35f37600d97c4918fc60052"
+    }
+  ],
+  "build": {
+    "manifestPath": "dist/offline-manifest.json",
+    "manifestSha256": "b33cfbc597bb2bcc4dd502113bfac9529cddbd24a2320086cf020eb59ba291ea",
+    "appVersion": "0.17.1",
+    "releaseId": "293909813ca868b94a8b1661441b6617501237f7c514bcd063652cd1a60542c8"
+  },
+  "visualReview": {
+    "reviewedAt": "2026-10-03T15:10:37.130Z",
+    "reviewer": "simplify_workspace_dialog agent using view_image",
+    "screenshotsReviewed": 30,
+    "checks": [
+      "Every default menu, expanded advanced menu, and default backup dialog screenshot was visually inspected in each of the ten conditions.",
+      "New menu contents remain inside viewport after the 1024 px and enlarged text positioning correction.",
+      "Text is readable without horizontal clipping; 200% text and short mobile dialogs use normal vertical scrolling, and disclosure actions/closing controls were reached during keyboard tests."
+    ],
+    "passed": true
+  },
+  "initialFindings": {
+    "initialReportPath": "docs/evidence/workspace-simplification-ui-initial-findings.json",
+    "initialReportSha256": "6f308cb1959c1711607031dd968312403b369ce347850fe413da5c0158ded670",
+    "initial1024ScreenshotPath": "docs/evidence/workspace-simplification-initial-1024-left-edge.png",
+    "initial1024ScreenshotSha256": "e32613dbfdbeeb89f379d6d8cd8f6bb1b90d779c7f12e92528ff2c9d9df573d7",
+    "fixedIssue": "Header wrapping placed the workspace trigger at the left edge at 1024 px and at 1440 px with 200% text. The previously right-aligned absolute menu extended outside the viewport. The corrected fixed menu is clamped to an 8 px viewport margin.",
+    "unrelatedKnownResource": "The first Chromium context requests /favicon.ico automatically and receives the existing 404. That exact resource error remains in raw consoleErrors and knownUnrelatedResourceErrors; applicationConsoleErrors and pageErrors are empty."
+  },
+  "counts": {
+    "conditions": 10,
+    "screenshots": 30,
+    "pageErrors": 0,
+    "applicationConsoleErrors": 0,
+    "knownUnrelatedResourceErrors": 1
+  }
+}

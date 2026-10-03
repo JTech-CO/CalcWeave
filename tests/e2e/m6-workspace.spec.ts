@@ -1,10 +1,11 @@
 import { expect, test, type Page } from '@playwright/test';
+import { expandLocalReset, expandStorageTroubleshooting, openWorkspaceBackup, workspaceMenuTrigger } from './workspace-tools';
 import { readFile } from 'node:fs/promises';
 import { createExample } from '../../apps/web/src/examples';
 import { BLOCK_REGISTRY } from '../../packages/block-library/src';
 import { getReleaseCatalog } from '../../packages/release/src';
 
-async function open(page: Page) { await page.goto('/'); await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨'); }
+async function open(page: Page) { await page.goto('./'); await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨'); }
 async function importExample(page: Page, id: Parameters<typeof createExample>[0]) {
   const model = createExample(id);
   await page.getByLabel('CalcWeave 모델 파일 선택').setInputFiles({ name: 'm6.cw.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(model)) });
@@ -14,7 +15,29 @@ async function importExample(page: Page, id: Parameters<typeof createExample>[0]
 }
 async function download(page: Page, label: string) { const pending = page.waitForEvent('download'); await page.getByRole('button', { name: label, exact: true }).click(); return readFile((await (await pending).path())!); }
 async function stored(page: Page, key: string): Promise<unknown> { return page.evaluate(async key => new Promise((resolve, reject) => { const opening = indexedDB.open('calcweave-m0', 1); opening.onsuccess = () => { const db = opening.result, tx = db.transaction('models', 'readonly'), reading = tx.objectStore('models').get(key); reading.onsuccess = () => resolve(reading.result); tx.oncomplete = () => db.close(); tx.onerror = () => reject(new Error('Read failed')); }; opening.onerror = () => reject(new Error('Open failed')); }), key); }
-async function manage(page: Page) { await page.getByRole('button', { name: '로컬 데이터 관리', exact: true }).click(); await expect(page.getByRole('dialog', { name: '로컬 데이터 관리' })).toBeVisible(); }
+async function manage(page: Page) { await openWorkspaceBackup(page); await expect(page.getByRole('dialog', { name: '백업·복구', exact: true })).toBeVisible(); }
+
+test('Workspace backup starts with essential actions while storage diagnostics and deletion stay collapsed', async ({ page }) => {
+  await open(page);
+  const header = page.locator('.header-actions');
+  await expect(header.getByRole('button', { name: '모델 패키지 공유', exact: true })).toBeHidden();
+  await expect(header.getByRole('button', { name: '로컬 데이터 관리', exact: true })).toHaveCount(0);
+  await manage(page);
+  const dialog = page.getByRole('dialog', { name: '백업·복구', exact: true });
+  await expect(dialog.getByRole('button', { name: '작업 공간 백업 다운로드', exact: true })).toBeVisible();
+  await expect(dialog.getByRole('button', { name: '백업 파일 선택', exact: true })).toBeVisible();
+  await expect(dialog.getByText('사이트 사용량 추정', { exact: true })).toBeHidden();
+  await expect(dialog.getByRole('button', { name: '로컬 진단 다운로드', exact: true })).toBeHidden();
+  await expect(dialog.getByRole('button', { name: '로컬 데이터 삭제 확인', exact: true })).toBeHidden();
+  await expect(dialog.locator('.fingerprint-value')).toHaveCount(0);
+  await expandStorageTroubleshooting(page);
+  await expect(dialog.getByText('사이트 사용량 추정', { exact: true })).toBeVisible();
+  await expect(dialog.getByRole('button', { name: '현재 모델 원본 다운로드', exact: true })).toBeVisible();
+  await expect(dialog.getByRole('button', { name: '로컬 진단 다운로드', exact: true })).toBeVisible();
+  await expect(dialog.getByRole('button', { name: '로컬 데이터 삭제 확인', exact: true })).toBeHidden();
+  await page.keyboard.press('Escape');
+  await expect(workspaceMenuTrigger(page)).toBeFocused();
+});
 
 test('M6 support reads all registry metadata, searches parameters and filters actual execution modes', async ({ page }) => {
   await open(page); await page.getByRole('button', { name: '지원·릴리스', exact: true }).click();
@@ -80,9 +103,9 @@ test('M6 corrupted and unsupported backup drafts never change saved model or exe
 test('M6 damaged slots remain downloadable while closed-field diagnostics exclude model text and values', async ({ page }) => {
   const secret = 'SENSITIVE-MODEL-TEXT-991'; // vsf-ignore: synthetic diagnostic-redaction fixture, not a credential.
   await open(page); await page.evaluate(async secret => new Promise<void>((resolve, reject) => { const request = indexedDB.open('calcweave-m0', 1); request.onsuccess = () => { const db = request.result, tx = db.transaction('models', 'readwrite'); tx.objectStore('models').put({ schemaVersion: 999, secret, values: [87654321] }, 'current'); tx.oncomplete = () => { db.close(); resolve(); }; tx.onerror = () => reject(new Error('Write failed')); }; }), secret);
-  await page.reload(); await expect(page.locator('.save-recovery-banner')).toBeVisible(); await manage(page); await page.getByRole('button', { name: '저장 상태', exact: true }).click();
+  await page.reload(); await expect(page.locator('.save-recovery-banner')).toBeVisible(); await manage(page); await expandStorageTroubleshooting(page);
   const original = await download(page, '현재 모델 원본 다운로드'); expect(original.toString('utf8')).toContain(secret);
-  await page.getByRole('button', { name: '로컬 진단', exact: true }).click(); const diagnostics = JSON.parse((await download(page, '로컬 진단 다운로드')).toString('utf8'));
+  await expandStorageTroubleshooting(page); const diagnostics = JSON.parse((await download(page, '로컬 진단 다운로드')).toString('utf8'));
   expect(diagnostics.format).toBe('calcweave-local-diagnostics'); expect(JSON.stringify(diagnostics)).not.toContain(secret); expect(JSON.stringify(diagnostics)).not.toContain('87654321');
   for (const entry of diagnostics.records) expect(Object.keys(entry).sort()).toEqual(['at', 'code', 'context', 'engineVersion']);
   expect(await stored(page, 'current')).toEqual(JSON.parse(original.toString('utf8')));
@@ -90,7 +113,7 @@ test('M6 damaged slots remain downloadable while closed-field diagnostics exclud
 
 test('M6 local reset requires an explicit second step and preserves unrelated browser preferences', async ({ page }) => {
   await open(page); const model = await importExample(page, 'lookup-2d-nonuniform'); await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨');
-  await page.evaluate(() => { localStorage.setItem('unrelated-setting', 'preserve'); localStorage.setItem('calcweave.theme', 'light'); }); await manage(page); await page.getByRole('button', { name: '데이터 삭제', exact: true }).click();
+  await page.evaluate(() => { localStorage.setItem('unrelated-setting', 'preserve'); localStorage.setItem('calcweave.theme', 'light'); }); await manage(page); await expandLocalReset(page);
   await page.getByRole('button', { name: '로컬 데이터 삭제 확인', exact: true }).click(); await expect(page.getByRole('button', { name: '영구 삭제 후 다시 열기' })).toBeDisabled();
   expect((await stored(page, 'current') as { modelId: string }).modelId).toBe(model.modelId);
   await page.getByLabel('백업을 확인했으며 로컬 데이터를 삭제합니다.').check(); await page.getByRole('button', { name: '영구 삭제 후 다시 열기' }).click();
@@ -113,8 +136,9 @@ for (const width of [320, 390]) for (const theme of ['dark', 'light'] as const) 
 test('M6 policies use local static routes and identify the actual operator without remote form submissions', async ({ page, context }) => {
   await open(page); await page.getByRole('button', { name: '지원·릴리스', exact: true }).click(); await page.getByRole('button', { name: '정책·로컬 저장', exact: true }).click();
   await expect(page.getByRole('dialog')).toContainText('JTech-Co'); await expect(page.getByRole('dialog')).toContainText('jtech-bryan@proton.me');
-  for (const [label, path] of [['개인정보 처리방침', '/privacy/'], ['이용약관', '/terms/'], ['쿠키·로컬 저장 안내', '/cookies/'], ['릴리스·오픈소스 고지', '/notices/']] as const) {
-    await expect(page.getByRole('link', { name: label, exact: true })).toHaveAttribute('href', path);
-    const policy = await context.newPage(); await policy.goto(path); await expect(policy.locator('h1')).toBeVisible(); expect(new URL(policy.url()).origin).toBe(new URL(page.url()).origin); await policy.close();
+  for (const [label, path] of [['개인정보 처리방침', 'privacy/'], ['이용약관', 'terms/'], ['쿠키·로컬 저장 안내', 'cookies/'], ['릴리스·오픈소스 고지', 'notices/']] as const) {
+    const policyUrl = new URL(path, page.url());
+    await expect(page.getByRole('link', { name: label, exact: true })).toHaveAttribute('href', policyUrl.pathname);
+    const policy = await context.newPage(); await policy.goto(policyUrl.href); await expect(policy.locator('h1')).toBeVisible(); expect(new URL(policy.url()).origin).toBe(new URL(page.url()).origin); await policy.close();
   }
 });

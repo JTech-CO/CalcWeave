@@ -5,6 +5,7 @@ import config from '../playwright.config';
 const verificationOrigin = process.env.CALCWEAVE_VERIFY_ORIGIN ?? 'http://127.0.0.1:4173';
 if (!/^http:\/\/127\.0\.0\.1:(?:4173|4175)$/.test(verificationOrigin)) throw new Error('Only dedicated local verification origins are allowed');
 import { createExample } from '../apps/web/src/examples';
+import { expandLocalReset, expandStorageTroubleshooting, openSignedPackage, openWorkspaceBackup } from '../tests/e2e/workspace-tools';
 const catalog = process.argv.includes('--catalog');
 const m7 = catalog || process.argv.includes('--m7');
 const m6 = m7 || process.argv.includes('--m6');
@@ -259,8 +260,16 @@ try {
         await page.getByRole('button', { name: '지원·릴리스', exact: true }).click();
         for (const [label, suffix] of [['지원 블록', 'catalog'], ['사용 방법', 'keyboard'], ['범위와 상한', 'limits'], ['정책·로컬 저장', 'policy']] as const) { await page.getByRole('button', { name: label, exact: true }).click(); await inspectDialog(`${theme}-${width}-support-${suffix}`); }
         await page.keyboard.press('Escape');
-        await page.getByRole('button', { name: '로컬 데이터 관리', exact: true }).click();
-        for (const [label, suffix] of [['백업·복구', 'backup'], ['저장 상태', 'storage'], ['로컬 진단', 'diagnostics'], ['데이터 삭제', 'reset']] as const) { await page.getByRole('button', { name: label, exact: true }).click(); if (suffix === 'reset') await page.getByRole('button', { name: '로컬 데이터 삭제 확인', exact: true }).click(); await inspectDialog(`${theme}-${width}-management-${suffix}`); }
+        await openWorkspaceBackup(page);
+        await inspectDialog(`${theme}-${width}-management-backup`);
+        await expandStorageTroubleshooting(page);
+        await inspectDialog(`${theme}-${width}-management-storage`);
+        await page.getByRole('heading', { name: '로컬 진단 기록', exact: true }).scrollIntoViewIfNeeded();
+        await inspectDialog(`${theme}-${width}-management-diagnostics`);
+        await page.getByText('저장 문제 해결', { exact: true }).click();
+        await expandLocalReset(page);
+        await page.getByRole('button', { name: '로컬 데이터 삭제 확인', exact: true }).click();
+        await inspectDialog(`${theme}-${width}-management-reset`);
         await page.keyboard.press('Escape');
       }
     }
@@ -275,7 +284,7 @@ try {
         await page.getByRole('button', { name: '코드 타깃 선택', exact: true }).click();
         for (const target of ['typescript', 'python']) { await page.getByRole('combobox', { name: '코드 타깃', exact: true }).selectOption(target); await page.getByRole('button', { name: target === 'python' ? 'Python 코드 다운로드' : 'TypeScript 코드 다운로드', exact: true }).waitFor(); await inspectDialog(`${theme}-${width}-code-${target}`); }
         await page.keyboard.press('Escape');
-        await page.getByRole('button', { name: '모델 패키지 공유', exact: true }).click();
+        await openSignedPackage(page);
         await page.getByRole('button', { name: '서명된 패키지 생성', exact: true }).click();
         await page.getByTestId('created-package-fingerprint').waitFor();
         await inspectDialog(`${theme}-${width}-package-export`);

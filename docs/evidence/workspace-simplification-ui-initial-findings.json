@@ -1,0 +1,343 @@
+{
+  "schemaVersion": 1,
+  "origin": "http://127.0.0.1:4175/",
+  "appVersion": "0.17.1",
+  "createdAt": "2026-10-03T15:01:34.576Z",
+  "passed": false,
+  "initialConditions": 10,
+  "failedConditions": [
+    {
+      "name": "dark-1440-text100",
+      "error": "Error: Console errors found\n    at assert (file:///C:/Users/MSI/Desktop/%EB%82%B4%20%ED%8F%B4%EB%8D%94/%EC%BD%94%EB%94%A9/%EA%B8%B0%ED%9A%8D/CalcWeave/.test-generated/workspace-simplification-ui-probe.mjs:10:64)\n    at run (file:///C:/Users/MSI/Desktop/%EB%82%B4%20%ED%8F%B4%EB%8D%94/%EC%BD%94%EB%94%A9/%EA%B8%B0%ED%9A%8D/CalcWeave/.test-generated/workspace-simplification-ui-probe.mjs:116:5)\n    at async file:///C:/Users/MSI/Desktop/%EB%82%B4%20%ED%8F%B4%EB%8D%94/%EC%BD%94%EB%94%A9/%EA%B8%B0%ED%9A%8D/CalcWeave/.test-generated/workspace-simplification-ui-probe.mjs:18:23",
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "pageErrors": [],
+      "measurements": {
+        "menuDefault": {
+          "x": 717.828125,
+          "y": 113,
+          "width": 304,
+          "height": 174.59375,
+          "right": 1021.828125,
+          "bottom": 287.59375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "menuAdvanced": {
+          "x": 717.828125,
+          "y": 113,
+          "width": 304,
+          "height": 218.59375,
+          "right": 1021.828125,
+          "bottom": 331.59375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "modalDefault": {
+          "x": 400,
+          "y": 121.265625,
+          "width": 640,
+          "height": 757.46875,
+          "right": 1040,
+          "bottom": 878.734375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "troubleshooting": {
+          "x": 400,
+          "y": 24,
+          "width": 640,
+          "height": 952,
+          "right": 1040,
+          "bottom": 976,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "deletionDisclosure": {
+          "x": 400,
+          "y": 63.875,
+          "width": 640,
+          "height": 872.234375,
+          "right": 1040,
+          "bottom": 936.109375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        }
+      }
+    },
+    {
+      "name": "dark-1024-text100",
+      "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.workspace-menu > summary')\u001b[22m\n\u001b[2m    - locator resolved to <summary aria-label=\"작업 공간\" title=\"백업·복구와 고급 파일\" class=\"icon-button workspace-menu-trigger\">…</summary>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" tabindex=\"-1\" aria-modal=\"true\" aria-labelledby=\"local-data-title\" class=\"workspace-dialog management-dialog\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" tabindex=\"-1\" aria-modal=\"true\" aria-labelledby=\"local-data-title\" class=\"workspace-dialog management-dialog\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    56 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <dialog open=\"\" tabindex=\"-1\" aria-modal=\"true\" aria-labelledby=\"local-data-title\" class=\"workspace-dialog management-dialog\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at run (C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\workspace-simplification-ui-probe.mjs:76:19)\n    at async file:///C:/Users/MSI/Desktop/%EB%82%B4%20%ED%8F%B4%EB%8D%94/%EC%BD%94%EB%94%A9/%EA%B8%B0%ED%9A%8D/CalcWeave/.test-generated/workspace-simplification-ui-probe.mjs:18:23",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "measurements": {
+        "menuDefault": {
+          "x": -248,
+          "y": 156,
+          "width": 304,
+          "height": 174.59375,
+          "right": 56,
+          "bottom": 330.59375,
+          "viewportWidth": 1024,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": false,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "menuAdvanced": {
+          "x": -248,
+          "y": 156,
+          "width": 304,
+          "height": 218.59375,
+          "right": 56,
+          "bottom": 374.59375,
+          "viewportWidth": 1024,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": false,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        }
+      }
+    },
+    {
+      "name": "light-1024-text100",
+      "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.workspace-menu > summary')\u001b[22m\n\u001b[2m    - locator resolved to <summary aria-label=\"작업 공간\" title=\"백업·복구와 고급 파일\" class=\"icon-button workspace-menu-trigger\">…</summary>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" tabindex=\"-1\" aria-modal=\"true\" aria-labelledby=\"local-data-title\" class=\"workspace-dialog management-dialog\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" tabindex=\"-1\" aria-modal=\"true\" aria-labelledby=\"local-data-title\" class=\"workspace-dialog management-dialog\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    56 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <dialog open=\"\" tabindex=\"-1\" aria-modal=\"true\" aria-labelledby=\"local-data-title\" class=\"workspace-dialog management-dialog\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at run (C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\workspace-simplification-ui-probe.mjs:76:19)\n    at async file:///C:/Users/MSI/Desktop/%EB%82%B4%20%ED%8F%B4%EB%8D%94/%EC%BD%94%EB%94%A9/%EA%B8%B0%ED%9A%8D/CalcWeave/.test-generated/workspace-simplification-ui-probe.mjs:18:23",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "measurements": {
+        "menuDefault": {
+          "x": -248,
+          "y": 156,
+          "width": 304,
+          "height": 174.59375,
+          "right": 56,
+          "bottom": 330.59375,
+          "viewportWidth": 1024,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": false,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "menuAdvanced": {
+          "x": -248,
+          "y": 156,
+          "width": 304,
+          "height": 218.59375,
+          "right": 56,
+          "bottom": 374.59375,
+          "viewportWidth": 1024,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": false,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        }
+      }
+    },
+    {
+      "name": "dark-1440-text200",
+      "error": "Error: menuDefault: horizontal bounds exceed viewport\n    at assert (file:///C:/Users/MSI/Desktop/%EB%82%B4%20%ED%8F%B4%EB%8D%94/%EC%BD%94%EB%94%A9/%EA%B8%B0%ED%9A%8D/CalcWeave/.test-generated/workspace-simplification-ui-probe.mjs:10:64)\n    at run (file:///C:/Users/MSI/Desktop/%EB%82%B4%20%ED%8F%B4%EB%8D%94/%EC%BD%94%EB%94%A9/%EA%B8%B0%ED%9A%8D/CalcWeave/.test-generated/workspace-simplification-ui-probe.mjs:112:7)\n    at async file:///C:/Users/MSI/Desktop/%EB%82%B4%20%ED%8F%B4%EB%8D%94/%EC%BD%94%EB%94%A9/%EA%B8%B0%ED%9A%8D/CalcWeave/.test-generated/workspace-simplification-ui-probe.mjs:20:59",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "measurements": {
+        "menuDefault": {
+          "x": -196,
+          "y": 226,
+          "width": 304,
+          "height": 359.375,
+          "right": 108,
+          "bottom": 585.375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": false,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "menuAdvanced": {
+          "x": -196,
+          "y": 226,
+          "width": 304,
+          "height": 475.375,
+          "right": 108,
+          "bottom": 701.375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": false,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "modalDefault": {
+          "x": 400,
+          "y": 24,
+          "width": 640,
+          "height": 952,
+          "right": 1040,
+          "bottom": 976,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "troubleshooting": {
+          "x": 400,
+          "y": 24,
+          "width": 640,
+          "height": 952,
+          "right": 1040,
+          "bottom": 976,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "deletionDisclosure": {
+          "x": 400,
+          "y": 24,
+          "width": 640,
+          "height": 952,
+          "right": 1040,
+          "bottom": 976,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        }
+      }
+    },
+    {
+      "name": "light-1440-text200",
+      "error": "Error: menuDefault: horizontal bounds exceed viewport\n    at assert (file:///C:/Users/MSI/Desktop/%EB%82%B4%20%ED%8F%B4%EB%8D%94/%EC%BD%94%EB%94%A9/%EA%B8%B0%ED%9A%8D/CalcWeave/.test-generated/workspace-simplification-ui-probe.mjs:10:64)\n    at run (file:///C:/Users/MSI/Desktop/%EB%82%B4%20%ED%8F%B4%EB%8D%94/%EC%BD%94%EB%94%A9/%EA%B8%B0%ED%9A%8D/CalcWeave/.test-generated/workspace-simplification-ui-probe.mjs:112:7)\n    at async file:///C:/Users/MSI/Desktop/%EB%82%B4%20%ED%8F%B4%EB%8D%94/%EC%BD%94%EB%94%A9/%EA%B8%B0%ED%9A%8D/CalcWeave/.test-generated/workspace-simplification-ui-probe.mjs:20:59",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "measurements": {
+        "menuDefault": {
+          "x": -196,
+          "y": 226,
+          "width": 304,
+          "height": 359.375,
+          "right": 108,
+          "bottom": 585.375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": false,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "menuAdvanced": {
+          "x": -196,
+          "y": 226,
+          "width": 304,
+          "height": 475.375,
+          "right": 108,
+          "bottom": 701.375,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": false,
+          "scrollWidth": 302,
+          "clientWidth": 302,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "modalDefault": {
+          "x": 400,
+          "y": 24,
+          "width": 640,
+          "height": 952,
+          "right": 1040,
+          "bottom": 976,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "troubleshooting": {
+          "x": 400,
+          "y": 24,
+          "width": 640,
+          "height": 952,
+          "right": 1040,
+          "bottom": 976,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        },
+        "deletionDisclosure": {
+          "x": 400,
+          "y": 24,
+          "width": 640,
+          "height": 952,
+          "right": 1040,
+          "bottom": 976,
+          "viewportWidth": 1440,
+          "viewportHeight": 1000,
+          "horizontalBoundsPass": true,
+          "scrollWidth": 638,
+          "clientWidth": 638,
+          "horizontalOverflowPass": true,
+          "visibleTextClipping": []
+        }
+      }
+    }
+  ],
+  "sourceReportSha256": "da5a917f544d4fc4cd748d539b618b767dd5a13c06959a7e2f0034bbf2c3729e",
+  "screenshot": {
+    "path": "docs/evidence/workspace-simplification-initial-1024-left-edge.png",
+    "sha256": "e32613dbfdbeeb89f379d6d8cd8f6bb1b90d779c7f12e92528ff2c9d9df573d7"
+  },
+  "resolution": "Corrected workspace menu positioning and reran all ten conditions. The existing automatic favicon.ico 404 remains separately recorded; no index.html change was made."
+}
