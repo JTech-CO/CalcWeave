@@ -11,7 +11,7 @@ export const MODEL_PACKAGE_LIMITS = Object.freeze({
   maxBytes: 6 * 1024 * 1024,
   maxDepth: MODEL_LIMITS.maxDepth + 4,
   maxValues: MODEL_LIMITS.maxValues + 10_000,
-  maxRegistryEntries: 256,
+  maxRegistryEntries: 512,
 });
 
 export interface ModelPackageInspection {
@@ -31,7 +31,7 @@ const registryEntrySchema = z.object({
   outputs: z.array(identifier).max(16),
   parameters: z.array(z.object({
     name: identifier,
-    kind: z.enum(['number', 'integer', 'value', 'numeric-vector', 'enum', 'expression', 'text', 'typed-value', 'data-type']),
+    kind: z.enum(['number', 'integer', 'value', 'numeric-vector', 'enum', 'expression', 'text', 'typed-value', 'data-type', 'signal-value']),
   }).strict()).max(16),
 }).strict();
 const packageSchema = z.object({

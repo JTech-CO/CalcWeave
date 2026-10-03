@@ -1,5 +1,6 @@
 import { M9_BLOCK_IDS } from '../packages/block-library/src/m9';
 import { M10_BLOCK_IDS } from '../packages/block-library/src/m10';
+import { M11_BLOCK_IDS } from '../packages/block-library/src/m11';
 import { M8_BLOCK_IDS } from '../packages/block-library/src/m8';
 import { describe, expect, it } from 'vitest';
 import { blockRegistry, getBlockDefinition, getBlockPorts } from '../packages/block-library/src';
@@ -30,7 +31,7 @@ function expectCode(model: unknown, code: string): void {
 
 describe('versioned block contracts', () => {
   it('exposes immutable M1/M2 contracts and extends scalar ODE execution with M3', () => {
-    expect(blockRegistry).toHaveLength(144 + M8_BLOCK_IDS.length + M9_BLOCK_IDS.length + M10_BLOCK_IDS.length);
+    expect(blockRegistry).toHaveLength(144 + M8_BLOCK_IDS.length + M9_BLOCK_IDS.length + M10_BLOCK_IDS.length + M11_BLOCK_IDS.length);
     expect(blockRegistry.filter((definition) => definition.state === 'continuous-state').every((definition) => definition.shape === 'scalar' && definition.valueType === 'float64')).toBe(true);
     expect(Object.isFrozen(blockRegistry)).toBe(true);
     expect(Object.isFrozen(blockRegistry[0]!.parameters)).toBe(true);

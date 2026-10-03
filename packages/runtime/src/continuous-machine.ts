@@ -6,7 +6,7 @@ export interface ContinuousEvent { nodeId: string; kind: 'crossing' | 'reset' | 
 type ContinuousMemory = { value?: SignalValue; previous?: number; previousTime?: number; priorTime?: number; slope?: number; on?: boolean; history?: { time: number; value: number }[]; historyStart?: number; historyLength?: number; jumpTimes?: number[]; jumpStart?: number; jumpLength?: number };
 
 /** Scalar ODE state and accepted-boundary memory. evaluate/derivative are pure. */
-export function createContinuousMachine(compiled: CompiledModel, charge: (node: IRNode) => void) {
+export function createContinuousMachine(compiled: CompiledModel, charge: (node: IRNode) => void, resolveNode: (node: IRNode) => IRNode = node => node) {
   const nodes = compiled.nodes;
   const byId = new Map(nodes.map((node) => [node.id, node]));
   const ranges = new Map<string, { start: number; length: number }>();
@@ -81,6 +81,7 @@ export function createContinuousMachine(compiled: CompiledModel, charge: (node: 
     }
   }
   function output(node: IRNode, state: number[], time: number, values: ContinuousValues, eventMask: Set<string>, sourceTime = time, reader?: (port: string) => SignalValue): Record<string, SignalValue> {
+    node = resolveNode(node);
     const p = node.parameters, x = vector(state, node), number = (key: string) => finiteNumber(p[key], node.id);
     const read = (port: string): SignalValue => reader ? reader(port) : input(values, node, port);
     const scalarInput = (): number => finiteNumber(read('in'), node.id);

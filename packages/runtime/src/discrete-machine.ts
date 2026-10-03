@@ -1,3 +1,5 @@
+import { M11_STATE_BLOCKS, m11InitialMemory, m11InitialOutput, m11IndependentOutput, m11Read, m11Commit, evaluateM11Node, type M11Memory, type M11Frame } from './m11';
+import { copyStateValue, zeroAnySignal } from '../../model/src/structured';
 import type { IRNode, SignalDescriptor, SignalValue, StateValue } from '../../model/src/types';
 import { checkSignal, copySignal, evaluateSignalNode, finiteNumber, interpolateTable, numericFailure, replayDataset, signalElements } from './kernels';
 import { M9_BLOCKS, M9_RANDOM_BLOCKS, m9InitialMemory, m9Read, m9Commit, m9IndependentOutput, type M9Memory } from './m9';
@@ -5,7 +7,7 @@ import { validateDataType, validateTypedSignal } from '../../model/src/typed';
 import { m10InitialMemory, m10InitialOutput, m10ReadState, m10CommitState, m10IndependentOutput, type M10Memory } from './m10';
 
 type PortValues = Map<string, Record<string, SignalValue>>;
-type Memory = M9Memory & { u?: number[]; y?: number[]; x?: number[]; buffer?: SignalValue };
+type Memory = M9Memory & M11Memory & { u?: number[]; y?: number[]; x?: number[]; buffer?: SignalValue };
 
 export const DISCRETE_BLOCKS = new Set([
   'source.step', 'source.ramp', 'source.sine-wave', 'source.pulse', 'source.clock', 'source.digital-clock',
@@ -28,6 +30,7 @@ function flatNumeric(value: SignalValue, id: string): number[] {
   return values.map((item) => finiteNumber(item, id));
 }
 function zeroSignal(descriptor: SignalDescriptor): SignalValue {
+  if (descriptor.valueType === 'bus' || descriptor.valueType === 'messages') return zeroAnySignal(descriptor);
   if (descriptor.valueType === 'typed') {
     const type = validateDataType(descriptor.typed);
     const element = type.dtype === 'complex128' ? { re: 0, im: 0 } : type.dtype === 'boolean' ? false : type.dtype === 'enum' ? type.enum!.labels[0]! : type.dtype === 'string' ? '' : type.dtype === 'float64' || type.dtype === 'float32' ? 0 : '0';
@@ -42,6 +45,7 @@ function due(node: IRNode, tick: number): boolean {
   return tick >= node.sampleTime.offset && (tick - node.sampleTime.offset) % node.sampleTime.period === 0;
 }
 function independentOutput(node: IRNode): boolean {
+  if (M11_STATE_BLOCKS.has(node.blockType)) return m11IndependentOutput(node);
   if (node.blockType === 'fixed.state-space') return m10IndependentOutput(node);
   if (M9_BLOCKS.has(node.blockType)) return m9IndependentOutput(node);
   switch (node.blockType) {
@@ -54,16 +58,20 @@ function independentOutput(node: IRNode): boolean {
 }
 
 /** A deterministic tick machine. The async browser and fixed standalone template use this contract. */
-export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseStep: number, startTime: number, charge: (node: IRNode) => void, producerNodes = nodes) {
+export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseStep: number, startTime: number, charge: (node: IRNode, explicitWork?: number, scopeInvocation?: boolean) => void, producerNodes = nodes) {
   const byId = new Map(producerNodes.map((node) => [node.id, node]));
   const held: PortValues = new Map();
   const memory = new Map<string, Memory>();
   const randomTicks = new Map<string, number>();
-  const extendedMemory = nodes.some((node) => DISCRETE_BLOCKS.has(node.blockType) && (node.blockType !== 'discrete.unit-delay'
+  const parameters = new Map<string, Record<string, unknown>>();
+  const writtenStates = new Map<string, Memory>();
+  const effective = (node: IRNode): IRNode => parameters.has(node.id) ? { ...node, parameters: { ...node.parameters, ...parameters.get(node.id)! } } : node;
+  const extendedMemory = nodes.some(node => node.blockType.startsWith('state.')) || nodes.some((node) => (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType)) && (node.blockType !== 'discrete.unit-delay'
     || Array.isArray(node.parameters.initial) || typeof node.parameters.initial === 'boolean'
     || node.parameters.reset === 'level' || node.sampleTime.period !== 1 || node.sampleTime.offset !== 0));
 
   function initialMemory(node: IRNode): Memory {
+    if (M11_STATE_BLOCKS.has(node.blockType)) return m11InitialMemory(node);
     if (node.blockType === 'fixed.state-space') return m10InitialMemory(node);
     if (M9_BLOCKS.has(node.blockType)) return m9InitialMemory(node, node.sampleTime.period * baseStep);
     const initial = node.parameters.initial as SignalValue;
@@ -92,6 +100,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     if (node.blockType === 'fixed.state-space') outputs.out = m10InitialOutput(node, state as M10Memory).out;
     if (node.blockType === 'discrete.fir') outputs.out = fir(node, state, undefined);
     if (node.blockType === 'discrete.transfer-function') outputs.out = transfer(node, state, undefined);
+    if (M11_STATE_BLOCKS.has(node.blockType)) Object.assign(outputs, m11InitialOutput(node, state));
     held.set(node.id, outputs);
   }
 
@@ -175,7 +184,14 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     const values = new Map([...(external ?? []), ...held]);
     const publications = new Map<string, Memory>();
     const nextHeld: PortValues = new Map();
+    const frame: M11Frame = {
+      readMemory: id => publications.get(id) ?? memory.get(id),
+      writeMemory: (id, state) => { if (!byId.has(id)) numericFailure('RUNTIME_INVALID_IR', id, '상태 대상이 없습니다.'); publications.set(id, state); writtenStates.set(id, state); },
+      readParameter: (id, key) => parameters.get(id)?.[key] ?? byId.get(id)?.parameters[key],
+      writeParameter: (id, key, value) => { if (!byId.has(id)) numericFailure('RUNTIME_INVALID_IR', id, '실행 값 대상이 없습니다.'); parameters.set(id, { ...parameters.get(id), [key]: value }); },
+    };
     const read = (node: IRNode, input: (port: string) => SignalValue): Record<string, SignalValue> => {
+      if (M11_STATE_BLOCKS.has(node.blockType)) { const result = m11Read(node, publications.get(node.id) ?? memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep, charge, frame); if (result.publicationMemory) publications.set(node.id, result.publicationMemory); return result.outputs; }
       if (node.blockType === 'fixed.state-space') return m10ReadState(node, memory.get(node.id)! as M10Memory, input);
       if (!M9_BLOCKS.has(node.blockType)) return { out: output(node, memory.get(node.id) ?? {}, input, tick, time) };
       const result = m9Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep);
@@ -188,18 +204,20 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     };
     // Non-feedthrough outputs must be visible even if their current input producer is later in the DAG.
     for (const node of nodes) if (due(node, tick) && independentOutput(node)) {
-      if (M9_RANDOM_BLOCKS.has(node.blockType) && (repeat || randomTicks.get(node.id) === tick)) continue;
+      if ((M9_RANDOM_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType)) && (repeat || randomTicks.get(node.id) === tick)) continue;
       charge(node);
       emit(node, read(node, () => numericFailure('RUNTIME_INVALID_IR', node.id, '상태 출력이 현재 입력에 의존할 수 없습니다.')));
     }
-    for (const node of nodes) {
+    for (const original of nodes) {
+      const node = effective(original);
       if (!due(node, tick) || independentOutput(node)) continue;
+      if (M11_STATE_BLOCKS.has(node.blockType) && (repeat || randomTicks.get(node.id) === tick)) continue;
       if (repeat && (node.blockType === 'source.random' || M9_RANDOM_BLOCKS.has(node.blockType))) continue;
       charge(node);
       const input = (port: string): SignalValue => readInput(values, node, port);
-      emit(node, DISCRETE_BLOCKS.has(node.blockType)
+      emit(node, (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType))
         ? read(node, input)
-        : evaluateSignalNode(node, input, undefined, time));
+        : evaluateM11Node(node, input, time, frame) ?? evaluateSignalNode(node, input, undefined, time));
     }
     // A failed output validation publishes no new RNG seed. The outer tick
     // checkpoint also restores held outputs and prior state transitions.
@@ -209,20 +227,23 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
   }
   /** One boundary node with lazy input reads. Seeded sources publish once per tick. */
   function evaluateNode(node: IRNode, tick: number, time: number, input: (port: string) => SignalValue, commit = true): Record<string, SignalValue> {
-    const random = node.blockType === 'source.random' || M9_RANDOM_BLOCKS.has(node.blockType);
+    node = effective(node);
+    const random = node.blockType === 'source.random' || M9_RANDOM_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType);
     if (!due(node, tick) || random && randomTicks.get(node.id) === tick) return held.get(node.id)!;
     charge(node);
-    const result = M9_BLOCKS.has(node.blockType) ? m9Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep) : undefined;
-    const outputs: Record<string, SignalValue> = result ? result.outputs : node.blockType === 'fixed.state-space' ? m10ReadState(node, memory.get(node.id)! as M10Memory, input) : DISCRETE_BLOCKS.has(node.blockType) ? { out: output(node, memory.get(node.id) ?? {}, input, tick, time) } : evaluateSignalNode(node, input, undefined, time);
+    const frame: M11Frame = { readMemory: id => memory.get(id), writeMemory: (id, state) => { if (commit) { memory.set(id, state); writtenStates.set(id, state); } }, readParameter: (id, key) => parameters.get(id)?.[key] ?? byId.get(id)?.parameters[key], writeParameter: (id, key, value) => { if (commit) parameters.set(id, { ...parameters.get(id), [key]: value }); } };
+    const result = M11_STATE_BLOCKS.has(node.blockType) ? m11Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep, charge, frame) : M9_BLOCKS.has(node.blockType) ? m9Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep) : undefined;
+    const outputs: Record<string, SignalValue> = result ? result.outputs : node.blockType === 'fixed.state-space' ? m10ReadState(node, memory.get(node.id)! as M10Memory, input) : (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType)) ? { out: output(node, memory.get(node.id) ?? {}, input, tick, time) } : evaluateM11Node(node, input, time, frame, charge) ?? evaluateSignalNode(node, input, undefined, time);
     for (const [port, descriptor] of Object.entries(node.outputs)) checkSignal(outputs[port], descriptor, node.id);
     if (commit || random) held.set(node.id, outputs);
     if (result?.publicationMemory && (commit || random)) memory.set(node.id, result.publicationMemory);
     if (random) randomTicks.set(node.id, tick);
     return outputs;
   }
-  function transition(values: PortValues, tick: number): void {
+  function transition(values: PortValues, tick: number, parentTime?: number): void {
     const next = new Map<string, Memory>();
-    for (const node of nodes) {
+    for (const original of nodes) {
+      const node = effective(original);
       const state = memory.get(node.id);
       if (!state || node.blockType === 'source.random') continue;
       // Publication belongs to producer hits, independently of the receiving rate.
@@ -233,12 +254,13 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
       }
       if (!due(node, tick)) continue;
       charge(node);
+      if (M11_STATE_BLOCKS.has(node.blockType)) { next.set(node.id, m11Commit(node, state, port => readInput(values, node, port), values.get(node.id)!, tick, parentTime ?? startTime + tick * baseStep, node.sampleTime.period * baseStep, charge)); continue; }
       if (node.blockType === 'fixed.state-space') {
         next.set(node.id, m10CommitState(node, state as M10Memory, (port) => readInput(values, node, port)));
         continue;
       }
       if (M9_BLOCKS.has(node.blockType)) {
-        next.set(node.id, m9Commit(node, state, (port) => readInput(values, node, port), values.get(node.id)!, tick, startTime + tick * baseStep, node.sampleTime.period * baseStep));
+        next.set(node.id, m9Commit(node, state, (port) => readInput(values, node, port), values.get(node.id)!, tick, parentTime ?? startTime + tick * baseStep, node.sampleTime.period * baseStep));
         continue;
       }
       if (node.parameters.reset === 'level') {
@@ -267,27 +289,35 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
       }
     }
     for (const [id, state] of next) memory.set(id, state);
+    // Explicit frame writers own the final approved slot commit for this tick.
+    for (const [id, state] of writtenStates) memory.set(id, state);
+    writtenStates.clear();
   }
   function finalState(): Record<string, SignalValue> {
-    return Object.fromEntries(stateIds.map((id) => {
-      return [id, copySignal(held.get(id)!.out!)];
+    return Object.fromEntries(stateIds.filter(id => Object.keys(held.get(id)!).length > 0).map((id) => {
+      const outputs = held.get(id)!;
+      return [id, outputs.out !== undefined ? copySignal(outputs.out) : { kind: 'bus', fields: Object.entries(outputs).map(([name, value]) => ({ name, value: copySignal(value) })) } as SignalValue];
     }));
   }
   function stateMemory(force = false): Record<string, StateValue> | undefined {
-    if (!extendedMemory && !force) return undefined;
+    if (!extendedMemory && !force && !parameters.size) return undefined;
     // Compiler-owned parameters never appear here; the snapshot owns every returned array.
-    return Object.fromEntries([...memory].map(([id, state]) => [id, JSON.parse(JSON.stringify(state)) as StateValue]));
+    const result: Record<string, StateValue> = Object.fromEntries([...memory].map(([id, state]) => [id, copyStateValue(state as StateValue)]));
+    for (const [id, overlay] of parameters) result[id] = { ...(result[id] as Record<string, StateValue> | undefined), parameterOverlay: copyStateValue(overlay as StateValue) };
+    return result;
   }
   const snapshot = (): PortValues => new Map([...held].map(([id, outputs]) => [id,
     Object.fromEntries(Object.entries(outputs).map(([port, value]) => [port, copySignal(value)]))]));
   function checkpoint() {
-    return { held: snapshot(), memory: new Map([...memory].map(([id, state]) => [id, JSON.parse(JSON.stringify(state)) as Memory])), randomTicks: new Map(randomTicks) };
+    return { held: snapshot(), memory: new Map([...memory].map(([id, state]) => [id, copyStateValue(state as StateValue) as Memory])), randomTicks: new Map(randomTicks), writtenStates: new Map([...writtenStates].map(([id, state]) => [id, copyStateValue(state as StateValue) as Memory])), parameters: new Map([...parameters].map(([id, values]) => [id, copyStateValue(values as StateValue) as Record<string, unknown>])) };
   }
   function restore(saved: ReturnType<typeof checkpoint>): void {
-    held.clear(); memory.clear(); randomTicks.clear();
+    held.clear(); memory.clear(); randomTicks.clear(); parameters.clear(); writtenStates.clear();
+    for (const [id, state] of saved.writtenStates ?? []) writtenStates.set(id, state);
+    for (const [id, values] of saved.parameters ?? []) parameters.set(id, values);
     for (const [id, outputs] of saved.held) held.set(id, outputs);
     for (const [id, state] of saved.memory) memory.set(id, state);
     for (const [id, tick] of saved.randomTicks) randomTicks.set(id, tick);
   }
-  return { evaluate, evaluateNode, transition, finalState, stateMemory, snapshot, checkpoint, restore };
+  return { evaluate, evaluateNode, transition, finalState, stateMemory, snapshot, checkpoint, restore, effectiveNode: effective };
 }

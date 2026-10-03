@@ -48,7 +48,7 @@ export function validateDataType(input: unknown): TypedDataType {
   return { dtype };
 }
 export function equalDataType(left: TypedDataType, right: TypedDataType): boolean { return JSON.stringify(validateDataType(left)) === JSON.stringify(validateDataType(right)); }
-export function typedDataType(descriptor: SignalDescriptor): TypedDataType { return descriptor.valueType === 'typed' ? validateDataType(descriptor.typed) : { dtype: descriptor.valueType }; }
+export function typedDataType(descriptor: SignalDescriptor): TypedDataType { if (descriptor.valueType === 'bus' || descriptor.valueType === 'messages') typedInvalid('Bus·메시지를 수치 자료형으로 자동 변환할 수 없습니다.', 'TYPED_TYPE_MISMATCH'); return descriptor.valueType === 'typed' ? validateDataType(descriptor.typed) : { dtype: descriptor.valueType }; }
 export function isIntegerDataType(type: TypedDataType): boolean { return Object.hasOwn(TYPED_INTEGER_TYPES, type.dtype); }
 export function typedIntegerSpec(type: TypedDataType): { wordLength: number; signed: boolean } {
   const checked = validateDataType(type);

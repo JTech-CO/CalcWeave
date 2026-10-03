@@ -1,11 +1,12 @@
 import { CONTINUOUS_BOUNDARY_TYPES, CONTINUOUS_STATE_TYPES, MODEL_LIMITS, ModelError, normalizeSolverSettings, type CalcModel, type ExpressionNode, type IRNode, type SignalDescriptor } from '../../model/src';
 import { getBlockDefinition, getDirectFeedthroughPorts, isDirectFeedthrough } from '../../block-library/src';
 import { M9_BLOCK_IDS } from '../../block-library/src/m9';
+import { M11_BLOCK_DEFINITIONS } from '../../block-library/src/m11';
 import { EXPANDED_TIME_SOURCE_IDS } from '../../block-library/src/time-sources';
 import { m8HasUnregisteredJump, m8JumpControlPorts } from './m8';
 
 const continuousSources: ReadonlySet<string> = new Set(['source.step', 'source.ramp', 'source.sine-wave', 'source.repeating-sequence', 'source.clock', ...EXPANDED_TIME_SOURCE_IDS]);
-const sampled: ReadonlySet<string> = new Set(['source.random', 'source.digital-clock', 'source.pulse', 'logic.edge-detect', 'time.rate-transition', 'time.zero-order-hold', 'fixed.state-space', ...M9_BLOCK_IDS]);
+const sampled: ReadonlySet<string> = new Set(['source.random', 'source.digital-clock', 'source.pulse', 'logic.edge-detect', 'time.rate-transition', 'time.zero-order-hold', 'fixed.state-space', ...M9_BLOCK_IDS, ...M11_BLOCK_DEFINITIONS.filter(definition => definition.state !== 'none' || definition.sampleTime === 'fixed-tick' || ['route.data-store-read', 'route.data-store-write', 'state.reader', 'state.writer', 'state.parameter-writer'].includes(definition.id)).map(definition => definition.id)]);
 const boundary = new Set(['time.zero-order-hold', 'time.first-order-hold']);
 const fail = (node: IRNode, code: string, message: string, portId?: string): never => { throw new ModelError([{ code, nodeId: node.id, message, ...(portId ? { portId } : {}) }]); };
 
@@ -96,6 +97,7 @@ export function inferContinuousDomains(model: CalcModel, ordered: IRNode[]): voi
         if (source.blockType !== 'logic.hit-crossing' && source.executionDomain !== 'discrete' && source.executionDomain !== 'constant') fail(node, 'UNSUPPORTED_RESET_EVENT', 'rising 초기화는 Hit Crossing 출력 또는 이산·상수 boolean 제어 신호를 사용해 주세요.', portId);
         continue;
       }
+      if (portId === 'call' && node.blockType === 'hierarchy.function-call' && node.parameters.callEventRate) continue;
       if (node.executionDomain === 'discrete' && source.executionDomain === 'continuous' && !boundary.has(node.blockType)) fail(node, 'HYBRID_BOUNDARY_REQUIRED', '연속 신호를 이산 입력에 연결하려면 Zero Order Hold를 사용해 샘플 경계를 명시해 주세요.', portId);
       if (node.executionDomain === 'discrete' && source.executionDomain === 'discrete' && node.blockType !== 'time.rate-transition' && !boundary.has(node.blockType) && (source.sampleTime.period !== node.sampleTime.period || source.sampleTime.offset !== node.sampleTime.offset)) fail(node, 'SAMPLE_TIME_MISMATCH', '서로 다른 이산 샘플시간 사이에는 Rate Transition이 필요합니다.', portId);
       // Reset ports are event controls; they do not impose current-output dependency or rate conversion.

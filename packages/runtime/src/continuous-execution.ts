@@ -28,14 +28,18 @@ export function createContinuousExecution(compiled: CompiledModel, hooks: { chec
     * (intervalCount + 1 + minimumTrials * (solver.method === 'rk4' ? 4 : 7));
   if (minimumOperations > (hooks.maxOperations ?? 50_000_000)) fail('RUNTIME_OPERATION_BUDGET', '최소 계산 연산량이 한도를 초과했습니다.');
   let operations = 0;
-  const charge = (node: IRNode): void => {
-    const nextOperations = operations + costs.get(node.id)!;
+  let scopeInvocations = 0;
+  const charge = (node: IRNode, explicitWork?: number, scopeInvocation = false): void => {
+    if (scopeInvocation && ++scopeInvocations > 4096) throw new ModelError([{ code: 'M11_INVOCATION_LIMIT', nodeId: node.id, message: '한 실행 경계의 계층 호출4096회를 초과했습니다.' }]);
+    const cost = explicitWork ?? costs.get(node.id)!;
+    if (!Number.isSafeInteger(cost) || cost < 0) throw new ModelError([{ code: 'RUNTIME_INVALID_IR', nodeId: node.id, message: '연산 비용이 유효하지 않습니다.' }]);
+    const nextOperations = operations + cost;
     if (nextOperations > (hooks.maxOperations ?? 50_000_000)) fail('RUNTIME_OPERATION_BUDGET', '계산 연산 한도를 초과했습니다.', node.id);
     operations = nextOperations;
     hooks.check?.();
   };
-  const machine = createContinuousMachine(compiled, charge);
   const discrete = createDiscreteMachine(discreteNodes, discreteIds, solver.discreteStep, execution.startTime, charge, nodes);
+  const machine = createContinuousMachine(compiled, charge, discrete.effectiveNode);
   let frozen = discrete.snapshot(), state = [...machine.initial], time = execution.startTime, outputIndex = 0, tick = 0;
   let previousTickValues: ContinuousValues | undefined, previousTick: number | undefined;
   let stepSize = Math.min(solver.initialStep, machine.maximumDelayStep);
@@ -52,6 +56,7 @@ export function createContinuousExecution(compiled: CompiledModel, hooks: { chec
     outputIndex += 1;
   }
   function tickBoundary(mask = new Set<string>()): Set<string> {
+    scopeInvocations = 0;
     // Expose the preceding tick's atomic commit only at its next tick. The
     // frozen published outputs between ticks preserve M2 read-before-write.
     if (previousTickValues && previousTick !== undefined) discrete.transition(previousTickValues, previousTick);

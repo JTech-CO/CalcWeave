@@ -1,3 +1,4 @@
+import { isStructuredSignal, validateAnySignal } from '../../model/src/structured';
 import {
   DATASET_LIMITS, ModelError, conversionCoefficients, datasetContentHash, isDatasetColumnName,
   sha256, validateDataset, validateSignal, validateTypedSignal, type Dataset, type DatasetCell, type DatasetColumn, type RunResult, type SignalValue, type TypedDataType, type TypedSignal,
@@ -215,9 +216,30 @@ function flattenSignal(value: SignalValue): (number | boolean)[] {
   if (!Array.isArray(value)) fail('INVALID_RESULT_CSV', '기존 신호와 자료형 신호를 같은 열에 혼합할 수 없습니다.');
   return value.flat() as (number | boolean)[];
 }
+/** Structured columns keep exact tagged JSON, including empty batches and all message metadata. */
+function exportStructuredResultCsv(result: RunResult, labels: Record<string, string>): string {
+  const ids = Object.keys(result.samples[0]!.values).sort();
+  if (ids.length > 1000 || result.samples.length * (ids.length + 1) > 1000000) fail('RESULT_RESOURCE_LIMIT', '구조화 CSV의 열·샘플 상한을 초과했습니다.');
+  const encoder = new TextEncoder();
+  let bytes = 0;
+  const lines: string[] = [];
+  const line = (cells: DatasetCell[]): void => {
+    const text = cells.map(safeCsvCell).join(',') + '\r\n';
+    bytes += encoder.encode(text).length;
+    if (bytes > 64 * 1024 * 1024) fail('RESULT_RESOURCE_LIMIT', '결과 CSV는64 MiB 이하여야 합니다.');
+    lines.push(text);
+  };
+  line(['time (s)', ...ids.map(id => `${labels[id] ?? id} [exact signal JSON]`)]);
+  for (const sample of result.samples) {
+    if (!Number.isFinite(sample.time) || Object.keys(sample.values).length !== ids.length || ids.some(id => !Object.hasOwn(sample.values, id))) fail('INVALID_RESULT_CSV', '구조화 결과의 시간·열을 확인하세요.');
+    line([sample.time, ...ids.map(id => `json:${JSON.stringify(validateAnySignal(sample.values[id]))}`)]);
+  }
+  return lines.join('');
+}
 /** Export every sample; vectors/matrices use stable row-major indexed columns. */
 export function exportResultCsv(result: RunResult, labels: Record<string, string> = {}): string {
   if (!result.samples.length) return 'time (s)\r\n';
+  if (result.samples.some(sample => Object.values(sample.values).some(isStructuredSignal))) return exportStructuredResultCsv(result, labels);
   if (Object.values(result.samples[0]!.values).some(value => typeof value === 'object' && !Array.isArray(value))) return exportTypedResultCsv(result, labels);
   const ids = Object.keys(result.samples[0]!.values).sort(), widths = ids.map((id) => flattenSignal(result.samples[0]!.values[id]!).length);
   const headers = ['time (s)', ...ids.flatMap((id, index) => Array.from({ length: widths[index]! }, (_, cell) => widths[index] === 1 ? labels[id] ?? id : `${labels[id] ?? id}[${cell}]`))];

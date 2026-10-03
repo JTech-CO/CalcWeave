@@ -5,6 +5,8 @@ import { typedStorageElements, validateTypedSignal } from './typed';
 
 /** Logical persistent memory, excluding temporary atomic-commit copies. Input is validated IR. */
 export function discreteStateElementCount(node: IRNode): number {
+  if (typeof node.parameters.scopeStateElements === 'number') return node.parameters.scopeStateElements;
+  if (typeof node.parameters.m11StateElements === 'number') return node.parameters.m11StateElements;
   const m9Count = m9StateElementCount(node);
   if (m9Count !== undefined) return m9Count;
   const initialCount = (): number => signalElementCount(validateSignal(node.parameters.initial));

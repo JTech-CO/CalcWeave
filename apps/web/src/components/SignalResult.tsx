@@ -1,17 +1,26 @@
-import { useEffect, useState } from 'react';
-import { validateDataType, validateTypedSignal, type SignalDescriptor, type SignalValue, type TypedCell, type TypedDataType, type TypedSignal } from '../../../../packages/model/src';
+import { useEffect, useMemo, useState } from 'react';
+import { describeAnySignal, validateAnySignal, validateDataType, validateTypedSignal, type BusSignal, type MessageSignal, type SignalDescriptor, type SignalValue, type TypedCell, type TypedDataType, type TypedSignal } from '../../../../packages/model/src';
 import { formatNumber } from './ResultPlot';
 
 export function signalSummary(value: SignalValue | undefined): string {
   if (value === undefined) return '—';
   if (typeof value === 'number') return formatNumber(value);
   if (typeof value === 'boolean') return String(value);
-  if (!Array.isArray(value)) { const signal = validateTypedSignal(value); return signal.shape.length ? `${signal.shape.join(' × ')} · ${signal.data.length}개 값` : typedCellText(signal.data[0]!, signal); }
-  return Array.isArray(value[0]) ? `${value.length} × ${value[0].length}` : `${value.length}개 값`;
+  if (!Array.isArray(value)) {
+    const signal = validateAnySignal(value);
+    if (typeof signal === 'object' && !Array.isArray(signal)) {
+      if (signal.kind === 'bus') return `버스 · ${signal.fields.length}개 필드`;
+      if (signal.kind === 'messages') return `메시지 · ${signal.items.length}개`;
+      return signal.shape.length ? `${signal.shape.join(' × ')} · ${signal.data.length}개 값` : typedCellText(signal.data[0]!, signal);
+    }
+  }
+  return Array.isArray(value) ? Array.isArray(value[0]) ? `${value.length} × ${value[0].length}` : `${value.length}개 값` : '—';
 }
 
 export function descriptorLabel(descriptor?: SignalDescriptor): string {
   if (!descriptor) return '타입은 실행 전 검사합니다';
+  if (descriptor.valueType === 'bus') return `이름 있는 버스 · ${descriptor.bus?.fields.length ?? 0}개 필드`;
+  if (descriptor.valueType === 'messages') return `메시지 묶음 · 최대 ${descriptor.message?.maxBatch ?? 64}개 · ${descriptor.message ? descriptorLabel(descriptor.message.payload) : 'payload는 실행 전 검사합니다'}`;
   const shape = descriptor.shape.length === 0 ? '스칼라' : descriptor.shape.length === 1 ? `벡터 [${descriptor.shape[0]}]` : `${descriptor.shape.length}D [${descriptor.shape.join(' × ')}]`;
   return `${descriptor.valueType === 'typed' ? typedTypeLabel(descriptor.typed!) : descriptor.valueType} · ${shape} · ${descriptor.unit === '1' ? '단위 없음' : descriptor.unit}${descriptor.fields ? ` · 필드 ${descriptor.fields.join(', ')}` : ''}`;
 }
@@ -40,10 +49,15 @@ export function typedCoordinates(index: number, shape: readonly number[]): numbe
 }
 
 const PAGE_SIZE = 100;
-export function SignalResult({ value, label }: { value: SignalValue; label: string }) {
+export function SignalResult({ value, label, exact = false, descriptor }: { value: SignalValue; label: string; exact?: boolean; descriptor?: SignalDescriptor }) {
   const [page, setPage] = useState(0);
+  const validated = useMemo(() => typeof value === 'object' && !Array.isArray(value) ? validateAnySignal(value) : null, [value]);
   useEffect(() => setPage(0), [value]);
-  if (!Array.isArray(value)) return typeof value === 'object' ? <TypedSignalResult value={value} label={label}/> : null;
+  if (!Array.isArray(value)) {
+    if (typeof value !== 'object') return null;
+    if (validated === null || typeof validated !== 'object' || Array.isArray(validated)) return null;
+    return validated.kind === 'bus' ? <BusSignalResult value={validated} label={label} descriptor={descriptor}/> : validated.kind === 'messages' ? <MessageSignalResult value={validated} label={label} descriptor={descriptor}/> : <TypedSignalResult value={validated} label={label}/>;
+  }
   const matrix = Array.isArray(value[0]);
   const columns = matrix ? (value[0] as number[] | boolean[]).length : 1;
   const flat = matrix ? (value as (number[] | boolean[])[]).flat() : value as (number | boolean)[];
@@ -53,8 +67,21 @@ export function SignalResult({ value, label }: { value: SignalValue; label: stri
   return <div className="signal-result">
     <h3>{label} · 전체 원소</h3>
     <nav className="table-pagination" aria-label={`${label} 원소 페이지`}><button className="button" disabled={current === 0} onClick={() => setPage(current - 1)}>이전 100개</button><span role="status" aria-live="polite">{start + 1}–{Math.min(start + PAGE_SIZE, flat.length)} / {flat.length}개</span><button className="button" disabled={current >= pages - 1} onClick={() => setPage(current + 1)}>다음 100개</button></nav>
-    <table><caption>{matrix ? '행·열' : '인덱스'}은 0부터 시작합니다. 행렬은 행 순서로 기록합니다.</caption><thead><tr>{matrix ? <><th scope="col">행</th><th scope="col">열</th></> : <th scope="col">인덱스</th>}<th scope="col">값</th></tr></thead><tbody>{flat.slice(start, start + PAGE_SIZE).map((item, index) => <tr key={start + index}>{matrix ? <><th scope="row">{Math.floor((start + index) / columns)}</th><td>{(start + index) % columns}</td></> : <th scope="row">{start + index}</th>}<td title={String(item)}>{typeof item === 'boolean' ? String(item) : formatNumber(item)}</td></tr>)}</tbody></table>
+    <table><caption>{matrix ? '행·열' : '인덱스'}은 0부터 시작합니다. 행렬은 행 순서로 기록합니다.</caption><thead><tr>{matrix ? <><th scope="col">행</th><th scope="col">열</th></> : <th scope="col">인덱스</th>}<th scope="col">값</th></tr></thead><tbody>{flat.slice(start, start + PAGE_SIZE).map((item, index) => <tr key={start + index}>{matrix ? <><th scope="row">{Math.floor((start + index) / columns)}</th><td>{(start + index) % columns}</td></> : <th scope="row">{start + index}</th>}<td title={String(item)}>{exact || typeof item === 'boolean' ? String(item) : formatNumber(item)}</td></tr>)}</tbody></table>
   </div>;
+}
+
+function StructuredLeaf({ value, label, descriptor }: { value: SignalValue; label: string; descriptor?: SignalDescriptor }) {
+  const summary = typeof value === 'number' ? String(value) : signalSummary(value);
+  return <div className="structured-leaf"><strong className="structured-value">{summary}</strong><small className="result-type">{descriptorLabel(descriptor ?? describeAnySignal(value))}</small><SignalResult value={value} label={label} exact descriptor={descriptor}/></div>;
+}
+
+function BusSignalResult({ value, label, descriptor }: { value: BusSignal; label: string; descriptor?: SignalDescriptor }) {
+  return <section className="structured-result bus-result" aria-label={`${label} 버스 필드`}><h3>{label} · {value.fields.length}개 필드</h3><p className="sample-detail">필드 순서와 자료형을 보존한 원본 값입니다.</p><div className="bus-fields">{value.fields.map(field => <details className="bus-field" key={field.name} open><summary><strong>{field.name}</strong><span>{signalSummary(field.value)}</span></summary><StructuredLeaf value={field.value} label={`${label} / ${field.name}`} descriptor={descriptor?.bus?.fields.find(item => item.name === field.name)?.descriptor}/></details>)}</div></section>;
+}
+
+function MessageSignalResult({ value, label, descriptor }: { value: MessageSignal; label: string; descriptor?: SignalDescriptor }) {
+  return <section className="structured-result message-result" aria-label={`${label} 메시지 기록`}><h3>{label} · {value.items.length}개 메시지</h3><p className="sample-detail">이 샘플의 발행 순서·시각·우선순위와 payload를 보존합니다.</p>{value.items.length ? <ol className="message-items">{value.items.map((item, index) => <li key={`${item.producer}-${item.sequence}-${index}`}><dl className="message-metadata"><dt>발행자</dt><dd>{item.producer}</dd><dt>순서</dt><dd>{item.sequence}</dd><dt>시각</dt><dd>{String(item.time)} s</dd><dt>우선순위</dt><dd>{item.priority}</dd></dl><details className="message-payload" open><summary>payload · {signalSummary(item.payload)}</summary><StructuredLeaf value={item.payload} label={`${label} / 메시지 ${index + 1}`} descriptor={descriptor?.message?.payload}/></details></li>)}</ol> : <p className="structured-empty">이 샘플에 메시지가 없습니다.</p>}</section>;
 }
 
 function TypedSignalResult({ value, label }: { value: TypedSignal; label: string }) {

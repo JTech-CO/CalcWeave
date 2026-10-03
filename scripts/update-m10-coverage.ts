@@ -34,8 +34,8 @@ const map = JSON.parse(await readFile(mapPath, 'utf8')) as { baseline: { existin
 assert.equal(map.baseline.existingSubsetRows, 134); assert.equal(map.baseline.sourceRows, 385); assert.equal(map.baseline.datasetSha256, datasetSha256);
 const evidenceBytes = await readFile(evidencePath);
 const evidence = JSON.parse(evidenceBytes.toString('utf8')) as { engineVersion: string; registryCount: number; predecessorDefinitions: number; newDefinitions: number; presets: number; rawFixtures: number; rawPresetFixtures: number; datasetSha256: string; strictTypeScriptModes: string[]; strictTypeScriptPrograms: number; actualGeneratedPrograms: number; fixtures: Evidence[]; presetEvidence: Evidence[]; failures: Failure[]; fullSimulinkEquivalenceClaimed: boolean };
-assert.equal(evidence.engineVersion, '0.11.0-m10'); assert.equal(evidence.engineVersion, ENGINE_VERSION);
-assert.equal(evidence.registryCount, blockRegistry.length); assert.equal(evidence.registryCount, 211 + M10_BLOCK_IDS.length); assert.equal(evidence.predecessorDefinitions, 211);
+assert.equal(evidence.engineVersion, '0.11.0-m10'); if (args[0] === '--write') assert.equal(evidence.engineVersion, ENGINE_VERSION, 'Only the original M10 engine may rewrite frozen M10 approvals');
+assert(blockRegistry.length >= evidence.registryCount, 'Current registry omitted frozen M10 definitions'); assert.equal(evidence.registryCount, 211 + M10_BLOCK_IDS.length); assert.equal(evidence.predecessorDefinitions, 211);
 assert.equal(evidence.newDefinitions, 34); assert.equal(evidence.newDefinitions, M10_BLOCK_IDS.length); assert.equal(evidence.presets, 10); assert.equal(evidence.presets, M10_BLOCK_PRESETS.length);
 assert.equal(evidence.rawFixtures, M10_INDEPENDENT_FIXTURES.length); assert.equal(evidence.rawPresetFixtures, M10_INDEPENDENT_PRESET_FIXTURES.length); assert.equal(evidence.datasetSha256, datasetSha256); assert.equal(evidence.fullSimulinkEquivalenceClaimed, false);
 assert.deepEqual([...evidence.strictTypeScriptModes].sort(), ['continuous', 'discrete', 'static']); assert.equal(evidence.strictTypeScriptPrograms, 3);
