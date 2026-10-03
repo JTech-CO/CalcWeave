@@ -1,5 +1,6 @@
 // Generated from repository-owned runtime sources by sync-runtime-templates.ts.
 export const SIGNAL_TYPES_TEMPLATE = [
+  "type ExecutionMode = 'static' | 'discrete' | 'continuous';",
   "type LegacySignalValue = number | boolean | number[] | boolean[] | number[][] | boolean[][];",
   "/** JSON preserves tagged IEEE special values, signed zero, and exact integer codes. */",
   "type TypedFloat = number | '-0' | 'NaN' | 'Infinity' | '-Infinity';",
@@ -79,6 +80,18 @@ export const SIGNAL_TYPES_TEMPLATE = [
   "    nodeId: string;",
   "    portId: string;",
   "}",
+  "interface Diagnostic {",
+  "    code: string;",
+  "    message: string;",
+  "    nodeId?: string;",
+  "    portId?: string;",
+  "    /** Discrete execution failure location; compiler diagnostics omit these fields. */",
+  "    tick?: number;",
+  "    time?: number;",
+  "    hierarchyPath?: string[];",
+  "    childNodeId?: string;",
+  "    iteration?: number;",
+  "}",
   "interface DashboardLiveEvent {",
   "    nodeId: string;",
   "    value: number;",
@@ -86,5 +99,12 @@ export const SIGNAL_TYPES_TEMPLATE = [
   "interface DashboardAppliedEvent extends DashboardLiveEvent {",
   "    time: number;",
   "    order: number;",
+  "}",
+  "interface AdapterLifecycle {",
+  "    nodeId: string;",
+  "    profileId: string;",
+  "    initialized: true;",
+  "    terminated: true;",
+  "    reason: 'completed' | 'cancelled' | 'failed';",
   "}"
 ].join('\n');

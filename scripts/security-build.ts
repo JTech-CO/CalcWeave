@@ -4,7 +4,7 @@ import { parseDeploymentBase } from './pages-base';
 // GitHub Pages does not consume host-specific `_headers` files. Ship the supported
 // meta directives as well as the stronger Vite development/preview HTTP policy.
 export const STATIC_CSP = [
-  "default-src 'self'", "script-src 'self'", "style-src 'self' 'unsafe-inline'",
+  "default-src 'self'", "script-src 'self' 'wasm-unsafe-eval'", "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:", "worker-src 'self'", "connect-src 'self'",
   "object-src 'none'", "base-uri 'self'", "form-action 'self'",
 ].join('; ');

@@ -1,0 +1,532 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M14",
+  "status": "passed",
+  "generatedAt": "2026-10-03T09:53:17.475Z",
+  "manualUserStudyConducted": false,
+  "claimScope": "Three self-authored bounded alternatives exercised through real native browser Workers. Eight original native environments remain unavailable; no native runtime equivalence, native code import or external redistribution rights are asserted.",
+  "unit": {
+    "passed": 35,
+    "failed": 0,
+    "log": "docs/evidence/m14-ui-unit-results.json",
+    "files": [
+      "tests/m14-ui-models.test.ts",
+      "tests/m14-history.test.ts"
+    ],
+    "regression": {
+      "passed": 73,
+      "failed": 0,
+      "log": "docs/evidence/m14-ui-regression-unit-results.json"
+    }
+  },
+  "browser": {
+    "status": "passed",
+    "total": 9,
+    "passed": 9,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "elapsedMs": 70473.321,
+    "report": "docs/evidence/m14-browser-workflow-results.json",
+    "testFilter": "tests/e2e/m14-editor.spec.ts",
+    "baseURL": "http://127.0.0.1:4175/",
+    "tests": [
+      {
+        "name": "M14 catalog shows all three pinned alternatives and eight unavailable native environments without executable inputs",
+        "file": "m14-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 12771
+      },
+      {
+        "name": "M14 real static WASM and bounded manual expression agree, inspector pins and saved manifest stay exact",
+        "file": "m14-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 14959
+      },
+      {
+        "name": "M14 pure WASM is evaluated by the continuous Worker solver against analytic decay",
+        "file": "m14-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 3398
+      },
+      {
+        "name": "M14 actual reset modes and two independent WASM states terminate with matching lifecycle receipts",
+        "file": "m14-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 5807
+      },
+      {
+        "name": "M14 FIFO delay preserves head order, arrival time and exact uint64 message payload",
+        "file": "m14-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 4433
+      },
+      {
+        "name": "M14 capacity policies retain distinct first or last message without changing envelope metadata",
+        "file": "m14-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 3467
+      },
+      {
+        "name": "M14 capacity and WASM failure report real nodes, terminate states and recover after inspector repair",
+        "file": "m14-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 8178
+      },
+      {
+        "name": "M14 cancelling a real initialized Worker returns terminated receipts and allows a fresh independent run",
+        "file": "m14-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 4924
+      },
+      {
+        "name": "M14 adapter metadata fits dark and light layouts through 320px with 200% text",
+        "file": "m14-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 5865
+      }
+    ],
+    "cancellation": {
+      "realNativeWorker": true,
+      "actualReturnedResultObserved": true,
+      "terminatedWasmInstances": 2,
+      "appDiscardsCancelledPartialHistory": true,
+      "freshRunValidated": true
+    },
+    "priorAttempt": {
+      "report": "docs/evidence/m14-browser-initial-results.json",
+      "passed": 8,
+      "failed": 1,
+      "reason": "A fixture initially expected cancelled partial history, while the existing App cancellation policy discards the superseded execution snapshot. The final fixture observes the actual native Worker cancelled result and lifecycle receipts, then validates clean rerun. Product cancellation behavior was preserved."
+    }
+  },
+  "adapterProfiles": [
+    {
+      "profileId": "calcweave.wasm-affine-f64-v1",
+      "blockType": "adapter.wasm-affine",
+      "availability": "bundled",
+      "metadataRendered": true,
+      "executeValidated": true,
+      "nativeRuntimeEquivalenceClaimed": false,
+      "sourceRowIds": [
+        "19-001"
+      ],
+      "exampleIds": [
+        "wasm-affine-and-expression",
+        "wasm-continuous-decay"
+      ],
+      "metadataEvidenceTest": "M14 catalog shows all three pinned alternatives and eight unavailable native environments without executable inputs"
+    },
+    {
+      "profileId": "calcweave.wasm-accumulator-f64-v1",
+      "blockType": "adapter.wasm-accumulator",
+      "availability": "bundled",
+      "metadataRendered": true,
+      "executeValidated": true,
+      "nativeRuntimeEquivalenceClaimed": false,
+      "sourceRowIds": [
+        "19-002"
+      ],
+      "exampleIds": [
+        "wasm-accumulator-resets",
+        "wasm-independent-instances"
+      ],
+      "metadataEvidenceTest": "M14 catalog shows all three pinned alternatives and eight unavailable native environments without executable inputs"
+    },
+    {
+      "profileId": "calcweave.entity-fixed-deadline-v1",
+      "blockType": "adapter.entity-transport",
+      "availability": "bundled",
+      "metadataRendered": true,
+      "executeValidated": true,
+      "nativeRuntimeEquivalenceClaimed": false,
+      "sourceRowIds": [
+        "02-016"
+      ],
+      "exampleIds": [
+        "entity-fifo-delay",
+        "entity-capacity-policies"
+      ],
+      "metadataEvidenceTest": "M14 catalog shows all three pinned alternatives and eight unavailable native environments without executable inputs"
+    },
+    {
+      "profileId": "native.entity-transport-delay",
+      "availability": "unavailable",
+      "metadataRendered": true,
+      "executeValidated": false,
+      "nativeRuntimeEquivalenceClaimed": false,
+      "sourceRowIds": [
+        "02-016"
+      ],
+      "exampleIds": [],
+      "metadataEvidenceTest": "M14 catalog shows all three pinned alternatives and eight unavailable native environments without executable inputs"
+    },
+    {
+      "profileId": "native.c-caller",
+      "availability": "unavailable",
+      "metadataRendered": true,
+      "executeValidated": false,
+      "nativeRuntimeEquivalenceClaimed": false,
+      "sourceRowIds": [
+        "19-001"
+      ],
+      "exampleIds": [],
+      "metadataEvidenceTest": "M14 catalog shows all three pinned alternatives and eight unavailable native environments without executable inputs"
+    },
+    {
+      "profileId": "native.c-function",
+      "availability": "unavailable",
+      "metadataRendered": true,
+      "executeValidated": false,
+      "nativeRuntimeEquivalenceClaimed": false,
+      "sourceRowIds": [
+        "19-002"
+      ],
+      "exampleIds": [],
+      "metadataEvidenceTest": "M14 catalog shows all three pinned alternatives and eight unavailable native environments without executable inputs"
+    },
+    {
+      "profileId": "native.interpreted-matlab-function",
+      "availability": "unavailable",
+      "metadataRendered": true,
+      "executeValidated": false,
+      "nativeRuntimeEquivalenceClaimed": false,
+      "sourceRowIds": [
+        "19-006"
+      ],
+      "exampleIds": [],
+      "metadataEvidenceTest": "M14 catalog shows all three pinned alternatives and eight unavailable native environments without executable inputs"
+    },
+    {
+      "profileId": "native.level-2-matlab-s-function",
+      "availability": "unavailable",
+      "metadataRendered": true,
+      "executeValidated": false,
+      "nativeRuntimeEquivalenceClaimed": false,
+      "sourceRowIds": [
+        "19-007"
+      ],
+      "exampleIds": [],
+      "metadataEvidenceTest": "M14 catalog shows all three pinned alternatives and eight unavailable native environments without executable inputs"
+    },
+    {
+      "profileId": "native.matlab-system",
+      "availability": "unavailable",
+      "metadataRendered": true,
+      "executeValidated": false,
+      "nativeRuntimeEquivalenceClaimed": false,
+      "sourceRowIds": [
+        "19-009"
+      ],
+      "exampleIds": [],
+      "metadataEvidenceTest": "M14 catalog shows all three pinned alternatives and eight unavailable native environments without executable inputs"
+    },
+    {
+      "profileId": "native.s-function",
+      "availability": "unavailable",
+      "metadataRendered": true,
+      "executeValidated": false,
+      "nativeRuntimeEquivalenceClaimed": false,
+      "sourceRowIds": [
+        "19-012"
+      ],
+      "exampleIds": [],
+      "metadataEvidenceTest": "M14 catalog shows all three pinned alternatives and eight unavailable native environments without executable inputs"
+    },
+    {
+      "profileId": "native.s-function-builder",
+      "availability": "unavailable",
+      "metadataRendered": true,
+      "executeValidated": false,
+      "nativeRuntimeEquivalenceClaimed": false,
+      "sourceRowIds": [
+        "19-013"
+      ],
+      "exampleIds": [],
+      "metadataEvidenceTest": "M14 catalog shows all three pinned alternatives and eight unavailable native environments without executable inputs"
+    }
+  ],
+  "nativeUnavailable": [
+    {
+      "profileId": "native.entity-transport-delay",
+      "diagnosticCode": "M14_NATIVE_ENVIRONMENT_UNAVAILABLE",
+      "metadataOnly": true,
+      "executionOffered": false
+    },
+    {
+      "profileId": "native.c-caller",
+      "diagnosticCode": "M14_NATIVE_ENVIRONMENT_UNAVAILABLE",
+      "metadataOnly": true,
+      "executionOffered": false
+    },
+    {
+      "profileId": "native.c-function",
+      "diagnosticCode": "M14_NATIVE_ENVIRONMENT_UNAVAILABLE",
+      "metadataOnly": true,
+      "executionOffered": false
+    },
+    {
+      "profileId": "native.interpreted-matlab-function",
+      "diagnosticCode": "M14_NATIVE_ENVIRONMENT_UNAVAILABLE",
+      "metadataOnly": true,
+      "executionOffered": false
+    },
+    {
+      "profileId": "native.level-2-matlab-s-function",
+      "diagnosticCode": "M14_NATIVE_ENVIRONMENT_UNAVAILABLE",
+      "metadataOnly": true,
+      "executionOffered": false
+    },
+    {
+      "profileId": "native.matlab-system",
+      "diagnosticCode": "M14_NATIVE_ENVIRONMENT_UNAVAILABLE",
+      "metadataOnly": true,
+      "executionOffered": false
+    },
+    {
+      "profileId": "native.s-function",
+      "diagnosticCode": "M14_NATIVE_ENVIRONMENT_UNAVAILABLE",
+      "metadataOnly": true,
+      "executionOffered": false
+    },
+    {
+      "profileId": "native.s-function-builder",
+      "diagnosticCode": "M14_NATIVE_ENVIRONMENT_UNAVAILABLE",
+      "metadataOnly": true,
+      "executionOffered": false
+    }
+  ],
+  "legacyManualPort": {
+    "expression": "3*x+1",
+    "input": 2,
+    "actualExpected": 7,
+    "safeAST": true,
+    "noMatlabExecuted": true,
+    "automaticTranslation": false,
+    "sourceRowId": "19-006",
+    "sourceCoverageUpgraded": false,
+    "evidenceTest": "M14 real static WASM and bounded manual expression agree, inspector pins and saved manifest stay exact"
+  },
+  "arbitraryCodeControls": false,
+  "arbitraryCodeControlsScope": "Adapter catalog and adapter inspector; the separately identified manual expression uses only the existing bounded AST.",
+  "learningExecutions": [
+    {
+      "id": "wasm-affine-and-expression",
+      "mode": "static",
+      "adapters": [
+        {
+          "nodeId": "affine",
+          "blockType": "adapter.wasm-affine",
+          "parameters": {
+            "gain": 3,
+            "bias": 1
+          }
+        }
+      ],
+      "exampleExecuted": true
+    },
+    {
+      "id": "wasm-continuous-decay",
+      "mode": "continuous",
+      "adapters": [
+        {
+          "nodeId": "affine",
+          "blockType": "adapter.wasm-affine",
+          "parameters": {
+            "gain": -2,
+            "bias": 0
+          }
+        }
+      ],
+      "exampleExecuted": true
+    },
+    {
+      "id": "wasm-accumulator-resets",
+      "mode": "discrete",
+      "adapters": [
+        {
+          "nodeId": "rising",
+          "blockType": "adapter.wasm-accumulator",
+          "parameters": {
+            "initial": 0,
+            "gain": 1,
+            "resetMode": "rising"
+          }
+        },
+        {
+          "nodeId": "level",
+          "blockType": "adapter.wasm-accumulator",
+          "parameters": {
+            "initial": 0,
+            "gain": 1,
+            "resetMode": "level"
+          }
+        }
+      ],
+      "exampleExecuted": true
+    },
+    {
+      "id": "wasm-independent-instances",
+      "mode": "discrete",
+      "adapters": [
+        {
+          "nodeId": "first",
+          "blockType": "adapter.wasm-accumulator",
+          "parameters": {
+            "initial": 0,
+            "gain": 1,
+            "resetMode": "rising"
+          }
+        },
+        {
+          "nodeId": "second",
+          "blockType": "adapter.wasm-accumulator",
+          "parameters": {
+            "initial": 10,
+            "gain": 2,
+            "resetMode": "rising"
+          }
+        }
+      ],
+      "exampleExecuted": true
+    },
+    {
+      "id": "entity-fifo-delay",
+      "mode": "discrete",
+      "adapters": [
+        {
+          "nodeId": "transport",
+          "blockType": "adapter.entity-transport",
+          "parameters": {
+            "capacity": 32,
+            "overflow": "error",
+            "maxRelease": 1
+          }
+        }
+      ],
+      "exampleExecuted": true
+    },
+    {
+      "id": "entity-capacity-policies",
+      "mode": "discrete",
+      "adapters": [
+        {
+          "nodeId": "newest",
+          "blockType": "adapter.entity-transport",
+          "parameters": {
+            "capacity": 1,
+            "overflow": "drop-newest",
+            "maxRelease": 64
+          }
+        },
+        {
+          "nodeId": "oldest",
+          "blockType": "adapter.entity-transport",
+          "parameters": {
+            "capacity": 1,
+            "overflow": "drop-oldest",
+            "maxRelease": 64
+          }
+        }
+      ],
+      "exampleExecuted": true
+    }
+  ],
+  "sourceMappingProof": {
+    "exactSelectedSourceConfigurations": "docs/evidence/m14-verification.json",
+    "sourceRowIds": [
+      "02-016",
+      "19-001",
+      "19-002"
+    ],
+    "uiLearningConfigurationsAreSeparatelyReported": true,
+    "originalNativeRuntimeExecuted": false
+  },
+  "responsive": {
+    "conditions": 8,
+    "personallyInspectedScreenshots": 8,
+    "metadataScrolledIntoView": true,
+    "visibleHashBoundsChecked": true,
+    "screenshots": [
+      {
+        "theme": "dark",
+        "width": 1440,
+        "textScale": 1,
+        "path": "docs/evidence/m14-adapters-dark-1440-1x.png",
+        "personallyInspected": true,
+        "hashVisible": true,
+        "horizontalOverflow": false
+      },
+      {
+        "theme": "dark",
+        "width": 1024,
+        "textScale": 1,
+        "path": "docs/evidence/m14-adapters-dark-1024-1x.png",
+        "personallyInspected": true,
+        "hashVisible": true,
+        "horizontalOverflow": false
+      },
+      {
+        "theme": "dark",
+        "width": 390,
+        "textScale": 1,
+        "path": "docs/evidence/m14-adapters-dark-390-1x.png",
+        "personallyInspected": true,
+        "hashVisible": true,
+        "horizontalOverflow": false
+      },
+      {
+        "theme": "dark",
+        "width": 320,
+        "textScale": 2,
+        "path": "docs/evidence/m14-adapters-dark-320-2x.png",
+        "personallyInspected": true,
+        "hashVisible": true,
+        "horizontalOverflow": false
+      },
+      {
+        "theme": "light",
+        "width": 1440,
+        "textScale": 1,
+        "path": "docs/evidence/m14-adapters-light-1440-1x.png",
+        "personallyInspected": true,
+        "hashVisible": true,
+        "horizontalOverflow": false
+      },
+      {
+        "theme": "light",
+        "width": 1024,
+        "textScale": 1,
+        "path": "docs/evidence/m14-adapters-light-1024-1x.png",
+        "personallyInspected": true,
+        "hashVisible": true,
+        "horizontalOverflow": false
+      },
+      {
+        "theme": "light",
+        "width": 390,
+        "textScale": 1,
+        "path": "docs/evidence/m14-adapters-light-390-1x.png",
+        "personallyInspected": true,
+        "hashVisible": true,
+        "horizontalOverflow": false
+      },
+      {
+        "theme": "light",
+        "width": 320,
+        "textScale": 2,
+        "path": "docs/evidence/m14-adapters-light-320-2x.png",
+        "personallyInspected": true,
+        "hashVisible": true,
+        "horizontalOverflow": false
+      }
+    ]
+  },
+  "preserved": {
+    "predecessorExampleIds": 69,
+    "predecessorCategoryIds": 11,
+    "totalExamples": 75,
+    "totalCategories": 12,
+    "canvas": "Name plus one compact value; ABI/provenance are in inspector and support catalog."
+  }
+}

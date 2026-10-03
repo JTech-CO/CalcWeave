@@ -1,7 +1,8 @@
-export const ENGINE_VERSION = '0.14.0-m13';
+export const ENGINE_VERSION = '0.15.0-m14';
 
 export type ExecutionMode = 'static' | 'discrete' | 'continuous';
 export type BlockType =
+  | 'adapter.wasm-affine' | 'adapter.wasm-accumulator' | 'adapter.entity-transport'
   | 'source.string-constant' | 'string.ascii-to-string' | 'string.compose' | 'string.scan' | 'string.string-compare' | 'string.string-concatenate'
   | 'string.string-contains' | 'string.string-count' | 'string.string-find' | 'string.string-length' | 'string.string-to-ascii' | 'string.parse-number' | 'string.parse-enum' | 'string.substring' | 'string.to-string'
   | 'dashboard.control' | 'dashboard.indicator' | 'dashboard.action' | 'sink.record' | 'sink.xy-graph' | 'sink.floating-scope' | 'sink.stop' | 'signal.probe' | 'math.slider-gain'
@@ -256,6 +257,7 @@ export interface HierarchyMetadata { origins: Record<string, HierarchyOrigin>; i
 export interface RunSample { time: number; values: Record<string, SignalValue> }
 export interface DashboardLiveEvent { nodeId: string; value: number }
 export interface DashboardAppliedEvent extends DashboardLiveEvent { time: number; order: number }
+export interface AdapterLifecycle { nodeId: string; profileId: string; initialized: true; terminated: true; reason: 'completed' | 'cancelled' | 'failed' }
 export interface RunResult {
   samples: RunSample[];
   finalState: Record<string, SignalValue>;
@@ -270,6 +272,7 @@ export interface RunResult {
   resources?: { operations: number };
   /** Graceful root Stop Simulation, after a complete validated observation. */
   stopReason?: { nodeId: string; tick: number; time: number };
+  adapterLifecycle?: AdapterLifecycle[];
 }
 export interface SolverStatistics {
   method: 'rk4' | 'rk45' | 'implicit-euler';

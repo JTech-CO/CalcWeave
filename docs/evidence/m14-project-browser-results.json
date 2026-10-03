@@ -1,0 +1,216 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\MSI\\AppData\\Local\\fnm_multishells\\59468_1790895586082\\node.exe",
+      "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config=.test-generated/m14-project-external.config.ts"
+    ],
+    "configFile": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m14-project-external.config.ts",
+    "rootDir": "C:/Users/MSI/Desktop/내 폴더/코딩/기획/CalcWeave/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/MSI/Desktop/내 폴더/코딩/기획/CalcWeave/test-results-m14-project",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/MSI/Desktop/내 폴더/코딩/기획/CalcWeave/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/pages-subpath.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "pages-subpath.spec.ts",
+      "file": "pages-subpath.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Pages project path boots scoped assets and the real calculation Worker",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3166,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T09:52:41.124Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "63cd190a424eb070df87-035325d9ae4ea4fdab94",
+          "file": "pages-subpath.spec.ts",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "title": "Pages support links open all scoped policy pages and their navigation returns to the app",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5369,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T09:52:45.258Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "63cd190a424eb070df87-afd9b5b933420262c47d",
+          "file": "pages-subpath.spec.ts",
+          "line": 48,
+          "column": 1
+        },
+        {
+          "title": "Pages scoped release caches only app files and remains editable and executable after offline reload",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4190,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T09:52:50.705Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "63cd190a424eb070df87-93830c190018807679b0",
+          "file": "pages-subpath.spec.ts",
+          "line": 63,
+          "column": 1
+        },
+        {
+          "title": "Pages offline reload can load the Python target and download a complete local execution archive",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5247,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T09:52:54.958Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "63cd190a424eb070df87-55b5e9ee736f8ae9f953",
+          "file": "pages-subpath.spec.ts",
+          "line": 79,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-03T09:52:40.653Z",
+    "duration": 23958.876,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

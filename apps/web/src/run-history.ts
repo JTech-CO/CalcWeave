@@ -4,6 +4,8 @@ import { parseModel, canonicalSemantic, ModelError, UNITS, type CalcModel, type 
 import { sha256 } from '../../../packages/codegen-ts/src/sha256';
 import type { ExportManifest } from '../../../packages/codegen-ts/src';
 import { equalDataType, typedStorageElements, validateDataType, validateTypedShape, validateTypedSignal } from '../../../packages/model/src';
+import { getNodeAdapterProfile } from '../../../packages/model/src/m14-adapters';
+import { compileModel } from '../../../packages/compiler/src';
 
 export const RUN_HISTORY_LIMITS = Object.freeze({ records: 5, bytes: 20 * 1024 * 1024, recordedValues: 200_000 });
 const allowedUnits = new Set<string>(UNITS);
@@ -98,6 +100,18 @@ export function validateRunHistory(raw: unknown): HistoryRecord[] {
     if (result.stopReason) {
       const reason = result.stopReason, last = result.samples.at(-1);
       if (result.status !== 'completed' || !last || Object.keys(reason).some(key => !['nodeId', 'tick', 'time'].includes(key)) || !record.model.nodes.some(node => node.id === reason.nodeId && node.blockType === 'sink.stop') || !Number.isInteger(reason.tick) || reason.tick < 0 || reason.tick > 10000 || !Number.isFinite(reason.time) || Math.abs(reason.time - last.time) > 1e-9) invalid('정상 종료 원인과 마지막 관측 샘플이 다릅니다.');
+    }
+    if (result.adapterLifecycle !== undefined) {
+      let compiled;
+      try { compiled = compileModel(record.model); } catch { invalid('확장 종료 기록의 실행 모델을 확인하지 못했습니다.'); }
+      const expected = new Map(compiled!.nodes.flatMap(node => { const profile = getNodeAdapterProfile(node.blockType); return profile?.artifact && profile.limits.rootGraphOnly ? [[node.id, profile.id] as const] : []; }));
+      const lifecycle = result.adapterLifecycle;
+      if (!Array.isArray(lifecycle) || lifecycle.length > expected.size || lifecycle.length > 1000 || result.status === 'completed' && lifecycle.length !== expected.size) invalid('확장 상태 종료 기록의 개수를 확인하세요.');
+      const visited = new Set<string>();
+      for (const item of lifecycle) {
+        if (!item || typeof item !== 'object' || Array.isArray(item) || Object.keys(item).length !== 5 || Object.keys(item).some(key => !['nodeId', 'profileId', 'initialized', 'terminated', 'reason'].includes(key)) || typeof item.nodeId !== 'string' || visited.has(item.nodeId) || expected.get(item.nodeId) !== item.profileId || item.initialized !== true || item.terminated !== true || item.reason !== result.status) invalid('확장 상태의 블록·프로파일·초기화·종료 원인이 실행과 다릅니다.');
+        visited.add(item.nodeId);
+      }
     }
     if (!Number.isFinite(result.elapsedMs) || result.elapsedMs < 0 || !result.finalState || typeof result.finalState !== 'object') invalid('최종 실행 상태가 올바르지 않습니다.');
   }

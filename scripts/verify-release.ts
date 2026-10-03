@@ -7,6 +7,8 @@ import { isOfflineAssetUrl, type OfflineManifest } from './offline-build';
 import { parseDeploymentBase } from './pages-base';
 import { PYTHON_TARGET } from '../packages/codegen-python/src/capabilities';
 import { MODEL_PACKAGE_PERMISSIONS, MODEL_PACKAGE_REGISTRY } from '../packages/model-package/src';
+import { BUILTIN_ADAPTER_PROFILES, UNAVAILABLE_ADAPTER_PROFILES } from '../packages/model/src/m14-adapters';
+import { M14_WASM_BYTES, inspectM14Wasm } from '../packages/runtime/src/m14-wasm';
 
 const catalog = getReleaseCatalog(), checks: string[] = [];
 function check(condition: unknown, message: string): void { assert(condition, message); checks.push(message); }
@@ -15,6 +17,11 @@ check(catalog.blocks.length >= 144 && new Set(catalog.blocks.map(block => block.
 check(PYTHON_TARGET.blockIds.length === 51 && new Set(PYTHON_TARGET.blockIds).size === 51 && catalog.blocks.every(block => block.exportTargets.includes('python') === PYTHON_TARGET.blockIds.includes(block.id)), 'Python registry export metadata equals approved target capabilities');
 check(PYTHON_TARGET.supportedModes.join(',') === 'static,discrete', 'Python target does not claim continuous solver support');
 check(MODEL_PACKAGE_REGISTRY.length === catalog.blocks.length && MODEL_PACKAGE_PERMISSIONS.join(',') === 'local-model' && Object.isFrozen(MODEL_PACKAGE_REGISTRY), 'model packages bind approved immutable registry and local-only permissions');
+check(BUILTIN_ADAPTER_PROFILES.length === 3 && UNAVAILABLE_ADAPTER_PROFILES.length === 8 && UNAVAILABLE_ADAPTER_PROFILES.every(profile => profile.availability === 'unavailable' && profile.exportTargets.length === 0), 'trusted adapter execution and unavailable native requirements remain distinct');
+for (const profile of BUILTIN_ADAPTER_PROFILES.filter(profile => profile.artifact)) {
+  const bytes = M14_WASM_BYTES[profile.id]!, inspected = inspectM14Wasm(bytes, profile.id);
+  check(createHash('sha256').update(Uint8Array.from(bytes)).digest('hex') === profile.artifact!.sha256 && inspected.imports === 0 && inspected.memories === 0 && !inspected.loops && !inspected.calls, `pinned straight-line WASM artifact ${profile.id}`);
+}
 const packageJson = JSON.parse(await readFile('package.json', 'utf8')) as { version: string };
 check(packageJson.version === catalog.version, 'package/release catalog version agreement');
 const manifest = JSON.parse(await readFile('dist/offline-manifest.json', 'utf8')) as OfflineManifest;
@@ -31,7 +38,7 @@ for (const asset of manifest.assets) {
 check(manifest.assets.reduce((total, asset) => total + asset.bytes, 0) <= 32 * 1024 * 1024, 'offline shell size limit');
 const html = await readFile('dist/index.html', 'utf8');
 const decodedHtml = html.replaceAll('&#39;', "'").replaceAll('&apos;', "'");
-check(decodedHtml.includes('http-equiv="Content-Security-Policy"') && decodedHtml.includes("script-src 'self'") && decodedHtml.includes("object-src 'none'") && !decodedHtml.includes('unsafe-eval'), 'production CSP meta blocks dynamic/inline script evaluation');
+check(decodedHtml.includes('http-equiv="Content-Security-Policy"') && decodedHtml.includes("script-src 'self' 'wasm-unsafe-eval'") && decodedHtml.includes("object-src 'none'") && !decodedHtml.includes("'unsafe-eval'"), 'production CSP permits pinned WASM while blocking dynamic/inline JavaScript evaluation');
 check(html.indexOf('Content-Security-Policy') < html.indexOf('<script') && !/<script(?![^>]*\bsrc=)[^>]*>/i.test(html), 'CSP precedes external-only application scripts');
 check(html.includes('name="referrer" content="no-referrer"'), 'production referrer policy');
 for (const policy of ['terms', 'privacy', 'cookies', 'notices']) {

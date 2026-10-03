@@ -1,3 +1,4 @@
+import { expectStandaloneSource } from './standalone-source';
 import { expect, test, type Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import type { CalcModel, TypedSignal } from '../../packages/model/src';
@@ -49,7 +50,7 @@ test('M10 typed integer fields preserve 64-bit edits, block invalid drafts, save
   await page.reload(); await expect(page.locator('.canvas-topline strong')).toHaveText(snapshot.name);
   await importModel(page, snapshot); await calculate(page);
   const codeDownload = page.waitForEvent('download'); await page.getByRole('button', { name: /코드 다운로드/ }).click();
-  const code = await readFile((await (await codeDownload).path())!, 'utf8'); expect(code).toContain('9223372036854775807'); expect(code).toContain('export function run'); expect(code).not.toMatch(/eval\(|new Function|https?:\/\//);
+  const code = await readFile((await (await codeDownload).path())!, 'utf8'); expect(code).toContain('9223372036854775807'); expect(code).toContain('export function run'); expectStandaloneSource(code);
   await page.getByRole('tab', { name: '실험', exact: true }).click();
   const csvDownload = page.waitForEvent('download'); await page.locator('.history-card').first().getByRole('button', { name: '결과 CSV', exact: true }).click();
   const csv = await readFile((await (await csvDownload).path())!, 'utf8'); expect(csv).toContain('int64:9223372036854775807'); expect(csv).toContain('int64:9223372036854775806'); expect(csv).toContain('shape=[]'); expect(errors).toEqual([]);

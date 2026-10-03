@@ -755,3 +755,31 @@ textarea:focus-visible { outline:2px solid var(--focus); outline-offset:3px; }
 
 .vertical-widget .gauge-linear { justify-items: center; }
 .vertical-widget .gauge-linear meter { writing-mode: vertical-lr; width: 32px; height: 160px; }
+.adapter-catalog-intro { display:grid; gap:10px; margin-bottom:20px; }
+.adapter-catalog-intro h3,.adapter-detail-heading h3 { font-size:var(--text-heading); }
+.adapter-catalog-intro p,.adapter-contract-copy,.adapter-unavailable-reason { font-size:var(--text-body); line-height:1.7; overflow-wrap:anywhere; }
+.adapter-layout { margin-top:18px; }
+.adapter-profile-detail { min-width:0; }
+.adapter-detail-heading { display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:12px; }
+.adapter-status { white-space:normal; overflow-wrap:anywhere; }
+.adapter-status.bundled { color:var(--success); }
+.adapter-status.unavailable { color:var(--muted); }
+.adapter-export-list,.adapter-references,.adapter-section ol,.adapter-section ul { padding-left:22px; overflow-wrap:anywhere; }
+.adapter-export-list li,.adapter-section li { margin:8px 0; }
+.adapter-profile-detail code { white-space:normal; overflow-wrap:anywhere; }
+.adapter-section { border-top:1px solid var(--line); padding:14px 0; font-size:var(--text-body); }
+.adapter-section summary,.adapter-node-details>details>summary { cursor:pointer; font-size:var(--text-body); overflow-wrap:anywhere; }
+.adapter-section>p { margin-top:12px; }
+.adapter-references a { color:var(--accent); }
+.adapter-node-details { min-width:0; }
+.adapter-node-details .adapter-profile-detail { margin-top:18px; }
+.adapter-node-details .support-metadata>div { grid-template-columns:minmax(0,1fr); gap:6px; }
+.adapter-lifecycle-summary { margin:16px 0; padding:12px; border:1px solid var(--line); border-radius:6px; font-size:var(--text-small); overflow-wrap:anywhere; }
+.adapter-lifecycle-summary summary { cursor:pointer; font-size:var(--text-body); }
+.adapter-lifecycle-summary ul { margin:12px 0 0; padding-left:20px; }
+.adapter-lifecycle-summary small { display:block; font-size:inherit; color:var(--muted); }
+@media(max-width:640px) {
+  .adapter-profile-detail .adapter-metadata>div { grid-template-columns:minmax(0,1fr); gap:6px; }
+  .adapter-profile-list button { width:100%; }
+  .adapter-catalog .support-filters { grid-template-columns:minmax(0,1fr); }
+}

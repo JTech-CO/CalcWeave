@@ -53,6 +53,20 @@ describe('M13 executable child metadata', () => {
 });
 
 let checkedStandaloneTypes = false;
+describe('M14 pinned adapter export boundaries', () => {
+  it('pins a nested affine ABI and executes the actual standalone WASM program', async () => {
+    const value = model([node('Call', 'hierarchy.atomic', { definitionId: 'Child' }), node('Result', 'sink.display')], [edge('Call', 'Result')], 'discrete', 1);
+    value.subsystems = [{ id: 'Child', name: 'Child', version: 1, nodes: [node('Source', 'source.constant', { value: 3 }), node('Wasm', 'adapter.wasm-affine', { gain: 2, bias: -1 }), node('Output', 'io.output')], edges: [edge('Source', 'Wasm'), edge('Wasm', 'Output')], inputs: [], outputs: [{ id: 'out', nodeId: 'Output' }], layout: {} }];
+    const compiled = compileModel(value), manifest = await createExportManifest(compiled);
+    expect(manifest.targetVersion).toBe('typescript-m14-v1');
+    expect(manifest.adapterReferences).toHaveLength(1);
+    expect(manifest.adapterReferences![0]!.profile.artifact).toMatchObject({ byteLength: 48, sha256: 'fc7801ff3c8d616c38773a0e26af62181f8281c8f06430193d0ed20fb239cb95', abiVersion: 1 });
+    const native = await runModel(compiled), standalone = await independentRun(exportTypeScript(compiled, manifest), undefined, manifest);
+    expect(native.samples.map(sample => sample.values.Result)).toEqual([5, 5]);
+    const { elapsedMs: _elapsed, ...stable } = native;
+    expect(standalone).toEqual(stable);
+  });
+});
 async function independentRun(source: string, mutateFirstResult?: (result: Omit<RunResult, 'elapsedMs'>) => void, expectedManifest?: ExportManifest): Promise<Omit<RunResult, 'elapsedMs'>> {
   const result = ts.transpileModule(source, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 }, reportDiagnostics: true });
   expect(result.diagnostics?.filter((d) => d.category === ts.DiagnosticCategory.Error)).toEqual([]);

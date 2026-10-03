@@ -1,15 +1,17 @@
 import { M11_STATE_BLOCKS, m11InitialMemory, m11InitialOutput, m11IndependentOutput, m11Read, m11Commit, evaluateM11Node, type M11Memory, type M11Frame } from './m11';
 import { M12_DISCRETE_STATE_BLOCKS, m12InitialMemory, m12InitialOutput, m12IndependentOutput, m12ReadState, m12CommitState } from './m12';
 import { M13_STATE_BLOCKS, M13_CONTROL_BLOCKS, m13InitialMemory, m13InitialOutput, m13Read, m13Commit, m13AppendControlEvent, m13ValidateControlValue, type M13Memory, type M13LiveEvent, type M13ControlReceipt } from './m13';
+import { M14_STATE_BLOCKS, m14InitialMemory, m14InitialOutput, m14InitializationCost, m14IndependentOutput, m14Read, m14Commit, m14Terminate, type M14Memory } from './m14';
+import { prepareM14Wasm, type M14WasmFunctions } from './m14-wasm';
 import { copyStateValue, zeroAnySignal } from '../../model/src/structured';
-import type { IRNode, SignalDescriptor, SignalValue, StateValue } from '../../model/src/types';
+import type { AdapterLifecycle, IRNode, SignalDescriptor, SignalValue, StateValue } from '../../model/src/types';
 import { checkSignal, copySignal, evaluateSignalNode, finiteNumber, interpolateTable, numericFailure, replayDataset, signalElements } from './kernels';
 import { M9_BLOCKS, M9_RANDOM_BLOCKS, m9InitialMemory, m9Read, m9Commit, m9IndependentOutput, type M9Memory } from './m9';
 import { validateDataType, validateTypedSignal } from '../../model/src/typed';
 import { m10InitialMemory, m10InitialOutput, m10ReadState, m10CommitState, m10IndependentOutput, type M10Memory } from './m10';
 
 type PortValues = Map<string, Record<string, SignalValue>>;
-type Memory = M9Memory & M11Memory & M13Memory & { u?: number[]; y?: number[]; x?: number[]; buffer?: SignalValue };
+type Memory = M9Memory & M11Memory & M13Memory & M14Memory & { u?: number[]; y?: number[]; x?: number[]; buffer?: SignalValue };
 
 export const DISCRETE_BLOCKS = new Set([
   'source.step', 'source.ramp', 'source.sine-wave', 'source.pulse', 'source.clock', 'source.digital-clock',
@@ -47,6 +49,7 @@ function due(node: IRNode, tick: number): boolean {
   return tick >= node.sampleTime.offset && (tick - node.sampleTime.offset) % node.sampleTime.period === 0;
 }
 function independentOutput(node: IRNode): boolean {
+  if (M14_STATE_BLOCKS.has(node.blockType)) return m14IndependentOutput(node);
   if (M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) return m12IndependentOutput(node);
   if (M11_STATE_BLOCKS.has(node.blockType)) return m11IndependentOutput(node);
   if (node.blockType === 'fixed.state-space') return m10IndependentOutput(node);
@@ -68,12 +71,20 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
   const randomTicks = new Map<string, number>();
   const parameters = new Map<string, Record<string, unknown>>();
   const writtenStates = new Map<string, Memory>();
+  // Pure, memory-free WASM exports are owned per machine; numerical state is only JSON memory.
+  const adapterBindings = new Map<string, M14WasmFunctions>();
+  let finalizedAdapters: AdapterLifecycle[] | undefined;
   const effective = (node: IRNode): IRNode => parameters.has(node.id) ? { ...node, parameters: { ...node.parameters, ...parameters.get(node.id)! } } : node;
-  const extendedMemory = nodes.some(node => node.blockType.startsWith('state.')) || nodes.some((node) => (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType) || M12_DISCRETE_STATE_BLOCKS.has(node.blockType) || M13_STATE_BLOCKS.has(node.blockType)) && (node.blockType !== 'discrete.unit-delay'
+  const extendedMemory = nodes.some(node => node.blockType.startsWith('state.')) || nodes.some((node) => (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType) || M12_DISCRETE_STATE_BLOCKS.has(node.blockType) || M13_STATE_BLOCKS.has(node.blockType) || M14_STATE_BLOCKS.has(node.blockType)) && (node.blockType !== 'discrete.unit-delay'
     || Array.isArray(node.parameters.initial) || typeof node.parameters.initial === 'boolean'
     || node.parameters.reset === 'level' || node.sampleTime.period !== 1 || node.sampleTime.offset !== 0));
 
   function initialMemory(node: IRNode): Memory {
+    if (M14_STATE_BLOCKS.has(node.blockType)) {
+      const work = m14InitializationCost(node);
+      if (work) { charge(node, work); adapterBindings.set(node.id, prepareM14Wasm(node)); }
+      return m14InitialMemory(node, adapterBindings.get(node.id));
+    }
     if (M13_STATE_BLOCKS.has(node.blockType)) return m13InitialMemory(node);
     if (M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) return m12InitialMemory(node);
     if (M11_STATE_BLOCKS.has(node.blockType)) return m11InitialMemory(node);
@@ -91,7 +102,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
       default: return {};
     }
   }
-  for (const node of nodes) {
+  try { for (const node of nodes) {
     const outputs = Object.fromEntries(Object.entries(node.outputs).map(([port, descriptor]) => [port, zeroSignal(descriptor)]));
     const state = initialMemory(node);
     if (Object.keys(state).length) memory.set(node.id, state);
@@ -109,7 +120,16 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     if (M11_STATE_BLOCKS.has(node.blockType)) Object.assign(outputs, m11InitialOutput(node, state));
     if (M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) Object.assign(outputs, m12InitialOutput(node, state));
     if (M13_STATE_BLOCKS.has(node.blockType)) Object.assign(outputs, m13InitialOutput(node, state));
+    if (M14_STATE_BLOCKS.has(node.blockType)) Object.assign(outputs, m14InitialOutput(node, state, adapterBindings.get(node.id)));
     held.set(node.id, outputs);
+  } } catch (error) {
+    // Construction can fail after another instance initialized. Its prepaid identity cleanup has no effects.
+    for (const node of nodes) if (memory.get(node.id)?.m14Initialized) m14Terminate(node, memory.get(node.id)!, 'failed', adapterBindings.get(node.id));
+    throw error;
+  }
+
+  function requireOpenAdapters(): void {
+    if (finalizedAdapters && adapterBindings.size) numericFailure('M14_LIFECYCLE_CLOSED', [...adapterBindings.keys()][0]!, '종료한 WASM 상태 인스턴스를 다시 실행할 수 없습니다.');
   }
 
   function dot(coefficients: number[], values: number[], id: string): number {
@@ -188,6 +208,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     }
   }
   function evaluate(tick: number, time: number, external?: PortValues, repeat = false): PortValues {
+    requireOpenAdapters();
     // Hybrid execution supplies frozen boundary inputs; continuous trial stages
     // never call this mutating tick evaluation.
     const values = new Map([...(external ?? []), ...held]);
@@ -200,6 +221,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
       writeParameter: (id, key, value) => { if (!byId.has(id)) numericFailure('RUNTIME_INVALID_IR', id, '실행 값 대상이 없습니다.'); parameters.set(id, { ...parameters.get(id), [key]: value }); },
     };
     const read = (node: IRNode, input: (port: string) => SignalValue): Record<string, SignalValue> => {
+      if (M14_STATE_BLOCKS.has(node.blockType)) { const result = m14Read(node, publications.get(node.id) ?? memory.get(node.id)!, input, tick, time, adapterBindings.get(node.id)); publications.set(node.id, result.publicationMemory); return result.outputs; }
       if (M13_STATE_BLOCKS.has(node.blockType)) { const result = m13Read(node, publications.get(node.id) ?? memory.get(node.id)!, input, tick, time); if (result.publicationMemory) publications.set(node.id, result.publicationMemory); return result.outputs; }
       if (M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) return m12ReadState(node, memory.get(node.id)!, input, node.sampleTime.period * baseStep);
       if (M11_STATE_BLOCKS.has(node.blockType)) { const result = m11Read(node, publications.get(node.id) ?? memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep, charge, frame); if (result.publicationMemory) publications.set(node.id, result.publicationMemory); return result.outputs; }
@@ -215,18 +237,18 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     };
     // Non-feedthrough outputs must be visible even if their current input producer is later in the DAG.
     for (const node of nodes) if (due(node, tick) && independentOutput(node)) {
-      if ((M9_RANDOM_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType)) && (repeat || randomTicks.get(node.id) === tick)) continue;
+      if ((M9_RANDOM_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType) || M14_STATE_BLOCKS.has(node.blockType)) && (repeat || randomTicks.get(node.id) === tick)) continue;
       charge(node);
       emit(node, read(node, () => numericFailure('RUNTIME_INVALID_IR', node.id, '상태 출력이 현재 입력에 의존할 수 없습니다.')));
     }
     for (const original of nodes) {
       const node = effective(original);
       if (!due(node, tick) || independentOutput(node)) continue;
-      if ((M11_STATE_BLOCKS.has(node.blockType) || M13_STATE_BLOCKS.has(node.blockType)) && (repeat || randomTicks.get(node.id) === tick)) continue;
+      if ((M11_STATE_BLOCKS.has(node.blockType) || M13_STATE_BLOCKS.has(node.blockType) || M14_STATE_BLOCKS.has(node.blockType)) && (repeat || randomTicks.get(node.id) === tick)) continue;
       if (repeat && (node.blockType === 'source.random' || M9_RANDOM_BLOCKS.has(node.blockType))) continue;
       charge(node);
       const input = (port: string): SignalValue => readInput(values, node, port);
-      emit(node, (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType) || M12_DISCRETE_STATE_BLOCKS.has(node.blockType) || M13_STATE_BLOCKS.has(node.blockType))
+      emit(node, (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType) || M12_DISCRETE_STATE_BLOCKS.has(node.blockType) || M13_STATE_BLOCKS.has(node.blockType) || M14_STATE_BLOCKS.has(node.blockType))
         ? read(node, input)
         : evaluateM11Node(node, input, time, frame) ?? evaluateSignalNode(node, input, undefined, time));
     }
@@ -238,12 +260,13 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
   }
   /** One boundary node with lazy input reads. Seeded sources publish once per tick. */
   function evaluateNode(node: IRNode, tick: number, time: number, input: (port: string) => SignalValue, commit = true): Record<string, SignalValue> {
+    requireOpenAdapters();
     node = effective(node);
-    const random = node.blockType === 'source.random' || M9_RANDOM_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType) || M13_STATE_BLOCKS.has(node.blockType);
+    const random = node.blockType === 'source.random' || M9_RANDOM_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType) || M13_STATE_BLOCKS.has(node.blockType) || M14_STATE_BLOCKS.has(node.blockType);
     if (!due(node, tick) || random && randomTicks.get(node.id) === tick) return held.get(node.id)!;
     charge(node);
     const frame: M11Frame = { readMemory: id => memory.get(id), writeMemory: (id, state) => { if (commit) { memory.set(id, state); writtenStates.set(id, state); } }, readParameter: (id, key) => parameters.get(id)?.[key] ?? byId.get(id)?.parameters[key], writeParameter: (id, key, value) => { if (commit) parameters.set(id, { ...parameters.get(id), [key]: value }); } };
-    const result = M13_STATE_BLOCKS.has(node.blockType) ? m13Read(node, memory.get(node.id)!, input, tick, time) : M11_STATE_BLOCKS.has(node.blockType) ? m11Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep, charge, frame) : M9_BLOCKS.has(node.blockType) ? m9Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep) : undefined;
+    const result = M14_STATE_BLOCKS.has(node.blockType) ? m14Read(node, memory.get(node.id)!, input, tick, time, adapterBindings.get(node.id)) : M13_STATE_BLOCKS.has(node.blockType) ? m13Read(node, memory.get(node.id)!, input, tick, time) : M11_STATE_BLOCKS.has(node.blockType) ? m11Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep, charge, frame) : M9_BLOCKS.has(node.blockType) ? m9Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep) : undefined;
     const outputs: Record<string, SignalValue> = result ? result.outputs : M12_DISCRETE_STATE_BLOCKS.has(node.blockType) ? m12ReadState(node, memory.get(node.id)!, input, node.sampleTime.period * baseStep) : node.blockType === 'fixed.state-space' ? m10ReadState(node, memory.get(node.id)! as M10Memory, input) : (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType) || M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) ? { out: output(node, memory.get(node.id) ?? {}, input, tick, time) } : evaluateM11Node(node, input, time, frame, charge) ?? evaluateSignalNode(node, input, undefined, time);
     for (const [port, descriptor] of Object.entries(node.outputs)) checkSignal(outputs[port], descriptor, node.id);
     if (commit || random) held.set(node.id, outputs);
@@ -252,6 +275,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     return outputs;
   }
   function transition(values: PortValues, tick: number, parentTime?: number): void {
+    requireOpenAdapters();
     const next = new Map<string, Memory>();
     for (const original of nodes) {
       const node = effective(original);
@@ -265,6 +289,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
       }
       if (!due(node, tick)) continue;
       charge(node);
+      if (M14_STATE_BLOCKS.has(node.blockType)) { next.set(node.id, m14Commit(node, state, port => readInput(values, node, port), adapterBindings.get(node.id))); continue; }
       if (M13_STATE_BLOCKS.has(node.blockType)) { next.set(node.id, m13Commit(node, state)); continue; }
       if (M11_STATE_BLOCKS.has(node.blockType)) { next.set(node.id, m11Commit(node, state, port => readInput(values, node, port), values.get(node.id)!, tick, parentTime ?? startTime + tick * baseStep, node.sampleTime.period * baseStep, charge)); continue; }
       if (M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) { next.set(node.id, m12CommitState(node, state, port => readInput(values, node, port), node.sampleTime.period * baseStep)); continue; }
@@ -355,5 +380,11 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     for (const [id, overlay] of staged) parameters.set(id, overlay);
     return { applied, pending };
   }
-  return { evaluate, evaluateNode, transition, finalState, stateMemory, snapshot, checkpoint, restore, effectiveNode: effective, applyDashboardEvents };
+  function finalize(reason: AdapterLifecycle['reason']): AdapterLifecycle[] {
+    if (!finalizedAdapters) {
+      finalizedAdapters = nodes.flatMap(node => { const row = m14Terminate(node, memory.get(node.id) ?? {}, reason, adapterBindings.get(node.id)); return row ? [row] : []; });
+    }
+    return finalizedAdapters.map(row => ({ ...row }));
+  }
+  return { evaluate, evaluateNode, transition, finalState, stateMemory, snapshot, checkpoint, restore, effectiveNode: effective, applyDashboardEvents, finalize };
 }

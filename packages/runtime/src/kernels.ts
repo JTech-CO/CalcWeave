@@ -1,6 +1,7 @@
 import { evaluateM11Node, m11OperationCost } from './m11';
 import { m12OperationCost } from './m12';
 import { evaluateM13Node, m13OperationCost } from './m13';
+import { evaluateM14Node, m14OperationCost } from './m14';
 import { evaluateExpression, expressionNodeCount } from '../../expression/src';
 import { ModelError, type IRNode, type SignalDescriptor, type SignalValue } from '../../model/src/types';
 import { matrixMultiply, transpose, determinant, inverse, solve, cholesky, lu, lookup2D, prelookup } from '../../advanced-math/src';
@@ -60,6 +61,8 @@ export function nodeOperationCost(node: IRNode, byId: Map<string, IRNode>): numb
   if (m12Cost !== undefined) return m12Cost;
   const m13Cost = m13OperationCost(node, inputSize, outputSize);
   if (m13Cost !== undefined) return m13Cost;
+  const m14Cost = m14OperationCost(node, inputSize, outputSize);
+  if (m14Cost !== undefined) return m14Cost;
   const m10Cost = m10OperationCost(node, inputSize, outputSize);
   if (m10Cost !== undefined) return m10Cost;
   if (node.blockType === 'math.matrix-multiply') {
@@ -149,6 +152,8 @@ export function checkSignal(value: SignalValue | undefined, descriptor: SignalDe
 
 /** M1 finite real/boolean kernels. Arbitrary model text never becomes executable syntax. */
 export function evaluateSignalNode(node: IRNode, input: (port: string) => SignalValue, state?: SignalValue, time = 0): Record<string, SignalValue> {
+  const m14 = evaluateM14Node(node, input);
+  if (m14 !== undefined) return m14;
   const m13 = evaluateM13Node(node, input, time);
   if (m13 !== undefined) return m13;
   const m11 = evaluateM11Node(node, input, time);

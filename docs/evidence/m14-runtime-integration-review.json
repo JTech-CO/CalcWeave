@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 1,
+  "stage": "M14",
+  "reviewType": "Focused independent runtime/codegen integration review",
+  "generatedAt": "2026-10-03T09:39:53.900Z",
+  "status": "no-remaining-code-blocker-found",
+  "mathWorksReferenceRuntimeUsed": false,
+  "fullSimulinkEquivalenceClaimed": false,
+  "nativeExternalRuntimeEquivalenceClaimed": false,
+  "publicLicenseAuthorizationAssumed": false,
+  "actualChecks": [
+    {
+      "name": "independent-literal-runtime-suite",
+      "passed": true,
+      "passedTests": 61,
+      "artifact": "docs/evidence/m14-runtime-unit-results.json"
+    },
+    {
+      "name": "actual-native-generated-full-contract",
+      "passed": true,
+      "artifact": "docs/evidence/m14-verification.json",
+      "engineVersion": "0.15.0-m14",
+      "counts": {
+        "rawFixtures": 20,
+        "definitionFixtures": 3,
+        "boundaryFixtures": 17,
+        "failures": 18,
+        "modeExecutions": 28,
+        "actualTypeScript": 32,
+        "strictTypeScriptPrograms": 3,
+        "checkedSamples": 85
+      },
+      "parityTolerance": 3e-12
+    },
+    {
+      "name": "authoritative-fixed-template-equality",
+      "passed": true,
+      "kernels": true,
+      "discrete": true,
+      "continuous": true,
+      "signalTypes": true
+    },
+    {
+      "name": "actual-fixed-WASM-binary-inspection",
+      "passed": true,
+      "artifact": "docs/evidence/m14-wasm-inspection.json",
+      "actualCryptoHash": true,
+      "hostValidation": true,
+      "tamperedByteCases": 169
+    },
+    {
+      "name": "lifecycle-and-failed-boundary-integrity",
+      "passed": true,
+      "actualSamePureInstanceCallbacks": [
+        "initialize",
+        "read",
+        "accumulate",
+        "reset",
+        "terminate"
+      ],
+      "idempotentCleanup": true,
+      "constructionFailureCleanup": true,
+      "cancellationCleanup": true,
+      "prepaidBoundedTermination": true,
+      "publishedMemoryUnchangedByTermination": true,
+      "checkpointStateLiteralOracle": true
+    },
+    {
+      "name": "entity-source-scope-boundary",
+      "passed": true,
+      "arrivalTimeFromAcceptedBoundary": true,
+      "minimumNextDueRelease": true,
+      "finitePhysicalDeadline": true,
+      "strictFIFOHeadBlocking": true,
+      "capacityPolicies": [
+        "error",
+        "drop-newest",
+        "drop-oldest"
+      ],
+      "boundedProducerHighWater": 128,
+      "payloadMetadataPreserved": true,
+      "noSimEventsIntegralClaim": true
+    }
+  ],
+  "decisions": [
+    {
+      "topic": "reset",
+      "contract": "Reset current state/output; always capture current input for next sample, including a reset hit.",
+      "literalRising": [
+        0,
+        1,
+        2,
+        0,
+        1,
+        2,
+        3
+      ],
+      "literalLevel": [
+        0,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "topic": "multirate-state",
+      "contract": "A non-due observation may commit the preceding due input while preserving the prior held output; full memory and held output are independently checked."
+    },
+    {
+      "topic": "trusted-execution",
+      "contract": "Only the two self-authored exact byte arrays and frozen catalog identities execute; no caller-supplied bytes, URLs, imports, callbacks, memory, tables, globals, start, loops or function calls."
+    },
+    {
+      "topic": "stateful-scope",
+      "contract": "Stateful adapters are root-graph-only. Pure affine may execute in supported nested scopes."
+    }
+  ],
+  "issues": [],
+  "excludedClaims": [
+    "No MATLAB/C/MEX/System/S-function native execution or reference parity.",
+    "Fixed-deadline messages are an independent alternative to SimEvents Entity Transport Delay.",
+    "No third-party runtime/code redistribution authorization or public project license is asserted.",
+    "This review does not replace final whole-repository/browser/coverage gates."
+  ],
+  "reviewedFiles": [
+    {
+      "file": "packages/runtime/src/m14.ts",
+      "sha256": "e168497b2fe1acdeaeddd55c13779687d4ece5d06efa688680ab54fb0d3d0766"
+    },
+    {
+      "file": "packages/runtime/src/m14-wasm.ts",
+      "sha256": "01335cf3dbbbb6216e31e3b32a15c5ebb9284ad4607ed9cdca1795120ba06ef9"
+    },
+    {
+      "file": "packages/runtime/src/discrete-machine.ts",
+      "sha256": "fa745e00c58b352369031dfd332c5c00df10a1c41a42975423b629d3b782f1e2"
+    },
+    {
+      "file": "packages/runtime/src/kernels.ts",
+      "sha256": "2ac5409ea1cf46886c75ee86705775721d1577bcb6b9494a206d663a60b4e772"
+    },
+    {
+      "file": "packages/runtime/src/index.ts",
+      "sha256": "6418c4e212a9e8438d33726f087ac7b5763e629253ca07f188fcb7dfd3e522f0"
+    },
+    {
+      "file": "packages/model/src/m14-adapters.ts",
+      "sha256": "3e28138fde231def06d8d0cf4698c46ccd684f68f5c984ead4e144f3dca62d37"
+    },
+    {
+      "file": "packages/compiler/src/m14.ts",
+      "sha256": "51e0b09ff919e1f465d912636e3b35df8d1f6be9a2334e17212690fa7f52cbbf"
+    },
+    {
+      "file": "packages/codegen-ts/src/index.ts",
+      "sha256": "95cbea0d45fe5b7bf6fbd79ebd4668d4fa2707a77291c2be9527b4f89a1ad5d5"
+    },
+    {
+      "file": "packages/codegen-ts/src/manifest.ts",
+      "sha256": "80970fad09afe9a0775d25a3f0f726477e3fe7c3fecf1d7bf1957f78513a7383"
+    },
+    {
+      "file": "packages/codegen-ts/sync-runtime-templates.ts",
+      "sha256": "4a5f99c1131f9c7138703eb1cb06d51bffc80e6494a9f8014a6407664cfc94c9"
+    },
+    {
+      "file": "scripts/verify-m14.ts",
+      "sha256": "e4231b4c8bb097a7858768b5e14e65e2b37849f4570d5d6de7e14b46a62dae4c"
+    },
+    {
+      "file": "tests/m14-runtime.test.ts",
+      "sha256": "265fd45bf801c1f70cb6ecd1465ddbab6a0480f025e3d901cd47512d8a2c2e2c"
+    },
+    {
+      "file": "tests/m14-independent-fixtures.ts",
+      "sha256": "72b7f98ed1c12fa22d900cab6862f046aef37f887591783cdcf2036e4064a978"
+    }
+  ]
+}

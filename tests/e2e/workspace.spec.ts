@@ -1,3 +1,4 @@
+import { expectStandaloneSource } from './standalone-source';
 import { expect, test, type Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import { writeFile } from 'node:fs/promises';
@@ -543,7 +544,7 @@ test('Model and standalone TypeScript downloads reflect the current snapshot', a
   expect(codeFile.suggestedFilename()).toBe('model.ts');
   const code = await readFile((await codeFile.path())!, 'utf8');
   expect(code).toContain('export function run');
-  expect(code).not.toMatch(/eval\(|new Function|https?:\/\//);
+  expectStandaloneSource(code);
 });
 
 test('M2 learning examples expose original array samples, FIR response, rates, seeded repeatability and state space', async ({ page }) => {
@@ -761,7 +762,7 @@ test('M2 execution archive includes current manifest and raw expected fixture, o
   expect(manifest.engineVersion).toBe(ENGINE_VERSION); expect(manifest.targetVersion).toBe('typescript-m2-v1');
   expect(manifest.modelHash).toBe(createHash('sha256').update(compileModel(model).semanticKey).digest('hex'));
   expect(manifest.dataReferences).toEqual([]); expect(manifest.rateTransitionPolicy).toBe('read-before-write');
-  expect(files['model.ts']).toContain('getManifest'); expect(files['model.ts']).not.toMatch(/eval\(|new Function|https?:\/\//);
+  expect(files['model.ts']).toContain('getManifest'); expectStandaloneSource(files['model.ts']);
   const expected = JSON.parse(files['expected-output.json']); expect(expected.samples).toHaveLength(41); expect(expected.status).toBe('completed');
   await page.locator('.model-node-list').getByRole('button', { name: 'seed 난수', exact: true }).click();
   await page.getByLabel('시드', { exact: true }).fill('43'); await page.getByLabel('시드', { exact: true }).press('Enter');
@@ -898,7 +899,7 @@ test('M3 continuous ZIP snapshots include solver settings, statistics, events an
   expect(manifest.modelHash).toBe(createHash('sha256').update(compileModel(snapshot).semanticKey).digest('hex'));
   const expected = JSON.parse(files['expected-output.json']);
   expect(expected.status).toBe('completed'); expect(expected.samples).toHaveLength(51); expect(expected.solverStatistics.method).toBe('rk45'); expect(expected.events).toEqual([]);
-  expect(files['model.ts']).toContain('getManifest'); expect(files['model.ts']).not.toMatch(/eval\(|new Function|https?:\/\//);
+  expect(files['model.ts']).toContain('getManifest'); expectStandaloneSource(files['model.ts']);
   expect(files['README.md']).toContain('출력 격자는 solver 내부 간격과 별개');
 });
 

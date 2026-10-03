@@ -1,0 +1,198 @@
+{
+  "generatedAt": "2026-10-03T09:53:58.155Z",
+  "stage": "M14",
+  "engineVersion": "0.15.0-m14",
+  "datasetSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+  "sourceRows": 385,
+  "uniqueSourceNameStrings": 339,
+  "firstWorkSourceRows": 8,
+  "registryDefinitions": 337,
+  "approvedAdditionalSourceRows": 3,
+  "existingMappingExtensions": 0,
+  "approvedSourceRows": 3,
+  "currentSourceSubset": 367,
+  "missingSourceRows": 18,
+  "nativeUnavailableRows": 8,
+  "nonExecutableRowsNotCounted": 5,
+  "fullSourceOptionsClosed": 0,
+  "evidencePath": "docs/evidence/m14-verification.json",
+  "evidenceSha256": "6886130299827a0d52e99533c0b0cf0ea827e27b5bceb56ca687e18fa4954f65",
+  "fixturePath": "tests/m14-independent-fixtures.ts",
+  "fixtureSha256": "72b7f98ed1c12fa22d900cab6862f046aef37f887591783cdcf2036e4064a978",
+  "uiWorkflowEvidencePath": "docs/evidence/m14-ui-workflow-verification.json",
+  "uiWorkflowEvidenceSha256": "2a8a78ebd197a611bacb38fa5c0de0aced7012265e7091c0e5083f144d32d8d0",
+  "uiBackingReports": {
+    "docs/evidence/m14-ui-unit-results.json": "4021c574c1de5e7da1329c7730b4506070bf2acfc526dbbdabc6fd4a8b27f0ed",
+    "docs/evidence/m14-browser-workflow-results.json": "5b80897351961ed5016dff078f7595e6603270a3b8b00af023594319a3f07be0"
+  },
+  "adapterCatalogPath": "packages/model/src/m14-adapters.ts",
+  "adapterCatalogSha256": "3e28138fde231def06d8d0cf4698c46ccd684f68f5c984ead4e144f3dca62d37",
+  "protectedArtifacts": {
+    "dataset/Simulink_Basic_Blocks_R2024b.md": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+    "docs/baselines/catalog-block-coverage.md": "bfad433de22c3302b53369be3465ec1d4bb3e072dd8f3ce310bc4af1ea967774",
+    "docs/simulink-coverage-roadmap.json": "86ec3c3f75939dc72a00b39d6760d86d9ef21f2a63922daf110c5db2fe7932cd",
+    "docs/baselines/m10-registry.json": "d23bc34bdbd450b1ea2be671b419f8ccfb74fa97238d541c3f9ffd97230cf8dc",
+    "docs/evidence/m10-source-approvals.json": "d8c938fb999555aaf61f24b68b7b631e158611dc2760542bd08d0f94d3221f4b",
+    "docs/evidence/m10-verification.json": "659a11814e1420f217068f4cab4c6726cd3070154f69fd1064afd3a4aee52e6d",
+    "docs/evidence/m10-reference-review.json": "fb9572178cc5c5caf19658e9010709a67d0d6611f83b9f3ce8993dffee493325",
+    "docs/evidence/m8-source-approvals.json": "4f558f5040f9dda1a9c2b5bbd2b848b825b4961489a03228dd3c12370b2c4d60",
+    "docs/evidence/m9-source-approvals.json": "7d49f1b15a6b325050a55295bca4d29411fe123dd0752e2ac98766641ccc18ca",
+    "docs/evidence/m8-verification.json": "351b5ba6031dff1a2f4dfb8b51e4e63e2747998277ee93e56decc4b908ff75d6",
+    "docs/evidence/m8-presets-verification.json": "55cef48ebe57a97ca02922225330f36b1f1d0866d2ad92d69f74fcceb7771f01",
+    "docs/evidence/m9-verification.json": "1d3fee9b56017db6c12b8f7f778d4c064efd4fa7f7d0014a2a38b6ffdd13a23f",
+    "docs/baselines/m11-registry.json": "daaf1ec9df9b5b7b43efdfd57863d0467b3f5636b3bcb4fd3b5450322fe8bf2e",
+    "docs/evidence/m11-source-approvals.json": "492abedeb09b84e601d206cf85ead66b3ba7596af0894f0f9519fd9af8aac8c7",
+    "docs/evidence/m11-verification.json": "716939d06a20c53a3fb9655820fb5c366fde0b1bb0fd5fd37adb39abadafea76",
+    "docs/baselines/m12-registry.json": "5eb19914ff0643307bb8c5c01b22557ad935558230a217e50ff8de6ee1867a73",
+    "docs/evidence/m12-source-approvals.json": "a3e2201b9672a4eac21f90a37b893ee0daf2c2a9b6d912654b46b1e1618a449b",
+    "docs/evidence/m12-verification.json": "79253d162a1af3ca5f5bbe2eb9de14d0fbc3e5aaa107795586678ab8f896f0c7",
+    "docs/baselines/m13-registry.json": "a4f8cadc0e8333cdc029c64de294077d90a98ae6d1f1746753649549f4f6a0d2",
+    "docs/evidence/m13-source-approvals.json": "bffe058d20baa23783f5682537787dbb9b6ac7aea06746d738b0972286af72bc",
+    "docs/evidence/m13-verification.json": "aa67d7976bd891f122f8a25eff41deb8b2054bc31ba660082b873e269883b598",
+    "docs/baselines/m13-block-coverage.md": "8d736de7dbf8dbda6eaca70790b0162afe7c78a168a09006e752c5fe8401e8c6"
+  },
+  "predecessorSourceRowsUnchanged": 382,
+  "unavailableSourceIds": [
+    "19-006",
+    "19-007",
+    "19-009",
+    "19-012",
+    "19-013"
+  ],
+  "approvals": [
+    {
+      "sourceId": "02-016",
+      "sourceName": "Entity Transport Delay",
+      "sourceLine": 140,
+      "canonical": "adapter.entity-transport",
+      "selectedParameters": {
+        "capacity": 4,
+        "overflow": "error",
+        "maxRelease": 2
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m14-independent-entity-transport",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "capacity": 4,
+            "overflow": "error",
+            "maxRelease": 2
+          },
+          "declaredModes": [
+            "discrete"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "delay",
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m14-independent-entity-transport/discrete"
+          ]
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m14-independent-entity-transport/discrete"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M14 독립 대체 subset",
+      "boundary": "Independent fixed-deadline message FIFO, seconds delay latched per arrival; release previous head at first due with deadline<=time and earliestTick<=tick, zero delay next due. No reciprocal-delay integral or SimEvents entities. · 실제 선택 구성 [{\"parameters\":{\"capacity\":4,\"overflow\":\"error\",\"maxRelease\":2},\"modes\":[\"discrete\"]}]; literal numerical/state/lifecycle·실제 TS/JSON/삽입 역순·신뢰된 module/ABI·화면 workflow만 확인. Native 실행 unavailable·전체 원본 옵션/MathWorks parity open.",
+      "newlyApproved": true,
+      "nativeExecutionStatus": "unavailable",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m14-ui-workflow-verification.json"
+    },
+    {
+      "sourceId": "19-001",
+      "sourceName": "C Caller",
+      "sourceLine": 711,
+      "canonical": "adapter.wasm-affine",
+      "selectedParameters": {
+        "gain": 3,
+        "bias": -1
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m14-independent-wasm-affine",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "gain": 3,
+            "bias": -1
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m14-independent-wasm-affine/static",
+            "m14-independent-wasm-affine/discrete",
+            "m14-independent-wasm-affine/continuous"
+          ]
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m14-independent-wasm-affine/static",
+        "m14-independent-wasm-affine/discrete",
+        "m14-independent-wasm-affine/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M14 독립 대체 subset",
+      "boundary": "Self-authored pinned f64 WASM affine(input,gain,bias); finite dimensionless legacy scalar only. External C parsing/compilation/ABI and MathWorks C Caller execution unavailable. · 실제 선택 구성 [{\"parameters\":{\"gain\":3,\"bias\":-1},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; literal numerical/state/lifecycle·실제 TS/JSON/삽입 역순·신뢰된 module/ABI·화면 workflow만 확인. Native 실행 unavailable·전체 원본 옵션/MathWorks parity open.",
+      "newlyApproved": true,
+      "nativeExecutionStatus": "unavailable",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m14-ui-workflow-verification.json"
+    },
+    {
+      "sourceId": "19-002",
+      "sourceName": "C Function",
+      "sourceLine": 712,
+      "canonical": "adapter.wasm-accumulator",
+      "selectedParameters": {
+        "initial": 1,
+        "gain": 2,
+        "resetMode": "rising"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m14-independent-wasm-accumulator",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "initial": 1,
+            "gain": 2,
+            "resetMode": "rising"
+          },
+          "declaredModes": [
+            "discrete"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in",
+            "reset"
+          ],
+          "evidenceFixtureIds": [
+            "m14-independent-wasm-accumulator/discrete"
+          ]
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m14-independent-wasm-accumulator/discrete"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M14 독립 대체 subset",
+      "boundary": "Self-authored pure WASM lifecycle with fixed-tick read-before-update JSON state; root graph only. Native C callbacks/subsystem reinitialization/compiler/target integration unavailable. · 실제 선택 구성 [{\"parameters\":{\"initial\":1,\"gain\":2,\"resetMode\":\"rising\"},\"modes\":[\"discrete\"]}]; literal numerical/state/lifecycle·실제 TS/JSON/삽입 역순·신뢰된 module/ABI·화면 workflow만 확인. Native 실행 unavailable·전체 원본 옵션/MathWorks parity open.",
+      "newlyApproved": true,
+      "nativeExecutionStatus": "unavailable",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m14-ui-workflow-verification.json"
+    }
+  ],
+  "primarySourceRuntimeExecuted": false,
+  "fullSimulinkEquivalenceClaimed": false
+}

@@ -1,0 +1,759 @@
+{
+  "schemaVersion": 2,
+  "documentVersion": "0.1",
+  "date": "2026-10-03",
+  "stage": "M14",
+  "title": "CalcWeave trusted fixed WASM and bounded transport adapters; native environments unavailable",
+  "planOnly": false,
+  "implementationStatus": "verified-selected-independent-alternatives",
+  "fullSimulinkEquivalenceClaimed": false,
+  "calendarCommitment": null,
+  "baseline": {
+    "sourcePath": "dataset/Simulink_Basic_Blocks_R2024b.md",
+    "datasetSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+    "roadmapPath": "docs/simulink-coverage-roadmap.json",
+    "roadmapSha256": "86ec3c3f75939dc72a00b39d6760d86d9ef21f2a63922daf110c5db2fe7932cd",
+    "sourceRows": 385,
+    "uniqueSourceNameStrings": 339,
+    "roadmapImmutable": true
+  },
+  "predecessorDelivery": {
+    "stage": "M13",
+    "baselineDefinitionCount": 334,
+    "registryPath": "docs/baselines/m13-registry.json",
+    "registrySha256": "a4f8cadc0e8333cdc029c64de294077d90a98ae6d1f1746753649549f4f6a0d2",
+    "sourceSubset": 364,
+    "protectedPredecessorProofs": [
+      {
+        "path": "docs/evidence/m13-source-approvals.json",
+        "sha256": "bffe058d20baa23783f5682537787dbb9b6ac7aea06746d738b0972286af72bc"
+      },
+      {
+        "path": "docs/evidence/m13-verification.json",
+        "sha256": "aa67d7976bd891f122f8a25eff41deb8b2054bc31ba660082b873e269883b598"
+      }
+    ]
+  },
+  "counts": {
+    "firstWorkSourceRows": 8,
+    "newDefinitions": 3,
+    "registryDefinitions": 337,
+    "selectedAlternativeCandidates": 3,
+    "nativeUnavailableRows": 8,
+    "nonExecutableRowsNotCounted": 5,
+    "sourceApprovals": 3,
+    "fullSourceOptionsClosed": 0,
+    "approvedAdditionalSourceRows": 3
+  },
+  "selectedDefinitions": [
+    {
+      "id": "adapter.wasm-affine",
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "profileId": "calcweave.wasm-affine-f64-v1",
+      "approvalStatus": "verified-selected-independent-alternative"
+    },
+    {
+      "id": "adapter.wasm-accumulator",
+      "modes": [
+        "discrete"
+      ],
+      "profileId": "calcweave.wasm-accumulator-f64-v1",
+      "approvalStatus": "verified-selected-independent-alternative"
+    },
+    {
+      "id": "adapter.entity-transport",
+      "modes": [
+        "discrete"
+      ],
+      "profileId": "calcweave.entity-fixed-deadline-v1",
+      "approvalStatus": "verified-selected-independent-alternative"
+    }
+  ],
+  "rows": [
+    {
+      "id": "02-016",
+      "sourceName": "Entity Transport Delay",
+      "sourceSection": 2,
+      "sourceOrdinal": 16,
+      "sourceLine": 140,
+      "sourceSubgroup": "문서에 함께 나타나지만 무조건적인 기본 사용 목록에서 분리한 항목",
+      "sourceCondition": "조건 · R2019b 도입. 엔터티/메시지 지연과 SimEvents 연계 항목. 일반 신호용 Transport Delay의 동의어가 아님",
+      "originalIdentitySha256": "93ea9f04912c1b735bce7f4de4dfc2cc2020e9f2fc604b52d7f83a7126cad342",
+      "baselineRoadmapRow": {
+        "id": "02-016",
+        "section": 2,
+        "ordinal": 16,
+        "name": "Entity Transport Delay",
+        "subgroup": "문서에 함께 나타나지만 무조건적인 기본 사용 목록에서 분리한 항목",
+        "condition": "조건 · R2019b 도입. 엔터티/메시지 지연과 SimEvents 연계 항목. 일반 신호용 Transport Delay의 동의어가 아님",
+        "line": 140,
+        "canonical": "adapter.entity-transport",
+        "planningSupport": "미지원·adapter 연구",
+        "originalPlannedMilestone": "M7",
+        "boundary": "SimEvents 엔터티 계약은 일반 신호 지연과 구분; 외부 엔터티 런타임 연구",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "adapter-gated",
+        "firstWorkMilestone": "M14",
+        "optionCompletionMilestones": [
+          "M14",
+          "M15",
+          "M16"
+        ],
+        "priority": "P2",
+        "rationale": "외부 어댑터·권리·라이선스 경계의 실행 의미에 배정; 미지원·adapter 연구 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 Entity Transport Delay의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: SimEvents 엔터티 계약은 일반 신호 지연과 구분; 외부 엔터티 런타임 연구",
+          "원본 환경·권리·dependency·ABI·격리·타깃 증거 전 실행 미지원; 독립 구현과 외부 원본 실행을 구분"
+        ],
+        "requiredContracts": [
+          "M14-parameter-inventory",
+          "M14-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-02-016-parameter-shape-domain",
+          "R-02-016-state-time-error",
+          "R-02-016-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "6db0c30f90d01887daecff419b0c0d9d236d4380cbb5c189f0002bc5bb18465e",
+      "baselineCanonical": "adapter.entity-transport",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "selectedImplementation": {
+        "canonical": "adapter.entity-transport",
+        "parameters": {
+          "capacity": 4,
+          "overflow": "error",
+          "maxRelease": 2
+        },
+        "requiredBindings": [
+          "in",
+          "delay"
+        ],
+        "boundary": "Independent fixed-deadline message FIFO, seconds delay latched per arrival; release previous head at first due with deadline<=time and earliestTick<=tick, zero delay next due. No reciprocal-delay integral or SimEvents entities.",
+        "classification": "independent-alternative"
+      },
+      "selectedDecision": "independent-alternative-candidate",
+      "approvalStatus": "verified-independent-alternative",
+      "nativeProfileId": "native.entity-transport-delay",
+      "nativeExecutionStatus": "unavailable",
+      "nativeFullEquivalent": false,
+      "executionEquivalenceClaimed": false,
+      "sourceOptionCompletionStatus": "open",
+      "primarySourceRuntimeExecuted": false,
+      "legacyManualPort": null,
+      "approval": {
+        "stageStatus": "verified-independent-alternative",
+        "configuredProfiles": [
+          {
+            "rawFixtureId": "m14-independent-entity-transport",
+            "configuredNodeId": "Block",
+            "selectedParameters": {
+              "capacity": 4,
+              "overflow": "error",
+              "maxRelease": 2
+            },
+            "declaredModes": [
+              "discrete"
+            ],
+            "requiredBindingsActuallyConnected": [
+              "delay",
+              "in"
+            ],
+            "evidenceFixtureIds": [
+              "m14-independent-entity-transport/discrete"
+            ]
+          }
+        ],
+        "evidenceFixtureIds": [
+          "m14-independent-entity-transport/discrete"
+        ],
+        "sourceApprovalPath": "docs/evidence/m14-source-approvals.json",
+        "nativeExecutionStatus": "unavailable",
+        "nativeFullEquivalent": false
+      }
+    },
+    {
+      "id": "19-001",
+      "sourceName": "C Caller",
+      "sourceSection": 19,
+      "sourceOrdinal": 1,
+      "sourceLine": 711,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 · 호출할 C 코드 및 지원 컴파일러가 별도로 필요할 수 있음",
+      "originalIdentitySha256": "9ef09fe02baf4a49958a9d19e9407b877833cf00639a380d3629f73d406c922f",
+      "baselineRoadmapRow": {
+        "id": "19-001",
+        "section": 19,
+        "ordinal": 1,
+        "name": "C Caller",
+        "subgroup": "일반 표",
+        "condition": "기본 · 호출할 C 코드 및 지원 컴파일러가 별도로 필요할 수 있음",
+        "line": 711,
+        "canonical": "adapter.native-code",
+        "planningSupport": "미지원·adapter 연구",
+        "originalPlannedMilestone": "M7",
+        "boundary": "C/C++ 컴파일러/ABI·WASM plugin 연구; 임의 native 코드나 MathWorks builder 실행 제외",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "adapter-gated",
+        "firstWorkMilestone": "M14",
+        "optionCompletionMilestones": [
+          "M14",
+          "M15",
+          "M16"
+        ],
+        "priority": "P2",
+        "rationale": "외부 어댑터·권리·라이선스 경계의 실행 의미에 배정; 미지원·adapter 연구 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 C Caller의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: C/C++ 컴파일러/ABI·WASM plugin 연구; 임의 native 코드나 MathWorks builder 실행 제외",
+          "원본 환경·권리·dependency·ABI·격리·타깃 증거 전 실행 미지원; 독립 구현과 외부 원본 실행을 구분"
+        ],
+        "requiredContracts": [
+          "M14-parameter-inventory",
+          "M14-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-19-001-parameter-shape-domain",
+          "R-19-001-state-time-error",
+          "R-19-001-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "87fca862b802808bfc2e1acb362a22faef997c4e80d44b68fa77b2cfc8f90728",
+      "baselineCanonical": "adapter.native-code",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "selectedImplementation": {
+        "canonical": "adapter.wasm-affine",
+        "parameters": {
+          "gain": 3,
+          "bias": -1
+        },
+        "requiredBindings": [
+          "in"
+        ],
+        "boundary": "Self-authored pinned f64 WASM affine(input,gain,bias); finite dimensionless legacy scalar only. External C parsing/compilation/ABI and MathWorks C Caller execution unavailable.",
+        "classification": "independent-alternative"
+      },
+      "selectedDecision": "independent-alternative-candidate",
+      "approvalStatus": "verified-independent-alternative",
+      "nativeProfileId": "native.c-caller",
+      "nativeExecutionStatus": "unavailable",
+      "nativeFullEquivalent": false,
+      "executionEquivalenceClaimed": false,
+      "sourceOptionCompletionStatus": "open",
+      "primarySourceRuntimeExecuted": false,
+      "legacyManualPort": null,
+      "approval": {
+        "stageStatus": "verified-independent-alternative",
+        "configuredProfiles": [
+          {
+            "rawFixtureId": "m14-independent-wasm-affine",
+            "configuredNodeId": "Block",
+            "selectedParameters": {
+              "gain": 3,
+              "bias": -1
+            },
+            "declaredModes": [
+              "static",
+              "discrete",
+              "continuous"
+            ],
+            "requiredBindingsActuallyConnected": [
+              "in"
+            ],
+            "evidenceFixtureIds": [
+              "m14-independent-wasm-affine/static",
+              "m14-independent-wasm-affine/discrete",
+              "m14-independent-wasm-affine/continuous"
+            ]
+          }
+        ],
+        "evidenceFixtureIds": [
+          "m14-independent-wasm-affine/static",
+          "m14-independent-wasm-affine/discrete",
+          "m14-independent-wasm-affine/continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m14-source-approvals.json",
+        "nativeExecutionStatus": "unavailable",
+        "nativeFullEquivalent": false
+      }
+    },
+    {
+      "id": "19-002",
+      "sourceName": "C Function",
+      "sourceSection": 19,
+      "sourceOrdinal": 2,
+      "sourceLine": 712,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "R2020a+ · 사용자 C 코드/컴파일러 조건",
+      "originalIdentitySha256": "97e52fb32510eb6123f200957ff65611b057bf1fb8ff5a9554c0f4cbef585739",
+      "baselineRoadmapRow": {
+        "id": "19-002",
+        "section": 19,
+        "ordinal": 2,
+        "name": "C Function",
+        "subgroup": "일반 표",
+        "condition": "R2020a+ · 사용자 C 코드/컴파일러 조건",
+        "line": 712,
+        "canonical": "adapter.native-code",
+        "planningSupport": "미지원·adapter 연구",
+        "originalPlannedMilestone": "M7",
+        "boundary": "C/C++ 컴파일러/ABI·WASM plugin 연구; 임의 native 코드나 MathWorks builder 실행 제외",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "adapter-gated",
+        "firstWorkMilestone": "M14",
+        "optionCompletionMilestones": [
+          "M14",
+          "M15",
+          "M16"
+        ],
+        "priority": "P2",
+        "rationale": "외부 어댑터·권리·라이선스 경계의 실행 의미에 배정; 미지원·adapter 연구 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 C Function의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: C/C++ 컴파일러/ABI·WASM plugin 연구; 임의 native 코드나 MathWorks builder 실행 제외",
+          "원본 환경·권리·dependency·ABI·격리·타깃 증거 전 실행 미지원; 독립 구현과 외부 원본 실행을 구분"
+        ],
+        "requiredContracts": [
+          "M14-parameter-inventory",
+          "M14-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-19-002-parameter-shape-domain",
+          "R-19-002-state-time-error",
+          "R-19-002-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "63ea7ab37f61e5301740d15ea033e64ecce0f63a5029ddd4012fe90d7f14d7f4",
+      "baselineCanonical": "adapter.native-code",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "selectedImplementation": {
+        "canonical": "adapter.wasm-accumulator",
+        "parameters": {
+          "initial": 1,
+          "gain": 2,
+          "resetMode": "rising"
+        },
+        "requiredBindings": [
+          "in",
+          "reset"
+        ],
+        "boundary": "Self-authored pure WASM lifecycle with fixed-tick read-before-update JSON state; root graph only. Native C callbacks/subsystem reinitialization/compiler/target integration unavailable.",
+        "classification": "independent-alternative"
+      },
+      "selectedDecision": "independent-alternative-candidate",
+      "approvalStatus": "verified-independent-alternative",
+      "nativeProfileId": "native.c-function",
+      "nativeExecutionStatus": "unavailable",
+      "nativeFullEquivalent": false,
+      "executionEquivalenceClaimed": false,
+      "sourceOptionCompletionStatus": "open",
+      "primarySourceRuntimeExecuted": false,
+      "legacyManualPort": null,
+      "approval": {
+        "stageStatus": "verified-independent-alternative",
+        "configuredProfiles": [
+          {
+            "rawFixtureId": "m14-independent-wasm-accumulator",
+            "configuredNodeId": "Block",
+            "selectedParameters": {
+              "initial": 1,
+              "gain": 2,
+              "resetMode": "rising"
+            },
+            "declaredModes": [
+              "discrete"
+            ],
+            "requiredBindingsActuallyConnected": [
+              "in",
+              "reset"
+            ],
+            "evidenceFixtureIds": [
+              "m14-independent-wasm-accumulator/discrete"
+            ]
+          }
+        ],
+        "evidenceFixtureIds": [
+          "m14-independent-wasm-accumulator/discrete"
+        ],
+        "sourceApprovalPath": "docs/evidence/m14-source-approvals.json",
+        "nativeExecutionStatus": "unavailable",
+        "nativeFullEquivalent": false
+      }
+    },
+    {
+      "id": "19-006",
+      "sourceName": "Interpreted MATLAB Function",
+      "sourceSection": 19,
+      "sourceOrdinal": 6,
+      "sourceLine": 716,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "레거시 · R2024b 문서에 제거 예정으로 표시. 신규 모델의 기본 선택에서 제외",
+      "originalIdentitySha256": "0f957043b8f76ca8a69c1560b9f22849b24718a289a617431602a0aea8c454ef",
+      "baselineRoadmapRow": {
+        "id": "19-006",
+        "section": 19,
+        "ordinal": 6,
+        "name": "Interpreted MATLAB Function",
+        "subgroup": "일반 표",
+        "condition": "레거시 · R2024b 문서에 제거 예정으로 표시. 신규 모델의 기본 선택에서 제외",
+        "line": 716,
+        "canonical": "adapter.matlab-legacy",
+        "planningSupport": "미지원·adapter 연구",
+        "originalPlannedMilestone": "M7",
+        "boundary": "legacy 해석 기록; MATLAB interpreter 미포함, AST/typed function으로 수동 변환",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "legacy-reference",
+        "firstWorkMilestone": "M14",
+        "optionCompletionMilestones": [
+          "M14",
+          "M16"
+        ],
+        "priority": "P2",
+        "rationale": "외부 어댑터·권리·라이선스 경계의 실행 의미에 배정; 미지원·adapter 연구 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 Interpreted MATLAB Function의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: legacy 해석 기록; MATLAB interpreter 미포함, AST/typed function으로 수동 변환",
+          "신규 기본 추천에서 제외·설명/수동 이전을 우선; legacy 실행 동등성은 별도 adapter 승인 전 미지원"
+        ],
+        "requiredContracts": [
+          "M14-parameter-inventory",
+          "M14-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-19-006-parameter-shape-domain",
+          "R-19-006-state-time-error",
+          "R-19-006-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "26d52dd0c54e279643bac8b2b9573c046f6f64edf926f5c3e91016071add00e6",
+      "baselineCanonical": "adapter.matlab-legacy",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "selectedImplementation": null,
+      "selectedDecision": "explicit-native-unavailable",
+      "approvalStatus": "unavailable-not-counted",
+      "nativeProfileId": "native.interpreted-matlab-function",
+      "nativeExecutionStatus": "unavailable",
+      "nativeFullEquivalent": false,
+      "executionEquivalenceClaimed": false,
+      "sourceOptionCompletionStatus": "open",
+      "primarySourceRuntimeExecuted": false,
+      "legacyManualPort": {
+        "canonical": "math.expression",
+        "expression": "3*x+1",
+        "automaticTranslation": false,
+        "nativeMatlabExecuted": false,
+        "sourceApprovalClaimed": false,
+        "actualExpected": 7
+      }
+    },
+    {
+      "id": "19-007",
+      "sourceName": "Level-2 MATLAB S-Function",
+      "sourceSection": 19,
+      "sourceOrdinal": 7,
+      "sourceLine": 717,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "originalIdentitySha256": "2aca977cea4320e4c2889c01507ee081b086698dc98f5d513b8f4f6d47d8ef96",
+      "baselineRoadmapRow": {
+        "id": "19-007",
+        "section": 19,
+        "ordinal": 7,
+        "name": "Level-2 MATLAB S-Function",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 717,
+        "canonical": "adapter.matlab-s-function",
+        "planningSupport": "미지원·adapter 연구",
+        "originalPlannedMilestone": "M7",
+        "boundary": "MATLAB callback lifecycle를 브라우저에서 자동 재현하지 않음; 수동 porting 조사",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "adapter-gated",
+        "firstWorkMilestone": "M14",
+        "optionCompletionMilestones": [
+          "M14",
+          "M15",
+          "M16"
+        ],
+        "priority": "P2",
+        "rationale": "외부 어댑터·권리·라이선스 경계의 실행 의미에 배정; 미지원·adapter 연구 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 Level-2 MATLAB S-Function의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: MATLAB callback lifecycle를 브라우저에서 자동 재현하지 않음; 수동 porting 조사",
+          "원본 환경·권리·dependency·ABI·격리·타깃 증거 전 실행 미지원; 독립 구현과 외부 원본 실행을 구분"
+        ],
+        "requiredContracts": [
+          "M14-parameter-inventory",
+          "M14-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-19-007-parameter-shape-domain",
+          "R-19-007-state-time-error",
+          "R-19-007-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "beaf65381e011f0f2b642c8c5b700c37c374229d4a7583178e6d6afeec3896ac",
+      "baselineCanonical": "adapter.matlab-s-function",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "selectedImplementation": null,
+      "selectedDecision": "explicit-native-unavailable",
+      "approvalStatus": "unavailable-not-counted",
+      "nativeProfileId": "native.level-2-matlab-s-function",
+      "nativeExecutionStatus": "unavailable",
+      "nativeFullEquivalent": false,
+      "executionEquivalenceClaimed": false,
+      "sourceOptionCompletionStatus": "open",
+      "primarySourceRuntimeExecuted": false,
+      "legacyManualPort": null
+    },
+    {
+      "id": "19-009",
+      "sourceName": "MATLAB System",
+      "sourceSection": 19,
+      "sourceOrdinal": 9,
+      "sourceLine": 719,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "조건 · 사용하는 System object 자체가 별도 툴박스에 속하면 해당 제품 필요",
+      "originalIdentitySha256": "1cd96f3ad42e9a4d1f3149072f410aa9c7419bdc67f7534f018ca583fed7e2fa",
+      "baselineRoadmapRow": {
+        "id": "19-009",
+        "section": 19,
+        "ordinal": 9,
+        "name": "MATLAB System",
+        "subgroup": "일반 표",
+        "condition": "조건 · 사용하는 System object 자체가 별도 툴박스에 속하면 해당 제품 필요",
+        "line": 719,
+        "canonical": "adapter.system-object",
+        "planningSupport": "미지원·adapter 연구",
+        "originalPlannedMilestone": "M7",
+        "boundary": "외부 System object/툴박스 dependency는 명시 adapter 연구·별도 라이선스 확인",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "adapter-gated",
+        "firstWorkMilestone": "M14",
+        "optionCompletionMilestones": [
+          "M14",
+          "M15",
+          "M16"
+        ],
+        "priority": "P2",
+        "rationale": "외부 어댑터·권리·라이선스 경계의 실행 의미에 배정; 미지원·adapter 연구 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 MATLAB System의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 외부 System object/툴박스 dependency는 명시 adapter 연구·별도 라이선스 확인",
+          "원본 환경·권리·dependency·ABI·격리·타깃 증거 전 실행 미지원; 독립 구현과 외부 원본 실행을 구분"
+        ],
+        "requiredContracts": [
+          "M14-parameter-inventory",
+          "M14-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-19-009-parameter-shape-domain",
+          "R-19-009-state-time-error",
+          "R-19-009-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "66042cabd84fb8eb8cf29ed4cf41ad57f7be13d7fa3802259d16ad84e54bd1c9",
+      "baselineCanonical": "adapter.system-object",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "selectedImplementation": null,
+      "selectedDecision": "explicit-native-unavailable",
+      "approvalStatus": "unavailable-not-counted",
+      "nativeProfileId": "native.matlab-system",
+      "nativeExecutionStatus": "unavailable",
+      "nativeFullEquivalent": false,
+      "executionEquivalenceClaimed": false,
+      "sourceOptionCompletionStatus": "open",
+      "primarySourceRuntimeExecuted": false,
+      "legacyManualPort": null
+    },
+    {
+      "id": "19-012",
+      "sourceName": "S-Function",
+      "sourceSection": 19,
+      "sourceOrdinal": 12,
+      "sourceLine": 722,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "originalIdentitySha256": "30a77805c7c72b05dd87138a161efa20b571a67e929a3538d33b820c3c4cc4f8",
+      "baselineRoadmapRow": {
+        "id": "19-012",
+        "section": 19,
+        "ordinal": 12,
+        "name": "S-Function",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 722,
+        "canonical": "adapter.s-function",
+        "planningSupport": "미지원·adapter 연구",
+        "originalPlannedMilestone": "M7",
+        "boundary": "native/MATLAB S-function callback/ABI 계약과 라이선스 검토; 자동 실행 제외",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "adapter-gated",
+        "firstWorkMilestone": "M14",
+        "optionCompletionMilestones": [
+          "M14",
+          "M15",
+          "M16"
+        ],
+        "priority": "P2",
+        "rationale": "외부 어댑터·권리·라이선스 경계의 실행 의미에 배정; 미지원·adapter 연구 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 S-Function의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: native/MATLAB S-function callback/ABI 계약과 라이선스 검토; 자동 실행 제외",
+          "원본 환경·권리·dependency·ABI·격리·타깃 증거 전 실행 미지원; 독립 구현과 외부 원본 실행을 구분"
+        ],
+        "requiredContracts": [
+          "M14-parameter-inventory",
+          "M14-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-19-012-parameter-shape-domain",
+          "R-19-012-state-time-error",
+          "R-19-012-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "09d88d64d8aa32df93c8e560de5d9913d53b91472896d6c874047eeef716128d",
+      "baselineCanonical": "adapter.s-function",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "selectedImplementation": null,
+      "selectedDecision": "explicit-native-unavailable",
+      "approvalStatus": "unavailable-not-counted",
+      "nativeProfileId": "native.s-function",
+      "nativeExecutionStatus": "unavailable",
+      "nativeFullEquivalent": false,
+      "executionEquivalenceClaimed": false,
+      "sourceOptionCompletionStatus": "open",
+      "primarySourceRuntimeExecuted": false,
+      "legacyManualPort": null
+    },
+    {
+      "id": "19-013",
+      "sourceName": "S-Function Builder",
+      "sourceSection": 19,
+      "sourceOrdinal": 13,
+      "sourceLine": 723,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 · 외부 컴파일러 및 사용자 코드 조건",
+      "originalIdentitySha256": "a7d6a308d706da64bf82c8d27001b91dd3c1ec69f3c9930b37c70c774330d156",
+      "baselineRoadmapRow": {
+        "id": "19-013",
+        "section": 19,
+        "ordinal": 13,
+        "name": "S-Function Builder",
+        "subgroup": "일반 표",
+        "condition": "기본 · 외부 컴파일러 및 사용자 코드 조건",
+        "line": 723,
+        "canonical": "adapter.native-code",
+        "planningSupport": "미지원·adapter 연구",
+        "originalPlannedMilestone": "M7",
+        "boundary": "C/C++ 컴파일러/ABI·WASM plugin 연구; 임의 native 코드나 MathWorks builder 실행 제외",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "adapter-gated",
+        "firstWorkMilestone": "M14",
+        "optionCompletionMilestones": [
+          "M14",
+          "M15",
+          "M16"
+        ],
+        "priority": "P2",
+        "rationale": "외부 어댑터·권리·라이선스 경계의 실행 의미에 배정; 미지원·adapter 연구 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 S-Function Builder의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: C/C++ 컴파일러/ABI·WASM plugin 연구; 임의 native 코드나 MathWorks builder 실행 제외",
+          "원본 환경·권리·dependency·ABI·격리·타깃 증거 전 실행 미지원; 독립 구현과 외부 원본 실행을 구분"
+        ],
+        "requiredContracts": [
+          "M14-parameter-inventory",
+          "M14-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-19-013-parameter-shape-domain",
+          "R-19-013-state-time-error",
+          "R-19-013-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "35bc839addb468e178e069d226017e426bc847006872dcc74d290d6aaee1abdf",
+      "baselineCanonical": "adapter.native-code",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "selectedImplementation": null,
+      "selectedDecision": "explicit-native-unavailable",
+      "approvalStatus": "unavailable-not-counted",
+      "nativeProfileId": "native.s-function-builder",
+      "nativeExecutionStatus": "unavailable",
+      "nativeFullEquivalent": false,
+      "executionEquivalenceClaimed": false,
+      "sourceOptionCompletionStatus": "open",
+      "primarySourceRuntimeExecuted": false,
+      "legacyManualPort": null
+    }
+  ],
+  "deliveryGate": {
+    "status": "passed-engineering-selected-scope",
+    "actualStandaloneStatus": "passed",
+    "browserStatus": "passed-ui-workflows",
+    "sourceApprovalStatus": "3-independent-alternatives-only",
+    "verifiedPublicDeployment": false
+  },
+  "claimScope": "Three source-specific independently authored bounded alternatives verified by actual numerical/state/lifecycle/standalone/UI proof. All eight native environments remain unavailable and full options open. Five unavailable source rows are not upgraded; predecessor382 mappings/statuses and334 definitions are preserved. No MathWorks runtime equivalence or arbitrary adapter execution is claimed."
+}

@@ -1,12 +1,12 @@
 # CalcWeave 마일스톤별 구축 방향
 
-> 버전: v0.14 · 작성일: 2026-10-03 · 상태: 로컬 앱0.14.0·엔진0.14.0-m13·334 registry·M13 선택 실행·UI 검증 완료; 검증된 공개 버전은 M12 앱0.13.0
+> 버전: v0.15 · 작성일: 2026-10-03 · 상태: 로컬 앱0.15.0·엔진0.15.0-m14·337 registry·M14 선택 수치·상태·UI와 source 승인 완료; M14 선택 engineering 검증 완료; 통합 공개 배포 대기; 검증된 공개 버전은 M12 앱0.13.0
 > 대상 브랜드: **CalcWeave** · 예정 공개 도메인: **CalcWeave.com**  
 > 도메인 등록·소유권·상표 사용 가능 여부는 별도 확인 항목이며, 현재 확보 완료로 간주하지 않는다.
 
 관련 문서: [기술 백서](01-technical-whitepaper.md) · [디자인 백서](02-design-whitepaper.md) · [블럭 대응표](block-coverage.md) · [원본 데이터셋](../dataset/Simulink_Basic_Blocks_R2024b.md)
 
-현재 M13 선택 범위는 기존304개 정의 보존·신규30개로334종,69예제/11범주다. 최초 배정75행 중 실제 문자열·Dashboard·기록·로컬 데이터 증거로 신규59행을 승인하고 이전16행을 보존해 subset364/385·미구현21행이다. 전체unit3515개·TS361실행/846표본·UI116개·전체browser167개와 최종 영향 경계3개를 확인했다. [M13 계약](m13-contract.md)·[검증](m13-validation.md)·[75행 대응표](m13-implementation-map.json)를 따른다. M13 병합·공개 배포는 별도 게이트이며 아래 M0~M12 수치는 각 단계의 기록이다. M14·M15 코드는 M13 게이트 이후 순차 진행한다. 원본 전체 옵션과 MathWorks 실행 동등성은 후속 로드맵에 남긴다.
+현재 M14 선택 범위는 기존334개 정의 보존·신규3개로337종,75예제/12범주다. 최초 배정8행의 native C/MATLAB/SimEvents 환경은 모두 unavailable이며 실제 고정 WASM·누산 lifecycle·메시지 FIFO3개만 독립 대체로 승인해 subset367/385·미구현18행이다. 전체unit3632개·TS32실행/85표본·UI35개/회귀73개·M14 browser9개·디자인188관측·root/project각81검사·project browser4개·fresh M13 TS361개를 확인했다. 전체 browser176개 중172개 PASS 뒤 다운로드 보안 assertion4개를 실제 실행 AST 검사로 갱신해 해당4/4를 재검증했다. 제품 소스는 변경하지 않았다. 성능6개 예산·dependency audit0·최종typecheck·M10~M14 source 승인/roadmap/coverage 회귀도 통과해 선택 engineering 검증을 완료했다. [M14 계약](m14-contract.md)·[검증](m14-validation.md)·[8행 대응표](m14-implementation-map.json)를 따른다. M14 동결 후 M15를 순서대로 진행하고 통합 공개 배포하며 현재 공개 검증 버전은 M12 앱0.13.0이다. 원본 전체 옵션과 MathWorks 실행 동등성은 후속 로드맵에 남긴다.
 
 M9 최초 engineering 납품 앱0.10.0·엔진0.10.0-m9는 기존185개 정의에26개 DSP·이산 상태·샘플시간 정의를 더해 registry211개를 구성한다. M9 preset15개·예제39개/6카테고리와58개 firstWork 원본행의 제한 대응을 [M9 계약](m9-contract.md)·[구현 맵](m9-implementation-map.json)·[검증 기록](m9-validation.md)에 기록한다. M8·M9의 선언 범위는 마지막 수치 경계 수정 후 로컬 검증을 완료했다. 원본행 승인 기록은 현재subset211행·미구현174행이며, 전체 옵션 완료나 engineering 최종 검증 완료를 이 숫자로 대신하지 않는다. 공개 Pages의 이번 버전 배포·실제 주소 확인도 완료했다.
 
@@ -485,3 +485,11 @@ Python `python-m7-v1`을 첫 추가 타깃으로 선정했다. 승인된 정적�
 ### M10·M11·M12 공개 통합 결과
 
 M10→M11→M12를 순서대로 검증·병합한 공개0.13.0/엔진0.13.0-m12 통합 릴리스를 게시했다. 304정의·61예제/9범주이며 main `27e01d6fad98ae39c149c8e577ec0eede4922769`의 [수동 Pages 검증/배포](https://github.com/JTech-CO/CalcWeave/actions/runs/37104252395), project14파일 byte/SHA parity, 공개9검사 PASS를 연결했다. [최신 공개 검증](pages-validation.md)을 따른다. 원본 선택 subset305/385와 미구현80행·전체 원본 옵션·native reference parity는 계속 별도 지표로 유지한다.
+
+## M13 납품 기록 — 문자열·대시보드·기록·로컬 데이터
+
+앱0.14.0·엔진0.14.0-m13의 선택 engineering 검증을 완료하고 기존304개 정의를 보존해334종·69예제/11범주로 확장했다. 원본75행 중 신규59행/이전16행 유지로 subset364/385·미구현21행이었다. 전체unit3515개·실제TS361실행/846표본·UI116개·전체browser167개와 최종 입력 경계3개·root/project각78검사·project browser4개·성능6개 예산을 검증했다. [M13 계약](m13-contract.md)·[검증](m13-validation.md)은 동결한 이전 단계의 근거이며 공개 배포는 M15 뒤 통합 릴리스로 확인한다.
+
+## M14 납품 기록 — 고정 WASM·lifecycle·메시지 전달
+
+앱0.15.0·엔진0.15.0-m14의 선택 engineering 검증을 완료했다. 기존334개 정의를 정확히 보존하고 고정 WASM affine·실제 누산 lifecycle·bounded FIFO3개를 추가해337종·75예제/12범주다. 원본8행의 native C/MATLAB/SimEvents 환경은 모두 unavailable이며3개 실제 선택 구성만 독립 대체로 승인해 subset367/385·미구현18행이다. 나머지5행·기존382행 mapping/status를 보존하고 전체8행 옵션·native runtime등가는 열어 두었다. 전체unit3632개·20raw/28모드·실제TS32실행/85표본/strict3개·UI35개/회귀73개·M14 browser9개·디자인188관측·root/project각81검사·project browser4개·성능6개와 fresh M13 TS361개가 통과했다. 전체 browser176개 중172개 PASS 뒤 다운로드 보안 assertion4개를 실제 실행 AST 검사로 갱신해 해당4/4를 재검증했다. 제품 소스는 변경하지 않았다. [M14 계약](m14-contract.md)·[검증](m14-validation.md)·[8행 대응표](m14-implementation-map.json)를 따른다. 임의 외부 코드·WASM 업로드·MATLAB 실행·SimEvents entity 적분은 제공하지 않으며 확인하지 않은 license/재배포 권리를 부여하지 않는다. 현재 공개는 M12 앱0.13.0이며 M14 동결 뒤 M15를 순서대로 구현·검증하고 통합 배포한다.
