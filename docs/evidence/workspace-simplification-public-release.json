@@ -1,0 +1,26 @@
+{
+  "status": "passed-workspace-simplification-release",
+  "checkedAt": "2026-10-03T15:53:21.453Z",
+  "appVersion": "0.17.1",
+  "engineVersion": "0.17.0-m16",
+  "url": "https://jtech-co.github.io/CalcWeave/",
+  "headSha": "6882c2ae95dfda950652f642e4570670c460e172",
+  "actionsRunId": 37132824930,
+  "releaseId": "eed8ecaa15afd751ae142d9d8f58c935cae13397b944f8ad8cd8db02b4890951",
+  "supportMatrixSha256": "e5d706d7fc127081fc8470189b3f580d03ed61ba938a8168a5aa8e3730bb875e",
+  "exactLocalProjectArtifactParity": true,
+  "assetCount": 16,
+  "publicBrowserChecks": 9,
+  "publicFeatureCases": 34,
+  "ciUnit": 3883,
+  "ciWholeBrowser": 199,
+  "ciProjectBrowser": 4,
+  "records": {
+    "docs/evidence/workspace-simplification-deployment-verification.json": "71357cd96427d928ee92d0eb506510607a899d65a5990e7a5df21488a5e3672e",
+    "docs/evidence/workspace-simplification-public-browser-verification.json": "1950af39087566e36c92bfa0e17af18ccb3734951952c196f0b33b2086ac8e7a",
+    "docs/evidence/workspace-simplification-public-feature-browser-results.json": "07a7bb58294e617ac821719321e9fad944fae33d1fbae3c2261104e169010196",
+    "docs/evidence/workspace-simplification-actions-verification.json": "16ad6e295fe4aeff3181866de9ad35d2b20a0a0d692e52de1a444e0501d9784e"
+  },
+  "verifiedApplicationDeployment": true,
+  "verifiedPublicLaunch": false
+}
