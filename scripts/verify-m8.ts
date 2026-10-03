@@ -9,7 +9,7 @@ import { M8_BLOCK_IDS, M8_BLOCK_PRESETS } from '../packages/block-library/src/m8
 import { compileModel } from '../packages/compiler/src';
 import { runModel } from '../packages/runtime/src';
 import { createExportManifest, exportTypeScript } from '../packages/codegen-ts/src';
-import { getPythonDiagnostics } from '../packages/codegen-python/src';
+import { getPythonDiagnostics, PYTHON_M7_TARGET } from '../packages/codegen-python/src';
 import { ENGINE_VERSION, ModelError, parseModelJson, serializeModel, type CalcModel, type RunResult } from '../packages/model/src';
 import { M8_FIXTURES, m8Expected, m8Model, type M8Fixture } from '../tests/m8-fixtures';
 
@@ -61,7 +61,7 @@ for (const entry of presetOnly ? [] : M8_FIXTURES) {
     const reversed = structuredClone(model); reversed.nodes.reverse(); reversed.edges.reverse(); assert.deepEqual(stable(await runModel(compileModel(reversed))), stable(result));
     const { generated, manifest, compiled } = await program(model, !strictModes.has(mode));
     equal(generated.run(), stable(result), `${entry.name}/${mode}/standalone TypeScript`); assert.equal(manifest.targetVersion, 'typescript-m8-v1');
-    assert(getPythonDiagnostics(compiled).some(item => item.nodeId === 'operation'), 'M8 cards must identify unsupported Python nodes');
+    assert(getPythonDiagnostics(compiled, PYTHON_M7_TARGET).some(item => item.nodeId === 'operation'), 'M8 cards must identify unsupported Python nodes');
     modes[mode] = { samples: result.samples.length, modelHash: manifest.modelHash, targetVersion: manifest.targetVersion, actualStandaloneTypeScript: true, jsonRoundtrip: true, insertionOrderIndependent: true };
   }
   fixtures.push({ id: entry.name, blockIds: [entry.id], parameters: entry.parameters, maximumAbsoluteError, maximumScaledError, tolerance, exactSubnormalOracles: true, modes, independentOracle: true });
@@ -98,6 +98,6 @@ for (const test of presetOnly ? [] : invalid) {
   try { generated.run(); assert.fail('Generated failure must be diagnosed'); } catch (error) { assert.deepEqual((error as ModelError).diagnostics, failure.diagnostics); }
   failures.push({ id: test.id, diagnostics: failure.diagnostics, actualStandaloneFailureParity: true });
 }
-const report = { generatedAt: new Date().toISOString(), engineVersion: ENGINE_VERSION, registryCount: blockRegistry.length, newDefinitions: M8_BLOCK_IDS.length, presets: M8_BLOCK_PRESETS.length, datasetSha256: createHash('sha256').update(await readFile('dataset/Simulink_Basic_Blocks_R2024b.md')).digest('hex'), strictTypeScriptModes: [...strictModes], checkedSamples, actualGeneratedPrograms: ordinal, fixtures, presetEvidence, failures, methodology: 'Literal independent scalar/vector/matrix/boolean outputs in every declared mode. Every raw sample, JSON roundtrip, reversed insertion order, manifests and executed standalone TypeScript compared. Strict import-free ES2022 compilation per mode; failure codes identify original nodes and match generated programs. No MathWorks execution or full-option equivalence claimed.', fullSimulinkEquivalenceClaimed: false };
+const report = { pythonDiagnosticTarget: PYTHON_M7_TARGET.id, generatedAt: new Date().toISOString(), engineVersion: ENGINE_VERSION, registryCount: blockRegistry.length, newDefinitions: M8_BLOCK_IDS.length, presets: M8_BLOCK_PRESETS.length, datasetSha256: createHash('sha256').update(await readFile('dataset/Simulink_Basic_Blocks_R2024b.md')).digest('hex'), strictTypeScriptModes: [...strictModes], checkedSamples, actualGeneratedPrograms: ordinal, fixtures, presetEvidence, failures, methodology: 'Literal independent scalar/vector/matrix/boolean outputs in every declared mode. Every raw sample, JSON roundtrip, reversed insertion order, manifests and executed standalone TypeScript compared. Strict import-free ES2022 compilation per mode; failure codes identify original nodes and match generated programs. No MathWorks execution or full-option equivalence claimed.', fullSimulinkEquivalenceClaimed: false };
 await writeFile(`docs/evidence/${presetOnly ? 'm8-presets-verification' : evidenceName}.json`, JSON.stringify(report, null, 2) + '\n');
 process.stdout.write(JSON.stringify({ fixtures: fixtures.length, failureFixtures: failures.length, checkedSamples, actualGeneratedPrograms: ordinal, newDefinitions: M8_BLOCK_IDS.length, registryCount: blockRegistry.length, strictTypeScriptModes: [...strictModes] }) + '\n');

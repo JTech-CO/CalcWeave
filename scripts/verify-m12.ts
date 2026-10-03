@@ -8,7 +8,7 @@ import { blockRegistry } from '../packages/block-library/src';
 import { M12_BLOCK_IDS } from '../packages/block-library/src/m12';
 import { compileModel } from '../packages/compiler/src';
 import { createExportManifest, exportTypeScript } from '../packages/codegen-ts/src';
-import { getPythonDiagnostics } from '../packages/codegen-python/src';
+import { getPythonDiagnostics, PYTHON_M7_TARGET } from '../packages/codegen-python/src';
 import { ENGINE_VERSION, ModelError, parseModelJson, serializeModel, type CalcModel, type RunResult } from '../packages/model/src';
 import { runModel } from '../packages/runtime/src';
 import { M12_INDEPENDENT_DEFINITION_FIXTURES, M12_INDEPENDENT_BOUNDARY_FIXTURES, M12_INDEPENDENT_FAILURE_FIXTURES, type M12IndependentFixture } from '../tests/m12-independent-fixtures';
@@ -95,7 +95,7 @@ async function verify(entry: M12IndependentFixture, mode: CalcModel['execution']
   const roundtrip = compileModel(parseModelJson(serializeModel(model))); assert.equal(roundtrip.semanticKey, compiled.semanticKey); compare(stable(await runModel(roundtrip)), stable(result), `${entry.name}/JSON full contract`, parityTolerance);
   const reversed = structuredClone(model); reversed.nodes.reverse(); reversed.edges.reverse(); const reordered = compileModel(reversed); assert.equal(reordered.semanticKey, compiled.semanticKey); compare(stable(await runModel(reordered)), stable(result), `${entry.name}/reversed full contract`, parityTolerance);
   const newNodes = compiled.nodes.filter(node => (M12_BLOCK_IDS as readonly string[]).includes(node.blockType));
-  const pythonDiagnostics = getPythonDiagnostics(compiled);
+  const pythonDiagnostics = getPythonDiagnostics(compiled, PYTHON_M7_TARGET);
   for (const node of newNodes) assert(pythonDiagnostics.some(diagnostic => diagnostic.nodeId === node.id), `${entry.name}/${node.id}: unsupported Python diagnostic`);
   return { id:entry.name, ...(entry.sourceIds?{sourceIds:entry.sourceIds}:{}), mode, blockIds:[...new Set(newNodes.map(node=>node.blockType))],
     parameters:Object.fromEntries(newNodes.map(node=>[node.id,{blockType:node.blockType,parameters:node.parameters,sampleTime:node.sampleTime}])), solver:compiled.model.execution.solver,
@@ -116,7 +116,7 @@ for (const entry of M12_INDEPENDENT_FAILURE_FIXTURES) {
   try{generated.run();assert.fail('Generated must fail');}catch(error){const actual=error as{diagnostics:unknown;partialResult:RunResult};assert.deepEqual(actual.diagnostics,failed.diagnostics);assert(actual.partialResult&&failed.partialResult);compare(stable(actual.partialResult),stable(failed.partialResult),entry.name+'/full failure partial parity',parityTolerance);}
   failures.push({name:entry.name,phase:'runtime',diagnosticCode:entry.code,actualTypeScriptExecuted:true,strictProgramIndividuallyChecked:individuallyStrictChecked,fullPartialParity:true});
 }
-const report={schemaVersion:1,engineVersion:ENGINE_VERSION,generatedAt:new Date().toISOString(),registryDefinitions:blockRegistry.length,addedDefinitions:11,predecessorDefinitionsUnchanged:293,fullSimulinkEquivalenceClaimed:false,
+const report={ pythonDiagnosticTarget: PYTHON_M7_TARGET.id,schemaVersion:1,engineVersion:ENGINE_VERSION,generatedAt:new Date().toISOString(),registryDefinitions:blockRegistry.length,addedDefinitions:11,predecessorDefinitionsUnchanged:293,fullSimulinkEquivalenceClaimed:false,
   counts:{rawFixtures:M12_INDEPENDENT_DEFINITION_FIXTURES.length+M12_INDEPENDENT_BOUNDARY_FIXTURES.length,definitionFixtures:M12_INDEPENDENT_DEFINITION_FIXTURES.length,boundaryFixtures:M12_INDEPENDENT_BOUNDARY_FIXTURES.length,failures:failures.length,modeExecutions:fixtures.length,actualTypeScript:ordinal,strictTypeScriptPrograms:strictPrograms,checkedSamples},parityTolerance,fixtures,failures};
 await writeFile(join('docs/evidence',evidenceName+'.json'),JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report.counts));

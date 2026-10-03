@@ -8,7 +8,7 @@ import { blockRegistry } from '../packages/block-library/src';
 import { M10_BLOCK_IDS, M10_BLOCK_PRESETS } from '../packages/block-library/src/m10';
 import { compileModel } from '../packages/compiler/src';
 import { createExportManifest, exportTypeScript } from '../packages/codegen-ts/src';
-import { getPythonDiagnostics } from '../packages/codegen-python/src';
+import { getPythonDiagnostics, PYTHON_M7_TARGET } from '../packages/codegen-python/src';
 import { ENGINE_VERSION, ModelError, parseModelJson, serializeModel, type CalcModel, type RunResult, type TypedSignal } from '../packages/model/src';
 import { runModel } from '../packages/runtime/src';
 import { M10_INDEPENDENT_DEFINITION_FIXTURES, M10_INDEPENDENT_FIXTURES, M10_INDEPENDENT_FAILURE_FIXTURES, M10_INDEPENDENT_PRESET_FIXTURES, m10IndependentMode, type M10IndependentFixture } from '../tests/m10-independent-fixtures';
@@ -97,7 +97,7 @@ async function verify(entry: M10IndependentFixture) {
   const roundtrip = compileModel(parseModelJson(serializeModel(entry.model))); assert.equal(roundtrip.semanticKey, compiled.semanticKey); compare(stable(await runModel(roundtrip)), stable(result), `${entry.name}/JSON full contract`);
   const reversed = structuredClone(entry.model); reversed.nodes.reverse(); reversed.edges.reverse(); const reordered = compileModel(reversed); assert.equal(reordered.semanticKey, compiled.semanticKey); compare(stable(await runModel(reordered)), stable(result), `${entry.name}/reversed insertion full contract`);
   const newNodes = compiled.nodes.filter(node => (M10_BLOCK_IDS as readonly string[]).includes(node.blockType)); assert(newNodes.length > 0);
-  const pythonDiagnostics = getPythonDiagnostics(compiled); for (const node of newNodes) assert(pythonDiagnostics.some(diagnostic => diagnostic.nodeId === node.id), `${entry.name}/${node.id}: unsupported Python original node diagnostic`);
+  const pythonDiagnostics = getPythonDiagnostics(compiled, PYTHON_M7_TARGET); for (const node of newNodes) assert(pythonDiagnostics.some(diagnostic => diagnostic.nodeId === node.id), `${entry.name}/${node.id}: unsupported Python original node diagnostic`);
   return { id: entry.name, ...(entry.presetId ? { presetId: entry.presetId } : {}), ...(entry.sourceIds ? { sourceIds: entry.sourceIds } : {}), mode: entry.model.execution.mode,
     blockIds: [...new Set(newNodes.map(node => node.blockType))], parameters: Object.fromEntries(newNodes.map(node => [node.id, { blockType: node.blockType, parameters: node.parameters, sampleTime: node.sampleTime }])),
     samples: result.samples.length, maximumAbsoluteError, maximumScaledError, float64Tolerance: tolerance, typedMetadataTagsAndStringsExact: true, float32BitTrueExact: true, exactZerosAndSubnormals: true,
@@ -126,7 +126,7 @@ for (const entry of M10_INDEPENDENT_FAILURE_FIXTURES) {
     strictStandaloneTemplateModeVerified: true, strictProgramIndividuallyChecked: individuallyStrictChecked, importFreeStandalone: true, actualStandaloneFailureParity: true, fullPartialStateAndMemoryParity: !!failure.partialResult, literalAtomicRollbackOracle: !!entry.expectedPartial, jsonFailureParity: true, insertionOrderFailureParity: true });
 }
 assert.equal(strictPrograms, strictModes.size, 'Each declared execution-mode template receives strict TypeScript checking');
-const report = { generatedAt: new Date().toISOString(), engineVersion: ENGINE_VERSION, registryCount: blockRegistry.length, predecessorDefinitions: predecessor.length,
+const report = { pythonDiagnosticTarget: PYTHON_M7_TARGET.id, generatedAt: new Date().toISOString(), engineVersion: ENGINE_VERSION, registryCount: blockRegistry.length, predecessorDefinitions: predecessor.length,
   newDefinitions: M10_BLOCK_IDS.length, presets: M10_BLOCK_PRESETS.length, rawFixtures: M10_INDEPENDENT_FIXTURES.length, rawPresetFixtures: M10_INDEPENDENT_PRESET_FIXTURES.length,
   datasetSha256: createHash('sha256').update(await readFile('dataset/Simulink_Basic_Blocks_R2024b.md')).digest('hex'), strictTypeScriptModes: [...strictModes], strictTypeScriptPrograms: strictPrograms,
   checkedSamples, exactTypedCells, actualGeneratedPrograms: ordinal, fixtures, presetEvidence, failures,

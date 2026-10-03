@@ -1,0 +1,46 @@
+{
+  "generatedAt": "2026-10-03T11:38:25.336Z",
+  "stage": "M15",
+  "change": "Explicitly bind historical negative Python checks to their approved python-m7-v1 target while current M15 positive support remains independently executed.",
+  "firstRun": {
+    "id": 37119792600,
+    "headSha": "3ef025dbf3838880b1884f6edb867d2d1c419379",
+    "conclusion": "failure",
+    "deploy": "skipped",
+    "failingStep": "npm run verify:m10",
+    "diagnostic": "m10-independent-uint64-exact-source-static/operation: unsupported Python original node diagnostic",
+    "path": "docs/evidence/m15-actions-initial-failure.json",
+    "sha256": "dfe72ff8f5720352b4db96e08d622eae1d2640d601790baec33a2a64e0128597",
+    "failureLogSha256": "94a026406f56db22c9eca15c5e8822fb67329b483aa59ca96247b34f8f6477ef"
+  },
+  "changedScripts": {
+    "scripts/verify-catalog.ts": "ab383d6988dec6017750b7e637730f6d5e031957d1c97e6f2f82ae6c14fe0fb5",
+    "scripts/verify-m8.ts": "59b38a4425e69b44347313b4761e7cfc2c73a7d28fbba98e75167d7220bb25b4",
+    "scripts/verify-m9.ts": "140cbe3bb894bf03c662d41ea4e24661d1529ac782f4a99424ecb6ac32046815",
+    "scripts/verify-m10.ts": "b280202032aeb7144cffb54532aff60ce32802e1e90406b9072f40469ff7d949",
+    "scripts/verify-m11.ts": "705cb4935daeaa632774e1109db01c79e15ac0b2ea7b774a8c2a73b66f415ac9",
+    "scripts/verify-m12.ts": "adc4e8260fcedef272bcc9b4532ede7a4eb0f143a99e24ef28826e757b221e4a"
+  },
+  "localAffectedActualProofs": [
+    {
+      "path": "docs/evidence/m10-regression-on-m15.json",
+      "sha256": "1acffc6f28d3091a17ca3f1d244d030d371ce57003f61ff9b5ee88c8f13b34d4",
+      "actualGeneratedPrograms": 209,
+      "checkedSamples": 484,
+      "pythonDiagnosticTarget": "python-m7-v1"
+    },
+    {
+      "path": "docs/evidence/m11-regression-on-m15.json",
+      "sha256": "775e65008a3e8e011b74621116936997030aee6a4f01a4b66aa95d7823655261",
+      "pythonDiagnosticTarget": "python-m7-v1"
+    }
+  ],
+  "currentPythonPositiveEvidence": {
+    "path": "docs/evidence/m15-python-verification.json",
+    "sha256": "06822cb6671866f301236a7e161f397d91b068bc136ddd583b092fa5d14215bd",
+    "actualPrograms": 142,
+    "supportedDefinitions": 69
+  },
+  "productionCodeChanged": false,
+  "frozenPredecessorArtifactsChanged": false
+}

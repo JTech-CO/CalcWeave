@@ -10,7 +10,7 @@ import { EXPANDED_TIME_SOURCE_IDS } from '../packages/block-library/src/time-sou
 import { compileModel } from '../packages/compiler/src';
 import { runModel } from '../packages/runtime/src';
 import { createExportManifest, exportTypeScript } from '../packages/codegen-ts/src';
-import { getPythonDiagnostics } from '../packages/codegen-python/src';
+import { getPythonDiagnostics, PYTHON_M7_TARGET } from '../packages/codegen-python/src';
 import { ENGINE_VERSION, ModelError, parseModelJson, serializeModel, type CalcModel, type RunResult, type SignalValue } from '../packages/model/src';
 import { EXPANSION_FIXTURES, expansionModel, type ExpansionFixture } from '../tests/block-expansion-fixtures';
 import { TIME_SOURCE_FIXTURES, timeSourceModel } from '../tests/time-source-fixtures';
@@ -65,7 +65,7 @@ async function actualTargets(model: CalcModel, expected: (time: number) => Signa
   const generated = await import(/* @vite-ignore */ pathToFileURL(moduleFile).href);
   assert.deepEqual(generated.getManifest(), metadata);
   compare(generated.run(), stable(result), `${model.name}/actual TypeScript`);
-  if (pythonRejected) assert(getPythonDiagnostics(compiled).some(item => item.nodeId), `${model.name}: new cards must report Python unsupported`);
+  if (pythonRejected) assert(getPythonDiagnostics(compiled, PYTHON_M7_TARGET).some(item => item.nodeId), `${model.name}: new cards must report Python unsupported`);
   return { maximumAbsoluteError, samples: result.samples.length, modelHash: metadata.modelHash, targetVersion: metadata.targetVersion };
 }
 
@@ -118,6 +118,6 @@ for (const entry of cases) {
   failures.push({ id: entry.fixture.id, diagnosticVerified: true, diagnostics: failure.diagnostics });
 }
 const datasetBytes = await readFile('dataset/Simulink_Basic_Blocks_R2024b.md');
-const report = { generatedAt: new Date().toISOString(), engineVersion: ENGINE_VERSION, registryCount: blockRegistry.length, newMathCards: 64, newTimeCards: 6, datasetSha256: createHash('sha256').update(datasetBytes).digest('hex'), strictTypeScriptModes: [...strictModes], checkedSamples, actualGeneratedPrograms: ordinal, fixtures, failures, methodology: 'Every raw scalar/vector/matrix/boolean sample compared with independent analytic/hand fixtures in every supported mode. Actual standalone TypeScript ESM and manifests compared with JS; strict ES2022-only compilation per mode and all time sources. JSON roundtrip and original-node domain diagnostics verified. Floating tolerance is 2e-12 scaled by max(1,abs(expected)); shape/boolean/key sets are exact. Source-row approval checks use absolute error within 2e-12 for these fixtures. New cards are explicitly unavailable in Python. Existing M1-M7 contracts have separate regression evidence.', publicDeploymentClaimed: false };
+const report = { pythonDiagnosticTarget: PYTHON_M7_TARGET.id, generatedAt: new Date().toISOString(), engineVersion: ENGINE_VERSION, registryCount: blockRegistry.length, newMathCards: 64, newTimeCards: 6, datasetSha256: createHash('sha256').update(datasetBytes).digest('hex'), strictTypeScriptModes: [...strictModes], checkedSamples, actualGeneratedPrograms: ordinal, fixtures, failures, methodology: 'Every raw scalar/vector/matrix/boolean sample compared with independent analytic/hand fixtures in every supported mode. Actual standalone TypeScript ESM and manifests compared with JS; strict ES2022-only compilation per mode and all time sources. JSON roundtrip and original-node domain diagnostics verified. Floating tolerance is 2e-12 scaled by max(1,abs(expected)); shape/boolean/key sets are exact. Source-row approval checks use absolute error within 2e-12 for these fixtures. New cards are explicitly unavailable in Python. Existing M1-M7 contracts have separate regression evidence.', publicDeploymentClaimed: false };
 await writeFile(`docs/evidence/${evidenceStage}-verification.json`, JSON.stringify(report, null, 2) + '\n');
 process.stdout.write(JSON.stringify({ fixtures: fixtures.length, failureFixtures: failures.length, checkedSamples, actualGeneratedPrograms: ordinal, registryCards: blockRegistry.length, strictTypeScriptModes: [...strictModes] }) + '\n');
