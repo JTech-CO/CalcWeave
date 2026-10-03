@@ -88,3 +88,11 @@ M16 구현 검사 후 중복된 M0~M15 계약·진행 기록과 이전 계획·�
 | 의존성 | [npm audit](evidence/workspace-simplification-dependency-audit.json) 알려진 취약점0개. |
 
 첫 집중 회귀의 탭 충돌 사례는30초 제한으로 시간 초과였다. [초기33/34](evidence/workspace-simplification-initial-browser-results.json), [독립 재실행1/1](evidence/workspace-simplification-cross-tab-browser-results.json), 최종34/34를 구분해 보존했다. 최종 UI의 page error와 앱 console error는0이다. 첫 브라우저의 자동 favicon.ico 요청404는 기존 정적 리소스 누락으로 별도 기록했다. 사용자 브라우저의 저장 데이터를 삭제하거나 읽지 않았다. 엔진·블럭337개·지원표와 보호 원자료/승인25개는 변경하지 않았으며 M16 문서 정리 기록도 당시 증거로 보존했다.
+
+## 보조 기능 정리 공개 결과
+
+[Actions 37132824930](https://github.com/JTech-CO/CalcWeave/actions/runs/37132824930)는 main `6882c2ae95dfda950652f642e4570670c460e172`에서 단위3,883/3,883·전체 브라우저199/199·프로젝트 경로4/4와 기존 모든 단계 회귀·release91검사를 통과한 뒤 앱0.17.1/엔진0.17.0-m16을 게시했다. 공개16assets와 service worker를 로컬의 프로젝트 artifact와 byte/SHA로 대조했다. release ID는 `eed8ecaa15afd751ae142d9d8f58c935cae13397b944f8ad8cd8db02b4890951`다.
+
+[공개 기본9검사](evidence/workspace-simplification-public-browser-verification.json)와 [실제 공개 기능34케이스](evidence/workspace-simplification-public-feature-browser-results.json)가 통과했다. 새 기본 접힘·고급 파일 진입·초점 복귀뿐 아니라 지문 불일치·변조 거부·migration 검토·원본 보존·백업/복구/삭제·탭 충돌·다운로드 Python/WASM의 실제 실행을 독립 브라우저에서 확인했다. 사용자 브라우저의 저장소는 접근하지 않았다.
+
+[조사·변경·로컬 검증](evidence/workspace-simplification-engineering-checks.json)·[CI 원본 요약](evidence/workspace-simplification-actions-verification.json)·[정확한 공개 파일](evidence/workspace-simplification-deployment-verification.json)·[공개 결과](evidence/workspace-simplification-public-release.json). M16의 모든 과거 수치/승인/문서 정리 증거는 별도로 보존하며 정식 출시·실제 novice 관찰·목표 도메인·원본 전체 동등성의 미검증 상태도 유지한다.
