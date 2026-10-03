@@ -6,6 +6,7 @@ import { compileModel } from '../packages/compiler/src';
 import { ModelError, type CalcEdge, type CalcModel, type CalcNode, type SignalDescriptor, type SignalValue, type SubsystemDefinition } from '../packages/model/src';
 import { runModel } from '../packages/runtime/src';
 import { M11_INDEPENDENT_DEFINITION_FIXTURES } from './m11-independent-fixtures';
+import { M12_BLOCK_IDS } from '../packages/block-library/src/m12';
 
 const node = (id: string, blockType: string, parameters: Record<string, unknown> = {}): CalcNode => ({ id, blockType, blockVersion: 1, label: id, parameters });
 const edge = (source: string, target: string, port = 'in', output = 'out'): CalcEdge => ({ id: `${source}-${output}-${target}-${port}`, source: { nodeId: source, portId: output }, target: { nodeId: target, portId: port } });
@@ -22,8 +23,8 @@ describe('M11 controlled hierarchy and structured compiler contracts', () => {
   it('preserves all245 preceding definitions exactly and registers48 independent operations', () => {
     const baseline = JSON.parse(readFileSync(new URL('../docs/baselines/m10-registry.json', import.meta.url), 'utf8')) as { id: string }[];
     expect(baseline).toHaveLength(245); for (const definition of baseline) expect(getBlockDefinition(definition.id)).toEqual(definition);
-    expect(M11_BLOCK_IDS).toHaveLength(48); expect(M11_SCOPE_BLOCK_IDS).toHaveLength(19); expect(blockRegistry).toHaveLength(293);
-    expect(new Set(blockRegistry.map(definition => definition.id)).size).toBe(293);
+    expect(M11_BLOCK_IDS).toHaveLength(48); expect(M11_SCOPE_BLOCK_IDS).toHaveLength(19); expect(blockRegistry).toHaveLength(293 + M12_BLOCK_IDS.length);
+    expect(new Set(blockRegistry.map(definition => definition.id)).size).toBe(293 + M12_BLOCK_IDS.length);
     expect(new Set(M11_INDEPENDENT_DEFINITION_FIXTURES.map(entry => entry.name))).toEqual(new Set(M11_BLOCK_IDS.map(id => `m11-independent-${id.replaceAll('.', '-')}`)));
   });
   it.each(M11_INDEPENDENT_DEFINITION_FIXTURES)('compiles $name in every declared mode with immutable JSON and insertion-order parity', entry => {

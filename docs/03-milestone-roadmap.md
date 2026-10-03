@@ -475,3 +475,7 @@ Python `python-m7-v1`을 첫 추가 타깃으로 선정했다. 승인된 정적�
 ## M11 납품 기록 — 조건부 계층·반복·구조화 메시지
 
 앱0.12.0·엔진0.12.0-m11,선택 로컬engineering완료. 기존245정의보존·신규48종으로293종,53예제/8범주. 원본73행중58선택승인(신규48·확장10),이전2유지·미지원13,현재subset293/385·missing92. 전체unit2896/2896,TS138실행·419표본,UI9+M10회귀7,project4,design188/pageErrors0·성능6예산·각release70검사PASS. 최초전체browser145/146 뒤pagination교정후관련16/16을분리기록한다. [M11 검증](m11-validation.md). 전체옵션·원본실행 parity·서비스출시승인은열린후속이며공개배포는M12최종통합릴리스에서확인한다.
+
+## M12 납품 기록 — 연속 solver·사건·DAE와 분석
+
+앱0.13.0·엔진0.13.0-m12, 선택 engineering완료. 기존293정의를 보존하고11종을 추가해304종,61예제/9범주. 원본26행 중 신규12선택승인·기존14유지,현재subset305/385·missing80;전체옵션26행 모두open. 전체unit3007/3007,전체browser156/156,project4/4,실제TS35실행/155표본/2strict,design188/pageErrors0·성능6예산·각release78검사PASS. [M12 계약](m12-contract.md)·[검증](m12-validation.md). 일반DAE·모든native solver·자동튜닝·MathWorks실행동등성·외부target은미승인이다. M10→M11→M12를차례로동결·병합하고M12통합릴리스의공개배포를별도확인한다.

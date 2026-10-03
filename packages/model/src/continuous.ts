@@ -14,11 +14,17 @@ export function normalizeSolverSettings(execution: ExecutionSettings): SolverSet
     maxSteps: SOLVER_LIMITS.maxSteps, maxRejects: SOLVER_LIMITS.maxRejects,
     maxEvaluations: SOLVER_LIMITS.maxEvaluations, eventTolerance: 1e-8,
     maxEvents: SOLVER_LIMITS.maxEvents, discreteStep: execution.step,
+    ...(execution.solver?.method === 'implicit-euler' ? { newtonTolerance: 1e-9, newtonMaxIterations: 24, jacobianStep: 1e-6 } : {}),
   };
   const value = { ...defaults, ...execution.solver };
   const invalid = (message: string): never => { throw new ModelError([{ code: 'INVALID_SOLVER', message }]); };
   if (Object.keys(execution.solver ?? {}).some((key) => !Object.hasOwn(defaults, key))) invalid('지원하지 않는 솔버 필드입니다.');
-  if (value.method !== 'rk4' && value.method !== 'rk45') invalid('솔버는 rk4 또는 rk45여야 합니다.');
+  if (!['rk4', 'rk45', 'implicit-euler'].includes(value.method)) invalid('솔버는 rk4, rk45 또는 독립 implicit-euler여야 합니다.');
+  if (value.method === 'implicit-euler') {
+    if (!Number.isFinite(value.newtonTolerance) || value.newtonTolerance! < 1e-14 || value.newtonTolerance! > 1e-3) invalid('newtonTolerance는1e-14~1e-3이어야 합니다.');
+    if (!Number.isSafeInteger(value.newtonMaxIterations) || value.newtonMaxIterations! < 1 || value.newtonMaxIterations! > 32) invalid('newtonMaxIterations는1~32의 정수여야 합니다.');
+    if (!Number.isFinite(value.jacobianStep) || value.jacobianStep! < 1e-8 || value.jacobianStep! > 1e-2) invalid('jacobianStep은1e-8~1e-2이어야 합니다.');
+  }
   for (const key of ['initialStep', 'minStep', 'maxStep', 'discreteStep'] as const) {
     const min = key === 'discreteStep' ? 1e-9 : SOLVER_LIMITS.minStep;
     if (!Number.isFinite(value[key]) || value[key] < min || value[key] > SOLVER_LIMITS.maxStep) invalid(`${key}는 ${min}~${SOLVER_LIMITS.maxStep}의 유한한 양수여야 합니다.`);
@@ -36,12 +42,14 @@ export function normalizeSolverSettings(execution: ExecutionSettings): SolverSet
 export const CONTINUOUS_STATE_TYPES: readonly string[] = Object.freeze([
   'continuous.integrator', 'continuous.second-order-integrator', 'continuous.state-space',
   'continuous.transfer-function', 'continuous.zero-pole', 'continuous.pid', 'continuous.derivative',
+  'continuous.descriptor', 'continuous.integrator-limited', 'continuous.second-order-limited', 'continuous.pid-2dof', 'time.variable-transport-delay',
 ]);
 export const CONTINUOUS_BOUNDARY_TYPES: readonly string[] = Object.freeze([
   'time.memory', 'time.zero-order-hold', 'time.first-order-hold', 'time.transport-delay',
   'logic.hit-crossing', 'nonlinear.relay',
 ]);
 export function continuousStateElementCount(node: IRNode): number {
+  if (typeof node.parameters.m12StateElements === 'number') return node.parameters.m12StateElements;
   switch (node.blockType) {
     case 'continuous.integrator': case 'continuous.derivative': return 1;
     case 'continuous.second-order-integrator': case 'continuous.pid': return 2;

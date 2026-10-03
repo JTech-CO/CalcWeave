@@ -1,6 +1,7 @@
 import { M9_BLOCK_IDS } from '../packages/block-library/src/m9';
 import { M10_BLOCK_IDS } from '../packages/block-library/src/m10';
 import { M11_BLOCK_IDS } from '../packages/block-library/src/m11';
+import { M12_BLOCK_IDS } from '../packages/block-library/src/m12';
 import { M8_BLOCK_IDS } from '../packages/block-library/src/m8';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { compileModel } from '../packages/compiler/src';
@@ -112,7 +113,7 @@ describe('M7 declarative package integrity and independently supplied trust', ()
   });
 
   it('requires the exact immutable executable registry including parameter kinds and ports', async () => {
-    expect(MODEL_PACKAGE_REGISTRY).toHaveLength(144 + M8_BLOCK_IDS.length + M9_BLOCK_IDS.length + M10_BLOCK_IDS.length + M11_BLOCK_IDS.length); expect(Object.isFrozen(MODEL_PACKAGE_REGISTRY[0]!.inputs)).toBe(true);
+    expect(MODEL_PACKAGE_REGISTRY).toHaveLength(144 + M8_BLOCK_IDS.length + M9_BLOCK_IDS.length + M10_BLOCK_IDS.length + M11_BLOCK_IDS.length + M12_BLOCK_IDS.length); expect(Object.isFrozen(MODEL_PACKAGE_REGISTRY[0]!.inputs)).toBe(true);
     const exported = await createModelPackage(model());
     for (const change of ['remove', 'ports', 'parameter', 'version', 'custom']) {
       const envelope = JSON.parse(exported.text);

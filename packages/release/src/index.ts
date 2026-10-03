@@ -3,7 +3,7 @@ import { ENGINE_VERSION, MODEL_LIMITS } from '../../model/src';
 import { DATASET_LIMITS } from '../../model/src/dataset';
 import { SOLVER_LIMITS } from '../../model/src/continuous';
 
-export const APP_VERSION = '0.12.0';
+export const APP_VERSION = '0.13.0';
 export const RELEASE = Object.freeze({
   version: APP_VERSION, engineVersion: ENGINE_VERSION, schemaVersion: 1,
   stage: 'public-beta', domain: 'calcweave.com', deploymentUrl: 'https://jtech-co.github.io/CalcWeave/', operator: 'JTech-Co',

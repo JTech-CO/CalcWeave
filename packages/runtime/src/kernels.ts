@@ -1,4 +1,5 @@
 import { evaluateM11Node, m11OperationCost } from './m11';
+import { m12OperationCost } from './m12';
 import { evaluateExpression, expressionNodeCount } from '../../expression/src';
 import { ModelError, type IRNode, type SignalDescriptor, type SignalValue } from '../../model/src/types';
 import { matrixMultiply, transpose, determinant, inverse, solve, cholesky, lu, lookup2D, prelookup } from '../../advanced-math/src';
@@ -54,6 +55,8 @@ export function nodeOperationCost(node: IRNode, byId: Map<string, IRNode>): numb
   if (m9Cost !== undefined) return m9Cost;
   const m11Cost = m11OperationCost(node, inputSize, outputSize);
   if (m11Cost !== undefined) return m11Cost;
+  const m12Cost = m12OperationCost(node, inputSize, outputSize);
+  if (m12Cost !== undefined) return m12Cost;
   const m10Cost = m10OperationCost(node, inputSize, outputSize);
   if (m10Cost !== undefined) return m10Cost;
   if (node.blockType === 'math.matrix-multiply') {

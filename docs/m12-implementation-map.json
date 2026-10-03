@@ -1,0 +1,3947 @@
+{
+  "schemaVersion": 2,
+  "documentVersion": "0.1",
+  "date": "2026-10-03",
+  "stage": "M12",
+  "title": "CalcWeave M12 bounded implicit integration, scalar constraints, index-1 DAE, continuous state limits and local analysis mapping",
+  "planOnly": false,
+  "fullSimulinkEquivalenceClaimed": false,
+  "calendarCommitment": null,
+  "baseline": {
+    "engineVersion": "0.8.0-catalog",
+    "registryDefinitions": 144,
+    "sourcePath": "dataset/Simulink_Basic_Blocks_R2024b.md",
+    "coveragePath": "docs/baselines/catalog-block-coverage.md",
+    "datasetSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+    "coverageSha256": "bfad433de22c3302b53369be3465ec1d4bb3e072dd8f3ce310bc4af1ea967774",
+    "sourceRows": 385,
+    "uniqueSourceNameStrings": 339,
+    "existingSubsetRows": 134,
+    "unimplementedRows": 251,
+    "statuses": {
+      "M4 승인 subset": 18,
+      "M1 정적 subset": 40,
+      "M5 독립 대체 subset": 2,
+      "M2 승인 subset": 29,
+      "미구현": 251,
+      "M3 승인 subset": 15,
+      "catalog 승인 subset": 20,
+      "M5 승인 subset": 5,
+      "M1 preset subset": 4,
+      "M1 AST 독립 대체 subset": 1
+    },
+    "sectionCounts": [
+      23,
+      16,
+      37,
+      14,
+      21,
+      22,
+      9,
+      38,
+      19,
+      8,
+      11,
+      5,
+      29,
+      14,
+      27,
+      11,
+      27,
+      16,
+      15,
+      9,
+      14
+    ],
+    "roadmapPath": "docs/simulink-coverage-roadmap.json",
+    "roadmapImmutable": true,
+    "roadmapSha256": "86ec3c3f75939dc72a00b39d6760d86d9ef21f2a63922daf110c5db2fe7932cd"
+  },
+  "predecessorDelivery": {
+    "stage": "M11",
+    "contractPath": "docs/m11-contract.md",
+    "implementationMapPath": "docs/m11-implementation-map.json",
+    "baselineDefinitionCount": 293,
+    "registryPath": "docs/baselines/m11-registry.json",
+    "registrySha256": "daaf1ec9df9b5b7b43efdfd57863d0467b3f5636b3bcb4fd3b5450322fe8bf2e",
+    "fullSourceOptionsStatus": "open; frozen M11 proofs retained"
+  },
+  "counts": {
+    "firstWorkSourceRows": 26,
+    "baselineExistingSubsetRows": 14,
+    "baselineMissingRows": 12,
+    "candidateSourceRows": 12,
+    "explicitUnsupportedRows": 0,
+    "newRegistryDefinitions": 11,
+    "approvedSourceRows": 12,
+    "approvedAdditionalSourceRows": 12,
+    "existingMappingExtensions": 0,
+    "preservedPredecessorSourceRows": 14,
+    "fullSourceOptionsClosed": 0,
+    "note": "The12 new source-row candidates map to11 new definitions; timed and triggered linearization share one independent-analysis definition. Existing14 source mappings are preserved, not implicitly extended.",
+    "pendingSourceWorkflowRows": 0
+  },
+  "newBlockIds": [
+    "continuous.descriptor",
+    "continuous.integrator-limited",
+    "continuous.second-order-limited",
+    "continuous.pid-2dof",
+    "time.variable-delay",
+    "time.variable-transport-delay",
+    "nonlinear.backlash",
+    "nonlinear.rate-limiter-continuous",
+    "nonlinear.rate-limiter-dynamic",
+    "solver.algebraic-constraint",
+    "analysis.linearization"
+  ],
+  "commonStageExitGates": [
+    "All26 original firstWork identities and canonical JSON row digests preserved; immutable source and predecessor artifacts checked.",
+    "Each12 baseline-missing selected mapping needs genuine independent configured literal runtime and actually executed standalone TypeScript proof.",
+    "All14 predecessor source mappings retain their previous selected status; integration method alone does not expand source approval.",
+    "Actual nonlinear/limit/delay/DAE/constraint and analysis failures, rejected-step rollback, due/event scheduling and bounded costs must be verified.",
+    "UI actual inputs, saved settings, matrix/bus results, gradient/resolution tools, history/code downloads and desktop/mobile/200-percent themes verified.",
+    "No full native solver, general DAE, MATLAB linearization, autotuning, Python/C/HDL or all-source-options claim without separate evidence."
+  ],
+  "solverContract": {
+    "methods": [
+      "rk4",
+      "rk45",
+      "implicit-euler"
+    ],
+    "implicitEuler": {
+      "selectedImplementation": "adaptive full plus two half implicit Euler steps; bounded finite-difference Newton with line search",
+      "continuousStateMaximum": 64,
+      "newtonTolerance": {
+        "default": 1e-9,
+        "minimum": 1e-14,
+        "maximum": 0.001
+      },
+      "newtonMaxIterations": {
+        "default": 24,
+        "minimum": 1,
+        "maximum": 32
+      },
+      "jacobianStep": {
+        "default": 0.000001,
+        "minimum": 1e-8,
+        "maximum": 0.01
+      },
+      "lineSearchMaximum": 12,
+      "rkSerializedShapePreserved": true
+    },
+    "nativeOde15sEquivalent": false,
+    "generalDaeSupported": false
+  },
+  "analysisUiContract": {
+    "expressionGradient": "Actual five bounded AST evaluations, central h/h2 finite differences and Richardson derivative; nonsmooth source rejected.",
+    "modelResolution": "Two actual continuous solver runs on one output observation grid; fine initial/max step divided by ratio2..8; immutable source snapshot; bounded cancellation.",
+    "localLinearization": "Actual continuous definition Jacobians A/B/C/D at explicit operating point, exactly four bus fields; independent alternative.",
+    "referenceMathWorksExecution": false
+  },
+  "families": [
+    {
+      "id": "m12-preserved-continuous-contracts",
+      "sourceIds": [
+        "01-011",
+        "02-001",
+        "02-003",
+        "02-004",
+        "02-006",
+        "02-008",
+        "02-010",
+        "02-011",
+        "02-012",
+        "02-015",
+        "04-005",
+        "04-010",
+        "05-012",
+        "10-001"
+      ],
+      "canonicals": [
+        "continuous.integrator",
+        "continuous.derivative",
+        "time.first-order-hold",
+        "continuous.pid",
+        "continuous.second-order-integrator",
+        "continuous.state-space",
+        "continuous.transfer-function",
+        "time.transport-delay",
+        "continuous.zero-pole",
+        "logic.hit-crossing",
+        "nonlinear.relay",
+        "time.memory"
+      ],
+      "sourceOptionCompletionStatus": "open",
+      "approvalStatus": "preserved-predecessor-subset"
+    },
+    {
+      "id": "m12-descriptor-dae",
+      "sourceIds": [
+        "02-002"
+      ],
+      "canonicals": [
+        "continuous.descriptor"
+      ],
+      "sourceOptionCompletionStatus": "open",
+      "approvalStatus": "verified-selected-scope"
+    },
+    {
+      "id": "m12-bounded-continuous-state",
+      "sourceIds": [
+        "02-005",
+        "02-007",
+        "02-009"
+      ],
+      "canonicals": [
+        "continuous.integrator-limited",
+        "continuous.pid-2dof",
+        "continuous.second-order-limited"
+      ],
+      "sourceOptionCompletionStatus": "open",
+      "approvalStatus": "verified-selected-scope"
+    },
+    {
+      "id": "m12-variable-delay",
+      "sourceIds": [
+        "02-013",
+        "02-014"
+      ],
+      "canonicals": [
+        "time.variable-delay",
+        "time.variable-transport-delay"
+      ],
+      "sourceOptionCompletionStatus": "open",
+      "approvalStatus": "verified-selected-scope"
+    },
+    {
+      "id": "m12-nonlinear-accepted-state",
+      "sourceIds": [
+        "04-001",
+        "04-008",
+        "04-009"
+      ],
+      "canonicals": [
+        "nonlinear.backlash",
+        "nonlinear.rate-limiter-continuous",
+        "nonlinear.rate-limiter-dynamic"
+      ],
+      "sourceOptionCompletionStatus": "open",
+      "approvalStatus": "verified-selected-scope"
+    },
+    {
+      "id": "m12-algebraic-solver",
+      "sourceIds": [
+        "08-003"
+      ],
+      "canonicals": [
+        "solver.algebraic-constraint"
+      ],
+      "sourceOptionCompletionStatus": "open",
+      "approvalStatus": "verified-selected-scope"
+    },
+    {
+      "id": "m12-local-linearization",
+      "sourceIds": [
+        "12-004",
+        "12-005"
+      ],
+      "canonicals": [
+        "analysis.linearization"
+      ],
+      "sourceOptionCompletionStatus": "open",
+      "approvalStatus": "verified-selected-scope"
+    }
+  ],
+  "rows": [
+    {
+      "sourceId": "01-011",
+      "section": 1,
+      "ordinal": 11,
+      "sourceName": "Integrator",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 88,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-01",
+      "baselineCanonical": "continuous.integrator",
+      "baselineStatus": "M3 승인 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "01-011",
+        "section": 1,
+        "ordinal": 11,
+        "name": "Integrator",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 88,
+        "canonical": "continuous.integrator",
+        "planningSupport": "직접",
+        "originalPlannedMilestone": "M3",
+        "boundary": "연속 상태·초깃값; reset/limited는 zero crossing 계약 필요; 실제 지원: 단위1 float64 scalar·initial·none/rising reset·RK4/RK45; Hit Crossing 또는 held boolean 제어; 출력 제한 제외; 계약·fixture: m3-contract / m3-verification",
+        "currentStatus": "M3 승인 subset",
+        "existingSubset": true,
+        "deliveryKind": "native-capability",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 직접 계획을 유지하고 현재 subset 밖의 옵션과 타깃을 재검증",
+        "remainingScope": [
+          "원본 Integrator의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 연속 상태·초깃값; reset/limited는 zero crossing 계약 필요; 실제 지원: 단위1 float64 scalar·initial·none/rising reset·RK4/RK45; Hit Crossing 또는 held boolean 제어; 출력 제한 제외; 계약·fixture: m3-contract / m3-verification",
+          "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-01-011-parameter-shape-domain",
+          "R-01-011-state-time-error",
+          "R-01-011-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "f0beea828114526adc1677f7bb8504ab686378b57bafadbd77224c3124e05191",
+      "contractFamily": "preserved-continuous-contracts",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "preserved-predecessor-subset",
+        "canonical": "continuous.integrator",
+        "parameters": {},
+        "requiredBindings": [],
+        "definitionIds": [],
+        "newBlockIds": [],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Previous verified selected source mapping retained unchanged. Solver availability does not approve additional full source options. 연속 상태·초깃값; reset/limited는 zero crossing 계약 필요; 실제 지원: 단위1 float64 scalar·initial·none/rising reset·RK4/RK45; Hit Crossing 또는 held boolean 제어; 출력 제한 제외; 계약·fixture: m3-contract / m3-verification",
+        "evidenceFixtureIds": [],
+        "runtimeLiteralFixtureIds": [],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "preserved-predecessor-subset",
+        "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update.",
+        "evidenceFixtureIds": [],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-01-011-parameter-shape-domain",
+        "R-01-011-state-time-error",
+        "R-01-011-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Integrator의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 연속 상태·초깃값; reset/limited는 zero crossing 계약 필요; 실제 지원: 단위1 float64 scalar·initial·none/rising reset·RK4/RK45; Hit Crossing 또는 held boolean 제어; 출력 제한 제외; 계약·fixture: m3-contract / m3-verification",
+        "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ]
+    },
+    {
+      "sourceId": "02-001",
+      "section": 2,
+      "ordinal": 1,
+      "sourceName": "Derivative",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 116,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-02",
+      "baselineCanonical": "continuous.derivative",
+      "baselineStatus": "M3 승인 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "02-001",
+        "section": 2,
+        "ordinal": 1,
+        "name": "Derivative",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 116,
+        "canonical": "continuous.derivative",
+        "planningSupport": "직접",
+        "originalPlannedMilestone": "M3",
+        "boundary": "비매끄러운 입력은 경고; 수치 미분/필터 계약과 오차 검증; 실제 지원: 단위1 scalar·causal 필터 미분 N(u-F), F′=N(u-F); filterN/initial; ideal derivative·잡음 안정성 보장 제외; 계약·fixture: m3-contract / m3-verification",
+        "currentStatus": "M3 승인 subset",
+        "existingSubset": true,
+        "deliveryKind": "native-capability",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 직접 계획을 유지하고 현재 subset 밖의 옵션과 타깃을 재검증",
+        "remainingScope": [
+          "원본 Derivative의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 비매끄러운 입력은 경고; 수치 미분/필터 계약과 오차 검증; 실제 지원: 단위1 scalar·causal 필터 미분 N(u-F), F′=N(u-F); filterN/initial; ideal derivative·잡음 안정성 보장 제외; 계약·fixture: m3-contract / m3-verification",
+          "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-02-001-parameter-shape-domain",
+          "R-02-001-state-time-error",
+          "R-02-001-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "80b79f7373c2a7cfc4fd9b251ad740db40cb5a2557b9c17f2a1c349f32210d80",
+      "contractFamily": "preserved-continuous-contracts",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "preserved-predecessor-subset",
+        "canonical": "continuous.derivative",
+        "parameters": {},
+        "requiredBindings": [],
+        "definitionIds": [],
+        "newBlockIds": [],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Previous verified selected source mapping retained unchanged. Solver availability does not approve additional full source options. 비매끄러운 입력은 경고; 수치 미분/필터 계약과 오차 검증; 실제 지원: 단위1 scalar·causal 필터 미분 N(u-F), F′=N(u-F); filterN/initial; ideal derivative·잡음 안정성 보장 제외; 계약·fixture: m3-contract / m3-verification",
+        "evidenceFixtureIds": [],
+        "runtimeLiteralFixtureIds": [],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "preserved-predecessor-subset",
+        "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update.",
+        "evidenceFixtureIds": [],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-02-001-parameter-shape-domain",
+        "R-02-001-state-time-error",
+        "R-02-001-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Derivative의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 비매끄러운 입력은 경고; 수치 미분/필터 계약과 오차 검증; 실제 지원: 단위1 scalar·causal 필터 미분 N(u-F), F′=N(u-F); filterN/initial; ideal derivative·잡음 안정성 보장 제외; 계약·fixture: m3-contract / m3-verification",
+        "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ]
+    },
+    {
+      "sourceId": "02-002",
+      "section": 2,
+      "ordinal": 2,
+      "sourceName": "Descriptor State-Space",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 117,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-02",
+      "baselineCanonical": "continuous.descriptor",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "02-002",
+        "section": 2,
+        "ordinal": 2,
+        "name": "Descriptor State-Space",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 117,
+        "canonical": "continuous.descriptor",
+        "planningSupport": "구성",
+        "originalPlannedMilestone": "M5",
+        "boundary": "비특이 E를 선형 solve로 State-Space 변환; 특이 E의 DAE는 M5 연구 통과 전 미지원",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "shared-configuration",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 구성 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 Descriptor State-Space의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 비특이 E를 선형 solve로 State-Space 변환; 특이 E의 DAE는 M5 연구 통과 전 미지원",
+          "공유 canonical의 설정/별칭/preset을 원본행별로 재현·fixture 확인; 새 엔진으로 중복 합산하지 않음"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-02-002-parameter-shape-domain",
+          "R-02-002-state-time-error",
+          "R-02-002-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "88ebaa0e88f36f4f3a6f13cf161efa2531c78e451ce38bf1e3e6ee1b583b1634",
+      "contractFamily": "descriptor-dae",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "candidate-selected-implementation-awaiting-verification",
+        "canonical": "continuous.descriptor",
+        "parameters": {
+          "E": [
+            [
+              1
+            ]
+          ],
+          "A": [
+            [
+              -1
+            ]
+          ],
+          "B": [
+            [
+              1
+            ]
+          ],
+          "C": [
+            [
+              1
+            ]
+          ],
+          "D": [
+            [
+              0
+            ]
+          ],
+          "initial": [
+            0
+          ],
+          "differentialCount": 0,
+          "initialPolicy": "error",
+          "consistencyTolerance": 1e-8,
+          "pivotTolerance": 1e-12
+        },
+        "requiredBindings": [
+          "in"
+        ],
+        "definitionIds": [],
+        "newBlockIds": [
+          "continuous.descriptor"
+        ],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Legacy finite real scalar/vector input/output; nonsingular E or explicit index-1 partition with nonsingular E11 and A22. Initial consistency error or explicit projection. General and higher-index DAE unsupported.",
+        "evidenceFixtureIds": [
+          "m12-independent-continuous-descriptor/continuous",
+          "m12-independent-index1-descriptor/continuous",
+          "m12-independent-index1-project/continuous"
+        ],
+        "runtimeLiteralFixtureIds": [
+          "m12-independent-continuous-descriptor"
+        ],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "verified-native-scope",
+        "selectedParameters": {
+          "E": [
+            [
+              2
+            ]
+          ],
+          "A": [
+            [
+              -2
+            ]
+          ],
+          "B": [
+            [
+              2
+            ]
+          ],
+          "C": [
+            [
+              1
+            ]
+          ],
+          "D": [
+            [
+              0
+            ]
+          ],
+          "initial": [
+            0
+          ],
+          "differentialCount": 0,
+          "initialPolicy": "error",
+          "consistencyTolerance": 1e-8,
+          "pivotTolerance": 1e-12
+        },
+        "rawFixtureId": "m12-independent-continuous-descriptor",
+        "evidenceFixtureIds": [
+          "m12-independent-continuous-descriptor/continuous",
+          "m12-independent-index1-descriptor/continuous",
+          "m12-independent-index1-project/continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-02-002-parameter-shape-domain",
+        "R-02-002-state-time-error",
+        "R-02-002-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Descriptor State-Space의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 비특이 E를 선형 solve로 State-Space 변환; 특이 E의 DAE는 M5 연구 통과 전 미지원",
+        "공유 canonical의 설정/별칭/preset을 원본행별로 재현·fixture 확인; 새 엔진으로 중복 합산하지 않음",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ],
+      "learningExampleId": "descriptor-index-one"
+    },
+    {
+      "sourceId": "02-003",
+      "section": 2,
+      "ordinal": 3,
+      "sourceName": "First Order Hold",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 118,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-02",
+      "baselineCanonical": "time.first-order-hold",
+      "baselineStatus": "M3 승인 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "02-003",
+        "section": 2,
+        "ordinal": 3,
+        "name": "First Order Hold",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 118,
+        "canonical": "time.first-order-hold",
+        "planningSupport": "직접",
+        "originalPlannedMilestone": "M3",
+        "boundary": "샘플 시점·보간 구간·초기 동작 명세; 실제 지원: 단위1 scalar 이전 두 due 샘플의 causal 기울기 외삽·정수 rate/offset·initial·현재 due 입력 캡처; 첫 두 샘플 전 기울기 0·미래 interpolation/전체 Simulink FOH 의미 제외; 계약·fixture: m3-contract / F03-first-order-hold; M3 대응 누락 교정",
+        "currentStatus": "M3 승인 subset",
+        "existingSubset": true,
+        "deliveryKind": "native-capability",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 직접 계획을 유지하고 현재 subset 밖의 옵션과 타깃을 재검증",
+        "remainingScope": [
+          "원본 First Order Hold의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 샘플 시점·보간 구간·초기 동작 명세; 실제 지원: 단위1 scalar 이전 두 due 샘플의 causal 기울기 외삽·정수 rate/offset·initial·현재 due 입력 캡처; 첫 두 샘플 전 기울기 0·미래 interpolation/전체 Simulink FOH 의미 제외; 계약·fixture: m3-contract / F03-first-order-hold; M3 대응 누락 교정",
+          "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-02-003-parameter-shape-domain",
+          "R-02-003-state-time-error",
+          "R-02-003-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "efd51fe5ce0efe8d99a204de1a302c752ddd086ec938830bfb7623a7ab1614d2",
+      "contractFamily": "preserved-continuous-contracts",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "preserved-predecessor-subset",
+        "canonical": "time.first-order-hold",
+        "parameters": {},
+        "requiredBindings": [],
+        "definitionIds": [],
+        "newBlockIds": [],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Previous verified selected source mapping retained unchanged. Solver availability does not approve additional full source options. 샘플 시점·보간 구간·초기 동작 명세; 실제 지원: 단위1 scalar 이전 두 due 샘플의 causal 기울기 외삽·정수 rate/offset·initial·현재 due 입력 캡처; 첫 두 샘플 전 기울기 0·미래 interpolation/전체 Simulink FOH 의미 제외; 계약·fixture: m3-contract / F03-first-order-hold; M3 대응 누락 교정",
+        "evidenceFixtureIds": [],
+        "runtimeLiteralFixtureIds": [],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "preserved-predecessor-subset",
+        "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update.",
+        "evidenceFixtureIds": [],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-02-003-parameter-shape-domain",
+        "R-02-003-state-time-error",
+        "R-02-003-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 First Order Hold의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 샘플 시점·보간 구간·초기 동작 명세; 실제 지원: 단위1 scalar 이전 두 due 샘플의 causal 기울기 외삽·정수 rate/offset·initial·현재 due 입력 캡처; 첫 두 샘플 전 기울기 0·미래 interpolation/전체 Simulink FOH 의미 제외; 계약·fixture: m3-contract / F03-first-order-hold; M3 대응 누락 교정",
+        "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ]
+    },
+    {
+      "sourceId": "02-004",
+      "section": 2,
+      "ordinal": 4,
+      "sourceName": "Integrator",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 119,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-02",
+      "baselineCanonical": "continuous.integrator",
+      "baselineStatus": "M3 승인 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "02-004",
+        "section": 2,
+        "ordinal": 4,
+        "name": "Integrator",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 119,
+        "canonical": "continuous.integrator",
+        "planningSupport": "직접",
+        "originalPlannedMilestone": "M3",
+        "boundary": "연속 상태·초깃값; reset/limited는 zero crossing 계약 필요; 실제 지원: 단위1 float64 scalar·initial·none/rising reset·RK4/RK45; Hit Crossing 또는 held boolean 제어; 출력 제한 제외; 계약·fixture: m3-contract / m3-verification",
+        "currentStatus": "M3 승인 subset",
+        "existingSubset": true,
+        "deliveryKind": "native-capability",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 직접 계획을 유지하고 현재 subset 밖의 옵션과 타깃을 재검증",
+        "remainingScope": [
+          "원본 Integrator의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 연속 상태·초깃값; reset/limited는 zero crossing 계약 필요; 실제 지원: 단위1 float64 scalar·initial·none/rising reset·RK4/RK45; Hit Crossing 또는 held boolean 제어; 출력 제한 제외; 계약·fixture: m3-contract / m3-verification",
+          "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-02-004-parameter-shape-domain",
+          "R-02-004-state-time-error",
+          "R-02-004-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "7aca764c01d206a7c1d44a5390ce22b09f3897095a2c038ba76933142e6e1067",
+      "contractFamily": "preserved-continuous-contracts",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "preserved-predecessor-subset",
+        "canonical": "continuous.integrator",
+        "parameters": {},
+        "requiredBindings": [],
+        "definitionIds": [],
+        "newBlockIds": [],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Previous verified selected source mapping retained unchanged. Solver availability does not approve additional full source options. 연속 상태·초깃값; reset/limited는 zero crossing 계약 필요; 실제 지원: 단위1 float64 scalar·initial·none/rising reset·RK4/RK45; Hit Crossing 또는 held boolean 제어; 출력 제한 제외; 계약·fixture: m3-contract / m3-verification",
+        "evidenceFixtureIds": [],
+        "runtimeLiteralFixtureIds": [],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "preserved-predecessor-subset",
+        "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update.",
+        "evidenceFixtureIds": [],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-02-004-parameter-shape-domain",
+        "R-02-004-state-time-error",
+        "R-02-004-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Integrator의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 연속 상태·초깃값; reset/limited는 zero crossing 계약 필요; 실제 지원: 단위1 float64 scalar·initial·none/rising reset·RK4/RK45; Hit Crossing 또는 held boolean 제어; 출력 제한 제외; 계약·fixture: m3-contract / m3-verification",
+        "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ]
+    },
+    {
+      "sourceId": "02-005",
+      "section": 2,
+      "ordinal": 5,
+      "sourceName": "Integrator Limited",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "구성 · Integrator의 출력 제한 설정",
+      "sourceLine": 120,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-02",
+      "baselineCanonical": "continuous.integrator",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "02-005",
+        "section": 2,
+        "ordinal": 5,
+        "name": "Integrator Limited",
+        "subgroup": "일반 표",
+        "condition": "구성 · Integrator의 출력 제한 설정",
+        "line": 120,
+        "canonical": "continuous.integrator",
+        "planningSupport": "구성",
+        "originalPlannedMilestone": "M3",
+        "boundary": "출력 제한 preset; 경계 도달·이탈 event",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "shared-configuration",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 구성 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 Integrator Limited의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 출력 제한 preset; 경계 도달·이탈 event",
+          "공유 canonical의 설정/별칭/preset을 원본행별로 재현·fixture 확인; 새 엔진으로 중복 합산하지 않음"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-02-005-parameter-shape-domain",
+          "R-02-005-state-time-error",
+          "R-02-005-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "45ab895964c1cb9cb439c9f825423a1bd2ec9b5a2e47e49334b9e7e3d84f4790",
+      "contractFamily": "bounded-continuous-state",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "candidate-selected-implementation-awaiting-verification",
+        "canonical": "continuous.integrator-limited",
+        "parameters": {
+          "initial": 0,
+          "lower": -10,
+          "upper": 10,
+          "reset": "none"
+        },
+        "requiredBindings": [
+          "in"
+        ],
+        "definitionIds": [],
+        "newBlockIds": [
+          "continuous.integrator-limited"
+        ],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Finite scalar state projection at upper/lower crossing; inward derivative leaves bound; none/rising reset and boolean limited output. Full native reset modes and external initial state options remain open.",
+        "evidenceFixtureIds": [
+          "m12-independent-continuous-integrator-limited/continuous",
+          "m12-independent-limited-release/continuous",
+          "m12-independent-reset-limit-tie/continuous"
+        ],
+        "runtimeLiteralFixtureIds": [
+          "m12-independent-continuous-integrator-limited"
+        ],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "verified-native-scope",
+        "selectedParameters": {
+          "initial": 0,
+          "lower": 0,
+          "upper": 0.5,
+          "reset": "none"
+        },
+        "rawFixtureId": "m12-independent-continuous-integrator-limited",
+        "evidenceFixtureIds": [
+          "m12-independent-continuous-integrator-limited/continuous",
+          "m12-independent-limited-release/continuous",
+          "m12-independent-reset-limit-tie/continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-02-005-parameter-shape-domain",
+        "R-02-005-state-time-error",
+        "R-02-005-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Integrator Limited의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 출력 제한 preset; 경계 도달·이탈 event",
+        "공유 canonical의 설정/별칭/preset을 원본행별로 재현·fixture 확인; 새 엔진으로 중복 합산하지 않음",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ],
+      "learningExampleId": "continuous-state-limits"
+    },
+    {
+      "sourceId": "02-006",
+      "section": 2,
+      "ordinal": 6,
+      "sourceName": "PID Controller",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 · 계수 직접 입력과 시뮬레이션 기준. 자동 튜닝 기능은 별도 제품 조건",
+      "sourceLine": 121,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-02",
+      "baselineCanonical": "continuous.pid",
+      "baselineStatus": "M3 승인 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "02-006",
+        "section": 2,
+        "ordinal": 6,
+        "name": "PID Controller",
+        "subgroup": "일반 표",
+        "condition": "기본 · 계수 직접 입력과 시뮬레이션 기준. 자동 튜닝 기능은 별도 제품 조건",
+        "line": 121,
+        "canonical": "continuous.pid",
+        "planningSupport": "직접",
+        "originalPlannedMilestone": "M3",
+        "boundary": "계수 직접 입력·anti-windup·미분 필터의 명시 subset; 자동 튜닝 제외; 실제 지원: 단위1 scalar parallel P/I/filtered D·kp/ki/kd/N·초기 적분/필터; anti-windup·clamp·2DOF·자동 튜닝 제외; 계약·fixture: m3-contract / m3-verification",
+        "currentStatus": "M3 승인 subset",
+        "existingSubset": true,
+        "deliveryKind": "native-capability",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 직접 계획을 유지하고 현재 subset 밖의 옵션과 타깃을 재검증",
+        "remainingScope": [
+          "원본 PID Controller의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 계수 직접 입력·anti-windup·미분 필터의 명시 subset; 자동 튜닝 제외; 실제 지원: 단위1 scalar parallel P/I/filtered D·kp/ki/kd/N·초기 적분/필터; anti-windup·clamp·2DOF·자동 튜닝 제외; 계약·fixture: m3-contract / m3-verification",
+          "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-02-006-parameter-shape-domain",
+          "R-02-006-state-time-error",
+          "R-02-006-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "5e7e1dc728adb206d6147061d4ba0d08404e997070284409562137c9903350ec",
+      "contractFamily": "preserved-continuous-contracts",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "preserved-predecessor-subset",
+        "canonical": "continuous.pid",
+        "parameters": {},
+        "requiredBindings": [],
+        "definitionIds": [],
+        "newBlockIds": [],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Previous verified selected source mapping retained unchanged. Solver availability does not approve additional full source options. 계수 직접 입력·anti-windup·미분 필터의 명시 subset; 자동 튜닝 제외; 실제 지원: 단위1 scalar parallel P/I/filtered D·kp/ki/kd/N·초기 적분/필터; anti-windup·clamp·2DOF·자동 튜닝 제외; 계약·fixture: m3-contract / m3-verification",
+        "evidenceFixtureIds": [],
+        "runtimeLiteralFixtureIds": [],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "preserved-predecessor-subset",
+        "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update.",
+        "evidenceFixtureIds": [],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-02-006-parameter-shape-domain",
+        "R-02-006-state-time-error",
+        "R-02-006-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 PID Controller의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 계수 직접 입력·anti-windup·미분 필터의 명시 subset; 자동 튜닝 제외; 실제 지원: 단위1 scalar parallel P/I/filtered D·kp/ki/kd/N·초기 적분/필터; anti-windup·clamp·2DOF·자동 튜닝 제외; 계약·fixture: m3-contract / m3-verification",
+        "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ]
+    },
+    {
+      "sourceId": "02-007",
+      "section": 2,
+      "ordinal": 7,
+      "sourceName": "PID Controller (2DOF)",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 · 자동 튜닝 기능은 별도 제품 조건",
+      "sourceLine": 122,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-02",
+      "baselineCanonical": "continuous.pid",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "02-007",
+        "section": 2,
+        "ordinal": 7,
+        "name": "PID Controller (2DOF)",
+        "subgroup": "일반 표",
+        "condition": "기본 · 자동 튜닝 기능은 별도 제품 조건",
+        "line": 122,
+        "canonical": "continuous.pid",
+        "planningSupport": "구성",
+        "originalPlannedMilestone": "M5",
+        "boundary": "2DOF setpoint weighting 확장; 자동 튜닝 제외",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "shared-configuration",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 구성 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 PID Controller (2DOF)의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 2DOF setpoint weighting 확장; 자동 튜닝 제외",
+          "공유 canonical의 설정/별칭/preset을 원본행별로 재현·fixture 확인; 새 엔진으로 중복 합산하지 않음"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-02-007-parameter-shape-domain",
+          "R-02-007-state-time-error",
+          "R-02-007-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "d9714509e9165907a4acb47212cb355639515712198751d9f088347c5f131400",
+      "contractFamily": "bounded-continuous-state",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "candidate-selected-implementation-awaiting-verification",
+        "canonical": "continuous.pid-2dof",
+        "parameters": {
+          "kp": 1,
+          "ki": 1,
+          "kd": 0,
+          "filterN": 10,
+          "b": 1,
+          "c": 1,
+          "initialIntegral": 0,
+          "initialFilter": 0,
+          "form": "parallel",
+          "controller": "PID",
+          "limit": "off",
+          "lower": -10,
+          "upper": 10,
+          "antiWindup": "none",
+          "kb": 1,
+          "reset": "none"
+        },
+        "requiredBindings": [
+          "r",
+          "y"
+        ],
+        "definitionIds": [],
+        "newBlockIds": [
+          "continuous.pid-2dof"
+        ],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Finite scalar reference/measurement, P/D setpoint weighting, parallel/ideal form, filtered derivative, explicit limits and selected anti-windup. Native tuning, multidimensional controller and target options remain open.",
+        "evidenceFixtureIds": [
+          "m12-independent-continuous-pid-2dof/continuous",
+          "m12-independent-pid-filter/continuous",
+          "m12-independent-pid-ideal-weights/continuous",
+          "m12-independent-pid-clamp/continuous",
+          "m12-independent-pid-back-calculation/continuous",
+          "m12-independent-pid-reset/continuous"
+        ],
+        "runtimeLiteralFixtureIds": [
+          "m12-independent-continuous-pid-2dof"
+        ],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "verified-native-scope",
+        "selectedParameters": {
+          "kp": 2,
+          "ki": 1,
+          "kd": 0,
+          "filterN": 10,
+          "b": 0.5,
+          "c": 1,
+          "initialIntegral": 0,
+          "initialFilter": 0,
+          "form": "parallel",
+          "controller": "PID",
+          "limit": "off",
+          "lower": -10,
+          "upper": 10,
+          "antiWindup": "none",
+          "kb": 1,
+          "reset": "none"
+        },
+        "rawFixtureId": "m12-independent-continuous-pid-2dof",
+        "evidenceFixtureIds": [
+          "m12-independent-continuous-pid-2dof/continuous",
+          "m12-independent-pid-filter/continuous",
+          "m12-independent-pid-ideal-weights/continuous",
+          "m12-independent-pid-clamp/continuous",
+          "m12-independent-pid-back-calculation/continuous",
+          "m12-independent-pid-reset/continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-02-007-parameter-shape-domain",
+        "R-02-007-state-time-error",
+        "R-02-007-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 PID Controller (2DOF)의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 2DOF setpoint weighting 확장; 자동 튜닝 제외",
+        "공유 canonical의 설정/별칭/preset을 원본행별로 재현·fixture 확인; 새 엔진으로 중복 합산하지 않음",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ],
+      "learningExampleId": "pid-two-degree-weighting"
+    },
+    {
+      "sourceId": "02-008",
+      "section": 2,
+      "ordinal": 8,
+      "sourceName": "Second-Order Integrator",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 123,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-02",
+      "baselineCanonical": "continuous.second-order-integrator",
+      "baselineStatus": "M3 승인 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "02-008",
+        "section": 2,
+        "ordinal": 8,
+        "name": "Second-Order Integrator",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 123,
+        "canonical": "continuous.second-order-integrator",
+        "planningSupport": "직접",
+        "originalPlannedMilestone": "M3",
+        "boundary": "위치/속도 상태·초깃값을 별도로 보존; 실제 지원: 단위1 scalar 가속도→위치/속도 두 상태·각 initial·별도 포트; limited/reset 옵션 제외; 계약·fixture: m3-contract / m3-verification",
+        "currentStatus": "M3 승인 subset",
+        "existingSubset": true,
+        "deliveryKind": "native-capability",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 직접 계획을 유지하고 현재 subset 밖의 옵션과 타깃을 재검증",
+        "remainingScope": [
+          "원본 Second-Order Integrator의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 위치/속도 상태·초깃값을 별도로 보존; 실제 지원: 단위1 scalar 가속도→위치/속도 두 상태·각 initial·별도 포트; limited/reset 옵션 제외; 계약·fixture: m3-contract / m3-verification",
+          "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-02-008-parameter-shape-domain",
+          "R-02-008-state-time-error",
+          "R-02-008-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "047b54a4b0f8772edfdaa92bb06a0fd268d617af43f9b2c78b040532a1f56c4e",
+      "contractFamily": "preserved-continuous-contracts",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "preserved-predecessor-subset",
+        "canonical": "continuous.second-order-integrator",
+        "parameters": {},
+        "requiredBindings": [],
+        "definitionIds": [],
+        "newBlockIds": [],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Previous verified selected source mapping retained unchanged. Solver availability does not approve additional full source options. 위치/속도 상태·초깃값을 별도로 보존; 실제 지원: 단위1 scalar 가속도→위치/속도 두 상태·각 initial·별도 포트; limited/reset 옵션 제외; 계약·fixture: m3-contract / m3-verification",
+        "evidenceFixtureIds": [],
+        "runtimeLiteralFixtureIds": [],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "preserved-predecessor-subset",
+        "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update.",
+        "evidenceFixtureIds": [],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-02-008-parameter-shape-domain",
+        "R-02-008-state-time-error",
+        "R-02-008-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Second-Order Integrator의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 위치/속도 상태·초깃값을 별도로 보존; 실제 지원: 단위1 scalar 가속도→위치/속도 두 상태·각 initial·별도 포트; limited/reset 옵션 제외; 계약·fixture: m3-contract / m3-verification",
+        "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ]
+    },
+    {
+      "sourceId": "02-009",
+      "section": 2,
+      "ordinal": 9,
+      "sourceName": "Second-Order Integrator Limited",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "구성 · Second-Order Integrator의 제한 설정",
+      "sourceLine": 124,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-02",
+      "baselineCanonical": "continuous.integrator-2",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "02-009",
+        "section": 2,
+        "ordinal": 9,
+        "name": "Second-Order Integrator Limited",
+        "subgroup": "일반 표",
+        "condition": "구성 · Second-Order Integrator의 제한 설정",
+        "line": 124,
+        "canonical": "continuous.integrator-2",
+        "planningSupport": "구성",
+        "originalPlannedMilestone": "M3",
+        "boundary": "두 상태 제한과 경계 event preset",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "shared-configuration",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 구성 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 Second-Order Integrator Limited의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 두 상태 제한과 경계 event preset",
+          "공유 canonical의 설정/별칭/preset을 원본행별로 재현·fixture 확인; 새 엔진으로 중복 합산하지 않음"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-02-009-parameter-shape-domain",
+          "R-02-009-state-time-error",
+          "R-02-009-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "7e6a12fc9a0b58f19c481eb4ffcc652c4694af7e2a2b46e5175c7b87628e1d43",
+      "contractFamily": "bounded-continuous-state",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "candidate-selected-implementation-awaiting-verification",
+        "canonical": "continuous.second-order-limited",
+        "parameters": {
+          "initialPosition": 0,
+          "initialVelocity": 0,
+          "positionLower": -10,
+          "positionUpper": 10,
+          "velocityLower": -10,
+          "velocityUpper": 10,
+          "reset": "none"
+        },
+        "requiredBindings": [
+          "in"
+        ],
+        "definitionIds": [],
+        "newBlockIds": [
+          "continuous.second-order-limited"
+        ],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Finite scalar acceleration; position/velocity guards and boolean bound flags. Position bound projects position and resets velocity to zero. Native additional reset, state and target options remain open.",
+        "evidenceFixtureIds": [
+          "m12-independent-continuous-second-order-limited/continuous",
+          "m12-independent-velocity-limit/continuous",
+          "m12-independent-position-velocity-tie/continuous"
+        ],
+        "runtimeLiteralFixtureIds": [
+          "m12-independent-continuous-second-order-limited"
+        ],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "verified-native-scope",
+        "selectedParameters": {
+          "initialPosition": 0,
+          "initialVelocity": 0,
+          "positionLower": -1,
+          "positionUpper": 0.25,
+          "velocityLower": -3,
+          "velocityUpper": 3,
+          "reset": "none"
+        },
+        "rawFixtureId": "m12-independent-continuous-second-order-limited",
+        "evidenceFixtureIds": [
+          "m12-independent-continuous-second-order-limited/continuous",
+          "m12-independent-velocity-limit/continuous",
+          "m12-independent-position-velocity-tie/continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-02-009-parameter-shape-domain",
+        "R-02-009-state-time-error",
+        "R-02-009-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Second-Order Integrator Limited의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 두 상태 제한과 경계 event preset",
+        "공유 canonical의 설정/별칭/preset을 원본행별로 재현·fixture 확인; 새 엔진으로 중복 합산하지 않음",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ],
+      "learningExampleId": "continuous-state-limits"
+    },
+    {
+      "sourceId": "02-010",
+      "section": 2,
+      "ordinal": 10,
+      "sourceName": "State-Space",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 125,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-02",
+      "baselineCanonical": "continuous.state-space",
+      "baselineStatus": "M3 승인 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "02-010",
+        "section": 2,
+        "ordinal": 10,
+        "name": "State-Space",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 125,
+        "canonical": "continuous.state-space",
+        "planningSupport": "직접",
+        "originalPlannedMilestone": "M3",
+        "boundary": "실수 LTI A/B/C/D; D에 따른 direct feedthrough; 실제 지원: 실수 단위1 scalar SISO·N=1..16·A/B/C/D/initial·D feedthrough 판정; MIMO/Descriptor 제외; 계약·fixture: m3-contract / m3-verification",
+        "currentStatus": "M3 승인 subset",
+        "existingSubset": true,
+        "deliveryKind": "native-capability",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 직접 계획을 유지하고 현재 subset 밖의 옵션과 타깃을 재검증",
+        "remainingScope": [
+          "원본 State-Space의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 실수 LTI A/B/C/D; D에 따른 direct feedthrough; 실제 지원: 실수 단위1 scalar SISO·N=1..16·A/B/C/D/initial·D feedthrough 판정; MIMO/Descriptor 제외; 계약·fixture: m3-contract / m3-verification",
+          "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-02-010-parameter-shape-domain",
+          "R-02-010-state-time-error",
+          "R-02-010-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "a63d3d89a1d6199339aa888189d15460fcaf161a09b4b2687bc1f6d025d141b6",
+      "contractFamily": "preserved-continuous-contracts",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "preserved-predecessor-subset",
+        "canonical": "continuous.state-space",
+        "parameters": {},
+        "requiredBindings": [],
+        "definitionIds": [],
+        "newBlockIds": [],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Previous verified selected source mapping retained unchanged. Solver availability does not approve additional full source options. 실수 LTI A/B/C/D; D에 따른 direct feedthrough; 실제 지원: 실수 단위1 scalar SISO·N=1..16·A/B/C/D/initial·D feedthrough 판정; MIMO/Descriptor 제외; 계약·fixture: m3-contract / m3-verification",
+        "evidenceFixtureIds": [],
+        "runtimeLiteralFixtureIds": [],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "preserved-predecessor-subset",
+        "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update.",
+        "evidenceFixtureIds": [],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-02-010-parameter-shape-domain",
+        "R-02-010-state-time-error",
+        "R-02-010-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 State-Space의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 실수 LTI A/B/C/D; D에 따른 direct feedthrough; 실제 지원: 실수 단위1 scalar SISO·N=1..16·A/B/C/D/initial·D feedthrough 판정; MIMO/Descriptor 제외; 계약·fixture: m3-contract / m3-verification",
+        "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ]
+    },
+    {
+      "sourceId": "02-011",
+      "section": 2,
+      "ordinal": 11,
+      "sourceName": "Transfer Fcn",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 126,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-02",
+      "baselineCanonical": "continuous.transfer-function",
+      "baselineStatus": "M3 승인 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "02-011",
+        "section": 2,
+        "ordinal": 11,
+        "name": "Transfer Fcn",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 126,
+        "canonical": "continuous.transfer-function",
+        "planningSupport": "구성",
+        "originalPlannedMilestone": "M3",
+        "boundary": "proper 실수 전달함수→검증된 상태공간 realization; 부적절 차수는 거부; 실제 지원: 실수 단위1 scalar proper s 내림차순 계수·차수0..16·a0≠0·제어 정준형 initial; improper/복소 제외; 계약·fixture: m3-contract / m3-verification",
+        "currentStatus": "M3 승인 subset",
+        "existingSubset": true,
+        "deliveryKind": "shared-configuration",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 구성 계획을 유지하고 현재 subset 밖의 옵션과 타깃을 재검증",
+        "remainingScope": [
+          "원본 Transfer Fcn의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: proper 실수 전달함수→검증된 상태공간 realization; 부적절 차수는 거부; 실제 지원: 실수 단위1 scalar proper s 내림차순 계수·차수0..16·a0≠0·제어 정준형 initial; improper/복소 제외; 계약·fixture: m3-contract / m3-verification",
+          "공유 canonical의 설정/별칭/preset을 원본행별로 재현·fixture 확인; 새 엔진으로 중복 합산하지 않음"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-02-011-parameter-shape-domain",
+          "R-02-011-state-time-error",
+          "R-02-011-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "5a4396946b3d1a052693569d16fa39c1ec68ce627a0042be80d990c48d23c91f",
+      "contractFamily": "preserved-continuous-contracts",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "preserved-predecessor-subset",
+        "canonical": "continuous.transfer-function",
+        "parameters": {},
+        "requiredBindings": [],
+        "definitionIds": [],
+        "newBlockIds": [],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Previous verified selected source mapping retained unchanged. Solver availability does not approve additional full source options. proper 실수 전달함수→검증된 상태공간 realization; 부적절 차수는 거부; 실제 지원: 실수 단위1 scalar proper s 내림차순 계수·차수0..16·a0≠0·제어 정준형 initial; improper/복소 제외; 계약·fixture: m3-contract / m3-verification",
+        "evidenceFixtureIds": [],
+        "runtimeLiteralFixtureIds": [],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "preserved-predecessor-subset",
+        "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update.",
+        "evidenceFixtureIds": [],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-02-011-parameter-shape-domain",
+        "R-02-011-state-time-error",
+        "R-02-011-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Transfer Fcn의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: proper 실수 전달함수→검증된 상태공간 realization; 부적절 차수는 거부; 실제 지원: 실수 단위1 scalar proper s 내림차순 계수·차수0..16·a0≠0·제어 정준형 initial; improper/복소 제외; 계약·fixture: m3-contract / m3-verification",
+        "공유 canonical의 설정/별칭/preset을 원본행별로 재현·fixture 확인; 새 엔진으로 중복 합산하지 않음",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ]
+    },
+    {
+      "sourceId": "02-012",
+      "section": 2,
+      "ordinal": 12,
+      "sourceName": "Transport Delay",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 127,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-02",
+      "baselineCanonical": "time.transport-delay",
+      "baselineStatus": "M3 승인 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "02-012",
+        "section": 2,
+        "ordinal": 12,
+        "name": "Transport Delay",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 127,
+        "canonical": "time.transport-delay",
+        "planningSupport": "직접",
+        "originalPlannedMilestone": "M3",
+        "boundary": "시뮬레이션 시간 기반 이력 보간·최대 지연/버퍼 상한; 실제 지원: 단위1 scalar 양의 고정 delay·initial prehistory·승인 이력 선형 보간·좌우 jump 보존·100k 총메모리; 가변/엔터티 지연 제외; 계약·fixture: m3-contract / m3-verification",
+        "currentStatus": "M3 승인 subset",
+        "existingSubset": true,
+        "deliveryKind": "native-capability",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 직접 계획을 유지하고 현재 subset 밖의 옵션과 타깃을 재검증",
+        "remainingScope": [
+          "원본 Transport Delay의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 시뮬레이션 시간 기반 이력 보간·최대 지연/버퍼 상한; 실제 지원: 단위1 scalar 양의 고정 delay·initial prehistory·승인 이력 선형 보간·좌우 jump 보존·100k 총메모리; 가변/엔터티 지연 제외; 계약·fixture: m3-contract / m3-verification",
+          "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-02-012-parameter-shape-domain",
+          "R-02-012-state-time-error",
+          "R-02-012-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "70dbeab3058b79d159b58aef6d59e669ac3b9286f7de22740b80f830086bfb0a",
+      "contractFamily": "preserved-continuous-contracts",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "preserved-predecessor-subset",
+        "canonical": "time.transport-delay",
+        "parameters": {},
+        "requiredBindings": [],
+        "definitionIds": [],
+        "newBlockIds": [],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Previous verified selected source mapping retained unchanged. Solver availability does not approve additional full source options. 시뮬레이션 시간 기반 이력 보간·최대 지연/버퍼 상한; 실제 지원: 단위1 scalar 양의 고정 delay·initial prehistory·승인 이력 선형 보간·좌우 jump 보존·100k 총메모리; 가변/엔터티 지연 제외; 계약·fixture: m3-contract / m3-verification",
+        "evidenceFixtureIds": [],
+        "runtimeLiteralFixtureIds": [],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "preserved-predecessor-subset",
+        "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update.",
+        "evidenceFixtureIds": [],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-02-012-parameter-shape-domain",
+        "R-02-012-state-time-error",
+        "R-02-012-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Transport Delay의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 시뮬레이션 시간 기반 이력 보간·최대 지연/버퍼 상한; 실제 지원: 단위1 scalar 양의 고정 delay·initial prehistory·승인 이력 선형 보간·좌우 jump 보존·100k 총메모리; 가변/엔터티 지연 제외; 계약·fixture: m3-contract / m3-verification",
+        "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ]
+    },
+    {
+      "sourceId": "02-013",
+      "section": 2,
+      "ordinal": 13,
+      "sourceName": "Variable Time Delay",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 128,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-02",
+      "baselineCanonical": "continuous.variable-time-delay",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "02-013",
+        "section": 2,
+        "ordinal": 13,
+        "name": "Variable Time Delay",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 128,
+        "canonical": "continuous.variable-time-delay",
+        "planningSupport": "직접",
+        "originalPlannedMilestone": "M5",
+        "boundary": "가변 지연의 시간 해석·보간·이력 범위 검증",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "native-capability",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 직접 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 Variable Time Delay의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 가변 지연의 시간 해석·보간·이력 범위 검증",
+          "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-02-013-parameter-shape-domain",
+          "R-02-013-state-time-error",
+          "R-02-013-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "eac616f2d1c4a6a68231dfa929f60d8caee8b217558092d17ac7b2d6585d9b7d",
+      "contractFamily": "variable-delay",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "candidate-selected-implementation-awaiting-verification",
+        "canonical": "time.variable-delay",
+        "parameters": {
+          "minDelay": 0.01,
+          "maxDelay": 10,
+          "initial": 0,
+          "historyLimit": 4096,
+          "handleZero": "no"
+        },
+        "requiredBindings": [
+          "in",
+          "delay"
+        ],
+        "definitionIds": [],
+        "newBlockIds": [
+          "time.variable-delay"
+        ],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Finite scalar approved history at t-delay with bounded positive delay. Explicit zero-direct option and left/right jump preservation; finite history budget diagnoses overflow. Arbitrary native interpolation/history/typed options remain open.",
+        "evidenceFixtureIds": [
+          "m12-independent-time-variable-delay/continuous",
+          "m12-independent-zero-delay-direct/continuous"
+        ],
+        "runtimeLiteralFixtureIds": [
+          "m12-independent-time-variable-delay"
+        ],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "verified-native-scope",
+        "selectedParameters": {
+          "minDelay": 0.25,
+          "maxDelay": 1,
+          "initial": 0,
+          "historyLimit": 128,
+          "handleZero": "no"
+        },
+        "rawFixtureId": "m12-independent-time-variable-delay",
+        "evidenceFixtureIds": [
+          "m12-independent-time-variable-delay/continuous",
+          "m12-independent-zero-delay-direct/continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-02-013-parameter-shape-domain",
+        "R-02-013-state-time-error",
+        "R-02-013-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Variable Time Delay의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 가변 지연의 시간 해석·보간·이력 범위 검증",
+        "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ],
+      "learningExampleId": "variable-delay-vs-transport"
+    },
+    {
+      "sourceId": "02-014",
+      "section": 2,
+      "ordinal": 14,
+      "sourceName": "Variable Transport Delay",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 129,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-02",
+      "baselineCanonical": "continuous.variable-transport-delay",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "02-014",
+        "section": 2,
+        "ordinal": 14,
+        "name": "Variable Transport Delay",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 129,
+        "canonical": "continuous.variable-transport-delay",
+        "planningSupport": "직접",
+        "originalPlannedMilestone": "M5",
+        "boundary": "가변 운송 지연의 별도 상태/시간 의미; 위 행과 합치지 않음",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "native-capability",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 직접 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 Variable Transport Delay의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 가변 운송 지연의 별도 상태/시간 의미; 위 행과 합치지 않음",
+          "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-02-014-parameter-shape-domain",
+          "R-02-014-state-time-error",
+          "R-02-014-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "887b024b558ba7240e2bf0de4be8ee3f9d780f52d9f1d54d45ea6fae4f0a9d02",
+      "contractFamily": "variable-delay",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "candidate-selected-implementation-awaiting-verification",
+        "canonical": "time.variable-transport-delay",
+        "parameters": {
+          "minDelay": 0.01,
+          "maxDelay": 10,
+          "initial": 0,
+          "historyLimit": 4096
+        },
+        "requiredBindings": [
+          "in",
+          "delay"
+        ],
+        "definitionIds": [],
+        "newBlockIds": [
+          "time.variable-transport-delay"
+        ],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Finite scalar transport-age state q prime equals 1/delay; approved history queried at age q-1. Positive delay bounds; not a t-delay alias. Native full variable transport options remain open.",
+        "evidenceFixtureIds": [
+          "m12-independent-time-variable-transport-delay/continuous"
+        ],
+        "runtimeLiteralFixtureIds": [
+          "m12-independent-time-variable-transport-delay"
+        ],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "verified-native-scope",
+        "selectedParameters": {
+          "minDelay": 0.25,
+          "maxDelay": 1,
+          "initial": 0,
+          "historyLimit": 128
+        },
+        "rawFixtureId": "m12-independent-time-variable-transport-delay",
+        "evidenceFixtureIds": [
+          "m12-independent-time-variable-transport-delay/continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-02-014-parameter-shape-domain",
+        "R-02-014-state-time-error",
+        "R-02-014-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Variable Transport Delay의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 가변 운송 지연의 별도 상태/시간 의미; 위 행과 합치지 않음",
+        "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ],
+      "learningExampleId": "variable-delay-vs-transport"
+    },
+    {
+      "sourceId": "02-015",
+      "section": 2,
+      "ordinal": 15,
+      "sourceName": "Zero-Pole",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 130,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-02",
+      "baselineCanonical": "continuous.zero-pole",
+      "baselineStatus": "M3 승인 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "02-015",
+        "section": 2,
+        "ordinal": 15,
+        "name": "Zero-Pole",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 130,
+        "canonical": "continuous.zero-pole",
+        "planningSupport": "구성",
+        "originalPlannedMilestone": "M3",
+        "boundary": "zeros/poles/gain→실수 계수 realization; 복소수 확장 M5; 실제 지원: 실수 roots/gain→proper 제어 정준형·roots0..16·initial; 복소 roots 제외; 계약·fixture: m3-contract / m3-verification",
+        "currentStatus": "M3 승인 subset",
+        "existingSubset": true,
+        "deliveryKind": "shared-configuration",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 구성 계획을 유지하고 현재 subset 밖의 옵션과 타깃을 재검증",
+        "remainingScope": [
+          "원본 Zero-Pole의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: zeros/poles/gain→실수 계수 realization; 복소수 확장 M5; 실제 지원: 실수 roots/gain→proper 제어 정준형·roots0..16·initial; 복소 roots 제외; 계약·fixture: m3-contract / m3-verification",
+          "공유 canonical의 설정/별칭/preset을 원본행별로 재현·fixture 확인; 새 엔진으로 중복 합산하지 않음"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-02-015-parameter-shape-domain",
+          "R-02-015-state-time-error",
+          "R-02-015-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "b92cac9641220ac26a87a012ef26bbb7559db2243645fd24bc9268e0ea34c9f1",
+      "contractFamily": "preserved-continuous-contracts",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "preserved-predecessor-subset",
+        "canonical": "continuous.zero-pole",
+        "parameters": {},
+        "requiredBindings": [],
+        "definitionIds": [],
+        "newBlockIds": [],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Previous verified selected source mapping retained unchanged. Solver availability does not approve additional full source options. zeros/poles/gain→실수 계수 realization; 복소수 확장 M5; 실제 지원: 실수 roots/gain→proper 제어 정준형·roots0..16·initial; 복소 roots 제외; 계약·fixture: m3-contract / m3-verification",
+        "evidenceFixtureIds": [],
+        "runtimeLiteralFixtureIds": [],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "preserved-predecessor-subset",
+        "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update.",
+        "evidenceFixtureIds": [],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-02-015-parameter-shape-domain",
+        "R-02-015-state-time-error",
+        "R-02-015-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Zero-Pole의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: zeros/poles/gain→실수 계수 realization; 복소수 확장 M5; 실제 지원: 실수 roots/gain→proper 제어 정준형·roots0..16·initial; 복소 roots 제외; 계약·fixture: m3-contract / m3-verification",
+        "공유 canonical의 설정/별칭/preset을 원본행별로 재현·fixture 확인; 새 엔진으로 중복 합산하지 않음",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ]
+    },
+    {
+      "sourceId": "04-001",
+      "section": 4,
+      "ordinal": 1,
+      "sourceName": "Backlash",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 215,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-04",
+      "baselineCanonical": "nonlinear.backlash",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "04-001",
+        "section": 4,
+        "ordinal": 1,
+        "name": "Backlash",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 215,
+        "canonical": "nonlinear.backlash",
+        "planningSupport": "직접",
+        "originalPlannedMilestone": "M3",
+        "boundary": "hysteresis 상태와 연속 경계 event 검증",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "native-capability",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 직접 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 Backlash의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: hysteresis 상태와 연속 경계 event 검증",
+          "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-04-001-parameter-shape-domain",
+          "R-04-001-state-time-error",
+          "R-04-001-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "1df5c024386d4bf0aac60a38aa1f7d7b5c09140c32cf3105aa224370c6fa7839",
+      "contractFamily": "nonlinear-accepted-state",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "candidate-selected-implementation-awaiting-verification",
+        "canonical": "nonlinear.backlash",
+        "parameters": {
+          "width": 1,
+          "initial": 0
+        },
+        "requiredBindings": [
+          "in"
+        ],
+        "definitionIds": [],
+        "newBlockIds": [
+          "nonlinear.backlash"
+        ],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Finite scalar accepted-output deadband state; width and initial output explicit. Native array, data type, solver and target options remain open.",
+        "evidenceFixtureIds": [
+          "m12-independent-nonlinear-backlash/continuous"
+        ],
+        "runtimeLiteralFixtureIds": [
+          "m12-independent-nonlinear-backlash"
+        ],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "verified-native-scope",
+        "selectedParameters": {
+          "width": 2,
+          "initial": 0
+        },
+        "rawFixtureId": "m12-independent-nonlinear-backlash",
+        "evidenceFixtureIds": [
+          "m12-independent-nonlinear-backlash/continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-04-001-parameter-shape-domain",
+        "R-04-001-state-time-error",
+        "R-04-001-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Backlash의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: hysteresis 상태와 연속 경계 event 검증",
+        "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ],
+      "learningExampleId": "backlash-and-rate-bounds"
+    },
+    {
+      "sourceId": "04-005",
+      "section": 4,
+      "ordinal": 5,
+      "sourceName": "Hit Crossing",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 219,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-04",
+      "baselineCanonical": "logic.hit-crossing",
+      "baselineStatus": "M3 승인 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "04-005",
+        "section": 4,
+        "ordinal": 5,
+        "name": "Hit Crossing",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 219,
+        "canonical": "logic.hit-crossing",
+        "planningSupport": "직접",
+        "originalPlannedMilestone": "M3",
+        "boundary": "방향·허용오차·동시 crossing 순서·chattering 상한; 실제 지원: 단위1 scalar threshold·rising/falling/either·boolean event pulse·시간 정밀화·동시 reset/tick 순서·사건 상한; 계약·fixture: m3-contract / m3-verification",
+        "currentStatus": "M3 승인 subset",
+        "existingSubset": true,
+        "deliveryKind": "native-capability",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 직접 계획을 유지하고 현재 subset 밖의 옵션과 타깃을 재검증",
+        "remainingScope": [
+          "원본 Hit Crossing의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 방향·허용오차·동시 crossing 순서·chattering 상한; 실제 지원: 단위1 scalar threshold·rising/falling/either·boolean event pulse·시간 정밀화·동시 reset/tick 순서·사건 상한; 계약·fixture: m3-contract / m3-verification",
+          "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-04-005-parameter-shape-domain",
+          "R-04-005-state-time-error",
+          "R-04-005-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "70360bd21dc69ae1405d8a0cf0eaab073ff173dadd336fc333a7d2e89ebc0bba",
+      "contractFamily": "preserved-continuous-contracts",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "preserved-predecessor-subset",
+        "canonical": "logic.hit-crossing",
+        "parameters": {},
+        "requiredBindings": [],
+        "definitionIds": [],
+        "newBlockIds": [],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Previous verified selected source mapping retained unchanged. Solver availability does not approve additional full source options. 방향·허용오차·동시 crossing 순서·chattering 상한; 실제 지원: 단위1 scalar threshold·rising/falling/either·boolean event pulse·시간 정밀화·동시 reset/tick 순서·사건 상한; 계약·fixture: m3-contract / m3-verification",
+        "evidenceFixtureIds": [],
+        "runtimeLiteralFixtureIds": [],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "preserved-predecessor-subset",
+        "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update.",
+        "evidenceFixtureIds": [],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-04-005-parameter-shape-domain",
+        "R-04-005-state-time-error",
+        "R-04-005-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Hit Crossing의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 방향·허용오차·동시 crossing 순서·chattering 상한; 실제 지원: 단위1 scalar threshold·rising/falling/either·boolean event pulse·시간 정밀화·동시 reset/tick 순서·사건 상한; 계약·fixture: m3-contract / m3-verification",
+        "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ]
+    },
+    {
+      "sourceId": "04-008",
+      "section": 4,
+      "ordinal": 8,
+      "sourceName": "Rate Limiter",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 222,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-04",
+      "baselineCanonical": "nonlinear.rate-limit",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "04-008",
+        "section": 4,
+        "ordinal": 8,
+        "name": "Rate Limiter",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 222,
+        "canonical": "nonlinear.rate-limit",
+        "planningSupport": "직접",
+        "originalPlannedMilestone": "M2",
+        "boundary": "이산 delta/time 제한; 연속 solver 결합 M3",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "native-capability",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 직접 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 Rate Limiter의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 이산 delta/time 제한; 연속 solver 결합 M3",
+          "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-04-008-parameter-shape-domain",
+          "R-04-008-state-time-error",
+          "R-04-008-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "efa1f1ca525e1a021e576225c90e9ec13b42049e00a715adfc9b759c1e20537b",
+      "contractFamily": "nonlinear-accepted-state",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "candidate-selected-implementation-awaiting-verification",
+        "canonical": "nonlinear.rate-limiter-continuous",
+        "parameters": {
+          "rising": 1,
+          "falling": -1,
+          "initial": 0
+        },
+        "requiredBindings": [
+          "in"
+        ],
+        "definitionIds": [],
+        "newBlockIds": [
+          "nonlinear.rate-limiter-continuous"
+        ],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Finite scalar accepted major-step envelope in continuous mode; initial continuous output is first input. Discrete due-grid mode has explicit initial output. Native full solver/data type/rate semantics remain open.",
+        "evidenceFixtureIds": [
+          "m12-independent-nonlinear-rate-limiter-continuous/continuous",
+          "m12-independent-rate-limiter-discrete/discrete"
+        ],
+        "runtimeLiteralFixtureIds": [
+          "m12-independent-nonlinear-rate-limiter-continuous"
+        ],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "verified-native-scope",
+        "selectedParameters": {
+          "rising": 1,
+          "falling": -1,
+          "initial": -8
+        },
+        "rawFixtureId": "m12-independent-nonlinear-rate-limiter-continuous",
+        "evidenceFixtureIds": [
+          "m12-independent-nonlinear-rate-limiter-continuous/continuous",
+          "m12-independent-rate-limiter-discrete/discrete"
+        ],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-04-008-parameter-shape-domain",
+        "R-04-008-state-time-error",
+        "R-04-008-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Rate Limiter의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 이산 delta/time 제한; 연속 solver 결합 M3",
+        "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ],
+      "learningExampleId": "backlash-and-rate-bounds"
+    },
+    {
+      "sourceId": "04-009",
+      "section": 4,
+      "ordinal": 9,
+      "sourceName": "Rate Limiter Dynamic",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 223,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-04",
+      "baselineCanonical": "nonlinear.rate-limit",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "04-009",
+        "section": 4,
+        "ordinal": 9,
+        "name": "Rate Limiter Dynamic",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 223,
+        "canonical": "nonlinear.rate-limit",
+        "planningSupport": "구성",
+        "originalPlannedMilestone": "M3",
+        "boundary": "동적 상승/하강 제한과 연속 상태 계약",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "shared-configuration",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 구성 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 Rate Limiter Dynamic의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 동적 상승/하강 제한과 연속 상태 계약",
+          "공유 canonical의 설정/별칭/preset을 원본행별로 재현·fixture 확인; 새 엔진으로 중복 합산하지 않음"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-04-009-parameter-shape-domain",
+          "R-04-009-state-time-error",
+          "R-04-009-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "2ed96fcb9751adb2032ac814e486d9bd55a1a0d44806cf41cf695041f0761dd1",
+      "contractFamily": "nonlinear-accepted-state",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "candidate-selected-implementation-awaiting-verification",
+        "canonical": "nonlinear.rate-limiter-dynamic",
+        "parameters": {
+          "initial": 0
+        },
+        "requiredBindings": [
+          "in",
+          "rising",
+          "falling"
+        ],
+        "definitionIds": [],
+        "newBlockIds": [
+          "nonlinear.rate-limiter-dynamic"
+        ],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Finite scalar external nonnegative rising/nonpositive falling limits with read-before-write discrete state. Continuous models use an explicit discrete due grid. Native continuously varying rate semantics remain open.",
+        "evidenceFixtureIds": [
+          "m12-independent-nonlinear-rate-limiter-dynamic/discrete",
+          "m12-independent-nonlinear-rate-limiter-dynamic/continuous"
+        ],
+        "runtimeLiteralFixtureIds": [
+          "m12-independent-nonlinear-rate-limiter-dynamic"
+        ],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "verified-native-scope",
+        "selectedParameters": {
+          "initial": 0
+        },
+        "rawFixtureId": "m12-independent-nonlinear-rate-limiter-dynamic",
+        "evidenceFixtureIds": [
+          "m12-independent-nonlinear-rate-limiter-dynamic/discrete",
+          "m12-independent-nonlinear-rate-limiter-dynamic/continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-04-009-parameter-shape-domain",
+        "R-04-009-state-time-error",
+        "R-04-009-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Rate Limiter Dynamic의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 동적 상승/하강 제한과 연속 상태 계약",
+        "공유 canonical의 설정/별칭/preset을 원본행별로 재현·fixture 확인; 새 엔진으로 중복 합산하지 않음",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ],
+      "learningExampleId": "backlash-and-rate-bounds"
+    },
+    {
+      "sourceId": "04-010",
+      "section": 4,
+      "ordinal": 10,
+      "sourceName": "Relay",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 224,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-04",
+      "baselineCanonical": "nonlinear.relay",
+      "baselineStatus": "M3 승인 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "04-010",
+        "section": 4,
+        "ordinal": 10,
+        "name": "Relay",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 224,
+        "canonical": "nonlinear.relay",
+        "planningSupport": "직접",
+        "originalPlannedMilestone": "M3",
+        "boundary": "on/off hysteresis 상태와 crossing event; 실제 지원: 단위1 scalar off<on hysteresis·초기 상태·on/off 값·교차 정밀화; equal threshold/typed vector 제외; 계약·fixture: m3-contract / m3-verification",
+        "currentStatus": "M3 승인 subset",
+        "existingSubset": true,
+        "deliveryKind": "native-capability",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 직접 계획을 유지하고 현재 subset 밖의 옵션과 타깃을 재검증",
+        "remainingScope": [
+          "원본 Relay의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: on/off hysteresis 상태와 crossing event; 실제 지원: 단위1 scalar off<on hysteresis·초기 상태·on/off 값·교차 정밀화; equal threshold/typed vector 제외; 계약·fixture: m3-contract / m3-verification",
+          "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-04-010-parameter-shape-domain",
+          "R-04-010-state-time-error",
+          "R-04-010-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "e427a39f7a18017c0955a8476fc4764deaa63513a8fb9236e771b8e963694ec6",
+      "contractFamily": "preserved-continuous-contracts",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "preserved-predecessor-subset",
+        "canonical": "nonlinear.relay",
+        "parameters": {},
+        "requiredBindings": [],
+        "definitionIds": [],
+        "newBlockIds": [],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Previous verified selected source mapping retained unchanged. Solver availability does not approve additional full source options. on/off hysteresis 상태와 crossing event; 실제 지원: 단위1 scalar off<on hysteresis·초기 상태·on/off 값·교차 정밀화; equal threshold/typed vector 제외; 계약·fixture: m3-contract / m3-verification",
+        "evidenceFixtureIds": [],
+        "runtimeLiteralFixtureIds": [],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "preserved-predecessor-subset",
+        "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update.",
+        "evidenceFixtureIds": [],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-04-010-parameter-shape-domain",
+        "R-04-010-state-time-error",
+        "R-04-010-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Relay의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: on/off hysteresis 상태와 crossing event; 실제 지원: 단위1 scalar off<on hysteresis·초기 상태·on/off 값·교차 정밀화; equal threshold/typed vector 제외; 계약·fixture: m3-contract / m3-verification",
+        "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ]
+    },
+    {
+      "sourceId": "05-012",
+      "section": 5,
+      "ordinal": 12,
+      "sourceName": "Memory",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 255,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-05",
+      "baselineCanonical": "time.memory",
+      "baselineStatus": "M3 승인 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "05-012",
+        "section": 5,
+        "ordinal": 12,
+        "name": "Memory",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 255,
+        "canonical": "time.memory",
+        "planningSupport": "직접",
+        "originalPlannedMilestone": "M3",
+        "boundary": "직전 major integration step 값; Unit Delay와 별도 수명·minor step 계약; 실제 지원: 단위1 scalar 직전 승인 major-step 입력·initial·trial/rejected/minor 불변; 이산 Unit Delay와 별도 의미; 계약·fixture: m3-contract / m3-verification",
+        "currentStatus": "M3 승인 subset",
+        "existingSubset": true,
+        "deliveryKind": "native-capability",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 직접 계획을 유지하고 현재 subset 밖의 옵션과 타깃을 재검증",
+        "remainingScope": [
+          "원본 Memory의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 직전 major integration step 값; Unit Delay와 별도 수명·minor step 계약; 실제 지원: 단위1 scalar 직전 승인 major-step 입력·initial·trial/rejected/minor 불변; 이산 Unit Delay와 별도 의미; 계약·fixture: m3-contract / m3-verification",
+          "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-05-012-parameter-shape-domain",
+          "R-05-012-state-time-error",
+          "R-05-012-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "bc5d6a91b4dbbf588d2ef14751a221621a760129b55e61b87fa5c601f9ab83eb",
+      "contractFamily": "preserved-continuous-contracts",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "preserved-predecessor-subset",
+        "canonical": "time.memory",
+        "parameters": {},
+        "requiredBindings": [],
+        "definitionIds": [],
+        "newBlockIds": [],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Previous verified selected source mapping retained unchanged. Solver availability does not approve additional full source options. 직전 major integration step 값; Unit Delay와 별도 수명·minor step 계약; 실제 지원: 단위1 scalar 직전 승인 major-step 입력·initial·trial/rejected/minor 불변; 이산 Unit Delay와 별도 의미; 계약·fixture: m3-contract / m3-verification",
+        "evidenceFixtureIds": [],
+        "runtimeLiteralFixtureIds": [],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "preserved-predecessor-subset",
+        "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update.",
+        "evidenceFixtureIds": [],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-05-012-parameter-shape-domain",
+        "R-05-012-state-time-error",
+        "R-05-012-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Memory의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 직전 major integration step 값; Unit Delay와 별도 수명·minor step 계약; 실제 지원: 단위1 scalar 직전 승인 major-step 입력·initial·trial/rejected/minor 불변; 이산 Unit Delay와 별도 의미; 계약·fixture: m3-contract / m3-verification",
+        "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ]
+    },
+    {
+      "sourceId": "08-003",
+      "section": 8,
+      "ordinal": 3,
+      "sourceName": "Algebraic Constraint",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 343,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-08",
+      "baselineCanonical": "solver.algebraic-constraint",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "08-003",
+        "section": 8,
+        "ordinal": 3,
+        "name": "Algebraic Constraint",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 343,
+        "canonical": "solver.algebraic-constraint",
+        "planningSupport": "미지원·adapter 연구",
+        "originalPlannedMilestone": "M5",
+        "boundary": "smooth real index-1 subset의 수렴 spike 이후 별도 승인 범위; 미수렴·비매끄러운 loop 거부",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "native-research",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 미지원·adapter 연구 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 Algebraic Constraint의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: smooth real index-1 subset의 수렴 spike 이후 별도 승인 범위; 미수렴·비매끄러운 loop 거부",
+          "수렴/잔차/초기값·불연속/미수렴 진단을 연구; spike 성공을 일반 DAE 지원으로 확대하지 않음"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-08-003-parameter-shape-domain",
+          "R-08-003-state-time-error",
+          "R-08-003-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "8d2c34a10daae85f92821ef688b4ad262cf8b214728c371dd80bf90d36c32bb8",
+      "contractFamily": "algebraic-solver",
+      "planningDeliveryKind": "native-research",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "candidate-selected-implementation-awaiting-verification",
+        "canonical": "solver.algebraic-constraint",
+        "parameters": {
+          "initial": 0,
+          "tolerance": 1e-8,
+          "maxIterations": 24,
+          "constraint": "zero"
+        },
+        "requiredBindings": [
+          "in"
+        ],
+        "definitionIds": [],
+        "newBlockIds": [
+          "solver.algebraic-constraint"
+        ],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Actual smooth finite scalar diagram residual or fixed-point equation jointly solved by bounded Newton; at most8 unknowns and64 component nodes. Nonsmooth, matrix, typed and general implicit systems rejected.",
+        "evidenceFixtureIds": [
+          "m12-independent-solver-algebraic-constraint/continuous",
+          "m12-independent-joint-algebraic/continuous"
+        ],
+        "runtimeLiteralFixtureIds": [
+          "m12-independent-solver-algebraic-constraint"
+        ],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "verified-native-scope",
+        "selectedParameters": {
+          "initial": 2,
+          "tolerance": 1e-11,
+          "maxIterations": 24,
+          "constraint": "zero"
+        },
+        "rawFixtureId": "m12-independent-solver-algebraic-constraint",
+        "evidenceFixtureIds": [
+          "m12-independent-solver-algebraic-constraint/continuous",
+          "m12-independent-joint-algebraic/continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-08-003-parameter-shape-domain",
+        "R-08-003-state-time-error",
+        "R-08-003-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Algebraic Constraint의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: smooth real index-1 subset의 수렴 spike 이후 별도 승인 범위; 미수렴·비매끄러운 loop 거부",
+        "수렴/잔차/초기값·불연속/미수렴 진단을 연구; spike 성공을 일반 DAE 지원으로 확대하지 않음",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ],
+      "learningExampleId": "algebraic-square-root"
+    },
+    {
+      "sourceId": "10-001",
+      "section": 10,
+      "ordinal": 1,
+      "sourceName": "Hit Crossing",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 428,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-10",
+      "baselineCanonical": "logic.hit-crossing",
+      "baselineStatus": "M3 승인 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "10-001",
+        "section": 10,
+        "ordinal": 1,
+        "name": "Hit Crossing",
+        "subgroup": "일반 표",
+        "condition": "기본",
+        "line": 428,
+        "canonical": "logic.hit-crossing",
+        "planningSupport": "직접",
+        "originalPlannedMilestone": "M3",
+        "boundary": "방향·허용오차·동시 crossing 순서·chattering 상한; 실제 지원: 단위1 scalar threshold·rising/falling/either·boolean event pulse·시간 정밀화·동시 reset/tick 순서·사건 상한; 계약·fixture: m3-contract / m3-verification",
+        "currentStatus": "M3 승인 subset",
+        "existingSubset": true,
+        "deliveryKind": "native-capability",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 직접 계획을 유지하고 현재 subset 밖의 옵션과 타깃을 재검증",
+        "remainingScope": [
+          "원본 Hit Crossing의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 방향·허용오차·동시 crossing 순서·chattering 상한; 실제 지원: 단위1 scalar threshold·rising/falling/either·boolean event pulse·시간 정밀화·동시 reset/tick 순서·사건 상한; 계약·fixture: m3-contract / m3-verification",
+          "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-10-001-parameter-shape-domain",
+          "R-10-001-state-time-error",
+          "R-10-001-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "0591822cfdbb89ef2f58521c76cbfa57c07074b79addbeb3c0bbf4ba7fff10e8",
+      "contractFamily": "preserved-continuous-contracts",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "preserved-predecessor-subset",
+        "canonical": "logic.hit-crossing",
+        "parameters": {},
+        "requiredBindings": [],
+        "definitionIds": [],
+        "newBlockIds": [],
+        "independentAlternative": false,
+        "controlPortAdapter": false,
+        "boundary": "Previous verified selected source mapping retained unchanged. Solver availability does not approve additional full source options. 방향·허용오차·동시 crossing 순서·chattering 상한; 실제 지원: 단위1 scalar threshold·rising/falling/either·boolean event pulse·시간 정밀화·동시 reset/tick 순서·사건 상한; 계약·fixture: m3-contract / m3-verification",
+        "evidenceFixtureIds": [],
+        "runtimeLiteralFixtureIds": [],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "preserved-predecessor-subset",
+        "reason": "Previous selected source mapping retained; additional full source options or native parity are not inferred from a solver update.",
+        "evidenceFixtureIds": [],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-10-001-parameter-shape-domain",
+        "R-10-001-state-time-error",
+        "R-10-001-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Hit Crossing의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 방향·허용오차·동시 crossing 순서·chattering 상한; 실제 지원: 단위1 scalar threshold·rising/falling/either·boolean event pulse·시간 정밀화·동시 reset/tick 순서·사건 상한; 계약·fixture: m3-contract / m3-verification",
+        "독립 native 구현·입력/상태/시간/오류·자원 경계의 검증된 옵션만 승인",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ]
+    },
+    {
+      "sourceId": "12-004",
+      "section": 12,
+      "ordinal": 4,
+      "sourceName": "Timed-Based Linearization",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 선형화 · 공식 문서의 표기를 유지함",
+      "sourceLine": 480,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-12",
+      "baselineCanonical": "analysis.linearization",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M14",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "12-004",
+        "section": 12,
+        "ordinal": 4,
+        "name": "Timed-Based Linearization",
+        "subgroup": "일반 표",
+        "condition": "기본 선형화 · 공식 문서의 표기를 유지함",
+        "line": 480,
+        "canonical": "analysis.linearization",
+        "planningSupport": "독립 대체",
+        "originalPlannedMilestone": "M5",
+        "boundary": "검증된 국소 Jacobian·명시 operating point; linmod 호환/고급 튜닝 보장 제외",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "independent-workflow",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M14",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 독립 대체 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 Timed-Based Linearization의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 검증된 국소 Jacobian·명시 operating point; linmod 호환/고급 튜닝 보장 제외",
+          "CalcWeave 자체 목적 대체와 원본 UI/언어/파일/런타임의 차이를 옵션별로 공개"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-12-004-parameter-shape-domain",
+          "R-12-004-state-time-error",
+          "R-12-004-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "46f85ec913ced20f7b2380950383bfd51380856fead3d4667aa6b4383b3733c5",
+      "contractFamily": "local-linearization",
+      "planningDeliveryKind": "independent-workflow",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "candidate-selected-implementation-awaiting-verification",
+        "canonical": "analysis.linearization",
+        "parameters": {
+          "definitionId": "plant",
+          "version": 1,
+          "operatingInputs": [],
+          "operatingState": [],
+          "fdStep": 0.00001,
+          "times": [
+            0
+          ],
+          "mode": "timed"
+        },
+        "requiredBindings": [],
+        "definitionIds": [
+          "linearPlant"
+        ],
+        "newBlockIds": [
+          "analysis.linearization"
+        ],
+        "independentAlternative": true,
+        "controlPortAdapter": false,
+        "boundary": "Independent local central-difference A/B/C/D of an actual compiled continuous definition at explicit operating input/state. At most64 declared timed requests; held between accepted requests. Native MATLAB linearization/file/analysis-tool equivalence is not claimed.",
+        "evidenceFixtureIds": [
+          "m12-independent-analysis-linearization/continuous",
+          "m12-independent-analysis-nonlinear-point/continuous",
+          "m12-independent-analysis-descriptor-reconstruction/continuous"
+        ],
+        "runtimeLiteralFixtureIds": [
+          "m12-independent-analysis-linearization"
+        ],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "verified-independent-alternative",
+        "selectedParameters": {
+          "definitionId": "Plant",
+          "version": 1,
+          "operatingInputs": [
+            2
+          ],
+          "operatingState": [
+            0.25
+          ],
+          "fdStep": 0.00001,
+          "times": [
+            0.5
+          ],
+          "mode": "timed"
+        },
+        "rawFixtureId": "m12-independent-analysis-linearization",
+        "evidenceFixtureIds": [
+          "m12-independent-analysis-linearization/continuous",
+          "m12-independent-analysis-nonlinear-point/continuous",
+          "m12-independent-analysis-descriptor-reconstruction/continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M14",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-12-004-parameter-shape-domain",
+        "R-12-004-state-time-error",
+        "R-12-004-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Timed-Based Linearization의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 검증된 국소 Jacobian·명시 operating point; linmod 호환/고급 튜닝 보장 제외",
+        "CalcWeave 자체 목적 대체와 원본 UI/언어/파일/런타임의 차이를 옵션별로 공개",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ],
+      "learningExampleId": "local-linearization-requests"
+    },
+    {
+      "sourceId": "12-005",
+      "section": 12,
+      "ordinal": 5,
+      "sourceName": "Trigger-Based Linearization",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 선형화 · 고급 선형화 도구와 구분",
+      "sourceLine": 481,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-12",
+      "baselineCanonical": "analysis.linearization",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M12",
+      "baselineOptionCompletionMilestones": [
+        "M12",
+        "M14",
+        "M15",
+        "M16"
+      ],
+      "baselineRoadmapRow": {
+        "id": "12-005",
+        "section": 12,
+        "ordinal": 5,
+        "name": "Trigger-Based Linearization",
+        "subgroup": "일반 표",
+        "condition": "기본 선형화 · 고급 선형화 도구와 구분",
+        "line": 481,
+        "canonical": "analysis.linearization",
+        "planningSupport": "독립 대체",
+        "originalPlannedMilestone": "M5",
+        "boundary": "검증된 국소 Jacobian·명시 operating point; linmod 호환/고급 튜닝 보장 제외",
+        "currentStatus": "미구현",
+        "existingSubset": false,
+        "deliveryKind": "independent-workflow",
+        "firstWorkMilestone": "M12",
+        "optionCompletionMilestones": [
+          "M12",
+          "M14",
+          "M15",
+          "M16"
+        ],
+        "priority": "P1",
+        "rationale": "연속 solver·사건·DAE와 분석의 실행 의미에 배정; 독립 대체 계획을 유지하고 미구현 source의 최초 계약/구현부터 착수",
+        "remainingScope": [
+          "원본 Trigger-Based Linearization의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+          "현재 제한/계획에서 남은 항목을 옵션별로 판정: 검증된 국소 Jacobian·명시 operating point; linmod 호환/고급 튜닝 보장 제외",
+          "CalcWeave 자체 목적 대체와 원본 UI/언어/파일/런타임의 차이를 옵션별로 공개"
+        ],
+        "requiredContracts": [
+          "M12-parameter-inventory",
+          "M12-execution-contract",
+          "M15-target-support-matrix",
+          "M16-source-option-evidence"
+        ],
+        "minimumFixtures": [
+          "R-12-005-parameter-shape-domain",
+          "R-12-005-state-time-error",
+          "R-12-005-target-roundtrip-or-explicit-rejection"
+        ],
+        "parameterInventoryStatus": "R2024b 전체 옵션 전수 사양·fixture inventory 미완료; 이름/조건 표를 옵션 사양으로 간주하지 않음",
+        "roadmapStatus": "후속 계획·구현/완료 지원 주장 아님",
+        "executionEquivalenceClaimed": false
+      },
+      "baselineRoadmapRowSha256": "5902597272819694a6e4ed99d16d2cdce60ffc44538eb46ef21f1141f5ac6b4d",
+      "contractFamily": "local-linearization",
+      "planningDeliveryKind": "independent-workflow",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "candidate-selected-implementation-awaiting-verification",
+        "canonical": "analysis.linearization",
+        "parameters": {
+          "definitionId": "plant",
+          "version": 1,
+          "operatingInputs": [],
+          "operatingState": [],
+          "fdStep": 0.00001,
+          "times": [
+            0
+          ],
+          "mode": "triggered"
+        },
+        "requiredBindings": [
+          "trigger"
+        ],
+        "definitionIds": [
+          "linearPlant"
+        ],
+        "newBlockIds": [
+          "analysis.linearization"
+        ],
+        "independentAlternative": true,
+        "controlPortAdapter": false,
+        "boundary": "Same independent local A/B/C/D analysis on rising boolean trigger; continuous producer must be registered Hit Crossing, or constant/discrete boolean. Arbitrary continuous pulses and native MATLAB trigger-linearization equivalence remain unsupported.",
+        "evidenceFixtureIds": [
+          "m12-independent-analysis-triggered/continuous"
+        ],
+        "runtimeLiteralFixtureIds": [
+          "m12-independent-analysis-triggered"
+        ],
+        "sourceFullEquivalent": false
+      },
+      "approval": {
+        "stageStatus": "verified-independent-alternative",
+        "selectedParameters": {
+          "definitionId": "Plant",
+          "version": 1,
+          "operatingInputs": [
+            2
+          ],
+          "operatingState": [
+            0.25
+          ],
+          "fdStep": 0.00001,
+          "times": [
+            0.5
+          ],
+          "mode": "triggered"
+        },
+        "rawFixtureId": "m12-independent-analysis-triggered",
+        "evidenceFixtureIds": [
+          "m12-independent-analysis-triggered/continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m12-source-approvals.json",
+        "nativeFullEquivalent": false
+      },
+      "followUpRequirements": [
+        {
+          "milestone": "M12",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M14",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "status": "open"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "status": "open"
+        }
+      ],
+      "optionInventoryTaskIds": [
+        "M12-parameter-inventory",
+        "M12-execution-contract",
+        "M15-target-support-matrix",
+        "M16-source-option-evidence"
+      ],
+      "minimumSourceFixtures": [
+        "R-12-005-parameter-shape-domain",
+        "R-12-005-state-time-error",
+        "R-12-005-target-roundtrip-or-explicit-rejection"
+      ],
+      "remainingSourceOptions": [
+        "원본 Trigger-Based Linearization의 R2024b 파라미터·자료형·shape·sample-time·mode·target/버전 조건 inventory",
+        "현재 제한/계획에서 남은 항목을 옵션별로 판정: 검증된 국소 Jacobian·명시 operating point; linmod 호환/고급 튜닝 보장 제외",
+        "CalcWeave 자체 목적 대체와 원본 UI/언어/파일/런타임의 차이를 옵션별로 공개",
+        "Current bounded declaration does not close full R2024b source parameters, reset/time/shape/data-type/target/version options or reference execution parity."
+      ],
+      "learningExampleId": "local-linearization-requests"
+    }
+  ],
+  "deliveryGate": {
+    "status": "complete-selected-engineering-scope",
+    "independentSourceApprovalRequired": true,
+    "actualStandaloneRequired": true,
+    "browserRequired": true,
+    "publicDeploymentApproved": false,
+    "engineeringProofPath": "docs/evidence/m12-engineering-checks.json"
+  },
+  "validationStatus": {
+    "uiUnit": {
+      "status": "passed",
+      "files": 2,
+      "tests": 17,
+      "rawReport": ".test-generated/m12-ui-unit-compact-final.json"
+    },
+    "learningModelExecution": {
+      "status": "passed",
+      "models": 8,
+      "tests": 8,
+      "parseCompileRun": true,
+      "literalOutputs": true,
+      "analyticOutputs": true,
+      "jsonRoundtrip": true,
+      "reverseInsertion": true,
+      "sourceImmutability": true,
+      "rawReport": ".test-generated/m12-ui-unit-compact-final.json"
+    },
+    "compilerRuntime": "passed-selected-scope",
+    "actualStandalone": "passed-35-executions",
+    "browser": {
+      "status": "passed",
+      "tests": 9,
+      "m10FocusedRegressionTests": 7,
+      "m11FocusedRegressionTests": 9,
+      "combinedFocusedPassedInWholeRun": 25,
+      "rootWholePassed": 156,
+      "rootWholeFailed": 0,
+      "rawReport": ".test-generated/m12-whole-browser.json",
+      "rawReportSha256": "22fa985fdf46ee4010259aa7378f3c7299af8322c1dd1265c2502fd3ed310595",
+      "proofPath": "docs/evidence/m12-ui-browser-verification.json",
+      "proofSha256": "dfb98e12fda9ff66f7ee904b8a8c959cc1a3fb704ad23e9b715ba09baa74cc85",
+      "priorFocused": {
+        "passed": 24,
+        "failed": 1,
+        "rawReport": ".test-generated/m12-focused-browser.json",
+        "rawReportSha256": "287b6105a4ec899661f9f819c06b76eddfff2aa8d9a7789af56bce39b5fb161d",
+        "preserved": true,
+        "reason": "Rawfloat transport sample0.5000000000000001 was compared exactly with mathematical0.5; only bounded numeric oracle assertion corrected."
+      },
+      "externalProjectPreviewPassed": 4,
+      "externalProjectPreviewRawReport": ".test-generated/m12-project-browser.json"
+    },
+    "sourceApproval": "12-selected-source-rows",
+    "mathWorksReferenceExecuted": false,
+    "fullSourceOptions": "open"
+  },
+  "claimScope": "Completed bounded CalcWeave M12 selected engineering contracts:12 newly approved source rows,14 predecessor mappings retained, actual numerical and standalone/browser/release gates. All26 full-source-option sets and MathWorks reference parity remain open; public deployment is a separate combined release check.",
+  "observedApi": {
+    "registryDefinitions": 304,
+    "newRegistryDefinitions": 11,
+    "preservedM11Definitions": 293,
+    "learningExamples": 61,
+    "exampleCategories": 9,
+    "declaredTargets": [
+      "typescript"
+    ],
+    "actualStandaloneStatus": "passed-selected-scope",
+    "sourceApprovals": 12
+  }
+}

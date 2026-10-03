@@ -2,12 +2,14 @@ import { CONTINUOUS_BOUNDARY_TYPES, CONTINUOUS_STATE_TYPES, MODEL_LIMITS, ModelE
 import { getBlockDefinition, getDirectFeedthroughPorts, isDirectFeedthrough } from '../../block-library/src';
 import { M9_BLOCK_IDS } from '../../block-library/src/m9';
 import { M11_BLOCK_DEFINITIONS } from '../../block-library/src/m11';
+import { M12_BLOCK_IDS } from '../../block-library/src/m12';
 import { EXPANDED_TIME_SOURCE_IDS } from '../../block-library/src/time-sources';
 import { m8HasUnregisteredJump, m8JumpControlPorts } from './m8';
 
 const continuousSources: ReadonlySet<string> = new Set(['source.step', 'source.ramp', 'source.sine-wave', 'source.repeating-sequence', 'source.clock', ...EXPANDED_TIME_SOURCE_IDS]);
-const sampled: ReadonlySet<string> = new Set(['source.random', 'source.digital-clock', 'source.pulse', 'logic.edge-detect', 'time.rate-transition', 'time.zero-order-hold', 'fixed.state-space', ...M9_BLOCK_IDS, ...M11_BLOCK_DEFINITIONS.filter(definition => definition.state !== 'none' || definition.sampleTime === 'fixed-tick' || ['route.data-store-read', 'route.data-store-write', 'state.reader', 'state.writer', 'state.parameter-writer'].includes(definition.id)).map(definition => definition.id)]);
+const sampled: ReadonlySet<string> = new Set(['nonlinear.rate-limiter-dynamic', 'source.random', 'source.digital-clock', 'source.pulse', 'logic.edge-detect', 'time.rate-transition', 'time.zero-order-hold', 'fixed.state-space', ...M9_BLOCK_IDS, ...M11_BLOCK_DEFINITIONS.filter(definition => definition.state !== 'none' || definition.sampleTime === 'fixed-tick' || ['route.data-store-read', 'route.data-store-write', 'state.reader', 'state.writer', 'state.parameter-writer'].includes(definition.id)).map(definition => definition.id)]);
 const boundary = new Set(['time.zero-order-hold', 'time.first-order-hold']);
+const continuousM12 = new Set<string>(M12_BLOCK_IDS.filter(id => id !== 'nonlinear.rate-limiter-dynamic'));
 const fail = (node: IRNode, code: string, message: string, portId?: string): never => { throw new ModelError([{ code, nodeId: node.id, message, ...(portId ? { portId } : {}) }]); };
 
 export function initialContinuousDescriptor(node: IRNode): SignalDescriptor | undefined {
@@ -72,7 +74,7 @@ export function inferContinuousDomains(model: CalcModel, ordered: IRNode[]): voi
     if (getBlockDefinition(node.blockType)!.sampleTime === 'constant' || node.blockType.startsWith('annotation.')) node.executionDomain = 'constant';
     else if (node.blockType === 'source.dataset') node.executionDomain = node.parameters.dataKind === 'boolean' ? 'discrete' : 'continuous';
     else if (node.blockType.startsWith('discrete.') || sampled.has(node.blockType)) node.executionDomain = 'discrete';
-    else if (CONTINUOUS_STATE_TYPES.includes(node.blockType) || CONTINUOUS_BOUNDARY_TYPES.includes(node.blockType) || continuousSources.has(node.blockType)) node.executionDomain = 'continuous';
+    else if (CONTINUOUS_STATE_TYPES.includes(node.blockType) || CONTINUOUS_BOUNDARY_TYPES.includes(node.blockType) || continuousSources.has(node.blockType) || (continuousM12.has(node.blockType) && !(node.blockType === 'nonlinear.rate-limiter-continuous' && explicit.get(node.id)))) node.executionDomain = 'continuous';
     else if (explicit.get(node.id)) node.executionDomain = 'discrete';
   }
   for (const node of ordered) {
@@ -97,7 +99,12 @@ export function inferContinuousDomains(model: CalcModel, ordered: IRNode[]): voi
         if (source.blockType !== 'logic.hit-crossing' && source.executionDomain !== 'discrete' && source.executionDomain !== 'constant') fail(node, 'UNSUPPORTED_RESET_EVENT', 'rising 초기화는 Hit Crossing 출력 또는 이산·상수 boolean 제어 신호를 사용해 주세요.', portId);
         continue;
       }
+      if (portId === 'reset' && ['continuous.integrator-limited', 'continuous.second-order-limited', 'continuous.pid-2dof'].includes(node.blockType)) {
+        if (source.blockType !== 'logic.hit-crossing' && source.executionDomain !== 'discrete' && source.executionDomain !== 'constant') fail(node, 'M12_RESET_BOUNDARY_REQUIRED', '제한 적분·2DOF PID rising reset은 등록된 Hit Crossing 또는 이산·상수 boolean 신호여야 합니다.', portId);
+        continue;
+      }
       if (portId === 'call' && node.blockType === 'hierarchy.function-call' && node.parameters.callEventRate) continue;
+      if (portId === 'trigger' && node.blockType === 'analysis.linearization' && source.executionDomain === 'continuous' && source.blockType !== 'logic.hit-crossing') fail(node, 'M12_ANALYSIS_TRIGGER_BOUNDARY_REQUIRED', '선형화 rising trigger는 등록된 Hit Crossing 또는 이산·상수 boolean 신호여야 합니다. 연속 조건은 Hit Crossing으로 사건 경계를 명시해 주세요.', portId);
       if (node.executionDomain === 'discrete' && source.executionDomain === 'continuous' && !boundary.has(node.blockType)) fail(node, 'HYBRID_BOUNDARY_REQUIRED', '연속 신호를 이산 입력에 연결하려면 Zero Order Hold를 사용해 샘플 경계를 명시해 주세요.', portId);
       if (node.executionDomain === 'discrete' && source.executionDomain === 'discrete' && node.blockType !== 'time.rate-transition' && !boundary.has(node.blockType) && (source.sampleTime.period !== node.sampleTime.period || source.sampleTime.offset !== node.sampleTime.offset)) fail(node, 'SAMPLE_TIME_MISMATCH', '서로 다른 이산 샘플시간 사이에는 Rate Transition이 필요합니다.', portId);
       // Reset ports are event controls; they do not impose current-output dependency or rate conversion.
@@ -111,12 +118,18 @@ export function inferContinuousDomains(model: CalcModel, ordered: IRNode[]): voi
 function validateContinuousCaptureDependencies(model: CalcModel, nodes: IRNode[], byId: Map<string, IRNode>): void {
   const holds = nodes.filter((node) => boundary.has(node.blockType));
   if (!holds.length) return;
-  const ids = [...byId.keys()].sort();
+  // A solved residual component is one current-stage producer. Its internal
+  // Newton cycle is legal; a cycle through a due hold capture is not.
+  const producerId = (id: string): string => String(byId.get(id)!.parameters.algebraicComponentId ?? id);
+  const ids = [...new Set([...byId.keys()].map(producerId))].sort();
   const adjacency = new Map(ids.map((id) => [id, [] as string[]]));
   for (const target of nodes) {
     if (!boundary.has(target.blockType) && !isDirectFeedthrough(target)) continue;
     for (const [port, endpoint] of Object.entries(target.inputs)) {
-      if (boundary.has(target.blockType) ? port !== 'reset' : getDirectFeedthroughPorts(target).includes(port)) adjacency.get(endpoint.nodeId)!.push(target.id);
+      if (boundary.has(target.blockType) ? port !== 'reset' : target.blockType === 'solver.algebraic-constraint' || getDirectFeedthroughPorts(target).includes(port)) {
+        const sourceId = producerId(endpoint.nodeId), targetId = producerId(target.id);
+        if (sourceId !== targetId) adjacency.get(sourceId)!.push(targetId);
+      }
     }
   }
   for (const targets of adjacency.values()) targets.sort();
@@ -187,8 +200,8 @@ function validateRegisteredDiscontinuities(ordered: IRNode[], byId: Map<string, 
     const sampledBits = ['logic.bit-mask', 'logic.extract-bits', 'logic.float-extract-bits', 'logic.integer-to-bits', 'logic.bits-to-integer', 'logic.shift-arithmetic', 'logic.bitwise-typed', 'fixed.integer-increment', 'fixed.trigonometric'].includes(node.blockType);
     if ((quantizingCast || quantizingMath || sampledBits) && changesContinuously(node)) fail(node, 'TYPED_CONTINUOUS_BOUNDARY_REQUIRED', '자료형 양자화·비트·fixed LUT 연산의 입력은 상수 또는 이산 held 신호여야 합니다. 연속 입력에는 Zero Order Hold를 연결해 샘플 경계를 지정해 주세요.');
   }
-  for (const state of ordered.filter((node) => CONTINUOUS_STATE_TYPES.includes(node.blockType))) {
-    const pending = state.inputs.in ? [state.inputs.in.nodeId] : [];
+  for (const state of ordered.filter((node) => CONTINUOUS_STATE_TYPES.includes(node.blockType) || continuousM12.has(node.blockType))) {
+    const pending = continuousM12.has(state.blockType) ? Object.entries(state.inputs).filter(([port]) => !['reset', 'trigger'].includes(port)).map(([, endpoint]) => endpoint.nodeId) : state.inputs.in ? [state.inputs.in.nodeId] : [];
     const seen = new Set<string>();
     while (pending.length) {
       const id = pending.pop()!;

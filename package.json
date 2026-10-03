@@ -1,9 +1,9 @@
 {
   "name": "calcweave",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "private": true,
   "type": "module",
-  "description": "CalcWeave: expanded mathematical and signal blocks with categorized learning examples",
+  "description": "CalcWeave: bounded mathematical diagrams, simulation and executable code export",
   "engines": {
     "node": ">=22.12"
   },
@@ -41,7 +41,8 @@
     "verify:m8": "tsx scripts/verify-m8.ts",
     "verify:m9": "tsx scripts/verify-m9.ts",
     "verify:m10": "tsx scripts/verify-m10.ts",
-    "verify:m11": "tsx scripts/verify-m11.ts"
+    "verify:m11": "tsx scripts/verify-m11.ts",
+    "verify:m12": "tsx scripts/verify-m12.ts"
   },
   "dependencies": {
     "@xyflow/react": "12.12.0",

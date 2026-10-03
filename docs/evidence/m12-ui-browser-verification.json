@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M12",
+  "generatedAt": "2026-10-03T06:30:40.385001+00:00",
+  "engineVersion": "0.13.0-m12",
+  "purpose": "Actual M12 solver/constraint/DAE/delay/analysis editor verification, with legacy typed and hierarchy regressions, preserving the initial floating-point assertion failure.",
+  "rootOrchestrated": true,
+  "wholeBrowser": {
+    "passed": 156,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "durationMs": 461595.415,
+    "rawReport": ".test-generated/m12-whole-browser.json",
+    "rawReportSha256": "22fa985fdf46ee4010259aa7378f3c7299af8322c1dd1265c2502fd3ed310595"
+  },
+  "browser": {
+    "passed": 9,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "m10RegressionPassed": 7,
+    "m11RegressionPassed": 9,
+    "focusedCombinedPassed": 25,
+    "tests": [
+      {
+        "title": "M12 implicit settings execute actual stiff decay, reject bounded drafts, persist and return cleanly to RK",
+        "status": "passed",
+        "durationMs": 4174
+      },
+      {
+        "title": "M12 actual algebraic diagram converges to z3 and diagnoses a residual without a real root",
+        "status": "passed",
+        "durationMs": 2262
+      },
+      {
+        "title": "M12 index1 Descriptor checks inconsistent initial state and executes explicit projection",
+        "status": "passed",
+        "durationMs": 2652
+      },
+      {
+        "title": "M12 variable time and variable transport delays retain distinct actual history semantics",
+        "status": "passed",
+        "durationMs": 2608
+      },
+      {
+        "title": "M12 state limits, backlash/rate bounds and weighted PID examples expose real results and events",
+        "status": "passed",
+        "durationMs": 3181
+      },
+      {
+        "title": "M12 timed and triggered local A/B/C/D appear as actual matrices and open the referenced plant",
+        "status": "passed",
+        "durationMs": 2954
+      },
+      {
+        "title": "M12 gradient tool executes the bounded expression API, reports nonsmooth input and exports actual values",
+        "status": "passed",
+        "durationMs": 2056
+      },
+      {
+        "title": "M12 model resolution runs two real solvers on one observation grid and leaves the saved source intact",
+        "status": "passed",
+        "durationMs": 3251
+      },
+      {
+        "title": "M12 analysis controls and actual summaries fit 320px at 200% text in both themes",
+        "status": "passed",
+        "durationMs": 2984
+      }
+    ],
+    "rawReport": ".test-generated/m12-whole-browser.json",
+    "rawReportSha256": "22fa985fdf46ee4010259aa7378f3c7299af8322c1dd1265c2502fd3ed310595"
+  },
+  "priorFocusedBrowser": {
+    "passed": 24,
+    "failed": 1,
+    "m12Passed": 8,
+    "m12Failed": 1,
+    "m10Passed": 7,
+    "m11Passed": 9,
+    "rawReport": ".test-generated/m12-focused-browser.json",
+    "rawReportSha256": "287b6105a4ec899661f9f819c06b76eddfff2aa8d9a7789af56bce39b5fb161d",
+    "failedTest": "M12 variable time and variable transport delays retain distinct actual history semantics",
+    "observedValue": 0.5000000000000001,
+    "mathematicalExpectedValue": 0.5,
+    "correction": "Only numeric oracle assertions changed to12-decimal closeness for both history outputs; exact output keys and block identity retained. Runtime/history values remain unrounded.",
+    "priorReportPreserved": true,
+    "productSourceChangedForCorrection": false
+  },
+  "unit": {
+    "passed": 17,
+    "failed": 0,
+    "files": 2,
+    "uiTests": 9,
+    "actualLearningModelTests": 8,
+    "rawReport": ".test-generated/m12-ui-unit-compact-final.json",
+    "rawReportSha256": "b516363503219032bf4277cb2d3ed0bbc1cc8b8da0aa20a9037e5cf01554c5fb"
+  },
+  "learningModels": {
+    "models": 8,
+    "parseCompileRun": true,
+    "literalAndAnalyticExpectations": true,
+    "jsonRoundtrip": true,
+    "reverseInsertion": true,
+    "sourceUnchanged": true
+  },
+  "externalProjectPreview": {
+    "passed": 4,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "rawReport": ".test-generated/m12-project-browser.json",
+    "rawReportSha256": "2ee280b0e51e3746c80eb8441be8c14b97d59999afd40d60d612187a5b85aa82",
+    "orchestrator": "root"
+  },
+  "responsiveChecks": {
+    "conditions": 8,
+    "themes": [
+      "dark",
+      "light"
+    ],
+    "viewports": [
+      {
+        "width": 1440,
+        "textScale": 1
+      },
+      {
+        "width": 1024,
+        "textScale": 1
+      },
+      {
+        "width": 390,
+        "textScale": 1
+      },
+      {
+        "width": 320,
+        "textScale": 2
+      }
+    ],
+    "actualGradientExecuted": true,
+    "documentHorizontalOverflowAbsent": true,
+    "allInputControlsContained": true,
+    "screenshots": [
+      {
+        "theme": "dark",
+        "viewportWidth": 1440,
+        "textScale": 1,
+        "path": "docs/evidence/m12-analysis-dark-1440-1x.png",
+        "sha256": "326a7ad4ebd707f924c1fb18a928463d0f016695170c34a70cf950f5c55b68a8",
+        "width": 820,
+        "height": 864,
+        "sourcePath": "test-results-m12-focused/m12-editor-M12-analysis-co-d7a6b--at-200-text-in-both-themes/analysis-dark-1440-1x.png",
+        "visuallyInspected": true,
+        "sourceReport": ".test-generated/m12-focused-browser.json",
+        "capturedViewport": "Complete visible desktop dialog at1440; top of vertically scrolling dialog at320/200percent."
+      },
+      {
+        "theme": "dark",
+        "viewportWidth": 320,
+        "textScale": 2,
+        "path": "docs/evidence/m12-analysis-dark-320-2x.png",
+        "sha256": "6f27d2f7d02c9e4d820c40fb8964d1def1bf85e960f3d8acc00a2376087a5db4",
+        "width": 300,
+        "height": 1176,
+        "sourcePath": "test-results-m12-focused/m12-editor-M12-analysis-co-d7a6b--at-200-text-in-both-themes/analysis-dark-320-2x.png",
+        "visuallyInspected": true,
+        "sourceReport": ".test-generated/m12-focused-browser.json",
+        "capturedViewport": "Complete visible desktop dialog at1440; top of vertically scrolling dialog at320/200percent."
+      },
+      {
+        "theme": "light",
+        "viewportWidth": 1440,
+        "textScale": 1,
+        "path": "docs/evidence/m12-analysis-light-1440-1x.png",
+        "sha256": "f75c3cdb29a436a240c37ae30e203cc061dc7716770de235dd9a1b44a734bcf7",
+        "width": 820,
+        "height": 864,
+        "sourcePath": "test-results-m12-focused/m12-editor-M12-analysis-co-d7a6b--at-200-text-in-both-themes/analysis-light-1440-1x.png",
+        "visuallyInspected": true,
+        "sourceReport": ".test-generated/m12-focused-browser.json",
+        "capturedViewport": "Complete visible desktop dialog at1440; top of vertically scrolling dialog at320/200percent."
+      },
+      {
+        "theme": "light",
+        "viewportWidth": 320,
+        "textScale": 2,
+        "path": "docs/evidence/m12-analysis-light-320-2x.png",
+        "sha256": "223d318288a78c1bf6fb34023d9343766ef7cd13e0bc616452e432e7b4714776",
+        "width": 300,
+        "height": 1176,
+        "sourcePath": "test-results-m12-focused/m12-editor-M12-analysis-co-d7a6b--at-200-text-in-both-themes/analysis-light-320-2x.png",
+        "visuallyInspected": true,
+        "sourceReport": ".test-generated/m12-focused-browser.json",
+        "capturedViewport": "Complete visible desktop dialog at1440; top of vertically scrolling dialog at320/200percent."
+      }
+    ],
+    "visualFindings": [
+      "Black dark and light gray theme surfaces retained.",
+      "Readable form, exact numerical summary and five actual function evaluations visible on both desktop screenshots.",
+      "At320px with200percent text, visible controls wrap within viewport and dialog uses vertical scrolling; screenshots capture the top viewport rather than the lower summary."
+    ]
+  },
+  "uiSourceInventoryAfterFinalVerification": [
+    {
+      "path": "apps/web/src/App.tsx",
+      "sha256": "2412e1437026de3a833a3dc9b9d31d5d8184d7bfbfe2edcce25ed6948adaf05a"
+    },
+    {
+      "path": "apps/web/src/components/BlockNode.tsx",
+      "sha256": "80316bea53e0eb6c30ea08efb3c51586cc7fc3c6ae816dbe303143ef9c5c7c07"
+    },
+    {
+      "path": "apps/web/src/components/AnalysisDialog.tsx",
+      "sha256": "a53281779aa08b1322bd02dec82ffd3b5c16ecc42876c3d0c8d550d03050a88e"
+    },
+    {
+      "path": "apps/web/src/components/NumericField.tsx",
+      "sha256": "8ef8cfd1d20646806cb9faee77524ea320f9c48b336f725bdfdf37f86323eb50"
+    },
+    {
+      "path": "apps/web/src/components/SolverRunDetails.tsx",
+      "sha256": "7a6141ff8837a00eef07ec86f8646fdb53aae9177384737ebe58a218ef188d78"
+    },
+    {
+      "path": "apps/web/src/solver-presentation.ts",
+      "sha256": "32aaf09f6e5a939a849c0eb1a61c640159f36d6faf75db0e939dcf98e0879e51"
+    },
+    {
+      "path": "apps/web/src/styles.css",
+      "sha256": "e50d40b34fcb04a37ac9a067d60f07a5b828fef31cc9cdc391fd90bcbff64ecd"
+    },
+    {
+      "path": "apps/web/src/examples.ts",
+      "sha256": "8e6a6f93e00e9415c0e1b3cf02633fa6a20812709ff8ad93d935c2ccbbd6c698"
+    },
+    {
+      "path": "apps/web/src/m12-examples.ts",
+      "sha256": "2fce6259724996ccfdecf1c7d04979716eb0a3dd4cc3ec9461efd9b2c4784efa"
+    },
+    {
+      "path": "tests/m12-ui.test.ts",
+      "sha256": "7e59ec8153b2b303c966dba860cf34ec8597ebfa24b7d852a7d4cb823ff3afcc"
+    },
+    {
+      "path": "tests/m12-examples.test.ts",
+      "sha256": "a9f0a6455fbd98ec30612856e969b2f2611d44706698be6eb8de1288d3480ae1"
+    },
+    {
+      "path": "tests/e2e/m12-editor.spec.ts",
+      "sha256": "6fbfc28f7560a1ac28a90dc0949bc7a53cfa15e393944bb642015a4187224093"
+    }
+  ],
+  "predecessorEvidencePreserved": [
+    "docs/evidence/m10-verification.json",
+    "docs/evidence/m11-ui-browser-verification.json",
+    "docs/evidence/m11-ui-final-navigation-verification.json"
+  ],
+  "claimScope": "Actual UI/model/browser results only. Native equivalence, source approval, standalone runtime proofs, performance and deployment gates are separate ROOT artifacts; no full Simulink equivalence claim."
+}

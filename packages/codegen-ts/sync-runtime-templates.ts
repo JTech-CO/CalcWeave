@@ -22,6 +22,11 @@ export async function buildFixedTemplates(): Promise<{ kernels: string; discrete
   const typedValues = await statements('packages/model/src/typed.ts', () => true);
   const m10 = await statements('packages/runtime/src/m10.ts', () => true);
   const m11 = await statements('packages/runtime/src/m11.ts', () => true);
+  const m12ContinuousStatement = (statement: ts.Statement) => ts.isInterfaceDeclaration(statement) && statement.name.text === 'M12AnalysisProgram'
+    || ts.isFunctionDeclaration(statement) && statement.name?.text === 'm12AnalyzePlant';
+  const m12 = await statements('packages/runtime/src/m12.ts', statement => !m12ContinuousStatement(statement));
+  const m12Analysis = await statements('packages/runtime/src/m12.ts', m12ContinuousStatement);
+  const numerics = await statements('packages/runtime/src/numerics.ts', () => true);
   const structuredValues = await statements('packages/model/src/structured.ts', () => true);
   const discrete = await statements('packages/runtime/src/discrete-machine.ts', () => true);
   const modelTypes = await statements('packages/model/src/types.ts', (statement) =>
@@ -40,8 +45,8 @@ export async function buildFixedTemplates(): Promise<{ kernels: string; discrete
   const solver = await statements('packages/runtime/src/continuous-solver.ts', () => true);
   const machine = await statements('packages/runtime/src/continuous-machine.ts', () => true);
   const execution = await statements('packages/runtime/src/continuous-execution.ts', () => true);
-  return { kernels: `class ModelError extends Error {\n  constructor(public readonly diagnostics: { code: string; nodeId?: string; message: string; tick?: number; time?: number; hierarchyPath?: string[]; childNodeId?: string; iteration?: number }[], public readonly partialResult?: unknown) {\n    super(diagnostics[0]?.code + (diagnostics[0]?.nodeId ? ': ' + diagnostics[0].nodeId : ''));\n    this.name = 'ModelError';\n  }\n}\n${signal}\n${typedValues}\n${structuredValues}\n${expressionCost}\n${operationCost}\n${expression}\n${advanced}\n${quantization}\n${expansion}\n${timeSources}\n${m8}\n${m9}\n${m10}\n${m11}\n${kernels}`, discrete, signalTypes,
-    continuous: [modelTypes, m9Memory, memory, solverSettings, solver, machine, execution].join('\n') };
+  return { kernels: `class ModelError extends Error {\n  constructor(public readonly diagnostics: { code: string; nodeId?: string; message: string; tick?: number; time?: number; hierarchyPath?: string[]; childNodeId?: string; iteration?: number }[], public readonly partialResult?: unknown) {\n    super(diagnostics[0]?.code + (diagnostics[0]?.nodeId ? ': ' + diagnostics[0].nodeId : ''));\n    this.name = 'ModelError';\n  }\n}\n${signal}\n${typedValues}\n${structuredValues}\n${expressionCost}\n${operationCost}\n${expression}\n${advanced}\n${quantization}\n${expansion}\n${timeSources}\n${m8}\n${m9}\n${m10}\n${m11}\n${numerics}\n${m12}\n${kernels}`, discrete, signalTypes,
+    continuous: [modelTypes, m9Memory, memory, solverSettings, solver, m12Analysis, machine, execution].join('\n') };
 }
 
 function fixedString(name: string, source: string): string {

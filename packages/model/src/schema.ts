@@ -46,7 +46,10 @@ const nodeSchema = z.object({
 }).strict();
 const edgeSchema = z.object({ id: identifier, source: endpointSchema, target: endpointSchema }).strict();
 const solverSchema = z.object({
-  method: z.enum(['rk4', 'rk45']).optional(),
+  method: z.enum(['rk4', 'rk45', 'implicit-euler']).optional(),
+  newtonTolerance: finiteNumber.min(1e-14).max(1e-3).optional(),
+  newtonMaxIterations: z.number().int().min(1).max(32).optional(),
+  jacobianStep: finiteNumber.min(1e-8).max(1e-2).optional(),
   initialStep: finiteNumber.min(SOLVER_LIMITS.minStep).max(SOLVER_LIMITS.maxStep).optional(),
   minStep: finiteNumber.min(SOLVER_LIMITS.minStep).max(SOLVER_LIMITS.maxStep).optional(),
   maxStep: finiteNumber.min(SOLVER_LIMITS.minStep).max(SOLVER_LIMITS.maxStep).optional(),

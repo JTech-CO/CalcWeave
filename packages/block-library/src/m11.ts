@@ -85,7 +85,7 @@ export const M11_BLOCK_DEFINITIONS: readonly BlockDefinition[] = [
 ];
 
 export const isM11ScopeBlock = (id: string): id is typeof M11_SCOPE_BLOCK_IDS[number] => (M11_SCOPE_BLOCK_IDS as readonly string[]).includes(id);
-export function isDefinitionReference(node: Pick<CalcNode, 'blockType'>): boolean { return node.blockType === 'hierarchy.subsystem' || isM11ScopeBlock(node.blockType) || node.blockType === 'functions.element'; }
+export function isDefinitionReference(node: Pick<CalcNode, 'blockType'>): boolean { return node.blockType === 'hierarchy.subsystem' || isM11ScopeBlock(node.blockType) || node.blockType === 'functions.element' || node.blockType === 'analysis.linearization'; }
 export interface DefinitionReference { definitionId: string; version: number }
 export function getDefinitionReferences(node: Pick<CalcNode, 'blockType' | 'parameters'>): DefinitionReference[] {
   if (!isDefinitionReference(node)) return [];

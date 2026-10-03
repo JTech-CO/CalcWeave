@@ -1,4 +1,5 @@
 import { M11_STATE_BLOCKS, m11InitialMemory, m11InitialOutput, m11IndependentOutput, m11Read, m11Commit, evaluateM11Node, type M11Memory, type M11Frame } from './m11';
+import { M12_DISCRETE_STATE_BLOCKS, m12InitialMemory, m12InitialOutput, m12IndependentOutput, m12ReadState, m12CommitState } from './m12';
 import { copyStateValue, zeroAnySignal } from '../../model/src/structured';
 import type { IRNode, SignalDescriptor, SignalValue, StateValue } from '../../model/src/types';
 import { checkSignal, copySignal, evaluateSignalNode, finiteNumber, interpolateTable, numericFailure, replayDataset, signalElements } from './kernels';
@@ -45,6 +46,7 @@ function due(node: IRNode, tick: number): boolean {
   return tick >= node.sampleTime.offset && (tick - node.sampleTime.offset) % node.sampleTime.period === 0;
 }
 function independentOutput(node: IRNode): boolean {
+  if (M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) return m12IndependentOutput(node);
   if (M11_STATE_BLOCKS.has(node.blockType)) return m11IndependentOutput(node);
   if (node.blockType === 'fixed.state-space') return m10IndependentOutput(node);
   if (M9_BLOCKS.has(node.blockType)) return m9IndependentOutput(node);
@@ -66,11 +68,12 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
   const parameters = new Map<string, Record<string, unknown>>();
   const writtenStates = new Map<string, Memory>();
   const effective = (node: IRNode): IRNode => parameters.has(node.id) ? { ...node, parameters: { ...node.parameters, ...parameters.get(node.id)! } } : node;
-  const extendedMemory = nodes.some(node => node.blockType.startsWith('state.')) || nodes.some((node) => (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType)) && (node.blockType !== 'discrete.unit-delay'
+  const extendedMemory = nodes.some(node => node.blockType.startsWith('state.')) || nodes.some((node) => (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType) || M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) && (node.blockType !== 'discrete.unit-delay'
     || Array.isArray(node.parameters.initial) || typeof node.parameters.initial === 'boolean'
     || node.parameters.reset === 'level' || node.sampleTime.period !== 1 || node.sampleTime.offset !== 0));
 
   function initialMemory(node: IRNode): Memory {
+    if (M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) return m12InitialMemory(node);
     if (M11_STATE_BLOCKS.has(node.blockType)) return m11InitialMemory(node);
     if (node.blockType === 'fixed.state-space') return m10InitialMemory(node);
     if (M9_BLOCKS.has(node.blockType)) return m9InitialMemory(node, node.sampleTime.period * baseStep);
@@ -101,6 +104,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     if (node.blockType === 'discrete.fir') outputs.out = fir(node, state, undefined);
     if (node.blockType === 'discrete.transfer-function') outputs.out = transfer(node, state, undefined);
     if (M11_STATE_BLOCKS.has(node.blockType)) Object.assign(outputs, m11InitialOutput(node, state));
+    if (M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) Object.assign(outputs, m12InitialOutput(node, state));
     held.set(node.id, outputs);
   }
 
@@ -131,6 +135,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     return value;
   }
   function output(node: IRNode, state: Memory, input: (port: string) => SignalValue, tick: number, time: number): SignalValue {
+    if (M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) return m12ReadState(node, state, input, node.sampleTime.period * baseStep).out!;
     const parameter = (key: string): number => finiteNumber(node.parameters[key], node.id);
     switch (node.blockType) {
       case 'source.dataset': return replayDataset(node, time);
@@ -191,6 +196,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
       writeParameter: (id, key, value) => { if (!byId.has(id)) numericFailure('RUNTIME_INVALID_IR', id, '실행 값 대상이 없습니다.'); parameters.set(id, { ...parameters.get(id), [key]: value }); },
     };
     const read = (node: IRNode, input: (port: string) => SignalValue): Record<string, SignalValue> => {
+      if (M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) return m12ReadState(node, memory.get(node.id)!, input, node.sampleTime.period * baseStep);
       if (M11_STATE_BLOCKS.has(node.blockType)) { const result = m11Read(node, publications.get(node.id) ?? memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep, charge, frame); if (result.publicationMemory) publications.set(node.id, result.publicationMemory); return result.outputs; }
       if (node.blockType === 'fixed.state-space') return m10ReadState(node, memory.get(node.id)! as M10Memory, input);
       if (!M9_BLOCKS.has(node.blockType)) return { out: output(node, memory.get(node.id) ?? {}, input, tick, time) };
@@ -215,7 +221,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
       if (repeat && (node.blockType === 'source.random' || M9_RANDOM_BLOCKS.has(node.blockType))) continue;
       charge(node);
       const input = (port: string): SignalValue => readInput(values, node, port);
-      emit(node, (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType))
+      emit(node, (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType) || M12_DISCRETE_STATE_BLOCKS.has(node.blockType))
         ? read(node, input)
         : evaluateM11Node(node, input, time, frame) ?? evaluateSignalNode(node, input, undefined, time));
     }
@@ -233,7 +239,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     charge(node);
     const frame: M11Frame = { readMemory: id => memory.get(id), writeMemory: (id, state) => { if (commit) { memory.set(id, state); writtenStates.set(id, state); } }, readParameter: (id, key) => parameters.get(id)?.[key] ?? byId.get(id)?.parameters[key], writeParameter: (id, key, value) => { if (commit) parameters.set(id, { ...parameters.get(id), [key]: value }); } };
     const result = M11_STATE_BLOCKS.has(node.blockType) ? m11Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep, charge, frame) : M9_BLOCKS.has(node.blockType) ? m9Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep) : undefined;
-    const outputs: Record<string, SignalValue> = result ? result.outputs : node.blockType === 'fixed.state-space' ? m10ReadState(node, memory.get(node.id)! as M10Memory, input) : (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType)) ? { out: output(node, memory.get(node.id) ?? {}, input, tick, time) } : evaluateM11Node(node, input, time, frame, charge) ?? evaluateSignalNode(node, input, undefined, time);
+    const outputs: Record<string, SignalValue> = result ? result.outputs : M12_DISCRETE_STATE_BLOCKS.has(node.blockType) ? m12ReadState(node, memory.get(node.id)!, input, node.sampleTime.period * baseStep) : node.blockType === 'fixed.state-space' ? m10ReadState(node, memory.get(node.id)! as M10Memory, input) : (DISCRETE_BLOCKS.has(node.blockType) || M11_STATE_BLOCKS.has(node.blockType) || M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) ? { out: output(node, memory.get(node.id) ?? {}, input, tick, time) } : evaluateM11Node(node, input, time, frame, charge) ?? evaluateSignalNode(node, input, undefined, time);
     for (const [port, descriptor] of Object.entries(node.outputs)) checkSignal(outputs[port], descriptor, node.id);
     if (commit || random) held.set(node.id, outputs);
     if (result?.publicationMemory && (commit || random)) memory.set(node.id, result.publicationMemory);
@@ -255,6 +261,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
       if (!due(node, tick)) continue;
       charge(node);
       if (M11_STATE_BLOCKS.has(node.blockType)) { next.set(node.id, m11Commit(node, state, port => readInput(values, node, port), values.get(node.id)!, tick, parentTime ?? startTime + tick * baseStep, node.sampleTime.period * baseStep, charge)); continue; }
+      if (M12_DISCRETE_STATE_BLOCKS.has(node.blockType)) { next.set(node.id, m12CommitState(node, state, port => readInput(values, node, port), node.sampleTime.period * baseStep)); continue; }
       if (node.blockType === 'fixed.state-space') {
         next.set(node.id, m10CommitState(node, state as M10Memory, (port) => readInput(values, node, port)));
         continue;

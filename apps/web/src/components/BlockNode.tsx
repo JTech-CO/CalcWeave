@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Handle, Position, useUpdateNodeInternals, type Node, type NodeProps } from '@xyflow/react';
 import { getBlockDefinition, getBlockPorts } from '../../../../packages/block-library/src';
 import { isDefinitionReference } from '../../../../packages/block-library/src/m11';
+import { M12_BLOCK_IDS } from '../../../../packages/block-library/src/m12';
 import type { CalcNode, SignalValue } from '../../../../packages/model/src';
 import { validateTypedSignal } from '../../../../packages/model/src';
 import { fixedCellText, signalSummary, typedCellText } from './SignalResult';
@@ -22,6 +23,7 @@ function compactNumber(value: number) {
 }
 
 export const BLOCK_SYMBOLS: Record<string, string> = {
+  'continuous.descriptor': 'Eẋ', 'continuous.integrator-limited': '∫', 'continuous.second-order-limited': '∫²', 'continuous.pid-2dof': 'PID', 'time.variable-delay': 'τ(t)', 'time.variable-transport-delay': 'q', 'nonlinear.backlash': '⇄', 'nonlinear.rate-limiter-continuous': 'Δ/t', 'nonlinear.rate-limiter-dynamic': 'Δ/t', 'solver.algebraic-constraint': 'f=0', 'analysis.linearization': 'J',
   'source.constant': '1', 'io.input': '↗', 'math.gain': '×', 'math.sum': '+',
   'math.multiply': '∏', 'sink.display': '▥', 'discrete.unit-delay': 'z⁻¹', 'continuous.integrator': '∫',
   'math.abs': '|x|', 'math.function': 'f', 'math.trigonometric': 'sin', 'math.round': '≈', 'math.minmax': '↧',
@@ -118,9 +120,11 @@ export function BlockNode({ id, data, selected }: NodeProps<FlowBlock>) {
     } catch { /* Imported invalid configuration is diagnosed by the compiler. */ }
   }
   const visibleValue = typedPreview ?? (typeof preview === 'number' && Number.isFinite(preview) ? compactNumber(preview) : typeof preview === 'boolean' ? String(preview) : Array.isArray(preview) ? Array.isArray(preview[0]) ? `[${preview.length}×${preview[0].length}]` : `[${preview.length}]` : '—');
-  const height = Math.max(definition.englishName.length > 18 ? 124 : 96, (Math.max(ports.inputs.length, ports.outputs.length) + 1) * 26);
+  const plainName = (M12_BLOCK_IDS as readonly string[]).includes(data.block.blockType) ? definition.englishName.replace(/\s*\((?:Selected|Discrete Selected|Independent Alternative)\)$/, '') : definition.englishName;
+  const canvasName = data.boundary || isDefinitionReference(data.block) ? data.block.label : plainName;
+  const height = Math.max(canvasName.length > 18 ? 124 : 96, (Math.max(ports.inputs.length, ports.outputs.length) + 1) * 26);
   return <div className={`block-node ${blockTone(data.block.blockType)} ${hasValue ? '' : 'name-only'} ${selected ? 'selected' : ''} ${data.error ? 'error' : ''}`} style={{ minHeight: height }} role="group" aria-label={`${definition.englishName} 블럭: ${data.block.label}`} title={data.block.label}>
-    <div className={`block-name${definition.englishName.length > 12 ? ' wrap-name' : ''}`}>{data.boundary || isDefinitionReference(data.block) ? data.block.label : definition.englishName}</div>
+    <div className={`block-name${canvasName.length > 12 ? ' wrap-name' : ''}`}>{canvasName}</div>
     {hasValue && <div className={`block-value${typedPreview !== undefined ? ' typed-preview' : ''}`} title={exactValue} aria-label={exactValue}>{visibleValue}</div>}
     {data.error && <span className="block-error" role="img" aria-label="입력 또는 설정 확인 필요" title="입력 또는 설정 확인 필요">!</span>}
     {ports.inputs.map((port, index) => <div className="port-row input-port" key={port} style={{ top: `${(index + 1) * 100 / (ports.inputs.length + 1)}%` }}><Handle type="target" position={Position.Left} id={port} aria-label={`${data.block.label} 입력 ${port}`} /></div>)}
