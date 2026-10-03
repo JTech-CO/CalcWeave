@@ -1,7 +1,13 @@
-export const ENGINE_VERSION = '0.9.0-m8';
+export const ENGINE_VERSION = '0.10.0-m9';
 
 export type ExecutionMode = 'static' | 'discrete' | 'continuous';
 export type BlockType =
+  | 'discrete.filter' | 'discrete.filter-time-varying' | 'discrete.pid' | 'discrete.pid-2dof' | 'discrete.zero-pole'
+  | 'discrete.delay-configured' | 'discrete.tapped-delay' | 'discrete.propagation-delay' | 'discrete.integrator-configured'
+  | 'discrete.state-space-mimo' | 'discrete.difference-configured' | 'logic.numeric-edge' | 'math.running-minmax'
+  | 'time.weighted-math' | 'time.decrement-to-zero' | 'signal.initial-condition' | 'source.band-limited-noise'
+  | 'source.counter' | 'source.pwm' | 'source.variable-pulse' | 'source.signal-generator' | 'source.sine-configured'
+  | 'source.sequence-configured' | 'source.random-configured' | 'verify.gradient' | 'verify.resolution'
   | 'nonlinear.friction' | 'nonlinear.dead-zone-dynamic' | 'nonlinear.saturation-dynamic' | 'nonlinear.wrap-to-zero'
   | 'logic.compare-constant' | 'logic.interval-dynamic' | 'logic.truth-table'
   | 'math.signed-sqrt' | 'math.reciprocal-sqrt' | 'math.negate' | 'math.sine-wave-function' | 'math.increment'

@@ -1,0 +1,791 @@
+{
+  "generatedAt": "2026-10-03T00:50:52.122Z",
+  "stage": "M9",
+  "engineVersion": "0.10.0-m9",
+  "datasetSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+  "evidencePath": "docs/evidence/m9-verification.json",
+  "evidenceSha256": "1d3fee9b56017db6c12b8f7f778d4c064efd4fa7f7d0014a2a38b6ffdd13a23f",
+  "registryDefinitions": 211,
+  "approvedAdditionalSourceRows": 31,
+  "existingTraceCorrections": 1,
+  "fullSimulinkEquivalenceClaimed": false,
+  "approvals": [
+    {
+      "sourceId": "04-006",
+      "sourceName": "PWM",
+      "canonical": "source.pwm",
+      "parameters": {},
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "물리적 period를 due grid에 floor하고 각 cycle 시작에 duty를 latch합니다. duty는0~1이며 cycle안의 변경은 다음cycle에 적용합니다. · 선택 설정 {}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-pwm-cycle-start-duty-latch",
+        "m9-pwm-delayed-first-cycle",
+        "m9-pwm-zero-duty",
+        "m9-pwm-fractional-period-floor",
+        "m9-pwm-cycle-start-duty-latch-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "04-013",
+      "sourceName": "Variable Pulse Generator",
+      "canonical": "source.variable-pulse",
+      "parameters": {},
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "cycle 시작에 duty·period 입력을 latch하는 고정 due grid 펄스입니다. period는초, duty는0~1입니다. · 선택 설정 {}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-variable-pulse-cycle-period-latch",
+        "m9-variable-pulse-cycle-period-latch-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "05-005",
+      "sourceName": "Discrete Filter",
+      "canonical": "discrete.filter",
+      "parameters": {
+        "representation": "filter"
+      },
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "원소별 sample-channel 실수 IIR. DF1/DF1T/DF2/DF2T와 고정 z⁻¹ 계수 또는 descending-z 전달함수 계수를 구분합니다. 프레임 처리는 미지원입니다. · 선택 설정 {\"representation\":\"filter\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-filter-df1-impulse",
+        "m9-filter-df1t-impulse",
+        "m9-filter-df2-impulse",
+        "m9-filter-df2t-impulse",
+        "m9-filter-zinv-degree-gap",
+        "m9-df2-initial-state-coordinate",
+        "m9-df2t-initial-state-coordinate",
+        "m9-reset-level-includes-falling-edge",
+        "m9-reset-level-hold-current-only",
+        "m9-filter-enable-holds-output-and-state",
+        "m9-df1-nonzero-combined-state",
+        "m9-df1t-nonzero-combined-state",
+        "m9-filter-vector-independent-channels",
+        "m9-filter-matrix-independent-channels",
+        "m9-causal-filter-unused-state-overflow-df2",
+        "m9-causal-filter-unused-state-overflow-df2t",
+        "m9-causal-filter-unused-state-overflow-df1t",
+        "m9-filter-df1-impulse-hybrid",
+        "m9-preset-fir",
+        "m9-preset-df2",
+        "m9-preset-real-zero",
+        "m9-preset-fir-hybrid",
+        "m9-preset-df2-hybrid",
+        "m9-preset-real-zero-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "05-006",
+      "sourceName": "Discrete PID Controller",
+      "canonical": "discrete.pid",
+      "parameters": {},
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "단위 없는 scalar error의 Parallel P/I/D와 유한한 미분 필터, FE/BE/Trapezoid, 고정 제한·clamping을 지원합니다. · 선택 설정 {}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-pid-integral-forward",
+        "m9-pid-integral-backward",
+        "m9-pid-integral-trapezoid",
+        "m9-pid-filter-forward",
+        "m9-pid-filter-backward",
+        "m9-pid-filter-trapezoid",
+        "m9-pid-clamping-antiwindup",
+        "m9-pid-clamp-without-antiwindup",
+        "m9-pid-nonzero-integral-state",
+        "m9-pid-nonzero-filter-state",
+        "m9-pid-zero-D-skips-unused-overflow",
+        "m9-pid-backward-filter-scaled-finite-state",
+        "m9-pid-trapezoid-filter-finite-sum",
+        "m9-pid-zero-I-trapezoid-skips-unused-overflow",
+        "m9-pid-trapezoid-integral-finite-average",
+        "m9-pid-integral-forward-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "05-007",
+      "sourceName": "Discrete PID Controller (2DOF)",
+      "canonical": "discrete.pid-2dof",
+      "parameters": {},
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "P에는 b·reference−measurement, I에는 reference−measurement, D에는 c·reference−measurement를 사용합니다. · 선택 설정 {}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-pid-2dof-separate-errors",
+        "m9-pid-2dof-unused-extreme-P-weight",
+        "m9-pid-2dof-separate-errors-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "05-010",
+      "sourceName": "Discrete Zero-Pole",
+      "canonical": "discrete.zero-pole",
+      "parameters": {},
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "실수 z 영점·극점과 gain을 descending-z DF2T 전달함수로 실현합니다. 복소근은 미지원입니다. · 선택 설정 {}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-real-zero-pole-descending-z",
+        "m9-zero-pole-cancelled-real-root",
+        "m9-real-zero-pole-descending-z-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "05-013",
+      "sourceName": "Propagation Delay",
+      "canonical": "discrete.propagation-delay",
+      "parameters": {},
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "각 due input의 raw 도착 time+delay가 엄격히 증가해야 하며 time+floor(delay/Ts)·Ts에 발행합니다. 같은 발행 grid에서는 마지막 값을 사용합니다. delay>Ts, 임의 시각 사건 solver 미지원입니다. · 선택 설정 {}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-propagation-floor-publish",
+        "m9-propagation-decimal-grid-due-ticks",
+        "m9-propagation-floor-publish-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "05-015",
+      "sourceName": "Tapped Delay",
+      "canonical": "discrete.tapped-delay",
+      "parameters": {},
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "scalar 실수·boolean의 이전 due 값들을 고정 벡터로 출력합니다. oldest/newest 순서와 현재 입력 포함 옵션입니다. · 선택 설정 {}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-tapped-delay-newest",
+        "m9-tapped-delay-oldest-current",
+        "m9-tapped-delay-boolean",
+        "m9-tapped-delay-newest-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "05-016",
+      "sourceName": "Transfer Fcn First Order",
+      "canonical": "discrete.filter",
+      "parameters": {
+        "numerator": [
+          0.5,
+          0
+        ],
+        "denominator": [
+          1,
+          -0.5
+        ],
+        "representation": "transfer"
+      },
+      "presetId": "first-order-response",
+      "status": "M9 독립 대체 subset",
+      "boundary": "원소별 sample-channel 실수 IIR. DF1/DF1T/DF2/DF2T와 고정 z⁻¹ 계수 또는 descending-z 전달함수 계수를 구분합니다. 프레임 처리는 미지원입니다. · 선택 설정 {\"numerator\":[0.5,0],\"denominator\":[1,-0.5],\"representation\":\"transfer\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-preset-first-order",
+        "m9-preset-first-order-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "05-017",
+      "sourceName": "Transfer Fcn Lead or Lag",
+      "canonical": "discrete.filter",
+      "parameters": {
+        "numerator": [
+          1,
+          -0.25
+        ],
+        "denominator": [
+          1,
+          -0.5
+        ],
+        "representation": "transfer"
+      },
+      "presetId": "lead-lag-response",
+      "status": "M9 독립 대체 subset",
+      "boundary": "원소별 sample-channel 실수 IIR. DF1/DF1T/DF2/DF2T와 고정 z⁻¹ 계수 또는 descending-z 전달함수 계수를 구분합니다. 프레임 처리는 미지원입니다. · 선택 설정 {\"numerator\":[1,-0.25],\"denominator\":[1,-0.5],\"representation\":\"transfer\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-preset-lead-lag",
+        "m9-preset-lead-lag-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "05-018",
+      "sourceName": "Transfer Fcn Real Zero",
+      "canonical": "discrete.filter",
+      "parameters": {
+        "numerator": [
+          1,
+          -0.5
+        ],
+        "denominator": [
+          1
+        ],
+        "representation": "filter"
+      },
+      "presetId": "real-zero-response",
+      "status": "M9 독립 대체 subset",
+      "boundary": "원소별 sample-channel 실수 IIR. DF1/DF1T/DF2/DF2T와 고정 z⁻¹ 계수 또는 descending-z 전달함수 계수를 구분합니다. 프레임 처리는 미지원입니다. · 선택 설정 {\"numerator\":[1,-0.5],\"denominator\":[1],\"representation\":\"filter\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-preset-real-zero",
+        "m9-preset-real-zero-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "05-020",
+      "sourceName": "Variable Integer Delay",
+      "canonical": "discrete.delay-configured",
+      "parameters": {
+        "mode": "variable",
+        "allowZero": "yes",
+        "casting": "truncate-clamp"
+      },
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "고정 또는 입력 delay의 정수 due 횟수를 지연합니다. delay=0은 현재 입력입니다. runtime cast는 truncate+clamp 또는 strict error를 선택합니다. · 선택 설정 {\"mode\":\"variable\",\"allowZero\":\"yes\",\"casting\":\"truncate-clamp\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-variable-delay-truncate-clamp",
+        "m9-variable-delay-truncate-clamp-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "06-009",
+      "sourceName": "Detect Decrease",
+      "canonical": "logic.numeric-edge",
+      "parameters": {
+        "mode": "decrease"
+      },
+      "presetId": "detect-decrease",
+      "status": "M9 preset subset",
+      "boundary": "change/increase/decrease 및 영 경계의 네 가지 strict·inclusive 부호 전이를 원소별 검출합니다. · 선택 설정 {\"mode\":\"decrease\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-detect-decrease",
+        "m9-preset-detect-decrease",
+        "m9-preset-detect-decrease-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "06-010",
+      "sourceName": "Detect Fall Negative",
+      "canonical": "logic.numeric-edge",
+      "parameters": {
+        "mode": "fall-negative"
+      },
+      "presetId": "detect-fall-negative",
+      "status": "M9 preset subset",
+      "boundary": "change/increase/decrease 및 영 경계의 네 가지 strict·inclusive 부호 전이를 원소별 검출합니다. · 선택 설정 {\"mode\":\"fall-negative\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-detect-fall-negative",
+        "m9-preset-detect-fall-negative",
+        "m9-preset-detect-fall-negative-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "06-011",
+      "sourceName": "Detect Fall Nonpositive",
+      "canonical": "logic.numeric-edge",
+      "parameters": {
+        "mode": "fall-nonpositive"
+      },
+      "presetId": "detect-fall-nonpositive",
+      "status": "M9 preset subset",
+      "boundary": "change/increase/decrease 및 영 경계의 네 가지 strict·inclusive 부호 전이를 원소별 검출합니다. · 선택 설정 {\"mode\":\"fall-nonpositive\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-detect-fall-nonpositive",
+        "m9-preset-detect-fall-nonpositive",
+        "m9-preset-detect-fall-nonpositive-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "06-012",
+      "sourceName": "Detect Increase",
+      "canonical": "logic.numeric-edge",
+      "parameters": {
+        "mode": "increase"
+      },
+      "presetId": "detect-increase",
+      "status": "M9 preset subset",
+      "boundary": "change/increase/decrease 및 영 경계의 네 가지 strict·inclusive 부호 전이를 원소별 검출합니다. · 선택 설정 {\"mode\":\"increase\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-detect-increase",
+        "m9-preset-detect-increase",
+        "m9-preset-detect-increase-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "06-013",
+      "sourceName": "Detect Rise Nonnegative",
+      "canonical": "logic.numeric-edge",
+      "parameters": {
+        "mode": "rise-nonnegative"
+      },
+      "presetId": "detect-rise-nonnegative",
+      "status": "M9 preset subset",
+      "boundary": "change/increase/decrease 및 영 경계의 네 가지 strict·inclusive 부호 전이를 원소별 검출합니다. · 선택 설정 {\"mode\":\"rise-nonnegative\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-detect-rise-nonnegative",
+        "m9-preset-detect-rise-nonnegative",
+        "m9-preset-detect-rise-nonnegative-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "06-014",
+      "sourceName": "Detect Rise Positive",
+      "canonical": "logic.numeric-edge",
+      "parameters": {
+        "mode": "rise-positive"
+      },
+      "presetId": "detect-rise-positive",
+      "status": "M9 preset subset",
+      "boundary": "change/increase/decrease 및 영 경계의 네 가지 strict·inclusive 부호 전이를 원소별 검출합니다. · 선택 설정 {\"mode\":\"rise-positive\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-detect-rise-positive",
+        "m9-preset-detect-rise-positive",
+        "m9-preset-detect-rise-positive-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "08-017",
+      "sourceName": "MinMax Running Resettable",
+      "canonical": "math.running-minmax",
+      "parameters": {
+        "operation": "max"
+      },
+      "presetId": null,
+      "status": "M9 독립 대체 subset",
+      "boundary": "채널별 현재 입력을 포함하여 초기 state와 min/max를 계산합니다. · 선택 설정 {\"operation\":\"max\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-running-max-vector",
+        "m9-running-max-vector-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "08-038",
+      "sourceName": "Weighted Sample Time Math",
+      "canonical": "time.weighted-math",
+      "parameters": {
+        "operation": "multiply"
+      },
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "Ts=baseStep·period 초. weight·Ts, 그 역수, u±weight·Ts 또는 곱·나눗셈을 계산합니다. subtract는 u−weight·Ts입니다. · 선택 설정 {\"operation\":\"multiply\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-weighted-time-multiply",
+        "m9-weighted-time-multiply-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "11-002",
+      "sourceName": "Check Discrete Gradient",
+      "canonical": "verify.gradient",
+      "parameters": {},
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "각 원소의 abs(current−previous)<abs(maximumGradient)를 모두 검증합니다. Ts로 나누지 않습니다. 실패하면 실행을 중단합니다. · 선택 설정 {}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-gradient-strict-absolute-difference",
+        "m9-gradient-vector-negative-limit-absolute"
+      ],
+      "declaredModes": [
+        "discrete"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "11-007",
+      "sourceName": "Check Input Resolution",
+      "canonical": "verify.resolution",
+      "parameters": {},
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "양의 scalar resolution에 mod(input,resolution)<tolerance를 모두 검증합니다. vector membership 옵션은 미지원입니다. · 선택 설정 {}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-resolution-modulus-positive-and-negative",
+        "m9-resolution-modulus-positive-and-negative-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "14-007",
+      "sourceName": "IC",
+      "canonical": "signal.initial-condition",
+      "parameters": {},
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "첫 due 출력은 initial, 이후에는 현재 입력을 보냅니다. scalar·벡터·2D float64/boolean의 같은 형상·단위를 요구합니다. · 선택 설정 {}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-first-due-initial-condition",
+        "m9-first-due-boolean-matrix-initial",
+        "m9-first-due-initial-condition-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "14-013",
+      "sourceName": "Weighted Sample Time",
+      "canonical": "time.weighted-math",
+      "parameters": {
+        "operation": "TsOnly"
+      },
+      "presetId": "weighted-sample-time",
+      "status": "M9 preset subset",
+      "boundary": "Ts=baseStep·period 초. weight·Ts, 그 역수, u±weight·Ts 또는 곱·나눗셈을 계산합니다. subtract는 u−weight·Ts입니다. · 선택 설정 {\"operation\":\"TsOnly\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-weighted-time-only",
+        "m9-weighted-Ts-uses-node-period",
+        "m9-weighted-time-only-hybrid",
+        "m9-preset-weighted-sample-time",
+        "m9-preset-weighted-sample-time-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "17-001",
+      "sourceName": "Band-Limited White Noise",
+      "canonical": "source.band-limited-noise",
+      "parameters": {},
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "due마다 held Gaussian을 생성합니다. variance=noisePower/Ts이며 자체 PRNG의 seed 재현을 지원합니다. · 선택 설정 {}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-band-limited-noise-PSD-and-consumed-seed",
+        "m9-bandlimited-noise-channel-PSD",
+        "m9-band-limited-noise-Ts-quarter",
+        "m9-band-limited-noise-PSD-and-consumed-seed-hybrid",
+        "m9-hybrid-noise-physical-Ts-not-output-grid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "17-005",
+      "sourceName": "Counter Free-Running",
+      "canonical": "source.counter",
+      "parameters": {
+        "mode": "free"
+      },
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "safe integer를 due당 1씩 증가시킵니다. free는 2^bits, limited는 upper+1에서0으로 돌아갑니다. 출력 dtype는 float64입니다. · 선택 설정 {\"mode\":\"free\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-counter-free-wrap",
+        "m9-counter-53-bit-safe-wrap",
+        "m9-counter-free-wrap-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "17-006",
+      "sourceName": "Counter Limited",
+      "canonical": "source.counter",
+      "parameters": {
+        "mode": "limited"
+      },
+      "presetId": "limited-counter",
+      "status": "M9 preset subset",
+      "boundary": "safe integer를 due당 1씩 증가시킵니다. free는 2^bits, limited는 upper+1에서0으로 돌아갑니다. 출력 dtype는 float64입니다. · 선택 설정 {\"mode\":\"limited\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-counter-limited-wrap",
+        "m9-counter-reset-rising",
+        "m9-counter-reset-falling",
+        "m9-counter-reset-either",
+        "m9-source-offset-first-due-count",
+        "m9-counter-limited-upper-zero",
+        "m9-preset-limited-counter",
+        "m9-preset-limited-counter-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "17-023",
+      "sourceName": "Signal Generator",
+      "canonical": "source.signal-generator",
+      "parameters": {},
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "held sine/square/sawtooth 또는 seeded uniform random scalar. Hz/rad/s를 명시하며 absolute simulation time을 사용합니다. · 선택 설정 {}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-signal-generator-Hz-square",
+        "m9-signal-generator-radians-sine",
+        "m9-signal-generator-sawtooth",
+        "m9-signal-generator-random-midpoint",
+        "m9-signal-generator-Hz-square-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "20-002",
+      "sourceName": "Transfer Fcn Direct Form II",
+      "canonical": "discrete.filter",
+      "parameters": {
+        "structure": "df2",
+        "representation": "filter"
+      },
+      "presetId": "direct-form-ii",
+      "status": "M9 preset subset",
+      "boundary": "원소별 sample-channel 실수 IIR. DF1/DF1T/DF2/DF2T와 고정 z⁻¹ 계수 또는 descending-z 전달함수 계수를 구분합니다. 프레임 처리는 미지원입니다. · 선택 설정 {\"structure\":\"df2\",\"representation\":\"filter\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-filter-df2-impulse",
+        "m9-df2-initial-state-coordinate",
+        "m9-causal-filter-unused-state-overflow-df2",
+        "m9-preset-df2",
+        "m9-preset-df2-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "20-003",
+      "sourceName": "Transfer Fcn Direct Form II Time Varying",
+      "canonical": "discrete.filter-time-varying",
+      "parameters": {},
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "DF2의 numerator와 leading 1을 생략한 denominator 입력입니다. 차수는 고정되며 계수 변경 후 state를 유지합니다. · 선택 설정 {}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-df2-time-varying-retains-state",
+        "m9-df2-time-varying-retains-state-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "20-006",
+      "sourceName": "Decrement Time To Zero",
+      "canonical": "time.decrement-to-zero",
+      "parameters": {},
+      "presetId": null,
+      "status": "M9 승인 subset",
+      "boundary": "초(s) 입력에 max(input−Ts,0)를 원소별 계산합니다. · 선택 설정 {}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-time-decrement-zero",
+        "m9-time-decrement-zero-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "05-009",
+      "sourceName": "Discrete Transfer Fcn",
+      "canonical": "discrete.filter",
+      "parameters": {
+        "representation": "transfer"
+      },
+      "presetId": "transfer-configured",
+      "status": "M9 preset subset",
+      "boundary": "원소별 sample-channel 실수 IIR. DF1/DF1T/DF2/DF2T와 고정 z⁻¹ 계수 또는 descending-z 전달함수 계수를 구분합니다. 프레임 처리는 미지원입니다. · 선택 설정 {\"representation\":\"transfer\"}. 등록된 finite float64/boolean 형상·모드·고정 due grid만; 원본 전체 옵션·R2024b 실행 및 seed 동등 미검증. M9 추가 옵션은 후속 inventory에서 추적한다.",
+      "evidenceFixtureIds": [
+        "m9-transfer-descending-z-degree-gap",
+        "m9-transfer-leading-normalization",
+        "m9-preset-transfer",
+        "m9-preset-first-order",
+        "m9-preset-lead-lag",
+        "m9-preset-transfer-hybrid",
+        "m9-preset-first-order-hybrid",
+        "m9-preset-lead-lag-hybrid"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": false,
+      "priorStatus": "M2 승인 subset",
+      "nativeFullEquivalent": false
+    }
+  ]
+}

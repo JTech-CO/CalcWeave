@@ -1,8 +1,9 @@
 import type { IRNode, SignalDescriptor, SignalValue, StateValue } from '../../model/src/types';
 import { checkSignal, copySignal, evaluateSignalNode, finiteNumber, interpolateTable, numericFailure, replayDataset, signalElements } from './kernels';
+import { M9_BLOCKS, M9_RANDOM_BLOCKS, m9InitialMemory, m9Read, m9Commit, m9IndependentOutput, type M9Memory } from './m9';
 
 type PortValues = Map<string, Record<string, SignalValue>>;
-type Memory = { value?: SignalValue; history?: SignalValue[]; u?: number[]; y?: number[]; x?: number[]; buffer?: SignalValue; seed?: number };
+type Memory = M9Memory & { u?: number[]; y?: number[]; x?: number[]; buffer?: SignalValue };
 
 export const DISCRETE_BLOCKS = new Set([
   'source.step', 'source.ramp', 'source.sine-wave', 'source.pulse', 'source.clock', 'source.digital-clock',
@@ -10,6 +11,7 @@ export const DISCRETE_BLOCKS = new Set([
   'discrete.difference', 'discrete.derivative', 'discrete.fir', 'discrete.transfer-function',
   'discrete.state-space', 'logic.edge-detect', 'time.rate-transition',
   'source.dataset',
+  ...M9_BLOCKS,
 ]);
 
 function mapNumeric(value: SignalValue, operation: (element: number, index: number) => number, nodeId: string): SignalValue {
@@ -32,6 +34,7 @@ function due(node: IRNode, tick: number): boolean {
   return tick >= node.sampleTime.offset && (tick - node.sampleTime.offset) % node.sampleTime.period === 0;
 }
 function independentOutput(node: IRNode): boolean {
+  if (M9_BLOCKS.has(node.blockType)) return m9IndependentOutput(node);
   switch (node.blockType) {
     case 'discrete.unit-delay': case 'discrete.delay': case 'discrete.integrator': case 'time.rate-transition': return true;
     case 'discrete.fir': return (node.parameters.coefficients as number[])[0] === 0;
@@ -52,6 +55,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     || node.parameters.reset === 'level' || node.sampleTime.period !== 1 || node.sampleTime.offset !== 0));
 
   function initialMemory(node: IRNode): Memory {
+    if (M9_BLOCKS.has(node.blockType)) return m9InitialMemory(node, node.sampleTime.period * baseStep);
     const initial = node.parameters.initial as SignalValue;
     switch (node.blockType) {
       case 'discrete.unit-delay': case 'discrete.integrator': case 'discrete.difference': case 'discrete.derivative': case 'logic.edge-detect': return { value: copySignal(initial) };
@@ -70,6 +74,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     if (Object.keys(state).length) memory.set(node.id, state);
     if (node.blockType === 'source.constant' || node.blockType === 'io.input') outputs.out = copySignal(node.parameters.value as SignalValue);
     if (node.blockType === 'source.digital-clock') outputs.out = startTime;
+    if (M9_BLOCKS.has(node.blockType)) outputs.out = copySignal(state.previousOutput!);
     if (node.blockType === 'discrete.unit-delay' || node.blockType === 'discrete.integrator') outputs.out = copySignal(state.value!);
     if (node.blockType === 'discrete.delay') outputs.out = copySignal(state.history![0]!);
     if (node.blockType === 'time.rate-transition') outputs.out = copySignal(state.buffer!);
@@ -157,34 +162,50 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     // Hybrid execution supplies frozen boundary inputs; continuous trial stages
     // never call this mutating tick evaluation.
     const values = new Map([...(external ?? []), ...held]);
+    const publications = new Map<string, Memory>();
+    const nextHeld: PortValues = new Map();
+    const read = (node: IRNode, input: (port: string) => SignalValue): Record<string, SignalValue> => {
+      if (!M9_BLOCKS.has(node.blockType)) return { out: output(node, memory.get(node.id) ?? {}, input, tick, time) };
+      const result = m9Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep);
+      if (result.publicationMemory) publications.set(node.id, result.publicationMemory);
+      return result.outputs;
+    };
     const emit = (node: IRNode, outputs: Record<string, SignalValue>): void => {
       for (const [port, descriptor] of Object.entries(node.outputs)) checkSignal(outputs[port], descriptor, node.id);
-      held.set(node.id, outputs); values.set(node.id, outputs);
+      nextHeld.set(node.id, outputs); values.set(node.id, outputs);
     };
     // Non-feedthrough outputs must be visible even if their current input producer is later in the DAG.
     for (const node of nodes) if (due(node, tick) && independentOutput(node)) {
+      if (M9_RANDOM_BLOCKS.has(node.blockType) && (repeat || randomTicks.get(node.id) === tick)) continue;
       charge(node);
-      emit(node, { out: output(node, memory.get(node.id)!, () => numericFailure('RUNTIME_INVALID_IR', node.id, '상태 출력이 현재 입력에 의존할 수 없습니다.'), tick, time) });
+      emit(node, read(node, () => numericFailure('RUNTIME_INVALID_IR', node.id, '상태 출력이 현재 입력에 의존할 수 없습니다.')));
     }
     for (const node of nodes) {
       if (!due(node, tick) || independentOutput(node)) continue;
-      if (repeat && node.blockType === 'source.random') continue;
+      if (repeat && (node.blockType === 'source.random' || M9_RANDOM_BLOCKS.has(node.blockType))) continue;
       charge(node);
       const input = (port: string): SignalValue => readInput(values, node, port);
       emit(node, DISCRETE_BLOCKS.has(node.blockType)
-        ? { out: output(node, memory.get(node.id) ?? {}, input, tick, time) }
+        ? read(node, input)
         : evaluateSignalNode(node, input, undefined, time));
     }
+    // A failed output validation publishes no new RNG seed. The outer tick
+    // checkpoint also restores held outputs and prior state transitions.
+    for (const [id, outputs] of nextHeld) held.set(id, outputs);
+    for (const [id, state] of publications) { memory.set(id, state); randomTicks.set(id, tick); }
     return values;
   }
   /** One boundary node with lazy input reads. Seeded sources publish once per tick. */
   function evaluateNode(node: IRNode, tick: number, time: number, input: (port: string) => SignalValue, commit = true): Record<string, SignalValue> {
-    if (!due(node, tick) || node.blockType === 'source.random' && randomTicks.get(node.id) === tick) return held.get(node.id)!;
+    const random = node.blockType === 'source.random' || M9_RANDOM_BLOCKS.has(node.blockType);
+    if (!due(node, tick) || random && randomTicks.get(node.id) === tick) return held.get(node.id)!;
     charge(node);
-    const outputs = DISCRETE_BLOCKS.has(node.blockType) ? { out: output(node, memory.get(node.id) ?? {}, input, tick, time) } : evaluateSignalNode(node, input, undefined, time);
+    const result = M9_BLOCKS.has(node.blockType) ? m9Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep) : undefined;
+    const outputs = result ? result.outputs : DISCRETE_BLOCKS.has(node.blockType) ? { out: output(node, memory.get(node.id) ?? {}, input, tick, time) } : evaluateSignalNode(node, input, undefined, time);
     for (const [port, descriptor] of Object.entries(node.outputs)) checkSignal(outputs[port], descriptor, node.id);
-    if (commit || node.blockType === 'source.random') held.set(node.id, outputs);
-    if (node.blockType === 'source.random') randomTicks.set(node.id, tick);
+    if (commit || random) held.set(node.id, outputs);
+    if (result?.publicationMemory && (commit || random)) memory.set(node.id, result.publicationMemory);
+    if (random) randomTicks.set(node.id, tick);
     return outputs;
   }
   function transition(values: PortValues, tick: number): void {
@@ -200,6 +221,10 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
       }
       if (!due(node, tick)) continue;
       charge(node);
+      if (M9_BLOCKS.has(node.blockType)) {
+        next.set(node.id, m9Commit(node, state, (port) => readInput(values, node, port), values.get(node.id)!, tick, startTime + tick * baseStep, node.sampleTime.period * baseStep));
+        continue;
+      }
       if (node.parameters.reset === 'level') {
         const reset = readInput(values, node, 'reset');
         if (typeof reset !== 'boolean') numericFailure('RUNTIME_TYPE_MISMATCH', node.id, 'reset에는 boolean scalar가 필요합니다.');

@@ -1,0 +1,150 @@
+{
+  "checkedAt": "2026-10-03T00:52:58.543075+00:00",
+  "engineVersion": "0.10.0-m9",
+  "status": "passed",
+  "readOnlyIndependentReview": true,
+  "cases": [
+    {
+      "name": "integrator-trapezoid-large-constant",
+      "compiled": true,
+      "outputs": [
+        5.0000000000000006e+306,
+        1.5000000000000002e+307,
+        2.5e+307
+      ],
+      "expected": [
+        5e+306,
+        1.5e+307,
+        2.5e+307
+      ]
+    },
+    {
+      "name": "integrator-trapezoid-zero-gain",
+      "compiled": true,
+      "outputs": [
+        1,
+        1,
+        1
+      ],
+      "expected": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "derivative-large-gain-small-difference",
+      "compiled": true,
+      "outputs": [
+        17.976931348623154,
+        0,
+        0
+      ],
+      "expected": [
+        17.976931348623154,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "difference-zero-gain-large-initial-gap",
+      "compiled": true,
+      "outputs": [
+        0,
+        0,
+        0
+      ],
+      "expected": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "pid-trapezoid-tiny-I-large-error",
+      "compiled": true,
+      "outputs": [
+        0.49999999999999994,
+        1.4999999999999998,
+        2.4999999999999996
+      ],
+      "expected": [
+        0.5,
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "name": "pid-2dof-unused-P-weight",
+      "compiled": true,
+      "outputs": [
+        0,
+        0,
+        0
+      ],
+      "expected": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "counter-53bit-safe-wrap",
+      "compiled": true,
+      "outputs": [
+        9007199254740991,
+        0,
+        1
+      ],
+      "expected": [
+        9007199254740991,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "sequence-stable-constant-subnormal",
+      "compiled": true,
+      "outputs": [
+        5e-324,
+        5e-324,
+        5e-324
+      ],
+      "expected": [
+        5e-324,
+        5e-324,
+        5e-324
+      ]
+    },
+    {
+      "name": "uniform-opposite-max-finite",
+      "compiled": true,
+      "outputs": [
+        -9.47544185481741e+307,
+        -4.700224243383082e+307,
+        1.5251745108154362e+306
+      ]
+    },
+    {
+      "name": "band-noise-zero-power",
+      "compiled": true,
+      "outputs": [
+        0,
+        0,
+        0
+      ],
+      "expected": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "analyticCases": 9,
+  "finiteOnlyCases": 1,
+  "tolerance": 3e-12,
+  "exactSubnormalOracles": true,
+  "compilerTestsPassed": 376,
+  "sourceEditedByReviewer": false,
+  "scope": "Extreme float64 intermediates, zero gains, wrap and seeded uniform/noise probes; not full MathWorks equivalence."
+}

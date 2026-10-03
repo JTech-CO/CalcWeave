@@ -1,10 +1,11 @@
 import { CONTINUOUS_BOUNDARY_TYPES, CONTINUOUS_STATE_TYPES, MODEL_LIMITS, ModelError, normalizeSolverSettings, type CalcModel, type ExpressionNode, type IRNode, type SignalDescriptor } from '../../model/src';
-import { getBlockDefinition, isDirectFeedthrough } from '../../block-library/src';
+import { getBlockDefinition, getDirectFeedthroughPorts, isDirectFeedthrough } from '../../block-library/src';
+import { M9_BLOCK_IDS } from '../../block-library/src/m9';
 import { EXPANDED_TIME_SOURCE_IDS } from '../../block-library/src/time-sources';
 import { m8HasUnregisteredJump, m8JumpControlPorts } from './m8';
 
 const continuousSources: ReadonlySet<string> = new Set(['source.step', 'source.ramp', 'source.sine-wave', 'source.repeating-sequence', 'source.clock', ...EXPANDED_TIME_SOURCE_IDS]);
-const sampled = new Set(['source.random', 'source.digital-clock', 'source.pulse', 'logic.edge-detect', 'time.rate-transition', 'time.zero-order-hold']);
+const sampled: ReadonlySet<string> = new Set(['source.random', 'source.digital-clock', 'source.pulse', 'logic.edge-detect', 'time.rate-transition', 'time.zero-order-hold', ...M9_BLOCK_IDS]);
 const boundary = new Set(['time.zero-order-hold', 'time.first-order-hold']);
 const fail = (node: IRNode, code: string, message: string, portId?: string): never => { throw new ModelError([{ code, nodeId: node.id, message, ...(portId ? { portId } : {}) }]); };
 
@@ -113,7 +114,7 @@ function validateContinuousCaptureDependencies(model: CalcModel, nodes: IRNode[]
   for (const target of nodes) {
     if (!boundary.has(target.blockType) && !isDirectFeedthrough(target)) continue;
     for (const [port, endpoint] of Object.entries(target.inputs)) {
-      if (port !== 'reset') adjacency.get(endpoint.nodeId)!.push(target.id);
+      if (boundary.has(target.blockType) ? port !== 'reset' : getDirectFeedthroughPorts(target).includes(port)) adjacency.get(endpoint.nodeId)!.push(target.id);
     }
   }
   for (const targets of adjacency.values()) targets.sort();

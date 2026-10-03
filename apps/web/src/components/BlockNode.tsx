@@ -54,6 +54,13 @@ export const BLOCK_SYMBOLS: Record<string, string> = {
   'matrix.triangle': '△', 'matrix.symmetrize': 'S', 'matrix.kronecker': '⊗',
   'source.linspace': 'Lin', 'source.logspace': 'Log', 'source.zeros': '0', 'source.chirp': 'f↗',
   'source.gaussian-pulse': 'G', 'source.damped-sine': 'e∿', 'source.exponential': 'eˣ', 'source.logistic': 'S', 'source.sinc-pulse': 'sinc',
+  'discrete.filter': 'H', 'discrete.filter-time-varying': 'Hₖ', 'discrete.pid': 'PID', 'discrete.pid-2dof': 'PID',
+  'discrete.zero-pole': 'ZP', 'discrete.delay-configured': 'z⁻ⁿ', 'discrete.tapped-delay': '⇉', 'discrete.propagation-delay': 'τ',
+  'discrete.integrator-configured': 'Σ', 'discrete.state-space-mimo': 'xₖ', 'discrete.difference-configured': 'Δ',
+  'logic.numeric-edge': '↗', 'math.running-minmax': '↧', 'time.weighted-math': 'Tₛ', 'time.decrement-to-zero': 'T−',
+  'signal.initial-condition': 'IC', 'source.band-limited-noise': '⚄', 'source.counter': 'k', 'source.pwm': '⌜',
+  'source.variable-pulse': '⌜', 'source.signal-generator': '∿', 'source.sine-configured': '∿',
+  'source.sequence-configured': '↻', 'source.random-configured': '⚄', 'verify.gradient': 'Δ?', 'verify.resolution': 'Q?',
 };
 
 export function blockTone(type: string) {

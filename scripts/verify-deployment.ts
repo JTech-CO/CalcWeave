@@ -5,6 +5,8 @@ import { createHash } from 'node:crypto';
 import { resolve, relative, isAbsolute, join } from 'node:path';
 import { isOfflineAssetUrl, type OfflineManifest } from './offline-build';
 import { parseDeploymentBase } from './pages-base';
+import { APP_VERSION } from '../packages/release/src';
+import { ENGINE_VERSION } from '../packages/model/src';
 
 // Read-only checks of the two approved destinations. No credentials/model data.
 const url = new URL(process.argv[2] ?? 'https://jtech-co.github.io/CalcWeave/');
@@ -81,6 +83,7 @@ report.verifiedApplicationDeployment = required.every(check => report.checks[che
 report.checks.actualNoviceStudy = 'Not verified: automation is not an observed F06 novice study.';
 report.checks.customDomain = url.hostname === 'calcweave.com' ? 'Custom-domain ownership must be independently verified in repository settings.' : 'Project URL verified; calcweave.com ownership/DNS remains a separate gate.';
 await mkdir('docs/evidence', { recursive: true });
-await writeFile('docs/evidence/pages-deployment-verification.json', JSON.stringify(report, null, 2) + '\n');
+const evidenceStage = String(APP_VERSION) === '0.8.1' ? 'pages' : ENGINE_VERSION.split('-').at(-1);
+await writeFile(`docs/evidence/${evidenceStage}-deployment-verification.json`, JSON.stringify(report, null, 2) + '\n');
 process.stdout.write(JSON.stringify(report) + '\n');
 if (!report.verifiedApplicationDeployment) process.exitCode = 1;

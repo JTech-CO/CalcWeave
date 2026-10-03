@@ -6,3 +6,4 @@ export * from './continuous';
 export * from './units';
 export * from './dataset';
 export * from './sha256';
+export * from './m9';
