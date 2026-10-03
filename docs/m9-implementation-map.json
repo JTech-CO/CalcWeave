@@ -12619,6 +12619,21 @@
       "finalWholeRunCIPending": false,
       "finalWholeCI": {
         "path": "docs/evidence/m9-actions-verification.json",
+        "runId": 37089327750,
+        "headSha": "a5be5f3965161dfbef032a054ecd924bd503251b",
+        "appVersion": "0.10.1",
+        "rootPassed": 131,
+        "rootFailed": 0,
+        "projectPassed": 4,
+        "projectFailed": 0,
+        "unitPassed": 2175,
+        "unitFailed": 0,
+        "status": "passed",
+        "addedCanvasAndSaveLayoutRegressions": 2,
+        "initialEngineeringRootBrowserCount": 129
+      },
+      "initialReleaseWholeCI": {
+        "path": "docs/evidence/m9-initial-release-actions-verification.json",
         "runId": 37084501448,
         "headSha": "2554c95e4e9c67d2127c8d40532fb6469ff5fa19",
         "rootPassed": 129,
@@ -12631,7 +12646,7 @@
       }
     },
     "rootRelease": {
-      "path": "docs/evidence/m9-root-release-verification.json",
+      "path": "docs/evidence/m9-initial-release-root-release-verification.json",
       "checks": 70,
       "files": 12,
       "bytes": 1873014,
@@ -12640,7 +12655,7 @@
     "publicDeploymentVerified": true,
     "fullSimulinkEquivalence": false,
     "sourceFullOptionCompletion": false,
-    "workspaceEvidencePath": "docs/evidence/m9-workspace-verification.json",
+    "workspaceEvidencePath": "docs/evidence/m9-initial-release-workspace-verification.json",
     "design": {
       "path": "docs/evidence/m9-design-verification.json",
       "observations": 188,
@@ -12670,7 +12685,7 @@
       "ownedPreviewTeardownRequiredCleanup": true
     },
     "projectRelease": {
-      "path": "docs/evidence/m9-project-release-verification.json",
+      "path": "docs/evidence/m9-initial-release-project-release-verification.json",
       "scope": "/CalcWeave/",
       "checks": 70,
       "files": 12,
@@ -12684,6 +12699,19 @@
       "artifactPath": "docs/evidence/m9-deployment-verification.json",
       "browserPath": "docs/evidence/m9-public-browser-verification.json",
       "url": "https://jtech-co.github.io/CalcWeave/",
+      "appVersion": "0.10.1",
+      "engineVersion": "0.10.0-m9",
+      "registryDefinitions": 211,
+      "releaseId": "643f8c6951a8d2bd86397a43414ec14bf640357e906f432d44dd2888d604f2d1",
+      "staticBytes": 1874006,
+      "browserChecks": 9,
+      "verifiedPublicLaunch": false
+    },
+    "initialPublicDeploymentEvidence": {
+      "actionsPath": "docs/evidence/m9-initial-release-actions-verification.json",
+      "artifactPath": "docs/evidence/m9-initial-release-deployment-verification.json",
+      "browserPath": "docs/evidence/m9-initial-release-public-browser-verification.json",
+      "url": "https://jtech-co.github.io/CalcWeave/",
       "appVersion": "0.10.0",
       "engineVersion": "0.10.0-m9",
       "registryDefinitions": 211,
@@ -12691,6 +12719,34 @@
       "staticBytes": 1873264,
       "browserChecks": 9,
       "verifiedPublicLaunch": false
+    },
+    "initialEngineeringAppVersion": "0.10.0",
+    "currentPublicAppVersion": "0.10.1",
+    "presentationPatch": {
+      "appVersion": "0.10.1",
+      "reason": "APP_VERSION labels; initial measurement race with actual dimensions, DOM match, cancellable2RAF; stable autosave-status geometry",
+      "engineUnchanged": true,
+      "sourceApprovalChange": false,
+      "failedAttemptPath": "docs/evidence/m9-presentation-patch-failed-attempt.json",
+      "fitCorrectionEvidencePath": "docs/evidence/m9-initial-fit-correction.json",
+      "focusedPassed": 7,
+      "focusedFailed": 0,
+      "focusedFlaky": 0,
+      "focusedSeconds": 25.668717,
+      "exactOriginalCITimingCauseEstablished": false,
+      "rootReleasePath": "docs/evidence/m9-root-release-verification.json",
+      "projectReleasePath": "docs/evidence/m9-project-release-verification.json",
+      "workspaceEvidencePath": "docs/evidence/m9-workspace-verification.json",
+      "lateLayoutFailedAttemptPath": "docs/evidence/m9-late-layout-failed-attempt.json",
+      "saveStatusLayoutCorrectionEvidencePath": "docs/evidence/m9-save-status-layout-correction.json",
+      "saveStatusLayoutCorrectionEvidenceSha256": "dcb0933d33ee0f8d20679e8d299111499dcb149ba4951ef7b1b6f79863f4b901",
+      "finalFocusedPassed": 8,
+      "finalFocusedFailed": 0,
+      "finalFocusedFlaky": 0,
+      "finalFocusedSeconds": 28.534076,
+      "saveLabelLayoutObservations": 8,
+      "initialMeasurementCorrectionAloneResolvedCISymptom": false,
+      "currentSaveStatusTextOnly": true
     }
   }
 }

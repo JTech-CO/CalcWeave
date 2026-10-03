@@ -407,3 +407,7 @@ baseline 상태 열은 immutable catalog 기준이다. 선택 canonical/configur
 - R2024b 미확정·설명 충돌은 승인범위를 subset/독립대체로 명시; 미확정 current-help 옵션을 최초 납품 blocker로 자동 추가하지 않음
 
 engineering 납품과 전체 source 옵션 완료는 서로 다른 승인이다. `delivery`가 승인되어도 모든 `optionInventory` 후보 및 원본의 후속 M10~M16 gate가 자동 완료되지 않는다. 후보는 exact R2024b applicability와 구현 증거를 확인한 뒤 개별적으로 완료한다. 이름별 카드 수를 원본 완전 대응 수나 독립 엔진 수로 환산하지 않는다.
+
+공개 앱의 최신0.10.1 patch는 버전 표시·초기 캔버스 측정 경합·자동 저장 상태의 레이아웃을 수정하며 엔진은0.10.0-m9다. 최초 engineering 앱0.10.0의 수치·상태·source 승인 계약은 유지하며 새 source 승격은 없다. [최신 공개 검증](pages-validation.md)과 [초기0.10.0 공개 근거](evidence/m9-initial-release-deployment-verification.json)를 따로 기록한다.
+
+[자동 저장 상태 레이아웃 교정](evidence/m9-save-status-layout-correction.json)은5개 상태 문구에 필요한 크기를 확보하면서 DOMtext와 접근성 상태는 현재 문구만 유지한다. 원본 수학 옵션·solver·state publication의 변경은 없다.

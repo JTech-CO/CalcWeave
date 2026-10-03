@@ -1,7 +1,7 @@
 # CalcWeave
 
 > 블럭을 연결해 수학을 계산하고, 시간에 따른 변화를 관찰하며, 모델을 데이터와 실행 코드로 이어가는 웹 도구.  
-> 기준일: 2026-10-03 · 앱: 0.10.0 · 엔진: 0.10.0-m9 · 현재 상태: M8·M9의 선언된 제한 범위 로컬검증 완료. registry211종(185+26)·M9 preset15개·예제39개·6개 카테고리. 공개 Pages의 이번 버전 배포·실제 주소 검증도 완료했으며 실제 사용자 조사·목표 도메인 확인은 별도입니다.
+> 기준일: 2026-10-03 · 앱: 0.10.1 · 엔진: 0.10.0-m9 · 현재 상태: M8·M9의 선언된 제한 범위 로컬검증 완료. registry211종(185+26)·M9 preset15개·예제39개·6개 카테고리. 공개 Pages의 이번 버전 배포·실제 주소 검증도 완료했으며 실제 사용자 조사·목표 도메인 확인은 별도입니다.
 
 CalcWeave는 MATLAB 설치 없이 브라우저에서 사용할 수 있는 블럭 기반 수학 계산·시뮬레이션 도구를 목표로 합니다. Simulink 기본 라이브러리의 기능 개념을 참고하면서, 초보자가 입력·계산·결과를 이해하고 점차 고급 모델로 확장할 수 있는 독립적인 사용 경험을 설계합니다.
 
@@ -9,9 +9,9 @@ CalcWeave는 MATLAB 설치 없이 브라우저에서 사용할 수 있는 블럭
 
 ## M9 DSP·이산 상태 확장
 
-앱0.10.0·엔진0.10.0-m9는 기존185개 정의를 보존하고 필터 실현 구조·이산 PID/2DOF·MIMO 상태공간·제어 가능한 정수 지연·발행 예약 지연·물리적 샘플시간 계산 등26개 정의를 추가합니다. registry211종과M9 명명 preset15개는 원본행 승인 수·독립 kernel 수와 다른 지표입니다. 학습 예제4개를 더해39개를6범주에서 탐색합니다.
+M9의 최초 engineering 납품 앱0.10.0·엔진0.10.0-m9는 기존185개 정의를 보존하고 필터 실현 구조·이산 PID/2DOF·MIMO 상태공간·제어 가능한 정수 지연·발행 예약 지연·물리적 샘플시간 계산 등26개 정의를 추가합니다. registry211종과M9 명명 preset15개는 원본행 승인 수·독립 kernel 수와 다른 지표입니다. 학습 예제4개를 더해39개를6범주에서 탐색합니다.
 
-M9의 선언된 범위는 마지막 수치 수정 후 로컬 수치·독립 TypeScript·상태·진단 검증과 최종 CI의 전체unit2,175개·루트browser129개·project browser4개, 공개 브라우저9개 검증을 완료했습니다. 현재 source 승인 기록은 신규31행과 기존05-009 추적 교정1행을 반영해 subset211행·미구현174행입니다. 151raw fixture records·30preset mode records·693raw samples·191actual TypeScript 프로그램과전체unit2,175개가 통과했으며, 원본 전체 옵션 동등성이나 MathWorks seed/bit parity를 주장하지 않습니다. [M9 계약](docs/m9-contract.md) · [구현 맵](docs/m9-implementation-map.json) · [검증 기록](docs/m9-validation.md)
+초기 앱0.10.0의 M9 선언 범위는 마지막 수치 수정 후 로컬 수치·독립 TypeScript·상태·진단 검증과 초기 공개 CI의 전체unit2,175개·루트browser129개·project browser4개, 공개 브라우저9개 검증을 완료했습니다. 현재 source 승인 기록은 신규31행과 기존05-009 추적 교정1행을 반영해 subset211행·미구현174행입니다. 151raw fixture records·30preset mode records·693raw samples·191actual TypeScript 프로그램과전체unit2,175개가 통과했으며, 원본 전체 옵션 동등성이나 MathWorks seed/bit parity를 주장하지 않습니다. [M9 계약](docs/m9-contract.md) · [구현 맵](docs/m9-implementation-map.json) · [검증 기록](docs/m9-validation.md)
 
 ## M8 수학·조회표 납품 기록
 
@@ -177,4 +177,8 @@ npm run verify:performance:catalog
 | `tests`, `fixtures/m0`~`fixtures/m5` 및 `fixtures/m7`, `scripts` | 검증, 예제 모델, 측정·대응표·릴리스 무결성 검사 |
 ## 0.10.1 버전 표시 수정
 
-헤더와 라이브러리에 남은 과거 `0.8` 표시를 릴리스 정본인 `APP_VERSION`에 연결했습니다. 앱0.10.1의 표시 수정이며 엔진0.10.0-m9와211개 정의·39예제·수치 계약은 그대로입니다. 최초0.10.0 공개 증거는 `docs/evidence/m9-initial-release-*`로 보존하며, 새0.10.1 공개 게시 검증은 진행 중입니다.
+헤더와 라이브러리에 남은 과거 `0.8` 표시를 `APP_VERSION`에 연결하고, 실제 캔버스 크기 변경을 구독해 DOM 측정과 맞춘 뒤 취소 가능한2프레임 안정화 후 최초 fit을 적용했습니다. 앱0.10.1의 버전 표시·초기 캔버스 측정 경합·자동 저장 상태의 레이아웃 안정화 수정이며 엔진0.10.0-m9와211개 정의·39예제·수치 계약은 그대로입니다. 최초0.10.0 공개 증거는 `docs/evidence/m9-initial-release-*`로 보존하며, 새0.10.1의 최종 CI와 공개 artifact·브라우저9개 검증도 완료했습니다.
+
+최초0.10.1 시도는 초기 캔버스 fit 검사에서128/129개가 통과하고1개가 실패해 배포가 생략됐다. [실패 기록](docs/evidence/m9-presentation-patch-failed-attempt.json)을 보존한다. ResizeObserver 알림을 지연한 경합은 별도로 재현했지만 원래 CI의 정확한 timing/geometry 원인은 로그로 확정하지 않는다.
+
+다음 시도도129/130개 통과 후 같은 초기 fit 검사에서 실패해 게시되지 않았다. [두 번째 실패 기록](docs/evidence/m9-late-layout-failed-attempt.json)을 보존한다. 캔버스가22px 작아지며 y중심 오차11px이 된 측정과 일치하는 자동 저장 문구의 헤더 줄바꿈을 별도로 재현했다. [저장 상태 레이아웃 교정](docs/evidence/m9-save-status-layout-correction.json)은5개 상태 문구의 크기를 미리 확보해 헤더 높이를 유지하며 DOMtext는 현재 상태만 포함한다.

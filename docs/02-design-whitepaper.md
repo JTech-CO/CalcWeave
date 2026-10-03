@@ -1,14 +1,14 @@
 # CalcWeave 디자인 백서
 
-> 버전: v0.12 · 작성일: 2026-10-03 · 상태: 앱0.10.0·엔진0.10.0-m9·211 블럭·39 예제·6범주·M9 선언 범위 및 공개 앱 배포 검증 완료
+> 버전: v0.12 · 작성일: 2026-10-03 · 상태: 앱0.10.1·엔진0.10.0-m9·211 블럭·39 예제·6범주·M9 선언 범위 및 공개 앱 배포 검증 완료
 > 제품명: **CalcWeave** · 목표 브랜드 도메인: **CalcWeave.com**  
 > 대상: 제품·디자인·프런트엔드·계산 엔진 개발자와 초기 사용자 검증 담당자
 
-현재 앱0.10.0·엔진0.10.0-m9는 직전185개 정의에26개 DSP·이산 상태·샘플시간 정의를 추가해 registry211개를 제공한다. M9 명명 preset15개는 공유 설정으로 구분하고 예제는39개·6개 카테고리다. [M9 계약](m9-contract.md)·[검증 기록](m9-validation.md)에 선택한 설정·상태·진단·코드 타깃의 로컬 검증을 기록한다. 현재 source 승인 기록은 subset211행·미구현174행이다. 마지막 수치 경계 수정 후 engineering 선언 범위는 검증 완료했고 공개 Pages의 이번 버전 배포·실제 주소 검증도 완료했다.
+M9 최초 engineering 납품 앱0.10.0·엔진0.10.0-m9는 직전185개 정의에26개 DSP·이산 상태·샘플시간 정의를 추가해 registry211개를 제공한다. M9 명명 preset15개는 공유 설정으로 구분하고 예제는39개·6개 카테고리다. [M9 계약](m9-contract.md)·[검증 기록](m9-validation.md)에 선택한 설정·상태·진단·코드 타깃의 로컬 검증을 기록한다. 현재 source 승인 기록은 subset211행·미구현174행이다. 마지막 수치 경계 수정 후 engineering 선언 범위는 검증 완료했고 공개 Pages의 이번 버전 배포·실제 주소 검증도 완료했다.
 
 직전 M8의41개 정의·8preset 납품은 검증 완료했으며 총185개 정의·35예제와 승인subset180행·미구현205행을 M9 이전 기준으로 보존한다. [M8 계약](m8-contract.md)·[검증](m8-validation.md)은 단계 기록이다. 전체 R2024b 옵션·MathWorks 실행/seed bit parity와 실제 초보자 사용성은 별도로 검증한다.
 
-앱0.8.1의 [GitHub Pages 웹 베타](https://jtech-co.github.io/CalcWeave/) 게시와 프로젝트 경로 계산·정책·오프라인 검증은 이전 배포 기록이다. M9는 공개 주소에서0.10.0/211 registry·지원표·Worker·오프라인의9개 브라우저 검증을 완료했다. [배포 검증](pages-validation.md)과 [M8~M16 전체 대응 후속 로드맵](05-simulink-coverage-roadmap.md)을 따르며 목표 도메인·실제 초보자 조사·전체 옵션 동등성은 별도다.
+앱0.8.1의 [GitHub Pages 웹 베타](https://jtech-co.github.io/CalcWeave/) 게시와 프로젝트 경로 계산·정책·오프라인 검증은 이전 배포 기록이다. 현재 앱0.10.1은 공개 주소에서211 registry·지원표·Worker·오프라인의9개 브라우저 검증을 완료했다. [배포 검증](pages-validation.md)과 [M8~M16 전체 대응 후속 로드맵](05-simulink-coverage-roadmap.md)을 따르며 목표 도메인·실제 초보자 조사·전체 옵션 동등성은 별도다.
 
 현재 로컬 및 검증한 공개 버전은211종 블럭과39예제를 제공한다. 예제를 기초·신호 입력·이산 상태·연속/혼합·데이터/도식·행렬/표/양자화의6범주로 찾고 제목·설명·블럭 ID를 검색한다. Enter/방향키/Escape와 IME 입력을 구분하며 작은 화면에서 메뉴를 화면 안에 배치한다. 빠른 추가 버튼의 K와 예제 버튼의 문자 v는 제거하고 dropdown은 SVG 아이콘을 쓴다. 단축키와 접근성 설명은 유지한다. 라이브러리는 신규 블럭의 식별 기호를 제공하며 캔버스는 종류 이름·핵심 값만 표시하는 간결한 계약을 유지한다. 검정/밝은 회색 테마, 본문16px/보조14px, 도식과 결과의 좌우 배치를 유지한다. 이전 [확장 계약](catalog-contract.md)·[검증](catalog-validation.md)도 단계 기록으로 보존한다.
 
@@ -644,3 +644,7 @@ M1은 데스크톱 포인터·키보드 편집을 기준으로 검증한다. 모
 - [MDN Storage quotas and eviction criteria](https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria): 브라우저 저장과 휴대용 백업을 구분하는 근거.
 
 실행·저장·export 계약이 바뀌면 이 문서의 문구·상태표·예제·검증 과제를 함께 갱신한다. 커버리지 문서에 없는 기능을 화면과 홍보 문구에서 먼저 지원한다고 표시하지 않는다.
+
+현재 공개 앱은0.10.1이며 엔진0.10.0-m9·211개 정의·39예제/6범주와 source subset211행/미구현174행은 유지한다. 버전 표시를 APP_VERSION에 연결하고 실제 캔버스 크기 구독·DOM 측정 일치·취소 가능한2프레임 안정화로 최초 fit의 측정 경합을 수정했다. [최신 공개 검증](pages-validation.md)과 [초기0.10.0 증거](evidence/m9-initial-release-actions-verification.json)를 구분한다. 원본 옵션·수치 계약·승인 범위를 추가하거나 완료 처리하지 않는다.
+
+자동 저장의5개 상태 문구 크기를 미리 확보해 최초 fit 뒤 헤더/캔버스 높이가 달라지는 경계를 교정했다. 추가 측정용 span은 비어 있고 aria-hidden이며 현재 DOMtext는 실제 현재 상태만 포함한다. [저장 상태 교정](evidence/m9-save-status-layout-correction.json)과 [두 번째 게시 전 실패](evidence/m9-late-layout-failed-attempt.json)를 보존한다.

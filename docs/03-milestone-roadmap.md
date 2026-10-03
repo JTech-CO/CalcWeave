@@ -1,12 +1,12 @@
 # CalcWeave 마일스톤별 구축 방향
 
-> 버전: v0.11 · 작성일: 2026-10-03 · 상태: 앱0.10.0·엔진0.10.0-m9·211 registry·M8·M9 선언 범위 및 공개 앱 배포 검증 완료
+> 버전: v0.11 · 작성일: 2026-10-03 · 상태: 앱0.10.1·엔진0.10.0-m9·211 registry·M8·M9 선언 범위 및 공개 앱 배포 검증 완료
 > 대상 브랜드: **CalcWeave** · 예정 공개 도메인: **CalcWeave.com**  
 > 도메인 등록·소유권·상표 사용 가능 여부는 별도 확인 항목이며, 현재 확보 완료로 간주하지 않는다.
 
 관련 문서: [기술 백서](01-technical-whitepaper.md) · [디자인 백서](02-design-whitepaper.md) · [블럭 대응표](block-coverage.md) · [원본 데이터셋](../dataset/Simulink_Basic_Blocks_R2024b.md)
 
-현재 앱0.10.0·엔진0.10.0-m9는 기존185개 정의에26개 DSP·이산 상태·샘플시간 정의를 더해 registry211개를 구성한다. M9 preset15개·예제39개/6카테고리와58개 firstWork 원본행의 제한 대응을 [M9 계약](m9-contract.md)·[구현 맵](m9-implementation-map.json)·[검증 기록](m9-validation.md)에 기록한다. M8·M9의 선언 범위는 마지막 수치 경계 수정 후 로컬 검증을 완료했다. 원본행 승인 기록은 현재subset211행·미구현174행이며, 전체 옵션 완료나 engineering 최종 검증 완료를 이 숫자로 대신하지 않는다. 공개 Pages의 이번 버전 배포·실제 주소 확인도 완료했다.
+M9 최초 engineering 납품 앱0.10.0·엔진0.10.0-m9는 기존185개 정의에26개 DSP·이산 상태·샘플시간 정의를 더해 registry211개를 구성한다. M9 preset15개·예제39개/6카테고리와58개 firstWork 원본행의 제한 대응을 [M9 계약](m9-contract.md)·[구현 맵](m9-implementation-map.json)·[검증 기록](m9-validation.md)에 기록한다. M8·M9의 선언 범위는 마지막 수치 경계 수정 후 로컬 검증을 완료했다. 원본행 승인 기록은 현재subset211행·미구현174행이며, 전체 옵션 완료나 engineering 최종 검증 완료를 이 숫자로 대신하지 않는다. 공개 Pages의 이번 버전 배포·실제 주소 확인도 완료했다.
 
 사용자 선택에 따라 M7 이후 확장은 수학·신호부터 진행했다.0.8.0 시점은74→144종과27→32예제/6카테고리, toolbar 문자 표시 정리를 포함한다. 해당 단계의 원자료 승인20행(신규19·기존Divide 추적교정1)과baseline 미구현251행은 과거 기록으로 보존한다. 모든 원본 블럭300여종의 동등 구현 완료로 기록하지 않는다. 원자료·registry·공유 kernel·preset을 구분하고 실제 계산/생성 코드 oracle를 승인 조건으로 사용한다. [확장 계획](block-expansion-plan.md)·[계약](catalog-contract.md)·[검증](catalog-validation.md)은 단계 증거다. 공개 출시 확인은 기존 M6 조건을 따른다.
 
@@ -462,4 +462,8 @@ Python `python-m7-v1`을 첫 추가 타깃으로 선정했다. 승인된 정적�
 
 최초 선언 범위는 제한 실수 sample-channel 필터·Parallel PID/2DOF·이산 MIMO·가변 정수 delay·fixed-grid 발행 지연·물리적Ts·자체seed stream이다. 공유preset·MinMax 및3개 설정 response 대체를 독립 kernel이나 원본 native 전체 동등성으로 합산하지 않는다. 복소수·일반n-D/variable-size·추가프레임/제어 옵션·조건부 실행·arbitrary-time event/DAE·외부adapter/target은 기존M9-followup/M10~M16 gate를 따른다.
 
-[M9 계약](m9-contract.md)·[검증 기록](m9-validation.md)·[현재 actual TS 기록](evidence/m9-verification.json)을 연결했다. 마지막 수치 경계 수정 후151raw records·30preset mode records·693samples·191actual TypeScript 및31파일2,175unit이 통과했다. 수정 전 전체browser129/129와 수정 후M9 5/5를 구분하며 최종M9 merge의 GitHub Actions에서 전체unit2,175개·루트browser129/129·project browser4/4가 통과했다. 디자인188관측/pageErrors0·성능6개 예산·project-path4/4 검증도 통과했다. root release70checks·12files·1,873,014bytes 및 `/CalcWeave/` release70checks·12files·1,873,264bytes를 [작업 공간 증거](evidence/m9-workspace-verification.json)에 기록했다. 앱0.10.0·엔진0.10.0-m9의 공개 Pages artifact와 실제 브라우저9개 검증을 완료했다. [배포 검증](pages-validation.md)을 따르며 전체 R2024b 옵션/MathWorks 실행 parity는 후속이다.
+[M9 계약](m9-contract.md)·[검증 기록](m9-validation.md)·[현재 actual TS 기록](evidence/m9-verification.json)을 연결했다. 마지막 수치 경계 수정 후151raw records·30preset mode records·693samples·191actual TypeScript 및31파일2,175unit이 통과했다. 수정 전 전체browser129/129와 수정 후M9 5/5를 구분하며 최종M9 merge의 GitHub Actions에서 전체unit2,175개·루트browser129/129·project browser4/4가 통과했다. 디자인188관측/pageErrors0·성능6개 예산·project-path4/4 검증도 통과했다. root release70checks·12files·1,873,014bytes 및 `/CalcWeave/` release70checks·12files·1,873,264bytes를 [작업 공간 증거](evidence/m9-initial-release-workspace-verification.json)에 기록했다. 앱0.10.0·엔진0.10.0-m9의 공개 Pages artifact와 실제 브라우저9개 검증을 완료했다. [배포 검증](pages-validation.md)을 따르며 전체 R2024b 옵션/MathWorks 실행 parity는 후속이다.
+
+현재 공개 앱은0.10.1이며 엔진0.10.0-m9·211개 정의·39예제/6범주와 source subset211행/미구현174행은 유지한다. 버전 표시를 APP_VERSION에 연결하고 실제 캔버스 크기 구독·DOM 측정 일치·취소 가능한2프레임 안정화로 최초 fit의 측정 경합을 수정했다. [최신 공개 검증](pages-validation.md)과 [초기0.10.0 증거](evidence/m9-initial-release-actions-verification.json)를 구분한다. 원본 옵션·수치 계약·승인 범위를 추가하거나 완료 처리하지 않는다.
+
+자동 저장의5개 상태 문구 크기를 미리 확보해 최초 fit 뒤 헤더/캔버스 높이가 달라지는 경계를 교정했다. 추가 측정용 span은 비어 있고 aria-hidden이며 현재 DOMtext는 실제 현재 상태만 포함한다. [저장 상태 교정](evidence/m9-save-status-layout-correction.json)과 [두 번째 게시 전 실패](evidence/m9-late-layout-failed-attempt.json)를 보존한다.
