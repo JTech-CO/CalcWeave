@@ -1,14 +1,16 @@
 # CalcWeave 기술 백서
 
-> 버전: v0.11 · 작성일: 2026-10-03 · 상태: M8 수학·조회표 확장·185 registry·기존144개 계약 보존
+> 버전: v0.12 · 작성일: 2026-10-03 · 상태: 앱0.10.0·엔진0.10.0-m9·211 registry·M9 선언 범위 로컬검증 완료
 > 대상: 제품 설계자, 프런트엔드 개발자, 수치 엔진 개발자  
 > 연결 문서: [디자인 백서](02-design-whitepaper.md) · [마일스톤](03-milestone-roadmap.md) · [블럭 대응표](block-coverage.md)
 
-M8의 앱0.9.0·엔진0.9.0-m8은 기존144개 등록 계약을 보존하고 수학·동적 경계·논리·배열·조회표41개 정의와8개 사전 설정을 연결한다. 총185종과35예제를 제공하며120개 독립 기준값·896개 원시 표본·388개 실제 TypeScript 프로그램을 검증했다. [M8 계약](m8-contract.md)·[검증](m8-validation.md)을 현재 확장 범위의 기준으로 사용한다. 이전 단계 기록과 전체 옵션 후속 계획은 보존한다.
+현재 앱0.10.0·엔진0.10.0-m9는 직전185개 정의에26개 DSP·이산 상태·샘플시간 정의를 더해 registry211개를 구성한다. M9의15개 명명 preset은 공유 설정이며 독립 kernel 수로 합산하지 않는다. 예제는39개·6개 카테고리다. [M9 계약](m9-contract.md)·[구현 맵](m9-implementation-map.json)·[검증 기록](m9-validation.md)을 현재 검증한 선언 범위의 기준으로 사용한다. 현재 source 승인 기록은 신규31행과 기존05-009 추적 교정1행을 반영해 subset211행·미구현174행이다. 마지막 수치 경계 수정 후 engineering 선언 범위를 검증 완료했으며 공개 Pages의0.10.0 배포·실제 주소 검증도 별도로 확인한다.
+
+직전 M8의 앱0.9.0·엔진0.9.0-m8은 기존144개 계약을 보존하고41개 정의·8preset을 추가해185개 정의·35예제의 선언 범위를 검증 완료했다. 원본 승인subset180행·미구현205행은 M9 승격 전의 마지막 승인 기준이다. [M8 계약](m8-contract.md)·[검증](m8-validation.md)을 단계 기록으로 보존하며, 전체 R2024b 옵션·MathWorks 실행/seed bit parity는 완료로 기록하지 않는다.
 
 ## 1. 제품 정의와 현재 상태
 
-앱0.8.1은 [GitHub Pages 웹 베타](https://jtech-co.github.io/CalcWeave/)를 게시하고 프로젝트 경로의 계산·정책·오프라인을 검증했다. 엔진0.8.0-catalog의144종 계약은 유지한다. [현재 배포 검증](pages-validation.md)과 [M8~M16 전체 대응 후속 로드맵](05-simulink-coverage-roadmap.md)을 현재 배포·확장 기준으로 사용한다. 목표 도메인·실제 초보자 조사·전체 옵션 동등성은 별도다.
+앱0.8.1의 [GitHub Pages 웹 베타](https://jtech-co.github.io/CalcWeave/) 게시와 프로젝트 경로의 계산·정책·오프라인 검증은 이전 배포 기록이다. 이번 M9 버전의 공개 배포는 확인 대기다. [배포 검증](pages-validation.md)과 [M8~M16 전체 대응 후속 로드맵](05-simulink-coverage-roadmap.md)을 따르며 목표 도메인·실제 초보자 조사·전체 옵션 동등성은 별도다.
 
 0.8.0의 수학·신호 확장은 승인된 수학·통계·벡터·행렬 64종과 시간 입력 6종을 추가한다. registry는 144종, 정적 지원은107종이며 Python 승인 51종은 그대로다. 기존74종의 파라미터·포트·모드·타입/형상/단위 계약을 유지한다. 신규 생성 타깃은 `typescript-catalog-v1`이며 import 없는 고정 실행 소스와 데이터만 내보낸다. 독립 oracle·모든 지원 모드·JSON roundtrip·실제 TS 결과를 검증한 범위만 대응표에 승인한다. 원자료385행/339이름과 registry 정의 수는 서로 다른 지표다. [확장 계약](catalog-contract.md)·[검증](catalog-validation.md)·[대응 계획](block-expansion-plan.md)을 현재 추가 범위의 기준으로 사용하고 아래 M0~M7 기록은 각 단계의 계약으로 보존한다.
 
@@ -226,6 +228,14 @@ M1 후보는 Constant, Inport, Sum, Gain, Product, Abs, Math Function, Trigonome
 
 각 tick은 **이전 committed state 고정 → due source 및 현재 입력에 의존하지 않는 상태 출력 준비 → due direct-feedthrough 출력과 조합 노드를 현재 의존 DAG 위상순서로 함께 평가 → 결과 기록 및 next-state 계산 → next state 일괄 commit** 순서다. 모든 next-state 계산은 동일한 이전 committed state를 사용한다. 현재 입력을 쓰는 이산 필터·PID도 상류 입력이 계산된 뒤 출력이 평가되며, 별도의 선행 output 목록으로 일괄 실행하지 않는다. due가 아닌 상태 블럭은 출력을 유지한다. 초기 상태는 첫 tick(startTime)의 출력 전에 적용한다. 예를 들어 tick 기준 Unit Delay의 y[0]은 초기값이고 y[1]은 u[0]이다. stop tick 포함 여부, non-grid stop time 거절 규칙, 입력 sample hold를 모델 사양에 고정한다.
 
+### 8.1 M9에서 추가한 제한 계약
+
+M9는 sample-channel 실수 Filter의 ascending z⁻¹와 Transfer Fcn의 descending z를 구분하고 분자 차수 차이를 leading padding으로 반영한다. DF1/DF1T/DF2/DF2T의 IC 좌표, 차수1~32의 DF2 동적 계수, reset/enable과 상태 publication을 명시한다. Parallel scalar PID/2DOF는 FE/BE/trapezoid·고정 제한·clamping을, 이산 MIMO 상태공간은 각축1~16의 unitless 행렬·vector 입출력을 선언한다. 전체 프레임 처리·Ideal PID·back-calculation/tracking은 M9-followup 후보이며 일반 자료형·complex/variable-size는 M10 이후다.
+
+가변 정수 지연은 due-count와 zero-lag/truncate-clamp/strict·IC·reset을 구분한다. Propagation Delay는 physical raw arrival 증가를 검사하고 floor(delay/Ts)의 정수 due index에 발행하며 마지막 기록 due도 진단한다. arbitrary-time event solver는 M12 경계다. Weighted Sample Time의 Ts는baseStep×period 초이고 offset은 주기 길이를 바꾸지 않는다. source의 minus polarity, 필터 reset 캡처 위상, MinMax 현재 입력 포함/reset 위상은 source 전체 동등성과 분리한다. Gaussian은 자체 PRNG stream을 사용하며 MathWorks seed sequence를 재현했다고 주장하지 않는다.
+
+정의의 선언 모드 수는 정적148·이산198·연속210이다. 새26개는 정적 실행을 선언하지 않으며 gradient 검증은 이산만, 나머지25개는 연속 모델 안에서도 고정 due-grid 영역에서 실행한다. Python 승인51개는 유지하고 M9 정의는 TypeScript만 선언한다. 이 수는 모든 ODE 연결·사건 solver·Simulink 전체 옵션 지원 수가 아니다.
+
 M2 구현은 `sampleTime={period,offset}`를 정수 base tick으로 저장한다. period1..10000,offset0..period-1이며 기본1/0이다. 일반 연결은 동일 period/offset을 요구하며 Constant/Input만 timeless 예외다. fast/slow 경계에는 명시적인 Rate Transition을 사용한다. read-before-write 경계 버퍼는 수신 tick 시작에 이전 publication을 읽고 producer의 현재 due 값을 tick 끝에 발행한다. 동시 hit·같은 rate의 RT도 이전값을 사용하고 첫 발행 전에는 typed initial을 사용한다. 1·2·5배 양방향, offset·hold·초기값을 fixture로 확인한다. 임의 비율, 비동기 task, 하드웨어 deadline은 별도 확장이다.
 
 M2 난수는 노드마다 독립적인 LCG32를 사용한다. uniform은 due마다1draw, normal은 Box-Muller cosine2draw이며 cache를 두지 않는다. seed·알고리즘·실제 소비 상태를 Run/manifest에 기록한다. 노드 삽입 순서와 다른 source 추가가 stream에 영향을 주지 않는다. 정확한 수식과 초기 hold는 구현 계약을 따른다. MATLAB 난수열 동등성을 주장하지 않으며 실제 보안 토큰에는 플랫폼의 암호학적 난수를 사용한다.
@@ -240,7 +250,7 @@ Memory는 이산 Unit Delay의 별칭으로 제공하지 않는다. M3의 `time.
 
 현재 연속 상태는 `dx/dt = f(t,x,u)` 형태의 단위 1 float64 scalar 비강성 ODE이다. M3a는 고정 내부 간격 RK4, M3b는 embedded Dormand–Prince RK45의 step rejection과 오차 제어를 제공한다. boolean·벡터·2D의 M2 이산 영역은 유지되지만 이를 ODE 상태로 자동 변환하지 않는다. solver 이름만 같다고 Simulink solver와 동일 구현·결과를 보장하지 않는다.
 
-Integrator는 초기값과 직접 Hit Crossing 또는 이산 held boolean의 rising reset을 지원한다. Second Order Integrator는 위치 `out`과 `velocity`를 출력한다. State Space는 상태 1~16개, A N×N·B/C/initial 길이 N·D scalar인 SISO다. Transfer Fcn은 내림차순 s 다항식의 proper 전달함수, Zero Pole은 실수 영점·극점과 gain을 같은 제어 정준형으로 내린다. 차수는 최대 16이며 초기 상태 길이·분모 첫 계수·정규화 overflow를 사전 검사한다. 일반 State Space의 A가 특이하다는 이유로 거절하지 않는다. Descriptor의 E, MIMO·복소 극점·improper 전달함수는 지원하지 않는다.
+Integrator는 초기값과 직접 Hit Crossing 또는 이산 held boolean의 rising reset을 지원한다. Second Order Integrator는 위치 `out`과 `velocity`를 출력한다. 연속 State Space는 상태1~16개, A N×N·B/C/initial 길이N·D scalar인 SISO다. Transfer Fcn은 내림차순 s 다항식의 proper 전달함수, Zero Pole은 실수 영점·극점과 gain을 같은 제어 정준형으로 내린다. 차수는 최대16이며 초기 상태 길이·분모 첫 계수·정규화 overflow를 사전 검사한다. 일반 State Space의 A가 특이하다는 이유로 거절하지 않는다. Descriptor의 E, 연속 MIMO·복소 극점·improper 전달함수는 지원하지 않는다. M9의 이산 MIMO와 연속 ODE 상태공간은 다른 계약이다.
 
 신규 12종은 Second Order Integrator, State Space, Transfer Fcn, Zero Pole, PID, 필터 Derivative, Memory, Zero Order Hold, First Order Hold, 고정 Transport Delay, Hit Crossing, Relay다. PID는 parallel `kp·u + ki·I + kd·N·(u−F)`, `I'=u`, `F'=N·(u−F)`이며 필터 Derivative는 마지막 미분 항과 필터 상태만 사용한다. 출력 제한·anti-windup·자동 튜닝은 포함하지 않는다.
 
@@ -264,7 +274,7 @@ Relay, Hit Crossing, reset, Saturation 경계 등은 단순한 화면 변화가 
 
 변하는 연속 Round·previous Lookup·수식의 floor/ceil/round/trunc·등록하지 않은 Compare 조건의 Switch가 ODE 미분 경로에 있으면 사전에 거절한다. 동일 연산의 원시 출력 표 또는 이산 held 입력 경로는 별도로 허용한다. step 내부에서 여러 번 교차하거나 tangential crossing처럼 부호 변화가 없는 사건은 모두 찾을 수 없으므로 최대 간격과 사건 허용값을 사용자가 설정해야 한다. 이 위험은 [MathWorks Zero-Crossing Detection](https://www.mathworks.com/help/simulink/ug/zero-crossing-detection.html)을 참고하며, CalcWeave의 사건 정밀도는 별도 fixture로 확인한다.
 
-Transport Delay는 양의 고정 지연만 지원한다. 승인 이력의 선형 보간, 시작 전 initial, 지연 이하의 내부 구간과 상태·이력 합계 100,000개 원소 상한을 사용한다. Zero Order Hold는 due 경계에서 scalar 입력을 샘플링하고 유지한다. First Order Hold는 이전 두 샘플의 기울기를 다음 구간에 외삽하는 causal 방식이다. 두 hold의 scalar·단위 1 경계와 Memory의 승인 단계 갱신을 일반 이산 Unit Delay와 구분한다. Derivative를 임의 불연속 입력의 정확한 미분기로 표시하지 않는다. 가변 지연, limited Integrator, PID anti-windup·자동 튜닝은 후속 범위다.
+Transport Delay는 양의 고정 지연만 지원한다. 승인 이력의 선형 보간, 시작 전 initial, 지연 이하의 내부 구간과 상태·이력 합계100,000개 원소 상한을 사용한다. Zero Order Hold는 due 경계에서 scalar 입력을 샘플링하고 유지한다. First Order Hold는 이전 두 샘플의 기울기를 다음 구간에 외삽하는 causal 방식이다. 두 hold의 scalar·단위1 경계와 Memory의 승인 단계 갱신을 일반 이산 Unit Delay와 구분한다. Derivative를 임의 불연속 입력의 정확한 미분기로 표시하지 않는다. 연속 가변 지연·연속 limited Integrator/anti-windup·자동 tuning은 후속 범위이며 M9의 이산 제한/지연과 구분한다.
 
 결과에는 원시 출력 샘플과 finalState/stateMemory 외에 `solverStatistics`와 사건 `events`가 있다. 수락·거절·평가·사건 횟수, 마지막 및 최소/최대 승인 간격을 기록한다. 실패는 완료·취소와 구분된 `failed`이며 진단에 시각과 블럭 위치를 보존한다. `ModelError.partialResult`는 마지막 승인 상태와 유효 원시 기록을 제공하며 완료 결과 fixture로 내보내지 않는다.
 

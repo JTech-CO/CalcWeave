@@ -296,6 +296,6 @@ try {
     pageErrors, observations: evidence };
   if (m6) report.scope += ' M6 adds release metadata, keyboard guidance, local policy links, backup/restore, damaged slot recovery, sanitized diagnostics and two-step local reset dialogs in both themes at 1440/1024/390/320, with native modal semantics and isolated backgrounds.';
   if (m7) report.scope += ' M7 adds TypeScript/Python target validation, ephemeral signed model package creation, independently trusted fingerprint import, and native import reports in both themes at 1440/1024/390/320.';
-  await writeFile(`docs/evidence/${catalog ? 'catalog-design-verification' : m7 ? 'm7-design-verification' : m6 ? 'm6-design-verification' : m5 ? 'm5-design-verification' : m4 ? 'm4-design-verification' : 'sane-design-verification'}.json`, JSON.stringify(report, null, 2) + '\n');
+  await writeFile(`docs/evidence/${catalog ? `${ENGINE_VERSION.split('-').at(-1)}-design-verification` : m7 ? 'm7-design-verification' : m6 ? 'm6-design-verification' : m5 ? 'm5-design-verification' : m4 ? 'm4-design-verification' : 'sane-design-verification'}.json`, JSON.stringify(report, null, 2) + '\n');
   process.stdout.write(JSON.stringify(report, null, 2) + '\n');
 } finally { await context.close(); await browser.close(); }

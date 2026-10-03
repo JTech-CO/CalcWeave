@@ -1,0 +1,121 @@
+{
+  "generatedAt": "2026-10-03T00:55:24.537395+00:00",
+  "appVersion": "0.10.0",
+  "engineVersion": "0.10.0-m9",
+  "declaredDeliveryVerified": true,
+  "fullSimulinkEquivalenceClaimed": false,
+  "registry": 211,
+  "m9Definitions": 26,
+  "predecessorDefinitionsPreserved": 185,
+  "presets": 15,
+  "examples": 39,
+  "categories": 6,
+  "unit": {
+    "files": 31,
+    "passed": 2175,
+    "failed": 0,
+    "durationSeconds": 33.29
+  },
+  "numeric": {
+    "fixtures": 151,
+    "presetModeRecords": 30,
+    "checkedSamples": 693,
+    "actualGeneratedPrograms": 191,
+    "failureFixtures": 10,
+    "strictModes": [
+      "discrete",
+      "continuous"
+    ],
+    "evidence": "m9-verification.json"
+  },
+  "regressions": {
+    "m7": "m7-regression-on-m9.json",
+    "catalog": "catalog-regression-on-m9-verification.json",
+    "m8": "m8-regression-on-m9.json",
+    "independentBoundaryReview": "m9-independent-boundary-review.json"
+  },
+  "browser": {
+    "fullRun": {
+      "passed": 129,
+      "failed": 0,
+      "durationSeconds": 331.461728,
+      "beforeLastNumericalOnlyCorrection": true
+    },
+    "finalM9TargetedRun": {
+      "passed": 5,
+      "failed": 0,
+      "durationSeconds": 14.325890000000001,
+      "finalSource": true
+    },
+    "finalFullRunInCIRequiredForPublication": true,
+    "projectPath": {
+      "passed": 4,
+      "failed": 0,
+      "durationSeconds": 183.032915,
+      "ownedPreviewTeardownRequiredCleanup": true,
+      "note": "All assertions passed. Windows helper shutdown waited; only the identified test preview process was stopped."
+    }
+  },
+  "design": {
+    "observations": 188,
+    "pageErrors": 0,
+    "evidence": "m9-design-verification.json"
+  },
+  "performance": {
+    "budgets": {
+      "coldLoad": true,
+      "warmLoad": true,
+      "node1000": true,
+      "cancellation": true,
+      "retainedHeap": true,
+      "pageErrors": true
+    },
+    "evidence": "m9-performance.json",
+    "localControlledMeasurements": true,
+    "publicNetworkPerformanceClaimed": false
+  },
+  "release": {
+    "checks": 70,
+    "staticFiles": 12,
+    "bytes": 1873014,
+    "releaseId": "91846e548f4ed5f6d998549ab72969e9dccf2f73e46d4401524b1d6db1c5bb60"
+  },
+  "security": {
+    "scannedFiles": {
+      "packages": 54,
+      "apps/web/src": 35,
+      "scripts": 33
+    },
+    "mediumOrHigher": 0,
+    "npmKnownVulnerabilities": 0,
+    "eightItemManualReview": {
+      "queries": "No remote database or query endpoint introduced.",
+      "output": "React escaping and restricted math AST retained; no user code evaluation.",
+      "secrets": "Pattern and final built-asset checks passed.",
+      "authorization": "No account/server model API; Pages OIDC confined to trusted deployment job.",
+      "validation": "Coefficient/shape/rate/state/queue/execution bounds validated; rollback tested.",
+      "rateLimits": "No login, paid API, or mail send; existing Worker budgets and cancellation retained.",
+      "settings": "Cookie/tracking absent; HTTPS/CSP/referrer and scoped offline artifact checks retained.",
+      "databasePermissions": "No remote DB; browser-local persistence/recovery regression passed."
+    },
+    "securityCertificationClaimed": false
+  },
+  "source": {
+    "rows": 385,
+    "newApprovals": 31,
+    "traceCorrections": 1,
+    "approvedSubset": 211,
+    "remaining": 174,
+    "datasetSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+    "sourceApprovalEvidence": "m9-source-approvals.json"
+  },
+  "publicDeploymentClaimed": false,
+  "projectRelease": {
+    "scope": "/CalcWeave/",
+    "checks": 70,
+    "staticFiles": 12,
+    "bytes": 1873264,
+    "releaseId": "f3a4ddb31b92e27b6a5a429b1522b86cf5d0bbc9786c5a26b4139a737f670d4d",
+    "evidence": "m9-project-release-verification.json"
+  }
+}

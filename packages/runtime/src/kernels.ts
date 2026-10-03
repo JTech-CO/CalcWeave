@@ -5,6 +5,7 @@ import { quantizeFixed, type FixedQuantizationOptions } from '../../quantization
 import { evaluateExpansionNode } from './expansion';
 import { evaluateTimeSourceNode } from './time-sources';
 import { evaluateM8Node, m8OperationCost } from './m8';
+import { m9OperationCost } from './m9';
 
 export function numericFailure(code: string, nodeId: string, message: string): never {
   throw new ModelError([{ code, nodeId, message }]);
@@ -42,6 +43,8 @@ export function nodeOperationCost(node: IRNode, byId: Map<string, IRNode>): numb
   };
   const m8Cost = m8OperationCost(node, inputSize, outputSize);
   if (m8Cost !== undefined) return m8Cost;
+  const m9Cost = m9OperationCost(node, inputSize, outputSize);
+  if (m9Cost !== undefined) return m9Cost;
   if (node.blockType === 'math.matrix-multiply') {
     const a = inputShape('a'), b = inputShape('b');
     return 8 * a[0]! * a[1]! * b[1]! + a[0]! * a[1]! + b[0]! * b[1]! + outputSize;

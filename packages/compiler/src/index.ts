@@ -1,4 +1,4 @@
-import { getBlockDefinition, getBlockPorts, isDirectFeedthrough, type BlockDefinition } from '../../block-library/src';
+import { getBlockDefinition, getBlockPorts, getDirectFeedthroughPorts, isDirectFeedthrough, type BlockDefinition } from '../../block-library/src';
 import { parseExpression } from '../../expression/src';
 import {
   canonicalSemantic, continuousStateElementCount, conversionCoefficients, divideUnits, discreteMemoryElementCount, isSafeIdentifier, MODEL_LIMITS, ModelError, multiplyUnits, normalizeSolverSettings, parseModel, reciprocalUnit, SIGNAL_LIMITS, signalElementCount, sqrtUnit, squareUnit, validateSignal,
@@ -12,6 +12,7 @@ import { validateAdvancedParameters } from './advanced';
 import { inferExpansionSignal } from './expansion';
 import { inferTimeSourceDescriptor, validateTimeSourceParameters } from './time-sources';
 import { inferM8Outputs, validateM8Parameters } from './m8';
+import { initialM9Outputs, inferM9Outputs, validateM9Parameters, validateM9StateInputs } from './m9';
 
 const compareId = (a: string, b: string): number => a < b ? -1 : a > b ? 1 : 0;
 
@@ -107,6 +108,8 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
   const sameShape = (a: SignalDescriptor, b: SignalDescriptor): boolean => a.shape.length === b.shape.length && a.shape.every((length, index) => length === b.shape[index]);
   const clone = (descriptor: SignalDescriptor): SignalDescriptor => ({ ...descriptor, shape: [...descriptor.shape] });
   for (const node of ordered) {
+    const m9Outputs = initialM9Outputs(node, originals.get(node.id)!.unit ?? '1');
+    if (m9Outputs) { Object.assign(node.outputs, m9Outputs); continue; }
     const descriptor = initialDiscreteDescriptor(node, originals.get(node.id)!.unit ?? '1');
     if (descriptor) node.outputs.out = descriptor;
     else {
@@ -313,7 +316,7 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
       case 'sink.display': case 'io.output': case 'io.terminator': case 'sink.scope': output = clone(input('in')); break;
       default: {
         const declaredUnit = originals.get(node.id)!.unit ?? '1';
-        const m8Outputs = inferM8Outputs(node, input, declaredUnit);
+        const m8Outputs = inferM8Outputs(node, input, declaredUnit) ?? inferM9Outputs(node, input, declaredUnit);
         if (m8Outputs) Object.assign(node.outputs, m8Outputs);
         else output = inferExpansionSignal(node, input, declaredUnit) ?? inferTimeSourceDescriptor(node, declaredUnit);
         break;
@@ -327,6 +330,7 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
     }
   }
   for (const node of ordered) {
+    if (validateM9StateInputs(node, port => { const endpoint = node.inputs[port]; const descriptor = endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; if (!descriptor) throw new ModelError([{ code: 'SIGNAL_INFERENCE_FAILED', nodeId: node.id, portId: port, message: 'M9 입력의형상을추론할수없습니다.' }]); return descriptor; })) continue;
     if (definitions.get(node.id)!.state === 'none' || node.blockType === 'source.random') continue;
     const endpoint = node.inputs.in!;
     const input = byId.get(endpoint.nodeId)!.outputs[endpoint.portId]!;
@@ -396,6 +400,7 @@ function compileFlatModel(input: unknown): CompiledModel {
       validateAdvancedParameters(ir);
       validateTimeSourceParameters(ir, model);
       validateM8Parameters(ir);
+      validateM9Parameters(ir, model);
       if (definition.id === 'math.expression') ir.expression = parseExpression(parameters.expression as string);
       nodeById.set(node.id, ir);
     } catch (error) {
@@ -432,7 +437,7 @@ function compileFlatModel(input: unknown): CompiledModel {
     }
     writtenInputs.add(inputKey);
     nodeById.get(edge.target.nodeId)!.inputs[edge.target.portId] = { ...edge.source };
-    if (edge.target.portId !== 'reset' && isDirectFeedthrough(nodeById.get(edge.target.nodeId)!) && !adjacency.get(edge.source.nodeId)!.has(edge.target.nodeId)) {
+    if (getDirectFeedthroughPorts(nodeById.get(edge.target.nodeId)!).includes(edge.target.portId) && !adjacency.get(edge.source.nodeId)!.has(edge.target.nodeId)) {
       adjacency.get(edge.source.nodeId)!.add(edge.target.nodeId);
       indegree.set(edge.target.nodeId, indegree.get(edge.target.nodeId)! + 1);
     }

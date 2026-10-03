@@ -342,6 +342,35 @@ EXAMPLES.push({ id: 'matrix-inspection', category: 'advanced', title: '행렬 �
   notes: 'AᵀA=[[16,0],[0,25]]입니다. column-major 인덱스는 [1,2,-1,-1], 유효 개수는 2입니다. CalcWeave의 Find Nonzero는 고정 폭과 개수로 결과를 표시하며 남는 자리는 -1입니다. 원본의 가변 길이 출력과 구분합니다.',
 } });
 
+EXAMPLES.push({ id: 'filter-realizations', category: 'discrete', title: '이산 필터의 계단 응답', description: 'y[k]=0.5u[k]+0.5u[k−1]+0.5y[k−1]의 입력과 응답을 비교합니다.', model: {
+  schemaVersion: 1, modelId: 'filter-realizations', name: '이산 필터의 계단 응답',
+  nodes: [node('step', 'source.step', '단위 계단', { stepTime: 0, before: 0, after: 1 }), node('filter', 'discrete.filter', '이산 필터', { numerator: [.5, .5], denominator: [1, -.5], structure: 'df2t', representation: 'filter', initial: 0 }), node('input', 'sink.scope', '입력 기록', {}), node('result', 'sink.scope', '응답 기록', {})],
+  edges: [edge('step-filter', 'step', 'filter', 'in'), edge('step-input', 'step', 'input', 'in'), edge('filter-result', 'filter', 'result', 'in')],
+  execution: { mode: 'discrete', startTime: 0, stopTime: 2, step: .1 }, layout: { step: { x: 40, y: 180 }, filter: { x: 330, y: 180 }, input: { x: 640, y: 30 }, result: { x: 640, y: 260 } },
+  notes: '계수는 z⁻¹의 오름차순입니다. 첫 출력은 0.5, 다음 출력은 1.25, 1.625이며 2에 가까워집니다. 필터를 선택해 DF1·DF1T·DF2·DF2T를 바꾸어 같은 영 초기 상태 응답을 비교하세요. 채널 처리와 전달함수의 계수 순서는 설정에서 구분합니다.',
+} });
+EXAMPLES.push({ id: 'tapped-history', category: 'discrete', title: '이전 세 샘플 보기', description: '현재 입력과 이전 세 샘플을 함께 기록해 지연의 순서를 확인합니다.', model: {
+  schemaVersion: 1, modelId: 'tapped-history', name: '이전 세 샘플 보기',
+  nodes: [node('ramp', 'source.ramp', '현재 샘플', { startTime: 0, slope: 1, initial: 0 }), node('taps', 'discrete.tapped-delay', '이전 세 샘플', { taps: 3, order: 'oldest', includeCurrent: 'no', initial: 0 }), node('input', 'sink.scope', '현재 값', {}), node('result', 'sink.scope', '이력 기록', {})],
+  edges: [edge('ramp-taps', 'ramp', 'taps', 'in'), edge('ramp-input', 'ramp', 'input', 'in'), edge('taps-result', 'taps', 'result', 'in')],
+  execution: { mode: 'discrete', startTime: 0, stopTime: 6, step: 1 }, layout: { ramp: { x: 40, y: 180 }, taps: { x: 330, y: 180 }, input: { x: 640, y: 30 }, result: { x: 640, y: 260 } },
+  notes: '1초마다 입력 0,1,2,…를 받습니다. 3초에는 이전 값 [0,1,2], 6초에는 [3,4,5]가 나옵니다. 오래된 값부터 표시하며 현재 입력은 포함하지 않습니다. 탭 지연의 등록 범위는 scalar 입력과 고정 길이 벡터 출력입니다.',
+} });
+EXAMPLES.push({ id: 'weighted-sample-counter', category: 'discrete', title: '샘플 주기와 순환 카운터', description: '0.1초 기본 간격에서 3 tick 주기·1 tick offset과 가중 시간 0.6초를 확인합니다.', model: {
+  schemaVersion: 1, modelId: 'weighted-sample-counter', name: '샘플 주기와 순환 카운터',
+  nodes: [{ ...node('counter', 'source.counter', '0~2 카운터', { mode: 'limited', upper: 2, initial: 0 }), sampleTime: { period: 3, offset: 1 } }, { ...node('period', 'time.weighted-math', '가중 샘플 시간', { operation: 'TsOnly', weight: 2 }), sampleTime: { period: 3, offset: 1 } }, { ...node('count', 'sink.scope', '카운터 기록', {}), sampleTime: { period: 3, offset: 1 } }, { ...node('seconds', 'sink.display', '주기 초', {}), sampleTime: { period: 3, offset: 1 } }],
+  edges: [edge('counter-count', 'counter', 'count', 'in'), edge('period-seconds', 'period', 'seconds', 'in')],
+  execution: { mode: 'discrete', startTime: 0, stopTime: 1.3, step: .1 }, layout: { counter: { x: 40, y: 40 }, period: { x: 40, y: 270 }, count: { x: 400, y: 40 }, seconds: { x: 400, y: 270 } },
+  notes: '주기는 3초가 아니라 기본 간격 0.1초×3=0.3초입니다. 최초 due는 0.1초이며, 카운터는 0.1/0.4/0.7/1.0초에 0/1/2/0을 출력합니다. Ts×2=0.6초를 별도 결과에서 확인합니다. 첫 due 이전에는 초기 held 출력이 표시됩니다.',
+} });
+EXAMPLES.push({ id: 'pid-setpoint-weights', category: 'discrete', title: '2DOF PI의 목표 가중치', description: 'P 가중치 0.5와 I=2의 backward 적분으로 목표 입력에 대한 출력을 계산합니다.', model: {
+  schemaVersion: 1, modelId: 'pid-setpoint-weights', name: '2DOF PI의 목표 가중치',
+  nodes: [node('reference', 'source.constant', '목표 값', { value: 1 }), node('measurement', 'source.constant', '측정 값', { value: 0 }), node('pid', 'discrete.pid-2dof', '2DOF PI', { kp: 1, ki: 2, kd: 0, b: .5, c: 0, integralMethod: 'backward', integralInitial: 0 }), node('result', 'sink.scope', '제어 출력', {})],
+  edges: [edge('reference-pid', 'reference', 'pid', 'reference'), edge('measurement-pid', 'measurement', 'pid', 'measurement'), edge('pid-result', 'pid', 'result', 'in')],
+  execution: { mode: 'discrete', startTime: 0, stopTime: 1, step: .1 }, layout: { reference: { x: 40, y: 30 }, measurement: { x: 40, y: 260 }, pid: { x: 350, y: 160 }, result: { x: 670, y: 160 } },
+  notes: 'P에는 0.5×목표−측정=0.5, I에는 목표−측정=1이 들어갑니다. 0.1초 간격 backward 적분의 첫 출력은 0.7, 이후 0.9,1.1,…입니다. 측정 값을 고정한 계산 예제이며 실제 장치의 폐루프 응답을 표현하지 않습니다. 적분 방식과 포화는 블록 설정에서 바꿀 수 있습니다.',
+} });
+
 export function createExample(id: string): CalcModel {
   return structuredClone((EXAMPLES.find(example => example.id === id) ?? EXAMPLES[0]).model);
 }

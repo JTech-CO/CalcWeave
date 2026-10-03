@@ -1,3 +1,4 @@
+import { M9_BLOCK_IDS } from '../../block-library/src/m9';
 import { ENGINE_VERSION, ModelError, normalizeSolverSettings, type CompiledModel, type ExecutionSettings, type SignalDescriptor } from '../../model/src';
 import { sha256 } from './sha256';
 import { EXPANSION_BLOCK_IDS } from '../../block-library/src/expansion';
@@ -9,9 +10,9 @@ export interface ExportManifest {
   modelHash: string;
   modelHashAlgorithm: 'SHA-256';
   engineVersion: string;
-  targetVersion: 'typescript-m2-v1' | 'typescript-m3-v1' | 'typescript-m4-v1' | 'typescript-m5-v1' | 'typescript-catalog-v1' | 'typescript-m8-v1';
+  targetVersion: 'typescript-m2-v1' | 'typescript-m3-v1' | 'typescript-m4-v1' | 'typescript-m5-v1' | 'typescript-catalog-v1' | 'typescript-m8-v1' | 'typescript-m9-v1';
   execution: ExecutionSettings;
-  nodes: Record<string, { sampleTime: { period: number; offset: number }; executionDomain?: 'continuous'|'discrete'|'constant'; seed?: number; randomAlgorithm?: 'lcg32-boxmuller-v1' }>;
+  nodes: Record<string, { sampleTime: { period: number; offset: number }; executionDomain?: 'continuous'|'discrete'|'constant'; seed?: number; randomAlgorithm?: 'lcg32-boxmuller-v1' | 'lcg32-boxmuller-midpoint-v1' | 'lcg32-uniform-midpoint-v1' }>;
   outputTypes: Record<string, SignalDescriptor>;
   rateTransitionPolicy: 'read-before-write';
   dataReferences: { id: string; version: number; sourceHash: string; contentHash: string; timeColumn: string; columns: { name: string; kind: 'number' | 'boolean' | 'string'; unit: string }[] }[];
@@ -31,12 +32,16 @@ export function manifestForHash(compiled: CompiledModel, hash: string): ExportMa
   const catalog = compiled.nodes.some(node => catalogIds.has(node.blockType));
   const m8Ids: ReadonlySet<string> = new Set(M8_BLOCK_IDS);
   const m8 = compiled.nodes.some(node => m8Ids.has(node.blockType));
+  const m9Ids: ReadonlySet<string> = new Set(M9_BLOCK_IDS);
+  const m9 = compiled.nodes.some(node => m9Ids.has(node.blockType));
   return {
     schemaVersion: 1, modelHash: hash, modelHashAlgorithm: 'SHA-256', engineVersion: ENGINE_VERSION,
-    targetVersion: m8 ? 'typescript-m8-v1' : catalog ? 'typescript-catalog-v1' : m5 ? 'typescript-m5-v1' : m4 ? 'typescript-m4-v1' : continuous ? 'typescript-m3-v1' : 'typescript-m2-v1', execution: structuredClone(compiled.model.execution),
+    targetVersion: m9 ? 'typescript-m9-v1' : m8 ? 'typescript-m8-v1' : catalog ? 'typescript-catalog-v1' : m5 ? 'typescript-m5-v1' : m4 ? 'typescript-m4-v1' : continuous ? 'typescript-m3-v1' : 'typescript-m2-v1', execution: structuredClone(compiled.model.execution),
     nodes: Object.fromEntries(compiled.nodes.map((node) => [node.id, { sampleTime: { ...node.sampleTime },
       ...(node.executionDomain ? { executionDomain: node.executionDomain } : {}),
-      ...(node.blockType === 'source.random' ? { seed: Number(node.parameters.seed), randomAlgorithm: 'lcg32-boxmuller-v1' as const } : {}) }])),
+      ...(node.blockType === 'source.random' ? { seed: Number(node.parameters.seed), randomAlgorithm: 'lcg32-boxmuller-v1' as const }
+        : node.blockType === 'source.band-limited-noise' || node.blockType === 'source.random-configured' && node.parameters.distribution === 'normal' ? { seed: Number(node.parameters.seed), randomAlgorithm: 'lcg32-boxmuller-midpoint-v1' as const }
+        : node.blockType === 'source.random-configured' || node.blockType === 'source.signal-generator' && node.parameters.waveform === 'random' ? { seed: Number(node.parameters.seed), randomAlgorithm: 'lcg32-uniform-midpoint-v1' as const } : {}) }])),
     outputTypes: structuredClone(compiled.outputTypes), rateTransitionPolicy: 'read-before-write',
     dataReferences: [...compiled.model.datasets ?? []].filter(dataset => dataIds.has(dataset.id)).sort((a,b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0).map(dataset => ({ id: dataset.id, version: dataset.version, sourceHash: dataset.sourceHash, contentHash: dataset.contentHash, timeColumn: dataset.timeColumn, columns: structuredClone(dataset.columns) })),
     ...(compiled.hierarchy ? { hierarchyReferences: structuredClone(compiled.hierarchy.instances) } : {}),

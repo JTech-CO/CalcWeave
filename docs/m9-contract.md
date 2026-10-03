@@ -1,12 +1,12 @@
 # CalcWeave M9 구현 계약
 
-작성일: 2026-10-03 · 문서 v0.2 · 상태: 계획 및 옵션 검토 · 일정 미확정
+작성일: 2026-10-03 · 문서 v0.6 · 상태: 선언 범위 검증 완료(`verified-declared-scope`) · 원본 전체 옵션/공개 배포 별도
 
 M9의 최초 작업 배정은 원본 **58행**이며, 서로 다른 이름 문자열은 55개다. 이 중 baseline의 기존 subset은 27행, 미구현은 31행이다. 분류 family 29개는 작업 묶음이며 engine 수로 합산하지 않는다. 원자료 전체 기준 385행·339이름과 SHA-256 `cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7`를 보존한다.
 
-M8 다음 단계에서 구현할 계약이다. M9의 신규 registry 정의 수는 아직 확정하지 않는다. 기존 27개 source subset의 이산·시드·rate 동작을 보존하면서 DSP와 상태 옵션을 확장한다.
+M8 이후의 제한 DSP·이산 상태·샘플시간 계약을 구현하고 검증했다. 직전 M8 납품은185개 registry·180개 source subset·미구현205행이며 immutable catalog baseline144개·134subset·미구현251행은 과거 기준으로 보존한다. 앱0.10.0·엔진0.10.0-m9는26개 정의·15개 명명 preset을 추가해 registry211개·39예제/6카테고리다. source 승인 기록은 신규31행과 기존05-009 추적 교정1행을 반영해 subset211행·미구현174행이다. 이 수치는 서로 다른 지표이며 원본 전체 옵션이나 공개 Pages 배포 완료가 아니다.
 
-기계판독 정본은 [m9-implementation-map.json](./m9-implementation-map.json)이다. [전체 후속 로드맵](./05-simulink-coverage-roadmap.md)의 baseline 배정과 [기술 계약](./catalog-contract.md)은 이 문서의 snapshot 승인으로 변경하지 않는다. `baselineStatus`는 기존 승인, `delivery`는 검토된 최초 납품 범위, `optionInventory`는 추가 옵션 후보이며 `sourceOptionCompletionStatus=open`은 원본의 전체 옵션 완료가 아직 열린 상태다. 신규 card와 source 승격은 evidence가 연결된 뒤 별도로 갱신한다.
+기계판독 정본은 [m9-implementation-map.json](./m9-implementation-map.json)이다. [전체 후속 로드맵](./05-simulink-coverage-roadmap.md)의 baseline 배정과 [기술 계약](./catalog-contract.md)은 이 문서의 snapshot 승인으로 변경하지 않는다. `baselineStatus`는 기존 승인, `delivery`는 검토된 최초 납품 범위, `optionInventory`는 추가 옵션 후보이며 `sourceOptionCompletionStatus=open`은 원본의 전체 옵션 완료가 아직 열린 상태다. 선택한 범위와 source 승격은 [최종 수치 증거](evidence/m9-verification.json)·[source 승인 근거](evidence/m9-source-approvals.json)에 연결했다. 전체58행의 추가 optionInventory는 열린 상태로 보존한다.
 
 ## 지원과 분류 규칙
 
@@ -20,9 +20,11 @@ M8 다음 단계에서 구현할 계약이다. M9의 신규 registry 정의 수�
 
 ## 검토된 최초 납품 범위
 
-M9의 firstWork 배정은 P0 미구현 계산과 선택된 기존 옵션을 제한된 API로 구현하기 위한 출발점이다. 58행 전체의 추적 결정은 유지하며, 구현 검토에서 선정한 primitive·설정의 모든 선언 mode/shape/options를 독립 raw oracle·actual TS·JSON·진단·자원 예산·UI/e2e와 과거 144개 정의·71개 catalog fixture 회귀로 판정한다. 31개 baseline 미구현행의 대응 범위를 각각 기록해야 한다. 전체 R2024b 옵션 완료는 별도 source-equivalence 종료조건이다.
+M9의 firstWork 배정은 P0 미구현 계산과 선택된 기존 옵션을 제한된 API로 구현하기 위한 출발점이다. 58행 전체의 추적 결정은 유지하며, 구현 검토에서 선정한 primitive·설정의 모든 선언 mode/shape/options를 독립 raw oracle·actual TS·JSON·진단·자원 예산·UI/e2e와 직전185개 정의·M8 120fixture+8preset 및71개 catalog fixture 회귀로 판정한다. 31개 baseline 미구현행의 대응 범위를 각각 기록해야 한다. 전체 R2024b 옵션 완료는 별도 source-equivalence 종료조건이다.
 
-아래 family의 `optionInventoryTaskIds`는 M9-followup 후보 추적 ID다. 아직 확인되지 않은 current-help의 옵션 전체를 최초 납품의 blocker로 자동 추가하지 않는다. 구현 API가 선정되면 `deliveryGate.declaredDefinitionIds`와 row별 fixture ID를 갱신하며 root가 승인한다.
+미구현31행의 선택 경로는18개 계산/제한 subset·9개 공유 preset·4개 독립 설정 대체로 나뉜다. First Order/Lead or Lag/Real Zero 세 설정 response는 원본의 topology·IC·옵션 reference가 미확정인 대체다. MinMax Running Resettable의 현재 입력 포함 출력·reset 누적 순서도 별도 설정 대체로 분류하며 native 동등성을 주장하지 않는다.
+
+아래 family의 `optionInventoryTaskIds`는 M9-followup 후보 추적 ID다. `minimumFixtures`는 수학 의도를 설명하는 미실행 probe이며 선택 API의 실행 fixture·원본 reference 증거가 아니다. 예를 들어 uniform min=max 후보는 최초 API의 min<max와 구분하여 후속에 남긴다. 아직 확인되지 않은 current-help의 옵션 전체를 최초 납품의 blocker로 자동 추가하지 않는다. 선택 API26개는 `deliveryGate.declaredDefinitionIds`와 최종 실행 증거에 연결했다. actual fixture·configured parameters·지원모드·preset과 원본 identity를 대조해 새31행 및 기존1행 추적 교정을 승인했다. 추가 옵션은 source 전체 동등성 gate를 따른다.
 
 ## 공식 사양의 확인 범위
 
@@ -48,6 +50,42 @@ MathWorks의 현재 온라인 도움말을 primary source로 조사했다. R2024
 | Sample-based Sine | k0부터 A·sin(2π(k+offset)/p)+bias, due마다 k modulo p | conditional subsystem reset은 M11; A·sin(ωt) time-based와 구분. [공식](https://www.mathworks.com/help/simulink/slref/sinewavefunction.html) |
 
 Read-before-write는 기존 Delay/Unit Delay/Rate Transition 경계의 결정성을 보존한다. Direct-feedthrough인 Difference, filter와 일부 적분 모드는 현재 입력을 읽으며 상태를 commit할 때만 갱신한다. 모든 블럭을 한 틱 늦추는 규약으로 단순화하지 않는다. external reset의 Level은 현재 nonzero 또는 이전 nonzero에서 0으로 떨어지는 경우도 적용하고, Levelhold는 현재 nonzero인 동안 적용한다. [Discrete Filter](https://www.mathworks.com/help/simulink/slref/discretefilter.html)
+
+선택한 필터 reset 계약에서는 reset이 활성인 due의 출력을 초기 슬롯에서 현재 입력으로 다시 계산한다. 그 due 이후의 commit은 초기 슬롯을 유지하며 현재 입력을 새 슬롯에 저장하지 않는다. enable=false와 reset이 겹치면 reset을 우선한다. 예를 들어 b=[1], a=[1,−0.5], 초기 슬롯0, u=[1,1,1,1,1], reset=[0,1,0,0,0]에서 Level 출력은[1,1,1,1,1.5], Levelhold 출력은[1,1,1,1.5,1.75]다. 이 read/commit 위상은 CalcWeave의 명시한 subset이며, MathWorks reference 실행의 입력 캡처 위상까지 확인했다는 뜻은 아니다. 필터 구조별 IC 좌표·reset·enable 조합의 source 전체 동등성은 열린 상태로 남긴다.
+
+## 선택한 선언 API
+
+- `discrete.filter`: ascending z⁻¹ `filter`와 descending z `transfer` representation, DF1/DF1T/DF2/DF2T를 나눈다. 전달함수의 부족한 numerator 차수는 leading padding으로 지연을 유지한다. fixed coefficients 각각1~33개, finite real sample-channel·zero/비영 IC·reset/enable이다. 프레임 처리는 이번 API에서 제외하고 M9-followup으로 남긴다. `stateInitial`은 channel×해당 structure의 state 좌표 순서로 flatten하며 같은 수를 다른 구조의 동일 물리 상태로 간주하지 않는다.
+- `discrete.filter-time-varying`: 차수1~32의 DF2, numerator 포트 길이order+1, denominator 포트 길이order로 leading1을 생략한다. 변경된 계수에 기존 state를 적용한다.
+- `discrete.delay-configured`/`discrete.tapped-delay`: fixed/variable due-count, zero lag·truncate-clamp/strict·parameter/port IC, 선택 reset/enable. tapped 출력은 scalar channel의 고정 벡터이며 다른 channel/frame 형태는 followup이다.
+- `discrete.propagation-delay`: rawArrival=time+delay의 엄격한 증가를 검사한다. 물리적 releaseDue는time+floor(delay/Ts)×Ts이며, 구현은captureTick+floor(delay/Ts)×period의 정수 due index로 발행해 부동소수점 시각 비교로 한 tick 늦어지는 일을 방지한다. delay>Ts·delay>128eps·safe integer due index를 요구하고 마지막 기록 due에도 delay와 raw arrival 순서를 검증한다. 같은 releaseDue의 여러 항목은 capture 순서대로 꺼내 마지막 값을 발행한다. arbitrary-time event solver는 지원하지 않는다.
+- `discrete.pid`/`discrete.pid-2dof`: unitless scalar·Parallel, FE/BE/trapezoid의 적분과 미분 필터·고정 clamp·clamping anti-windup이다. Ideal·back-calculation/tracking·coefficient port 등의 후보는 M9-followup open이다.
+- `discrete.state-space-mimo`: A N×N/B N×M/C P×N/D P×M·각축1~16·unitless vector 입출력이다. `discrete.integrator-configured`와 `discrete.difference-configured`는 이전 due 이력과 물리적 Ts를 명시한다.
+- `time.weighted-math`: TsOnly(s), inverse(Hz), add/subtract/multiply/divide. subtract의 선언은u−weight×Ts이며 원본 문장의 polarity reference는 미확정이다. `time.decrement-to-zero`는max(u−Ts,0), `signal.initial-condition`은첫 due의initial 이후current input이다.
+- `logic.numeric-edge`의7개 모드·`math.running-minmax`·`source.counter`의free/limited는 공유 kernel 설정을 원본 ID별로 추적한다. counter의 계산 출력은float64 safe integer이며 원본 integer dtype 동일성을 주장하지 않는다.
+- `math.running-minmax`: 현재 입력과 누적 상태의 min/max를 현재 due에 출력한다. reset due에도 IC와 현재 입력의 min/max를 출력한 뒤 commit은 IC를 유지한다. 현재 공식 도움말의 reset 출력=IC 설명 및 DirectFeedthrough=no 특성과 위상 차이가 있으므로 08-017은 독립 설정 대체다. IC=0은 공식 예제와 일치하지만 이것만으로 출력·reset 동등성을 확인하지 않는다. [공식](https://www.mathworks.com/help/simulink/slref/minmaxrunningresettable.html)
+- 잡음/난수·PWM/variable pulse·signal generator·sample sine·sample sequence는 선언된 held sample 동작이다. Gaussian variance=noisePower/Ts, seed stream은 자체 규약이며 MathWorks seed bit parity가 아니다. sample sequence는 균등 due 간격의 scalar 확장이며 기존 arbitrary time vector 계약을 바꾸지 않는다.
+- `verify.gradient`는 discrete-only strict absΔu<abs(maximumGradient)다. `verify.resolution`은scalar/1D float64 입력과 scalar positive resolution의mod<tolerance이며 검사 실패 시 실행을 중단한다. 원본 vector membership과 optional output/warning/callback 설정은 열린 후속이다.
+
+새26개는 정적 실행을 선언하지 않는다. `verify.gradient`는 이산만, 나머지25개는 이산/연속 모델 안에서 고정 due-grid 동작을 선언한다. 연속 지원 표기는 모든 ODE feedback·사건 solver 지원을 뜻하지 않는다. 선택한 선언 API는 최종 수치·코드 생성·단위 및 영향받은 브라우저 검사로 검증했다. 전체 source 옵션과 공개 배포는 별도다.
+
+## 독립 review fixture 후보
+
+아래 이름은 독립 수학 oracle다. 31개 미구현행 모두의 선택 fixture를 JSON `rows[].delivery.evidenceFixtureIds`에 연결하고 compiled canonical·필수 설정·preset identity를 대조했다. 이 연결을 actual TS/mode evidence와 대조해 승인했으며, fixture가 존재한다는 이유만으로 source 전체 옵션을 승인하지 않는다. 기존27행 가운데 선택 확장 경로도 가능한 fixture에 연결하고, 기존05-009 전달함수 교정은 신규31행과 따로 센다.
+
+- `m9-filter-zinv-degree-gap`: b=[1], a=[1,−0.5], zero IC, impulse[1,0,0,0]이면 ascending z⁻¹ Filter는[1,0.5,0.25,0.125].
+- `m9-transfer-descending-z-degree-gap`: 같은 계수의 descending z Transfer Fcn은[0,1,0.5,0.25]. b=[2], a=[2,−1]을 쓰는 `m9-transfer-leading-normalization`도 같은 지연 응답이다.
+- `m9-df2-time-varying-retains-state`: num=[1,0], denNoLead가[−0.5]→[−0.25]→[−0.75], u=[1,0,0], zero IC이면[1,0.25,0.1875].
+- `m9-variable-delay-current-zero-lag`: u=[1,2,3], d=[0,1,2]이면[1,1,1]. d=0의 현재 입력과 이전 commit buffer를 구분한다.
+- `m9-weighted-period-not-rate`: baseStep0.1·period3·offset2·weight2에서 weightedTs는0.6초다. offset은 물리적 주기 길이를 바꾸지 않는다.
+- `m9-reset-level-includes-falling-edge` / `m9-reset-level-hold-current-only`: 위 reset read/commit 구분을 literal5-sample 결과로 검증한다.
+- `m9-causal-filter-unused-state-overflow-{df2,df2t,df1t}`: b0=0인 causal 출력의 read가 실제 입력으로 계산할 commit의 사용하지 않는 임시 슬롯을 계산해 실패하지 않아야 한다. 출력과 다음 슬롯이 모두 유한한 cancellation 사례를 별도로 검증한다.
+- `m9-sequence-subnormal-constant` / `m9-sequence-subnormal-tie`: 균등 선형 sequence의 상수 MIN_VALUE는 그대로 유지하고, MIN_VALUE와2×MIN_VALUE의 중간값은 round-to-nearest-even으로2×MIN_VALUE다. 일반 절대 오차 허용으로0 결과를 통과시키지 않는다.
+- `m9-numeric-change-boolean`: initial=false와 입력[false,true,true]의 change 결과는[false,true,false]다. 숫자 sign 비교와 허용하는 boolean equality를 구분한다.
+
+읽기 전용 독립 검토에서 선택12fixture의40개 raw sample을 정확 비교하고 마지막 기록 tick의 Propagation Delay 진단2건을 원본 node/tick/time으로 재현했다. causal 필터 임시 overflow·sequence subnormal·boolean 변화 검출은 구현 담당이 교정했고 해당 probe가 통과했다. 전체 선언 옵션·actual TS·배포 build·UI 회귀의 단계 승인 결과는 root 검증에 따라 별도로 기록한다.
+
+신규31행의 제한 범위와 기존05-009의 추적 교정1행을 승인해 현재source subset211행·미구현174행이다. 원본08-028 Sine Wave Function의 sample-based 후속도 추적하지만 M9 firstWork58행에는 추가 합산하지 않는다. 최종151raw fixture records·30preset mode records·10실패 parity·693raw samples·191actual TypeScript 프로그램과31파일2,175개 전체 unit이 통과했다. 마지막 수치 수정 전 전체browser129/129와 수정 후 영향받은5/5는 별도 기록이며 최종 전체CI 실행은 대기다. [검증 기록](m9-validation.md)에 근거와 남은 공개검증을 기록한다.
 
 ## 작업 family와 추가 옵션 inventory
 
@@ -134,7 +172,7 @@ Read-before-write는 기존 Delay/Unit Delay/Rate Transition 경계의 결정성
 원본 ID: 05-013 · 분류: `new-primitive`
 
 - `m9-propagation-delay-01`: sample input at Tk, publish Uk at Tk+Dk; y0 before first release·bounded schedule queue; dt>128*Number.EPSILON, finite scalar 양수 검사
-- `m9-propagation-delay-02`: fixed interval path: positive delay>Ts, delay/Ts floor to integer grid·publish times strictly increasing
+- `m9-propagation-delay-02`: fixed interval path: positive delay>Ts, delay/Ts floor to integer grid·raw arrival strictly increasing; quantized release ties는 capture 순서의 마지막 값 발행
 - `m9-propagation-delay-03`: run-at-fixed=false는 arbitrary release events scheduler 요구; M9 discrete scheduler로 가능한 경로는 구현, ODE event alignment M12와 분리
 - `m9-propagation-delay-04`: 동적delay 변경·last release·out-of-order·queue budget·node/tick diagnostics
 
@@ -157,6 +195,8 @@ Read-before-write는 기존 Delay/Unit Delay/Rate Transition 경계의 결정성
 ### m9-running-minmax · resettable 누적 극값
 
 원본 ID: 08-017 · 분류: `new-primitive`
+
+최초 대응은 `operation=max`의 현재 입력 포함 누적 계산인 독립 설정 대체다. 원본의 no-direct-feedthrough 특성 및 reset exact-IC 위상은 reference 미확정으로 남긴다.
 
 - `m9-running-minmax-01`: element/channel별 누적 min 또는 max·real shape 및 initial state
 - `m9-running-minmax-02`: reset input의 configured predicate·current input 포함/제외 시점·첫 출력
@@ -295,73 +335,73 @@ vector resolution의 any-membership 문구와 동일차원 element-wise 문구�
 
 ## 모든 원본행의 처리 경로
 
-이 표의 status는 baseline 그대로이며 이번 단계 완료를 뜻하지 않는다. 각 행의 전체 required task와 후속 옵션은 JSON으로 조회한다. 영문명·분류·조건·원본 line은 JSON에 무손실 보존했다.
+baseline 상태 열은 immutable catalog 기준이다. 선택 canonical/configuration은 검증한 제한 API이며 현재 source 상태와 evidence는 JSON의approval 및 source 승인 근거에서 확인한다. 이 표는 baseline 상태를 덮어쓰거나 원본 전체 옵션 완료를 뜻하지 않는다.
 
-| 원본 ID | 블럭명 | baseline | 이번 작업 분류 | 계약 family | 후속 |
+| ID | 원본 이름 | baseline 상태 | 선택 경로 | canonical / 구성 | 후속 gate |
 | --- | --- | --- | --- | --- | --- |
-| [01-005](../dataset/Simulink_Basic_Blocks_R2024b.md#library-01) | Delay | M2 승인 subset | existing-options | m9-delay | M10, M12, M15, M16 |
-| [01-007](../dataset/Simulink_Basic_Blocks_R2024b.md#library-01) | Discrete-Time Integrator | M2 승인 subset | existing-options | m9-integrator | M10, M12, M15, M16 |
-| [04-006](../dataset/Simulink_Basic_Blocks_R2024b.md#library-04) | PWM | 미구현 | new-primitive | m9-pulses | M10, M12, M15, M16 |
-| [04-013](../dataset/Simulink_Basic_Blocks_R2024b.md#library-04) | Variable Pulse Generator | 미구현 | new-primitive | m9-pulses | M10, M12, M15, M16 |
-| [05-001](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Delay | M2 승인 subset | existing-options | m9-delay | M10, M12, M15, M16 |
-| [05-002](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Difference | M2 승인 subset | existing-options | m9-difference | M10, M15, M16 |
-| [05-003](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete Derivative | M2 승인 subset | existing-options | m9-derivative | M10, M15, M16 |
-| [05-004](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete FIR Filter | M2 승인 subset | existing-options | m9-fir | M10, M15, M16 |
-| [05-005](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete Filter | 미구현 | new-primitive | m9-iir-filter | M10, M15, M16 |
-| [05-006](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete PID Controller | 미구현 | new-primitive | m9-pid | M10, M12, M15, M16 |
-| [05-007](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete PID Controller (2DOF) | 미구현 | new-primitive | m9-pid | M10, M12, M15, M16 |
-| [05-008](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete State-Space | M2 승인 subset | existing-options | m9-state-space | M10, M15, M16 |
-| [05-009](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete Transfer Fcn | M2 승인 subset | existing-options | m9-transfer-function | M10, M15, M16 |
-| [05-010](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete Zero-Pole | 미구현 | existing-options | m9-transfer-function | M10, M15, M16 |
-| [05-011](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete-Time Integrator | M2 승인 subset | existing-options | m9-integrator | M10, M12, M15, M16 |
-| [05-013](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Propagation Delay | 미구현 | new-primitive | m9-propagation-delay | M10, M12, M15, M16 |
-| [05-014](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Resettable Delay | M2 승인 subset | existing-options | m9-delay | M10, M12, M15, M16 |
-| [05-015](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Tapped Delay | 미구현 | existing-options | m9-delay | M10, M12, M15, M16 |
-| [05-016](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Transfer Fcn First Order | 미구현 | existing-options | m9-transfer-function | M10, M15, M16 |
-| [05-017](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Transfer Fcn Lead or Lag | 미구현 | existing-options | m9-transfer-function | M10, M15, M16 |
-| [05-018](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Transfer Fcn Real Zero | 미구현 | existing-options | m9-transfer-function | M10, M15, M16 |
-| [05-019](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Unit Delay | M2 승인 subset | existing-options | m9-delay | M10, M12, M15, M16 |
-| [05-020](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Variable Integer Delay | 미구현 | existing-options | m9-delay | M10, M12, M15, M16 |
-| [05-021](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Zero-Order Hold | M3 승인 subset | existing-options | m9-zero-order-hold | M10, M15, M16 |
-| [06-008](../dataset/Simulink_Basic_Blocks_R2024b.md#library-06) | Detect Change | M2 승인 subset | existing-options | m9-detect | M10, M15, M16 |
-| [06-009](../dataset/Simulink_Basic_Blocks_R2024b.md#library-06) | Detect Decrease | 미구현 | existing-options | m9-detect | M10, M15, M16 |
-| [06-010](../dataset/Simulink_Basic_Blocks_R2024b.md#library-06) | Detect Fall Negative | 미구현 | existing-options | m9-detect | M10, M15, M16 |
-| [06-011](../dataset/Simulink_Basic_Blocks_R2024b.md#library-06) | Detect Fall Nonpositive | 미구현 | existing-options | m9-detect | M10, M15, M16 |
-| [06-012](../dataset/Simulink_Basic_Blocks_R2024b.md#library-06) | Detect Increase | 미구현 | existing-options | m9-detect | M10, M15, M16 |
-| [06-013](../dataset/Simulink_Basic_Blocks_R2024b.md#library-06) | Detect Rise Nonnegative | 미구현 | existing-options | m9-detect | M10, M15, M16 |
-| [06-014](../dataset/Simulink_Basic_Blocks_R2024b.md#library-06) | Detect Rise Positive | 미구현 | existing-options | m9-detect | M10, M15, M16 |
-| [08-017](../dataset/Simulink_Basic_Blocks_R2024b.md#library-08) | MinMax Running Resettable | 미구현 | new-primitive | m9-running-minmax | M10, M15, M16 |
-| [08-038](../dataset/Simulink_Basic_Blocks_R2024b.md#library-08) | Weighted Sample Time Math | 미구현 | new-primitive | m9-weighted-time | M10, M12, M15, M16 |
-| [11-002](../dataset/Simulink_Basic_Blocks_R2024b.md#library-11) | Check Discrete Gradient | 미구현 | new-primitive | m9-gradient | M10, M15, M16 |
-| [11-007](../dataset/Simulink_Basic_Blocks_R2024b.md#library-11) | Check Input Resolution | 미구현 | new-primitive | m9-resolution | M10, M15, M16 |
-| [14-007](../dataset/Simulink_Basic_Blocks_R2024b.md#library-14) | IC | 미구현 | new-primitive | m9-ic | M10, M15, M16 |
-| [14-009](../dataset/Simulink_Basic_Blocks_R2024b.md#library-14) | Rate Transition | M2 승인 subset | existing-options | m9-rate-transition | M10, M15, M16 |
-| [14-013](../dataset/Simulink_Basic_Blocks_R2024b.md#library-14) | Weighted Sample Time | 미구현 | new-primitive | m9-weighted-time | M10, M12, M15, M16 |
-| [17-001](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Band-Limited White Noise | 미구현 | new-primitive | m9-band-noise | M10, M14, M15, M16 |
-| [17-002](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Chirp Signal | catalog 승인 subset | existing-options | m9-chirp | M10, M12, M15, M16 |
-| [17-003](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Clock | M2 승인 subset | existing-options | m9-clock | M10, M12, M15, M16 |
-| [17-005](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Counter Free-Running | 미구현 | new-primitive | m9-counter | M10, M15, M16 |
-| [17-006](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Counter Limited | 미구현 | new-primitive | m9-counter | M10, M15, M16 |
-| [17-007](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Digital Clock | M2 승인 subset | existing-options | m9-clock | M10, M12, M15, M16 |
-| [17-016](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Pulse Generator | M2 승인 subset | existing-options | m9-pulses | M10, M15, M16 |
-| [17-017](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Ramp | M2 승인 subset | existing-options | m9-ramp | M10, M15, M16 |
-| [17-018](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Random Number | M2 승인 subset | existing-options | m9-random | M10, M14, M15, M16 |
-| [17-019](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Repeating Sequence | M2 승인 subset | existing-options | m9-repeating | M10, M15, M16 |
-| [17-020](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Repeating Sequence Interpolated | M2 승인 subset | existing-options | m9-repeating | M10, M15, M16 |
-| [17-021](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Repeating Sequence Stair | M2 승인 subset | existing-options | m9-repeating | M10, M15, M16 |
-| [17-023](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Signal Generator | 미구현 | new-primitive | m9-signal-generator | M10, M15, M16 |
-| [17-024](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Sine Wave | M2 승인 subset | existing-options | m9-sine-wave | M10, M12, M15, M16 |
-| [17-025](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Step | M2 승인 subset | existing-options | m9-step | M10, M15, M16 |
-| [17-026](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Uniform Random Number | M2 승인 subset | existing-options | m9-random | M10, M14, M15, M16 |
-| [20-002](../dataset/Simulink_Basic_Blocks_R2024b.md#library-20) | Transfer Fcn Direct Form II | 미구현 | new-primitive | m9-iir-filter | M10, M15, M16 |
-| [20-003](../dataset/Simulink_Basic_Blocks_R2024b.md#library-20) | Transfer Fcn Direct Form II Time Varying | 미구현 | new-primitive | m9-iir-filter | M10, M15, M16 |
-| [20-006](../dataset/Simulink_Basic_Blocks_R2024b.md#library-20) | Decrement Time To Zero | 미구현 | new-primitive | m9-weighted-time | M10, M15, M16 |
-| [21-014](../dataset/Simulink_Basic_Blocks_R2024b.md#library-21) | Discrete State-Space | M2 승인 subset | existing-options | m9-state-space | M10, M15, M16 |
+| [01-005](../dataset/Simulink_Basic_Blocks_R2024b.md#library-01) | Delay | M2 승인 subset | 제한 계산 경로 | `discrete.delay-configured` {"mode":"fixed"} | M10, M12, M15, M16 |
+| [01-007](../dataset/Simulink_Basic_Blocks_R2024b.md#library-01) | Discrete-Time Integrator | M2 승인 subset | 제한 계산 경로 | `discrete.integrator-configured` 선언 기본값 | M10, M12, M15, M16 |
+| [04-006](../dataset/Simulink_Basic_Blocks_R2024b.md#library-04) | PWM | 미구현 | 제한 계산 경로 | `source.pwm` 선언 기본값 | M10, M12, M15, M16 |
+| [04-013](../dataset/Simulink_Basic_Blocks_R2024b.md#library-04) | Variable Pulse Generator | 미구현 | 제한 계산 경로 | `source.variable-pulse` 선언 기본값 | M10, M12, M15, M16 |
+| [05-001](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Delay | M2 승인 subset | 제한 계산 경로 | `discrete.delay-configured` {"mode":"fixed"} | M10, M12, M15, M16 |
+| [05-002](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Difference | M2 승인 subset | 제한 계산 경로 | `discrete.difference-configured` {"operation":"difference"} | M10, M15, M16 |
+| [05-003](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete Derivative | M2 승인 subset | 제한 계산 경로 | `discrete.difference-configured` {"operation":"derivative"} | M10, M15, M16 |
+| [05-004](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete FIR Filter | M2 승인 subset | 공유 preset | `discrete.filter` {"denominator":[1],"representation":"filter"} · preset `fir-configured` | M10, M15, M16 |
+| [05-005](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete Filter | 미구현 | 제한 계산 경로 | `discrete.filter` {"representation":"filter"} | M10, M15, M16 |
+| [05-006](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete PID Controller | 미구현 | 제한 계산 경로 | `discrete.pid` 선언 기본값 | M10, M12, M15, M16 |
+| [05-007](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete PID Controller (2DOF) | 미구현 | 제한 계산 경로 | `discrete.pid-2dof` 선언 기본값 | M10, M12, M15, M16 |
+| [05-008](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete State-Space | M2 승인 subset | 제한 계산 경로 | `discrete.state-space-mimo` 선언 기본값 | M10, M15, M16 |
+| [05-009](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete Transfer Fcn | M2 승인 subset | 공유 preset | `discrete.filter` {"representation":"transfer"} · preset `transfer-configured` | M10, M15, M16 |
+| [05-010](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete Zero-Pole | 미구현 | 제한 계산 경로 | `discrete.zero-pole` 선언 기본값 | M10, M15, M16 |
+| [05-011](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Discrete-Time Integrator | M2 승인 subset | 제한 계산 경로 | `discrete.integrator-configured` 선언 기본값 | M10, M12, M15, M16 |
+| [05-013](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Propagation Delay | 미구현 | fixed-grid subset 후보 | `discrete.propagation-delay` 선언 기본값 | M10, M12, M15, M16 |
+| [05-014](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Resettable Delay | M2 승인 subset | 제한 계산 경로 | `discrete.delay-configured` {"mode":"fixed","reset":"level"} | M10, M12, M15, M16 |
+| [05-015](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Tapped Delay | 미구현 | 제한 계산 경로 | `discrete.tapped-delay` 선언 기본값 | M10, M12, M15, M16 |
+| [05-016](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Transfer Fcn First Order | 미구현 | 독립 설정 대체 | `discrete.filter` {"numerator":[0.5,0],"denominator":[1,-0.5],"representation":"transfer"} · preset `first-order-response` | M10, M15, M16 |
+| [05-017](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Transfer Fcn Lead or Lag | 미구현 | 독립 설정 대체 | `discrete.filter` {"numerator":[1,-0.25],"denominator":[1,-0.5],"representation":"transfer"} · preset `lead-lag-response` | M10, M15, M16 |
+| [05-018](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Transfer Fcn Real Zero | 미구현 | 독립 설정 대체 | `discrete.filter` {"numerator":[1,-0.5],"denominator":[1],"representation":"filter"} · preset `real-zero-response` | M10, M15, M16 |
+| [05-019](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Unit Delay | M2 승인 subset | 제한 계산 경로 | `discrete.delay-configured` {"mode":"fixed","steps":1} | M10, M12, M15, M16 |
+| [05-020](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Variable Integer Delay | 미구현 | 제한 계산 경로 | `discrete.delay-configured` {"mode":"variable","allowZero":"yes","casting":"truncate-clamp"} | M10, M12, M15, M16 |
+| [05-021](../dataset/Simulink_Basic_Blocks_R2024b.md#library-05) | Zero-Order Hold | M3 승인 subset | 기존 subset 보존 | `time.zero-order-hold` 선언 기본값 | M10, M15, M16 |
+| [06-008](../dataset/Simulink_Basic_Blocks_R2024b.md#library-06) | Detect Change | M2 승인 subset | 공유 preset | `logic.numeric-edge` {"mode":"change"} · preset `detect-change` | M10, M15, M16 |
+| [06-009](../dataset/Simulink_Basic_Blocks_R2024b.md#library-06) | Detect Decrease | 미구현 | 공유 preset | `logic.numeric-edge` {"mode":"decrease"} · preset `detect-decrease` | M10, M15, M16 |
+| [06-010](../dataset/Simulink_Basic_Blocks_R2024b.md#library-06) | Detect Fall Negative | 미구현 | 공유 preset | `logic.numeric-edge` {"mode":"fall-negative"} · preset `detect-fall-negative` | M10, M15, M16 |
+| [06-011](../dataset/Simulink_Basic_Blocks_R2024b.md#library-06) | Detect Fall Nonpositive | 미구현 | 공유 preset | `logic.numeric-edge` {"mode":"fall-nonpositive"} · preset `detect-fall-nonpositive` | M10, M15, M16 |
+| [06-012](../dataset/Simulink_Basic_Blocks_R2024b.md#library-06) | Detect Increase | 미구현 | 공유 preset | `logic.numeric-edge` {"mode":"increase"} · preset `detect-increase` | M10, M15, M16 |
+| [06-013](../dataset/Simulink_Basic_Blocks_R2024b.md#library-06) | Detect Rise Nonnegative | 미구현 | 공유 preset | `logic.numeric-edge` {"mode":"rise-nonnegative"} · preset `detect-rise-nonnegative` | M10, M15, M16 |
+| [06-014](../dataset/Simulink_Basic_Blocks_R2024b.md#library-06) | Detect Rise Positive | 미구현 | 공유 preset | `logic.numeric-edge` {"mode":"rise-positive"} · preset `detect-rise-positive` | M10, M15, M16 |
+| [08-017](../dataset/Simulink_Basic_Blocks_R2024b.md#library-08) | MinMax Running Resettable | 미구현 | 독립 설정 대체 | `math.running-minmax` `operation=max`; 현재 입력 포함·reset IC 누적의 위상 차이 | M9-followup, M10, M15, M16 |
+| [08-038](../dataset/Simulink_Basic_Blocks_R2024b.md#library-08) | Weighted Sample Time Math | 미구현 | 제한 계산 경로 | `time.weighted-math` `operation=multiply`; minus polarity 미확정 | M9-followup, M10, M12, M15, M16 |
+| [11-002](../dataset/Simulink_Basic_Blocks_R2024b.md#library-11) | Check Discrete Gradient | 미구현 | 제한 계산 경로 | `verify.gradient` 선언 기본값 | M10, M15, M16 |
+| [11-007](../dataset/Simulink_Basic_Blocks_R2024b.md#library-11) | Check Input Resolution | 미구현 | 제한 계산 경로 | `verify.resolution` 선언 기본값 | M10, M15, M16 |
+| [14-007](../dataset/Simulink_Basic_Blocks_R2024b.md#library-14) | IC | 미구현 | 제한 계산 경로 | `signal.initial-condition` 선언 기본값 | M10, M15, M16 |
+| [14-009](../dataset/Simulink_Basic_Blocks_R2024b.md#library-14) | Rate Transition | M2 승인 subset | 기존 subset 보존 | `time.rate-transition` 선언 기본값 | M10, M15, M16 |
+| [14-013](../dataset/Simulink_Basic_Blocks_R2024b.md#library-14) | Weighted Sample Time | 미구현 | 공유 preset | `time.weighted-math` {"operation":"TsOnly"} · preset `weighted-sample-time` | M10, M12, M15, M16 |
+| [17-001](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Band-Limited White Noise | 미구현 | 제한 계산 경로 | `source.band-limited-noise` 선언 기본값 | M10, M14, M15, M16 |
+| [17-002](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Chirp Signal | catalog 승인 subset | 기존 subset 보존 | `source.chirp` 선언 기본값 | M10, M12, M15, M16 |
+| [17-003](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Clock | M2 승인 subset | 기존 subset 보존 | `source.clock` 선언 기본값 | M10, M12, M15, M16 |
+| [17-005](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Counter Free-Running | 미구현 | 제한 계산 경로 | `source.counter` {"mode":"free"} | M10, M15, M16 |
+| [17-006](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Counter Limited | 미구현 | 공유 preset | `source.counter` {"mode":"limited"} · preset `limited-counter` | M10, M15, M16 |
+| [17-007](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Digital Clock | M2 승인 subset | 기존 subset 보존 | `source.digital-clock` 선언 기본값 | M10, M12, M15, M16 |
+| [17-016](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Pulse Generator | M2 승인 subset | 기존 subset 보존 | `source.pulse` 선언 기본값 | M10, M15, M16 |
+| [17-017](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Ramp | M2 승인 subset | 기존 subset 보존 | `source.ramp` 선언 기본값 | M10, M15, M16 |
+| [17-018](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Random Number | M2 승인 subset | 제한 계산 경로 | `source.random-configured` {"distribution":"normal"} | M10, M14, M15, M16 |
+| [17-019](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Repeating Sequence | M2 승인 subset | 기존 subset 보존 | `source.repeating-sequence` 선언 기본값 | M10, M15, M16 |
+| [17-020](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Repeating Sequence Interpolated | M2 승인 subset | 샘플 확장 후보 | `source.sequence-configured` {"interpolation":"linear"} | M10, M15, M16 |
+| [17-021](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Repeating Sequence Stair | M2 승인 subset | 샘플 확장 후보 | `source.sequence-configured` {"interpolation":"previous"} | M10, M15, M16 |
+| [17-023](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Signal Generator | 미구현 | 제한 계산 경로 | `source.signal-generator` 선언 기본값 | M10, M15, M16 |
+| [17-024](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Sine Wave | M2 승인 subset | 제한 계산 경로 | `source.sine-configured` 선언 기본값 | M10, M12, M15, M16 |
+| [17-025](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Step | M2 승인 subset | 기존 subset 보존 | `source.step` 선언 기본값 | M10, M15, M16 |
+| [17-026](../dataset/Simulink_Basic_Blocks_R2024b.md#library-17) | Uniform Random Number | M2 승인 subset | 제한 계산 경로 | `source.random-configured` {"distribution":"uniform"} | M10, M14, M15, M16 |
+| [20-002](../dataset/Simulink_Basic_Blocks_R2024b.md#library-20) | Transfer Fcn Direct Form II | 미구현 | 공유 preset | `discrete.filter` {"structure":"df2","representation":"filter"} · preset `direct-form-ii` | M10, M15, M16 |
+| [20-003](../dataset/Simulink_Basic_Blocks_R2024b.md#library-20) | Transfer Fcn Direct Form II Time Varying | 미구현 | 제한 계산 경로 | `discrete.filter-time-varying` 선언 기본값 | M10, M15, M16 |
+| [20-006](../dataset/Simulink_Basic_Blocks_R2024b.md#library-20) | Decrement Time To Zero | 미구현 | 제한 계산 경로 | `time.decrement-to-zero` 선언 기본값 | M10, M15, M16 |
+| [21-014](../dataset/Simulink_Basic_Blocks_R2024b.md#library-21) | Discrete State-Space | M2 승인 subset | 제한 계산 경로 | `discrete.state-space-mimo` 선언 기본값 | M10, M15, M16 |
 
 ## 종료 조건과 검증
 
 - 검토된 최초 납품: P0 미구현 계산의 bounded 대응과 이번 구현이 선언한 모든 mode/shape/options를 compiler/runtime/JSON/UI/TS에서 독립 oracle로 검증; 추가 옵션 후보 전체 구현을 요구하는 gate가 아님
-- 기존144 registry와71catalog fixture의 지원모드·수치값·JSON·actualTS 회귀; source row별 승격은 root가 evidence로 별도 결정
+- 이전185 registry 정의와M8 120fixture+8preset 및catalog71fixture의 지원모드·수치값·JSON·actualTS 회귀; source row별 승격은 root가 evidence로 별도 결정
 - 원본385행/339이름/datasetdigest 및 baseline status 보존; preset/definition/contract-family/kernel/원본행 별도 지표
 - 선언한 mode/shape/options·domainfailure·resourcebudget·TS raw samples·JSON roundtrip 검증, Python은 선언된 subset만
 - R2024b 미확정·설명 충돌은 승인범위를 subset/독립대체로 명시; 미확정 current-help 옵션을 최초 납품 blocker로 자동 추가하지 않음

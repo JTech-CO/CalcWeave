@@ -2,6 +2,7 @@ import type { BlockType, CalcModel, CalcNode, ExecutionMode } from '../../model/
 import { EXPANSION_BLOCK_DEFINITIONS } from './expansion';
 import { TIME_SOURCE_DEFINITIONS } from './time-sources';
 import { getM8Ports, M8_BLOCK_DEFINITIONS, M8_BLOCK_PRESETS } from './m8';
+import { getM9Ports, getM9DirectFeedthroughPorts, M9_BLOCK_DEFINITIONS, M9_BLOCK_PRESETS } from './m9';
 import { UNITS } from '../../model/src/signal';
 import { PYTHON_TARGET } from '../../codegen-python/src/capabilities';
 
@@ -139,11 +140,11 @@ function deepFreeze<T>(value: T): T {
 
 /** Typed algebraic, fixed-tick discrete and bounded continuous/mixed contracts. */
 const pythonBlockIds: ReadonlySet<string> = new Set(PYTHON_TARGET.blockIds);
-export const blockRegistry: readonly BlockDefinition[] = deepFreeze([...definitions, ...EXPANSION_BLOCK_DEFINITIONS, ...TIME_SOURCE_DEFINITIONS, ...M8_BLOCK_DEFINITIONS].map(definition => ({
+export const blockRegistry: readonly BlockDefinition[] = deepFreeze([...definitions, ...EXPANSION_BLOCK_DEFINITIONS, ...TIME_SOURCE_DEFINITIONS, ...M8_BLOCK_DEFINITIONS, ...M9_BLOCK_DEFINITIONS].map(definition => ({
   ...definition, exportTargets: pythonBlockIds.has(definition.id) ? ['typescript', 'python'] as const : ['typescript'] as const,
 })));
 export const BLOCK_REGISTRY = blockRegistry;
-export const blockPresets = deepFreeze(M8_BLOCK_PRESETS);
+export const blockPresets = deepFreeze([...M8_BLOCK_PRESETS, ...M9_BLOCK_PRESETS]);
 const registryById = new Map<string, BlockDefinition>(blockRegistry.map((definition) => [definition.id, definition]));
 export function getBlockDefinition(id: string): BlockDefinition | undefined { return registryById.get(id); }
 
@@ -151,6 +152,8 @@ export function getBlockDefinition(id: string): BlockDefinition | undefined { re
 export function getBlockPorts(node: Pick<CalcNode, 'blockType' | 'parameters'>, context?: Pick<CalcModel, 'subsystems'>): { inputs: string[]; outputs: string[] } {
   const definition = getBlockDefinition(node.blockType);
   if (!definition) return { inputs: [], outputs: [] };
+  const m9Ports = getM9Ports(node);
+  if (m9Ports) return m9Ports;
   const m8Ports = getM8Ports(node);
   if (m8Ports) return m8Ports;
   if (node.blockType === 'hierarchy.subsystem') {
@@ -171,6 +174,8 @@ export function getBlockPorts(node: Pick<CalcNode, 'blockType' | 'parameters'>, 
 
 /** Coefficient-dependent feedthrough is part of the approved discrete realization. */
 export function isDirectFeedthrough(node: Pick<CalcNode, 'blockType' | 'parameters'>): boolean {
+  const m9Ports = getM9DirectFeedthroughPorts(node);
+  if (m9Ports) return m9Ports.length > 0;
   if (node.blockType === 'discrete.fir') return (node.parameters.coefficients as unknown[] | undefined)?.[0] !== 0;
   if (node.blockType === 'discrete.transfer-function') return (node.parameters.numerator as unknown[] | undefined)?.[0] !== 0;
   if (node.blockType === 'discrete.state-space') return node.parameters.D !== 0;
@@ -179,4 +184,11 @@ export function isDirectFeedthrough(node: Pick<CalcNode, 'blockType' | 'paramete
   if (node.blockType === 'continuous.zero-pole') return (node.parameters.zeros as unknown[] | undefined)?.length === (node.parameters.poles as unknown[] | undefined)?.length && node.parameters.gain !== 0;
   if (node.blockType === 'continuous.pid') return (node.parameters.kp as number) + (node.parameters.kd as number) * (node.parameters.filterN as number) !== 0;
   return getBlockDefinition(node.blockType)?.directFeedthrough ?? false;
+}
+
+/** Existing definitions preserve their previous reset/commit dependency semantics. */
+export function getDirectFeedthroughPorts(node: Pick<CalcNode, 'blockType' | 'parameters'>): string[] {
+  const m9Ports = getM9DirectFeedthroughPorts(node);
+  if (m9Ports) return m9Ports;
+  return isDirectFeedthrough(node) ? getBlockPorts(node).inputs.filter(port => port !== 'reset') : [];
 }
