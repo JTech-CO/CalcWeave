@@ -4,7 +4,7 @@
 
 [웹 베타 열기](https://jtech-co.github.io/CalcWeave/) · [기술 백서](docs/01-technical-whitepaper.md) · [디자인 백서](docs/02-design-whitepaper.md) · [운영 안내](docs/operations.md) · [검증과 증거](docs/validation.md)
 
-현재 소스는 앱 `0.17.2` / 엔진 `0.17.0-m16`입니다. 도움말을 사용 안내·블록 찾기·파일·코드·앱 정보로 정리했습니다. 공개 주소의 버전과 실제 배포 결과는 [검증 문서](docs/validation.md)에서 확인할 수 있습니다. 목표 브랜드 도메인은 **CalcWeave.com**, 운영자는 **JTech-Co**, 문의는 [jtech-bryan@proton.me](mailto:jtech-bryan@proton.me)입니다.
+현재 공개 앱은 `0.17.2` / 엔진 `0.17.0-m16`입니다. 도움말을 사용 안내·블록 찾기·파일·코드·앱 정보로 정리하고 병합·GitHub Pages 갱신을 완료했습니다. [실제 CI·공개 검증 결과](docs/validation.md#제품-도움말-공개-결과)를 확인할 수 있습니다. 목표 브랜드 도메인은 **CalcWeave.com**, 운영자는 **JTech-Co**, 문의는 [jtech-bryan@proton.me](mailto:jtech-bryan@proton.me)입니다.
 
 ## 현재 범위
 

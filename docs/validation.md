@@ -110,3 +110,11 @@ M16 구현 검사 후 중복된 M0~M15 계약·진행 기록과 이전 계획·�
 | 의존성 | [npm audit](evidence/product-help-dependency-audit.json) 알려진 취약점0개. |
 
 [변경·보안 기준·보존 검사](evidence/product-help-engineering-checks.json)에 검색 길이·허용 목록·React 출력 이스케이프와 개인정보 흐름 변경 없음, 엔진·지원표·과거 증거 보존 상태를 기록했다. 첫 UI 실행은 중간 빌드 교체를 감지한 [7조건 부분 결과](evidence/product-help-initial-ui-verification.json), 다음 실행은 DOM10조건 통과 후 제목 가림을 발견한 [시각 실패 결과](evidence/product-help-initial2-ui-verification.json)로 보존한다. 최종 검사의 앱 콘솔 오류와 페이지 오류는0이며 자동 favicon.ico 요청404는 별도로 기록했다. 사용자 브라우저의 저장 데이터는 접근하지 않았다.
+
+## 제품 도움말 공개 결과
+
+[Actions 37140475203](https://github.com/JTech-CO/CalcWeave/actions/runs/37140475203)는 main `9d4e3c375f1b4361990d4a80c68cc14da56967b1`에서 단위3,883/3,883·전체 브라우저204/204·프로젝트 경로4/4와 기존 모든 단계 회귀·release91검사를 통과한 뒤 앱0.17.2/엔진0.17.0-m16을 게시했다. 공개16assets와 service worker는 로컬 프로젝트 artifact와 byte/SHA가 일치했다. release ID는 `8f43d3362987d007748878b63b0505063eb54e199888d961aeb89ecfb7f052d9`다.
+
+[공개 기본9검사](evidence/product-help-public-browser-verification.json)와 [실제 공개 기능35케이스](evidence/product-help-public-feature-browser-results.json)가 통과했다. 제품 중심 첫 안내·블록 검색·4개 메뉴·닫힌 기술/호환성 정보·기존 대응표와 어댑터 상세·탭 전환 스크롤·키보드 초점과 기존 백업·복구 경로를 독립 브라우저에서 확인했다. 사용자 브라우저의 저장 데이터는 접근하지 않았다.
+
+[변경·로컬 검증](evidence/product-help-engineering-checks.json)·[CI 원본 요약](evidence/product-help-actions-verification.json)·[정확한 공개 파일](evidence/product-help-deployment-verification.json)·[공개 결과](evidence/product-help-public-release.json). 과거 실패와 M16 승인·문서 정리 증거는 보존한다. 기술적 앱 배포 PASS와 정식 출시·실제 초보자 관찰·목표 도메인·원본 전체 동등성의 미검증 상태는 구분한다.
