@@ -1,0 +1,35 @@
+{
+  "generatedAt": "2026-10-03T02:10:34.593041+00:00",
+  "runId": 37087756063,
+  "runUrl": "https://github.com/JTech-CO/CalcWeave/actions/runs/37087756063",
+  "sourceSha": "a186c8948ee4b813e4b4d89da70509fd77b909b4",
+  "status": "failed-before-publication",
+  "deploymentSkipped": true,
+  "browserPassed": 129,
+  "browserFailed": 1,
+  "browserTotal": 130,
+  "controlledStaleMeasurementRegressionPassed": true,
+  "failedPhase": "Initial1440 canvas after asynchronous header layout change.",
+  "observedCanvas": {
+    "x": 250,
+    "y": 248,
+    "width": 558,
+    "height": 670
+  },
+  "fittedPriorCanvas": {
+    "x": 250,
+    "y": 226,
+    "width": 558,
+    "height": 692
+  },
+  "observedViewport": {
+    "x": -23.4,
+    "y": 195.6,
+    "zoom": 0.8
+  },
+  "centerError": {
+    "x": -1.52587890625e-05,
+    "y": 11
+  },
+  "followup": "Reserve geometry across initial asynchronous save labels; preserve previous measurement-race correction and user navigation."
+}

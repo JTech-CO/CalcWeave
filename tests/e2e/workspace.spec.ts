@@ -146,6 +146,46 @@ test('Initial fit waits for a delayed positive canvas measurement and preserves 
   expect(await canvasViewport(page)).toEqual(navigated);
 });
 
+test('First autosave keeps the header and initially fitted canvas stable when status labels wrap', async ({ page }) => {
+  await page.addInitScript(() => {
+    const state = window as typeof window & { startupSavePending?: boolean; releaseStartupSave?: () => void };
+    const style = document.createElement('style');
+    // Reproduce the Linux CI's 22px extra header row with deterministic font metrics.
+    style.textContent = '.project-name {flex:0 0 260px!important;gap:0!important;} .project-name>input {height:47px!important;} .save-indicator {line-height:22px!important;}';
+    const attach = new MutationObserver(() => { if (document.head && !style.isConnected) { document.head.append(style); attach.disconnect(); } });
+    attach.observe(document, { childList: true, subtree: true });
+    const timeout = window.setTimeout;
+    let held = false;
+    window.setTimeout = ((handler: TimerHandler, delay?: number, ...args: unknown[]) => {
+      if (!held && typeof handler === 'function' && delay === 500) {
+        held = true; state.releaseStartupSave = () => handler(...args);
+        return timeout(() => { state.startupSavePending = true; }, delay);
+      }
+      return timeout(handler, delay, ...args);
+    }) as typeof window.setTimeout;
+  });
+  await page.goto('/');
+  await page.waitForFunction(() => (window as typeof window & { startupSavePending?: boolean }).startupSavePending === true);
+  // Reserved labels must not falsely signal that the still-held save is complete.
+  await expect(page.locator('.save-indicator')).toHaveText('변경됨');
+  await expectDiagramInsideCanvas(page);
+  const headerBefore = (await page.locator('.app-header').boundingBox())!;
+  const canvasBefore = (await page.locator('.canvas-area > .react-flow').boundingBox())!;
+  await page.evaluate(() => (window as typeof window & { releaseStartupSave: () => void }).releaseStartupSave());
+  await expect(page.locator('.save-indicator')).toHaveText('브라우저에 저장됨');
+  expect(await page.locator('.app-header').boundingBox()).toEqual(headerBefore);
+  expect(await page.locator('.canvas-area > .react-flow').boundingBox()).toEqual(canvasBefore);
+  await expectDiagramInsideCanvas(page);
+
+  await page.getByRole('button', { name: '캔버스 축소', exact: true }).click();
+  const navigated = await canvasViewport(page);
+  await page.getByLabel('모델 이름').fill('저장 상태와 화면 유지');
+  await page.getByLabel('모델 이름').press('Enter');
+  await expect(page.locator('.save-indicator')).toHaveText('브라우저에 저장됨');
+  expect(await page.locator('.app-header').boundingBox()).toEqual(headerBefore);
+  expect(await canvasViewport(page)).toEqual(navigated);
+});
+
 for (const width of [1440, 1920]) {
   test(`First load and delayed saved-model restoration fit the actual ${width}px canvas without resetting later user navigation`, async ({ page }) => {
     const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
