@@ -1,6 +1,6 @@
 # M9 DSP·이산 상태 구축 및 검증 기록
 
-2026-10-03 KST · 문서 v0.2 · 앱0.10.0 · 엔진0.10.0-m9 · 모델schema1 · 상태: **로컬 선언 범위 검증 완료(`verified-declared-scope`)**. 공개 앱 배포·실제 주소 검증도 완료했다. 전체 서비스 출시 게이트는 별도다.
+2026-10-03 KST · 문서 v0.2 · 초기 engineering 앱0.10.0 · 현재 공개 앱0.10.1 · 엔진0.10.0-m9 · 모델schema1 · 상태: **로컬 선언 범위 검증 완료(`verified-declared-scope`)**. 공개 앱 배포·실제 주소 검증도 완료했다. 전체 서비스 출시 게이트는 별도다.
 
 [M9 계약](m9-contract.md)의 최초 납품은26개 정의와15개 명명 preset이다. 직전185개 정의를 보존해 registry211개이며 학습 예제는39개·6개 카테고리다. 선언 모드별 정의 수는 정적148·이산198·연속210이다. 새26개는 정적 모드를 선언하지 않으며 `verify.gradient`는 이산만, 나머지25개는 이산 및 연속 모델의 고정 due-grid 영역을 선언한다. 이 숫자는 모든 ODE 연결·solver 사건·원본 전체 옵션의 지원 수가 아니다. Python은 기존 승인51개를 유지하고 M9 정의는 TypeScript만 선언한다.
 
@@ -12,7 +12,7 @@ M9 firstWork 배정은58행이며 catalog baseline의 기존subset27행·미구�
 
 [M9 source 승인 근거](evidence/m9-source-approvals.json)의 적용·검사는 통과했다. 새31행은18개 제한 계산 subset·9개 공유 preset·4개 독립 설정 대체이며 기존05-009 전달함수의 추적 교정1행은 신규 승격과 별도로 센다. 현재 [대응표](block-coverage.md)는 subset211행·미구현174행이다. 이 source 상태는 registry211개와 서로 다른 지표이고 engineering 최종 검증 완료를 대신하지 않는다. 원본 전체 옵션을 승인한 행은 없으며 `nativeFullEquivalent=false`와 열린 후속 옵션을 유지한다.
 
-## 검증 항목과 현재 상태
+## 초기0.10.0 engineering 검증
 
 | 항목 | 확인할 계약 | 현재 상태 |
 | --- | --- | --- |
@@ -32,7 +32,7 @@ M9 firstWork 배정은58행이며 catalog baseline의 기존subset27행·미구�
 | source 대응 |58개 identity·원자료digest·31신규/1교정·이전 승인 보존 | source 재승인·적용/검사 PASS, 현재211subset/174미구현 |
 | 공개 배포 | 실제 Pages artifact 버전·파일/hash·Worker/계산·오프라인 | 공개 artifact parity·실제 브라우저9개 PASS; 전체 서비스 출시 미승인 |
 
-최종 [root 릴리스 증거](evidence/m9-root-release-verification.json)의 releaseId는 `91846e548f4ed5f6d998549ab72969e9dccf2f73e46d4401524b1d6db1c5bb60`이다. [디자인 기록](evidence/m9-design-verification.json)의188관측/pageErrors0와 [성능 기록](evidence/m9-performance.json)의6개 로컬 측정 예산은 모두 통과했다. `/CalcWeave/` 경로 검증4/4(183.03초)와 [project release](evidence/m9-project-release-verification.json)의70checks·12files·1,873,264bytes도 통과했으며 project releaseId는 `f3a4ddb31b92e27b6a5a429b1522b86cf5d0bbc9786c5a26b4139a737f670d4d`다. root/project artifact는 경로가 달라 별도로 기록한다. [최종 작업 공간 증거](evidence/m9-workspace-verification.json)에 이 결과를 모았다. 실제 공개 Pages artifact·브라우저9개 검증도 통과했으며 로컬 측정을 공개 네트워크 성능으로 해석하지 않는다. `npm run verify:m9`는 실제 TS 수치 보고서를 생성하고 source 승격은 원본 identity·선택 canonical/필수 설정·preset·fixture·지원 mode의 근거를 별도로 검사한다.
+초기0.10.0 [root 릴리스 증거](evidence/m9-initial-release-root-release-verification.json)의 releaseId는 `91846e548f4ed5f6d998549ab72969e9dccf2f73e46d4401524b1d6db1c5bb60`이다. [디자인 기록](evidence/m9-design-verification.json)의188관측/pageErrors0와 [성능 기록](evidence/m9-performance.json)의6개 로컬 측정 예산은 모두 통과했다. `/CalcWeave/` 경로 검증4/4(183.03초)와 [project release](evidence/m9-initial-release-project-release-verification.json)의70checks·12files·1,873,264bytes도 통과했으며 project releaseId는 `f3a4ddb31b92e27b6a5a429b1522b86cf5d0bbc9786c5a26b4139a737f670d4d`다. root/project artifact는 경로가 달라 별도로 기록한다. [최종 작업 공간 증거](evidence/m9-initial-release-workspace-verification.json)에 이 결과를 모았다. 실제 공개 Pages artifact·브라우저9개 검증도 통과했으며 로컬 측정을 공개 네트워크 성능으로 해석하지 않는다. `npm run verify:m9`는 실제 TS 수치 보고서를 생성하고 source 승격은 원본 identity·선택 canonical/필수 설정·preset·fixture·지원 mode의 근거를 별도로 검사한다.
 
 ## 독립 검토에서 고정한 경계
 
@@ -54,8 +54,16 @@ First Order/Lead-Lag/Real Zero의3개 configured response와 MinMax Running Rese
 
 engineering 종료는 마지막 수정 이후 수치·생성 TS·전체unit·영향받은browser·디자인·로컬 성능·root/project build/release·project-path·source identity를 확인한 선언 범위로 판정했다. 공개 Pages 배포와 최종 전체browser CI도 완료했다. 원본 전체 옵션 동등성·실제 초보자 조사·목표 도메인·문의 운영 정책은 남은 확인 항목이다.
 
-## 최종 CI와 실제 공개 주소 증거
+## 초기0.10.0 CI와 실제 공개 주소 증거
 
 앱0.10.0·엔진0.10.0-m9의 공개 Pages artifact와 실제 브라우저9개 검증을 완료했다. 최종M9 merge의 GitHub Actions에서 전체unit2,175개·루트browser129/129·project browser4/4가 통과했다.
 
-[Actions 기록](evidence/m9-actions-verification.json) · [공개 artifact 검증](evidence/m9-deployment-verification.json) · [공개 브라우저 검증](evidence/m9-public-browser-verification.json). 마지막 수치 수정 전 로컬129개 실행은 역사로 보존하며 최종 CI의 전체129개 실행과 구분한다. 공개 기술 배포 성공으로 실제 F06 조사·목표 도메인 소유·문의 이메일 보유/처리 정책·전체 서비스 출시를 승인하지 않는다.
+[Actions 기록](evidence/m9-initial-release-actions-verification.json) · [공개 artifact 검증](evidence/m9-initial-release-deployment-verification.json) · [공개 브라우저 검증](evidence/m9-initial-release-public-browser-verification.json). 마지막 수치 수정 전 로컬129개 실행은 역사로 보존하며 최종 CI의 전체129개 실행과 구분한다. 공개 기술 배포 성공으로 실제 F06 조사·목표 도메인 소유·문의 이메일 보유/처리 정책·전체 서비스 출시를 승인하지 않는다.
+
+## 최신0.10.1 표시·캔버스·저장 상태 patch 공개 검증
+
+버전 표시를 APP_VERSION에 연결하고, 실제 캔버스 크기를 구독해 DOM 측정과 맞춘 뒤 취소 가능한2프레임 안정화 후 최초 fit을 적용했다. 수치 engine0.10.0-m9·211개 정의·39예제/6범주·151raw/693samples/191actual TS·source subset211행/미구현174행과58행의 열린 전체 옵션을 유지한다. 최종 CI와 공개 artifact parity·브라우저9개 검증은 최신 증거를 따른다. [Actions](evidence/m9-actions-verification.json) · [공개 artifact](evidence/m9-deployment-verification.json) · [공개 브라우저](evidence/m9-public-browser-verification.json). 최초0.10.1 시도는128/129개 검사 통과 후 초기 fit1개 실패로 배포가 생략됐고 [실패 기록](evidence/m9-presentation-patch-failed-attempt.json)을 보존한다. [캔버스 교정 근거](evidence/m9-initial-fit-correction.json)는 기존 artifact에서 결정적 회귀가 실패하고 교정 후 focused7/7(25.668717초, flaky0)이 통과한 기록이다. 별도 경합 재현을 원래 CI의 정확한 timing/geometry 원인 확정으로 해석하지 않는다. 새로운 수치 기능/source 승인이나 full Simulink/전체 서비스 출시 완료를 선언하지 않는다.
+
+두 번째 run37087756063도129/130개 통과 후 초기 fit 검사에서 실패해 deploy가 생략됐다. [후속 실패 기록](evidence/m9-late-layout-failed-attempt.json)의 canvas y248/height670·y중심 오차11px은 최초 fit 당시 y226/height692 이후22px 높이 변화다. [저장 상태 교정](evidence/m9-save-status-layout-correction.json)은 이 기하와 일치하는 첫 자동 저장 문구의 헤더 줄바꿈을 재현하고5개 문구의 크기를 예약했다. 앞선 측정 경합은 실제로 교정했으나 이것만으로 원래 CI 증상을 모두 해결했다고 기록하지 않는다.
+
+저장 상태 교정 후 focused8/8(28.534076초, flaky0)이 통과했다. dark/light·1440px/100%와200%·390px/100%·320px/200%의8개 관측은 헤더/캔버스 불변·예약span5개의 빈DOMtext/aria-hidden·문서overflow0을 확인한다. 390/320px에서 기존 CSS가 상태를 숨기는 조건은 표시된 문구 검사로 합산하지 않는다. 초기7/7 측정 교정 기록과 이 최종8/8 저장 상태 교정은 다른 실행이다.

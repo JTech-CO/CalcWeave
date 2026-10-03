@@ -1,6 +1,6 @@
 # Pages 웹 베타 배포 점검 범위
 
-앱0.10.0 · 엔진0.10.0-m9 · registry211 · 2026-10-03
+앱0.10.1 · 엔진0.10.0-m9 · registry211 · 2026-10-03
 
 `vsf-launch`와 `vsf-legal`의 실제 코드/배포 대조를 적용했다. 대상은 무료·계정 없음·정적 호스팅·브라우저 로컬 계산 웹 베타다. 앱 배포 검증과 서비스 전체 공개 출시 게이트는 각각 기록한다. 현재 실제 공개 검사 결과는 [M9 배포 검증](evidence/m9-deployment-verification.json)과 [M9 공개 브라우저 검증](evidence/m9-public-browser-verification.json)에 남긴다. 이전0.8.1의 [배포 증거](evidence/pages-deployment-verification.json)와 [브라우저 증거](evidence/pages-public-browser-verification.json)는 역사로 보존한다. 이 기록은 법률 자문이나 종합 보안 인증이 아니다.
 
@@ -23,3 +23,7 @@ M9 공개 앱의 기술 검사는 최종 CI verify/deploy 성공·공개 artifac
 Pages에서 임의 HTTP 보안 헤더를 설정할 수 없으며 정책 접근은 상시 지원·릴리스 버튼의 정책 메뉴에 있다. 필수 HTTP 헤더를 관리할 수 있는 호스팅 구성, 정책 링크의 직접 상시 노출, 메일 운영 정책 확정과 외부 모니터링은 후속 운영 작업이다. 이런 미확인을 전 서비스 출시 PASS로 바꾸지 않으며 `verifiedPublicLaunch`는 false를 유지한다.
 
 현재 공개 앱은211개 정의와39개 예제/6범주를 제공하며 M9 preset15개는 공유 설정이다. source subset211행은 registry 수와 다른 지표이며 원본58행의 전체 옵션은 모두 열린 후속이다. 배포 PASS로 원본 전체 옵션/MathWorks bit parity 또는 서비스 전체 출시를 승인하지 않는다.
+
+0.10.1은 버전 표시·초기 캔버스 측정 경합·자동 저장 상태 레이아웃의 patch이며 기존 수치·registry/source 범위를 바꾸지 않는다. 초기0.10.0 [배포](evidence/m9-initial-release-deployment-verification.json)·[공개 브라우저](evidence/m9-initial-release-public-browser-verification.json) 증거와 [최초0.10.1 실패 기록](evidence/m9-presentation-patch-failed-attempt.json)도 보존한다. 최신 공개 artifact와9개 브라우저 검증의 성공을 목표 도메인/F06/문의 정책/전체 서비스 출시 승인으로 확대하지 않는다.
+
+[두 번째 게시 전 실패](evidence/m9-late-layout-failed-attempt.json)와 [저장 상태 레이아웃 교정](evidence/m9-save-status-layout-correction.json)을 별도로 보존한다. 현재 상태만 DOMtext/접근성으로 전달하며 숨은 측정 문구로 저장 readiness가 통과하지 않도록 한다.

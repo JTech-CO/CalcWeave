@@ -1,26 +1,26 @@
 {
-  "generatedAt": "2026-10-03T01:12:08.749Z",
+  "generatedAt": "2026-10-03T02:27:20.693Z",
   "url": "https://jtech-co.github.io/CalcWeave/",
-  "appVersion": "0.10.0",
+  "appVersion": "0.10.1",
   "engineVersion": "0.10.0-m9",
   "scope": "/CalcWeave/",
-  "releaseId": "f3a4ddb31b92e27b6a5a429b1522b86cf5d0bbc9786c5a26b4139a737f670d4d",
-  "artifactDirectory": ".test-generated/m9-project-dist",
+  "releaseId": "643f8c6951a8d2bd86397a43414ec14bf640357e906f432d44dd2888d604f2d1",
+  "artifactDirectory": ".test-generated/m9-final-project-dist",
   "dns": [
-    {
-      "address": "185.199.109.153",
-      "family": 4
-    },
     {
       "address": "185.199.108.153",
       "family": 4
     },
     {
-      "address": "185.199.111.153",
+      "address": "185.199.110.153",
       "family": 4
     },
     {
-      "address": "185.199.110.153",
+      "address": "185.199.109.153",
+      "family": 4
+    },
+    {
+      "address": "185.199.111.153",
       "family": 4
     }
   ],

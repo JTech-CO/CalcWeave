@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T01:13:24.399902+00:00",
+  "generatedAt": "2026-10-03T02:27:33.527690+00:00",
   "appVersion": "0.10.1",
   "engineVersion": "0.10.0-m9",
   "declaredDeliveryVerified": true,
@@ -56,14 +56,16 @@
       "note": "All assertions passed. Windows helper shutdown waited; only the identified test preview process was stopped."
     },
     "finalFullRunInCI": {
-      "passed": 129,
+      "passed": 131,
       "failed": 0,
-      "duration": "5.1m",
+      "duration": "4.9m",
       "projectPassed": 4,
       "projectFailed": 0,
-      "projectDurationSeconds": 9.0,
+      "projectDurationSeconds": 9.3,
       "evidence": "m9-actions-verification.json",
-      "finalSource": true
+      "finalSource": true,
+      "sourceSha": "a5be5f3965161dfbef032a054ecd924bd503251b",
+      "appVersion": "0.10.1"
     },
     "finalFullRunInCICompleted": true
   },
@@ -86,10 +88,14 @@
     "publicNetworkPerformanceClaimed": false
   },
   "release": {
+    "scope": "/",
+    "appVersion": "0.10.1",
+    "engineVersion": "0.10.0-m9",
     "checks": 70,
     "staticFiles": 12,
-    "bytes": 1873014,
-    "releaseId": "91846e548f4ed5f6d998549ab72969e9dccf2f73e46d4401524b1d6db1c5bb60"
+    "bytes": 1873756,
+    "releaseId": "dd0b2b9d808162100ffcf09c8e58db21f2ee40a7570e90f05f25c894a6a7b89b",
+    "evidence": "m9-root-release-verification.json"
   },
   "security": {
     "scannedFiles": {
@@ -123,22 +129,25 @@
   "publicDeploymentClaimed": true,
   "projectRelease": {
     "scope": "/CalcWeave/",
+    "appVersion": "0.10.1",
+    "engineVersion": "0.10.0-m9",
     "checks": 70,
     "staticFiles": 12,
-    "bytes": 1873264,
-    "releaseId": "f3a4ddb31b92e27b6a5a429b1522b86cf5d0bbc9786c5a26b4139a737f670d4d",
+    "bytes": 1874006,
+    "releaseId": "643f8c6951a8d2bd86397a43414ec14bf640357e906f432d44dd2888d604f2d1",
     "evidence": "m9-project-release-verification.json"
   },
   "public": {
     "url": "https://jtech-co.github.io/CalcWeave/",
-    "appVersion": "0.10.0",
+    "appVersion": "0.10.1",
     "engineVersion": "0.10.0-m9",
-    "deploymentRun": 37084501448,
-    "deploymentSourceSha": "2554c95e4e9c67d2127c8d40532fb6469ff5fa19",
-    "releaseId": "f3a4ddb31b92e27b6a5a429b1522b86cf5d0bbc9786c5a26b4139a737f670d4d",
+    "deploymentRun": 37089327750,
+    "deploymentSourceSha": "a5be5f3965161dfbef032a054ecd924bd503251b",
+    "releaseId": "643f8c6951a8d2bd86397a43414ec14bf640357e906f432d44dd2888d604f2d1",
     "exactLocalProjectArtifactParity": true,
     "browserChecks": 9,
-    "browserElapsedMs": 6254,
+    "browserElapsedMs": 5662,
+    "visibleLabelsVerified": true,
     "isolatedFreshContext": true,
     "pageErrors": [],
     "outsideAppRequests": [],
@@ -161,7 +170,7 @@
     "targetedBrowserDurationSeconds": 28.534076,
     "rootEvidence": "m9-root-release-verification.json",
     "projectEvidence": "m9-project-release-verification.json",
-    "publicationPending": true,
+    "publicationPending": false,
     "versionLabelTargetedBrowser": {
       "passed": 4,
       "failed": 0,
@@ -176,6 +185,43 @@
       "durationSeconds": 25.668717
     },
     "saveStatusLayoutCorrectionEvidence": "m9-save-status-layout-correction.json",
-    "lateLayoutFailedPublicationAttemptEvidence": "m9-late-layout-failed-attempt.json"
+    "lateLayoutFailedPublicationAttemptEvidence": "m9-late-layout-failed-attempt.json",
+    "deploymentRun": 37089327750,
+    "deploymentSourceSha": "a5be5f3965161dfbef032a054ecd924bd503251b",
+    "publicVisibleLabelsVerified": true
+  },
+  "initialEngineeringEvidence": {
+    "appVersion": "0.10.0",
+    "engineVersion": "0.10.0-m9",
+    "scope": "Numerical/source/design/performance observations were measured on the initial M9 engineering release. The patch synchronizes version labels, waits for actual initial canvas measurements, and stabilizes save-status label geometry. Numerical engine and registry contracts are unchanged.",
+    "workspace": "m9-initial-release-workspace-verification.json",
+    "rootRelease": "m9-initial-release-root-release-verification.json",
+    "projectRelease": "m9-initial-release-project-release-verification.json",
+    "publicActions": "m9-initial-release-actions-verification.json",
+    "publicDeployment": "m9-initial-release-deployment-verification.json",
+    "publicBrowser": "m9-initial-release-public-browser-verification.json",
+    "publicScreenshot": "m9-initial-release-public-desktop.png"
+  },
+  "initialPublicDeployment": {
+    "url": "https://jtech-co.github.io/CalcWeave/",
+    "appVersion": "0.10.0",
+    "engineVersion": "0.10.0-m9",
+    "deploymentRun": 37084501448,
+    "deploymentSourceSha": "2554c95e4e9c67d2127c8d40532fb6469ff5fa19",
+    "releaseId": "f3a4ddb31b92e27b6a5a429b1522b86cf5d0bbc9786c5a26b4139a737f670d4d",
+    "exactLocalProjectArtifactParity": true,
+    "browserChecks": 9,
+    "browserElapsedMs": 6254,
+    "isolatedFreshContext": true,
+    "pageErrors": [],
+    "outsideAppRequests": [],
+    "evidence": [
+      "m9-initial-release-actions-verification.json",
+      "m9-initial-release-deployment-verification.json",
+      "m9-initial-release-public-browser-verification.json"
+    ],
+    "verifiedPublicLaunch": false,
+    "customDomainVerified": false,
+    "actualNoviceStudyClaimed": false
   }
 }
