@@ -86,15 +86,65 @@ async function expectDiagramInsideCanvas(page: Page) {
       const { x, y, width, height } = element.getBoundingClientRect();
       return { x, y, width, height };
     }));
-    if (!canvas || !nodes.length || nodes.some(node => node.width <= 0 || node.height <= 0)) return false;
+    if (!canvas || !nodes.length || nodes.some(node => node.width <= 0 || node.height <= 0)) return JSON.stringify({ canvas, nodes });
     const left = Math.min(...nodes.map(node => node.x)), top = Math.min(...nodes.map(node => node.y));
     const right = Math.max(...nodes.map(node => node.x + node.width)), bottom = Math.max(...nodes.map(node => node.y + node.height));
-    return left >= canvas.x - 1 && top >= canvas.y - 1
+    const centerError = { x: (left + right) / 2 - (canvas.x + canvas.width / 2), y: (top + bottom) / 2 - (canvas.y + canvas.height / 2) };
+    const fitted = left >= canvas.x - 1 && top >= canvas.y - 1
       && right <= canvas.x + canvas.width + 1 && bottom <= canvas.y + canvas.height + 1
-      && Math.abs((left + right) / 2 - (canvas.x + canvas.width / 2)) <= 2
-      && Math.abs((top + bottom) / 2 - (canvas.y + canvas.height / 2)) <= 2;
-  }, { message: 'All measured diagram nodes must be visible and centered within the actual canvas' }).toBe(true);
+      && Math.abs(centerError.x) <= 2 && Math.abs(centerError.y) <= 2;
+    return fitted ? 'visible and centered' : JSON.stringify({ canvas, nodes, centerError, viewport: await canvasViewport(page) });
+  }, { message: 'All measured diagram nodes must be visible and centered within the actual canvas' }).toBe('visible and centered');
 }
+
+test('Initial fit waits for a delayed positive canvas measurement and preserves later navigation', async ({ page }) => {
+  await page.addInitScript(() => {
+    const state = window as typeof window & { startupCanvasWidth?: number; releaseCanvasMeasurement?: () => void; canvasMeasurementPending?: boolean };
+    const style = document.createElement('style');
+    // A layout change occurs after the first positive measurement, before node measurement.
+    style.textContent = '.canvas-area > .react-flow { width:500px !important; }';
+    const attach = new MutationObserver(() => { if (document.head && !style.isConnected) document.head.append(style); });
+    attach.observe(document, { childList: true, subtree: true });
+    let removed = false, released = false;
+    const pending: { callback: ResizeObserverCallback; entries: ResizeObserverEntry[]; observer: ResizeObserver }[] = [];
+    const NativeResizeObserver = window.ResizeObserver;
+    window.ResizeObserver = class extends NativeResizeObserver {
+      constructor(callback: ResizeObserverCallback) {
+        super((entries, observer) => {
+          if (!released && entries.some(entry => entry.target.classList.contains('react-flow__renderer'))) {
+            pending.push({ callback, entries, observer }); state.canvasMeasurementPending = true; return;
+          }
+          if (!removed && entries.some(entry => entry.target.classList.contains('react-flow__node'))) {
+            removed = true; attach.disconnect(); style.remove();
+          }
+          callback(entries, observer);
+        });
+      }
+      observe(target: Element, options?: ResizeObserverOptions) {
+        if (target.classList.contains('react-flow__renderer')) state.startupCanvasWidth = (target as HTMLElement).offsetWidth;
+        super.observe(target, options);
+      }
+    };
+    state.releaseCanvasMeasurement = () => {
+      released = true; state.canvasMeasurementPending = false;
+      for (const delivery of pending.splice(0)) delivery.callback(delivery.entries, delivery.observer);
+    };
+  });
+  await openWorkspace(page);
+  await expect(page.locator('.react-flow__node')).toHaveCount(3);
+  await expect.poll(() => page.evaluate(() => {
+    const state = window as typeof window & { startupCanvasWidth?: number; canvasMeasurementPending?: boolean };
+    return { width: state.startupCanvasWidth, pending: state.canvasMeasurementPending };
+  })).toEqual({ width: 500, pending: true });
+  await page.evaluate(() => (window as typeof window & { releaseCanvasMeasurement: () => void }).releaseCanvasMeasurement());
+  await expectDiagramInsideCanvas(page);
+
+  await page.getByRole('button', { name: '캔버스 축소', exact: true }).click();
+  const navigated = await canvasViewport(page);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
+  expect(await canvasViewport(page)).toEqual(navigated);
+});
 
 for (const width of [1440, 1920]) {
   test(`First load and delayed saved-model restoration fit the actual ${width}px canvas without resetting later user navigation`, async ({ page }) => {

@@ -207,7 +207,9 @@ function Workspace() {
     const node = state.nodeLookup.get(block.id);
     return node?.data.block === block && (node.measured.width ?? 0) > 0 && (node.measured.height ?? 0) > 0;
   }));
-  const canvasMeasured = useStore(state => state.width > 0 && state.height > 0);
+  const canvasWidth = useStore(state => state.width);
+  const canvasHeight = useStore(state => state.height);
+  const canvasElement = useStore(state => state.domNode);
   const initialFitRequested = useRef(false);
   const lastSubsystemClick = useRef<{ id: string; time: number; x: number; y: number } | null>(null);
 
@@ -281,14 +283,25 @@ function Workspace() {
   }, []);
 
   useEffect(() => {
-    // Fit the restored model, after both its blocks and the actual canvas are measured.
-    // A one-time request preserves subsequent user pan/zoom, including edits and runs.
-    if (!loaded || !viewportInitialized || !canvasMeasured || initialFitRequested.current) return;
+    // Wait for React Flow's measurements to match the settled canvas layout.
+    // Positive dimensions can still be stale during the first ResizeObserver delivery.
+    if (!loaded || !viewportInitialized || !canvasElement || canvasWidth <= 0 || canvasHeight <= 0 || initialFitRequested.current) return;
     if (!model.nodes.length) { initialFitRequested.current = true; return; }
     if (!nodesMeasured) return;
-    initialFitRequested.current = true;
-    void fitView({ ...READABLE_VIEW, duration: 0 });
-  }, [loaded, viewportInitialized, canvasMeasured, nodesMeasured, model.nodes.length, fitView]);
+    let cancelled = false;
+    let frame = 0;
+    const layoutMatches = () => canvasElement.offsetWidth === canvasWidth && canvasElement.offsetHeight === canvasHeight;
+    frame = window.requestAnimationFrame(() => {
+      if (!layoutMatches()) return;
+      frame = window.requestAnimationFrame(() => {
+        if (cancelled || !layoutMatches()) return;
+        void fitView({ ...READABLE_VIEW, duration: 0 }).then(fitted => {
+          if (!cancelled && fitted && layoutMatches()) initialFitRequested.current = true;
+        });
+      });
+    });
+    return () => { cancelled = true; window.cancelAnimationFrame(frame); };
+  }, [loaded, viewportInitialized, canvasElement, canvasWidth, canvasHeight, nodesMeasured, model.nodes.length, fitView]);
 
   useEffect(() => {
     if (!loaded || !localSavingEnabled || storageMaintenance.current) return;
