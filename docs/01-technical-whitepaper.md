@@ -1,16 +1,16 @@
 # CalcWeave 기술 백서
 
-> 버전: v0.12 · 작성일: 2026-10-03 · 상태: 앱0.10.0·엔진0.10.0-m9·211 registry·M9 선언 범위 로컬검증 완료
+> 버전: v0.12 · 작성일: 2026-10-03 · 상태: 앱0.10.0·엔진0.10.0-m9·211 registry·M9 선언 범위 및 공개 앱 배포 검증 완료
 > 대상: 제품 설계자, 프런트엔드 개발자, 수치 엔진 개발자  
 > 연결 문서: [디자인 백서](02-design-whitepaper.md) · [마일스톤](03-milestone-roadmap.md) · [블럭 대응표](block-coverage.md)
 
-현재 앱0.10.0·엔진0.10.0-m9는 직전185개 정의에26개 DSP·이산 상태·샘플시간 정의를 더해 registry211개를 구성한다. M9의15개 명명 preset은 공유 설정이며 독립 kernel 수로 합산하지 않는다. 예제는39개·6개 카테고리다. [M9 계약](m9-contract.md)·[구현 맵](m9-implementation-map.json)·[검증 기록](m9-validation.md)을 현재 검증한 선언 범위의 기준으로 사용한다. 현재 source 승인 기록은 신규31행과 기존05-009 추적 교정1행을 반영해 subset211행·미구현174행이다. 마지막 수치 경계 수정 후 engineering 선언 범위를 검증 완료했으며 공개 Pages의0.10.0 배포·실제 주소 검증도 별도로 확인한다.
+현재 앱0.10.0·엔진0.10.0-m9는 직전185개 정의에26개 DSP·이산 상태·샘플시간 정의를 더해 registry211개를 구성한다. M9의15개 명명 preset은 공유 설정이며 독립 kernel 수로 합산하지 않는다. 예제는39개·6개 카테고리다. [M9 계약](m9-contract.md)·[구현 맵](m9-implementation-map.json)·[검증 기록](m9-validation.md)을 현재 검증한 선언 범위의 기준으로 사용한다. 현재 source 승인 기록은 신규31행과 기존05-009 추적 교정1행을 반영해 subset211행·미구현174행이다. 마지막 수치 경계 수정 후 engineering 선언 범위를 검증 완료했으며 공개 Pages의0.10.0 배포·실제 주소 검증도 완료했다.
 
 직전 M8의 앱0.9.0·엔진0.9.0-m8은 기존144개 계약을 보존하고41개 정의·8preset을 추가해185개 정의·35예제의 선언 범위를 검증 완료했다. 원본 승인subset180행·미구현205행은 M9 승격 전의 마지막 승인 기준이다. [M8 계약](m8-contract.md)·[검증](m8-validation.md)을 단계 기록으로 보존하며, 전체 R2024b 옵션·MathWorks 실행/seed bit parity는 완료로 기록하지 않는다.
 
 ## 1. 제품 정의와 현재 상태
 
-앱0.8.1의 [GitHub Pages 웹 베타](https://jtech-co.github.io/CalcWeave/) 게시와 프로젝트 경로의 계산·정책·오프라인 검증은 이전 배포 기록이다. 이번 M9 버전의 공개 배포는 확인 대기다. [배포 검증](pages-validation.md)과 [M8~M16 전체 대응 후속 로드맵](05-simulink-coverage-roadmap.md)을 따르며 목표 도메인·실제 초보자 조사·전체 옵션 동등성은 별도다.
+앱0.8.1의 [GitHub Pages 웹 베타](https://jtech-co.github.io/CalcWeave/) 게시와 프로젝트 경로의 계산·정책·오프라인 검증은 이전 배포 기록이다. 이번 M9 버전은 공개 Pages의0.10.0/211 registry와 실제 브라우저9개 검증을 완료했다. [배포 검증](pages-validation.md)과 [M8~M16 전체 대응 후속 로드맵](05-simulink-coverage-roadmap.md)을 따르며 목표 도메인·실제 초보자 조사·전체 옵션 동등성은 별도다.
 
 0.8.0의 수학·신호 확장은 승인된 수학·통계·벡터·행렬 64종과 시간 입력 6종을 추가한다. registry는 144종, 정적 지원은107종이며 Python 승인 51종은 그대로다. 기존74종의 파라미터·포트·모드·타입/형상/단위 계약을 유지한다. 신규 생성 타깃은 `typescript-catalog-v1`이며 import 없는 고정 실행 소스와 데이터만 내보낸다. 독립 oracle·모든 지원 모드·JSON roundtrip·실제 TS 결과를 검증한 범위만 대응표에 승인한다. 원자료385행/339이름과 registry 정의 수는 서로 다른 지표다. [확장 계약](catalog-contract.md)·[검증](catalog-validation.md)·[대응 계획](block-expansion-plan.md)을 현재 추가 범위의 기준으로 사용하고 아래 M0~M7 기록은 각 단계의 계약으로 보존한다.
 

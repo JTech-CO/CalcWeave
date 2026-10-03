@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-03T01:15:52.469Z",
-  "appVersion": "0.10.1",
+  "generatedAt": "2026-10-03T00:58:13.521Z",
+  "appVersion": "0.10.0",
   "engineVersion": "0.10.0-m9",
   "scope": "/",
-  "releaseId": "d592c1d3bfdb76c27a4835eb81a06f9a16ce92062532ba92f2717765a696c8e7",
+  "releaseId": "91846e548f4ed5f6d998549ab72969e9dccf2f73e46d4401524b1d6db1c5bb60",
   "checks": [
     "app/engine release versions",
     "single registry retains catalog definitions with unique executable IDs",
@@ -18,16 +18,16 @@
     "final built bytes match /assets/engine.worker-f0TJDrgW.js",
     "safe static asset /assets/index-BSvd8MHu.css",
     "final built bytes match /assets/index-BSvd8MHu.css",
-    "safe static asset /assets/index-DL1VDs9d.js",
-    "final built bytes match /assets/index-DL1VDs9d.js",
-    "safe static asset /assets/src-BZ_Hn4Rh.js",
-    "final built bytes match /assets/src-BZ_Hn4Rh.js",
-    "safe static asset /assets/src-DMIPjRyr.js",
-    "final built bytes match /assets/src-DMIPjRyr.js",
-    "safe static asset /assets/src-Daxw0242.js",
-    "final built bytes match /assets/src-Daxw0242.js",
-    "safe static asset /assets/src-aI-HR0ny.js",
-    "final built bytes match /assets/src-aI-HR0ny.js",
+    "safe static asset /assets/index-C8PAEvTH.js",
+    "final built bytes match /assets/index-C8PAEvTH.js",
+    "safe static asset /assets/src-B6pCtFYH.js",
+    "final built bytes match /assets/src-B6pCtFYH.js",
+    "safe static asset /assets/src-B7zE3kjG.js",
+    "final built bytes match /assets/src-B7zE3kjG.js",
+    "safe static asset /assets/src-DiP2WUEq.js",
+    "final built bytes match /assets/src-DiP2WUEq.js",
+    "safe static asset /assets/src-zAQ1uO_D.js",
+    "final built bytes match /assets/src-zAQ1uO_D.js",
     "safe static asset /cookies/index.html",
     "final built bytes match /cookies/index.html",
     "safe static asset /index.html",
@@ -58,11 +58,11 @@
     "all code/Worker/lazy chunks are in static release",
     "all code/Worker/lazy chunks are in static release",
     "no recognized secret material in assets\\engine.worker-f0TJDrgW.js",
-    "no recognized secret material in assets\\index-DL1VDs9d.js",
-    "no recognized secret material in assets\\src-aI-HR0ny.js",
-    "no recognized secret material in assets\\src-BZ_Hn4Rh.js",
-    "no recognized secret material in assets\\src-Daxw0242.js",
-    "no recognized secret material in assets\\src-DMIPjRyr.js",
+    "no recognized secret material in assets\\index-C8PAEvTH.js",
+    "no recognized secret material in assets\\src-B6pCtFYH.js",
+    "no recognized secret material in assets\\src-B7zE3kjG.js",
+    "no recognized secret material in assets\\src-DiP2WUEq.js",
+    "no recognized secret material in assets\\src-zAQ1uO_D.js",
     "no recognized secret material in cookies\\index.html",
     "no recognized secret material in index.html",
     "no recognized secret material in notices\\index.html",
@@ -88,29 +88,29 @@
       "sha256": "477ffef561dac5dc6001c8476736c61014980bbf4ee0ecbdf07ccd51bbd891b5"
     },
     {
-      "url": "/assets/index-DL1VDs9d.js",
-      "bytes": 1054106,
-      "sha256": "398f628cd456657ec9255689351ebff843c407a21b8af737b9dd5dc3c29136b3"
+      "url": "/assets/index-C8PAEvTH.js",
+      "bytes": 1054100,
+      "sha256": "f39d02a94f81ece73291c7136a79d38a199aafc01182980adfcd7b58c7cd7a8a"
     },
     {
-      "url": "/assets/src-BZ_Hn4Rh.js",
-      "bytes": 1775,
-      "sha256": "df905e249a093cb82fc909cad829d271ab81aacd12aeb0709e5147d438dc00e0"
-    },
-    {
-      "url": "/assets/src-DMIPjRyr.js",
+      "url": "/assets/src-B6pCtFYH.js",
       "bytes": 258340,
-      "sha256": "4aed5abdc2d7eff49d76344a4cd2fb54f9e6f0e85cf7377e76d59477c8dcc147"
+      "sha256": "f099cbb16b67fda4355792c4044aec158d0b9a79fa985c28bc15d0def73e2a8d"
     },
     {
-      "url": "/assets/src-Daxw0242.js",
-      "bytes": 36483,
-      "sha256": "ea8ae27cbca033a2ea70135bbdfe5d3c5d169333dbedd3a004b11d5980fef1c3"
-    },
-    {
-      "url": "/assets/src-aI-HR0ny.js",
+      "url": "/assets/src-B7zE3kjG.js",
       "bytes": 7155,
-      "sha256": "a0007ed1f880b5290e4ebc84f5cb7eceb2aaa47f4606ecf51def3ccc5d923ef2"
+      "sha256": "69903e1f235ac8787ad1dde5e95293419fbf4c102ba6a9d51e6df6866ddd3a8e"
+    },
+    {
+      "url": "/assets/src-DiP2WUEq.js",
+      "bytes": 1775,
+      "sha256": "d18c7b030158ba4fc148d17770f4aea34bfa2e236122cc6be32b71a2344367cb"
+    },
+    {
+      "url": "/assets/src-zAQ1uO_D.js",
+      "bytes": 36483,
+      "sha256": "7f63b5eab86fafebffe93e561319e45bdc6764ed228095bfbe44e2c2285ce97a"
     },
     {
       "url": "/cookies/index.html",
@@ -120,12 +120,12 @@
     {
       "url": "/index.html",
       "bytes": 1077,
-      "sha256": "ff8d6bfc261eab4c9738bb6597812de33300e949a1118f2ad950f3389bd58431"
+      "sha256": "86a7eca4a1e3f07b8d694103be9cb2cd51807563da8d4833cae5cf3b33a7d299"
     },
     {
       "url": "/notices/index.html",
       "bytes": 35127,
-      "sha256": "8a967654d12a5970be749a929825f772ba1d3742d283e3272a05dff42cb5c889"
+      "sha256": "66bd1580a4e25c9f12dab5631f58cad2ce3c2a676712ba3db6895482457f0526"
     },
     {
       "url": "/privacy/index.html",
@@ -138,6 +138,6 @@
       "sha256": "620e00e98f765be04bed9b926e16d4d6299fbadd8abf9be752e0359cc6bfadaf"
     }
   ],
-  "totalStaticBytes": 1873020,
+  "totalStaticBytes": 1873014,
   "publicDeploymentClaimed": false
 }

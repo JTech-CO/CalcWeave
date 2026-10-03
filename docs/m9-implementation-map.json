@@ -12616,7 +12616,19 @@
         "total": 5,
         "seconds": 14.3
       },
-      "finalWholeRunCIPending": true
+      "finalWholeRunCIPending": false,
+      "finalWholeCI": {
+        "path": "docs/evidence/m9-actions-verification.json",
+        "runId": 37084501448,
+        "headSha": "2554c95e4e9c67d2127c8d40532fb6469ff5fa19",
+        "rootPassed": 129,
+        "rootFailed": 0,
+        "projectPassed": 4,
+        "projectFailed": 0,
+        "unitPassed": 2175,
+        "unitFailed": 0,
+        "status": "passed"
+      }
     },
     "rootRelease": {
       "path": "docs/evidence/m9-root-release-verification.json",
@@ -12625,7 +12637,7 @@
       "bytes": 1873014,
       "releaseId": "91846e548f4ed5f6d998549ab72969e9dccf2f73e46d4401524b1d6db1c5bb60"
     },
-    "publicDeploymentVerified": false,
+    "publicDeploymentVerified": true,
     "fullSimulinkEquivalence": false,
     "sourceFullOptionCompletion": false,
     "workspaceEvidencePath": "docs/evidence/m9-workspace-verification.json",
@@ -12666,6 +12678,19 @@
       "releaseId": "f3a4ddb31b92e27b6a5a429b1522b86cf5d0bbc9786c5a26b4139a737f670d4d",
       "status": "passed"
     },
-    "publicDeploymentStatus": "pending-root-public-verification"
+    "publicDeploymentStatus": "verified-application-deployment",
+    "publicDeploymentEvidence": {
+      "actionsPath": "docs/evidence/m9-actions-verification.json",
+      "artifactPath": "docs/evidence/m9-deployment-verification.json",
+      "browserPath": "docs/evidence/m9-public-browser-verification.json",
+      "url": "https://jtech-co.github.io/CalcWeave/",
+      "appVersion": "0.10.0",
+      "engineVersion": "0.10.0-m9",
+      "registryDefinitions": 211,
+      "releaseId": "f3a4ddb31b92e27b6a5a429b1522b86cf5d0bbc9786c5a26b4139a737f670d4d",
+      "staticBytes": 1873264,
+      "browserChecks": 9,
+      "verifiedPublicLaunch": false
+    }
   }
 }

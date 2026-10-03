@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { APP_VERSION } from '../../../../packages/release/src';
 import './RunBrand.css';
 
 export type RunBrandPhase = 'ready' | 'validating' | 'running' | 'paused' | 'completed' | 'cancelled' | 'failed';
@@ -52,6 +53,6 @@ export function RunBrand({ activityKey, phase }: RunBrandProps) {
   return <div className={`brand run-brand${isPulsing ? ' is-pulsing' : ''}${phase === 'paused' ? ' is-paused' : ''}`} role="group" aria-label={busy ? 'CalcWeave · 계산 중' : phase === 'paused' ? 'CalcWeave · 일시정지' : 'CalcWeave'} data-activity={phase} data-animating={isPulsing ? 'true' : 'false'}>
     <span key={`mark-${activityKey}`} className="brand-mark" aria-hidden="true"><i/><i/><i/><i/></span>
     <strong key={`wordmark-${activityKey}`} className="brand-wordmark" aria-hidden="true">Calc<span>Weave</span></strong>
-    <span className="research-badge">0.8 작업 공간</span>
+    <span className="research-badge">{APP_VERSION} 작업 공간</span>
   </div>;
 }

@@ -136,7 +136,9 @@ async function main() {
     await expect(page.locator('.library-item')).toHaveCount(blockRegistry.length);
     const moduleURL = await page.locator('script[type="module"]').getAttribute('src');
     assert(moduleURL?.startsWith(`${BASE}assets/`));
-    check('fresh public workspace and current registered blocks', { url: page.url(), moduleURL, isolatedContext: true });
+    await expect(page.locator('.research-badge')).toHaveText(`${APP_VERSION} 작업 공간`);
+    await expect(page.locator('.library-footnote .small-square')).toHaveText(APP_VERSION);
+    check('fresh public workspace and current registered blocks', { url: page.url(), moduleURL, isolatedContext: true, visibleAppVersion: APP_VERSION });
 
     const initial = await calculate(page, 1);
     assert.equal(initial.result.samples[0]!.values.result, 6);
