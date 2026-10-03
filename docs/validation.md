@@ -1,6 +1,6 @@
 # CalcWeave 검증 상태
 
-현행 소스는 앱 `0.17.1` · 엔진 `0.17.0-m16`이다. 이 문서는 구현의 검증 범위와 배포 증거를 연결한다. 과거 단계의 수치·실패 기록은 `evidence/`에 보존한다. M16의 공개 결과와 후속 화면 정리의 검사는 별도로 기록한다.
+현행 소스는 앱 `0.17.2` · 엔진 `0.17.0-m16`이다. 이 문서는 구현의 검증 범위와 배포 증거를 연결한다. 과거 단계의 수치·실패 기록은 `evidence/`에 보존한다. M16의 공개 결과와 보조 기능·도움말 정리의 검사는 별도로 기록한다.
 
 ## 지원 감사
 
@@ -96,3 +96,17 @@ M16 구현 검사 후 중복된 M0~M15 계약·진행 기록과 이전 계획·�
 [공개 기본9검사](evidence/workspace-simplification-public-browser-verification.json)와 [실제 공개 기능34케이스](evidence/workspace-simplification-public-feature-browser-results.json)가 통과했다. 새 기본 접힘·고급 파일 진입·초점 복귀뿐 아니라 지문 불일치·변조 거부·migration 검토·원본 보존·백업/복구/삭제·탭 충돌·다운로드 Python/WASM의 실제 실행을 독립 브라우저에서 확인했다. 사용자 브라우저의 저장소는 접근하지 않았다.
 
 [조사·변경·로컬 검증](evidence/workspace-simplification-engineering-checks.json)·[CI 원본 요약](evidence/workspace-simplification-actions-verification.json)·[정확한 공개 파일](evidence/workspace-simplification-deployment-verification.json)·[공개 결과](evidence/workspace-simplification-public-release.json). M16의 모든 과거 수치/승인/문서 정리 증거는 별도로 보존하며 정식 출시·실제 novice 관찰·목표 도메인·원본 전체 동등성의 미검증 상태도 유지한다.
+
+## 제품 도움말 정리
+
+앱 `0.17.2`는 CalcWeave 자체의 계산 흐름을 설명하는 도움말 변경이다. 기본 메뉴를 사용 안내·블록 찾기·파일·코드·앱 정보로 정리하고, 첫 화면에 작은 계산의 작성·연결·실행을 안내한다. Simulink 비교와 확장 상세는 앱 정보의 접힌 호환성 참고로 옮겼다. MATLAB 설치가 필요 없는 독립 웹 계산 도구임을 명시하며, 전체 옵션 동등성이나 미지원 기능의 경계를 변경하지 않았다. ID·엔진 버전·원시 파라미터와 세부 상한은 필요할 때 여는 기술 정보에 보존했다.
+
+| 검사 | 실제 결과 |
+| --- | --- |
+| 도움말 집중 회귀 | [35/35 PASS](evidence/product-help-browser-results.json). 기존 블록 검색·원자료 385행·어댑터 계약과 새 기본 안내·4개 메뉴·키보드 초점·스크롤 복귀를 확인했다. |
+| 화면 실측 | [10조건·18캡처 PASS](evidence/product-help-ui-verification.json): 1440/1024/390/320px의 다크·라이트 및 1440px 글자200%. 캡처를 모두 직접 검토하고 탭 전환 시 제목이 가려지던 문제를 수정했다. |
+| 경로·배포 후보 | [root](evidence/product-help-root-release-verification.json)·[project](evidence/product-help-project-release-verification.json) 각각91검사·16assets PASS. [프로젝트 경로 브라우저4/4 PASS](evidence/product-help-project-browser-results.json). |
+| 단위 재검사 | [초기 전체](evidence/product-help-initial-unit-results.json)는3,873/3,883 PASS와10개 시간 초과 의심 실패였다. 실패6파일을 단일 워커로 재실행한 [492/492 PASS](evidence/product-help-unit-retry-results.json)에는 최초 실패10개가 모두 포함되었다. 테스트·구현·시간 제한을 변경하지 않았으며 이 합산을 단일 전체 PASS로 표현하지 않는다. 전체 CI 결과는 별도로 기록한다. |
+| 의존성 | [npm audit](evidence/product-help-dependency-audit.json) 알려진 취약점0개. |
+
+[변경·보안 기준·보존 검사](evidence/product-help-engineering-checks.json)에 검색 길이·허용 목록·React 출력 이스케이프와 개인정보 흐름 변경 없음, 엔진·지원표·과거 증거 보존 상태를 기록했다. 첫 UI 실행은 중간 빌드 교체를 감지한 [7조건 부분 결과](evidence/product-help-initial-ui-verification.json), 다음 실행은 DOM10조건 통과 후 제목 가림을 발견한 [시각 실패 결과](evidence/product-help-initial2-ui-verification.json)로 보존한다. 최종 검사의 앱 콘솔 오류와 페이지 오류는0이며 자동 favicon.ico 요청404는 별도로 기록했다. 사용자 브라우저의 저장 데이터는 접근하지 않았다.

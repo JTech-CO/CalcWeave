@@ -1,0 +1,184 @@
+{
+  "generatedAt": "2026-10-03T17:15:14.483Z",
+  "appVersion": "0.17.2",
+  "engineVersion": "0.17.0-m16",
+  "scope": "/CalcWeave/",
+  "releaseId": "8f43d3362987d007748878b63b0505063eb54e199888d961aeb89ecfb7f052d9",
+  "checks": [
+    "app/engine release versions",
+    "single registry retains catalog definitions with unique executable IDs",
+    "Python release metadata matches versioned capabilities and preserves all51 predecessor IDs",
+    "WASM release metadata matches selected scalar target capabilities",
+    "C/C++ emission is not advertised as verified execution",
+    "Python target does not claim continuous solver support",
+    "model packages bind approved immutable registry and local-only permissions",
+    "trusted adapter execution and unavailable native requirements remain distinct",
+    "pinned straight-line WASM artifact calcweave.wasm-affine-f64-v1",
+    "pinned straight-line WASM artifact calcweave.wasm-accumulator-f64-v1",
+    "package/release catalog version agreement",
+    "offline release version and bounded deployment scope agreement",
+    "releaseId binds complete static asset manifest",
+    "bounded unique offline allowlist",
+    "safe static asset /CalcWeave/assets/engine.worker-BYNS5Yfw.js",
+    "final built bytes match /CalcWeave/assets/engine.worker-BYNS5Yfw.js",
+    "safe static asset /CalcWeave/assets/index-BuFe4fvD.js",
+    "final built bytes match /CalcWeave/assets/index-BuFe4fvD.js",
+    "safe static asset /CalcWeave/assets/index-D5WwklyN.css",
+    "final built bytes match /CalcWeave/assets/index-D5WwklyN.css",
+    "safe static asset /CalcWeave/assets/schemas-B44qH8my.js",
+    "final built bytes match /CalcWeave/assets/schemas-B44qH8my.js",
+    "safe static asset /CalcWeave/assets/src-BH9EnOuL.js",
+    "final built bytes match /CalcWeave/assets/src-BH9EnOuL.js",
+    "safe static asset /CalcWeave/assets/src-Bcx-wexT.js",
+    "final built bytes match /CalcWeave/assets/src-Bcx-wexT.js",
+    "safe static asset /CalcWeave/assets/src-BePJ-JuP.js",
+    "final built bytes match /CalcWeave/assets/src-BePJ-JuP.js",
+    "safe static asset /CalcWeave/assets/src-BhYy4jpG.js",
+    "final built bytes match /CalcWeave/assets/src-BhYy4jpG.js",
+    "safe static asset /CalcWeave/assets/src-Cw2CCdNK.js",
+    "final built bytes match /CalcWeave/assets/src-Cw2CCdNK.js",
+    "safe static asset /CalcWeave/assets/src-DPj4L-mi.js",
+    "final built bytes match /CalcWeave/assets/src-DPj4L-mi.js",
+    "safe static asset /CalcWeave/assets/src-DSgLMJ8v.js",
+    "final built bytes match /CalcWeave/assets/src-DSgLMJ8v.js",
+    "safe static asset /CalcWeave/cookies/index.html",
+    "final built bytes match /CalcWeave/cookies/index.html",
+    "safe static asset /CalcWeave/index.html",
+    "final built bytes match /CalcWeave/index.html",
+    "safe static asset /CalcWeave/notices/index.html",
+    "final built bytes match /CalcWeave/notices/index.html",
+    "safe static asset /CalcWeave/privacy/index.html",
+    "final built bytes match /CalcWeave/privacy/index.html",
+    "safe static asset /CalcWeave/terms/index.html",
+    "final built bytes match /CalcWeave/terms/index.html",
+    "offline shell size limit",
+    "production CSP permits pinned WASM while blocking dynamic/inline JavaScript evaluation",
+    "CSP precedes external-only application scripts",
+    "production referrer policy",
+    "offline accessible protected policy terms",
+    "operator/contact in terms",
+    "offline accessible protected policy privacy",
+    "operator/contact in privacy",
+    "offline accessible protected policy cookies",
+    "operator/contact in cookies",
+    "offline accessible protected policy notices",
+    "no source maps or environment files distributed",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "no recognized secret material in assets\\engine.worker-BYNS5Yfw.js",
+    "no recognized secret material in assets\\index-BuFe4fvD.js",
+    "no recognized secret material in assets\\schemas-B44qH8my.js",
+    "no recognized secret material in assets\\src-Bcx-wexT.js",
+    "no recognized secret material in assets\\src-BePJ-JuP.js",
+    "no recognized secret material in assets\\src-BH9EnOuL.js",
+    "no recognized secret material in assets\\src-BhYy4jpG.js",
+    "no recognized secret material in assets\\src-Cw2CCdNK.js",
+    "no recognized secret material in assets\\src-DPj4L-mi.js",
+    "no recognized secret material in assets\\src-DSgLMJ8v.js",
+    "no recognized secret material in cookies\\index.html",
+    "no recognized secret material in index.html",
+    "no recognized secret material in notices\\index.html",
+    "no recognized secret material in offline-manifest.json",
+    "no recognized secret material in privacy\\index.html",
+    "no recognized secret material in sw.js",
+    "no recognized secret material in terms\\index.html",
+    "publication is explicitly dispatched",
+    "only official Actions at the independently verified commit allowlist",
+    "workflow executes actual approved Python target parity",
+    "workflow validates the exact approved project/custom-domain destination",
+    "configured-path build and verification precede artifact publication"
+  ],
+  "files": [
+    {
+      "url": "/CalcWeave/assets/engine.worker-BYNS5Yfw.js",
+      "bytes": 633138,
+      "sha256": "b1569d9f9b1b9db5afab30d75f7c00501c854a903666dfab91bd00e5b704fe3f"
+    },
+    {
+      "url": "/CalcWeave/assets/index-BuFe4fvD.js",
+      "bytes": 1244744,
+      "sha256": "5ee38072d352ac38d79ebd205a7936a8a470033100b464a7b613022984d19ed0"
+    },
+    {
+      "url": "/CalcWeave/assets/index-D5WwklyN.css",
+      "bytes": 104302,
+      "sha256": "61951ac3f9f35ec3e692ddaa0df0280c3d4d8aecd0dd550131cd8d7738302d93"
+    },
+    {
+      "url": "/CalcWeave/assets/schemas-B44qH8my.js",
+      "bytes": 89575,
+      "sha256": "3fe9116fec43c1e03dfdcbfb3d962963c6399c72fec836d781706a228d67b6b6"
+    },
+    {
+      "url": "/CalcWeave/assets/src-BH9EnOuL.js",
+      "bytes": 13633,
+      "sha256": "8378166f73d5c4d4be7e6f1cabec6eea607bf7d44862bcb442bfed99edbd247c"
+    },
+    {
+      "url": "/CalcWeave/assets/src-Bcx-wexT.js",
+      "bytes": 3849878,
+      "sha256": "e8ffe226096710de03e621ccd2e869d2939d89e7a72cc1eb716898ea0bc6cb07"
+    },
+    {
+      "url": "/CalcWeave/assets/src-BePJ-JuP.js",
+      "bytes": 514227,
+      "sha256": "cb0375cca914eabcfb52acfa10e8a8c02eadb047ffff2fd0eeb39f589676de5b"
+    },
+    {
+      "url": "/CalcWeave/assets/src-BhYy4jpG.js",
+      "bytes": 10180,
+      "sha256": "0986ab731d8e88f7c2c20626625270de99eaedcb8c49e08048fc2db4433ccc81"
+    },
+    {
+      "url": "/CalcWeave/assets/src-Cw2CCdNK.js",
+      "bytes": 58127,
+      "sha256": "581cc19158bda43d956be6d8148124a94c0c03b6d71a11312314fb78346e696d"
+    },
+    {
+      "url": "/CalcWeave/assets/src-DPj4L-mi.js",
+      "bytes": 3423,
+      "sha256": "152665c4f806a7b519c58d532f5706a20d53c91680633c7363f3f5b71a4147d0"
+    },
+    {
+      "url": "/CalcWeave/assets/src-DSgLMJ8v.js",
+      "bytes": 207232,
+      "sha256": "5da0900fc5d73796ae0742afd2b9ac516966a17faab7d7feec09e676359b0f50"
+    },
+    {
+      "url": "/CalcWeave/cookies/index.html",
+      "bytes": 4393,
+      "sha256": "24331d2e495a34b3813e18d66ff8cbe93bab5d7f969afcabf79a3b8567c2f38c"
+    },
+    {
+      "url": "/CalcWeave/index.html",
+      "bytes": 1296,
+      "sha256": "65eee04110a760a1378a19538fc5e2578f3ba6097870ac266f4d72011d72f5e5"
+    },
+    {
+      "url": "/CalcWeave/notices/index.html",
+      "bytes": 35204,
+      "sha256": "266ed86533ac46a3d2b85a9a7f86eda44056d611bd1558f19067485068c1ae79"
+    },
+    {
+      "url": "/CalcWeave/privacy/index.html",
+      "bytes": 6867,
+      "sha256": "a977457d228e07b569dd113e74db053a4406f8b294c9f3882068580b5819df05"
+    },
+    {
+      "url": "/CalcWeave/terms/index.html",
+      "bytes": 4910,
+      "sha256": "0341a99e3cd0ef5ba07357417cf8bcc03a216a70bdbb5358a71cb19e7c64ce93"
+    }
+  ],
+  "totalStaticBytes": 6781129,
+  "publicDeploymentClaimed": false
+}

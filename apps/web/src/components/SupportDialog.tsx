@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { type ParameterDefinition } from '../../../../packages/block-library/src';
 import { type ExecutionMode } from '../../../../packages/model/src';
 import { getReleaseCatalog } from '../../../../packages/release/src';
@@ -8,6 +8,7 @@ import { ModalDialog } from './ModalDialog';
 import { appResourcePath } from '../app-path';
 import { AdapterCatalogPanel } from './AdapterCatalogPanel';
 import { downloadText } from './M4WorkspaceTools';
+import './HelpDialog.css';
 
 const MODES: Record<ExecutionMode, string> = { static: '정적 계산', discrete: '이산 시뮬레이션', continuous: '연속·혼합 시뮬레이션' };
 const RELEASE = getReleaseCatalog();
@@ -16,23 +17,129 @@ function parameterConstraint(parameter: Pick<ParameterDefinition, 'options' | 'm
   return [parameter.options?.join(' · '), parameter.min !== undefined || parameter.max !== undefined ? `${parameter.min ?? '−∞'} ~ ${parameter.max ?? '∞'}` : '', parameter.minLength !== undefined || parameter.maxLength !== undefined ? `길이 ${parameter.minLength ?? 0} ~ ${parameter.maxLength ?? '제한 없음'}` : ''].filter(Boolean).join(' / ') || '신호 형식·유한값을 확인합니다.';
 }
 
+type HelpPage = 'guide' | 'blocks' | 'files' | 'about';
+type HelpDetail = 'matrix' | 'adapters' | null;
+const MODEL_LIMIT_LABELS: Record<keyof typeof RELEASE.limits, string> = {
+  maxBytes: '모델 파일 크기', maxDepth: '파일 구조의 중첩 깊이', maxValues: '파일 안의 값 수',
+  maxNodes: '블록 수', maxEdges: '연결 수', maxSteps: '이산 실행 단계',
+  maxRecordedValues: '결과 기록의 수치 원소', maxStateElements: '저장 상태의 수치 원소',
+  maxTime: '실행 시간의 최댓값 (초)', minStep: '이산 시간 간격의 최솟값 (초)',
+};
+const DATASET_LIMIT_LABELS: Record<keyof typeof RELEASE.datasetLimits, string> = {
+  maxBytes: '데이터 파일 크기', maxRows: '데이터 행', maxColumns: '데이터 열',
+  maxCells: '데이터 셀', maxDatasets: '모델 안의 데이터표', maxStringLength: '셀 안의 문자열 길이',
+};
+const SOLVER_LIMIT_LABELS: Record<keyof typeof RELEASE.solverLimits, string> = {
+  minStep: '내부 시간 간격의 최솟값 (초)', maxStep: '내부 시간 간격의 최댓값 (초)',
+  minTolerance: '허용오차의 최솟값', maxTolerance: '허용오차의 최댓값',
+  maxSteps: '연속 계산 단계', maxRejects: '허용오차 초과 재시도', maxEvaluations: '함수 평가',
+  maxEvents: '이벤트 처리', minEventTolerance: '이벤트 허용오차의 최솟값', maxEventTolerance: '이벤트 허용오차의 최댓값',
+};
+function displayDefault(value: unknown): string {
+  if (typeof value === 'string') return value || '빈 문자열';
+  if (typeof value === 'boolean') return value ? '참 (true)' : '거짓 (false)';
+  if (value === null) return '지정 없음';
+  if (Array.isArray(value)) return '[' + value.map(item => Array.isArray(item) ? '[' + item.map(String).join(', ') + ']' : String(item)).join(', ') + ']';
+  if (typeof value === 'object') return '구조화된 값 · 아래 기술 정보에서 확인';
+  return String(value);
+}
+function readableParameterConstraint(parameter: ParameterDefinition): string {
+  const min = parameter.min === -Number.MAX_VALUE ? undefined : parameter.min;
+  const max = parameter.max === Number.MAX_VALUE ? undefined : parameter.max;
+  const range = min !== undefined && max !== undefined ? String(min) + ' ~ ' + String(max) : min !== undefined ? String(min) + ' 이상' : max !== undefined ? String(max) + ' 이하' : '';
+  const length = parameter.minLength !== undefined || parameter.maxLength !== undefined ? '길이 ' + String(parameter.minLength ?? 0) + ' ~ ' + String(parameter.maxLength ?? '제한 없음') : '';
+  return [parameter.options?.join(' · '), range, length].filter(Boolean).join(' / ') || (parameter.kind === 'number' || parameter.kind === 'integer' ? '유한한 ' + (parameter.kind === 'integer' ? '정수' : '숫자') + '를 입력합니다.' : '블록 속성에서 신호 형식과 값을 지정합니다.');
+}
+function LimitList({ values, labels }: { values: Readonly<Record<string, number>>; labels: Readonly<Record<string, string>> }) {
+  return <dl className="support-metadata help-limit-list">{Object.entries(values).map(([key, value]) => <div key={key}><dt>{labels[key]}</dt><dd>{key === 'maxBytes' ? String(value / (1024 * 1024)) + ' MiB' : String(value)}</dd></div>)}</dl>;
+}
+
 export function SupportDialog({ onClose, onManage }: { onClose: () => void; onManage: () => void }) {
-  const [page, setPage] = useState<'support' | 'matrix' | 'adapters' | 'keyboard' | 'limits' | 'policy'>('support');
+  const [page, setPage] = useState<HelpPage>('guide');
+  const [detail, setDetail] = useState<HelpDetail>(null);
   const [query, setQuery] = useState('');
   const [mode, setMode] = useState<ExecutionMode | ''>('');
   const [selectedId, setSelectedId] = useState('source.constant');
-  const blocks = useMemo(() => BLOCK_REGISTRY.filter(block => (!mode || block.supportedModes.includes(mode)) && `${block.id} ${block.label} ${block.englishName} ${block.aliases?.join(' ')} ${block.description} ${block.category} ${Object.entries(block.parameters).map(([key, parameter]) => `${key} ${parameter.label} ${parameter.kind} ${parameter.options?.join(' ')}`).join(' ')} ${block.valueType} ${block.shape} ${block.unit}`.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase())), [query, mode]);
+  const aboutButton = useRef<HTMLButtonElement>(null);
+  const blocksButton = useRef<HTMLButtonElement>(null);
+  useLayoutEffect(() => {
+    // A native dialog retains scroll when a tab swaps its content. Reset after
+    // the new content is laid out so every help page starts at its heading.
+    aboutButton.current?.closest('dialog')?.scrollTo(0, 0);
+  }, [page, detail]);
+  const blocks = useMemo(() => BLOCK_REGISTRY.filter(block => (!mode || block.supportedModes.includes(mode)) && (block.id + ' ' + block.label + ' ' + block.englishName + ' ' + block.aliases?.join(' ') + ' ' + block.description + ' ' + block.category + ' ' + Object.entries(block.parameters).map(([key, parameter]) => key + ' ' + parameter.label + ' ' + parameter.kind + ' ' + parameter.options?.join(' ')).join(' ') + ' ' + block.valueType + ' ' + block.shape + ' ' + block.unit).toLocaleLowerCase().includes(query.trim().toLocaleLowerCase())), [query, mode]);
   const selected = BLOCK_REGISTRY.find(block => block.id === selectedId)!;
-  return <ModalDialog labelId="support-title" className="support-dialog" onClose={onClose} initialFocus="[aria-label='지원 블록 검색']">
-    <div className="dialog-heading"><div><h2 id="support-title">지원·릴리스</h2><p>CalcWeave {RELEASE.version} · 엔진 {RELEASE.engineVersion} · {BLOCK_REGISTRY.length}개 블록</p><p>웹 베타 · {RELEASE.browserSupport}</p></div><button className="icon-button" aria-label="지원·릴리스 닫기" onClick={onClose}><Icon name="close"/></button></div>
-    <nav className="dialog-navigation" aria-label="지원 정보"><button aria-pressed={page === 'support'} onClick={() => setPage('support')}>지원 블록</button><button aria-pressed={page === 'matrix'} onClick={() => setPage('matrix')}>원자료 대응표</button><button aria-pressed={page === 'adapters'} onClick={() => setPage('adapters')}>확장 실행</button><button aria-pressed={page === 'keyboard'} onClick={() => setPage('keyboard')}>사용 방법</button><button aria-pressed={page === 'limits'} onClick={() => setPage('limits')}>범위와 상한</button><button aria-pressed={page === 'policy'} onClick={() => setPage('policy')}>정책·로컬 저장</button></nav>
-    <div className="dialog-content">
-      {page === 'matrix' && <SourceSupportPanel/>}
-      {page === 'adapters' && <AdapterCatalogPanel/>}
-      {page === 'support' && <><div className="support-filters"><label className="field"><span className="field-label">블록·파라미터 검색</span><input aria-label="지원 블록 검색" maxLength={120} value={query} onChange={event => setQuery(event.target.value)} placeholder="LU, 적분, wordLength…"/></label><label className="field"><span className="field-label">실행 방식</span><select aria-label="지원 실행 방식" value={mode} onChange={event => setMode(event.target.value as ExecutionMode | '')}><option value="">전체 방식</option>{Object.entries(MODES).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label></div><p className="support-result-count" role="status">{blocks.length} / {BLOCK_REGISTRY.length}개 블록</p><div className="support-layout"><div className="support-block-list" aria-label="지원 블록 목록">{blocks.map(block => <button key={block.id} aria-pressed={selectedId === block.id} onClick={() => setSelectedId(block.id)}><strong>{block.label} · {block.englishName}</strong><span>{block.category} · {block.supportedModes.map(item => MODES[item]).join(' / ')}</span></button>)}{!blocks.length && <p className="muted-copy">일치하는 블록이 없습니다.</p>}</div><section className="support-block-detail" aria-label="선택한 블록의 지원 정보"><h3>{selected.label} · {selected.englishName}</h3><p>{selected.description}</p><dl className="support-metadata"><div><dt>ID</dt><dd>{selected.id} · v{selected.version}</dd></div><div><dt>실행 방식</dt><dd>{selected.supportedModes.map(item => MODES[item]).join(' · ')}</dd></div><div><dt>입력 / 출력</dt><dd>{selected.inputs.join(', ') || '없음'} / {selected.outputs.join(', ') || '없음'}<small>동적 포트는 블록의 설정과 하위 도식 정의에 따라 바뀝니다.</small></dd></div><div><dt>코드 타깃</dt><dd>{selected.exportTargets.join(' · ')}<small>Python은 정적·이산 실행의 승인 범위입니다. 하위 도식은 내부 계산 블록이 모두 지원될 때 내보낼 수 있습니다. 실제 모델의 모드·연결·자료형은 코드 타깃 선택 창에서 확인합니다.</small></dd></div><div><dt>타입 · 모양</dt><dd>{selected.valueType} · {selected.shape}</dd></div><div><dt>단위</dt><dd>{selected.unit === 'dimensionless' ? '1 · 단위 없음' : '입력·파라미터에서 추론'}</dd></div><div><dt>시간 · 상태</dt><dd>{selected.sampleTime} · {selected.state}</dd></div></dl><h4>파라미터와 기본값</h4>{Object.keys(selected.parameters).length ? <div className="support-parameter-list">{Object.entries(selected.parameters).map(([key, parameter]) => <div key={key}><strong>{parameter.label} <code>{key}</code></strong><p>{parameter.kind} · 기본값 <code>{JSON.stringify(parameter.default)}</code></p><p>{parameterConstraint(parameter)}</p></div>)}</div> : <p>설정할 파라미터가 없습니다.</p>}<p className="field-help">타입·shape·단위·연결 조건은 현재 모델을 실행하기 전에 검증합니다. 입력값을 추론하는 블록의 최종 모양은 블록 속성에서 확인하세요.</p></section></div></>}
-      {page === 'keyboard' && <section className="support-copy"><h3>블록으로 계산을 엮어 보세요.</h3><ol><li>라이브러리에서 블록을 추가합니다.</li><li>출력 → 입력 포트를 연결합니다. 블록 속성의 연결 메뉴는 키보드로도 사용할 수 있습니다.</li><li>블록을 선택하고 값을 바꾼 뒤 실행합니다.</li></ol><dl className="support-metadata"><div><dt>캔버스</dt><dd>휠 버튼 드래그 이동 · 왼쪽 드래그 영역 선택 · Space 도식 맞추기</dd></div><div><dt>키보드 편집</dt><dd>Tab으로 블록 이동 · Enter로 속성 편집 · Tab으로 입력값과 연결 메뉴 이동</dd></div><div><dt>빠른 추가</dt><dd>Ctrl+K · ↑ ↓ 선택 · Enter 추가 · Escape 닫기</dd></div><div><dt>선택</dt><dd>Ctrl+A 전체 선택 · Ctrl+C/V 복사·붙여넣기 · Ctrl+D 복제 · Delete 삭제</dd></div><div><dt>실행</dt><dd>Ctrl+Enter 실행 · Ctrl+Z 실행 취소 · Ctrl+Shift+Z 다시 실행</dd></div></dl><p>데이터는 CSV·JSON을 미리 본 뒤 재생합니다. 선택 블록은 하위 도식으로 묶고 내부를 편집할 수 있습니다. 실험에서는 반복 실행과 비교를, 대시보드에서는 다음 실행의 입력 조절을, 노트에서는 설명을 보관합니다.</p><p>Scope의 시작·종료 시간을 적용하면 그 범위까지 실제 계산을 다시 실행합니다. solver 내부 간격과 결과 기록 간격은 별도로 설정합니다.</p></section>}
-      {page === 'limits' && <section className="support-copy"><h3>지원 범위</h3><p>기존 실수 float64·boolean 신호는 scalar·벡터·2D 범위이며, Typed 신호는 명시한 자료형과 최대 8차원 배열을 지원합니다. Bus·메시지는 등록한 구조와 상한을 확인합니다. 연속·혼합 실행은 RK4·RK45와 선택 implicit Euler 계약이며, 블록·자료형·설정에 따른 제한은 대응표와 실행 전 검증에서 확인하세요. 행렬 계산은 실수 밀집 2D 범위이고 기존 Quantize의 최대 32-bit 양자화는 decoded 값과 저장 정수 코드를 출력합니다.</p><ul className="unsupported-list">{RELEASE.unsupported.map(item => <li key={item}>{item}</li>)}</ul><p>단위는 검증하며 unit.convert를 제외한 자동 변환은 수행하지 않습니다.</p><h3>실행 상한</h3><dl className="support-metadata">{Object.entries(RELEASE.limits).map(([key, value]) => <div key={key}><dt>{key}</dt><dd>{String(value)}</dd></div>)}</dl><details><summary>연속 solver 상한</summary><dl className="support-metadata">{Object.entries(RELEASE.solverLimits).map(([key, value]) => <div key={key}><dt>{key}</dt><dd>{String(value)}</dd></div>)}</dl></details><p>행렬 각 축 최대 32, lookup 각 축 2~32, 계층 깊이 최대 8, 데이터 파일 최대 2 MiB. 반복 실험은 최대 16회와 총 30초 상한을 공유합니다. 실행 기록은 최대 5개·20 MiB로 유지하며, 기록당 수치 원소는 200,000개를 넘을 수 없습니다.</p></section>}
-      {page === 'policy' && <section className="support-copy"><h3>이 브라우저의 로컬 작업 공간</h3><p>모델과 데이터, 실행 기록은 현재 브라우저에 저장됩니다. 백업 파일은 직접 내려받아 보관하고 다른 기기에서 복원할 수 있습니다. 브라우저 저장 공간을 지우면 저장된 작업이 사라질 수 있습니다.</p><button className="button primary" onClick={onManage}>백업·복구 열기</button><h3>정책</h3><div className="policy-links"><a href={appResourcePath(RELEASE.policyLinks.privacy)} target="_blank" rel="noopener noreferrer">개인정보 처리방침</a><a href={appResourcePath(RELEASE.policyLinks.terms)} target="_blank" rel="noopener noreferrer">이용약관</a><a href={appResourcePath(RELEASE.policyLinks.cookies)} target="_blank" rel="noopener noreferrer">쿠키·로컬 저장 안내</a></div><p>운영자 {RELEASE.operator} · 문의 <a href={`mailto:${RELEASE.contact}`}>{RELEASE.contact}</a></p><p>현재 웹 베타: <a href={RELEASE.deploymentUrl} target="_blank" rel="noopener noreferrer">GitHub Pages에서 열기</a></p><p>브랜딩 목표 도메인: {RELEASE.domain}. 검증 범위와 남은 확인은 릴리스 체크리스트에 기록합니다.</p><a href={appResourcePath(RELEASE.policyLinks.notices)} target="_blank" rel="noopener noreferrer">릴리스·오픈소스 고지</a></section>}
+  function openPage(next: HelpPage) { aboutButton.current?.closest('dialog')?.scrollTo(0, 0); setPage(next); setDetail(null); }
+  function openDetail(next: Exclude<HelpDetail, null>) { aboutButton.current?.focus({ preventScroll: true }); setDetail(next); }
+  function backToAbout() { setDetail(null); aboutButton.current?.focus({ preventScroll: true }); }
+  function findBlocks() { openPage('blocks'); blocksButton.current?.focus({ preventScroll: true }); }
+  return <ModalDialog labelId="support-title" className="support-dialog help-dialog" onClose={onClose} initialFocus="[data-help-start]">
+    <div className="dialog-heading help-heading"><div><h2 id="support-title">CalcWeave 도움말</h2><p>설치 없이 웹 브라우저에서 블록을 연결해 계산하고 시뮬레이션하세요.</p></div><button className="icon-button" aria-label="도움말 닫기" onClick={onClose}><Icon name="close"/></button></div>
+    <nav className="dialog-navigation help-navigation" aria-label="도움말 항목">
+      <button data-help-start aria-pressed={page === 'guide'} onClick={() => openPage('guide')}>사용 안내</button>
+      <button ref={blocksButton} aria-pressed={page === 'blocks'} onClick={() => openPage('blocks')}>블록 찾기</button>
+      <button aria-pressed={page === 'files'} onClick={() => openPage('files')}>파일·코드</button>
+      <button ref={aboutButton} data-help-about aria-pressed={page === 'about'} onClick={() => openPage('about')}>앱 정보</button>
+    </nav>
+    <div className="dialog-content help-content">
+      {page === 'guide' && <section className="help-guide" aria-labelledby="help-guide-title">
+        <div className="help-guide-layout">
+          <div><h3 id="help-guide-title">첫 계산을 만들어 보세요</h3><p>상수에 배율을 곱하고 결과를 표시하는 작은 도식부터 시작할 수 있습니다.</p>
+            <ol className="help-steps"><li><strong>블록을 놓습니다</strong><span>라이브러리 또는 빠른 추가에서 상수, 배율, 결과(Display) 블록을 추가하세요. 준비된 도식은 상단의 예제로 시작에서 고를 수 있습니다.</span></li><li><strong>선을 연결하고 값을 정합니다</strong><span>상수 → 배율 → 결과 순서로 출력과 입력 포트를 연결하세요. 블록 속성에서 상수를 2, 배율을 3으로 바꿔 보세요.</span></li><li><strong>실행하고 결과를 확인합니다</strong><span>상단의 실행 버튼을 누르면 계산 결과에 6이 나타납니다. 시간에 따른 변화는 이산 또는 연속 실행 방식과 시간 그래프(Scope)로 확인하세요.</span></li></ol>
+            <button className="button" onClick={findBlocks}>필요한 블록 찾기<Icon name="arrow" size={16}/></button>
+          </div>
+          <section className="help-next-steps" aria-labelledby="help-next-title"><h3 id="help-next-title">작업을 이어가는 방법</h3><dl>
+            <div><dt>시간에 따른 변화</dt><dd>모델 설정에서 실행 방식과 시작·종료 시간을 정하세요. Scope의 시간 범위를 적용하면 해당 범위까지 다시 계산합니다.</dd></div>
+            <div><dt>측정 데이터로 계산</dt><dd>CSV·JSON을 미리 본 뒤 데이터 재생 블록에 연결하세요. 반복 실험에서 입력을 바꿔 결과를 비교할 수 있습니다.</dd></div>
+            <div><dt>도식 정리와 설명</dt><dd>선택한 블록을 하위 도식으로 묶고, 대시보드에서 입력을 조절하거나 노트에 설명을 남길 수 있습니다.</dd></div>
+          </dl></section>
+        </div>
+        <details className="help-disclosure"><summary>마우스·키보드 조작</summary><dl className="support-metadata help-shortcuts">
+          <div><dt>도식 이동</dt><dd>마우스 휠 버튼을 누른 채 드래그</dd></div><div><dt>영역 선택</dt><dd>캔버스 빈 곳에서 마우스 왼쪽 버튼으로 드래그</dd></div><div><dt>도식 맞추기</dt><dd>캔버스에서 <kbd>Space</kbd></dd></div>
+          <div><dt>키보드로 블록 편집</dt><dd><kbd>Tab</kbd>으로 블록 이동 · <kbd>Enter</kbd>로 속성 편집 · 입력값과 연결 메뉴는 <kbd>Tab</kbd>으로 이동</dd></div>
+          <div><dt>빠른 추가</dt><dd><kbd>Ctrl + K</kbd> · <kbd>↑ / ↓</kbd> 선택 · <kbd>Enter</kbd> 추가 · <kbd>Escape</kbd> 닫기</dd></div>
+          <div><dt>선택과 복사</dt><dd><kbd>Ctrl + A</kbd> 전체 선택 · <kbd>Ctrl + C / V</kbd> 복사·붙여넣기 · <kbd>Ctrl + D</kbd> 복제 · <kbd>Delete</kbd> 삭제</dd></div>
+          <div><dt>실행과 실행 취소</dt><dd><kbd>Ctrl + Enter</kbd> 실행 · <kbd>Ctrl + Z</kbd> 실행 취소 · <kbd>Ctrl + Shift + Z</kbd> 다시 실행</dd></div>
+        </dl></details>
+      </section>}
+      {page === 'blocks' && <section aria-label="블록 찾기">
+        <div className="support-filters"><label className="field"><span className="field-label">블록·파라미터 검색</span><input aria-label="지원 블록 검색" maxLength={120} value={query} onChange={event => setQuery(event.target.value.slice(0, 120))} placeholder="상수, 적분, 행렬…"/></label><label className="field"><span className="field-label">실행 방식</span><select aria-label="지원 실행 방식" value={mode} onChange={event => setMode(Object.hasOwn(MODES, event.target.value) ? event.target.value as ExecutionMode : '')}><option value="">전체 방식</option>{Object.entries(MODES).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label></div>
+        <p className="support-result-count" role="status">{blocks.length} / {BLOCK_REGISTRY.length}개 블록</p>
+        <div className="support-layout"><div className="support-block-list" aria-label="지원 블록 목록">{blocks.map(block => <button key={block.id} aria-pressed={selectedId === block.id} onClick={() => setSelectedId(block.id)}><strong>{block.label}<span className="help-block-english">{block.englishName}</span></strong><span>{block.category} · {block.supportedModes.map(item => MODES[item]).join(' / ')}</span></button>)}{!blocks.length && <p className="muted-copy">일치하는 블록이 없습니다.</p>}</div>
+          <section className="support-block-detail" aria-label="선택한 블록의 지원 정보"><h3>{selected.label}<span className="help-detail-english">{selected.englishName}</span></h3><p>{selected.description}</p>
+            <dl className="support-metadata"><div><dt>실행 방식</dt><dd>{selected.supportedModes.map(item => MODES[item]).join(' · ')}</dd></div><div><dt>입력 / 출력</dt><dd>{selected.inputs.length}개 / {selected.outputs.length}개<small>포트 수는 블록 설정과 하위 도식에 따라 바뀔 수 있습니다.</small></dd></div><div><dt>코드 내보내기</dt><dd>{selected.exportTargets.map(target => target === 'typescript' ? 'TypeScript' : target === 'python' ? 'Python' : 'WASM').join(' · ')}<small>내보낼 때 모델의 실행 방식·연결·자료형과 설정을 확인합니다. 하위 도식은 내부 계산 블록이 모두 지원되어야 합니다.</small></dd></div></dl>
+            <h4>설정과 기본값</h4>{Object.keys(selected.parameters).length ? <><div className="support-parameter-list help-parameter-list">{Object.entries(selected.parameters).map(([key, parameter]) => <div key={key}><strong>{parameter.label}</strong><p>기본값 <span className="help-default-value">{displayDefault(parameter.default)}</span></p><p>{readableParameterConstraint(parameter)}</p></div>)}</div><details className="help-disclosure"><summary>파라미터 기술 정보</summary><div className="support-parameter-list">{Object.entries(selected.parameters).map(([key, parameter]) => <div key={key}><strong>{parameter.label} <code>{key}</code></strong><p>{parameter.kind} · 기본값 <code>{JSON.stringify(parameter.default)}</code></p><p>{parameterConstraint(parameter)}</p></div>)}</div></details></> : <p>설정할 파라미터가 없습니다.</p>}
+            <details className="help-disclosure"><summary>기술 정보</summary><dl className="support-metadata">
+              <div><dt>ID · 버전</dt><dd>{selected.id} · v{selected.version}</dd></div><div><dt>포트 이름</dt><dd>{selected.inputs.join(', ') || '없음'} / {selected.outputs.join(', ') || '없음'}</dd></div><div><dt>타입 · 모양</dt><dd>{selected.valueType} · {selected.shape}</dd></div><div><dt>단위</dt><dd>{selected.unit === 'dimensionless' ? '단위 없음' : '입력·파라미터에서 추론'}</dd></div><div><dt>시간 · 상태</dt><dd>{selected.sampleTime} · {selected.state}</dd></div>
+            </dl></details><p className="field-help">연결과 신호 형식, 단위, 설정은 실행 전에 검증합니다. 실제 입력에 따라 정해지는 형식은 모델의 블록 속성에서 확인하세요.</p>
+          </section>
+        </div>
+      </section>}
+      {page === 'files' && <section className="help-files" aria-labelledby="help-files-title"><h3 id="help-files-title">도식과 결과를 파일로 이어가세요</h3>
+        <dl className="help-file-rows">
+          <div><dt>모델 저장과 전달</dt><dd>상단의 모델 다운로드로 도식·데이터·하위 도식·대시보드·노트를 함께 저장합니다. 가져오기로 다른 브라우저에서도 열 수 있습니다.</dd></div>
+          <div><dt>작업 공간 백업</dt><dd>작업 공간의 백업·복구에서 모델을 보관하고 실행 기록의 포함 여부를 선택하세요. 브라우저 저장 공간을 지울 때와 기기를 옮길 때 사용할 수 있습니다.</dd></div>
+          <div><dt>계산 결과 활용</dt><dd>실행 결과와 Scope에서 값을 확인하세요. 실험 탭의 실행 기록에서 결과 CSV를 내려받아 다른 도구에서 사용할 수 있습니다.</dd></div>
+        </dl>
+        <h3>실행 가능한 코드로 내보내기</h3><p>코드 다운로드 오른쪽의 타깃 선택 버튼에서 실행 환경을 선택하세요. 내보내기 전에 현재 모델의 지원 여부를 확인하며, 실행 방식과 블록 설정에 따라 선택 가능한 타깃이 달라집니다.</p>
+        <dl className="help-file-rows">
+          <div><dt>TypeScript</dt><dd>지원되는 모델을 독립 실행 코드로 내보냅니다.</dd></div>
+          <div><dt>Python</dt><dd>지원 블록의 정적·이산 실행 설정을 내보냅니다. 준비한 Python 환경에서 실행하며 연속 시뮬레이션은 지원하지 않습니다.</dd></div>
+          <div><dt>WASM</dt><dd>유한한 실수 단일값을 쓰는 순환 없는 계산 도식의 일부 블록을 지원합니다. 저장 상태나 연속 시뮬레이션은 지원하지 않습니다.</dd></div>
+        </dl>
+        <details className="help-disclosure"><summary>파일 호환성과 고급 공유</summary><p>MAT 데이터표와 SLX·MDL 도식은 일부 형식을 해석해 가져옵니다. 변환되지 않는 항목과 손실을 검토하고, 원본 파일은 따로 보관하세요. MATLAB 코드나 콜백, 외부 참조는 실행하지 않습니다.</p><p>서명된 모델 패키지는 작업 공간 → 고급 파일에서 사용합니다. 공개 키 지문은 파일 출처 확인용이며 계산 정확성을 증명하지 않습니다. 일반 모델 파일은 지문 입력 없이 주고받을 수 있습니다.</p><p>C/C++ 코드 내보내기는 현재 지원하지 않습니다.</p></details>
+      </section>}
+      {page === 'about' && detail !== null && <><div className="help-detail-heading"><button className="button subtle" onClick={backToAbout}>앱 정보로 돌아가기</button><h3>{detail === 'matrix' ? 'Simulink 참고 자료 비교' : '확장 기능 상세'}</h3></div>{detail === 'matrix' ? <SourceSupportPanel/> : <AdapterCatalogPanel/>}</>}
+      {page === 'about' && detail === null && <section className="help-about" aria-labelledby="help-about-title">
+        <div className="help-about-version"><h3 id="help-about-title">CalcWeave</h3><span>버전 {RELEASE.version}</span></div>
+        <p>CalcWeave는 독립적인 웹 계산 도구이며 MATLAB 설치가 필요하지 않습니다.</p>
+        <section className="help-about-section" aria-labelledby="help-storage-title"><h3 id="help-storage-title">이 브라우저에 작업을 저장합니다</h3><p>모델과 데이터, 실행 기록은 현재 브라우저에 저장됩니다. 브라우저 저장 공간을 지우면 작업이 사라질 수 있으니 백업 파일을 내려받아 보관하세요.</p><button className="button" onClick={onManage}>백업·복구 열기</button></section>
+        <section className="help-about-section" aria-labelledby="help-limits-title"><h3 id="help-limits-title">작업 크기</h3><dl className="support-metadata help-limits-summary"><div><dt>모델</dt><dd>블록 {RELEASE.limits.maxNodes.toLocaleString('ko-KR')}개 · 연결 {RELEASE.limits.maxEdges.toLocaleString('ko-KR')}개 · 파일 {RELEASE.limits.maxBytes / (1024 * 1024)} MiB</dd></div><div><dt>데이터 파일</dt><dd>{RELEASE.datasetLimits.maxBytes / (1024 * 1024)} MiB · {RELEASE.datasetLimits.maxRows.toLocaleString('ko-KR')}행 · {RELEASE.datasetLimits.maxColumns}열 · 전체 {RELEASE.datasetLimits.maxCells.toLocaleString('ko-KR')}셀</dd></div><div><dt>실행 기록</dt><dd>최대 5개 · 전체 20 MiB · 기록당 수치 원소 200,000개</dd></div></dl><details className="help-disclosure"><summary>계산·데이터 세부 범위</summary><p>기본 실수·참/거짓 신호는 단일값·벡터·2차원 배열을 지원합니다. Typed 신호는 명시한 자료형과 최대 8차원 배열을 지원하며 기본 실수 블록과 연결할 때 명시적으로 변환합니다. 실수 밀집 행렬은 각 축 32개, lookup 표는 각 축 2~32개, 하위 도식 깊이는 최대 8단계입니다.</p><p>연속·혼합 실행은 RK4·RK45와 선택된 implicit Euler 설정을 지원합니다. 연속 상태는 단위 없는 실수 단일값 범위입니다. 단위는 검증하며 단위 변환 블록 이외의 자동 변환은 수행하지 않습니다. 내부 계산 간격과 결과 기록 간격은 별도로 정합니다.</p><p>반복 실험은 최대 16회와 전체 30초 상한을 공유합니다.</p><h4>모델과 결과</h4><LimitList values={RELEASE.limits} labels={MODEL_LIMIT_LABELS}/><h4>데이터표</h4><LimitList values={RELEASE.datasetLimits} labels={DATASET_LIMIT_LABELS}/><h4>연속 계산</h4><LimitList values={RELEASE.solverLimits} labels={SOLVER_LIMIT_LABELS}/><h4>계산·내보내기 조건</h4><ul className="unsupported-list">{RELEASE.unsupported.map(item => <li key={item}>{item}</li>)}</ul></details></section>
+        <details className="help-disclosure"><summary>버전 기술 정보</summary><dl className="support-metadata"><div><dt>계산 엔진</dt><dd>{RELEASE.engineVersion}</dd></div><div><dt>모델 파일 형식 버전</dt><dd>{RELEASE.schemaVersion}</dd></div></dl></details>
+        <details className="help-disclosure"><summary>지원 환경</summary><p>Windows의 Chromium 브라우저에서 검증했습니다. Firefox·Safari와 다른 운영체제는 아직 검증하지 않았습니다.</p><p>오프라인 사용은 최초 온라인 설치가 완료된 이후에 가능합니다. 계정이나 클라우드 동기화는 제공하지 않습니다. 여러 탭의 저장 충돌은 자동 병합하지 않으므로 현재 탭을 백업하고 최신 저장 모델을 불러오세요.</p></details>
+        <details className="help-disclosure"><summary>호환성 참고</summary><p>Simulink 관련 자료는 기능·파일 형식 비교를 위한 참고입니다. CalcWeave의 기본 사용 조건이 아니며, 원본의 모든 기능이나 옵션과 같다는 의미도 아닙니다.</p><div className="help-reference-actions"><button className="button" onClick={() => openDetail('matrix')}>Simulink 참고 자료 비교</button><button className="button" onClick={() => openDetail('adapters')}>확장 기능 상세</button></div></details>
+        <section className="help-about-section help-contact" aria-labelledby="help-contact-title"><h3 id="help-contact-title">문의와 이용 안내</h3><p>{RELEASE.operator} · <a href={'mailto:' + RELEASE.contact}>{RELEASE.contact}</a></p><div className="policy-links"><a href={RELEASE.deploymentUrl} target="_blank" rel="noopener noreferrer">현재 웹 주소</a><a href={appResourcePath(RELEASE.policyLinks.privacy)} target="_blank" rel="noopener noreferrer">개인정보 처리방침</a><a href={appResourcePath(RELEASE.policyLinks.terms)} target="_blank" rel="noopener noreferrer">이용약관</a><a href={appResourcePath(RELEASE.policyLinks.cookies)} target="_blank" rel="noopener noreferrer">쿠키·로컬 저장 안내</a><a href={appResourcePath(RELEASE.policyLinks.notices)} target="_blank" rel="noopener noreferrer">오픈소스 고지</a></div></section>
+      </section>}
     </div>
     <div className="dialog-footnote">Escape 닫기 · Tab으로 창 안의 항목 이동<button className="text-button" onClick={onClose}>닫기</button></div>
   </ModalDialog>;
@@ -84,8 +191,9 @@ function SourceSupportContent({ api }: { api: SupportMatrixApi }) {
     catch { setReportError(true); }
   }
   return <section className="source-support-matrix" aria-labelledby="source-matrix-title">
-    <h3 id="source-matrix-title">원자료별 지원 범위를 확인하세요</h3>
-    <p>R2024b 참고 자료의 원자료 {summary.trackedSourceRows}행을 추적합니다. 같은 이름이나 같은 계산 블록을 사용하는 항목도 원자료 ID로 구분합니다. 전체 Simulink 라이브러리 전수 목록이나 원본 전체 옵션의 동등성을 뜻하지 않습니다.</p>
+    <h3 id="source-matrix-title">참고 자료와 CalcWeave 기능 비교</h3>
+    <p>CalcWeave는 MATLAB 설치가 필요 없는 독립적인 웹 계산 도구입니다. 이 비교표는 Simulink 관련 참고 자료를 확인하기 위한 정보이며 기본 사용 조건이 아닙니다.</p>
+    <p>R2024b에서 선택한 참고 자료의 원자료 {summary.trackedSourceRows}행을 추적합니다. 같은 이름이나 같은 계산 블록을 사용하는 항목도 원자료 ID로 구분합니다. 전체 Simulink 라이브러리 전수 목록이나 원본 전체 옵션의 동등성을 뜻하지 않으며, 원본 환경의 수치 동등성은 검증하지 않았습니다.</p>
     <div className="source-support-summary" data-testid="source-support-summary"><span>원자료 {summary.trackedSourceRows}행 · 이름 {summary.uniqueSourceNames}개</span><span>등록 계산 블록 {summary.registryDefinitions}개</span><span>선택 subset {summary.selectedSubsetRows}행 · 미지원 {summary.unsupportedRows}행</span><span>원본 옵션 inventory 미검증 {summary.unverifiedInventoryRows}행 · 전체 동등 승인 {summary.fullOptionEquivalentRows}행</span></div>
     <div className="source-support-filters">
       <label className="field source-support-search"><span className="field-label">원자료 이름·ID·구현 검색</span><input aria-label="원자료 검색" maxLength={120} value={query} onChange={event => setQuery(event.target.value.slice(0, 120))} placeholder="Display, 06-001, string…"/></label>

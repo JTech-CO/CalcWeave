@@ -5,14 +5,14 @@ import { SOLVER_LIMITS } from '../../model/src/continuous';
 import { PYTHON_TARGET } from '../../codegen-python/src/capabilities';
 import { WASM_TARGET, C_CPP_TARGET } from '../../codegen-wasm/src/capabilities';
 
-export const APP_VERSION = '0.17.1';
+export const APP_VERSION = '0.17.2';
 export const RELEASE = Object.freeze({
   version: APP_VERSION, engineVersion: ENGINE_VERSION, schemaVersion: 1,
   stage: 'public-beta', domain: 'calcweave.com', deploymentUrl: 'https://jtech-co.github.io/CalcWeave/', operator: 'JTech-Co',
   contact: 'jtech-bryan@proton.me',
   repository: 'https://github.com/JTech-CO/CalcWeave',
   policyLinks: Object.freeze({ terms: '/terms/', privacy: '/privacy/', cookies: '/cookies/', notices: '/notices/' }),
-  browserSupport: 'Windows Chromium에서 검증한 베타입니다. Firefox·Safari 검증과 실제 초보자 사용성 평가는 공개 출시 확인 항목입니다.',
+  browserSupport: 'Windows Chromium에서 동작을 확인했습니다. Firefox와 Safari는 아직 검증하지 않았습니다.',
 });
 
 export const RELEASE_LIMITATIONS = Object.freeze([

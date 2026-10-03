@@ -2,14 +2,15 @@ import { expect, test, type Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import { createM14Examples } from '../../apps/web/src/m14-examples';
 import { BUILTIN_ADAPTER_PROFILES, UNAVAILABLE_ADAPTER_PROFILES, type CalcModel } from '../../packages/model/src';
+import { openCompatibilityReference } from './help-tools';
 
-async function workspace(page: Page) { await page.goto('/'); await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨'); }
+async function workspace(page: Page) { await page.goto('./'); await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨'); }
 async function example(page: Page, id: string) { await page.getByRole('tab', { name: '도식', exact: true }).click(); await page.getByRole('button', { name: '예제로 시작', exact: true }).click(); await page.getByLabel('예제 카테고리').selectOption('adapters'); await page.locator(`[data-example-id="${id}"]`).click(); }
 async function run(page: Page) { await page.locator('.run-button').click(); await expect(page.locator('.result-status')).toContainText('현재 모델의 결과'); }
 async function download(page: Page, name: string, container?: ReturnType<Page['locator']>) { const event = page.waitForEvent('download'); await (container ?? page).getByRole('button', { name, exact: true }).click(); return readFile((await (await event).path())!, 'utf8'); }
 async function history(page: Page) { await page.getByRole('tab', { name: '실험', exact: true }).click(); await expect(page.locator('.history-card').first()).toBeVisible(); return JSON.parse(await download(page, '기록 JSON', page.locator('.history-card').first())); }
 async function importModel(page: Page, model: CalcModel) { await page.getByLabel('CalcWeave 모델 파일 선택').setInputFiles({ name: 'm14.cw.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(model)) }); await expect(page.locator('.canvas-topline strong')).toHaveText(model.name); }
-async function catalog(page: Page) { await page.getByRole('button', { name: '지원·릴리스', exact: true }).click(); await page.getByRole('button', { name: '확장 실행', exact: true }).click(); return page.getByRole('dialog', { name: '지원·릴리스' }); }
+async function catalog(page: Page) { return openCompatibilityReference(page, 'adapters'); }
 
 test('M14 catalog shows all three pinned alternatives and eight unavailable native environments without executable inputs', async ({ page }) => {
   const errors: string[] = [], requests: string[] = []; page.on('pageerror', error => errors.push(error.message)); page.on('request', request => requests.push(request.url()));

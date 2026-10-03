@@ -1,0 +1,64 @@
+.help-dialog .help-heading h2 { font-size:1.375rem; }
+.help-dialog .help-heading p { font-size:var(--text-body); line-height:1.7; }
+.help-dialog .help-navigation { gap:4px 8px; }
+.help-dialog .help-navigation button { font-size:var(--text-body); padding:10px 16px; }
+.help-dialog .help-content { padding-top:24px; }
+.help-dialog .help-content p { font-size:var(--text-body); line-height:1.8; }
+.help-dialog .help-content h3 { font-size:var(--text-heading); font-weight:600; }
+.help-dialog .help-content h4 { font-size:var(--text-body); }
+.help-guide-layout { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:40px; align-items:start; }
+.help-steps { padding-left:24px; margin:24px 0; display:grid; gap:20px; }
+.help-steps li { padding-left:6px; line-height:1.7; font-size:var(--text-body); }
+.help-steps li::marker { color:var(--accent); font-weight:600; }
+.help-steps strong,.help-steps span { display:block; }
+.help-steps span { margin-top:6px; color:var(--muted); }
+.help-next-steps { border-left:1px solid var(--line); padding-left:32px; }
+.help-next-steps dl { display:grid; gap:24px; margin:18px 0 0; }
+.help-next-steps dt,.help-file-rows dt { font-size:var(--text-body); font-weight:600; }
+.help-next-steps dd { margin:8px 0 0; color:var(--muted); line-height:1.8; font-size:var(--text-body); }
+.help-dialog .help-disclosure { margin:24px 0 0; padding-top:0; border-top:1px solid var(--line); min-width:0; }
+.help-dialog .help-disclosure>summary { padding:14px 0; font-size:var(--text-body); cursor:pointer; font-weight:600; overflow-wrap:anywhere; }
+.help-dialog .help-disclosure>p { margin:0 0 12px; color:var(--muted); }
+.help-dialog .help-disclosure .support-metadata { margin-top:6px; }
+.help-dialog .support-metadata { font-size:var(--text-small); }
+.help-dialog .help-shortcuts { gap:14px; }
+.help-shortcuts kbd { font:inherit; color:var(--text); white-space:normal; }
+.help-dialog .support-result-count { margin:12px 0 16px; font-size:var(--text-small); }
+.help-block-english { display:block; font-size:var(--text-small); font-weight:400; margin-top:4px; }
+.help-detail-english { display:block; color:var(--muted); font-size:var(--text-body); font-weight:400; margin-top:4px; }
+.help-dialog .help-parameter-list { gap:12px; }
+.help-dialog .help-parameter-list>div { background:transparent; border:0; border-bottom:1px solid var(--line); border-radius:0; padding:0 0 12px; }
+.help-dialog .help-parameter-list p { font-size:var(--text-small); margin-top:6px; }
+.help-default-value { display:inline; margin-left:8px; color:var(--text); overflow-wrap:anywhere; }
+.help-file-rows { display:grid; gap:0; margin:20px 0 28px; }
+.help-file-rows>div { display:grid; grid-template-columns:minmax(140px,.55fr) minmax(0,1.45fr); gap:24px; border-bottom:1px solid var(--line); padding:16px 0; }
+.help-file-rows>div:first-child { padding-top:0; }
+.help-file-rows dd { margin:0; color:var(--muted); font-size:var(--text-body); line-height:1.8; overflow-wrap:anywhere; }
+.help-about-version { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 16px; margin-bottom:12px; }
+.help-dialog .help-about-version h3 { margin:0; }
+.help-about-version>span { color:var(--muted); font-size:var(--text-small); }
+.help-about-section { margin-top:28px; }
+.help-about-section>.button { margin-top:16px; }
+.help-about-section>p { color:var(--muted); }
+.help-reference-actions { display:flex; flex-wrap:wrap; gap:12px; padding:4px 0 8px; }
+.help-contact .policy-links { margin-top:14px; gap:8px 20px; }
+.help-contact a { color:var(--accent); overflow-wrap:anywhere; }
+.help-detail-heading { display:flex; flex-wrap:wrap; align-items:baseline; gap:12px 20px; border-bottom:1px solid var(--line); margin-bottom:24px; padding-bottom:16px; }
+.help-dialog .help-detail-heading h3 { margin:0; }
+.help-dialog .help-detail-heading .button { padding-left:0; font-size:var(--text-small); }
+.help-dialog .source-support-matrix p,.help-dialog .source-support-detail p,.help-dialog .adapter-catalog p,.help-dialog .support-parameter-list:not(.help-parameter-list) p { font-size:var(--text-small); }
+.help-dialog .help-limit-list dd { font-variant-numeric:tabular-nums; }
+@media (max-width:760px) {
+  .help-guide-layout { grid-template-columns:minmax(0,1fr); gap:28px; }
+  .help-next-steps { border-left:0; border-top:1px solid var(--line); padding:24px 0 0; }
+  .help-next-steps dl { gap:20px; }
+  .help-dialog .help-navigation button { padding:9px 12px; }
+  .help-file-rows>div { grid-template-columns:minmax(0,1fr); gap:8px; }
+}
+@media (max-width:420px) {
+  .help-dialog .help-navigation { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .help-dialog .help-navigation button { padding:9px 8px; }
+  .help-dialog .help-content { padding-top:20px; }
+  .help-dialog .help-shortcuts>div,.help-dialog .help-limit-list>div { grid-template-columns:minmax(0,1fr); gap:6px; }
+  .help-reference-actions>.button { width:100%; justify-content:flex-start; }
+}

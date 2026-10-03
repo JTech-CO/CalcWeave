@@ -25,7 +25,7 @@ const POLICY_PAGES = [
   { label: '이용약관', suffix: 'terms/', heading: '베타 이용 안내' },
   { label: '개인정보 처리방침', suffix: 'privacy/', heading: '개인정보' },
   { label: '쿠키·로컬 저장 안내', suffix: 'cookies/', heading: '쿠키' },
-  { label: '릴리스·오픈소스 고지', suffix: 'notices/', heading: '오픈소스 고지' },
+  { label: '오픈소스 고지', suffix: 'notices/', heading: '오픈소스 고지' },
 ] as const;
 const ZIP_FILES = ['README.md', 'expected-output.json', 'manifest.json', 'model.cw.json', 'model.py', 'run-example.py'];
 const hash = (value: string | Uint8Array) => createHash('sha256').update(value).digest('hex');
@@ -171,14 +171,17 @@ async function main() {
     assert(workers.some(url => approved(url) && new URL(url).pathname.startsWith(`${BASE}assets/engine.worker-`)), 'Actual browser calculation Worker loaded');
     check('real Worker baseline calculation', { raw: initial.result.samples, workerURLs: [...workers], modelId: initial.model.modelId });
 
-    await page.getByRole('button', { name: '지원·릴리스', exact: true }).click();
-    const support = page.getByRole('dialog', { name: '지원·릴리스', exact: true });
-    await expect(support).toContainText(`CalcWeave ${APP_VERSION} · 엔진 ${ENGINE_VERSION} · ${blockRegistry.length}개 블록`);
+    await page.getByRole('button', { name: '도움말', exact: true }).click();
+    const support = page.getByRole('dialog', { name: 'CalcWeave 도움말', exact: true });
+    await expect(support.locator('[data-help-start]')).toBeFocused();
+    await support.getByRole('button', { name: '블록 찾기', exact: true }).click();
     await expect(support.locator('.support-block-list > button')).toHaveCount(blockRegistry.length);
-    check('current release support table', { appVersion: APP_VERSION, engineVersion: ENGINE_VERSION, blockCount: blockRegistry.length });
-    await support.getByRole('button', { name: '정책·로컬 저장', exact: true }).click();
+    await support.getByRole('button', { name: '앱 정보', exact: true }).click();
+    await support.getByText('버전 기술 정보', { exact: true }).click();
+    await expect(support).toContainText(APP_VERSION); await expect(support).toContainText(ENGINE_VERSION);
+    check('current product help and block catalog', { appVersion: APP_VERSION, engineVersion: ENGINE_VERSION, blockCount: blockRegistry.length });
     for (const policy of POLICY_PAGES) await expect(support.getByRole('link', { name: policy.label, exact: true })).toHaveAttribute('href', BASE + policy.suffix);
-    await expect(support.getByRole('link', { name: 'GitHub Pages에서 열기', exact: true })).toHaveAttribute('href', TARGET);
+    await expect(support.getByRole('link', { name: '현재 웹 주소', exact: true })).toHaveAttribute('href', TARGET);
     await page.keyboard.press('Escape'); await expect(support).not.toBeVisible();
 
     const policyPage = await context.newPage(), policyEvidence = [];

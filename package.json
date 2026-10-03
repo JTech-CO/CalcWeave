@@ -1,6 +1,6 @@
 {
   "name": "calcweave",
-  "version": "0.17.1",
+  "version": "0.17.2",
   "private": true,
   "type": "module",
   "description": "CalcWeave: bounded mathematical diagrams, simulation and executable code export",

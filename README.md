@@ -4,7 +4,7 @@
 
 [웹 베타 열기](https://jtech-co.github.io/CalcWeave/) · [기술 백서](docs/01-technical-whitepaper.md) · [디자인 백서](docs/02-design-whitepaper.md) · [운영 안내](docs/operations.md) · [검증과 증거](docs/validation.md)
 
-현재 공개 앱은 `0.17.1` / 엔진 `0.17.0-m16`입니다. 백업·복구와 고급 파일의 화면 노출을 정리하고 병합·GitHub Pages 갱신을 완료했습니다. [실제 CI·공개 검증 결과](docs/validation.md#보조-기능-정리-공개-결과)를 확인할 수 있습니다. 목표 브랜드 도메인은 **CalcWeave.com**, 운영자는 **JTech-Co**, 문의는 [jtech-bryan@proton.me](mailto:jtech-bryan@proton.me)입니다.
+현재 소스는 앱 `0.17.2` / 엔진 `0.17.0-m16`입니다. 도움말을 사용 안내·블록 찾기·파일·코드·앱 정보로 정리했습니다. 공개 주소의 버전과 실제 배포 결과는 [검증 문서](docs/validation.md)에서 확인할 수 있습니다. 목표 브랜드 도메인은 **CalcWeave.com**, 운영자는 **JTech-Co**, 문의는 [jtech-bryan@proton.me](mailto:jtech-bryan@proton.me)입니다.
 
 ## 현재 범위
 
@@ -29,6 +29,8 @@ npm run dev
 ```
 
 화면의 **예제로 시작**에서 작은 모델을 열고 입력값을 바꾼 뒤 실행하세요. 캔버스는 휠 버튼 드래그로 이동하고, 왼쪽 버튼 드래그로 영역을 선택하며, 캔버스에 초점이 있을 때 Space로 도식을 맞춥니다. 블럭의 상세 설정과 제한은 속성 패널에서 확인합니다.
+
+상단 **도움말**은 기본 계산 방법, 실제 블록 검색, 파일 보관과 코드 내보내기를 안내합니다. **앱 정보**에서 버전·문의·정책·백업과 지원 환경을 확인합니다. Simulink 목록과의 비교는 접힌 **호환성 참고**에 있으며 CalcWeave의 설치나 실행 조건을 뜻하지 않습니다.
 
 ```sh
 npm run typecheck

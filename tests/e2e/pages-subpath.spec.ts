@@ -2,6 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import type { HistoryRecord } from '../../apps/web/src/run-history';
 import type { OfflineManifest } from '../../scripts/offline-build';
+import { openAppInfo } from './help-tools';
 
 test.use({ serviceWorkers: 'allow' });
 const BASE = '/CalcWeave/';
@@ -46,9 +47,9 @@ test('Pages project path boots scoped assets and the real calculation Worker', a
 });
 
 test('Pages support links open all scoped policy pages and their navigation returns to the app', async ({ page }, testInfo) => {
-  await open(page); await page.getByRole('button', { name: '지원·릴리스', exact: true }).click(); await page.getByRole('button', { name: '정책·로컬 저장', exact: true }).click();
-  for (const [name, suffix] of [['개인정보 처리방침', 'privacy/'], ['이용약관', 'terms/'], ['쿠키·로컬 저장 안내', 'cookies/'], ['릴리스·오픈소스 고지', 'notices/']] as const) await expect(page.getByRole('link', { name, exact: true })).toHaveAttribute('href', BASE + suffix);
-  await expect(page.getByRole('link', { name: 'GitHub Pages에서 열기', exact: true })).toHaveAttribute('href', 'https://jtech-co.github.io/CalcWeave/');
+  await open(page); await openAppInfo(page);
+  for (const [name, suffix] of [['개인정보 처리방침', 'privacy/'], ['이용약관', 'terms/'], ['쿠키·로컬 저장 안내', 'cookies/'], ['오픈소스 고지', 'notices/']] as const) await expect(page.getByRole('link', { name, exact: true })).toHaveAttribute('href', BASE + suffix);
+  await expect(page.getByRole('link', { name: '현재 웹 주소', exact: true })).toHaveAttribute('href', 'https://jtech-co.github.io/CalcWeave/');
   const popupPending = page.waitForEvent('popup'); await page.getByRole('link', { name: '개인정보 처리방침', exact: true }).click(); const policy = await popupPending;
   await expect(policy).toHaveURL(/\/CalcWeave\/privacy\/$/);
   for (const suffix of ['privacy/', 'terms/', 'cookies/', 'notices/']) {
