@@ -1,12 +1,13 @@
 import { expect, test, type Page } from '@playwright/test';
+import { expandLocalReset, expandStorageTroubleshooting, openWorkspaceBackup } from './workspace-tools';
 import { readFile } from 'node:fs/promises';
 import { createExample } from '../../apps/web/src/examples';
 import { createSubsystemFromSelection } from '../../packages/compiler/src/hierarchy';
 import type { CalcModel } from '../../packages/model/src';
 
-async function open(page: Page) { await page.goto('/'); await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨'); }
+async function open(page: Page) { await page.goto('./'); await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨'); }
 async function importModel(page: Page, model: CalcModel) { await page.getByLabel('CalcWeave 모델 파일 선택').setInputFiles({ name: 'recovery.cw.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(model)) }); await expect(page.getByLabel('모델 이름')).toHaveValue(model.name); await expect.poll(async () => (await stored(page)).current).toEqual(model); await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨'); }
-async function manage(page: Page) { await page.getByRole('button', { name: '로컬 데이터 관리', exact: true }).click(); await expect(page.getByRole('dialog', { name: '로컬 데이터 관리' })).toBeVisible(); }
+async function manage(page: Page) { await openWorkspaceBackup(page); await expect(page.getByRole('dialog', { name: '백업·복구', exact: true })).toBeVisible(); }
 async function download(page: Page, label: string): Promise<Buffer> { const pending = page.waitForEvent('download'); await page.getByRole('button', { name: label, exact: true }).click(); return readFile((await (await pending).path())!); }
 async function stored(page: Page): Promise<Record<string, unknown>> {
   return page.evaluate(() => new Promise((resolve, reject) => {
@@ -61,19 +62,19 @@ test('M6 reset clears every IndexedDB key, diagnostics, backup metadata and both
     const sessionKeys = Array.from({ length: sessionStorage.length }, (_value, index) => sessionStorage.key(index)).filter((key) => key?.startsWith('calcweave.'));
     (window as unknown as Record<string, unknown>).beforeAppResetState = new Promise((resolve, reject) => { const request = indexedDB.open('calcweave-m0', 1); request.onsuccess = () => { const database = request.result, transaction = database.transaction('models', 'readonly'), keys = transaction.objectStore('models').getAllKeys(); keys.onsuccess = () => resolve({ databaseKeys: keys.result, localKeys, sessionKeys }); transaction.oncomplete = () => database.close(); transaction.onerror = () => reject(new Error('Read failed')); }; });
   });
-  await manage(page); await page.getByRole('button', { name: '데이터 삭제', exact: true }).click(); await page.getByRole('button', { name: '로컬 데이터 삭제 확인', exact: true }).click(); await expect(page.getByRole('button', { name: '영구 삭제 후 다시 열기' })).toBeDisabled(); await page.getByLabel('백업을 확인했으며 로컬 데이터를 삭제합니다.').check();
+  await manage(page); await expandLocalReset(page); await page.getByRole('button', { name: '로컬 데이터 삭제 확인', exact: true }).click(); await expect(page.getByRole('button', { name: '영구 삭제 후 다시 열기' })).toBeDisabled(); await page.getByLabel('백업을 확인했으며 로컬 데이터를 삭제합니다.').check();
   await page.getByRole('button', { name: '영구 삭제 후 다시 열기' }).click(); await expect(page.getByLabel('모델 이름')).toHaveValue(createExample('first-calculation').name); expect(await page.evaluate(() => (window as unknown as Record<string, unknown>).beforeAppResetState)).toEqual({ databaseKeys: [], localKeys: [], sessionKeys: [] });
   expect(await page.evaluate(() => ({ local: localStorage.getItem('unrelated-preference'), session: sessionStorage.getItem('unrelated-session') }))).toEqual({ local: 'retain', session: 'retain' }); await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨'); expect((await stored(page))['run-history-v1']).toBeUndefined();
 });
 
 test('M6 metadata getter-independent diagnostics export discards hostile extra fields from damaged local log storage', async ({ page }) => {
   await open(page); await page.evaluate(() => localStorage.setItem('calcweave.local-operations-v1', JSON.stringify([{ code: 'STORAGE_READ_FAILED', context: 'storage', at: new Date().toISOString(), engineVersion: '0.6.0-m6', stack: 'private-model-label', value: 999888777 }, { code: 'MODEL_IMPORT_FAILED', context: 'validation', at: new Date().toISOString(), engineVersion: '0.6.0-m6' }, { code: 'STORAGE_READ_FAILED', context: 'storage', at: new Date().toISOString(), engineVersion: '0.6.0-private-model-label' }])));
-  await manage(page); await page.getByRole('button', { name: '로컬 진단', exact: true }).click(); const diagnostics = JSON.parse((await download(page, '로컬 진단 다운로드')).toString('utf8')); expect(diagnostics.records).toHaveLength(1); expect(Object.keys(diagnostics.records[0]).sort()).toEqual(['at', 'code', 'context', 'engineVersion']); expect(JSON.stringify(diagnostics)).not.toContain('private-model-label'); expect(JSON.stringify(diagnostics)).not.toContain('999888777');
+  await manage(page); await expandStorageTroubleshooting(page); const diagnostics = JSON.parse((await download(page, '로컬 진단 다운로드')).toString('utf8')); expect(diagnostics.records).toHaveLength(1); expect(Object.keys(diagnostics.records[0]).sort()).toEqual(['at', 'code', 'context', 'engineVersion']); expect(JSON.stringify(diagnostics)).not.toContain('private-model-label'); expect(JSON.stringify(diagnostics)).not.toContain('999888777');
   await page.getByRole('button', { name: '진단 기록 지우기', exact: true }).click(); expect(await page.evaluate(() => localStorage.getItem('calcweave.local-operations-v1'))).toBeNull();
 });
 
 test('M6 a stale-tab reset confirmation cannot erase a newer model or its preferences', async ({ page, context }) => {
-  await open(page); const other = await context.newPage(); await open(other); await manage(other); await other.getByRole('button', { name: '데이터 삭제', exact: true }).click(); await other.getByRole('button', { name: '로컬 데이터 삭제 확인', exact: true }).click(); await other.getByLabel('백업을 확인했으며 로컬 데이터를 삭제합니다.').check();
+  await open(page); const other = await context.newPage(); await open(other); await manage(other); await expandLocalReset(other); await other.getByRole('button', { name: '로컬 데이터 삭제 확인', exact: true }).click(); await other.getByLabel('백업을 확인했으며 로컬 데이터를 삭제합니다.').check();
   const newer = createExample('data-playback'); await importModel(page, newer); const before = await stored(page); await page.evaluate(() => localStorage.setItem('calcweave.protected-setting', 'retain'));
   await other.getByRole('button', { name: '영구 삭제 후 다시 열기' }).click(); await expect(other.locator('.local-management-error')).toContainText('다른 탭'); expect(await stored(page)).toEqual(before); expect(await page.evaluate(() => localStorage.getItem('calcweave.protected-setting'))).toBe('retain'); await other.close();
 });

@@ -1,0 +1,32 @@
+.management-dialog .workspace-management-details {
+  margin-top: 24px;
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+  font-size: var(--text-body);
+}
+
+.management-dialog .workspace-management-details > summary {
+  padding: 12px 0;
+  color: var(--text);
+  cursor: pointer;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.management-dialog .workspace-management-details > summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.management-dialog .workspace-management-details > .support-copy > h3:first-child {
+  margin-top: 12px;
+}
+
+.management-dialog .backup-verification-details {
+  margin: 16px 0;
+}
+
+.management-dialog .backup-verification-details > .support-metadata {
+  margin-top: 8px;
+}

@@ -1,6 +1,6 @@
 # CalcWeave 기술 백서
 
-현행 앱 `0.17.0` / 엔진 `0.17.0-m16`의 설계와 실행 경계를 설명한다. 최종 실측·배포 상태는 [검증 문서](validation.md), 화면·상호작용은 [디자인 백서](02-design-whitepaper.md), 정책·복구·배포는 [운영 안내](operations.md)를 따른다. 현재 문서에 과거 단계의 시험 횟수나 납품 목록을 누적하지 않는다.
+현행 앱 `0.17.1` / 엔진 `0.17.0-m16`의 설계와 실행 경계를 설명한다. 최종 실측·배포 상태는 [검증 문서](validation.md), 화면·상호작용은 [디자인 백서](02-design-whitepaper.md), 정책·복구·배포는 [운영 안내](operations.md)를 따른다. 현재 문서에 과거 단계의 시험 횟수나 납품 목록을 누적하지 않는다.
 
 ## 제품과 지원을 세는 방법
 
@@ -136,7 +136,9 @@ manifest는 model/semantic/data hash, target/engine version, modes·units·sampl
 
 ## 파일·서명·migration 경계
 
-선언형 `.cw.json`, 포함 데이터가 있는 모델 패키지와 작업 공간 백업을 분리한다. SHA checksum은 손상 검출이며 출처 인증·암호화가 아니다. P-256 패키지 서명은 원본 payload를 인증하고 사용자에게 별도 채널의 fingerprint 확인을 요구한다. 파일에 있는 key로 파일 자체의 출처를 자동 신뢰하지 않는다. signing private key는 메모리의 일회용 입력이며 저장·다운로드·서버 전송하지 않는다.
+일상적인 도식 전달은 header의 **모델 다운로드·가져오기**를 사용한다. 선언형 `.cw.json`은 블록·연결·실행 설정과 포함 데이터·하위 도식·대시보드·노트를 보관하므로 일반 전달에 서명 패키지가 필수는 아니다. 작업 공간 백업은 현재 모델에 선택한 실행 기록을 함께 보관하는 별도 형식이며 **작업 공간 → 백업·복구**에서 제공한다. 저장 문제 해결·백업 검증 정보·저장 데이터 삭제는 이 화면의 접힌 영역에서 확인한다. 영역을 접어도 schema/hash 검증·원본 보존·revision 충돌 검사·검토와 명시 확인을 거치는 삭제 절차는 유지한다.
+
+서명된 모델 패키지는 별도 경로로 확인한 공개 키 지문과 파일의 서명을 대조할 필요가 있을 때 사용하는 고급 기능이다. 일회용 키와 지문은 의도된 출처 확인 절차였으나 기본 화면의 독립 공유 버튼과 상세 관리 정보는 첫 계산에 필요한 정보량을 넘겼다. 현행 경로는 **작업 공간 → 고급 파일 → 서명된 모델 패키지**이며 기본 메뉴의 고급 파일은 닫혀 있다. SHA checksum은 손상 검출이며 출처 인증·암호화가 아니다. P-256 패키지 서명은 원본 payload와 확인한 키의 관계를 검증하며 작성자의 실명이나 계정을 인증하지 않는다. 파일에 있는 key로 파일 자체의 출처를 자동 신뢰하지 않는다. signing private key는 메모리의 일회용 키이며 저장·다운로드·서버 전송하지 않는다. 새 패키지를 생성하면 지문도 바뀌므로 별도 채널의 fingerprint 확인을 생략하지 않는다.
 
 과거 패키지는 [명시 engine/registry projection baseline](../packages/model-package/src/migrations.ts)에 있는8개 식별자만 후보로 읽는다. 원본 integrity/crypto 확인→정확 registry pin→현재 정규화/compile 보고→독립 trust와 사용자 migration 검토→사본 적용 순서를 유지한다. 원본 bytes/hash와 서명 적용 범위를 보존하고 current semantic hash를 별도 제공한다. `numericalParityWithOriginalEngineVerified:false`, `optionCoercionPerformed:false`이며 semver 추정이나 과거 옵션의 강제 변환은 없다.
 

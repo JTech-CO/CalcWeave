@@ -1,6 +1,6 @@
 # CalcWeave 디자인 백서
 
-현행 CalcWeave의 화면·상호작용·문구 원칙을 설명한다. 계산 의미와 제한은 [기술 백서](01-technical-whitepaper.md), 실제 관측은 [검증 문서](validation.md), 데이터 보호·배포는 [운영 안내](operations.md)를 따른다. 자동 브라우저 검사·화면 관측을 실제 초보자 연구나 접근성 인증으로 표현하지 않는다.
+현행 CalcWeave 앱 `0.17.1` / 엔진 `0.17.0-m16`의 화면·상호작용·문구 원칙을 설명한다. 계산 의미와 제한은 [기술 백서](01-technical-whitepaper.md), 실제 관측은 [검증 문서](validation.md), 데이터 보호·배포는 [운영 안내](operations.md)를 따른다. 자동 브라우저 검사·화면 관측을 실제 초보자 연구나 접근성 인증으로 표현하지 않는다.
 
 ## 경험의 출발점
 
@@ -21,7 +21,7 @@
 
 ## 정보 구조와 첫 사용
 
-주요 작업은 도식·데이터·실험·대시보드·노트다. header에는 모델명·저장 상태·모델/코드/공유 파일·지원/릴리스·로컬 관리가 있고 toolbar는 추가·예제·실행에 집중한다. 라이브러리의 범주/검색과 속성 패널은 실제 registry를 따른다. 각 기능의 모드·자료형·타깃 제한은 추가와 실행 위치 가까이에 둔다.
+주요 작업은 도식·데이터·실험·대시보드·노트다. header에는 모델명·저장 상태·모델 다운로드/가져오기·코드 다운로드·작업 공간·지원/릴리스가 있고 toolbar는 추가·예제·실행에 집중한다. 작업 공간 메뉴에서 백업·복구를 바로 열 수 있고, 서명된 모델 패키지는 닫힌 고급 파일 안에 둔다. 공개 키 지문이나 저장소 진단을 첫 계산의 필수 단계로 제시하지 않는다. 라이브러리의 범주/검색과 속성 패널은 실제 registry를 따른다. 각 기능의 모드·자료형·타깃 제한은 추가와 실행 위치 가까이에 둔다.
 
 75개 예제를12개 범주로 찾을 수 있다. 제목·설명·사용 블럭 ID의 검색, 범주 선택, 방향키·Enter·Escape와 IME 입력을 구분한다. 예제는 실제 모델 snapshot이며 category label을 추가 블럭이나 독립 엔진 수로 세지 않는다. 첫 계산→시간 입력/상태→연속/혼합→행렬/표/자료형→계층/메시지→데이터/어댑터의 학습 경로를 제공하되 모두 순서대로 학습해야만 기능을 사용할 수 있는 구조로 만들지 않는다.
 
@@ -96,14 +96,19 @@ Dashboard control의 kind/min/max/step/choices·appearance/orientation과 indica
 
 해석 도구는 선택 expression의 실제 gradient·resolution 비교와 smooth plant operating point의 A/B/C/D를 설명한다. 필드가 있다는 이유로 선형화가 계산됐다고 표시하지 않으며 타깃/shape/interior·모드 조건의 진단을 먼저 보여 준다. solver·수치 알고리즘·원본 외부 환경의 미지원은 [기술 백서](01-technical-whitepaper.md)의 경계를 따른다.
 
-## 로컬 관리·가져오기·내보내기
+## 백업·복구·가져오기·내보내기
 
-저장 상태는 저장중/브라우저 저장됨/실패/다른 탭 변경을 구분한다. 문구 길이가 바뀌어 header와 캔버스 높이가 흔들리지 않게 한다. 관리 화면은 백업 내용·복구 미리보기·이전 정상 저장·읽지 못한 원본·로컬 진단·삭제 대상을 설명한다. 삭제는 별도 검토 단계와 명시 선택으로 수행하며 다운로드 파일/다른 브라우저까지 지워졌다고 안내하지 않는다.
+저장 상태는 저장중/브라우저 저장됨/실패/다른 탭 변경을 구분한다. 문구 길이가 바뀌어 header와 캔버스 높이가 흔들리지 않게 한다. 도식과 포함 데이터의 일상적인 전달에는 `.cw.json`의 모델 다운로드·가져오기를 사용한다. **작업 공간 → 백업·복구** 화면은 작업 공간 백업과 복구 미리보기를 우선 보여 준다. 저장 상태·이전 정상 저장·읽지 못한 원본·로컬 진단은 닫힌 **저장 문제 해결**에서, 버전·SHA-256은 미리보기의 닫힌 **백업 검증 정보**에서 확인한다. **이 브라우저의 저장 데이터 삭제**도 닫힌 영역에 두며 대상 검토와 명시 확인의 두 단계는 유지한다. 다운로드 파일/다른 브라우저까지 지워졌다고 안내하지 않는다.
+
+공개 키 지문과 일회용 서명은 파일의 출처를 별도 채널로 확인하려는 사용자를 위한 기능이다. 이를 기본 header에 독립 버튼으로 노출하고 세부 저장 진단을 한꺼번에 보여 주던 구성은 계산 작업에 비해 복잡했다. **작업 공간 → 고급 파일 → 서명된 모델 패키지**로 진입을 묶고 서명·지문 확인·migration 검토 절차는 유지한다. 서명은 작성자의 실명 인증으로 안내하지 않으며, 일반 모델 전달에 필요한 단계로 요구하지 않는다.
+
+[작업 공간 메뉴](../apps/web/src/components/WorkspaceMenu.tsx)는 native details/summary를 사용한다. 외부 클릭·Tab으로 영역 이탈·Escape로 닫히며 외부 클릭의 기본 동작을 막지 않는다. 모달을 열기 전에 메뉴를 닫고 보이는 작업 공간 버튼으로 초점을 옮겨, 종료 후 숨겨진 메뉴 항목이 아닌 진입 버튼으로 돌아오게 한다. 좁은 화면에서는 팝업을 viewport 안에 배치하고 메뉴 내용이 가로로 넘치지 않게 한다.
 
 | 가져오기 단계 | UI 경계 |
 | --- | --- |
 | Dataset | file/sheet/column·time·kind/unit·정리 선택·provenance와 오류를 미리 확인. 적용은 사본/검증된 Dataset이다. |
-| 선언형 패키지 | 구문/integrity/signature·현재 compile·원본 public-key fingerprint 확인과 trust를 분리. |
+| 일반 `.cw.json` | 포함 데이터·설정이 있는 모델 파일을 검증해 읽는다. 공개 키 지문 입력을 요구하지 않는다. |
+| 서명된 모델 패키지 | 고급 파일 경로에서 구문/integrity/signature·현재 compile·원본 public-key fingerprint 확인과 trust를 분리. |
 | 과거 패키지 migration | 원본 engine/registry/hash와 current normalized/semantic hash, 바뀐 내용·검증 범위·원본 보존을 별도 검토한 뒤 적용. |
 | MAT/SLX/MDL | 분석 profile·실행/미지원 이유·원본 member/line/offset·명시 Inport 입력, 변환 후보를 검토한 뒤 적용. |
 | `.cwinterop.json` | raw SHA와 재분석 비교 결과·원본 bytes 다운로드·사본 적용을 분리. 편집한 native 모델 생성은 지원하지 않음. |
@@ -126,6 +131,6 @@ native dialog의 focus containment·Escape·focus 복원·배경 inert, 제목/d
 | 파일 분석/migration | [InteropImportDialog](../apps/web/src/components/InteropImportDialog.tsx), [ModelPackageDialog](../apps/web/src/components/ModelPackageDialog.tsx) | [M15 interop UI proof](evidence/m15-interop-ui-verification.json), [browser](../tests/e2e/m15-interop.spec.ts) |
 | 타깃 선택/묶음 | [CodeExportDialog](../apps/web/src/components/CodeExportDialog.tsx) | [actual export browser](../tests/e2e/m15-exports.spec.ts) |
 | source 지원표 | [SupportDialog](../apps/web/src/components/SupportDialog.tsx), [support API](../packages/support-matrix/src/index.ts) | [현행 validation](validation.md), [M16 browser](../tests/e2e/m16-support.spec.ts) |
-| 복구/삭제/offline | [LocalDataDialog](../apps/web/src/components/LocalDataDialog.tsx), [offline](../apps/web/src/offline.ts) | [복구 browser](../tests/e2e/m6-recovery.spec.ts), [offline browser](../tests/e2e/m6-offline.spec.ts) |
+| 작업 공간/복구/삭제/offline | [WorkspaceMenu](../apps/web/src/components/WorkspaceMenu.tsx), [LocalDataDialog](../apps/web/src/components/LocalDataDialog.tsx), [offline](../apps/web/src/offline.ts) | [복구 browser](../tests/e2e/m6-recovery.spec.ts), [offline browser](../tests/e2e/m6-offline.spec.ts) |
 
 실제 초보자 관찰 F06은 별도 열린 gate다. 최소 작업은 예제 실행·값 수정·오류 위치 찾기·블럭 검색/연결·백업 복구·코드 export이며, 동의한 참가자의 성공/막힘과 최소 기록으로 효과를 검증한다. 자동화의 PASS나 디자이너 화면 관측으로 사용자의 학습성을 입증했다고 선언하지 않는다. 회귀 횟수·실패/교정·검사 버전은 이 문서에 누적하지 않고 [검증과 증거](validation.md)에 기록한다.
