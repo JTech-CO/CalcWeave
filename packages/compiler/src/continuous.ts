@@ -5,7 +5,7 @@ import { EXPANDED_TIME_SOURCE_IDS } from '../../block-library/src/time-sources';
 import { m8HasUnregisteredJump, m8JumpControlPorts } from './m8';
 
 const continuousSources: ReadonlySet<string> = new Set(['source.step', 'source.ramp', 'source.sine-wave', 'source.repeating-sequence', 'source.clock', ...EXPANDED_TIME_SOURCE_IDS]);
-const sampled: ReadonlySet<string> = new Set(['source.random', 'source.digital-clock', 'source.pulse', 'logic.edge-detect', 'time.rate-transition', 'time.zero-order-hold', ...M9_BLOCK_IDS]);
+const sampled: ReadonlySet<string> = new Set(['source.random', 'source.digital-clock', 'source.pulse', 'logic.edge-detect', 'time.rate-transition', 'time.zero-order-hold', 'fixed.state-space', ...M9_BLOCK_IDS]);
 const boundary = new Set(['time.zero-order-hold', 'time.first-order-hold']);
 const fail = (node: IRNode, code: string, message: string, portId?: string): never => { throw new ModelError([{ code, nodeId: node.id, message, ...(portId ? { portId } : {}) }]); };
 
@@ -178,6 +178,13 @@ function validateRegisteredDiscontinuities(ordered: IRNode[], byId: Map<string, 
     const changing = CONTINUOUS_STATE_TYPES.includes(node.blockType) || continuousSources.has(node.blockType) || Object.values(node.inputs).some((endpoint) => changesContinuously(byId.get(endpoint.nodeId)!, next));
     changingMemo.set(node.id, changing); return changing;
   };
+  for (const node of ordered) {
+    const dtype = node.outputs.out?.typed?.dtype;
+    const quantizingCast = ['signal.cast', 'signal.cast-inherited'].includes(node.blockType) && dtype !== 'float64' && dtype !== 'complex128';
+    const quantizingMath = node.blockType === 'typed.math' && dtype !== 'float64' && dtype !== 'complex128';
+    const sampledBits = ['logic.bit-mask', 'logic.extract-bits', 'logic.float-extract-bits', 'logic.integer-to-bits', 'logic.bits-to-integer', 'logic.shift-arithmetic', 'logic.bitwise-typed', 'fixed.integer-increment', 'fixed.trigonometric'].includes(node.blockType);
+    if ((quantizingCast || quantizingMath || sampledBits) && changesContinuously(node)) fail(node, 'TYPED_CONTINUOUS_BOUNDARY_REQUIRED', '자료형 양자화·비트·fixed LUT 연산의 입력은 상수 또는 이산 held 신호여야 합니다. 연속 입력에는 Zero Order Hold를 연결해 샘플 경계를 지정해 주세요.');
+  }
   for (const state of ordered.filter((node) => CONTINUOUS_STATE_TYPES.includes(node.blockType))) {
     const pending = state.inputs.in ? [state.inputs.in.nodeId] : [];
     const seen = new Set<string>();

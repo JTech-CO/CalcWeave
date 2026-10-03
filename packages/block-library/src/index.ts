@@ -3,11 +3,12 @@ import { EXPANSION_BLOCK_DEFINITIONS } from './expansion';
 import { TIME_SOURCE_DEFINITIONS } from './time-sources';
 import { getM8Ports, M8_BLOCK_DEFINITIONS, M8_BLOCK_PRESETS } from './m8';
 import { getM9Ports, getM9DirectFeedthroughPorts, M9_BLOCK_DEFINITIONS, M9_BLOCK_PRESETS } from './m9';
+import { getM10Ports, getM10DirectFeedthroughPorts, M10_BLOCK_DEFINITIONS, M10_BLOCK_PRESETS } from './m10';
 import { UNITS } from '../../model/src/signal';
 import { PYTHON_TARGET } from '../../codegen-python/src/capabilities';
 
 export interface ParameterDefinition {
-  readonly kind: 'number' | 'integer' | 'value' | 'numeric-vector' | 'enum' | 'expression' | 'text';
+  readonly kind: 'number' | 'integer' | 'value' | 'typed-value' | 'data-type' | 'numeric-vector' | 'enum' | 'expression' | 'text';
   readonly label: string;
   readonly default: unknown;
   readonly min?: number;
@@ -140,11 +141,11 @@ function deepFreeze<T>(value: T): T {
 
 /** Typed algebraic, fixed-tick discrete and bounded continuous/mixed contracts. */
 const pythonBlockIds: ReadonlySet<string> = new Set(PYTHON_TARGET.blockIds);
-export const blockRegistry: readonly BlockDefinition[] = deepFreeze([...definitions, ...EXPANSION_BLOCK_DEFINITIONS, ...TIME_SOURCE_DEFINITIONS, ...M8_BLOCK_DEFINITIONS, ...M9_BLOCK_DEFINITIONS].map(definition => ({
+export const blockRegistry: readonly BlockDefinition[] = deepFreeze([...definitions, ...EXPANSION_BLOCK_DEFINITIONS, ...TIME_SOURCE_DEFINITIONS, ...M8_BLOCK_DEFINITIONS, ...M9_BLOCK_DEFINITIONS, ...M10_BLOCK_DEFINITIONS].map(definition => ({
   ...definition, exportTargets: pythonBlockIds.has(definition.id) ? ['typescript', 'python'] as const : ['typescript'] as const,
 })));
 export const BLOCK_REGISTRY = blockRegistry;
-export const blockPresets = deepFreeze([...M8_BLOCK_PRESETS, ...M9_BLOCK_PRESETS]);
+export const blockPresets = deepFreeze([...M8_BLOCK_PRESETS, ...M9_BLOCK_PRESETS, ...M10_BLOCK_PRESETS]);
 const registryById = new Map<string, BlockDefinition>(blockRegistry.map((definition) => [definition.id, definition]));
 export function getBlockDefinition(id: string): BlockDefinition | undefined { return registryById.get(id); }
 
@@ -152,6 +153,8 @@ export function getBlockDefinition(id: string): BlockDefinition | undefined { re
 export function getBlockPorts(node: Pick<CalcNode, 'blockType' | 'parameters'>, context?: Pick<CalcModel, 'subsystems'>): { inputs: string[]; outputs: string[] } {
   const definition = getBlockDefinition(node.blockType);
   if (!definition) return { inputs: [], outputs: [] };
+  const m10Ports = getM10Ports(node);
+  if (m10Ports) return m10Ports;
   const m9Ports = getM9Ports(node);
   if (m9Ports) return m9Ports;
   const m8Ports = getM8Ports(node);
@@ -174,6 +177,8 @@ export function getBlockPorts(node: Pick<CalcNode, 'blockType' | 'parameters'>, 
 
 /** Coefficient-dependent feedthrough is part of the approved discrete realization. */
 export function isDirectFeedthrough(node: Pick<CalcNode, 'blockType' | 'parameters'>): boolean {
+  const m10Ports = getM10DirectFeedthroughPorts(node);
+  if (m10Ports) return m10Ports.length > 0;
   const m9Ports = getM9DirectFeedthroughPorts(node);
   if (m9Ports) return m9Ports.length > 0;
   if (node.blockType === 'discrete.fir') return (node.parameters.coefficients as unknown[] | undefined)?.[0] !== 0;
@@ -188,6 +193,8 @@ export function isDirectFeedthrough(node: Pick<CalcNode, 'blockType' | 'paramete
 
 /** Existing definitions preserve their previous reset/commit dependency semantics. */
 export function getDirectFeedthroughPorts(node: Pick<CalcNode, 'blockType' | 'parameters'>): string[] {
+  const m10Ports = getM10DirectFeedthroughPorts(node);
+  if (m10Ports) return m10Ports;
   const m9Ports = getM9DirectFeedthroughPorts(node);
   if (m9Ports) return m9Ports;
   return isDirectFeedthrough(node) ? getBlockPorts(node).inputs.filter(port => port !== 'reset') : [];

@@ -1,0 +1,717 @@
+{
+  "schemaVersion": 1,
+  "stage": "M10",
+  "date": "2026-10-03",
+  "authority": "MathWorks primary documentation",
+  "claimScope": "MathWorks primary source meaning review plus separately labelled independent CalcWeave raw literal runtime evidence; no Simulink execution or full R2024b option approval",
+  "sourcePath": "dataset/Simulink_Basic_Blocks_R2024b.md",
+  "datasetSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+  "sourceRows": 38,
+  "uniqueSourceNameStrings": 37,
+  "referencePages": [
+    {
+      "id": "datatypeconversion",
+      "url": "https://www.mathworks.com/help/simulink/slref/datatypeconversion.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/datatypeconversion.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": true,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "archived-content-read"
+    },
+    {
+      "id": "datatypeconversioninherited",
+      "url": "https://www.mathworks.com/help/simulink/slref/datatypeconversioninherited.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/datatypeconversioninherited.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "bitclear",
+      "url": "https://www.mathworks.com/help/simulink/slref/bitclear.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/bitclear.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "bitset",
+      "url": "https://www.mathworks.com/help/simulink/slref/bitset.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/bitset.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "bittointegerconverter",
+      "url": "https://www.mathworks.com/help/simulink/slref/bittointegerconverter.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/bittointegerconverter.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "integertobitconverter",
+      "url": "https://www.mathworks.com/help/simulink/slref/integertobitconverter.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/integertobitconverter.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "bitwiseoperator",
+      "url": "https://www.mathworks.com/help/simulink/slref/bitwiseoperator.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/bitwiseoperator.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "extractbits",
+      "url": "https://www.mathworks.com/help/simulink/slref/extractbits.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/extractbits.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "floatextractbits",
+      "url": "https://www.mathworks.com/help/simulink/slref/floatextractbits.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/floatextractbits.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "shiftarithmetic",
+      "url": "https://www.mathworks.com/help/simulink/slref/shiftarithmetic.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/shiftarithmetic.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "sine",
+      "url": "https://www.mathworks.com/help/simulink/slref/sine.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/sine.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": true,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "archived-content-read"
+    },
+    {
+      "id": "complextomagnitudeangle",
+      "url": "https://www.mathworks.com/help/simulink/slref/complextomagnitudeangle.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/complextomagnitudeangle.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "complextorealimag",
+      "url": "https://www.mathworks.com/help/simulink/slref/complextorealimag.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/complextorealimag.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "magnitudeangletocomplex",
+      "url": "https://www.mathworks.com/help/simulink/slref/magnitudeangletocomplex.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/magnitudeangletocomplex.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "realimagtocomplex",
+      "url": "https://www.mathworks.com/help/simulink/slref/realimagtocomplex.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/realimagtocomplex.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "hermitiantranspose",
+      "url": "https://www.mathworks.com/help/simulink/slref/hermitiantranspose.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/hermitiantranspose.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "ishermitian",
+      "url": "https://www.mathworks.com/help/simulink/slref/ishermitian.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/ishermitian.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "unitsystemconfiguration",
+      "url": "https://www.mathworks.com/help/simulink/slref/unitsystemconfiguration.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/unitsystemconfiguration.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "bustovector",
+      "url": "https://www.mathworks.com/help/simulink/slref/bustovector.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/bustovector.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "datatypeduplicate",
+      "url": "https://www.mathworks.com/help/simulink/slref/datatypeduplicate.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/datatypeduplicate.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "datatypepropagation",
+      "url": "https://www.mathworks.com/help/simulink/slref/datatypepropagation.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/datatypepropagation.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "datatypescalingstrip",
+      "url": "https://www.mathworks.com/help/simulink/slref/datatypescalingstrip.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/datatypescalingstrip.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "signalconversion",
+      "url": "https://www.mathworks.com/help/simulink/slref/signalconversion.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/signalconversion.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": true,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "archived-content-read"
+    },
+    {
+      "id": "signalspecification",
+      "url": "https://www.mathworks.com/help/simulink/slref/signalspecification.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/signalspecification.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "unitconversion",
+      "url": "https://www.mathworks.com/help/simulink/slref/unitconversion.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/unitconversion.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": true,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "archived-content-read"
+    },
+    {
+      "id": "width",
+      "url": "https://www.mathworks.com/help/simulink/slref/width.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/width.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": true,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "archived-content-read"
+    },
+    {
+      "id": "enumeratedconstant",
+      "url": "https://www.mathworks.com/help/simulink/slref/enumeratedconstant.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/enumeratedconstant.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "fixedpointstatespace",
+      "url": "https://www.mathworks.com/help/simulink/slref/fixedpointstatespace.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/fixedpointstatespace.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": true,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "archived-content-read"
+    },
+    {
+      "id": "decrementstoredinteger",
+      "url": "https://www.mathworks.com/help/simulink/slref/decrementstoredinteger.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/decrementstoredinteger.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "incrementstoredinteger",
+      "url": "https://www.mathworks.com/help/simulink/slref/incrementstoredinteger.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/incrementstoredinteger.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "cache-miss-or-not-probed; exact-version-unverified"
+    },
+    {
+      "id": "constant",
+      "url": "https://www.mathworks.com/help/simulink/slref/constant.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/constant.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": false,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "not-probed-constant-preset"
+    },
+    {
+      "id": "dotproduct",
+      "url": "https://www.mathworks.com/help/simulink/slref/dotproduct.html",
+      "releaseUrl": "https://www.mathworks.com/help/releases/R2024b/simulink/slref/dotproduct.html",
+      "currentHelpCoreSemanticsChecked": true,
+      "r2024bExactPageVerified": true,
+      "r2024bFullOptionInventoryComplete": false,
+      "mathWorksReferenceExecuted": false,
+      "archiveOutcome": "archived-content-read"
+    }
+  ],
+  "verifiedReleasePages": [
+    "https://www.mathworks.com/help/releases/R2024b/simulink/slref/datatypeconversion.html",
+    "https://www.mathworks.com/help/releases/R2024b/simulink/slref/sine.html",
+    "https://www.mathworks.com/help/releases/R2024b/simulink/slref/signalconversion.html",
+    "https://www.mathworks.com/help/releases/R2024b/simulink/slref/unitconversion.html",
+    "https://www.mathworks.com/help/releases/R2024b/simulink/slref/width.html",
+    "https://www.mathworks.com/help/releases/R2024b/simulink/slref/fixedpointstatespace.html",
+    "https://www.mathworks.com/help/releases/R2024b/simulink/slref/dotproduct.html"
+  ],
+  "meaningDecisions": [
+    {
+      "sourceIds": [
+        "01-004",
+        "14-002",
+        "14-003"
+      ],
+      "referenceId": "datatypeconversion",
+      "decision": "RWV preserves interpreted values; SI preserves fixed stored integers. SI does not reinterpret floating IEEE bits. Selected nearest/away/even ties are +infinity/away-from-zero/even; float bit extraction is a separate primitive.",
+      "remaining": "slope-bias, half, inherited back-propagation combinations and enum numerical casts remain open"
+    },
+    {
+      "sourceIds": [
+        "06-001",
+        "06-002",
+        "06-015",
+        "06-016",
+        "06-022"
+      ],
+      "referenceIds": [
+        "bitclear",
+        "bitset",
+        "extractbits",
+        "floatextractbits",
+        "shiftarithmetic"
+      ],
+      "decision": "Index0 is LSB; fixed scaling is ignored by stored-bit selection. IEEE fields use the stored float format. Arithmetic bit shifts and binary-point shifts have distinct effects; bidirectional positive shift means right.",
+      "remaining": "all source hardware/diagnostic/special-payload combinations remain open",
+      "selectedBinaryPointMeaning": "Positive shift moves binary point right: fractionLength decreases and unchanged SI has larger real value."
+    },
+    {
+      "sourceIds": [
+        "07-003",
+        "07-008"
+      ],
+      "referenceId": "sine",
+      "decision": "Source uses a turn-phase fixed quarter-wave table. The selected interpolated stored-code realization is an independent alternative because Speed/Precision internal rules and reference bits are unverified.",
+      "declaredAlgorithm": {
+        "wordLength": [
+          2,
+          53
+        ],
+        "fractionLength": "wordLength-2",
+        "tablePoints": "2..min(1024,2^(wordLength-2)+1)",
+        "phase": "normalized periodic turn; cosine shifts phase by1/4",
+        "table": "j=0..N-1 quarter-wave sine values quantized into stored codes",
+        "interpolation": "reflect/sign by quadrant, linear interpolation of stored codes, selected rounding and wrap"
+      },
+      "literalBitOracles": [
+        {
+          "wordLength": 4,
+          "fractionLength": 2,
+          "tablePoints": 2,
+          "inputTurns": [
+            "0",
+            "1/8",
+            "1/4",
+            "3/8",
+            "1/2",
+            "5/8",
+            "3/4",
+            "7/8"
+          ],
+          "sineStored": [
+            "0",
+            "2",
+            "4",
+            "2",
+            "0",
+            "-2",
+            "-4",
+            "-2"
+          ],
+          "cosineStored": [
+            "4",
+            "2",
+            "0",
+            "-2",
+            "-4",
+            "-2",
+            "0",
+            "2"
+          ],
+          "rounding": "even"
+        },
+        {
+          "wordLength": 4,
+          "fractionLength": 2,
+          "tablePoints": 3,
+          "tableStored": [
+            "0",
+            "3",
+            "4"
+          ],
+          "inputTurns": [
+            "0",
+            "1/8",
+            "1/4",
+            "3/8",
+            "1/2",
+            "5/8",
+            "3/4",
+            "7/8"
+          ],
+          "sineStored": [
+            "0",
+            "3",
+            "4",
+            "3",
+            "0",
+            "-3",
+            "-4",
+            "-3"
+          ],
+          "cosineStored": [
+            "4",
+            "3",
+            "0",
+            "-3",
+            "-4",
+            "-3",
+            "0",
+            "3"
+          ],
+          "rounding": "even"
+        },
+        {
+          "wordLength": 4,
+          "fractionLength": 2,
+          "tablePoints": 3,
+          "inputTurns": [
+            "1/16",
+            "3/16",
+            "9/16",
+            "11/16"
+          ],
+          "sineStored": [
+            "2",
+            "4",
+            "-2",
+            "-4"
+          ],
+          "rounding": "even"
+        }
+      ],
+      "remaining": "actual source table construction, intermediate dtype, Speed/Precision rules and out-of-range phase behavior remain open"
+    },
+    {
+      "sourceIds": [
+        "08-006",
+        "08-007",
+        "08-012",
+        "08-022",
+        "09-006",
+        "09-008"
+      ],
+      "referenceIds": [
+        "complextomagnitudeangle",
+        "complextorealimag",
+        "magnitudeangletocomplex",
+        "realimagtocomplex",
+        "hermitiantranspose",
+        "ishermitian"
+      ],
+      "decision": "Polar angle is radians. Hermitian transposition conjugates complex values. Hermitian and skew-Hermitian predicates are distinct; signed-zero branch behavior must be declared.",
+      "remaining": "CORDIC, complex fixed/single, all symbolic/error tolerance combinations remain open"
+    },
+    {
+      "sourceIds": [
+        "14-004",
+        "14-005",
+        "14-011"
+      ],
+      "referenceIds": [
+        "datatypeduplicate",
+        "datatypepropagation",
+        "signalspecification"
+      ],
+      "decision": "These impose compile-time attributes or constraints; passing values through alone does not implement source type duplication/propagation. Prop reads Ref1/Ref2 metadata and constrains upstream type/scaling.",
+      "remaining": "full inherited-rule precedence and symbolic/variable-size constraint resolution remain open"
+    },
+    {
+      "sourceIds": [
+        "14-006"
+      ],
+      "referenceId": "datatypescalingstrip",
+      "decision": "Output contains SI and nominal scale; use smallest fitting built-in word width according to input width/signedness.",
+      "remaining": "source output table currently omits64bit while input permits64bit; selected64bit behavior must be disclosed as an extension"
+    },
+    {
+      "sourceIds": [
+        "14-001",
+        "14-010",
+        "21-011",
+        "21-012",
+        "21-013"
+      ],
+      "referenceIds": [
+        "bustovector",
+        "signalconversion"
+      ],
+      "decision": "Bus conversion and representation copying preserve values. Homogeneous scalar/vector bus ordering is explicit; source virtual/nonvirtual storage semantics are broader than local fields metadata.",
+      "remaining": "nested heterogeneous buses, ABI/address/code-generation storage identity and mixed sampling remain open"
+    },
+    {
+      "sourceIds": [
+        "13-027",
+        "14-012"
+      ],
+      "referenceIds": [
+        "unitsystemconfiguration",
+        "unitconversion"
+      ],
+      "decision": "Unit-system configuration is an allowed-units model constraint. Unit conversion can be affine or inverse-unit; selected local policy must be separated from full source unit catalog.",
+      "remaining": "custom unit dictionaries and all inherited target dtype policies remain open"
+    },
+    {
+      "sourceIds": [
+        "20-001",
+        "20-005",
+        "20-009"
+      ],
+      "referenceIds": [
+        "fixedpointstatespace",
+        "decrementstoredinteger",
+        "incrementstoredinteger"
+      ],
+      "decision": "State-space evaluates output from current state before committing next state. Selected bit-true internal arithmetic must declare every rounding point. Stored increment/decrement changes SI by1 with wrap.",
+      "remaining": "source actual internal accumulator/scale/complex/IC realization reference remains open"
+    },
+    {
+      "sourceIds": [
+        "17-008",
+        "21-002",
+        "21-003",
+        "21-004"
+      ],
+      "referenceIds": [
+        "enumeratedconstant",
+        "constant"
+      ],
+      "decision": "Closed local enum labels and explicit nonfinite JSON tags preserve selected values; local enums do not execute MATLAB enum classes.",
+      "remaining": "underlying enum integer codes/default/range casts, nonfinite payload and all downstream target behavior remain open"
+    },
+    {
+      "sourceIds": [
+        "08-009"
+      ],
+      "countsAsAdditionalM10FirstWorkRow": false,
+      "referenceId": "dotproduct",
+      "decision": "R2024b Dot Product conjugates the first input and sums corresponding products. Selected complex128 vector extension defaults conjugateFirst=yes. Independent unconjugated mode is disclosed separately.",
+      "remaining": "Source real/complex fixed/single accumulator settings and all target bit parity remain open."
+    },
+    {
+      "sourceIds": [
+        "06-003",
+        "06-017"
+      ],
+      "referenceIds": [
+        "bittointegerconverter",
+        "integertobitconverter"
+      ],
+      "decision": "Selected MSB-first/LSB-first order and signed two’s-complement mapping follow the source packing meaning. Integer unpacking reads stored integers. CalcWeave selected API supports one integer scalar or one boolean group, widths1..64 within the selected target width.",
+      "remaining": "Current source M parameter1..32; selected33..64 width is an independent extension. Multi-group vector packing, full input/output dtype inheritance, source hardware-width policy, fixed input packing and source range/code-generation diagnostic differences remain open."
+    },
+    {
+      "sourceIds": [
+        "06-004"
+      ],
+      "referenceId": "bitwiseoperator",
+      "decision": "Bitwise AND/OR/XOR/NOT operate on corresponding stored bits, not nonzero truth values. The selected API preserves signed integer width; NOT has one input and the other operators have two inputs with scalar broadcast.",
+      "remaining": "Source NAND/NOR, input reduction, arbitrary port count, boolean/fixed dtype variants and stored-vs-real mask parameters remain open."
+    },
+    {
+      "sourceIds": [
+        "14-014"
+      ],
+      "referenceId": "width",
+      "decision": "Selected Width returns total element count of bounded fixed shape as an intrinsic float64 scalar; a complex cell counts as one element. R2024b primary page supports n-D input and intrinsic double output.",
+      "remaining": "Variable/symbolic dimensions, output dtype choice/back-propagation/all-port dtype modes, constant sample-time option and arrays of buses remain open."
+    }
+  ],
+  "followUpSemantics": [
+    {
+      "stage": "M11",
+      "firstWorkRows": 73,
+      "referenceUrls": [
+        "https://www.mathworks.com/help/simulink/slref/enabledsubsystem.html",
+        "https://www.mathworks.com/help/simulink/slref/merge.html",
+        "https://www.mathworks.com/help/simulink/slref/queue.html"
+      ],
+      "notes": [
+        "Enable positive-value execution differs from nonzero control.",
+        "Merge uses latest conditional driver and source restricts simultaneous active drivers.",
+        "Selected typed message queue needs ordering/full-policy/due ownership; source FIFO/LIFO/priority options are distinct."
+      ],
+      "implementationStartedByThisTask": false
+    },
+    {
+      "stage": "M12",
+      "firstWorkRows": 26,
+      "referenceUrls": [
+        "https://www.mathworks.com/help/simulink/slref/descriptorstatespace.html",
+        "https://www.mathworks.com/help/simulink/slref/algebraicconstraint.html"
+      ],
+      "notes": [
+        "Singular descriptor mass matrix requires actual DAE handling; nonsingular inverse does not cover it.",
+        "Algebraic constraint returns a solved loop unknown rather than a boolean assertion.",
+        "Current-help later-version equation-format options require exact-release checking before R2024b claims."
+      ],
+      "implementationStartedByThisTask": false
+    }
+  ],
+  "mathWorksReferenceExecuted": false,
+  "implementationVerified": true,
+  "sourceFullOptionCompletionStatus": "open",
+  "independentRawReview": {
+    "testPath": "tests/m10-independent-math.test.ts",
+    "fixturePath": "tests/m10-independent-fixtures.ts",
+    "fixtureSha256": "26d95f65369b250bf5a7e61f940b1759b5f66f99061815b038f22a279385210c",
+    "unitTestCount": 210,
+    "unitTestPassed": 210,
+    "selectedDefinitions": 34,
+    "rawDefinitionFixtures": 34,
+    "rawBoundaryFixtures": 25,
+    "rawFixtures": 59,
+    "presetFixtures": 10,
+    "successfulModeExecutions": 206,
+    "failureFixtures": 3,
+    "modes": [
+      "static",
+      "discrete",
+      "continuous"
+    ],
+    "actualCompileAndRun": true,
+    "jsonRoundtrip": true,
+    "reversedInsertionOrder": true,
+    "freshRunRepeat": true,
+    "exactTypedLiteralOracles": true,
+    "actualStandaloneTypeScript": {
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "evidenceSha256": "659a11814e1420f217068f4cab4c6726cd3070154f69fd1064afd3a4aee52e6d",
+      "actualGeneratedPrograms": 209,
+      "successfulModeExecutions": 206,
+      "failurePrograms": 3,
+      "checkedSamples": 484,
+      "exactTypedCells": 4011,
+      "strictModeTemplates": 3,
+      "strictModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "scope": "One actual generated program per declared execution-mode template strictly checked; all209 generated programs individually import-free AST/syntax/transpile checked and actually executed. Typed metadata/codes/tags/binary32/zero exact; finite float64/complex tolerance3e-12."
+    },
+    "mathWorksReferenceExecuted": false,
+    "mathWorksBitParityClaimed": false,
+    "performanceMeasured": false,
+    "oracles": [
+      "IEEE64/32 fields with -0/Infinity/canonical NaN tags",
+      "SI cast of float32 numeric5 to fixed SI5 versus real-world SI160; no reinterpretation",
+      "All6 signed tie rounding modes; binary32 ties and operation-stage rounding",
+      "Exact int64/uint64 values above2^53 and stored-code signed bit/shift/wrap",
+      "WL4 FL2 quarter-wave N2/N3 sine/cosine codes and interpolation ties",
+      "Fixed state-space output[2,5,7,8], held output8, internal x7 and atomic row failure rollback",
+      "Complex conjugate-first dot versus independent unconjugated mode, rectangular Hermitian and signed-zero polar branch",
+      "Rank8 reshape/permute/squeeze and singleton-to-scalar exact values"
+    ],
+    "limitations": [
+      "Local independent expected literals establish selected CalcWeave semantics only.",
+      "Unit tests use exact equality; generated verification declares a finite binary64/complex tolerance while metadata/code/tags/binary32/zero remain exact.",
+      "No MATLAB or Simulink model executed. No full source option or target performance approval."
+    ]
+  },
+  "implementationVerificationScope": "Selected runtime raw oracle and standalone execution only; UI, source approval and stage completion remain separate."
+}

@@ -1,0 +1,1146 @@
+{
+  "generatedAt": "2026-10-03T03:43:46.139Z",
+  "stage": "M10",
+  "engineVersion": "0.11.0-m10",
+  "datasetSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+  "evidencePath": "docs/evidence/m10-verification.json",
+  "evidenceSha256": "659a11814e1420f217068f4cab4c6726cd3070154f69fd1064afd3a4aee52e6d",
+  "fixturePath": "tests/m10-independent-fixtures.ts",
+  "fixtureSha256": "26d95f65369b250bf5a7e61f940b1759b5f66f99061815b038f22a279385210c",
+  "sourceReviewPath": "docs/evidence/m10-reference-review.json",
+  "registryDefinitions": 245,
+  "firstWorkSourceRows": 38,
+  "approvedAdditionalSourceRows": 34,
+  "existingMappingExtensions": 3,
+  "preservedSourceRows": [
+    {
+      "sourceId": "14-012",
+      "canonical": "unit.convert",
+      "priorStatus": "M4 승인 subset",
+      "rowSha256": "8bc058d0aee6a56c40b98d69154698afd7a48e933fa6c442419faee6965c1bee",
+      "followup": "Typed and inverse-unit conversion remain open; original finite affine subset and row are preserved.",
+      "nativeFullEquivalent": false
+    }
+  ],
+  "pending": [],
+  "strictTypeScriptScope": "One actual program per execution-mode template is strictly type checked; every configured generated program is import-free syntax checked and actually executed. Exact selected typed metadata/codes/tags/binary32 and full runtime contract parity are distinct from finite binary64/complex tolerance.",
+  "protectedArtifacts": {
+    "dataset/Simulink_Basic_Blocks_R2024b.md": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+    "docs/baselines/catalog-block-coverage.md": "bfad433de22c3302b53369be3465ec1d4bb3e072dd8f3ce310bc4af1ea967774",
+    "docs/baselines/m9-registry.json": "a16262a3f9ebb74156f2896d3b11019ec5dafbbd65b0ea0deab9470f6eeda6b4",
+    "docs/evidence/m8-source-approvals.json": "4f558f5040f9dda1a9c2b5bbd2b848b825b4961489a03228dd3c12370b2c4d60",
+    "docs/evidence/m9-source-approvals.json": "7d49f1b15a6b325050a55295bca4d29411fe123dd0752e2ac98766641ccc18ca",
+    "docs/evidence/m8-verification.json": "351b5ba6031dff1a2f4dfb8b51e4e63e2747998277ee93e56decc4b908ff75d6",
+    "docs/evidence/m8-presets-verification.json": "55cef48ebe57a97ca02922225330f36b1f1d0866d2ad92d69f74fcceb7771f01",
+    "docs/evidence/m9-verification.json": "1d3fee9b56017db6c12b8f7f778d4c064efd4fa7f7d0014a2a38b6ffdd13a23f"
+  },
+  "fullSimulinkEquivalenceClaimed": false,
+  "approvals": [
+    {
+      "sourceId": "01-004",
+      "sourceName": "Data Type Conversion",
+      "sourceLine": 81,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "signal.cast",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "명시한 자료형으로 변환합니다. propagated 설정은 Data Type Propagation의 유일한 역방향 constraint로 결정하며 모호한 경우 실행하지 않습니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-conversion-signed-ties-static",
+        "m10-independent-conversion-signed-ties-discrete",
+        "m10-independent-conversion-signed-ties-continuous",
+        "m10-independent-propagation-backconstraint-static",
+        "m10-independent-propagation-backconstraint-discrete",
+        "m10-independent-propagation-backconstraint-continuous",
+        "m10-independent-cast-floor-negative-ties-static",
+        "m10-independent-cast-floor-negative-ties-discrete",
+        "m10-independent-cast-floor-negative-ties-continuous",
+        "m10-independent-cast-ceil-negative-ties-static",
+        "m10-independent-cast-ceil-negative-ties-discrete",
+        "m10-independent-cast-ceil-negative-ties-continuous",
+        "m10-independent-cast-toward-zero-negative-ties-static",
+        "m10-independent-cast-toward-zero-negative-ties-discrete",
+        "m10-independent-cast-toward-zero-negative-ties-continuous",
+        "m10-independent-cast-nearest-negative-ties-static",
+        "m10-independent-cast-nearest-negative-ties-discrete",
+        "m10-independent-cast-nearest-negative-ties-continuous",
+        "m10-independent-cast-away-negative-ties-static",
+        "m10-independent-cast-away-negative-ties-discrete",
+        "m10-independent-cast-away-negative-ties-continuous",
+        "m10-independent-conversion-stored-not-ieee-static",
+        "m10-independent-conversion-stored-not-ieee-discrete",
+        "m10-independent-conversion-stored-not-ieee-continuous",
+        "m10-independent-conversion-real-world-scaling-static",
+        "m10-independent-conversion-real-world-scaling-discrete",
+        "m10-independent-conversion-real-world-scaling-continuous",
+        "m10-independent-f32-tie-down-static",
+        "m10-independent-f32-tie-down-discrete",
+        "m10-independent-f32-tie-down-continuous",
+        "m10-independent-int64-minimum-roundtrip-static",
+        "m10-independent-int64-minimum-roundtrip-discrete",
+        "m10-independent-int64-minimum-roundtrip-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": false,
+      "priorStatus": "M5 독립 대체 subset",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "06-001",
+      "sourceName": "Bit Clear",
+      "sourceLine": 280,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "logic.bit-mask",
+      "parameters": {
+        "operation": "clear"
+      },
+      "presetId": "m10-bit-clear",
+      "status": "M10 preset subset",
+      "boundary": "built-in 정수의 지정한 0-based 비트를 설정·해제합니다. 폭 밖 index와 암묵적인 float 변환은 거부합니다. · 선택 설정 {\"operation\":\"clear\"}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-preset-bit-clear-static",
+        "m10-independent-preset-bit-clear-discrete",
+        "m10-independent-preset-bit-clear-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "06-002",
+      "sourceName": "Bit Set",
+      "sourceLine": 281,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "logic.bit-mask",
+      "parameters": {
+        "operation": "set"
+      },
+      "presetId": "m10-bit-set",
+      "status": "M10 preset subset",
+      "boundary": "built-in 정수의 지정한 0-based 비트를 설정·해제합니다. 폭 밖 index와 암묵적인 float 변환은 거부합니다. · 선택 설정 {\"operation\":\"set\"}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-preset-bit-set-static",
+        "m10-independent-preset-bit-set-discrete",
+        "m10-independent-preset-bit-set-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "06-003",
+      "sourceName": "Bit to Integer Converter",
+      "sourceLine": 282,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "편입 R2022a+ · 그 이전 Communications Toolbox 소속",
+      "canonical": "logic.bits-to-integer",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "1~64개 boolean 벡터를 지정한 built-in 정수로 묶습니다. signed two’s complement와 MSB/LSB 순서를 명시합니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-bits-to-signed-integer-static",
+        "m10-independent-bits-to-signed-integer-discrete",
+        "m10-independent-bits-to-signed-integer-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "06-004",
+      "sourceName": "Bitwise Operator",
+      "sourceLine": 283,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "logic.bitwise-typed",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "같은 built-in 정수 자료형에 and/or/xor/not를 적용합니다. 정수 폭과 부호를 보존합니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-bitwise64-xor-static",
+        "m10-independent-bitwise64-xor-discrete",
+        "m10-independent-bitwise64-xor-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": false,
+      "priorStatus": "M2 승인 subset",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "06-015",
+      "sourceName": "Extract Bits",
+      "sourceLine": 294,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "logic.extract-bits",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "built-in 정수의 포함된 low..high 비트를 추출하여 담을 수 있는 최소 unsigned 정수로 출력합니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-extract-signed-highbits-static",
+        "m10-independent-extract-signed-highbits-discrete",
+        "m10-independent-extract-signed-highbits-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "06-016",
+      "sourceName": "Float Extract Bits",
+      "sourceLine": 295,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "R2023a+",
+      "canonical": "logic.float-extract-bits",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "float32/float64의 raw IEEE 비트 또는 sign·exponent·fraction을 unsigned 정수로 출력합니다. endianness와 독립적인 수치 비트열입니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-ieee64-bit-patterns-static",
+        "m10-independent-ieee64-bit-patterns-discrete",
+        "m10-independent-ieee64-bit-patterns-continuous",
+        "m10-independent-ieee32-bit-patterns-static",
+        "m10-independent-ieee32-bit-patterns-discrete",
+        "m10-independent-ieee32-bit-patterns-continuous",
+        "m10-independent-ieee64-sign-static",
+        "m10-independent-ieee64-sign-discrete",
+        "m10-independent-ieee64-sign-continuous",
+        "m10-independent-ieee64-exponent-static",
+        "m10-independent-ieee64-exponent-discrete",
+        "m10-independent-ieee64-exponent-continuous",
+        "m10-independent-ieee64-fraction-static",
+        "m10-independent-ieee64-fraction-discrete",
+        "m10-independent-ieee64-fraction-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "06-017",
+      "sourceName": "Integer to Bit Converter",
+      "sourceLine": 296,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "편입 R2022a+ · 그 이전 Communications Toolbox 소속",
+      "canonical": "logic.integer-to-bits",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "typed 정수 scalar의 요청 폭을 검증하여 MSB/LSB 우선 boolean 벡터로 출력합니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-integer-to-bits-signed-static",
+        "m10-independent-integer-to-bits-signed-discrete",
+        "m10-independent-integer-to-bits-signed-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "06-022",
+      "sourceName": "Shift Arithmetic",
+      "sourceLine": 301,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "logic.shift-arithmetic",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "bit 모드의 양수 shift는 오른쪽, 음수는 왼쪽입니다. binary-point는 저장 코드를 유지하며 FL−shift로 scale을 바꾸므로 양수에서 실세계 값은 커집니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-arithmetic-shift-negative64-static",
+        "m10-independent-arithmetic-shift-negative64-discrete",
+        "m10-independent-arithmetic-shift-negative64-continuous",
+        "m10-independent-binary-point-source-positive-right-static",
+        "m10-independent-binary-point-source-positive-right-discrete",
+        "m10-independent-binary-point-source-positive-right-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "07-003",
+      "sourceName": "Cosine",
+      "sourceLine": 319,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "구성/조건 · Sine의 코사인 출력 설정. 고정소수점 실행 조건 확인",
+      "canonical": "fixed.trigonometric",
+      "parameters": {
+        "operation": "cos"
+      },
+      "presetId": null,
+      "status": "M10 독립 대체 subset",
+      "boundary": "독립 quarter-wave LUT로 sin(2πu)·cos(2πu)를 계산합니다. 원본 Speed/Precision bit parity는 미승인이며 output은 signed WL/FL=WL−2입니다. · 선택 설정 {\"operation\":\"cos\"}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-fixed-cosine-n2-static",
+        "m10-independent-fixed-cosine-n2-discrete",
+        "m10-independent-fixed-cosine-n2-continuous",
+        "m10-independent-fixed-cosine-n3-static",
+        "m10-independent-fixed-cosine-n3-discrete",
+        "m10-independent-fixed-cosine-n3-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "07-008",
+      "sourceName": "Sine",
+      "sourceLine": 324,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "조건 · 고정소수점 출력용 조회표 블록. 무추가제품 일반 사용에는 Trigonometric Function 등을 우선",
+      "canonical": "fixed.trigonometric",
+      "parameters": {
+        "operation": "sin"
+      },
+      "presetId": null,
+      "status": "M10 독립 대체 subset",
+      "boundary": "독립 quarter-wave LUT로 sin(2πu)·cos(2πu)를 계산합니다. 원본 Speed/Precision bit parity는 미승인이며 output은 signed WL/FL=WL−2입니다. · 선택 설정 {\"operation\":\"sin\"}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-fixed-sine-coarse-lut-static",
+        "m10-independent-fixed-sine-coarse-lut-discrete",
+        "m10-independent-fixed-sine-coarse-lut-continuous",
+        "m10-independent-fixed-sine-n3-static",
+        "m10-independent-fixed-sine-n3-discrete",
+        "m10-independent-fixed-sine-n3-continuous",
+        "m10-independent-fixed-lut-ties-even-static",
+        "m10-independent-fixed-lut-ties-even-discrete",
+        "m10-independent-fixed-lut-ties-even-continuous",
+        "m10-independent-fixed-lut-periodic-rational-static",
+        "m10-independent-fixed-lut-periodic-rational-discrete",
+        "m10-independent-fixed-lut-periodic-rational-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "08-006",
+      "sourceName": "Complex to Magnitude-Angle",
+      "sourceLine": 346,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "complex.to-polar",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "complex128의 hypot 크기와 atan2 위상을 typed float64로 출력합니다. 위상은 rad이며 branch cut과 signed zero를 보존합니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-complex-polar-signed-branch-static",
+        "m10-independent-complex-polar-signed-branch-discrete",
+        "m10-independent-complex-polar-signed-branch-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "08-007",
+      "sourceName": "Complex to Real-Imag",
+      "sourceLine": 347,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "complex.to-parts",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "complex128 신호의 real·imag를 typed float64로 분리합니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-complex-parts-separation-static",
+        "m10-independent-complex-parts-separation-discrete",
+        "m10-independent-complex-parts-separation-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "08-012",
+      "sourceName": "Magnitude-Angle to Complex",
+      "sourceLine": 352,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "complex.from-polar",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "유한한 음수가 아닌 magnitude와 radian angle로 complex128을 만듭니다. angle은 단위 1 또는 rad입니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-complex-polar-zero-angle-static",
+        "m10-independent-complex-polar-zero-angle-discrete",
+        "m10-independent-complex-polar-zero-angle-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "08-022",
+      "sourceName": "Real-Imag to Complex",
+      "sourceLine": 362,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "complex.from-parts",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "같은 형상·단위의 실수 real·imag를 complex128 신호로 만듭니다. scalar만 명시 broadcast합니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-complex-parts-broadcast-static",
+        "m10-independent-complex-parts-broadcast-discrete",
+        "m10-independent-complex-parts-broadcast-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "09-006",
+      "sourceName": "Hermitian Transpose",
+      "sourceLine": 399,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "R2021b+",
+      "canonical": "complex.hermitian",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "2D complex128의 켤레 전치를 계산합니다. 각 축 1~32, 실수 전치와 구분합니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-hermitian-rectangular-static",
+        "m10-independent-hermitian-rectangular-discrete",
+        "m10-independent-hermitian-rectangular-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "09-008",
+      "sourceName": "IsHermitian",
+      "sourceLine": 401,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "R2022a+",
+      "canonical": "complex.is-hermitian",
+      "parameters": {
+        "tolerance": 0
+      },
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "complex128 정방 행렬의 conjugate symmetry와 실수 diagonal을 절대 tolerance로 검사합니다. · 선택 설정 {\"tolerance\":0}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-is-hermitian-static",
+        "m10-independent-is-hermitian-discrete",
+        "m10-independent-is-hermitian-continuous",
+        "m10-independent-hermitian-imaginary-diagonal-false-static",
+        "m10-independent-hermitian-imaginary-diagonal-false-discrete",
+        "m10-independent-hermitian-imaginary-diagonal-false-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-027",
+      "sourceName": "Unit System Configuration",
+      "sourceLine": 523,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "signal.unit-system",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 독립 대체 subset",
+      "boundary": "프로젝트 전역에서 선언·추론하는 단위를 선택한 SI 허용 목록으로 제한합니다. MathWorks unit system 객체의 실행과 구분합니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-unit-allowlist-constraint-static",
+        "m10-independent-unit-allowlist-constraint-discrete",
+        "m10-independent-unit-allowlist-constraint-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "14-001",
+      "sourceName": "Bus to Vector",
+      "sourceLine": 541,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "signal.bus-to-vector",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "기존 동종 scalar named-bus를 필드 순서의 일반 벡터로 바꿉니다. 이종·중첩 bus는 지원하지 않습니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-bus-vector-order-static",
+        "m10-independent-bus-vector-order-discrete",
+        "m10-independent-bus-vector-order-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "14-002",
+      "sourceName": "Data Type Conversion",
+      "sourceLine": 542,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "signal.cast",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "명시한 자료형으로 변환합니다. propagated 설정은 Data Type Propagation의 유일한 역방향 constraint로 결정하며 모호한 경우 실행하지 않습니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-conversion-signed-ties-static",
+        "m10-independent-conversion-signed-ties-discrete",
+        "m10-independent-conversion-signed-ties-continuous",
+        "m10-independent-propagation-backconstraint-static",
+        "m10-independent-propagation-backconstraint-discrete",
+        "m10-independent-propagation-backconstraint-continuous",
+        "m10-independent-cast-floor-negative-ties-static",
+        "m10-independent-cast-floor-negative-ties-discrete",
+        "m10-independent-cast-floor-negative-ties-continuous",
+        "m10-independent-cast-ceil-negative-ties-static",
+        "m10-independent-cast-ceil-negative-ties-discrete",
+        "m10-independent-cast-ceil-negative-ties-continuous",
+        "m10-independent-cast-toward-zero-negative-ties-static",
+        "m10-independent-cast-toward-zero-negative-ties-discrete",
+        "m10-independent-cast-toward-zero-negative-ties-continuous",
+        "m10-independent-cast-nearest-negative-ties-static",
+        "m10-independent-cast-nearest-negative-ties-discrete",
+        "m10-independent-cast-nearest-negative-ties-continuous",
+        "m10-independent-cast-away-negative-ties-static",
+        "m10-independent-cast-away-negative-ties-discrete",
+        "m10-independent-cast-away-negative-ties-continuous",
+        "m10-independent-conversion-stored-not-ieee-static",
+        "m10-independent-conversion-stored-not-ieee-discrete",
+        "m10-independent-conversion-stored-not-ieee-continuous",
+        "m10-independent-conversion-real-world-scaling-static",
+        "m10-independent-conversion-real-world-scaling-discrete",
+        "m10-independent-conversion-real-world-scaling-continuous",
+        "m10-independent-f32-tie-down-static",
+        "m10-independent-f32-tie-down-discrete",
+        "m10-independent-f32-tie-down-continuous",
+        "m10-independent-int64-minimum-roundtrip-static",
+        "m10-independent-int64-minimum-roundtrip-discrete",
+        "m10-independent-int64-minimum-roundtrip-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": false,
+      "priorStatus": "M5 독립 대체 subset",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "14-003",
+      "sourceName": "Data Type Conversion Inherited",
+      "sourceLine": 543,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "signal.cast-inherited",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "reference 입력의 자료형·스케일을 상속하여 in을 변환합니다. reference의 값과 형상은 변환 결과에 사용하지 않습니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-inherited-stored-integer-static",
+        "m10-independent-inherited-stored-integer-discrete",
+        "m10-independent-inherited-stored-integer-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "14-004",
+      "sourceName": "Data Type Duplicate",
+      "sourceLine": 544,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "signal.type-duplicate",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "a와 b의 자료형·고정소수점 스케일·열거 선언 동일성을 컴파일 시 검사합니다. 값이나 형상을 변환하지 않습니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-duplicate-metadata-static",
+        "m10-independent-duplicate-metadata-discrete",
+        "m10-independent-duplicate-metadata-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "14-005",
+      "sourceName": "Data Type Propagation",
+      "sourceLine": 545,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "signal.type-propagation",
+      "parameters": {
+        "rule": "widest-integer"
+      },
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "ref1 자료형 또는 두 built-in 정수의 넓은 자료형을 직접 연결된 propagated cast로 역전파합니다. 다른 역전파 경로와 순환·충돌은 진단합니다. · 선택 설정 {\"rule\":\"widest-integer\"}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-propagation-backconstraint-static",
+        "m10-independent-propagation-backconstraint-discrete",
+        "m10-independent-propagation-backconstraint-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "14-006",
+      "sourceName": "Data Type Scaling Strip",
+      "sourceLine": 546,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "조건 · 고정소수점 관련 사용 시 제품 및 데이터형 조건 확인",
+      "canonical": "signal.scaling-strip",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "고정소수점 신호의 저장 정수를 담을 수 있는 가장 작은 built-in 정수로 출력합니다. 실세계 값 복원과 구분합니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-strip-si-not-floatbits-static",
+        "m10-independent-strip-si-not-floatbits-discrete",
+        "m10-independent-strip-si-not-floatbits-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "14-010",
+      "sourceName": "Signal Conversion",
+      "sourceLine": 550,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "signal.representation",
+      "parameters": {
+        "representation": "copy"
+      },
+      "presetId": null,
+      "status": "M10 독립 대체 subset",
+      "boundary": "copy는 값을 방어 복사합니다. virtual/nonvirtual은 기존 동종 scalar named-bus의 compiler 표현만 선언하며 MATLAB bus object는 지원하지 않습니다. · 선택 설정 {\"representation\":\"copy\"}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-copy-above-53-static",
+        "m10-independent-copy-above-53-discrete",
+        "m10-independent-copy-above-53-continuous",
+        "m10-independent-preset-copy-static",
+        "m10-independent-preset-copy-discrete",
+        "m10-independent-preset-copy-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "14-011",
+      "sourceName": "Signal Specification",
+      "sourceLine": 551,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "signal.specification",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "선택한 자료형·고정 형상·유한 실수 범위를 검증합니다. 범위는 clipping 없이 위반을 진단하며 자료형·형상은 변환하지 않습니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-specification-rank8-static",
+        "m10-independent-specification-rank8-discrete",
+        "m10-independent-specification-rank8-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "14-014",
+      "sourceName": "Width",
+      "sourceLine": 554,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "signal.width",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "고정 신호의 전체 원소 수를 출력합니다. 복소수 원소 하나는 폭 하나로 계산합니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-width-complex-elements-static",
+        "m10-independent-width-complex-elements-discrete",
+        "m10-independent-width-complex-elements-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "17-008",
+      "sourceName": "Enumerated Constant",
+      "sourceLine": 645,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "source.enum",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 독립 대체 subset",
+      "boundary": "선언한 이름과 label 목록의 열거 값만 출력합니다. 숫자나 문자열 신호와 자동 변환하지 않습니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-enum-constant-static",
+        "m10-independent-enum-constant-discrete",
+        "m10-independent-enum-constant-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "20-001",
+      "sourceName": "Fixed-Point State-Space",
+      "sourceLine": 745,
+      "sourceSubgroup": "Additional Discrete",
+      "sourceCondition": "기본/조건 · 기본 double 설정 가능. 고정소수점 실행은 별도 제품 조건",
+      "canonical": "fixed.state-space",
+      "parameters": {},
+      "presetId": null,
+      "status": "M10 승인 subset",
+      "boundary": "같은 binary-point fixed 자료형의 1~8축 MIMO 이산 상태입니다. 각 product와 누적 add에 지정 rounding·overflow를 적용하며 due는 read-before-write입니다. · 선택 설정 {}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-fixed-state-staged-rounding-discrete",
+        "m10-independent-fixed-state-staged-rounding-continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "20-005",
+      "sourceName": "Decrement Stored Integer",
+      "sourceLine": 756,
+      "sourceSubgroup": "Additional Math / Increment - Decrement",
+      "sourceCondition": "조건 · 저장 정수값/스케일링 의미 및 고정소수점 조건 확인",
+      "canonical": "fixed.integer-increment",
+      "parameters": {
+        "delta": -1,
+        "overflow": "wrap"
+      },
+      "presetId": "m10-code-decrement",
+      "status": "M10 preset subset",
+      "boundary": "fixed 신호의 실세계 값이 아닌 저장 코드에 delta를 더합니다. 지정 폭의 overflow 정책을 적용합니다. · 선택 설정 {\"delta\":-1,\"overflow\":\"wrap\"}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-preset-si-decrement-static",
+        "m10-independent-preset-si-decrement-discrete",
+        "m10-independent-preset-si-decrement-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "20-009",
+      "sourceName": "Increment Stored Integer",
+      "sourceLine": 760,
+      "sourceSubgroup": "Additional Math / Increment - Decrement",
+      "sourceCondition": "조건 · 저장 정수값/스케일링 의미 및 고정소수점 조건 확인",
+      "canonical": "fixed.integer-increment",
+      "parameters": {
+        "delta": 1,
+        "overflow": "wrap"
+      },
+      "presetId": "m10-code-increment",
+      "status": "M10 preset subset",
+      "boundary": "fixed 신호의 실세계 값이 아닌 저장 코드에 delta를 더합니다. 지정 폭의 overflow 정책을 적용합니다. · 선택 설정 {\"delta\":1,\"overflow\":\"wrap\"}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-preset-si-increment-static",
+        "m10-independent-preset-si-increment-discrete",
+        "m10-independent-preset-si-increment-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "21-002",
+      "sourceName": "Inf",
+      "sourceLine": 779,
+      "sourceSubgroup": "Sources — Constant의 사전 구성",
+      "sourceCondition": "구성 · Constant 값 `inf`",
+      "canonical": "source.typed",
+      "parameters": {
+        "value": {
+          "kind": "typed",
+          "dtype": "float64",
+          "shape": [],
+          "data": [
+            "Infinity"
+          ]
+        }
+      },
+      "presetId": "m10-positive-infinity",
+      "status": "M10 preset subset",
+      "boundary": "자료형과 형상을 보존하는 JSON 신호입니다. 정수·고정소수점은 정확한 저장 코드, IEEE 특수값은 명시 태그로 저장합니다. · 선택 설정 {\"value\":{\"kind\":\"typed\",\"dtype\":\"float64\",\"shape\":[],\"data\":[\"Infinity\"]}}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-preset-inf-static",
+        "m10-independent-preset-inf-discrete",
+        "m10-independent-preset-inf-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "21-003",
+      "sourceName": "NaN",
+      "sourceLine": 780,
+      "sourceSubgroup": "Sources — Constant의 사전 구성",
+      "sourceCondition": "구성 · Constant 값 `NaN`",
+      "canonical": "source.typed",
+      "parameters": {
+        "value": {
+          "kind": "typed",
+          "dtype": "float64",
+          "shape": [],
+          "data": [
+            "NaN"
+          ]
+        }
+      },
+      "presetId": "m10-nan",
+      "status": "M10 preset subset",
+      "boundary": "자료형과 형상을 보존하는 JSON 신호입니다. 정수·고정소수점은 정확한 저장 코드, IEEE 특수값은 명시 태그로 저장합니다. · 선택 설정 {\"value\":{\"kind\":\"typed\",\"dtype\":\"float64\",\"shape\":[],\"data\":[\"NaN\"]}}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-preset-nan-static",
+        "m10-independent-preset-nan-discrete",
+        "m10-independent-preset-nan-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "21-004",
+      "sourceName": "Negative Inf",
+      "sourceLine": 781,
+      "sourceSubgroup": "Sources — Constant의 사전 구성",
+      "sourceCondition": "구성 · Constant 값 `-inf`",
+      "canonical": "source.typed",
+      "parameters": {
+        "value": {
+          "kind": "typed",
+          "dtype": "float64",
+          "shape": [],
+          "data": [
+            "-Infinity"
+          ]
+        }
+      },
+      "presetId": "m10-negative-infinity",
+      "status": "M10 preset subset",
+      "boundary": "자료형과 형상을 보존하는 JSON 신호입니다. 정수·고정소수점은 정확한 저장 코드, IEEE 특수값은 명시 태그로 저장합니다. · 선택 설정 {\"value\":{\"kind\":\"typed\",\"dtype\":\"float64\",\"shape\":[],\"data\":[\"-Infinity\"]}}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-preset-negative-inf-static",
+        "m10-independent-preset-negative-inf-discrete",
+        "m10-independent-preset-negative-inf-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "21-011",
+      "sourceName": "Signal Copy",
+      "sourceLine": 802,
+      "sourceSubgroup": "Signal Attributes — Signal Conversion의 사전 구성",
+      "sourceCondition": "구성 · Signal Conversion의 `Signal copy`",
+      "canonical": "signal.representation",
+      "parameters": {
+        "representation": "copy"
+      },
+      "presetId": "m10-signal-copy",
+      "status": "M10 preset subset",
+      "boundary": "copy는 값을 방어 복사합니다. virtual/nonvirtual은 기존 동종 scalar named-bus의 compiler 표현만 선언하며 MATLAB bus object는 지원하지 않습니다. · 선택 설정 {\"representation\":\"copy\"}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-preset-copy-static",
+        "m10-independent-preset-copy-discrete",
+        "m10-independent-preset-copy-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "21-012",
+      "sourceName": "To Virtual Bus",
+      "sourceLine": 803,
+      "sourceSubgroup": "Signal Attributes — Signal Conversion의 사전 구성",
+      "sourceCondition": "구성 · Signal Conversion의 `Virtual bus`",
+      "canonical": "signal.representation",
+      "parameters": {
+        "representation": "virtual"
+      },
+      "presetId": "m10-virtual-bus",
+      "status": "M10 독립 대체 subset",
+      "boundary": "copy는 값을 방어 복사합니다. virtual/nonvirtual은 기존 동종 scalar named-bus의 compiler 표현만 선언하며 MATLAB bus object는 지원하지 않습니다. · 선택 설정 {\"representation\":\"virtual\"}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-preset-virtual-bus-static",
+        "m10-independent-preset-virtual-bus-discrete",
+        "m10-independent-preset-virtual-bus-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "21-013",
+      "sourceName": "To Nonvirtual Bus",
+      "sourceLine": 804,
+      "sourceSubgroup": "Signal Attributes — Signal Conversion의 사전 구성",
+      "sourceCondition": "구성 · Signal Conversion의 `Nonvirtual bus`",
+      "canonical": "signal.representation",
+      "parameters": {
+        "representation": "nonvirtual"
+      },
+      "presetId": "m10-nonvirtual-bus",
+      "status": "M10 독립 대체 subset",
+      "boundary": "copy는 값을 방어 복사합니다. virtual/nonvirtual은 기존 동종 scalar named-bus의 compiler 표현만 선언하며 MATLAB bus object는 지원하지 않습니다. · 선택 설정 {\"representation\":\"nonvirtual\"}. 등록된 tagged dtype·bounded 형상·mode 및 명시 rounding/overflow만; changing continuous quantization은 held 경계 필수. 실제 TS/JSON/original node/state 검증은 선택 oracle 범위이며 전체 옵션·R2024b 실행 및 MathWorks bit parity 미승인. 후속 source 옵션은 open이다.",
+      "evidenceFixtureIds": [
+        "m10-independent-preset-nonvirtual-bus-static",
+        "m10-independent-preset-nonvirtual-bus-discrete",
+        "m10-independent-preset-nonvirtual-bus-continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    }
+  ]
+}

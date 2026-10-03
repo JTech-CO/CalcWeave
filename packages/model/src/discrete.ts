@@ -1,6 +1,7 @@
 import { signalElementCount, validateSignal } from './signal';
 import type { IRNode } from './types';
 import { m9StateElementCount } from './m9';
+import { typedStorageElements, validateTypedSignal } from './typed';
 
 /** Logical persistent memory, excluding temporary atomic-commit copies. Input is validated IR. */
 export function discreteStateElementCount(node: IRNode): number {
@@ -8,6 +9,7 @@ export function discreteStateElementCount(node: IRNode): number {
   if (m9Count !== undefined) return m9Count;
   const initialCount = (): number => signalElementCount(validateSignal(node.parameters.initial));
   switch (node.blockType) {
+    case 'fixed.state-space': return typedStorageElements(validateTypedSignal(node.parameters.initial));
     case 'discrete.unit-delay': case 'discrete.integrator': case 'discrete.difference': case 'discrete.derivative':
     case 'time.rate-transition': return initialCount();
     case 'discrete.delay': return (node.parameters.steps as number) * initialCount();

@@ -467,3 +467,7 @@ Python `python-m7-v1`을 첫 추가 타깃으로 선정했다. 승인된 정적�
 현재 공개 앱은0.10.1이며 엔진0.10.0-m9·211개 정의·39예제/6범주와 source subset211행/미구현174행은 유지한다. 버전 표시를 APP_VERSION에 연결하고 실제 캔버스 크기 구독·DOM 측정 일치·취소 가능한2프레임 안정화로 최초 fit의 측정 경합을 수정했다. [최신 공개 검증](pages-validation.md)과 [초기0.10.0 증거](evidence/m9-initial-release-actions-verification.json)를 구분한다. 원본 옵션·수치 계약·승인 범위를 추가하거나 완료 처리하지 않는다.
 
 자동 저장의5개 상태 문구 크기를 미리 확보해 최초 fit 뒤 헤더/캔버스 높이가 달라지는 경계를 교정했다. 추가 측정용 span은 비어 있고 aria-hidden이며 현재 DOMtext는 실제 현재 상태만 포함한다. [저장 상태 교정](evidence/m9-save-status-layout-correction.json)과 [두 번째 게시 전 실패](evidence/m9-late-layout-failed-attempt.json)를 보존한다.
+
+## M10 납품 기록 — 자료형·복소수·고정소수점·n-D
+
+앱0.11.0·엔진0.11.0-m10,선택로컬engineering완료. 기존211정의보존,신규34정의·10preset·6예제,총245정의·45예제/7범주. source subset245행/미구현140행. 전체unit2669/2669,209actual TypeScript·484samples·4011exacttypedcell 비교,UI7/7,design188/pageErrors0,성능6예산/root-project70검사통과. 루트browser135/138 최초통과와3문제해결후관련21/21을분리기록한다. [M10 검증](m10-validation.md). 공개배포는M12최종통합릴리스에서확인한다. 전체Simulink옵션동등성과서비스출시승인은별도열린게이트다.

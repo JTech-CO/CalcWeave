@@ -31,7 +31,8 @@ describe('M8 bounded stateless compiler contracts', () => {
     expect(baseline.definitions).toHaveLength(144);
     for (const definition of baseline.definitions) expect(getBlockDefinition(String(definition.id))).toEqual(definition);
     expect(M8_BLOCK_IDS).toHaveLength(41);
-    expect(blockRegistry.filter(definition => !(M9_BLOCK_IDS as readonly string[]).includes(definition.id))).toHaveLength(185);
+    const baselineIds = new Set(baseline.definitions.map(definition => definition.id));
+    expect(blockRegistry.filter(definition => baselineIds.has(definition.id) || (M8_BLOCK_IDS as readonly string[]).includes(definition.id))).toHaveLength(185);
     expect(new Set(blockRegistry.map(item => item.id)).size).toBe(blockRegistry.length);
     expect(blockPresets.filter(preset => (M8_BLOCK_PRESETS as readonly { id: string }[]).some(old => old.id === preset.id))).toHaveLength(8);
     for (const preset of blockPresets) expect(getBlockDefinition(preset.blockType)).toBeDefined();

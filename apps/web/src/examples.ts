@@ -17,6 +17,7 @@ export const EXAMPLE_CATEGORIES = [
   { id: 'continuous', label: '연속·혼합 시뮬레이션', description: '적분·제어·이벤트와 solver 설정을 살펴봅니다.' },
   { id: 'workspace', label: '데이터와 도식 관리', description: '데이터 재생·이름 있는 신호·하위 도식을 다룹니다.' },
   { id: 'advanced', label: '행렬·표·양자화', description: '행렬 풀이·표 보간·저장 정수의 규칙을 비교합니다.' },
+  { id: 'typed', label: '자료형·복소수·n-D', description: '정확한 정수·고정소수점·복소수와 다차원 배열을 다룹니다.' },
 ] as const;
 export type ExampleCategoryId = typeof EXAMPLE_CATEGORIES[number]['id'];
 export interface CalcExample { id: string; title: string; description: string; category: ExampleCategoryId; model: CalcModel }
@@ -369,6 +370,49 @@ EXAMPLES.push({ id: 'pid-setpoint-weights', category: 'discrete', title: '2DOF P
   edges: [edge('reference-pid', 'reference', 'pid', 'reference'), edge('measurement-pid', 'measurement', 'pid', 'measurement'), edge('pid-result', 'pid', 'result', 'in')],
   execution: { mode: 'discrete', startTime: 0, stopTime: 1, step: .1 }, layout: { reference: { x: 40, y: 30 }, measurement: { x: 40, y: 260 }, pid: { x: 350, y: 160 }, result: { x: 670, y: 160 } },
   notes: 'P에는 0.5×목표−측정=0.5, I에는 목표−측정=1이 들어갑니다. 0.1초 간격 backward 적분의 첫 출력은 0.7, 이후 0.9,1.1,…입니다. 측정 값을 고정한 계산 예제이며 실제 장치의 폐루프 응답을 표현하지 않습니다. 적분 방식과 포화는 블록 설정에서 바꿀 수 있습니다.',
+} });
+
+EXAMPLES.push({ id: 'typed-integer64', category: 'typed', title: '64비트 정수와 비트', description: 'uint64 최댓값의 마지막 비트를 해제해 정확한 20자리 정수를 확인합니다.', model: {
+  schemaVersion: 1, modelId: 'typed-integer64', name: '64비트 정수와 비트',
+  nodes: [node('integer', 'source.typed', '정확한 정수', { value: { kind: 'typed', dtype: 'uint64', shape: [], data: ['18446744073709551615'] } }), node('clear', 'logic.bit-mask', '마지막 비트 해제', { operation: 'clear', bits: [0] }), node('original', 'sink.display', '원래 정수', {}), node('result', 'sink.display', '비트 해제 결과', {})],
+  edges: [edge('integer-clear', 'integer', 'clear', 'in'), edge('integer-original', 'integer', 'original', 'in'), edge('clear-result', 'clear', 'result', 'in')],
+  execution: { mode: 'static', startTime: 0, stopTime: 0, step: .1 }, layout: { integer: { x: 40, y: 180 }, clear: { x: 330, y: 180 }, original: { x: 640, y: 30 }, result: { x: 640, y: 260 } },
+  notes: '18446744073709551615와 18446744073709551614는 십진 문자열로 저장되어 Number 정밀도 손실이 없습니다. 입력 블럭을 선택하면 자료형과 정확한 정수를 바꿀 수 있습니다. typed CSV는 dtype:payload 텍스트로 기록하며 모델 복구에는 모델 JSON을 사용하세요.',
+} });
+EXAMPLES.push({ id: 'typed-fixed-overflow', category: 'typed', title: '고정소수점 저장 코드의 경계', description: 'signed 4비트·소수 2비트에서 코드 7에 1을 더하고 wrap과 saturate를 비교합니다.', model: {
+  schemaVersion: 1, modelId: 'typed-fixed-overflow', name: '고정소수점 저장 코드의 경계',
+  nodes: [node('value', 'source.typed', '고정소수점 입력', { value: { kind: 'typed', dtype: 'fixed', fixed: { signed: true, wordLength: 4, fractionLength: 2 }, shape: [], data: ['7'] } }), node('wrap', 'fixed.integer-increment', '순환 증가', { delta: 1, overflow: 'wrap' }), node('saturate', 'fixed.integer-increment', '경계 증가', { delta: 1, overflow: 'saturate' }), node('wrap-result', 'sink.display', '순환 결과', {}), node('saturate-result', 'sink.display', '경계 결과', {})],
+  edges: [edge('value-wrap', 'value', 'wrap', 'in'), edge('value-saturate', 'value', 'saturate', 'in'), edge('wrap-result', 'wrap', 'wrap-result', 'in'), edge('saturate-result', 'saturate', 'saturate-result', 'in')],
+  execution: { mode: 'static', startTime: 0, stopTime: 0, step: .1 }, layout: { value: { x: 40, y: 180 }, wrap: { x: 330, y: 30 }, saturate: { x: 330, y: 280 }, 'wrap-result': { x: 650, y: 30 }, 'saturate-result': { x: 650, y: 280 } },
+  notes: '입력 코드 7의 실세계 값은 7×2⁻²=1.75입니다. 저장 코드에 1을 더하면 wrap은 코드 −8·실세계 값 −2, saturate는 코드 7·실세계 값 1.75입니다. 저장 코드 증가와 실세계 값 1 증가를 구분하세요.',
+} });
+EXAMPLES.push({ id: 'typed-complex-hermitian', category: 'typed', title: '복소수와 켤레 전치', description: '2+3i와 2−3i를 가진 2×2 행렬의 켤레 전치와 에르미트 조건을 확인합니다.', model: {
+  schemaVersion: 1, modelId: 'typed-complex-hermitian', name: '복소수와 켤레 전치',
+  nodes: [node('complex', 'source.typed', '복소수 행렬', { value: { kind: 'typed', dtype: 'complex128', shape: [2, 2], data: [{ re: 1, im: 0 }, { re: 2, im: 3 }, { re: 2, im: -3 }, { re: 4, im: 0 }] } }), node('hermitian', 'complex.hermitian', '켤레 전치', {}), node('check', 'complex.is-hermitian', '에르미트 확인', { tolerance: 0 }), node('result', 'sink.display', '켤레 전치 결과', {}), node('verified', 'sink.display', '에르미트 여부', {})],
+  edges: [edge('complex-hermitian', 'complex', 'hermitian', 'in'), edge('complex-check', 'complex', 'check', 'in'), edge('hermitian-result', 'hermitian', 'result', 'in'), edge('check-verified', 'check', 'verified', 'in')],
+  execution: { mode: 'static', startTime: 0, stopTime: 0, step: .1 }, layout: { complex: { x: 40, y: 180 }, hermitian: { x: 350, y: 30 }, check: { x: 350, y: 290 }, result: { x: 650, y: 30 }, verified: { x: 650, y: 290 } },
+  notes: '입력의 행 순서는 [1, 2+3i, 2−3i, 4]입니다. 켤레 전치 후 같은 행렬이므로 에르미트 조건이 true입니다. 결과 표는 실수와 허수를 별도 열로 표시합니다.',
+} });
+EXAMPLES.push({ id: 'typed-tensor-permute', category: 'typed', title: '3차원 배열의 축 바꾸기', description: '2×2×2의 정수 배열을 [2,0,1] 축 순서로 바꾸고 실제 원소 좌표를 확인합니다.', model: {
+  schemaVersion: 1, modelId: 'typed-tensor-permute', name: '3차원 배열의 축 바꾸기',
+  nodes: [node('tensor', 'source.typed', '3차원 정수', { value: { kind: 'typed', dtype: 'int16', shape: [2, 2, 2], data: ['1', '2', '3', '4', '5', '6', '7', '8'] } }), node('permute', 'tensor.permute', '축 순열', { order: [2, 0, 1] }), node('result', 'sink.display', '3차원 결과', {})],
+  edges: [edge('tensor-permute', 'tensor', 'permute', 'in'), edge('permute-result', 'permute', 'result', 'in')],
+  execution: { mode: 'static', startTime: 0, stopTime: 0, step: .1 }, layout: { tensor: { x: 40, y: 140 }, permute: { x: 350, y: 140 }, result: { x: 660, y: 140 } },
+  notes: '좌표는 0부터 시작하고 마지막 축이 가장 빠르게 바뀝니다. 출력은 행 순서 [1,3,5,7,2,4,6,8]입니다. 일반 n-D는 typed 신호이며 기존 2D 블럭에 자동 연결하지 않습니다.',
+} });
+EXAMPLES.push({ id: 'typed-string-enum', category: 'typed', title: '문자열과 열거 값 보관', description: '문자열 배열과 Mode 열거 값을 별도 자료형으로 기록하고 안전한 CSV를 확인합니다.', model: {
+  schemaVersion: 1, modelId: 'typed-string-enum', name: '문자열과 열거 값 보관',
+  nodes: [node('text', 'source.typed', '문자열 입력', { value: { kind: 'typed', dtype: 'string', shape: [3], data: ['CalcWeave', '=1+1', '한글'] } }), node('mode', 'source.enum', '현재 모드', { value: { kind: 'typed', dtype: 'enum', enum: { name: 'Mode', labels: ['Off', 'On'] }, shape: [], data: ['On'] } }), node('text-result', 'sink.display', '문자열 결과', {}), node('mode-result', 'sink.display', '열거 결과', {})],
+  edges: [edge('text-result', 'text', 'text-result', 'in'), edge('mode-result', 'mode', 'mode-result', 'in')],
+  execution: { mode: 'static', startTime: 0, stopTime: 0, step: .1 }, layout: { text: { x: 40, y: 40 }, mode: { x: 40, y: 290 }, 'text-result': { x: 400, y: 40 }, 'mode-result': { x: 400, y: 290 } },
+  notes: '문자열과 enum은 숫자로 자동 변환하지 않습니다. Mode는 Off와 On만 허용합니다. CSV의 string:·enum: 접두사는 값을 텍스트로 보존하고 수식 실행을 막습니다. 모델 복구에는 모델 JSON을 사용하세요.',
+} });
+EXAMPLES.push({ id: 'typed-ieee-cast', category: 'typed', title: '자료형 변환과 IEEE 특수값', description: 'float64 0.1을 float32로 바꾸고 NaN·무한대·부호 있는 0의 명시 태그를 확인합니다.', model: {
+  schemaVersion: 1, modelId: 'typed-ieee-cast', name: '자료형 변환과 IEEE 특수값',
+  nodes: [node('value', 'source.typed', '실수 입력', { value: { kind: 'typed', dtype: 'float64', shape: [], data: [.1] } }), node('cast', 'signal.cast', 'float32 변환', { source: 'explicit', target: { dtype: 'float32' }, special: 'preserve' }), node('special', 'source.typed', 'IEEE 태그', { value: { kind: 'typed', dtype: 'float64', shape: [4], data: ['NaN', 'Infinity', '-Infinity', '-0'] } }), node('result', 'sink.display', 'float32 결과', {}), node('special-result', 'sink.display', '특수값 결과', {})],
+  edges: [edge('value-cast', 'value', 'cast', 'in'), edge('cast-result', 'cast', 'result', 'in'), edge('special-result', 'special', 'special-result', 'in')],
+  execution: { mode: 'static', startTime: 0, stopTime: 0, step: .1 }, layout: { value: { x: 40, y: 30 }, cast: { x: 340, y: 30 }, special: { x: 40, y: 290 }, result: { x: 650, y: 30 }, 'special-result': { x: 650, y: 290 } },
+  notes: 'float32로 반올림한 0.1은 0.10000000149011612입니다. IEEE 특수값은 JSON 숫자가 아닌 NaN·Infinity·-Infinity·-0 태그로 저장합니다. 기존 유한 실수 블럭으로 연결할 때에는 명시 경계와 자료형 범위를 확인하세요.',
 } });
 
 export function createExample(id: string): CalcModel {

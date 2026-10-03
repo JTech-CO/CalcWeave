@@ -345,7 +345,10 @@ export function m9Read(node: IRNode, memory: M9Memory, input: (port: string) => 
     }
     case 'logic.numeric-edge': {
       if (node.parameters.mode === 'change' && node.parameters.initial !== undefined) {
-        const elements = (value: SignalValue): (number | boolean)[] => !Array.isArray(value) ? [value] : Array.isArray(value[0]) ? (value as (number | boolean)[][]).flat() : value as (number | boolean)[];
+        const elements = (value: SignalValue): (number | boolean)[] => {
+          if (typeof value === 'object' && !Array.isArray(value)) numericFailure('RUNTIME_TYPE_MISMATCH', node.id, '이 블럭은 기존 실수·논리 신호만 지원합니다.');
+          return !Array.isArray(value) ? [value] : Array.isArray(value[0]) ? (value as (number | boolean)[][]).flat() : value as (number | boolean)[];
+        };
         const previous = elements(state.value!);
         return { outputs: { out: shape(elements(input('in')).map((value, index) => value !== previous[index]), node.outputs.out!) } };
       }

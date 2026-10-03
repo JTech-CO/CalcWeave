@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M10",
+  "generatedAt": "2026-10-03T03:49:45.841667+00:00",
+  "environment": "local Windows Chromium; root-path build; isolated fresh browser contexts",
+  "engineVersion": "0.11.0-m10",
+  "commands": [
+    "npm run build",
+    "npx playwright test tests/e2e/m10-editor.spec.ts --reporter=json",
+    "npx vitest run tests/m10-ui-values.test.ts tests/m10-result-export.test.ts tests/m4-data.test.ts --reporter=json"
+  ],
+  "browser": {
+    "passed": 7,
+    "failed": 0,
+    "flaky": 0,
+    "durationMs": 21242.736,
+    "tests": [
+      {
+        "title": "M10 typed integer fields preserve 64-bit edits, block invalid drafts, save/import, and download CSV/TS",
+        "status": "passed",
+        "durationMs": 4522
+      },
+      {
+        "title": "M10 data-type parameters edit fixed metadata and keep invalid metadata uncommitted",
+        "status": "passed",
+        "durationMs": 2372
+      },
+      {
+        "title": "M10 n-D result tables expose true row-major coordinates and 100-element pages",
+        "status": "passed",
+        "durationMs": 2376
+      },
+      {
+        "title": "M10 complex scalar editors preserve signed zero and complex matrices display independent components",
+        "status": "passed",
+        "durationMs": 2509
+      },
+      {
+        "title": "M10 categorized string and enum examples escape markup and validate enum membership",
+        "status": "passed",
+        "durationMs": 2467
+      },
+      {
+        "title": "M10 typed controls and exact results stay contained at narrow widths and 200% text",
+        "status": "passed",
+        "durationMs": 2941
+      },
+      {
+        "title": "M10 typed finite curves visualize fixed state-space and uint64 while keeping exact records",
+        "status": "passed",
+        "durationMs": 2547
+      }
+    ],
+    "rawReportSHA256": "b3fa17474d6e3757035ff1d494711cb50acfa91936372057ae6babc0c631b5c4"
+  },
+  "unitAndLegacyCsvRegression": {
+    "passed": 77,
+    "failed": 0,
+    "files": 3
+  },
+  "responsiveObservations": {
+    "count": 8,
+    "themes": [
+      "dark",
+      "light"
+    ],
+    "viewportsAndTextScale": [
+      [
+        1440,
+        1
+      ],
+      [
+        1440,
+        2
+      ],
+      [
+        390,
+        1
+      ],
+      [
+        320,
+        2
+      ]
+    ],
+    "assertions": [
+      "no document horizontal overflow",
+      "all typed controls contained",
+      "actual theme button used"
+    ]
+  },
+  "contract": [
+    "Typed integer/fixed decimal input never passes through Number",
+    "Invalid drafts remain editable, are not committed, and block execution with INVALID_NUMBER_DRAFT",
+    "Typed CSV uses exact dtype:payload text and records unchanged dtype/shape/fixed/enum declaration",
+    "Finite typed scalar curves explicitly approximate to float64; original exact values remain in result/history/exports",
+    "No plotted bridge through special or unsupported typed samples",
+    "Original 39 example IDs and 6 categories retained; 6 typed examples added"
+  ],
+  "screenshots": [
+    {
+      "path": "docs/evidence/m10-typed-field-dark-desktop.png",
+      "sha256": "57a3b20ef2c84804c802c801b5862dc8f9adec4e9f52bd5665fb492be218b9fc"
+    },
+    {
+      "path": "docs/evidence/m10-typed-field-light-320-200pct.png",
+      "sha256": "587feaf93c87b5a0bb3a8f60f1740eb9270c8de8413e98d7e7c18f54b15d96b3"
+    }
+  ],
+  "scope": "targeted UI/CSV checks only; full browser/CI/public deployment separate"
+}

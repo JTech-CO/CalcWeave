@@ -1,4 +1,5 @@
 import { ModelError, type SignalDescriptor } from './types';
+import { typedStorageElements } from './typed';
 
 export const UNITS = Object.freeze(['1', 'm', 'cm', 'mm', 'km', 's', 'ms', 'min', 'kg', 'g', 'A', 'K', 'C', 'mol', 'cd', 'rad', 'deg', 'V', 'mV', 'Hz', 'N', 'Pa', 'J', 'W', 'm/s', 'm/s^2', 'm^2'] as const);
 export const SIGNAL_LIMITS = Object.freeze({ maxElements: 1_024, maxAxis: 1_024, maxIntermediateElements: 100_000 });
@@ -54,9 +55,10 @@ export function validateSignal(value: unknown): SignalDescriptor {
 }
 
 export function signalElementCount(descriptor: SignalDescriptor): number {
+  if (descriptor.valueType === 'typed') return typedStorageElements(descriptor);
   return descriptor.shape.reduce((product, length) => product * length, 1);
 }
 
 export function formatSignalShape(descriptor: SignalDescriptor): string {
-  return descriptor.shape.length === 0 ? 'scalar' : descriptor.shape.length === 1 ? `vector[${descriptor.shape[0]}]` : `matrix[${descriptor.shape.join('×')}]`;
+  return descriptor.shape.length === 0 ? 'scalar' : descriptor.shape.length === 1 ? `vector[${descriptor.shape[0]}]` : `${descriptor.shape.length === 2 ? 'matrix' : 'tensor'}[${descriptor.shape.join('×')}]`;
 }

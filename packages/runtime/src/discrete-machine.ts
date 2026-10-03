@@ -1,6 +1,8 @@
 import type { IRNode, SignalDescriptor, SignalValue, StateValue } from '../../model/src/types';
 import { checkSignal, copySignal, evaluateSignalNode, finiteNumber, interpolateTable, numericFailure, replayDataset, signalElements } from './kernels';
 import { M9_BLOCKS, M9_RANDOM_BLOCKS, m9InitialMemory, m9Read, m9Commit, m9IndependentOutput, type M9Memory } from './m9';
+import { validateDataType, validateTypedSignal } from '../../model/src/typed';
+import { m10InitialMemory, m10InitialOutput, m10ReadState, m10CommitState, m10IndependentOutput, type M10Memory } from './m10';
 
 type PortValues = Map<string, Record<string, SignalValue>>;
 type Memory = M9Memory & { u?: number[]; y?: number[]; x?: number[]; buffer?: SignalValue };
@@ -11,6 +13,7 @@ export const DISCRETE_BLOCKS = new Set([
   'discrete.difference', 'discrete.derivative', 'discrete.fir', 'discrete.transfer-function',
   'discrete.state-space', 'logic.edge-detect', 'time.rate-transition',
   'source.dataset',
+  'fixed.state-space',
   ...M9_BLOCKS,
 ]);
 
@@ -25,6 +28,11 @@ function flatNumeric(value: SignalValue, id: string): number[] {
   return values.map((item) => finiteNumber(item, id));
 }
 function zeroSignal(descriptor: SignalDescriptor): SignalValue {
+  if (descriptor.valueType === 'typed') {
+    const type = validateDataType(descriptor.typed);
+    const element = type.dtype === 'complex128' ? { re: 0, im: 0 } : type.dtype === 'boolean' ? false : type.dtype === 'enum' ? type.enum!.labels[0]! : type.dtype === 'string' ? '' : type.dtype === 'float64' || type.dtype === 'float32' ? 0 : '0';
+    return validateTypedSignal({ kind: 'typed', ...type, shape: descriptor.shape, data: Array.from({ length: descriptor.shape.reduce((size, axis) => size * axis, 1) }, () => element) });
+  }
   const element = descriptor.valueType === 'boolean' ? false : 0;
   if (!descriptor.shape.length) return element;
   if (descriptor.shape.length === 1) return Array(descriptor.shape[0]!).fill(element) as number[] | boolean[];
@@ -34,6 +42,7 @@ function due(node: IRNode, tick: number): boolean {
   return tick >= node.sampleTime.offset && (tick - node.sampleTime.offset) % node.sampleTime.period === 0;
 }
 function independentOutput(node: IRNode): boolean {
+  if (node.blockType === 'fixed.state-space') return m10IndependentOutput(node);
   if (M9_BLOCKS.has(node.blockType)) return m9IndependentOutput(node);
   switch (node.blockType) {
     case 'discrete.unit-delay': case 'discrete.delay': case 'discrete.integrator': case 'time.rate-transition': return true;
@@ -55,6 +64,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     || node.parameters.reset === 'level' || node.sampleTime.period !== 1 || node.sampleTime.offset !== 0));
 
   function initialMemory(node: IRNode): Memory {
+    if (node.blockType === 'fixed.state-space') return m10InitialMemory(node);
     if (M9_BLOCKS.has(node.blockType)) return m9InitialMemory(node, node.sampleTime.period * baseStep);
     const initial = node.parameters.initial as SignalValue;
     switch (node.blockType) {
@@ -79,6 +89,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     if (node.blockType === 'discrete.delay') outputs.out = copySignal(state.history![0]!);
     if (node.blockType === 'time.rate-transition') outputs.out = copySignal(state.buffer!);
     if (node.blockType === 'discrete.state-space') outputs.out = dot(node.parameters.C as number[], state.x!, node.id);
+    if (node.blockType === 'fixed.state-space') outputs.out = m10InitialOutput(node, state as M10Memory).out;
     if (node.blockType === 'discrete.fir') outputs.out = fir(node, state, undefined);
     if (node.blockType === 'discrete.transfer-function') outputs.out = transfer(node, state, undefined);
     held.set(node.id, outputs);
@@ -165,6 +176,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     const publications = new Map<string, Memory>();
     const nextHeld: PortValues = new Map();
     const read = (node: IRNode, input: (port: string) => SignalValue): Record<string, SignalValue> => {
+      if (node.blockType === 'fixed.state-space') return m10ReadState(node, memory.get(node.id)! as M10Memory, input);
       if (!M9_BLOCKS.has(node.blockType)) return { out: output(node, memory.get(node.id) ?? {}, input, tick, time) };
       const result = m9Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep);
       if (result.publicationMemory) publications.set(node.id, result.publicationMemory);
@@ -201,7 +213,7 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
     if (!due(node, tick) || random && randomTicks.get(node.id) === tick) return held.get(node.id)!;
     charge(node);
     const result = M9_BLOCKS.has(node.blockType) ? m9Read(node, memory.get(node.id)!, input, tick, time, node.sampleTime.period * baseStep) : undefined;
-    const outputs = result ? result.outputs : DISCRETE_BLOCKS.has(node.blockType) ? { out: output(node, memory.get(node.id) ?? {}, input, tick, time) } : evaluateSignalNode(node, input, undefined, time);
+    const outputs: Record<string, SignalValue> = result ? result.outputs : node.blockType === 'fixed.state-space' ? m10ReadState(node, memory.get(node.id)! as M10Memory, input) : DISCRETE_BLOCKS.has(node.blockType) ? { out: output(node, memory.get(node.id) ?? {}, input, tick, time) } : evaluateSignalNode(node, input, undefined, time);
     for (const [port, descriptor] of Object.entries(node.outputs)) checkSignal(outputs[port], descriptor, node.id);
     if (commit || random) held.set(node.id, outputs);
     if (result?.publicationMemory && (commit || random)) memory.set(node.id, result.publicationMemory);
@@ -221,6 +233,10 @@ export function createDiscreteMachine(nodes: IRNode[], stateIds: string[], baseS
       }
       if (!due(node, tick)) continue;
       charge(node);
+      if (node.blockType === 'fixed.state-space') {
+        next.set(node.id, m10CommitState(node, state as M10Memory, (port) => readInput(values, node, port)));
+        continue;
+      }
       if (M9_BLOCKS.has(node.blockType)) {
         next.set(node.id, m9Commit(node, state, (port) => readInput(values, node, port), values.get(node.id)!, tick, startTime + tick * baseStep, node.sampleTime.period * baseStep));
         continue;

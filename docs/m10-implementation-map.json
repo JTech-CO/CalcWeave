@@ -1,0 +1,4293 @@
+{
+  "schemaVersion": 2,
+  "documentVersion": "0.2",
+  "date": "2026-10-03",
+  "stage": "M10",
+  "title": "CalcWeave M10 원본행 구현 계약 inventory",
+  "planOnly": false,
+  "fullSimulinkEquivalenceClaimed": false,
+  "calendarCommitment": null,
+  "baseline": {
+    "engineVersion": "0.8.0-catalog",
+    "registryDefinitions": 144,
+    "sourcePath": "dataset/Simulink_Basic_Blocks_R2024b.md",
+    "coveragePath": "docs/baselines/catalog-block-coverage.md",
+    "datasetSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+    "coverageSha256": "bfad433de22c3302b53369be3465ec1d4bb3e072dd8f3ce310bc4af1ea967774",
+    "sourceRows": 385,
+    "uniqueSourceNameStrings": 339,
+    "existingSubsetRows": 134,
+    "unimplementedRows": 251,
+    "statuses": {
+      "M4 승인 subset": 18,
+      "M1 정적 subset": 40,
+      "M5 독립 대체 subset": 2,
+      "M2 승인 subset": 29,
+      "미구현": 251,
+      "M3 승인 subset": 15,
+      "catalog 승인 subset": 20,
+      "M5 승인 subset": 5,
+      "M1 preset subset": 4,
+      "M1 AST 독립 대체 subset": 1
+    },
+    "sectionCounts": [
+      23,
+      16,
+      37,
+      14,
+      21,
+      22,
+      9,
+      38,
+      19,
+      8,
+      11,
+      5,
+      29,
+      14,
+      27,
+      11,
+      27,
+      16,
+      15,
+      9,
+      14
+    ],
+    "roadmapPath": "docs/simulink-coverage-roadmap.json",
+    "roadmapImmutable": true,
+    "originalCoveragePath": "docs/block-coverage.md"
+  },
+  "predecessorDelivery": {
+    "stage": "M9",
+    "appVersion": "0.10.1",
+    "engineVersion": "0.10.0-m9",
+    "registryDefinitions": 211,
+    "subsetSourceRows": 211,
+    "missingSourceRows": 174,
+    "examples": 39,
+    "exampleCategories": 6,
+    "evidencePath": "docs/evidence/m9-workspace-verification.json"
+  },
+  "counts": {
+    "sourceRows": 38,
+    "uniqueSourceNameStrings": 37,
+    "baselineExistingSubsetRows": 4,
+    "baselineUnimplementedRows": 34,
+    "contractFamilies": 23,
+    "planningDeliveryKind": {
+      "nativeCapability": 17,
+      "sharedConfiguration": 18,
+      "independentWorkflow": 3
+    },
+    "observedAdditionalDefinitions": 34,
+    "observedNamedPresets": 10,
+    "verifiedStageRows": 37,
+    "independentNumericalKernelCount": null,
+    "independentRawFixtures": 59,
+    "independentPresetFixtures": 10,
+    "successfulRuntimeModeExecutions": 206,
+    "independentFailureFixtures": 3,
+    "actualGeneratedPrograms": 209,
+    "priorSubsetPreservedRows": 1,
+    "approvedAdditionalSourceRows": 34,
+    "existingMappingExtensions": 3
+  },
+  "sourceVerification": {
+    "authority": "MathWorks primary help",
+    "verifiedDate": "2026-10-03",
+    "versionScope": "selected R2024b archived core pages and current-help semantics; full option inventory open",
+    "referenceReviewPath": "docs/evidence/m10-reference-review.json",
+    "r2024bVerifiedPageCount": 7,
+    "mathWorksReferenceExecuted": false,
+    "currentHelpCorePagesChecked": 32
+  },
+  "commonStageExitGates": [
+    "38 original firstWork identities and immutable baseline/source digests preserved; families, definitions, presets, source rows and numerical kernels counted separately.",
+    "Every declared mode/dtype/shape/option pipeline requires independent raw/bit oracle, actual standalone strict TypeScript, JSON, diagnostics, state ownership and UI evidence.",
+    "Legacy 211 definitions and M9/M8/catalog/regression evidence remain valid; unsupported typed legacy edges produce original-node diagnostics without silent conversion.",
+    "Bit-true claims apply only to selected explicit typed arithmetic/rounding contracts, never mere float64 output quantization or MathWorks execution parity.",
+    "Bounded typed parsing and allocation, cancellation, failure atomicity, source import/export preservation and no executable user expressions.",
+    "Original source-option completion remains open while undeclared or unverified required source behaviors remain."
+  ],
+  "typedWireContract": {
+    "kind": "typed",
+    "dtypes": [
+      "float64",
+      "float32",
+      "boolean",
+      "int8",
+      "uint8",
+      "int16",
+      "uint16",
+      "int32",
+      "uint32",
+      "int64",
+      "uint64",
+      "complex128",
+      "fixed",
+      "string",
+      "enum"
+    ],
+    "shape": {
+      "rankMin": 0,
+      "rankMax": 8,
+      "axisMin": 1,
+      "axisMax": 1024,
+      "maxElements": 1024,
+      "storageOrder": "row-major-flat",
+      "variableSizeSignals": false
+    },
+    "integerEncoding": "canonical decimal strings for all integer widths and fixed stored-integer codes",
+    "floatingEncoding": "finite JSON numbers or -0/NaN/Infinity/-Infinity exact string tags",
+    "complexEncoding": "{re,im} per element using float64 floating encoding",
+    "fixed": {
+      "signed": "boolean",
+      "wordLengthMin": 1,
+      "wordLengthMax": 64,
+      "fractionLengthMin": -64,
+      "fractionLengthMax": 64,
+      "scaling": "binary-point, zero bias"
+    },
+    "enumeration": {
+      "nameMaxCharacters": 64,
+      "labelCountMin": 1,
+      "labelCountMax": 64,
+      "labelMaxCharacters": 64,
+      "underlyingIntegerCodesSupported": false
+    },
+    "stringMaxCharacters": 256,
+    "legacyBoundary": "typed signals remain tagged; legacy finite f64/boolean arrays are not implicitly cast",
+    "coreRoundingModes": [
+      "floor",
+      "ceil",
+      "zero",
+      "nearest",
+      "away",
+      "even"
+    ],
+    "blockRoundingModes": [
+      "nearest-even",
+      "floor",
+      "ceil",
+      "toward-zero",
+      "nearest",
+      "away"
+    ]
+  },
+  "families": [
+    {
+      "id": "m10-type-conversion",
+      "sourceIds": [
+        "01-004",
+        "14-002",
+        "14-003"
+      ],
+      "scope": "RWV/SI, exact integer/f32 rounding and explicit target dtype",
+      "primaryReferenceIds": [
+        "datatypeconversion",
+        "datatypeconversioninherited"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-conversion-si-not-float-bits",
+        "m10-conversion-nearest-even-negative-tie",
+        "m10-conversion-uint64-above-53"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-type-conversion-parameter-dtype-shape",
+        "m10-type-conversion-mode-special-error",
+        "m10-type-conversion-target-reference"
+      ]
+    },
+    {
+      "id": "m10-bit-mask",
+      "sourceIds": [
+        "06-001",
+        "06-002"
+      ],
+      "scope": "stored integer bit0=LSB; ignore scaling",
+      "primaryReferenceIds": [
+        "bitclear",
+        "bitset"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-bit-set-63",
+        "m10-bit-clear-fixed-si"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-bit-mask-parameter-dtype-shape",
+        "m10-bit-mask-mode-special-error",
+        "m10-bit-mask-target-reference"
+      ]
+    },
+    {
+      "id": "m10-bit-pack",
+      "sourceIds": [
+        "06-003",
+        "06-017"
+      ],
+      "scope": "M bits per integer with MSB/LSB and signed/unsigned grouping",
+      "primaryReferenceIds": [
+        "bittointegerconverter",
+        "integertobitconverter"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-bit-pack-signed-msb",
+        "m10-bit-unpack-lsb"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-bit-pack-parameter-dtype-shape",
+        "m10-bit-pack-mode-special-error",
+        "m10-bit-pack-target-reference"
+      ]
+    },
+    {
+      "id": "m10-bitwise",
+      "sourceIds": [
+        "06-004"
+      ],
+      "scope": "BigInt width bounded two's complement operations; preserve selected dtype",
+      "primaryReferenceIds": [
+        "bitwiseoperator"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-bitwise-u64-fullword"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-bitwise-parameter-dtype-shape",
+        "m10-bitwise-mode-special-error",
+        "m10-bitwise-target-reference"
+      ]
+    },
+    {
+      "id": "m10-bit-extract",
+      "sourceIds": [
+        "06-015"
+      ],
+      "scope": "contiguous bit ranges measured from LSB, SI and explicit output sizing",
+      "primaryReferenceIds": [
+        "extractbits"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-extract-top-sign-bit"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-bit-extract-parameter-dtype-shape",
+        "m10-bit-extract-mode-special-error",
+        "m10-bit-extract-target-reference"
+      ]
+    },
+    {
+      "id": "m10-float-bits",
+      "sourceIds": [
+        "06-016"
+      ],
+      "scope": "IEEE754 representation extraction, not numerical cast",
+      "primaryReferenceIds": [
+        "floatextractbits"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-float32-negzero-bits",
+        "m10-float64-one-exponent"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-float-bits-parameter-dtype-shape",
+        "m10-float-bits-mode-special-error",
+        "m10-float-bits-target-reference"
+      ]
+    },
+    {
+      "id": "m10-shift",
+      "sourceIds": [
+        "06-022"
+      ],
+      "scope": "arithmetic bit shift versus binary-point shift; bidirectional positive=right",
+      "primaryReferenceIds": [
+        "shiftarithmetic"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-arithmetic-shift-negative",
+        "m10-binary-point-si-unchanged"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-shift-parameter-dtype-shape",
+        "m10-shift-mode-special-error",
+        "m10-shift-target-reference"
+      ]
+    },
+    {
+      "id": "m10-fixed-trig",
+      "sourceIds": [
+        "07-003",
+        "07-008"
+      ],
+      "scope": "turn-based fixed-point quarter-wave LUT; independent selected realization",
+      "primaryReferenceIds": [
+        "sine"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-fixed-sine-coarse-lut",
+        "m10-fixed-trig-tie-even"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-fixed-trig-parameter-dtype-shape",
+        "m10-fixed-trig-mode-special-error",
+        "m10-fixed-trig-target-reference"
+      ]
+    },
+    {
+      "id": "m10-complex-conversion",
+      "sourceIds": [
+        "08-006",
+        "08-007",
+        "08-012",
+        "08-022"
+      ],
+      "scope": "rectangular/polar conversion, radians, magnitude and signed branch cut",
+      "primaryReferenceIds": [
+        "complextomagnitudeangle",
+        "complextorealimag",
+        "magnitudeangletocomplex",
+        "realimagtocomplex"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-complex-3-4",
+        "m10-complex-negative-axis-signed-zero"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-complex-conversion-parameter-dtype-shape",
+        "m10-complex-conversion-mode-special-error",
+        "m10-complex-conversion-target-reference"
+      ]
+    },
+    {
+      "id": "m10-hermitian",
+      "sourceIds": [
+        "09-006",
+        "09-008"
+      ],
+      "scope": "conjugate transpose and Hermitian/skew-Hermitian square predicates",
+      "primaryReferenceIds": [
+        "hermitiantranspose",
+        "ishermitian"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-hermitian-complex-offdiagonal",
+        "m10-skew-hermitian"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-hermitian-parameter-dtype-shape",
+        "m10-hermitian-mode-special-error",
+        "m10-hermitian-target-reference"
+      ]
+    },
+    {
+      "id": "m10-unit-policy",
+      "sourceIds": [
+        "13-027"
+      ],
+      "scope": "allowed-unit-system compiler constraint; independent local policy",
+      "primaryReferenceIds": [
+        "unitsystemconfiguration"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-unit-policy-invalid-unit"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-unit-policy-parameter-dtype-shape",
+        "m10-unit-policy-mode-special-error",
+        "m10-unit-policy-target-reference"
+      ]
+    },
+    {
+      "id": "m10-bus-vector",
+      "sourceIds": [
+        "14-001"
+      ],
+      "scope": "homogeneous virtual scalar/vector bus flattening with preserved order",
+      "primaryReferenceIds": [
+        "bustovector"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-bus-vector-field-order"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-bus-vector-parameter-dtype-shape",
+        "m10-bus-vector-mode-special-error",
+        "m10-bus-vector-target-reference"
+      ]
+    },
+    {
+      "id": "m10-type-constraint",
+      "sourceIds": [
+        "14-004"
+      ],
+      "scope": "force exact dtype metadata agreement in compiler; no value cast",
+      "primaryReferenceIds": [
+        "datatypeduplicate"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-duplicate-type-conflict"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-type-constraint-parameter-dtype-shape",
+        "m10-type-constraint-mode-special-error",
+        "m10-type-constraint-target-reference"
+      ]
+    },
+    {
+      "id": "m10-type-propagation",
+      "sourceIds": [
+        "14-005"
+      ],
+      "scope": "Ref1/Ref2-derived upstream Prop type/scaling constraints",
+      "primaryReferenceIds": [
+        "datatypepropagation"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-propagation-backward-chain",
+        "m10-propagation-conflict"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-type-propagation-parameter-dtype-shape",
+        "m10-type-propagation-mode-special-error",
+        "m10-type-propagation-target-reference"
+      ]
+    },
+    {
+      "id": "m10-scaling-strip",
+      "sourceIds": [
+        "14-006"
+      ],
+      "scope": "SI preserved; choose minimal fitting built-in integer width",
+      "primaryReferenceIds": [
+        "datatypescalingstrip"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-strip-signed-9-bit-to-int16"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-scaling-strip-parameter-dtype-shape",
+        "m10-scaling-strip-mode-special-error",
+        "m10-scaling-strip-target-reference"
+      ]
+    },
+    {
+      "id": "m10-representation",
+      "sourceIds": [
+        "14-010",
+        "21-011",
+        "21-012",
+        "21-013"
+      ],
+      "scope": "copy/virtual/nonvirtual representation without altering values",
+      "primaryReferenceIds": [
+        "signalconversion"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-copy-preserves-u64",
+        "m10-representation-roundtrip"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-representation-parameter-dtype-shape",
+        "m10-representation-mode-special-error",
+        "m10-representation-target-reference"
+      ]
+    },
+    {
+      "id": "m10-signal-specification",
+      "sourceIds": [
+        "14-011"
+      ],
+      "scope": "compile-time dtype/shape/unit contract and diagnostics",
+      "primaryReferenceIds": [
+        "signalspecification"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-spec-rank8",
+        "m10-spec-mismatch"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-signal-specification-parameter-dtype-shape",
+        "m10-signal-specification-mode-special-error",
+        "m10-signal-specification-target-reference"
+      ]
+    },
+    {
+      "id": "m10-unit-conversion",
+      "sourceIds": [
+        "14-012"
+      ],
+      "scope": "declared affine and inverse-unit conversions with dtype policy",
+      "primaryReferenceIds": [
+        "unitconversion"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-unit-inverse-zero-diagnostic"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-unit-conversion-parameter-dtype-shape",
+        "m10-unit-conversion-mode-special-error",
+        "m10-unit-conversion-target-reference"
+      ]
+    },
+    {
+      "id": "m10-width",
+      "sourceIds": [
+        "14-014"
+      ],
+      "scope": "total element width scalar output; static typed n-D shape",
+      "primaryReferenceIds": [
+        "width"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-width-rank3"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-width-parameter-dtype-shape",
+        "m10-width-mode-special-error",
+        "m10-width-target-reference"
+      ]
+    },
+    {
+      "id": "m10-enumeration",
+      "sourceIds": [
+        "17-008"
+      ],
+      "scope": "closed named label-set constant with validation; no MATLAB class execution",
+      "primaryReferenceIds": [
+        "enumeratedconstant"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-enum-constant-unknown-label"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-enumeration-parameter-dtype-shape",
+        "m10-enumeration-mode-special-error",
+        "m10-enumeration-target-reference"
+      ]
+    },
+    {
+      "id": "m10-fixed-state-space",
+      "sourceIds": [
+        "20-001"
+      ],
+      "scope": "x+=Ax+Bu, y=Cx+Du with declared per-operation state/output type rules",
+      "primaryReferenceIds": [
+        "fixedpointstatespace"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-fixed-state-feedback-bit-true"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-fixed-state-space-parameter-dtype-shape",
+        "m10-fixed-state-space-mode-special-error",
+        "m10-fixed-state-space-target-reference"
+      ]
+    },
+    {
+      "id": "m10-stored-integer-step",
+      "sourceIds": [
+        "20-005",
+        "20-009"
+      ],
+      "scope": "SI±1, preserved scale/dtype; overflow wraps",
+      "primaryReferenceIds": [
+        "decrementstoredinteger",
+        "incrementstoredinteger"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-stored-integer-increment-wrap",
+        "m10-stored-integer-decrement-scale"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-stored-integer-step-parameter-dtype-shape",
+        "m10-stored-integer-step-mode-special-error",
+        "m10-stored-integer-step-target-reference"
+      ]
+    },
+    {
+      "id": "m10-special-constant",
+      "sourceIds": [
+        "21-002",
+        "21-003",
+        "21-004"
+      ],
+      "scope": "explicit tagged ±Infinity/NaN constants; no implicit legacy acceptance",
+      "primaryReferenceIds": [
+        "constant"
+      ],
+      "optionInventoryStatus": "open",
+      "declaredApiStatus": "selected runtime literal fixtures executed; standalone/source full-option approval separate",
+      "minimumFixtures": [
+        "m10-tagged-nan-roundtrip",
+        "m10-inf-legacy-rejection"
+      ],
+      "optionInventoryTaskIds": [
+        "m10-special-constant-parameter-dtype-shape",
+        "m10-special-constant-mode-special-error",
+        "m10-special-constant-target-reference"
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "sourceId": "01-004",
+      "section": 1,
+      "ordinal": 4,
+      "sourceName": "Data Type Conversion",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 81,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-01",
+      "baselineCanonical": "fixed.quantize",
+      "baselineStatus": "M5 독립 대체 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-type-conversion",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "selected-subset-approved",
+        "canonical": "signal.cast",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-conversion-signed-ties-static",
+          "m10-independent-conversion-signed-ties-discrete",
+          "m10-independent-conversion-signed-ties-continuous",
+          "m10-independent-propagation-backconstraint-static",
+          "m10-independent-propagation-backconstraint-discrete",
+          "m10-independent-propagation-backconstraint-continuous",
+          "m10-independent-cast-floor-negative-ties-static",
+          "m10-independent-cast-floor-negative-ties-discrete",
+          "m10-independent-cast-floor-negative-ties-continuous",
+          "m10-independent-cast-ceil-negative-ties-static",
+          "m10-independent-cast-ceil-negative-ties-discrete",
+          "m10-independent-cast-ceil-negative-ties-continuous",
+          "m10-independent-cast-toward-zero-negative-ties-static",
+          "m10-independent-cast-toward-zero-negative-ties-discrete",
+          "m10-independent-cast-toward-zero-negative-ties-continuous",
+          "m10-independent-cast-nearest-negative-ties-static",
+          "m10-independent-cast-nearest-negative-ties-discrete",
+          "m10-independent-cast-nearest-negative-ties-continuous",
+          "m10-independent-cast-away-negative-ties-static",
+          "m10-independent-cast-away-negative-ties-discrete",
+          "m10-independent-cast-away-negative-ties-continuous",
+          "m10-independent-conversion-stored-not-ieee-static",
+          "m10-independent-conversion-stored-not-ieee-discrete",
+          "m10-independent-conversion-stored-not-ieee-continuous",
+          "m10-independent-conversion-real-world-scaling-static",
+          "m10-independent-conversion-real-world-scaling-discrete",
+          "m10-independent-conversion-real-world-scaling-continuous",
+          "m10-independent-f32-tie-down-static",
+          "m10-independent-f32-tie-down-discrete",
+          "m10-independent-f32-tie-down-continuous",
+          "m10-independent-int64-minimum-roundtrip-static",
+          "m10-independent-int64-minimum-roundtrip-discrete",
+          "m10-independent-int64-minimum-roundtrip-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-conversion-signed-ties",
+          "m10-independent-cast-floor-negative-ties",
+          "m10-independent-cast-ceil-negative-ties",
+          "m10-independent-cast-toward-zero-negative-ties",
+          "m10-independent-cast-nearest-negative-ties",
+          "m10-independent-cast-away-negative-ties",
+          "m10-independent-conversion-stored-not-ieee",
+          "m10-independent-conversion-real-world-scaling",
+          "m10-independent-f32-tie-down",
+          "m10-independent-int64-minimum-roundtrip"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-conversion-signed-ties-static",
+          "m10-independent-conversion-signed-ties-discrete",
+          "m10-independent-conversion-signed-ties-continuous",
+          "m10-independent-cast-floor-negative-ties-static",
+          "m10-independent-cast-floor-negative-ties-discrete",
+          "m10-independent-cast-floor-negative-ties-continuous",
+          "m10-independent-cast-ceil-negative-ties-static",
+          "m10-independent-cast-ceil-negative-ties-discrete",
+          "m10-independent-cast-ceil-negative-ties-continuous",
+          "m10-independent-cast-toward-zero-negative-ties-static",
+          "m10-independent-cast-toward-zero-negative-ties-discrete",
+          "m10-independent-cast-toward-zero-negative-ties-continuous",
+          "m10-independent-cast-nearest-negative-ties-static",
+          "m10-independent-cast-nearest-negative-ties-discrete",
+          "m10-independent-cast-nearest-negative-ties-continuous",
+          "m10-independent-cast-away-negative-ties-static",
+          "m10-independent-cast-away-negative-ties-discrete",
+          "m10-independent-cast-away-negative-ties-continuous",
+          "m10-independent-conversion-stored-not-ieee-static",
+          "m10-independent-conversion-stored-not-ieee-discrete",
+          "m10-independent-conversion-stored-not-ieee-continuous",
+          "m10-independent-conversion-real-world-scaling-static",
+          "m10-independent-conversion-real-world-scaling-discrete",
+          "m10-independent-conversion-real-world-scaling-continuous",
+          "m10-independent-f32-tie-down-static",
+          "m10-independent-f32-tie-down-discrete",
+          "m10-independent-f32-tie-down-continuous",
+          "m10-independent-int64-minimum-roundtrip-static",
+          "m10-independent-int64-minimum-roundtrip-discrete",
+          "m10-independent-int64-minimum-roundtrip-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-type-conversion-parameter-dtype-shape",
+        "m10-type-conversion-mode-special-error",
+        "m10-type-conversion-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-conversion-signed-ties-static",
+          "m10-independent-conversion-signed-ties-discrete",
+          "m10-independent-conversion-signed-ties-continuous",
+          "m10-independent-propagation-backconstraint-static",
+          "m10-independent-propagation-backconstraint-discrete",
+          "m10-independent-propagation-backconstraint-continuous",
+          "m10-independent-cast-floor-negative-ties-static",
+          "m10-independent-cast-floor-negative-ties-discrete",
+          "m10-independent-cast-floor-negative-ties-continuous",
+          "m10-independent-cast-ceil-negative-ties-static",
+          "m10-independent-cast-ceil-negative-ties-discrete",
+          "m10-independent-cast-ceil-negative-ties-continuous",
+          "m10-independent-cast-toward-zero-negative-ties-static",
+          "m10-independent-cast-toward-zero-negative-ties-discrete",
+          "m10-independent-cast-toward-zero-negative-ties-continuous",
+          "m10-independent-cast-nearest-negative-ties-static",
+          "m10-independent-cast-nearest-negative-ties-discrete",
+          "m10-independent-cast-nearest-negative-ties-continuous",
+          "m10-independent-cast-away-negative-ties-static",
+          "m10-independent-cast-away-negative-ties-discrete",
+          "m10-independent-cast-away-negative-ties-continuous",
+          "m10-independent-conversion-stored-not-ieee-static",
+          "m10-independent-conversion-stored-not-ieee-discrete",
+          "m10-independent-conversion-stored-not-ieee-continuous",
+          "m10-independent-conversion-real-world-scaling-static",
+          "m10-independent-conversion-real-world-scaling-discrete",
+          "m10-independent-conversion-real-world-scaling-continuous",
+          "m10-independent-f32-tie-down-static",
+          "m10-independent-f32-tie-down-discrete",
+          "m10-independent-f32-tie-down-continuous",
+          "m10-independent-int64-minimum-roundtrip-static",
+          "m10-independent-int64-minimum-roundtrip-discrete",
+          "m10-independent-int64-minimum-roundtrip-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "06-001",
+      "section": 6,
+      "ordinal": 1,
+      "sourceName": "Bit Clear",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 280,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-06",
+      "baselineCanonical": "logic.bit-mask",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-bit-mask",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "logic.bit-mask",
+        "parameters": {
+          "operation": "clear"
+        },
+        "presetId": "m10-bit-clear",
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-bit-clear-static",
+          "m10-independent-preset-bit-clear-discrete",
+          "m10-independent-preset-bit-clear-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-preset-bit-clear"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-preset-bit-clear-static",
+          "m10-independent-preset-bit-clear-discrete",
+          "m10-independent-preset-bit-clear-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-bit-mask-parameter-dtype-shape",
+        "m10-bit-mask-mode-special-error",
+        "m10-bit-mask-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 preset subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-bit-clear-static",
+          "m10-independent-preset-bit-clear-discrete",
+          "m10-independent-preset-bit-clear-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "06-002",
+      "section": 6,
+      "ordinal": 2,
+      "sourceName": "Bit Set",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 281,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-06",
+      "baselineCanonical": "logic.bit-mask",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-bit-mask",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "logic.bit-mask",
+        "parameters": {
+          "operation": "set"
+        },
+        "presetId": "m10-bit-set",
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-bit-set-static",
+          "m10-independent-preset-bit-set-discrete",
+          "m10-independent-preset-bit-set-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-preset-bit-set"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-preset-bit-set-static",
+          "m10-independent-preset-bit-set-discrete",
+          "m10-independent-preset-bit-set-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-bit-mask-parameter-dtype-shape",
+        "m10-bit-mask-mode-special-error",
+        "m10-bit-mask-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 preset subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-bit-set-static",
+          "m10-independent-preset-bit-set-discrete",
+          "m10-independent-preset-bit-set-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "06-003",
+      "section": 6,
+      "ordinal": 3,
+      "sourceName": "Bit to Integer Converter",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "편입 R2022a+ · 그 이전 Communications Toolbox 소속",
+      "sourceLine": 282,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-06",
+      "baselineCanonical": "logic.bit-conversion",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-bit-pack",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "logic.bits-to-integer",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-bits-to-signed-integer-static",
+          "m10-independent-bits-to-signed-integer-discrete",
+          "m10-independent-bits-to-signed-integer-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-bits-to-signed-integer"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-bits-to-signed-integer-static",
+          "m10-independent-bits-to-signed-integer-discrete",
+          "m10-independent-bits-to-signed-integer-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-bit-pack-parameter-dtype-shape",
+        "m10-bit-pack-mode-special-error",
+        "m10-bit-pack-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-bits-to-signed-integer-static",
+          "m10-independent-bits-to-signed-integer-discrete",
+          "m10-independent-bits-to-signed-integer-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "06-004",
+      "section": 6,
+      "ordinal": 4,
+      "sourceName": "Bitwise Operator",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 283,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-06",
+      "baselineCanonical": "logic.bitwise",
+      "baselineStatus": "M2 승인 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-bitwise",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "selected-subset-approved",
+        "canonical": "logic.bitwise-typed",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-bitwise64-xor-static",
+          "m10-independent-bitwise64-xor-discrete",
+          "m10-independent-bitwise64-xor-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-bitwise64-xor"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-bitwise64-xor-static",
+          "m10-independent-bitwise64-xor-discrete",
+          "m10-independent-bitwise64-xor-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-bitwise-parameter-dtype-shape",
+        "m10-bitwise-mode-special-error",
+        "m10-bitwise-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-bitwise64-xor-static",
+          "m10-independent-bitwise64-xor-discrete",
+          "m10-independent-bitwise64-xor-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "06-015",
+      "section": 6,
+      "ordinal": 15,
+      "sourceName": "Extract Bits",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 294,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-06",
+      "baselineCanonical": "logic.extract-bits",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-bit-extract",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "logic.extract-bits",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-extract-signed-highbits-static",
+          "m10-independent-extract-signed-highbits-discrete",
+          "m10-independent-extract-signed-highbits-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-extract-signed-highbits"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-extract-signed-highbits-static",
+          "m10-independent-extract-signed-highbits-discrete",
+          "m10-independent-extract-signed-highbits-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-bit-extract-parameter-dtype-shape",
+        "m10-bit-extract-mode-special-error",
+        "m10-bit-extract-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-extract-signed-highbits-static",
+          "m10-independent-extract-signed-highbits-discrete",
+          "m10-independent-extract-signed-highbits-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "06-016",
+      "section": 6,
+      "ordinal": 16,
+      "sourceName": "Float Extract Bits",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "R2023a+",
+      "sourceLine": 295,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-06",
+      "baselineCanonical": "logic.float-extract-bits",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-float-bits",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "logic.float-extract-bits",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-ieee64-bit-patterns-static",
+          "m10-independent-ieee64-bit-patterns-discrete",
+          "m10-independent-ieee64-bit-patterns-continuous",
+          "m10-independent-ieee32-bit-patterns-static",
+          "m10-independent-ieee32-bit-patterns-discrete",
+          "m10-independent-ieee32-bit-patterns-continuous",
+          "m10-independent-ieee64-sign-static",
+          "m10-independent-ieee64-sign-discrete",
+          "m10-independent-ieee64-sign-continuous",
+          "m10-independent-ieee64-exponent-static",
+          "m10-independent-ieee64-exponent-discrete",
+          "m10-independent-ieee64-exponent-continuous",
+          "m10-independent-ieee64-fraction-static",
+          "m10-independent-ieee64-fraction-discrete",
+          "m10-independent-ieee64-fraction-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-ieee64-bit-patterns",
+          "m10-independent-ieee32-bit-patterns",
+          "m10-independent-ieee64-sign",
+          "m10-independent-ieee64-exponent",
+          "m10-independent-ieee64-fraction"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-ieee64-bit-patterns-static",
+          "m10-independent-ieee64-bit-patterns-discrete",
+          "m10-independent-ieee64-bit-patterns-continuous",
+          "m10-independent-ieee32-bit-patterns-static",
+          "m10-independent-ieee32-bit-patterns-discrete",
+          "m10-independent-ieee32-bit-patterns-continuous",
+          "m10-independent-ieee64-sign-static",
+          "m10-independent-ieee64-sign-discrete",
+          "m10-independent-ieee64-sign-continuous",
+          "m10-independent-ieee64-exponent-static",
+          "m10-independent-ieee64-exponent-discrete",
+          "m10-independent-ieee64-exponent-continuous",
+          "m10-independent-ieee64-fraction-static",
+          "m10-independent-ieee64-fraction-discrete",
+          "m10-independent-ieee64-fraction-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-float-bits-parameter-dtype-shape",
+        "m10-float-bits-mode-special-error",
+        "m10-float-bits-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-ieee64-bit-patterns-static",
+          "m10-independent-ieee64-bit-patterns-discrete",
+          "m10-independent-ieee64-bit-patterns-continuous",
+          "m10-independent-ieee32-bit-patterns-static",
+          "m10-independent-ieee32-bit-patterns-discrete",
+          "m10-independent-ieee32-bit-patterns-continuous",
+          "m10-independent-ieee64-sign-static",
+          "m10-independent-ieee64-sign-discrete",
+          "m10-independent-ieee64-sign-continuous",
+          "m10-independent-ieee64-exponent-static",
+          "m10-independent-ieee64-exponent-discrete",
+          "m10-independent-ieee64-exponent-continuous",
+          "m10-independent-ieee64-fraction-static",
+          "m10-independent-ieee64-fraction-discrete",
+          "m10-independent-ieee64-fraction-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "06-017",
+      "section": 6,
+      "ordinal": 17,
+      "sourceName": "Integer to Bit Converter",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "편입 R2022a+ · 그 이전 Communications Toolbox 소속",
+      "sourceLine": 296,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-06",
+      "baselineCanonical": "logic.bit-conversion",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-bit-pack",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "logic.integer-to-bits",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-integer-to-bits-signed-static",
+          "m10-independent-integer-to-bits-signed-discrete",
+          "m10-independent-integer-to-bits-signed-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-integer-to-bits-signed"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-integer-to-bits-signed-static",
+          "m10-independent-integer-to-bits-signed-discrete",
+          "m10-independent-integer-to-bits-signed-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-bit-pack-parameter-dtype-shape",
+        "m10-bit-pack-mode-special-error",
+        "m10-bit-pack-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-integer-to-bits-signed-static",
+          "m10-independent-integer-to-bits-signed-discrete",
+          "m10-independent-integer-to-bits-signed-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "06-022",
+      "section": 6,
+      "ordinal": 22,
+      "sourceName": "Shift Arithmetic",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 301,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-06",
+      "baselineCanonical": "logic.shift",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-shift",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "logic.shift-arithmetic",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-arithmetic-shift-negative64-static",
+          "m10-independent-arithmetic-shift-negative64-discrete",
+          "m10-independent-arithmetic-shift-negative64-continuous",
+          "m10-independent-binary-point-source-positive-right-static",
+          "m10-independent-binary-point-source-positive-right-discrete",
+          "m10-independent-binary-point-source-positive-right-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-arithmetic-shift-negative64",
+          "m10-independent-binary-point-source-positive-right"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-arithmetic-shift-negative64-static",
+          "m10-independent-arithmetic-shift-negative64-discrete",
+          "m10-independent-arithmetic-shift-negative64-continuous",
+          "m10-independent-binary-point-source-positive-right-static",
+          "m10-independent-binary-point-source-positive-right-discrete",
+          "m10-independent-binary-point-source-positive-right-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-shift-parameter-dtype-shape",
+        "m10-shift-mode-special-error",
+        "m10-shift-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-arithmetic-shift-negative64-static",
+          "m10-independent-arithmetic-shift-negative64-discrete",
+          "m10-independent-arithmetic-shift-negative64-continuous",
+          "m10-independent-binary-point-source-positive-right-static",
+          "m10-independent-binary-point-source-positive-right-discrete",
+          "m10-independent-binary-point-source-positive-right-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "07-003",
+      "section": 7,
+      "ordinal": 3,
+      "sourceName": "Cosine",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "구성/조건 · Sine의 코사인 출력 설정. 고정소수점 실행 조건 확인",
+      "sourceLine": 319,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-07",
+      "baselineCanonical": "math.trigonometric",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-fixed-trig",
+      "planningDeliveryKind": "independent-workflow",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "fixed.trigonometric",
+        "parameters": {
+          "operation": "cos"
+        },
+        "presetId": null,
+        "independentAlternative": true,
+        "evidenceFixtureIds": [
+          "m10-independent-fixed-cosine-n2-static",
+          "m10-independent-fixed-cosine-n2-discrete",
+          "m10-independent-fixed-cosine-n2-continuous",
+          "m10-independent-fixed-cosine-n3-static",
+          "m10-independent-fixed-cosine-n3-discrete",
+          "m10-independent-fixed-cosine-n3-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-fixed-cosine-n2",
+          "m10-independent-fixed-cosine-n3"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-fixed-cosine-n2-static",
+          "m10-independent-fixed-cosine-n2-discrete",
+          "m10-independent-fixed-cosine-n2-continuous",
+          "m10-independent-fixed-cosine-n3-static",
+          "m10-independent-fixed-cosine-n3-discrete",
+          "m10-independent-fixed-cosine-n3-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-fixed-trig-parameter-dtype-shape",
+        "m10-fixed-trig-mode-special-error",
+        "m10-fixed-trig-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 독립 대체 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-fixed-cosine-n2-static",
+          "m10-independent-fixed-cosine-n2-discrete",
+          "m10-independent-fixed-cosine-n2-continuous",
+          "m10-independent-fixed-cosine-n3-static",
+          "m10-independent-fixed-cosine-n3-discrete",
+          "m10-independent-fixed-cosine-n3-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "07-008",
+      "section": 7,
+      "ordinal": 8,
+      "sourceName": "Sine",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "조건 · 고정소수점 출력용 조회표 블록. 무추가제품 일반 사용에는 Trigonometric Function 등을 우선",
+      "sourceLine": 324,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-07",
+      "baselineCanonical": "math.trigonometric",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-fixed-trig",
+      "planningDeliveryKind": "independent-workflow",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "fixed.trigonometric",
+        "parameters": {
+          "operation": "sin"
+        },
+        "presetId": null,
+        "independentAlternative": true,
+        "evidenceFixtureIds": [
+          "m10-independent-fixed-sine-coarse-lut-static",
+          "m10-independent-fixed-sine-coarse-lut-discrete",
+          "m10-independent-fixed-sine-coarse-lut-continuous",
+          "m10-independent-fixed-sine-n3-static",
+          "m10-independent-fixed-sine-n3-discrete",
+          "m10-independent-fixed-sine-n3-continuous",
+          "m10-independent-fixed-lut-ties-even-static",
+          "m10-independent-fixed-lut-ties-even-discrete",
+          "m10-independent-fixed-lut-ties-even-continuous",
+          "m10-independent-fixed-lut-periodic-rational-static",
+          "m10-independent-fixed-lut-periodic-rational-discrete",
+          "m10-independent-fixed-lut-periodic-rational-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-fixed-sine-coarse-lut",
+          "m10-independent-fixed-sine-n3",
+          "m10-independent-fixed-lut-ties-even",
+          "m10-independent-fixed-lut-periodic-rational"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-fixed-sine-coarse-lut-static",
+          "m10-independent-fixed-sine-coarse-lut-discrete",
+          "m10-independent-fixed-sine-coarse-lut-continuous",
+          "m10-independent-fixed-sine-n3-static",
+          "m10-independent-fixed-sine-n3-discrete",
+          "m10-independent-fixed-sine-n3-continuous",
+          "m10-independent-fixed-lut-ties-even-static",
+          "m10-independent-fixed-lut-ties-even-discrete",
+          "m10-independent-fixed-lut-ties-even-continuous",
+          "m10-independent-fixed-lut-periodic-rational-static",
+          "m10-independent-fixed-lut-periodic-rational-discrete",
+          "m10-independent-fixed-lut-periodic-rational-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-fixed-trig-parameter-dtype-shape",
+        "m10-fixed-trig-mode-special-error",
+        "m10-fixed-trig-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 독립 대체 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-fixed-sine-coarse-lut-static",
+          "m10-independent-fixed-sine-coarse-lut-discrete",
+          "m10-independent-fixed-sine-coarse-lut-continuous",
+          "m10-independent-fixed-sine-n3-static",
+          "m10-independent-fixed-sine-n3-discrete",
+          "m10-independent-fixed-sine-n3-continuous",
+          "m10-independent-fixed-lut-ties-even-static",
+          "m10-independent-fixed-lut-ties-even-discrete",
+          "m10-independent-fixed-lut-ties-even-continuous",
+          "m10-independent-fixed-lut-periodic-rational-static",
+          "m10-independent-fixed-lut-periodic-rational-discrete",
+          "m10-independent-fixed-lut-periodic-rational-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "08-006",
+      "section": 8,
+      "ordinal": 6,
+      "sourceName": "Complex to Magnitude-Angle",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 346,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-08",
+      "baselineCanonical": "math.complex-conversion",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-complex-conversion",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "complex.to-polar",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-complex-polar-signed-branch-static",
+          "m10-independent-complex-polar-signed-branch-discrete",
+          "m10-independent-complex-polar-signed-branch-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-complex-polar-signed-branch"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-complex-polar-signed-branch-static",
+          "m10-independent-complex-polar-signed-branch-discrete",
+          "m10-independent-complex-polar-signed-branch-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-complex-conversion-parameter-dtype-shape",
+        "m10-complex-conversion-mode-special-error",
+        "m10-complex-conversion-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-complex-polar-signed-branch-static",
+          "m10-independent-complex-polar-signed-branch-discrete",
+          "m10-independent-complex-polar-signed-branch-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "08-007",
+      "section": 8,
+      "ordinal": 7,
+      "sourceName": "Complex to Real-Imag",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 347,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-08",
+      "baselineCanonical": "math.complex-conversion",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-complex-conversion",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "complex.to-parts",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-complex-parts-separation-static",
+          "m10-independent-complex-parts-separation-discrete",
+          "m10-independent-complex-parts-separation-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-complex-parts-separation"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-complex-parts-separation-static",
+          "m10-independent-complex-parts-separation-discrete",
+          "m10-independent-complex-parts-separation-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-complex-conversion-parameter-dtype-shape",
+        "m10-complex-conversion-mode-special-error",
+        "m10-complex-conversion-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-complex-parts-separation-static",
+          "m10-independent-complex-parts-separation-discrete",
+          "m10-independent-complex-parts-separation-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "08-012",
+      "section": 8,
+      "ordinal": 12,
+      "sourceName": "Magnitude-Angle to Complex",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 352,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-08",
+      "baselineCanonical": "math.complex-conversion",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-complex-conversion",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "complex.from-polar",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-complex-polar-zero-angle-static",
+          "m10-independent-complex-polar-zero-angle-discrete",
+          "m10-independent-complex-polar-zero-angle-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-complex-polar-zero-angle"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-complex-polar-zero-angle-static",
+          "m10-independent-complex-polar-zero-angle-discrete",
+          "m10-independent-complex-polar-zero-angle-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-complex-conversion-parameter-dtype-shape",
+        "m10-complex-conversion-mode-special-error",
+        "m10-complex-conversion-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-complex-polar-zero-angle-static",
+          "m10-independent-complex-polar-zero-angle-discrete",
+          "m10-independent-complex-polar-zero-angle-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "08-022",
+      "section": 8,
+      "ordinal": 22,
+      "sourceName": "Real-Imag to Complex",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 362,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-08",
+      "baselineCanonical": "math.complex-conversion",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-complex-conversion",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "complex.from-parts",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-complex-parts-broadcast-static",
+          "m10-independent-complex-parts-broadcast-discrete",
+          "m10-independent-complex-parts-broadcast-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-complex-parts-broadcast"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-complex-parts-broadcast-static",
+          "m10-independent-complex-parts-broadcast-discrete",
+          "m10-independent-complex-parts-broadcast-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-complex-conversion-parameter-dtype-shape",
+        "m10-complex-conversion-mode-special-error",
+        "m10-complex-conversion-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-complex-parts-broadcast-static",
+          "m10-independent-complex-parts-broadcast-discrete",
+          "m10-independent-complex-parts-broadcast-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "09-006",
+      "section": 9,
+      "ordinal": 6,
+      "sourceName": "Hermitian Transpose",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "R2021b+",
+      "sourceLine": 399,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-09",
+      "baselineCanonical": "matrix.transpose",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-hermitian",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "complex.hermitian",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-hermitian-rectangular-static",
+          "m10-independent-hermitian-rectangular-discrete",
+          "m10-independent-hermitian-rectangular-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-hermitian-rectangular"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-hermitian-rectangular-static",
+          "m10-independent-hermitian-rectangular-discrete",
+          "m10-independent-hermitian-rectangular-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-hermitian-parameter-dtype-shape",
+        "m10-hermitian-mode-special-error",
+        "m10-hermitian-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-hermitian-rectangular-static",
+          "m10-independent-hermitian-rectangular-discrete",
+          "m10-independent-hermitian-rectangular-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "09-008",
+      "section": 9,
+      "ordinal": 8,
+      "sourceName": "IsHermitian",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "R2022a+",
+      "sourceLine": 401,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-09",
+      "baselineCanonical": "matrix.is-hermitian",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-hermitian",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "complex.is-hermitian",
+        "parameters": {
+          "tolerance": 0
+        },
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-is-hermitian-static",
+          "m10-independent-is-hermitian-discrete",
+          "m10-independent-is-hermitian-continuous",
+          "m10-independent-hermitian-imaginary-diagonal-false-static",
+          "m10-independent-hermitian-imaginary-diagonal-false-discrete",
+          "m10-independent-hermitian-imaginary-diagonal-false-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-is-hermitian"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-is-hermitian-static",
+          "m10-independent-is-hermitian-discrete",
+          "m10-independent-is-hermitian-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-hermitian-parameter-dtype-shape",
+        "m10-hermitian-mode-special-error",
+        "m10-hermitian-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-is-hermitian-static",
+          "m10-independent-is-hermitian-discrete",
+          "m10-independent-is-hermitian-continuous",
+          "m10-independent-hermitian-imaginary-diagonal-false-static",
+          "m10-independent-hermitian-imaginary-diagonal-false-discrete",
+          "m10-independent-hermitian-imaginary-diagonal-false-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "13-027",
+      "section": 13,
+      "ordinal": 27,
+      "sourceName": "Unit System Configuration",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 523,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-13",
+      "baselineCanonical": "signal.unit-system",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-unit-policy",
+      "planningDeliveryKind": "independent-workflow",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "signal.unit-system",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": true,
+        "evidenceFixtureIds": [
+          "m10-independent-unit-allowlist-constraint-static",
+          "m10-independent-unit-allowlist-constraint-discrete",
+          "m10-independent-unit-allowlist-constraint-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-unit-allowlist-constraint"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-unit-allowlist-constraint-static",
+          "m10-independent-unit-allowlist-constraint-discrete",
+          "m10-independent-unit-allowlist-constraint-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-unit-policy-parameter-dtype-shape",
+        "m10-unit-policy-mode-special-error",
+        "m10-unit-policy-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 독립 대체 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-unit-allowlist-constraint-static",
+          "m10-independent-unit-allowlist-constraint-discrete",
+          "m10-independent-unit-allowlist-constraint-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "14-001",
+      "section": 14,
+      "ordinal": 1,
+      "sourceName": "Bus to Vector",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 541,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-14",
+      "baselineCanonical": "signal.bus-to-vector",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-bus-vector",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "signal.bus-to-vector",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-bus-vector-order-static",
+          "m10-independent-bus-vector-order-discrete",
+          "m10-independent-bus-vector-order-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-bus-vector-order"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-bus-vector-order-static",
+          "m10-independent-bus-vector-order-discrete",
+          "m10-independent-bus-vector-order-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-bus-vector-parameter-dtype-shape",
+        "m10-bus-vector-mode-special-error",
+        "m10-bus-vector-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-bus-vector-order-static",
+          "m10-independent-bus-vector-order-discrete",
+          "m10-independent-bus-vector-order-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "14-002",
+      "section": 14,
+      "ordinal": 2,
+      "sourceName": "Data Type Conversion",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 542,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-14",
+      "baselineCanonical": "fixed.quantize",
+      "baselineStatus": "M5 독립 대체 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-type-conversion",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "selected-subset-approved",
+        "canonical": "signal.cast",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-conversion-signed-ties-static",
+          "m10-independent-conversion-signed-ties-discrete",
+          "m10-independent-conversion-signed-ties-continuous",
+          "m10-independent-propagation-backconstraint-static",
+          "m10-independent-propagation-backconstraint-discrete",
+          "m10-independent-propagation-backconstraint-continuous",
+          "m10-independent-cast-floor-negative-ties-static",
+          "m10-independent-cast-floor-negative-ties-discrete",
+          "m10-independent-cast-floor-negative-ties-continuous",
+          "m10-independent-cast-ceil-negative-ties-static",
+          "m10-independent-cast-ceil-negative-ties-discrete",
+          "m10-independent-cast-ceil-negative-ties-continuous",
+          "m10-independent-cast-toward-zero-negative-ties-static",
+          "m10-independent-cast-toward-zero-negative-ties-discrete",
+          "m10-independent-cast-toward-zero-negative-ties-continuous",
+          "m10-independent-cast-nearest-negative-ties-static",
+          "m10-independent-cast-nearest-negative-ties-discrete",
+          "m10-independent-cast-nearest-negative-ties-continuous",
+          "m10-independent-cast-away-negative-ties-static",
+          "m10-independent-cast-away-negative-ties-discrete",
+          "m10-independent-cast-away-negative-ties-continuous",
+          "m10-independent-conversion-stored-not-ieee-static",
+          "m10-independent-conversion-stored-not-ieee-discrete",
+          "m10-independent-conversion-stored-not-ieee-continuous",
+          "m10-independent-conversion-real-world-scaling-static",
+          "m10-independent-conversion-real-world-scaling-discrete",
+          "m10-independent-conversion-real-world-scaling-continuous",
+          "m10-independent-f32-tie-down-static",
+          "m10-independent-f32-tie-down-discrete",
+          "m10-independent-f32-tie-down-continuous",
+          "m10-independent-int64-minimum-roundtrip-static",
+          "m10-independent-int64-minimum-roundtrip-discrete",
+          "m10-independent-int64-minimum-roundtrip-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-conversion-signed-ties",
+          "m10-independent-cast-floor-negative-ties",
+          "m10-independent-cast-ceil-negative-ties",
+          "m10-independent-cast-toward-zero-negative-ties",
+          "m10-independent-cast-nearest-negative-ties",
+          "m10-independent-cast-away-negative-ties",
+          "m10-independent-conversion-stored-not-ieee",
+          "m10-independent-conversion-real-world-scaling",
+          "m10-independent-f32-tie-down",
+          "m10-independent-int64-minimum-roundtrip"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-conversion-signed-ties-static",
+          "m10-independent-conversion-signed-ties-discrete",
+          "m10-independent-conversion-signed-ties-continuous",
+          "m10-independent-cast-floor-negative-ties-static",
+          "m10-independent-cast-floor-negative-ties-discrete",
+          "m10-independent-cast-floor-negative-ties-continuous",
+          "m10-independent-cast-ceil-negative-ties-static",
+          "m10-independent-cast-ceil-negative-ties-discrete",
+          "m10-independent-cast-ceil-negative-ties-continuous",
+          "m10-independent-cast-toward-zero-negative-ties-static",
+          "m10-independent-cast-toward-zero-negative-ties-discrete",
+          "m10-independent-cast-toward-zero-negative-ties-continuous",
+          "m10-independent-cast-nearest-negative-ties-static",
+          "m10-independent-cast-nearest-negative-ties-discrete",
+          "m10-independent-cast-nearest-negative-ties-continuous",
+          "m10-independent-cast-away-negative-ties-static",
+          "m10-independent-cast-away-negative-ties-discrete",
+          "m10-independent-cast-away-negative-ties-continuous",
+          "m10-independent-conversion-stored-not-ieee-static",
+          "m10-independent-conversion-stored-not-ieee-discrete",
+          "m10-independent-conversion-stored-not-ieee-continuous",
+          "m10-independent-conversion-real-world-scaling-static",
+          "m10-independent-conversion-real-world-scaling-discrete",
+          "m10-independent-conversion-real-world-scaling-continuous",
+          "m10-independent-f32-tie-down-static",
+          "m10-independent-f32-tie-down-discrete",
+          "m10-independent-f32-tie-down-continuous",
+          "m10-independent-int64-minimum-roundtrip-static",
+          "m10-independent-int64-minimum-roundtrip-discrete",
+          "m10-independent-int64-minimum-roundtrip-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-type-conversion-parameter-dtype-shape",
+        "m10-type-conversion-mode-special-error",
+        "m10-type-conversion-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-conversion-signed-ties-static",
+          "m10-independent-conversion-signed-ties-discrete",
+          "m10-independent-conversion-signed-ties-continuous",
+          "m10-independent-propagation-backconstraint-static",
+          "m10-independent-propagation-backconstraint-discrete",
+          "m10-independent-propagation-backconstraint-continuous",
+          "m10-independent-cast-floor-negative-ties-static",
+          "m10-independent-cast-floor-negative-ties-discrete",
+          "m10-independent-cast-floor-negative-ties-continuous",
+          "m10-independent-cast-ceil-negative-ties-static",
+          "m10-independent-cast-ceil-negative-ties-discrete",
+          "m10-independent-cast-ceil-negative-ties-continuous",
+          "m10-independent-cast-toward-zero-negative-ties-static",
+          "m10-independent-cast-toward-zero-negative-ties-discrete",
+          "m10-independent-cast-toward-zero-negative-ties-continuous",
+          "m10-independent-cast-nearest-negative-ties-static",
+          "m10-independent-cast-nearest-negative-ties-discrete",
+          "m10-independent-cast-nearest-negative-ties-continuous",
+          "m10-independent-cast-away-negative-ties-static",
+          "m10-independent-cast-away-negative-ties-discrete",
+          "m10-independent-cast-away-negative-ties-continuous",
+          "m10-independent-conversion-stored-not-ieee-static",
+          "m10-independent-conversion-stored-not-ieee-discrete",
+          "m10-independent-conversion-stored-not-ieee-continuous",
+          "m10-independent-conversion-real-world-scaling-static",
+          "m10-independent-conversion-real-world-scaling-discrete",
+          "m10-independent-conversion-real-world-scaling-continuous",
+          "m10-independent-f32-tie-down-static",
+          "m10-independent-f32-tie-down-discrete",
+          "m10-independent-f32-tie-down-continuous",
+          "m10-independent-int64-minimum-roundtrip-static",
+          "m10-independent-int64-minimum-roundtrip-discrete",
+          "m10-independent-int64-minimum-roundtrip-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "14-003",
+      "section": 14,
+      "ordinal": 3,
+      "sourceName": "Data Type Conversion Inherited",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 543,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-14",
+      "baselineCanonical": "signal.cast",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-type-conversion",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "signal.cast-inherited",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-inherited-stored-integer-static",
+          "m10-independent-inherited-stored-integer-discrete",
+          "m10-independent-inherited-stored-integer-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-inherited-stored-integer"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-inherited-stored-integer-static",
+          "m10-independent-inherited-stored-integer-discrete",
+          "m10-independent-inherited-stored-integer-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-type-conversion-parameter-dtype-shape",
+        "m10-type-conversion-mode-special-error",
+        "m10-type-conversion-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-inherited-stored-integer-static",
+          "m10-independent-inherited-stored-integer-discrete",
+          "m10-independent-inherited-stored-integer-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "14-004",
+      "section": 14,
+      "ordinal": 4,
+      "sourceName": "Data Type Duplicate",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 544,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-14",
+      "baselineCanonical": "signal.type-constraint",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-type-constraint",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "signal.type-duplicate",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-duplicate-metadata-static",
+          "m10-independent-duplicate-metadata-discrete",
+          "m10-independent-duplicate-metadata-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-duplicate-metadata"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-duplicate-metadata-static",
+          "m10-independent-duplicate-metadata-discrete",
+          "m10-independent-duplicate-metadata-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-type-constraint-parameter-dtype-shape",
+        "m10-type-constraint-mode-special-error",
+        "m10-type-constraint-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-duplicate-metadata-static",
+          "m10-independent-duplicate-metadata-discrete",
+          "m10-independent-duplicate-metadata-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "14-005",
+      "section": 14,
+      "ordinal": 5,
+      "sourceName": "Data Type Propagation",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 545,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-14",
+      "baselineCanonical": "signal.type-propagation",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-type-propagation",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "signal.type-propagation",
+        "parameters": {
+          "rule": "widest-integer"
+        },
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-propagation-backconstraint-static",
+          "m10-independent-propagation-backconstraint-discrete",
+          "m10-independent-propagation-backconstraint-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-propagation-backconstraint"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-propagation-backconstraint-static",
+          "m10-independent-propagation-backconstraint-discrete",
+          "m10-independent-propagation-backconstraint-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-type-propagation-parameter-dtype-shape",
+        "m10-type-propagation-mode-special-error",
+        "m10-type-propagation-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-propagation-backconstraint-static",
+          "m10-independent-propagation-backconstraint-discrete",
+          "m10-independent-propagation-backconstraint-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "14-006",
+      "section": 14,
+      "ordinal": 6,
+      "sourceName": "Data Type Scaling Strip",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "조건 · 고정소수점 관련 사용 시 제품 및 데이터형 조건 확인",
+      "sourceLine": 546,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-14",
+      "baselineCanonical": "signal.scaling-strip",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-scaling-strip",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "signal.scaling-strip",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-strip-si-not-floatbits-static",
+          "m10-independent-strip-si-not-floatbits-discrete",
+          "m10-independent-strip-si-not-floatbits-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-strip-si-not-floatbits"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-strip-si-not-floatbits-static",
+          "m10-independent-strip-si-not-floatbits-discrete",
+          "m10-independent-strip-si-not-floatbits-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-scaling-strip-parameter-dtype-shape",
+        "m10-scaling-strip-mode-special-error",
+        "m10-scaling-strip-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-strip-si-not-floatbits-static",
+          "m10-independent-strip-si-not-floatbits-discrete",
+          "m10-independent-strip-si-not-floatbits-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "14-010",
+      "section": 14,
+      "ordinal": 10,
+      "sourceName": "Signal Conversion",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 550,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-14",
+      "baselineCanonical": "signal.representation",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-representation",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "signal.representation",
+        "parameters": {
+          "representation": "copy"
+        },
+        "presetId": null,
+        "independentAlternative": true,
+        "evidenceFixtureIds": [
+          "m10-independent-copy-above-53-static",
+          "m10-independent-copy-above-53-discrete",
+          "m10-independent-copy-above-53-continuous",
+          "m10-independent-preset-copy-static",
+          "m10-independent-preset-copy-discrete",
+          "m10-independent-preset-copy-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-copy-above-53",
+          "m10-independent-preset-copy"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-copy-above-53-static",
+          "m10-independent-copy-above-53-discrete",
+          "m10-independent-copy-above-53-continuous",
+          "m10-independent-preset-copy-static",
+          "m10-independent-preset-copy-discrete",
+          "m10-independent-preset-copy-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-representation-parameter-dtype-shape",
+        "m10-representation-mode-special-error",
+        "m10-representation-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 독립 대체 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-copy-above-53-static",
+          "m10-independent-copy-above-53-discrete",
+          "m10-independent-copy-above-53-continuous",
+          "m10-independent-preset-copy-static",
+          "m10-independent-preset-copy-discrete",
+          "m10-independent-preset-copy-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "14-011",
+      "section": 14,
+      "ordinal": 11,
+      "sourceName": "Signal Specification",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 551,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-14",
+      "baselineCanonical": "signal.contract",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-signal-specification",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "signal.specification",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-specification-rank8-static",
+          "m10-independent-specification-rank8-discrete",
+          "m10-independent-specification-rank8-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-specification-rank8"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-specification-rank8-static",
+          "m10-independent-specification-rank8-discrete",
+          "m10-independent-specification-rank8-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-signal-specification-parameter-dtype-shape",
+        "m10-signal-specification-mode-special-error",
+        "m10-signal-specification-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-specification-rank8-static",
+          "m10-independent-specification-rank8-discrete",
+          "m10-independent-specification-rank8-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "14-012",
+      "section": 14,
+      "ordinal": 12,
+      "sourceName": "Unit Conversion",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 552,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-14",
+      "baselineCanonical": "unit.convert",
+      "baselineStatus": "M4 승인 subset",
+      "baselineExistingSubset": true,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-unit-conversion",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": false,
+        "status": "prior-approved-subset-preserved-followup-open",
+        "canonical": "unit.convert",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [],
+        "candidateStrictEvidenceFixtureIds": []
+      },
+      "optionInventoryTaskIds": [
+        "m10-unit-conversion-parameter-dtype-shape",
+        "m10-unit-conversion-mode-special-error",
+        "m10-unit-conversion-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "prior-finite-affine-subset-preserved-followup-open",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": []
+      }
+    },
+    {
+      "sourceId": "14-014",
+      "section": 14,
+      "ordinal": 14,
+      "sourceName": "Width",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 554,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-14",
+      "baselineCanonical": "signal.width",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-width",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "signal.width",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-width-complex-elements-static",
+          "m10-independent-width-complex-elements-discrete",
+          "m10-independent-width-complex-elements-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-width-complex-elements"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-width-complex-elements-static",
+          "m10-independent-width-complex-elements-discrete",
+          "m10-independent-width-complex-elements-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-width-parameter-dtype-shape",
+        "m10-width-mode-special-error",
+        "m10-width-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-width-complex-elements-static",
+          "m10-independent-width-complex-elements-discrete",
+          "m10-independent-width-complex-elements-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "17-008",
+      "section": 17,
+      "ordinal": 8,
+      "sourceName": "Enumerated Constant",
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "sourceLine": 645,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-17",
+      "baselineCanonical": "source.enum",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-enumeration",
+      "planningDeliveryKind": "native-capability",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "source.enum",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": true,
+        "evidenceFixtureIds": [
+          "m10-independent-enum-constant-static",
+          "m10-independent-enum-constant-discrete",
+          "m10-independent-enum-constant-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-enum-constant"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-enum-constant-static",
+          "m10-independent-enum-constant-discrete",
+          "m10-independent-enum-constant-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-enumeration-parameter-dtype-shape",
+        "m10-enumeration-mode-special-error",
+        "m10-enumeration-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 독립 대체 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-enum-constant-static",
+          "m10-independent-enum-constant-discrete",
+          "m10-independent-enum-constant-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "20-001",
+      "section": 20,
+      "ordinal": 1,
+      "sourceName": "Fixed-Point State-Space",
+      "sourceSubgroup": "Additional Discrete",
+      "sourceCondition": "기본/조건 · 기본 double 설정 가능. 고정소수점 실행은 별도 제품 조건",
+      "sourceLine": 745,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-20",
+      "baselineCanonical": "discrete.state-space",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-fixed-state-space",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "fixed.state-space",
+        "parameters": {},
+        "presetId": null,
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-fixed-state-staged-rounding-discrete",
+          "m10-independent-fixed-state-staged-rounding-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-fixed-state-staged-rounding"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-fixed-state-staged-rounding-discrete",
+          "m10-independent-fixed-state-staged-rounding-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-fixed-state-space-parameter-dtype-shape",
+        "m10-fixed-state-space-mode-special-error",
+        "m10-fixed-state-space-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 승인 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-fixed-state-staged-rounding-discrete",
+          "m10-independent-fixed-state-staged-rounding-continuous"
+        ],
+        "declaredModes": [
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "20-005",
+      "section": 20,
+      "ordinal": 5,
+      "sourceName": "Decrement Stored Integer",
+      "sourceSubgroup": "Additional Math / Increment - Decrement",
+      "sourceCondition": "조건 · 저장 정수값/스케일링 의미 및 고정소수점 조건 확인",
+      "sourceLine": 756,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-20",
+      "baselineCanonical": "fixed.integer-increment",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-stored-integer-step",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "fixed.integer-increment",
+        "parameters": {
+          "delta": -1,
+          "overflow": "wrap"
+        },
+        "presetId": "m10-code-decrement",
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-si-decrement-static",
+          "m10-independent-preset-si-decrement-discrete",
+          "m10-independent-preset-si-decrement-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-preset-si-decrement"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-preset-si-decrement-static",
+          "m10-independent-preset-si-decrement-discrete",
+          "m10-independent-preset-si-decrement-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-stored-integer-step-parameter-dtype-shape",
+        "m10-stored-integer-step-mode-special-error",
+        "m10-stored-integer-step-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 preset subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-si-decrement-static",
+          "m10-independent-preset-si-decrement-discrete",
+          "m10-independent-preset-si-decrement-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "20-009",
+      "section": 20,
+      "ordinal": 9,
+      "sourceName": "Increment Stored Integer",
+      "sourceSubgroup": "Additional Math / Increment - Decrement",
+      "sourceCondition": "조건 · 저장 정수값/스케일링 의미 및 고정소수점 조건 확인",
+      "sourceLine": 760,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-20",
+      "baselineCanonical": "fixed.integer-increment",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-stored-integer-step",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "fixed.integer-increment",
+        "parameters": {
+          "delta": 1,
+          "overflow": "wrap"
+        },
+        "presetId": "m10-code-increment",
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-si-increment-static",
+          "m10-independent-preset-si-increment-discrete",
+          "m10-independent-preset-si-increment-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-preset-si-increment"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-preset-si-increment-static",
+          "m10-independent-preset-si-increment-discrete",
+          "m10-independent-preset-si-increment-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-stored-integer-step-parameter-dtype-shape",
+        "m10-stored-integer-step-mode-special-error",
+        "m10-stored-integer-step-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 preset subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-si-increment-static",
+          "m10-independent-preset-si-increment-discrete",
+          "m10-independent-preset-si-increment-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "21-002",
+      "section": 21,
+      "ordinal": 2,
+      "sourceName": "Inf",
+      "sourceSubgroup": "Sources — Constant의 사전 구성",
+      "sourceCondition": "구성 · Constant 값 `inf`",
+      "sourceLine": 779,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-21",
+      "baselineCanonical": "source.constant",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-special-constant",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "source.typed",
+        "parameters": {
+          "value": {
+            "kind": "typed",
+            "dtype": "float64",
+            "shape": [],
+            "data": [
+              "Infinity"
+            ]
+          }
+        },
+        "presetId": "m10-positive-infinity",
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-inf-static",
+          "m10-independent-preset-inf-discrete",
+          "m10-independent-preset-inf-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-preset-inf"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-preset-inf-static",
+          "m10-independent-preset-inf-discrete",
+          "m10-independent-preset-inf-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-special-constant-parameter-dtype-shape",
+        "m10-special-constant-mode-special-error",
+        "m10-special-constant-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 preset subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-inf-static",
+          "m10-independent-preset-inf-discrete",
+          "m10-independent-preset-inf-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "21-003",
+      "section": 21,
+      "ordinal": 3,
+      "sourceName": "NaN",
+      "sourceSubgroup": "Sources — Constant의 사전 구성",
+      "sourceCondition": "구성 · Constant 값 `NaN`",
+      "sourceLine": 780,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-21",
+      "baselineCanonical": "source.constant",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-special-constant",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "source.typed",
+        "parameters": {
+          "value": {
+            "kind": "typed",
+            "dtype": "float64",
+            "shape": [],
+            "data": [
+              "NaN"
+            ]
+          }
+        },
+        "presetId": "m10-nan",
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-nan-static",
+          "m10-independent-preset-nan-discrete",
+          "m10-independent-preset-nan-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-preset-nan"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-preset-nan-static",
+          "m10-independent-preset-nan-discrete",
+          "m10-independent-preset-nan-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-special-constant-parameter-dtype-shape",
+        "m10-special-constant-mode-special-error",
+        "m10-special-constant-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 preset subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-nan-static",
+          "m10-independent-preset-nan-discrete",
+          "m10-independent-preset-nan-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "21-004",
+      "section": 21,
+      "ordinal": 4,
+      "sourceName": "Negative Inf",
+      "sourceSubgroup": "Sources — Constant의 사전 구성",
+      "sourceCondition": "구성 · Constant 값 `-inf`",
+      "sourceLine": 781,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-21",
+      "baselineCanonical": "source.constant",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-special-constant",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "source.typed",
+        "parameters": {
+          "value": {
+            "kind": "typed",
+            "dtype": "float64",
+            "shape": [],
+            "data": [
+              "-Infinity"
+            ]
+          }
+        },
+        "presetId": "m10-negative-infinity",
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-negative-inf-static",
+          "m10-independent-preset-negative-inf-discrete",
+          "m10-independent-preset-negative-inf-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-preset-negative-inf"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-preset-negative-inf-static",
+          "m10-independent-preset-negative-inf-discrete",
+          "m10-independent-preset-negative-inf-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-special-constant-parameter-dtype-shape",
+        "m10-special-constant-mode-special-error",
+        "m10-special-constant-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 preset subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-negative-inf-static",
+          "m10-independent-preset-negative-inf-discrete",
+          "m10-independent-preset-negative-inf-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "21-011",
+      "section": 21,
+      "ordinal": 11,
+      "sourceName": "Signal Copy",
+      "sourceSubgroup": "Signal Attributes — Signal Conversion의 사전 구성",
+      "sourceCondition": "구성 · Signal Conversion의 `Signal copy`",
+      "sourceLine": 802,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-21",
+      "baselineCanonical": "signal.representation",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-representation",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "signal.representation",
+        "parameters": {
+          "representation": "copy"
+        },
+        "presetId": "m10-signal-copy",
+        "independentAlternative": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-copy-static",
+          "m10-independent-preset-copy-discrete",
+          "m10-independent-preset-copy-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-preset-copy"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-preset-copy-static",
+          "m10-independent-preset-copy-discrete",
+          "m10-independent-preset-copy-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-representation-parameter-dtype-shape",
+        "m10-representation-mode-special-error",
+        "m10-representation-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 preset subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-copy-static",
+          "m10-independent-preset-copy-discrete",
+          "m10-independent-preset-copy-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "21-012",
+      "section": 21,
+      "ordinal": 12,
+      "sourceName": "To Virtual Bus",
+      "sourceSubgroup": "Signal Attributes — Signal Conversion의 사전 구성",
+      "sourceCondition": "구성 · Signal Conversion의 `Virtual bus`",
+      "sourceLine": 803,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-21",
+      "baselineCanonical": "signal.representation",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-representation",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "signal.representation",
+        "parameters": {
+          "representation": "virtual"
+        },
+        "presetId": "m10-virtual-bus",
+        "independentAlternative": true,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-virtual-bus-static",
+          "m10-independent-preset-virtual-bus-discrete",
+          "m10-independent-preset-virtual-bus-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-preset-virtual-bus"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-preset-virtual-bus-static",
+          "m10-independent-preset-virtual-bus-discrete",
+          "m10-independent-preset-virtual-bus-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-representation-parameter-dtype-shape",
+        "m10-representation-mode-special-error",
+        "m10-representation-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 독립 대체 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-virtual-bus-static",
+          "m10-independent-preset-virtual-bus-discrete",
+          "m10-independent-preset-virtual-bus-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    },
+    {
+      "sourceId": "21-013",
+      "section": 21,
+      "ordinal": 13,
+      "sourceName": "To Nonvirtual Bus",
+      "sourceSubgroup": "Signal Attributes — Signal Conversion의 사전 구성",
+      "sourceCondition": "구성 · Signal Conversion의 `Nonvirtual bus`",
+      "sourceLine": 804,
+      "sourceReference": "dataset/Simulink_Basic_Blocks_R2024b.md#library-21",
+      "baselineCanonical": "signal.representation",
+      "baselineStatus": "미구현",
+      "baselineExistingSubset": false,
+      "baselineFirstWorkMilestone": "M10",
+      "baselineOptionCompletionMilestones": [
+        "M10",
+        "M15",
+        "M16"
+      ],
+      "contractFamily": "m10-representation",
+      "planningDeliveryKind": "shared-configuration",
+      "sourceOptionCompletionStatus": "open",
+      "delivery": {
+        "firstWorkAssigned": true,
+        "baselineMissing": true,
+        "status": "selected-subset-approved",
+        "canonical": "signal.representation",
+        "parameters": {
+          "representation": "nonvirtual"
+        },
+        "presetId": "m10-nonvirtual-bus",
+        "independentAlternative": true,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-nonvirtual-bus-static",
+          "m10-independent-preset-nonvirtual-bus-discrete",
+          "m10-independent-preset-nonvirtual-bus-continuous"
+        ],
+        "sourceFullEquivalent": false,
+        "runtimeLiteralFixtureIds": [
+          "m10-independent-preset-nonvirtual-bus"
+        ],
+        "candidateStrictEvidenceFixtureIds": [
+          "m10-independent-preset-nonvirtual-bus-static",
+          "m10-independent-preset-nonvirtual-bus-discrete",
+          "m10-independent-preset-nonvirtual-bus-continuous"
+        ]
+      },
+      "optionInventoryTaskIds": [
+        "m10-representation-parameter-dtype-shape",
+        "m10-representation-mode-special-error",
+        "m10-representation-target-reference"
+      ],
+      "followUpRequirements": [
+        {
+          "milestone": "M10-followup",
+          "required": true,
+          "reason": "undeclared additional dtype/shape/parameter/algorithm combinations and reference parity"
+        },
+        {
+          "milestone": "M15",
+          "required": true,
+          "reason": "target runtime/format support and generated-code validation"
+        },
+        {
+          "milestone": "M16",
+          "required": true,
+          "reason": "full source-option/reference audit"
+        }
+      ],
+      "approval": {
+        "stageStatus": "M10 독립 대체 subset",
+        "nativeFullEquivalent": false,
+        "evidenceFixtureIds": [
+          "m10-independent-preset-nonvirtual-bus-static",
+          "m10-independent-preset-nonvirtual-bus-discrete",
+          "m10-independent-preset-nonvirtual-bus-continuous"
+        ],
+        "declaredModes": [
+          "static",
+          "discrete",
+          "continuous"
+        ],
+        "sourceApprovalPath": "docs/evidence/m10-source-approvals.json"
+      }
+    }
+  ],
+  "deliveryGate": {
+    "status": "selected-runtime-standalone-and-source-approved-ui-stage-gate-separate",
+    "declaredDefinitionIds": [
+      "source.typed",
+      "source.enum",
+      "signal.cast",
+      "signal.cast-inherited",
+      "signal.to-legacy",
+      "signal.type-duplicate",
+      "signal.type-propagation",
+      "signal.scaling-strip",
+      "signal.representation",
+      "signal.specification",
+      "signal.width",
+      "signal.bus-to-vector",
+      "signal.unit-system",
+      "logic.bit-mask",
+      "logic.extract-bits",
+      "logic.float-extract-bits",
+      "logic.integer-to-bits",
+      "logic.bits-to-integer",
+      "logic.shift-arithmetic",
+      "logic.bitwise-typed",
+      "fixed.integer-increment",
+      "fixed.trigonometric",
+      "fixed.state-space",
+      "complex.from-parts",
+      "complex.to-parts",
+      "complex.from-polar",
+      "complex.to-polar",
+      "complex.hermitian",
+      "complex.is-hermitian",
+      "complex.dot",
+      "typed.math",
+      "tensor.reshape",
+      "tensor.permute",
+      "tensor.squeeze"
+    ],
+    "declaredPresetIds": [
+      "m10-bit-clear",
+      "m10-bit-set",
+      "m10-code-decrement",
+      "m10-code-increment",
+      "m10-positive-infinity",
+      "m10-nan",
+      "m10-negative-infinity",
+      "m10-signal-copy",
+      "m10-virtual-bus",
+      "m10-nonvirtual-bus"
+    ],
+    "requiredScope": [
+      "38 original firstWork identities and immutable baseline/source digests preserved; families, definitions, presets, source rows and numerical kernels counted separately.",
+      "Every declared mode/dtype/shape/option pipeline requires independent raw/bit oracle, actual standalone strict TypeScript, JSON, diagnostics, state ownership and UI evidence.",
+      "Legacy 211 definitions and M9/M8/catalog/regression evidence remain valid; unsupported typed legacy edges produce original-node diagnostics without silent conversion.",
+      "Bit-true claims apply only to selected explicit typed arithmetic/rounding contracts, never mere float64 output quantization or MathWorks execution parity.",
+      "Bounded typed parsing and allocation, cancellation, failure atomicity, source import/export preservation and no executable user expressions.",
+      "Original source-option completion remains open while undeclared or unverified required source behaviors remain."
+    ],
+    "evidencePaths": [
+      "tests/m10-independent-fixtures.ts",
+      "tests/m10-independent-math.test.ts",
+      "docs/evidence/m10-reference-review.json",
+      "docs/evidence/m10-verification.json",
+      "docs/evidence/m10-source-approvals.json"
+    ],
+    "sourcePromotionPerformed": true,
+    "sourceApprovalPath": "docs/evidence/m10-source-approvals.json",
+    "sourceApprovalSha256": "d8c938fb999555aaf61f24b68b7b631e158611dc2760542bd08d0f94d3221f4b"
+  },
+  "crossStageFollowups": [
+    {
+      "milestone": "M11",
+      "sourceRows": 73,
+      "dependency": "typed/bus metadata and state ownership",
+      "boundary": "conditional hierarchy, bounded loops/messages and actual back constraints; no M11 code started by this inventory task"
+    },
+    {
+      "milestone": "M12",
+      "sourceRows": 26,
+      "dependency": "M9 timing, M10 typed boundaries, M11 conditional events",
+      "boundary": "ODE event/DAE and analysis use separate solver/reference contracts; nonsingular E^-1 is not singular DAE equivalence"
+    }
+  ],
+  "validationStatus": {
+    "contract": "selected-api-v0.2",
+    "sourceIdentity": "checked-against-immutable-roadmap",
+    "declaredExecution": "206-successful-mode-executions-plus3-original-node-failure-parity",
+    "actualStandaloneTypeScript": "209-actual-generated-programs-passed-3-strict-mode-templates",
+    "ui": "pending",
+    "sourceFullOptionCompletion": "open",
+    "sourceSelectedSubset": "37-selected-approved-rows-and1-prior-preserved-row",
+    "stageCompletion": "pending-ui-and-root-exit-gate"
+  },
+  "observedApi": {
+    "definitionPath": "packages/block-library/src/m10.ts",
+    "observationStatus": "34 selected definitions and10 presets observed;59 raw and10 configured preset independent literals executed in206 mode cases, plus3 failures. Standalone/UI/source gate evidence separate.",
+    "definitionIds": [
+      "source.typed",
+      "source.enum",
+      "signal.cast",
+      "signal.cast-inherited",
+      "signal.to-legacy",
+      "signal.type-duplicate",
+      "signal.type-propagation",
+      "signal.scaling-strip",
+      "signal.representation",
+      "signal.specification",
+      "signal.width",
+      "signal.bus-to-vector",
+      "signal.unit-system",
+      "logic.bit-mask",
+      "logic.extract-bits",
+      "logic.float-extract-bits",
+      "logic.integer-to-bits",
+      "logic.bits-to-integer",
+      "logic.shift-arithmetic",
+      "logic.bitwise-typed",
+      "fixed.integer-increment",
+      "fixed.trigonometric",
+      "fixed.state-space",
+      "complex.from-parts",
+      "complex.to-parts",
+      "complex.from-polar",
+      "complex.to-polar",
+      "complex.hermitian",
+      "complex.is-hermitian",
+      "complex.dot",
+      "typed.math",
+      "tensor.reshape",
+      "tensor.permute",
+      "tensor.squeeze"
+    ],
+    "presetIds": [
+      "m10-bit-clear",
+      "m10-bit-set",
+      "m10-code-decrement",
+      "m10-code-increment",
+      "m10-positive-infinity",
+      "m10-nan",
+      "m10-negative-infinity",
+      "m10-signal-copy",
+      "m10-virtual-bus",
+      "m10-nonvirtual-bus"
+    ]
+  },
+  "claimScope": "Selected typed implementation and independent literal runtime tests observed; actual standalone, UI, source promotion and stage gate recorded separately.",
+  "supplementalFollowups": [
+    {
+      "sourceId": "08-009",
+      "baselineFirstWorkMilestone": "M8",
+      "canonical": "complex.dot",
+      "parameters": {
+        "conjugateFirst": "yes"
+      },
+      "countsAsAdditionalM10FirstWorkRow": false,
+      "status": "selected-complex-followup-runtime-literal-verified",
+      "sourceFullOptionCompletionStatus": "open",
+      "independentExtension": {
+        "conjugateFirst": "no"
+      },
+      "fixtureIds": [
+        "m10-independent-complex-dot-conjugates-first",
+        "m10-independent-complex-dot-no-conjugate"
+      ]
+    }
+  ],
+  "selectedExecutionBoundary": {
+    "continuousTypedQuantization": "Changing continuous inputs to quantizing casts, non-float64 typed arithmetic, bit operations and fixed LUT require an explicit held boundary. Constant or already-held inputs are supported. Smooth float64 complex-to-legacy paths can feed the existing solver.",
+    "fixedStateSpace": "Same binary-point fixed metadata for A/B/C/D/initial/input; n,m,p1..8. Each product and accumulated add applies selected rounding/overflow. No reset or mixed-scale realization. Output reads current state, transition commits atomically. finalState is held output and stateMemory contains internal x.",
+    "binaryPointShift": "Positive shift is right binary-point shift: new fractionLength=old fractionLength-shift; stored code unchanged and real value multiplied by2^shift.",
+    "schema": "Existing schemaVersion1 retained; tagged signals extend its value contract with explicit defensive validation and no lossy migration."
+  }
+}
