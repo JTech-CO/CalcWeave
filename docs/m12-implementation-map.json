@@ -3880,8 +3880,27 @@
     "independentSourceApprovalRequired": true,
     "actualStandaloneRequired": true,
     "browserRequired": true,
-    "publicDeploymentApproved": false,
-    "engineeringProofPath": "docs/evidence/m12-engineering-checks.json"
+    "publicDeploymentApproved": true,
+    "engineeringProofPath": "docs/evidence/m12-engineering-checks.json",
+    "publicDeployment": {
+      "status": "passed-combined-release",
+      "checkedAt": "2026-10-03T07:03:37.873Z",
+      "appVersion": "0.13.0",
+      "engineVersion": "0.13.0-m12",
+      "url": "https://jtech-co.github.io/CalcWeave/",
+      "headSha": "27e01d6fad98ae39c149c8e577ec0eede4922769",
+      "actionsRunId": 37104252395,
+      "releaseId": "e23ce356d45b9707b06946dcb1982c4db97c8a8ceeb70c32c35ce861087264ed",
+      "exactLocalProjectArtifactParity": true,
+      "publicBrowserChecks": 9,
+      "records": {
+        "docs/evidence/m12-deployment-verification.json": "802bac821141bdcd8d6b632636ff18987d94c7a35018d06623f09cd0d36623ef",
+        "docs/evidence/m12-public-browser-verification.json": "c706198041f3cb5365888f3859e6ff469d4196607eb2a4328fc652b6d12dbc92",
+        "docs/evidence/m12-actions-verification.json": "28c9eccc504dd518d234477695a1989255e77be6f9009cabf2e0bc089880a619"
+      },
+      "verifiedApplicationDeployment": true,
+      "verifiedPublicLaunch": false
+    }
   },
   "validationStatus": {
     "uiUnit": {
@@ -3931,7 +3950,7 @@
     "mathWorksReferenceExecuted": false,
     "fullSourceOptions": "open"
   },
-  "claimScope": "Completed bounded CalcWeave M12 selected engineering contracts:12 newly approved source rows,14 predecessor mappings retained, actual numerical and standalone/browser/release gates. All26 full-source-option sets and MathWorks reference parity remain open; public deployment is a separate combined release check.",
+  "claimScope": "Completed bounded CalcWeave M12 selected engineering contracts:12 newly approved source rows,14 predecessor mappings retained, actual numerical and standalone/browser/release gates. All26 full-source-option sets and MathWorks reference parity remain open; the 0.13.0 combined application deployment is independently verified by Actions, exact project asset parity and a fresh public browser. Full public launch remains a separate gate.",
   "observedApi": {
     "registryDefinitions": 304,
     "newRegistryDefinitions": 11,

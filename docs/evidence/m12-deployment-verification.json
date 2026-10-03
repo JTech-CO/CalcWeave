@@ -1,0 +1,59 @@
+{
+  "generatedAt": "2026-10-03T07:02:32.561Z",
+  "url": "https://jtech-co.github.io/CalcWeave/",
+  "appVersion": "0.13.0",
+  "engineVersion": "0.13.0-m12",
+  "scope": "/CalcWeave/",
+  "releaseId": "e23ce356d45b9707b06946dcb1982c4db97c8a8ceeb70c32c35ce861087264ed",
+  "artifactDirectory": ".test-generated/m12-frozen-source/dist",
+  "dns": [
+    {
+      "address": "185.199.110.153",
+      "family": 4
+    },
+    {
+      "address": "185.199.109.153",
+      "family": 4
+    },
+    {
+      "address": "185.199.108.153",
+      "family": 4
+    },
+    {
+      "address": "185.199.111.153",
+      "family": 4
+    }
+  ],
+  "checks": {
+    "dnsResolved": true,
+    "https200": true,
+    "calcWeaveHtml": true,
+    "content-security-policy": null,
+    "x-content-type-options": null,
+    "x-frame-options": null,
+    "strict-transport-security": "max-age=31556952",
+    "referrer-policy": null,
+    "permissions-policy": null,
+    "setCookiePresent": false,
+    "httpRedirectsToHttps": true,
+    "privacy/": true,
+    "terms/": true,
+    "cookies/": true,
+    "notices/": true,
+    "offline-manifest.json": true,
+    "currentRelease": true,
+    "releaseParity": true,
+    "sw.js": true,
+    "serviceWorkerParity": true,
+    "staticAssetsParity": true,
+    "privatePathsAbsent": true,
+    "private:.env": true,
+    "private:.env.local": true,
+    "private:.git/config": true,
+    "private:backup.sql": true,
+    "actualNoviceStudy": "Not verified: automation is not an observed F06 novice study.",
+    "customDomain": "Project URL verified; calcweave.com ownership/DNS remains a separate gate."
+  },
+  "verifiedApplicationDeployment": true,
+  "verifiedPublicLaunch": false
+}

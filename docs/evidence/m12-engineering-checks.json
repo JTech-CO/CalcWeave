@@ -397,7 +397,26 @@
     "command": "npm audit --audit-level=moderate"
   },
   "securityScope": "Bounded local numerical input, React escaping, no new dynamic code evaluation or server/auth/DB/PII surface; frozen registry/source/proof and final built-secret/CSP checks retained.",
-  "publicDeployment": "pending-M12-combined",
+  "publicDeployment": {
+    "status": "passed-combined-release",
+    "checkedAt": "2026-10-03T07:03:37.873Z",
+    "appVersion": "0.13.0",
+    "engineVersion": "0.13.0-m12",
+    "url": "https://jtech-co.github.io/CalcWeave/",
+    "headSha": "27e01d6fad98ae39c149c8e577ec0eede4922769",
+    "actionsRunId": 37104252395,
+    "releaseId": "e23ce356d45b9707b06946dcb1982c4db97c8a8ceeb70c32c35ce861087264ed",
+    "exactLocalProjectArtifactParity": true,
+    "publicBrowserChecks": 9,
+    "records": {
+      "docs/evidence/m12-deployment-verification.json": "802bac821141bdcd8d6b632636ff18987d94c7a35018d06623f09cd0d36623ef",
+      "docs/evidence/m12-public-browser-verification.json": "c706198041f3cb5365888f3859e6ff469d4196607eb2a4328fc652b6d12dbc92",
+      "docs/evidence/m12-actions-verification.json": "28c9eccc504dd518d234477695a1989255e77be6f9009cabf2e0bc089880a619"
+    },
+    "verifiedApplicationDeployment": true,
+    "verifiedPublicLaunch": false
+  },
   "fullSimulinkEquivalenceClaimed": false,
-  "verifiedPublicLaunch": false
+  "verifiedPublicLaunch": false,
+  "verifiedApplicationDeployment": true
 }

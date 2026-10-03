@@ -479,3 +479,7 @@ Python `python-m7-v1`을 첫 추가 타깃으로 선정했다. 승인된 정적�
 ## M12 납품 기록 — 연속 solver·사건·DAE와 분석
 
 앱0.13.0·엔진0.13.0-m12, 선택 engineering완료. 기존293정의를 보존하고11종을 추가해304종,61예제/9범주. 원본26행 중 신규12선택승인·기존14유지,현재subset305/385·missing80;전체옵션26행 모두open. 전체unit3007/3007,전체browser156/156,project4/4,실제TS35실행/155표본/2strict,design188/pageErrors0·성능6예산·각release78검사PASS. [M12 계약](m12-contract.md)·[검증](m12-validation.md). 일반DAE·모든native solver·자동튜닝·MathWorks실행동등성·외부target은미승인이다. M10→M11→M12를차례로동결·병합하고M12통합릴리스의공개배포를별도확인한다.
+
+### M10·M11·M12 공개 통합 결과
+
+M10→M11→M12를 순서대로 검증·병합한 공개0.13.0/엔진0.13.0-m12 통합 릴리스를 게시했다. 304정의·61예제/9범주이며 main `27e01d6fad98ae39c149c8e577ec0eede4922769`의 [수동 Pages 검증/배포](https://github.com/JTech-CO/CalcWeave/actions/runs/37104252395), project14파일 byte/SHA parity, 공개9검사 PASS를 연결했다. [최신 공개 검증](pages-validation.md)을 따른다. 원본 선택 subset305/385와 미구현80행·전체 원본 옵션·native reference parity는 계속 별도 지표로 유지한다.

@@ -343,5 +343,69 @@
     "Security statements are scoped to inspected source; no full Git-history secret scan, production-host header certification or penetration test was performed."
   ],
   "primarySourceRuntimeExecuted": false,
-  "fullSimulinkEquivalenceClaimed": false
+  "fullSimulinkEquivalenceClaimed": false,
+  "finalPublicMetadataReview": {
+    "reviewedAt": "2026-10-03T07:06:15.604Z",
+    "result": "PASS",
+    "scope": "Read-only consistency review of recorded completed GitHub Actions, exact local project artifact metadata, fresh public browser evidence, final source-bound coverage and current M12 implementation-map metadata. No live browser, numerical execution or deployment was rerun by this review.",
+    "currentImplementationMap": {
+      "path": "docs/m12-implementation-map.json",
+      "sha256": "77c04df25d7703bdb72b970e39dcb2ee2e3c387cf9ebba965ec2646d08225454"
+    },
+    "evidenceHashes": {
+      "docs/evidence/m12-actions-verification.json": "28c9eccc504dd518d234477695a1989255e77be6f9009cabf2e0bc089880a619",
+      "docs/evidence/m12-deployment-verification.json": "802bac821141bdcd8d6b632636ff18987d94c7a35018d06623f09cd0d36623ef",
+      "docs/evidence/m12-public-browser-verification.json": "c706198041f3cb5365888f3859e6ff469d4196607eb2a4328fc652b6d12dbc92",
+      "docs/evidence/m12-engineering-checks.json": "cb5fad1c4ba810787be530a73389bd916809ded3b2ed5523e710251402654d10",
+      "docs/evidence/m12-source-approvals.json": "a3e2201b9672a4eac21f90a37b893ee0daf2c2a9b6d912654b46b1e1618a449b",
+      "docs/evidence/m12-verification.json": "79253d162a1af3ca5f5bbe2eb9de14d0fbc3e5aaa107795586678ab8f896f0c7"
+    },
+    "facts": {
+      "headSha": "27e01d6fad98ae39c149c8e577ec0eede4922769",
+      "actionsRunId": 37104252395,
+      "verifyJob": "success",
+      "deployJob": "success",
+      "ciUnitPassed": 3007,
+      "ciWholeBrowserPassed": 156,
+      "ciProjectBrowserPassed": 4,
+      "appVersion": "0.13.0",
+      "engineVersion": "0.13.0-m12",
+      "releaseId": "e23ce356d45b9707b06946dcb1982c4db97c8a8ceeb70c32c35ce861087264ed",
+      "url": "https://jtech-co.github.io/CalcWeave/",
+      "scope": "/CalcWeave/",
+      "localProjectAssets": 14,
+      "localProjectBytes": 2504919,
+      "exactLocalProjectArtifactParity": true,
+      "isolatedPublicBrowserChecks": 9,
+      "pageErrors": 0,
+      "outsideAppRequests": 0,
+      "protectedBaselineHashesUnchanged": 15,
+      "firstWorkSourceRows": 26,
+      "newSourceApprovals": 12,
+      "preservedSourceRows": 14,
+      "currentSelectedSourceSubset": 305,
+      "missingSourceRows": 80,
+      "fullSourceOptionsClosed": 0,
+      "sourceCoverageVerification": {
+        "command": "npx tsx scripts/update-m12-coverage.ts --verify",
+        "exitCode": 0,
+        "mutated": false
+      },
+      "verifiedApplicationDeployment": true,
+      "verifiedPublicLaunch": false,
+      "fullSimulinkEquivalenceClaimed": false
+    },
+    "originalSnapshotPreserved": {
+      "reviewedAt": "2026-10-03T06:46:44.116Z",
+      "artifacts": true,
+      "protectedBaselineHashes": true,
+      "scope": "Existing artifacts and protected hashes remain the predeployment independent-review snapshot; this field alone records the later public metadata review."
+    },
+    "limitations": [
+      "This review inspects existing public verification evidence and does not itself repeat a live public request, browser run or host penetration test.",
+      "The public browser verifies workspace, baseline Worker calculation, offline edits/policy navigation and Python ZIP data parity; it does not execute new M12 numerical models or Python code.",
+      "Full public launch/F06 novice study and calcweave.com ownership/DNS remain separate gates; deployment evidence records absent host headers explicitly.",
+      "All original source full-option sets and MathWorks/native reference runtime parity remain open."
+    ]
+  }
 }

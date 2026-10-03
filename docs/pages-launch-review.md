@@ -1,5 +1,41 @@
 # Pages 웹 베타 배포 점검 범위
 
+앱0.13.0 · 엔진0.13.0-m12 · registry304 · 2026-10-03
+
+대상은 무료·계정 없음·정적 GitHub Pages 호스팅·브라우저 로컬 계산 웹 베타다. 기존 `vsf-launch`·`vsf-legal`의 적용 범위를 보존하고 M12의 실제 배포/공개 기술 검증 결과를 갱신한다. 앱 게시와 서비스 전체 공개 출시 gate는 별도로 판정한다. [M12 Actions](evidence/m12-actions-verification.json)·[배포 파일](evidence/m12-deployment-verification.json)·[공개 브라우저](evidence/m12-public-browser-verification.json)가 최신 증거다. 이 기록은 법률 자문이나 종합 보안 인증이 아니다.
+
+## M12에서 실제 확인한 범위
+
+[workflow 37104252395](https://github.com/JTech-CO/CalcWeave/actions/runs/37104252395)는 main `27e01d6fad98ae39c149c8e577ec0eede4922769`에서 verify/deploy를 통과했다. 실제 CI unit3,007개·루트browser156개·project browser4개가 통과했다. 공개14파일/2,504,919바이트·manifest·SW는 로컬 최종 `/CalcWeave/` artifact와 byte/SHA-256이 일치한다. releaseId는 `e23ce356d45b9707b06946dcb1982c4db97c8a8ceeb70c32c35ce861087264ed`다. 로컬 `/` artifact와 공개 project artifact는 다른 release identity로 기록한다.
+
+새 격리 브라우저의9개 검사에서304개 라이브러리/지원표·0.13.0 badge·최초 fit·기본 Worker 결과6·정책4페이지·scoped cache·오프라인 재로딩/편집 결과10·정책 탐색·Python ZIP 내용 parity·pageErrors0/범위 밖 요청0을 확인했다. 이 공개 검사는 새 M12 수치 예제의 직접 공개 실행이나 Python 코드 실행을 확인하는 검사가 아니다. 실제 새 수치 실행과 타깃별 Python 실행은 [M12 수치 검증](m12-validation.md)·[독립 TypeScript 실행](evidence/m12-verification.json)·[별도 타깃 회귀](evidence/m12-predecessor-regressions.json)에 연결한다.
+
+| 항목 | 적용 범위와 현재 판정 |
+| --- | --- |
+| 쿼리·인젝션 | 원격 SQL/NoSQL·서버 셸 실행 없음. 수식은 bounded AST, 모델은 승인 registry의 선언형 입력이다. 서버 쿼리 검사는 현재 구조에 해당 없음. |
+| 출력·XSS | 사용자 이름/메모/수식은 React 텍스트로 표시한다. 정책 생성기의 HTML escape와 링크 scheme 제한을 유지한다. 로컬/CI 결과 escaping 회귀와 최종 빌드 검사를 통과했다. |
+| 시크릿 | M12의 최종 built-secret/CSP 검사와 npm 취약점0 기록은 [작업 공간 증거](evidence/m12-engineering-checks.json)를 따른다. M9와 이전0.8.1의 패턴 검사 수치는 아래 당시 기록으로 보존하며 M12 재검사 수치로 바꾸지 않는다. 알려진 패턴 검사를 모든 시크릿 부재의 증명으로 해석하지 않는다. |
+| 인증·인가 | 계정·세션·원격 모델/관리 API가 없어 서버 소유권/RLS 검사는 해당 없음. Pages 쓰기·OIDC는 기본 브랜치 deploy job에만 제공하며 이번 두 job의 성공을 기록했다. |
+| 입력·자원 | bounded 모델/데이터/실행/패키지 경계를 유지한다. M12 수치 입력·차원·Newton 반복·history·연산 상한은 선택 계약과 실제 수치 증거를 따른다. 공개 검사는 redirect·본문 크기·정적 자산 digest를 확인했다. |
+| 호출 제한 | 로그인·인증코드·유료 API·이메일 자동 발송이 없어 관련 서버 rate-limit은 해당 없음. Worker 취소·실행 예산의 로컬/CI 회귀와6개 성능 예산은 별도 증거로 통과했다. |
+| 쿠키·HTTPS·헤더 | 앱 쿠키/추적 SDK 없음. 공개 HTTPS·HTTP→HTTPS·Set-Cookie 없음·private4경로404를 확인했다. HSTS는 `max-age=31556952`다. CSP/nosniff/frame/referrer/permissions HTTP헤더는 관찰되지 않았고 CSP/no-referrer meta와 구분한다. |
+| DB 권한 | 원격 DB·Storage가 없어 서버 권한/RLS 검사는 해당 없음. IndexedDB·백업/복구/삭제는 로컬/CI 브라우저 회귀를 따르며 공개 검사는 격리된 저장소만 사용했다. |
+| 의존성 | 잠금 파일을 유지하고 실제 CI npm audit에서 알려진 취약점0을 확인했다. 공식 Actions는 SHA로 고정한다. |
+| 개인정보·정책 | 모델/데이터/결과/서명용 개인키는 앱 서버로 전송하지 않는다. GitHub 호스팅 통신과 외부 메일 앱은 별도 제공자 범위로 안내한다. 정책4페이지의 실제 HTML200·CSP meta·앱 범위 navigation을 확인했다. 문의 메일 보유/처리 정책의 확정은 아래 미확인 항목이다. |
+| 운영 | 고정 필드 로컬 진단·수동 백업/해시 복구/원본 다운로드·충돌 보호를 유지한다. 원격 모델 저장/유료 API가 없어 서버 DB 자동 백업·비용 알림은 해당 없음. 외부 모니터링·호스트 설정 등 후속 운영 확인은 자동 공개 검증의 PASS에 포함하지 않는다. |
+
+## 판정과 열린 출시 항목
+
+기술적 앱 배포는 최종 main CI·공개 artifact parity·격리 브라우저9개 검증을 근거로 PASS다. `verifiedApplicationDeployment=true`와 `verifiedPublicLaunch=false`를 함께 유지한다. 서버 계정·원격DB·유료 API 관련 해당없음 항목을 목표 도메인·사용자 관찰·운영 정책의 미확인 항목과 합치지 않는다.
+
+목표 도메인 calcweave.com의 DNS·소유/custom domain, 실제 F06 초보자 관찰, 문의 이메일 운영자의 보유/처리 정책은 완료되지 않았다. 자동화는 F06 관찰 연구의 증거가 아니며 메일의 미확정 값을 지어내지 않는다. Pages에서 임의 HTTP 보안 헤더를 관리할 수 있는 별도 호스팅 구성, 정책 링크의 직접 상시 노출과 외부 모니터링도 후속이다. 계정·개인정보 수집·원격 저장·결제를 추가하기 전 해당 흐름과 정책을 다시 확인한다.
+
+공개 artifact는304개 정의·61개 예제/9범주를 포함한다. source subset305/385·미구현80행은 별도 지표다. M10/M11/M12의 전체 원본 옵션과 MathWorks 실행 동등성은 열린 후속이며 일반 DAE·ode15s·MATLAB 선형화·자동 튜닝의 전체 대응을 주장하지 않는다. 기술적 배포 PASS를 원본 전체 옵션·MathWorks parity·전체 서비스 출시 승인으로 확대하지 않는다. [공개 배포 기록](pages-validation.md)·[실제 화면](evidence/m12-public-desktop.png).
+
+## 이전 M9 0.10.1 배포 점검 기록
+
+아래는 당시 원문 기록이다. ‘최신’·‘현재’는 M9 확인 시점을 뜻하며 당시 검사 수치와 실패/교정 기록을 보존한다.
+
 앱0.10.1 · 엔진0.10.0-m9 · registry211 · 2026-10-03
 
 `vsf-launch`와 `vsf-legal`의 실제 코드/배포 대조를 적용했다. 대상은 무료·계정 없음·정적 호스팅·브라우저 로컬 계산 웹 베타다. 앱 배포 검증과 서비스 전체 공개 출시 게이트는 각각 기록한다. 현재 실제 공개 검사 결과는 [M9 배포 검증](evidence/m9-deployment-verification.json)과 [M9 공개 브라우저 검증](evidence/m9-public-browser-verification.json)에 남긴다. 이전0.8.1의 [배포 증거](evidence/pages-deployment-verification.json)와 [브라우저 증거](evidence/pages-public-browser-verification.json)는 역사로 보존한다. 이 기록은 법률 자문이나 종합 보안 인증이 아니다.

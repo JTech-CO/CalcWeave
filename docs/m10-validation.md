@@ -6,7 +6,7 @@
 
 최종 실제 TypeScript 보고서는 [m10-verification.json](evidence/m10-verification.json)에 있다. 독립 literal 기반59 raw fixture의176개 선언 모드 실행, 10 preset의30개 모드 실행 및 실패3개를 합쳐 **209개 생성 프로그램을 실제 실행**했다. 성공206개 실행의 전체484개 sample과 정적·이산·연속 fixed template3개의 strict TypeScript 검사를 통과했다. 정확 typed-cell 비교는4,011회다. 이 숫자는 반복 parity 비교를 포함한 비교 횟수이며 서로 다른 원소4,011개나 추가 registry 정의 수를 뜻하지 않는다.
 
-compiler 단위83개, typed 값·runtime 단위154개 및 독립 수치 단위210개가 통과했다. 마지막 전체unit은 **38파일2,669/2,669 PASS(35.96초)**이며 이 부분집합들을 포함한다. 부분집합 수를 전체unit 수에 다시 더하지 않는다. 최종 `npx tsc --noEmit`도 통과했다. UI·browser·성능·배포 artifact 및 source 승인은 아래 증거로 확인했다. 공개 배포는 M12 종료 후 통합 릴리스로 진행한다.
+compiler 단위83개, typed 값·runtime 단위154개 및 독립 수치 단위210개가 통과했다. 마지막 전체unit은 **38파일2,669/2,669 PASS(35.96초)**이며 이 부분집합들을 포함한다. 부분집합 수를 전체unit 수에 다시 더하지 않는다. 최종 `npx tsc --noEmit`도 통과했다. UI·browser·성능·배포 artifact 및 source 승인은 아래 증거로 확인했다. M10 구현은 공개0.13.0 통합 릴리스에 포함됐고 [공개 검증](pages-validation.md)을 통과했다. 이전0.11.0 artifact의 별도 공개 배포를 주장하지 않는다.
 
 ## 수치 검증 방법과 실제 생성 코드
 
@@ -61,7 +61,7 @@ dtype·shape·fixed scaling·enum metadata, integer/fixed decimal code, IEEE spe
 | localPerformance | PASS | 6예산 통과; cold p95 1101.9864ms, warm955.8478ms, 1000node116.4304ms, cancel256.9781ms, retained heap−1112572B |
 | rootProjectRelease | PASS | 각70검사/12파일; root2093388B SHA b1855e111a91d32dfb4abef30f9713384d8c0e0ca565590fe6cb5bc654c8d6ab; project2093638B SHA129b1d65e51195bf726213bed478434151928e18d1cd64002066336a08d29ac6 |
 | projectBrowser | PASS | /CalcWeave/ 실제4개 모두 assertion 통과. Windows webServer 종료 대기 후 root build 복원 및 동일 hash 재확인 |
-| publicDeployment | pending combined release | M12 완료 후 GitHub Pages 통합 배포; 현재 공개 버전을 M10으로 주장하지 않음 |
+| publicDeployment | included in verified0.13.0 combined release | M12 Actions·정확한 project artifact parity·공개9검사 PASS; 이전0.11.0 artifact 별도 배포를 주장하지 않음 |
 | engineeringMilestoneStatus | complete selected scope | 독립 수치/actualTS/단위/UI/성능/artifact/행별 선택 승인 증거를 동결 |
 | fullServiceLaunch | false | 기존 초보자 관찰·도메인·운영 확인 사항 별도 |
 | fullSimulinkEquivalenceClaimed | false | 원본 전체 옵션·MathWorks reference·추가 target 후속 |

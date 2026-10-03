@@ -30,7 +30,7 @@ Bus/message의 nested metadata·exact uint64·payload·빈 batch를 UI, history�
 | source 행별 승인 | 73행 중58선택 승인(신규48·기존확장10), 이전2유지·미지원13; 현재subset293/385,missing92 |
 | 디자인·성능 | 188관측/pageErrors0·6성능 예산 PASS |
 | root/project artifact | 각각70검사/12파일 PASS; root2335169B,project2335419B; project browser4/4 최종 exit0 |
-| 공개 배포 | M12 최종 통합 릴리스에서 확인 |
+| 공개 배포 | M12의 공개0.13.0 통합 릴리스에 포함; [Actions·파일 parity·공개9검사](pages-validation.md) PASS |
 | fullSimulinkEquivalenceClaimed | false |
 | verifiedPublicLaunch | false; 기존 도메인·운영 확인·초보자 관찰 게이트 별도 |
 
