@@ -1,0 +1,2404 @@
+{
+  "generatedAt": "2026-10-03T05:16:20.097Z",
+  "stage": "M11",
+  "engineVersion": "0.12.0-m11",
+  "datasetSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+  "sourceRows": 385,
+  "uniqueSourceNameStrings": 339,
+  "firstWorkSourceRows": 73,
+  "registryDefinitions": 293,
+  "approvedAdditionalSourceRows": 48,
+  "existingMappingExtensions": 10,
+  "approvedSourceRows": 58,
+  "selectionCounts": {
+    "verified-native-scope": 31,
+    "verified-shared-configuration": 17,
+    "verified-independent-alternative": 8,
+    "verified-conditional-adapter": 2
+  },
+  "evidencePath": "docs/evidence/m11-verification.json",
+  "evidenceSha256": "716939d06a20c53a3fb9655820fb5c366fde0b1bb0fd5fd37adb39abadafea76",
+  "fixturePath": "tests/m11-independent-fixtures.ts",
+  "fixtureSha256": "5a3cd6db5fb29ac4a1baf37ef98a87a182c62cc7ad33814b4aeb702da238eb70",
+  "protectedArtifacts": {
+    "dataset/Simulink_Basic_Blocks_R2024b.md": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+    "docs/baselines/catalog-block-coverage.md": "bfad433de22c3302b53369be3465ec1d4bb3e072dd8f3ce310bc4af1ea967774",
+    "docs/simulink-coverage-roadmap.json": "86ec3c3f75939dc72a00b39d6760d86d9ef21f2a63922daf110c5db2fe7932cd",
+    "docs/baselines/m10-registry.json": "d23bc34bdbd450b1ea2be671b419f8ccfb74fa97238d541c3f9ffd97230cf8dc",
+    "docs/evidence/m10-source-approvals.json": "d8c938fb999555aaf61f24b68b7b631e158611dc2760542bd08d0f94d3221f4b",
+    "docs/evidence/m10-verification.json": "659a11814e1420f217068f4cab4c6726cd3070154f69fd1064afd3a4aee52e6d",
+    "docs/evidence/m10-reference-review.json": "fb9572178cc5c5caf19658e9010709a67d0d6611f83b9f3ce8993dffee493325",
+    "docs/evidence/m8-source-approvals.json": "4f558f5040f9dda1a9c2b5bbd2b848b825b4961489a03228dd3c12370b2c4d60",
+    "docs/evidence/m9-source-approvals.json": "7d49f1b15a6b325050a55295bca4d29411fe123dd0752e2ac98766641ccc18ca",
+    "docs/evidence/m8-verification.json": "351b5ba6031dff1a2f4dfb8b51e4e63e2747998277ee93e56decc4b908ff75d6",
+    "docs/evidence/m8-presets-verification.json": "55cef48ebe57a97ca02922225330f36b1f1d0866d2ad92d69f74fcceb7771f01",
+    "docs/evidence/m9-verification.json": "1d3fee9b56017db6c12b8f7f778d4c064efd4fa7f7d0014a2a38b6ffdd13a23f"
+  },
+  "sourceAudit": "Every approval names one executed configured raw model and the matching original row identity. Pure declarations, aliases, inactive code, examples and untested default selectors do not independently approve a source. Actual tested parameter values may differ from candidate defaults and are retained separately.",
+  "primarySourceRuntimeExecuted": false,
+  "fullSimulinkEquivalenceClaimed": false,
+  "fullSourceOptionsClosed": 0,
+  "pending": [],
+  "preservedSourceRows": [
+    {
+      "sourceId": "01-019",
+      "reason": "Frozen M4 transparent definition expansion retained; no new M11 source approval inferred from controlled wrappers.",
+      "rowSha256": "c2f8de70785ad439af6a4b6adb20b9cd4d05431ec4b8f199a691db0ee4b25acf"
+    },
+    {
+      "sourceId": "13-021",
+      "reason": "Frozen M4 transparent definition expansion retained; no new M11 source approval inferred from controlled wrappers.",
+      "rowSha256": "8ac381264cf946227dcfc04397e6e77829066ff14affd9272b3b5e13887f4038"
+    }
+  ],
+  "explicitlyUnsupported": [
+    {
+      "sourceId": "10-004",
+      "reason": "Native message-arrival-triggered definition/control port is not registered; signal enable/receive composition does not establish source equivalence."
+    },
+    {
+      "sourceId": "13-015",
+      "reason": "Native named bus-element boundary/element grouping shell is not implemented. Structured Inport and field selector are available but are not approved as this source row."
+    },
+    {
+      "sourceId": "13-017",
+      "reason": "External model-reference artifact/resolution/configuration lifecycle is not implemented. Local definitions do not imply external model-reference support."
+    },
+    {
+      "sourceId": "13-018",
+      "reason": "Native named bus-element boundary/element grouping shell is not implemented. Structured Outport and bus creator/assignment are available but are not approved as this source row."
+    },
+    {
+      "sourceId": "13-022",
+      "reason": "External subsystem reference artifact/resolution/version lifecycle is not implemented. Local definition references are a separate capability."
+    },
+    {
+      "sourceId": "15-013",
+      "reason": "Native source/sink/start/end variant routing and its compile/update choices are not implemented. Local Variant Subsystem selection is a separate capability."
+    },
+    {
+      "sourceId": "15-014",
+      "reason": "Native source/sink/start/end variant routing and its compile/update choices are not implemented. Local Variant Subsystem selection is a separate capability."
+    },
+    {
+      "sourceId": "15-023",
+      "reason": "Native source/sink/start/end variant routing and its compile/update choices are not implemented. Local Variant Subsystem selection is a separate capability."
+    },
+    {
+      "sourceId": "15-024",
+      "reason": "Native source/sink/start/end variant routing and its compile/update choices are not implemented. Local Variant Subsystem selection is a separate capability."
+    },
+    {
+      "sourceId": "15-025",
+      "reason": "Native source/sink/start/end variant routing and its compile/update choices are not implemented. Local Variant Subsystem selection is a separate capability."
+    },
+    {
+      "sourceId": "15-026",
+      "reason": "Native source/sink/start/end variant routing and its compile/update choices are not implemented. Local Variant Subsystem selection is a separate capability."
+    },
+    {
+      "sourceId": "16-003",
+      "reason": "Native named bus-element boundary/element grouping shell is not implemented. Structured Outport and bus creator/assignment are available but are not approved as this source row."
+    },
+    {
+      "sourceId": "17-013",
+      "reason": "Native named bus-element boundary/element grouping shell is not implemented. Structured Inport and field selector are available but are not approved as this source row."
+    }
+  ],
+  "approvals": [
+    {
+      "sourceId": "01-001",
+      "sourceName": "Bus Creator",
+      "sourceLine": 78,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "route.structured-bus",
+      "candidateParameters": {
+        "count": 2,
+        "fields": "[\"a\",\"b\"]"
+      },
+      "selectedParameters": {
+        "count": 2,
+        "fields": "[\"exact\",\"flag\"]"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-route-structured-bus",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "heterogeneous ordered bus; bounded16 fields/depth8; exact leaf metadata · 실제 선택 구성 {\"count\":2,\"fields\":\"[\\\"exact\\\",\\\"flag\\\"]\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-route-structured-bus/static",
+        "m11-independent-route-structured-bus/discrete",
+        "m11-independent-route-structured-bus/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in1",
+        "in2"
+      ],
+      "newlyApproved": false,
+      "priorStatus": "M4 승인 subset",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "01-002",
+      "sourceName": "Bus Selector",
+      "sourceLine": 79,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "route.structured-select",
+      "candidateParameters": {
+        "field": "a"
+      },
+      "selectedParameters": {
+        "field": "exact"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-route-structured-select",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "bounded field path selected without casts · 실제 선택 구성 {\"field\":\"exact\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-route-structured-select/static",
+        "m11-independent-route-structured-select/discrete",
+        "m11-independent-route-structured-select/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": false,
+      "priorStatus": "M4 승인 subset",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "01-010",
+      "sourceName": "Inport",
+      "sourceLine": 87,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 · 화면의 초기 이름은 보통 `In1`",
+      "canonical": "io.structured-input",
+      "candidateParameters": {},
+      "selectedParameters": {
+        "value": {
+          "kind": "bus",
+          "fields": [
+            {
+              "name": "exact",
+              "value": {
+                "kind": "typed",
+                "dtype": "uint64",
+                "shape": [],
+                "data": [
+                  "9007199254740993"
+                ]
+              }
+            },
+            {
+              "name": "flag",
+              "value": true
+            }
+          ]
+        }
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-io-structured-input",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "validated typed/bus/message standalone value or definition boundary · 실제 선택 구성 {\"value\":{\"kind\":\"bus\",\"fields\":[{\"name\":\"exact\",\"value\":{\"kind\":\"typed\",\"dtype\":\"uint64\",\"shape\":[],\"data\":[\"9007199254740993\"]}},{\"name\":\"flag\",\"value\":true}]}}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-io-structured-input/static",
+        "m11-independent-io-structured-input/discrete",
+        "m11-independent-io-structured-input/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [],
+      "newlyApproved": false,
+      "priorStatus": "M1 정적 subset",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "01-014",
+      "sourceName": "Outport",
+      "sourceLine": 91,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 · 화면의 초기 이름은 보통 `Out1`",
+      "canonical": "io.structured-output",
+      "candidateParameters": {},
+      "selectedParameters": {},
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-io-structured-output",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "raw structured output or definition boundary · 실제 선택 구성 {}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-io-structured-output/static",
+        "m11-independent-io-structured-output/discrete",
+        "m11-independent-io-structured-output/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": false,
+      "priorStatus": "M1 정적 subset",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "09-001",
+      "sourceName": "Array Processing Subsystem",
+      "sourceLine": 394,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "R2024a+",
+      "canonical": "hierarchy.array-processing",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "axis": 0
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "axis": 0
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-array-processing",
+      "selectionKind": "verified-independent-alternative",
+      "status": "M11 독립 대체 subset",
+      "boundary": "actual axis slices processed by child definition; partition budget · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\",\"axis\":0}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-array-processing/discrete",
+        "m11-independent-hierarchy-array-processing/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "09-014",
+      "sourceName": "Neighborhood Processing Subsystem",
+      "sourceLine": 407,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "R2022b+",
+      "canonical": "hierarchy.neighborhood-processing",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "window": 3,
+        "boundary": "clamp"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "window": 3,
+        "boundary": "clamp"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-neighborhood-processing",
+      "selectionKind": "verified-independent-alternative",
+      "status": "M11 독립 대체 subset",
+      "boundary": "actual bounded 2D windows; scalar child result; clamp/wrap/zero · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\",\"window\":3,\"boundary\":\"clamp\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-neighborhood-processing/discrete",
+        "m11-independent-hierarchy-neighborhood-processing/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "09-016",
+      "sourceName": "Pixel Processing Subsystem",
+      "sourceLine": 409,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "R2024a+",
+      "canonical": "hierarchy.pixel-processing",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-pixel-processing",
+      "selectionKind": "verified-independent-alternative",
+      "status": "M11 독립 대체 subset",
+      "boundary": "scalar child execution for each position; independent persistent banks · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-pixel-processing/discrete",
+        "m11-independent-hierarchy-pixel-processing/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "10-002",
+      "sourceName": "Hit Scheduler",
+      "sourceLine": 429,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "R2022b+",
+      "canonical": "events.hit-scheduler",
+      "candidateParameters": {
+        "times": [
+          0,
+          1
+        ],
+        "count": 1
+      },
+      "selectedParameters": {
+        "times": [
+          0,
+          2
+        ],
+        "count": 2
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-events-hit-scheduler",
+      "selectionKind": "verified-independent-alternative",
+      "status": "M11 독립 대체 subset",
+      "boundary": "declared fixed due-grid calls; arbitrary solver-time scheduling remains open · 실제 선택 구성 {\"times\":[0,2],\"count\":2}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-events-hit-scheduler/discrete",
+        "m11-independent-events-hit-scheduler/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "10-003",
+      "sourceName": "Message Merge",
+      "sourceLine": 430,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "R2021a+",
+      "canonical": "events.message-merge",
+      "candidateParameters": {
+        "count": 2
+      },
+      "selectedParameters": {
+        "count": 2
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-events-message-merge",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "same payload descriptor; priority and stable input arrival order · 실제 선택 구성 {\"count\":2}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-events-message-merge/static",
+        "m11-independent-events-message-merge/discrete",
+        "m11-independent-events-message-merge/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in1",
+        "in2"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "10-005",
+      "sourceName": "Queue",
+      "sourceLine": 432,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 메시지 사용 / 조건 · 엔터티 및 고급 라우팅은 SimEvents 조건 확인. 제품 편입의 정확한 최초 버전은 별도 확인 필요",
+      "canonical": "events.queue",
+      "candidateParameters": {
+        "capacity": 16,
+        "maxDequeue": 1,
+        "overflow": "error"
+      },
+      "selectedParameters": {
+        "capacity": 16,
+        "maxDequeue": 1,
+        "overflow": "error"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-events-queue",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "old queue dequeue precedes new enqueue; bounded storage and batch · 실제 선택 구성 {\"capacity\":16,\"maxDequeue\":1,\"overflow\":\"error\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-events-queue/discrete",
+        "m11-independent-events-queue/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in",
+        "receive"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "10-006",
+      "sourceName": "Receive",
+      "sourceLine": 433,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 메시지 사용 · 구버전 제품 구성 및 메시지 기능 확인",
+      "canonical": "events.receive",
+      "candidateParameters": {
+        "initial": 0
+      },
+      "selectedParameters": {
+        "initial": 0
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-events-receive",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "first payload plus valid; hold initial/previous payload on empty batch · 실제 선택 구성 {\"initial\":0}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-events-receive/discrete",
+        "m11-independent-events-receive/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "10-007",
+      "sourceName": "Send",
+      "sourceLine": 434,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 메시지 사용 · 구버전 제품 구성 및 메시지 기능 확인",
+      "canonical": "events.send",
+      "candidateParameters": {
+        "producer": "sender",
+        "priority": 0
+      },
+      "selectedParameters": {
+        "producer": "Producer",
+        "priority": 0
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-events-send",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "boolean publication; exact producer/sequence/time/priority/payload · 실제 선택 구성 {\"producer\":\"Producer\",\"priority\":0}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-events-send/discrete",
+        "m11-independent-events-send/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "payload",
+        "send"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "10-008",
+      "sourceName": "Sequence Viewer",
+      "sourceLine": 435,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 · 메시지/이벤트 시퀀스 표시",
+      "canonical": "sink.sequence-viewer",
+      "candidateParameters": {},
+      "selectedParameters": {},
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-sink-sequence-viewer",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "bounded raw message batches recorded as samples · 실제 선택 구성 {}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-sink-sequence-viewer/static",
+        "m11-independent-sink-sequence-viewer/discrete",
+        "m11-independent-sink-sequence-viewer/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-001",
+      "sourceName": "Atomic Subsystem",
+      "sourceLine": 497,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "구성 · Subsystem의 atomic 실행 구성",
+      "canonical": "hierarchy.atomic",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-atomic",
+      "selectionKind": "verified-shared-configuration",
+      "status": "M11 승인 subset",
+      "boundary": "child state bank and atomic publication · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-atomic/discrete",
+        "m11-independent-hierarchy-atomic/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-002",
+      "sourceName": "Enable",
+      "sourceLine": 498,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "hierarchy.enabled",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "stateOnEnable": "hold"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "stateOnEnable": "hold"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-enabled",
+      "selectionKind": "verified-conditional-adapter",
+      "status": "M11 제어 포트 subset",
+      "boundary": "positive enable control-port adapter; no separate primitive block · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\",\"stateOnEnable\":\"hold\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-enabled/discrete",
+        "m11-independent-hierarchy-enabled/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "enable",
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-003",
+      "sourceName": "Enabled Subsystem",
+      "sourceLine": 499,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "hierarchy.enabled",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "stateOnEnable": "hold"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "stateOnEnable": "hold"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-enabled",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "positive enable; independent reactivation-state and inactive-output policies · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\",\"stateOnEnable\":\"hold\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-enabled/discrete",
+        "m11-independent-hierarchy-enabled/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "enable",
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-004",
+      "sourceName": "Enabled and Triggered Subsystem",
+      "sourceLine": 500,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "hierarchy.enabled-triggered",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "trigger": "rising",
+        "stateOnEnable": "hold"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "trigger": "rising",
+        "stateOnEnable": "hold"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-enabled-triggered",
+      "selectionKind": "verified-shared-configuration",
+      "status": "M11 승인 subset",
+      "boundary": "enabled and actual trigger edge; disabled edge not replayed · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\",\"trigger\":\"rising\",\"stateOnEnable\":\"hold\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-enabled-triggered/discrete",
+        "m11-independent-hierarchy-enabled-triggered/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "enable",
+        "in",
+        "trigger"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-005",
+      "sourceName": "For Each Subsystem",
+      "sourceLine": 501,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "hierarchy.for-each",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "axis": 0
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "axis": 0
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-for-each",
+      "selectionKind": "verified-shared-configuration",
+      "status": "M11 승인 subset",
+      "boundary": "at most64 single-element partitions with independent persistent banks · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\",\"axis\":0}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-for-each/discrete",
+        "m11-independent-hierarchy-for-each/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-006",
+      "sourceName": "For Iterator Subsystem",
+      "sourceLine": 502,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "hierarchy.for-iterator",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "count": 4,
+        "iterationPort": "iteration",
+        "statePerIteration": "carry"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "count": 3,
+        "iterationPort": "iteration",
+        "statePerIteration": "carry"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-for-iterator",
+      "selectionKind": "verified-shared-configuration",
+      "status": "M11 승인 subset",
+      "boundary": "0..64 calls at same parent time; automatic iteration binding · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\",\"count\":3,\"iterationPort\":\"iteration\",\"statePerIteration\":\"carry\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-for-iterator/discrete",
+        "m11-independent-hierarchy-for-iterator/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-007",
+      "sourceName": "Function Element",
+      "sourceLine": 503,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "R2022a+",
+      "canonical": "functions.element",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "name": "function"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "name": "Accumulate"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-functions-element",
+      "selectionKind": "verified-independent-alternative",
+      "status": "M11 독립 대체 subset",
+      "boundary": "local versioned definition declaration; no external language execution · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"name\":\"Accumulate\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-functions-element/discrete",
+        "m11-independent-functions-element/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-008",
+      "sourceName": "Function Element Call",
+      "sourceLine": 504,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "R2022a+",
+      "canonical": "functions.call",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-functions-call",
+      "selectionKind": "verified-independent-alternative",
+      "status": "M11 독립 대체 subset",
+      "boundary": "explicit local definition ABI with independent state bank · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-functions-call/discrete",
+        "m11-independent-functions-call/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-009",
+      "sourceName": "Function-Call Feedback Latch",
+      "sourceLine": 505,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "events.feedback-latch",
+      "candidateParameters": {
+        "initial": 0
+      },
+      "selectedParameters": {
+        "initial": 0,
+        "initialDescriptor": "null"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-events-feedback-latch",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "previous committed signal published on next due · 실제 선택 구성 {\"initial\":0,\"initialDescriptor\":\"null\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-events-feedback-latch/discrete",
+        "m11-independent-events-feedback-latch/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-010",
+      "sourceName": "Function-Call Generator",
+      "sourceLine": 506,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "events.function-call-generator",
+      "candidateParameters": {
+        "count": 1
+      },
+      "selectedParameters": {
+        "count": 2
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-events-function-call-generator",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "integer1..64 call count at declared due · 실제 선택 구성 {\"count\":2}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-events-function-call-generator/discrete",
+        "m11-independent-events-function-call-generator/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-011",
+      "sourceName": "Function-Call Split",
+      "sourceLine": 507,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "events.function-call-split",
+      "candidateParameters": {
+        "count": 2
+      },
+      "selectedParameters": {
+        "count": 2
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-events-function-call-split",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "validated count copied to explicit output ordering · 실제 선택 구성 {\"count\":2}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-events-function-call-split/static",
+        "m11-independent-events-function-call-split/discrete",
+        "m11-independent-events-function-call-split/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-012",
+      "sourceName": "Function-Call Subsystem",
+      "sourceLine": 508,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "hierarchy.function-call",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-function-call",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "0..64 same-time sequential invocations; producer-rate event ownership · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-function-call/discrete",
+        "m11-independent-hierarchy-function-call/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "call",
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-013",
+      "sourceName": "If",
+      "sourceLine": 509,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "hierarchy.if",
+      "candidateParameters": {
+        "comparison": "gt",
+        "threshold": 0
+      },
+      "selectedParameters": {
+        "comparison": "gt",
+        "threshold": 2
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-if",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "finite scalar comparison; exclusive then/else action signals · 실제 선택 구성 {\"comparison\":\"gt\",\"threshold\":2}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-if/static",
+        "m11-independent-hierarchy-if/discrete",
+        "m11-independent-hierarchy-if/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-014",
+      "sourceName": "If Action Subsystem",
+      "sourceLine": 510,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "hierarchy.action",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "stateOnEnable": "hold"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-action",
+      "selectionKind": "verified-shared-configuration",
+      "status": "M11 승인 subset",
+      "boundary": "boolean action; conditional publication owns Merge participation · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\",\"stateOnEnable\":\"hold\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-action/discrete",
+        "m11-independent-hierarchy-action/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "action",
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-016",
+      "sourceName": "Inport",
+      "sourceLine": 512,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 · 배치 후 초기 이름은 보통 In1",
+      "canonical": "io.structured-input",
+      "candidateParameters": {},
+      "selectedParameters": {
+        "value": {
+          "kind": "bus",
+          "fields": [
+            {
+              "name": "exact",
+              "value": {
+                "kind": "typed",
+                "dtype": "uint64",
+                "shape": [],
+                "data": [
+                  "9007199254740993"
+                ]
+              }
+            },
+            {
+              "name": "flag",
+              "value": true
+            }
+          ]
+        }
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-io-structured-input",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "validated typed/bus/message standalone value or definition boundary · 실제 선택 구성 {\"value\":{\"kind\":\"bus\",\"fields\":[{\"name\":\"exact\",\"value\":{\"kind\":\"typed\",\"dtype\":\"uint64\",\"shape\":[],\"data\":[\"9007199254740993\"]}},{\"name\":\"flag\",\"value\":true}]}}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-io-structured-input/static",
+        "m11-independent-io-structured-input/discrete",
+        "m11-independent-io-structured-input/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [],
+      "newlyApproved": false,
+      "priorStatus": "M1 정적 subset",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-019",
+      "sourceName": "Outport",
+      "sourceLine": 515,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 · 배치 후 초기 이름은 보통 Out1",
+      "canonical": "io.structured-output",
+      "candidateParameters": {},
+      "selectedParameters": {},
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-io-structured-output",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "raw structured output or definition boundary · 실제 선택 구성 {}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-io-structured-output/static",
+        "m11-independent-io-structured-output/discrete",
+        "m11-independent-io-structured-output/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": false,
+      "priorStatus": "M1 정적 subset",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-020",
+      "sourceName": "Resettable Subsystem",
+      "sourceLine": 516,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "hierarchy.resettable",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "resetMode": "rising"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "resetMode": "rising"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-resettable",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "rising/level reset before current child invocation · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\",\"resetMode\":\"rising\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-resettable/discrete",
+        "m11-independent-hierarchy-resettable/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in",
+        "reset"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-023",
+      "sourceName": "Switch Case",
+      "sourceLine": 519,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "hierarchy.switch-case",
+      "candidateParameters": {
+        "cases": [
+          0,
+          1
+        ]
+      },
+      "selectedParameters": {
+        "cases": [
+          1,
+          2
+        ]
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-switch-case",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "unique finite scalar cases and default action · 실제 선택 구성 {\"cases\":[1,2]}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-switch-case/static",
+        "m11-independent-hierarchy-switch-case/discrete",
+        "m11-independent-hierarchy-switch-case/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-024",
+      "sourceName": "Switch Case Action Subsystem",
+      "sourceLine": 520,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "hierarchy.action",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "stateOnEnable": "hold"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-action",
+      "selectionKind": "verified-shared-configuration",
+      "status": "M11 승인 subset",
+      "boundary": "boolean action from selected case · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\",\"stateOnEnable\":\"hold\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-action/discrete",
+        "m11-independent-hierarchy-action/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "action",
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-025",
+      "sourceName": "Trigger",
+      "sourceLine": 521,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "hierarchy.triggered",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "trigger": "rising"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "trigger": "rising"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-triggered",
+      "selectionKind": "verified-conditional-adapter",
+      "status": "M11 제어 포트 subset",
+      "boundary": "trigger control-port adapter; no separate primitive block · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\",\"trigger\":\"rising\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-triggered/discrete",
+        "m11-independent-hierarchy-triggered/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in",
+        "trigger"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-026",
+      "sourceName": "Triggered Subsystem",
+      "sourceLine": 522,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "hierarchy.triggered",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "trigger": "rising"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "trigger": "rising"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-triggered",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "rising/falling/either real edge; output held between calls · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\",\"trigger\":\"rising\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-triggered/discrete",
+        "m11-independent-hierarchy-triggered/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in",
+        "trigger"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-028",
+      "sourceName": "Variant Subsystem",
+      "sourceLine": 524,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "hierarchy.variant",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "alternateDefinitionId": "alternative",
+        "alternateVersion": 1,
+        "active": "first"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "alternateDefinitionId": "Inactive",
+        "alternateVersion": 1,
+        "active": "first"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-variant",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "selected definition alone executes; both external interfaces checked · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\",\"alternateDefinitionId\":\"Inactive\",\"alternateVersion\":1,\"active\":\"first\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-variant/discrete",
+        "m11-independent-hierarchy-variant/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "13-029",
+      "sourceName": "While Iterator Subsystem",
+      "sourceLine": 525,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "hierarchy.while-iterator",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "maxIterations": 16,
+        "iterationPort": "iteration",
+        "conditionOutput": "continue",
+        "statePerIteration": "carry"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold",
+        "maxIterations": 4,
+        "conditionOutput": "continue",
+        "iterationPort": "iteration",
+        "statePerIteration": "carry"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-hierarchy-while-iterator",
+      "selectionKind": "verified-shared-configuration",
+      "status": "M11 승인 subset",
+      "boundary": "boolean continuation; max64 bound; overflow atomic diagnostic · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\",\"maxIterations\":4,\"conditionOutput\":\"continue\",\"iterationPort\":\"iteration\",\"statePerIteration\":\"carry\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-hierarchy-while-iterator/discrete",
+        "m11-independent-hierarchy-while-iterator/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "condition",
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "15-001",
+      "sourceName": "Bus Assignment",
+      "sourceLine": 570,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "route.structured-assign",
+      "candidateParameters": {
+        "field": "a"
+      },
+      "selectedParameters": {
+        "field": "flag"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-route-structured-assign",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "existing field path; replacement descriptor must match · 실제 선택 구성 {\"field\":\"flag\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-route-structured-assign/static",
+        "m11-independent-route-structured-assign/discrete",
+        "m11-independent-route-structured-assign/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in",
+        "value"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "15-002",
+      "sourceName": "Bus Creator",
+      "sourceLine": 571,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "route.structured-bus",
+      "candidateParameters": {
+        "count": 2,
+        "fields": "[\"a\",\"b\"]"
+      },
+      "selectedParameters": {
+        "count": 2,
+        "fields": "[\"exact\",\"flag\"]"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-route-structured-bus",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "heterogeneous ordered bus; bounded16 fields/depth8; exact leaf metadata · 실제 선택 구성 {\"count\":2,\"fields\":\"[\\\"exact\\\",\\\"flag\\\"]\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-route-structured-bus/static",
+        "m11-independent-route-structured-bus/discrete",
+        "m11-independent-route-structured-bus/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in1",
+        "in2"
+      ],
+      "newlyApproved": false,
+      "priorStatus": "M4 승인 subset",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "15-003",
+      "sourceName": "Bus Selector",
+      "sourceLine": 572,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "route.structured-select",
+      "candidateParameters": {
+        "field": "a"
+      },
+      "selectedParameters": {
+        "field": "exact"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-route-structured-select",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "bounded field path selected without casts · 실제 선택 구성 {\"field\":\"exact\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-route-structured-select/static",
+        "m11-independent-route-structured-select/discrete",
+        "m11-independent-route-structured-select/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": false,
+      "priorStatus": "M4 승인 subset",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "15-004",
+      "sourceName": "Data Store Memory",
+      "sourceLine": 573,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "route.data-store-memory",
+      "candidateParameters": {
+        "name": "shared",
+        "scope": "local",
+        "initial": 0
+      },
+      "selectedParameters": {
+        "name": "Data",
+        "scope": "local",
+        "initial": 2
+      },
+      "configuredNodeId": "Memory",
+      "rawFixtureId": "m11-independent-route-data-store-memory",
+      "selectionKind": "verified-shared-configuration",
+      "status": "M11 승인 subset",
+      "boundary": "bounded exact initial signal and lexical owner declaration · 실제 선택 구성 {\"name\":\"Data\",\"scope\":\"local\",\"initial\":2}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-route-data-store-memory/discrete",
+        "m11-independent-route-data-store-memory/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "15-005",
+      "sourceName": "Data Store Read",
+      "sourceLine": 574,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "route.data-store-read",
+      "candidateParameters": {
+        "name": "shared",
+        "scope": "local",
+        "order": 0
+      },
+      "selectedParameters": {
+        "name": "Data",
+        "scope": "local",
+        "order": 1
+      },
+      "configuredNodeId": "Read",
+      "rawFixtureId": "m11-independent-route-data-store-read",
+      "selectionKind": "verified-shared-configuration",
+      "status": "M11 승인 subset",
+      "boundary": "explicit frame journal read order · 실제 선택 구성 {\"name\":\"Data\",\"scope\":\"local\",\"order\":1}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-route-data-store-read/discrete",
+        "m11-independent-route-data-store-read/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "15-006",
+      "sourceName": "Data Store Write",
+      "sourceLine": 575,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "route.data-store-write",
+      "candidateParameters": {
+        "name": "shared",
+        "scope": "local",
+        "order": 0
+      },
+      "selectedParameters": {
+        "name": "Data",
+        "scope": "local",
+        "order": 0
+      },
+      "configuredNodeId": "Write",
+      "rawFixtureId": "m11-independent-route-data-store-write",
+      "selectionKind": "verified-shared-configuration",
+      "status": "M11 승인 subset",
+      "boundary": "shape/type invariant staged journal write; writer conflicts diagnosed · 실제 선택 구성 {\"name\":\"Data\",\"scope\":\"local\",\"order\":0}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-route-data-store-write/discrete",
+        "m11-independent-route-data-store-write/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "15-008",
+      "sourceName": "From",
+      "sourceLine": 577,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "route.from",
+      "candidateParameters": {
+        "name": "shared",
+        "scope": "local"
+      },
+      "selectedParameters": {
+        "name": "Tag",
+        "scope": "scoped"
+      },
+      "configuredNodeId": "From",
+      "rawFixtureId": "m11-independent-route-from",
+      "selectionKind": "verified-shared-configuration",
+      "status": "M11 승인 subset",
+      "boundary": "unique visible Goto producer and original descriptor · 실제 선택 구성 {\"name\":\"Tag\",\"scope\":\"scoped\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-route-from/static",
+        "m11-independent-route-from/discrete",
+        "m11-independent-route-from/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "15-009",
+      "sourceName": "Goto",
+      "sourceLine": 578,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "route.goto",
+      "candidateParameters": {
+        "name": "shared",
+        "scope": "local"
+      },
+      "selectedParameters": {
+        "name": "Tag",
+        "scope": "scoped"
+      },
+      "configuredNodeId": "Goto",
+      "rawFixtureId": "m11-independent-route-goto",
+      "selectionKind": "verified-shared-configuration",
+      "status": "M11 승인 subset",
+      "boundary": "local/scoped/global name binding resolved by compiler · 실제 선택 구성 {\"name\":\"Tag\",\"scope\":\"scoped\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-route-goto/static",
+        "m11-independent-route-goto/discrete",
+        "m11-independent-route-goto/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "15-010",
+      "sourceName": "Goto Tag Visibility",
+      "sourceLine": 579,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "route.tag-visibility",
+      "candidateParameters": {
+        "name": "shared"
+      },
+      "selectedParameters": {
+        "name": "Tag"
+      },
+      "configuredNodeId": "Visibility",
+      "rawFixtureId": "m11-independent-route-tag-visibility",
+      "selectionKind": "verified-shared-configuration",
+      "status": "M11 승인 subset",
+      "boundary": "lexical scoped-tag owner declaration · 실제 선택 구성 {\"name\":\"Tag\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-route-tag-visibility/static",
+        "m11-independent-route-tag-visibility/discrete",
+        "m11-independent-route-tag-visibility/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "15-015",
+      "sourceName": "Merge",
+      "sourceLine": 584,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "route.merge",
+      "candidateParameters": {
+        "count": 2,
+        "initial": 0
+      },
+      "selectedParameters": {
+        "count": 2,
+        "initial": 0
+      },
+      "configuredNodeId": "Merge",
+      "rawFixtureId": "m11-independent-route-merge",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "only actual conditional publications participate; simultaneous writers diagnosed · 실제 선택 구성 {\"count\":2,\"initial\":0}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-route-merge/discrete",
+        "m11-independent-route-merge/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in1",
+        "in2"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "15-018",
+      "sourceName": "Parameter Writer",
+      "sourceLine": 587,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 · 구버전 최초 도입 미확정",
+      "canonical": "state.parameter-writer",
+      "candidateParameters": {
+        "target": "constant",
+        "parameter": "value",
+        "order": 0
+      },
+      "selectedParameters": {
+        "target": "Target",
+        "parameter": "value",
+        "order": 0
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-state-parameter-writer",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "approved value/gain overlays only; same descriptor; atomic frame writes · 실제 선택 구성 {\"target\":\"Target\",\"parameter\":\"value\",\"order\":0}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-state-parameter-writer/discrete",
+        "m11-independent-state-parameter-writer/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "15-020",
+      "sourceName": "State Reader",
+      "sourceLine": 589,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 · 구버전 최초 도입 미확정",
+      "canonical": "state.reader",
+      "candidateParameters": {
+        "target": "delay",
+        "slot": "value",
+        "order": 0
+      },
+      "selectedParameters": {
+        "target": "Delay",
+        "slot": "value",
+        "order": 1
+      },
+      "configuredNodeId": "Read",
+      "rawFixtureId": "m11-independent-state-reader",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "approved local value slot; no arbitrary runtime object exposure · 실제 선택 구성 {\"target\":\"Delay\",\"slot\":\"value\",\"order\":1}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-state-reader/discrete",
+        "m11-independent-state-reader/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "15-021",
+      "sourceName": "State Writer",
+      "sourceLine": 590,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 · 구버전 최초 도입 미확정",
+      "canonical": "state.writer",
+      "candidateParameters": {
+        "target": "delay",
+        "slot": "value",
+        "order": 0
+      },
+      "selectedParameters": {
+        "target": "Delay",
+        "slot": "value",
+        "order": 0
+      },
+      "configuredNodeId": "Write",
+      "rawFixtureId": "m11-independent-state-writer",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "approved shape-invariant local value slot staged write · 실제 선택 구성 {\"target\":\"Delay\",\"slot\":\"value\",\"order\":0}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-state-writer/discrete",
+        "m11-independent-state-writer/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "16-004",
+      "sourceName": "Outport",
+      "sourceLine": 615,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "io.structured-output",
+      "candidateParameters": {},
+      "selectedParameters": {},
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-io-structured-output",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "raw structured output or definition boundary · 실제 선택 구성 {}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-io-structured-output/static",
+        "m11-independent-io-structured-output/discrete",
+        "m11-independent-io-structured-output/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": false,
+      "priorStatus": "M1 정적 subset",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "17-014",
+      "sourceName": "Inport",
+      "sourceLine": 651,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "io.structured-input",
+      "candidateParameters": {},
+      "selectedParameters": {
+        "value": {
+          "kind": "bus",
+          "fields": [
+            {
+              "name": "exact",
+              "value": {
+                "kind": "typed",
+                "dtype": "uint64",
+                "shape": [],
+                "data": [
+                  "9007199254740993"
+                ]
+              }
+            },
+            {
+              "name": "flag",
+              "value": true
+            }
+          ]
+        }
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-io-structured-input",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "validated typed/bus/message standalone value or definition boundary · 실제 선택 구성 {\"value\":{\"kind\":\"bus\",\"fields\":[{\"name\":\"exact\",\"value\":{\"kind\":\"typed\",\"dtype\":\"uint64\",\"shape\":[],\"data\":[\"9007199254740993\"]}},{\"name\":\"flag\",\"value\":true}]}}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-io-structured-input/static",
+        "m11-independent-io-structured-input/discrete",
+        "m11-independent-io-structured-input/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [],
+      "newlyApproved": false,
+      "priorStatus": "M1 정적 subset",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "19-004",
+      "sourceName": "Function Caller",
+      "sourceLine": 714,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "functions.call",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-functions-call",
+      "selectionKind": "verified-native-scope",
+      "status": "M11 승인 subset",
+      "boundary": "explicit local definition ABI; no external host function invocation · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-functions-call/discrete",
+        "m11-independent-functions-call/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "19-005",
+      "sourceName": "Initialize Function",
+      "sourceLine": 715,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "functions.initialize",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-functions-initialize",
+      "selectionKind": "verified-shared-configuration",
+      "status": "M11 승인 subset",
+      "boundary": "first due once; held output after call · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-functions-initialize/discrete",
+        "m11-independent-functions-initialize/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "19-008",
+      "sourceName": "MATLAB Function",
+      "sourceLine": 718,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본 · 이 블록 자체를 Stateflow Chart와 혼동하지 않음",
+      "canonical": "functions.typed",
+      "candidateParameters": {
+        "expression": "x * x"
+      },
+      "selectedParameters": {
+        "expression": "x*x+1"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-functions-typed",
+      "selectionKind": "verified-independent-alternative",
+      "status": "M11 독립 대체 subset",
+      "boundary": "independent bounded scalar expression AST alternative; MATLAB syntax not executed · 실제 선택 구성 {\"expression\":\"x*x+1\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-functions-typed/static",
+        "m11-independent-functions-typed/discrete",
+        "m11-independent-functions-typed/continuous"
+      ],
+      "declaredModes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "19-010",
+      "sourceName": "Reinitialize Function",
+      "sourceLine": 720,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "R2022a+",
+      "canonical": "functions.reinitialize",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-functions-reinitialize",
+      "selectionKind": "verified-shared-configuration",
+      "status": "M11 승인 subset",
+      "boundary": "rising reset reinitializes bank then invokes local definition · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-functions-reinitialize/discrete",
+        "m11-independent-functions-reinitialize/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in",
+        "reset"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "19-011",
+      "sourceName": "Reset Function",
+      "sourceLine": 721,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "functions.reset",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-functions-reset",
+      "selectionKind": "verified-shared-configuration",
+      "status": "M11 승인 subset",
+      "boundary": "rising reset calls local definition; other due held · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-functions-reset/discrete",
+        "m11-independent-functions-reset/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in",
+        "reset"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "19-014",
+      "sourceName": "Simulink Function",
+      "sourceLine": 724,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "functions.call",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-functions-call",
+      "selectionKind": "verified-independent-alternative",
+      "status": "M11 독립 대체 subset",
+      "boundary": "selected local explicit ABI alternative; full function graph semantics open · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-functions-call/discrete",
+        "m11-independent-functions-call/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    },
+    {
+      "sourceId": "19-015",
+      "sourceName": "Terminate Function",
+      "sourceLine": 725,
+      "sourceSubgroup": "일반 표",
+      "sourceCondition": "기본",
+      "canonical": "functions.terminate",
+      "candidateParameters": {
+        "definitionId": "subsystem",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "selectedParameters": {
+        "definitionId": "Child",
+        "version": 1,
+        "initialOutputs": "{}",
+        "disabledOutput": "hold"
+      },
+      "configuredNodeId": "Operation",
+      "rawFixtureId": "m11-independent-functions-terminate",
+      "selectionKind": "verified-shared-configuration",
+      "status": "M11 승인 subset",
+      "boundary": "declared last due call; cancellation/browser-exit hook excluded · 실제 선택 구성 {\"definitionId\":\"Child\",\"version\":1,\"initialOutputs\":\"{}\",\"disabledOutput\":\"hold\"}; 같은 fixture의 입출력·상태·실패·TS/JSON 원자 경계만 승인. 지역 lexical graph·4096 호출/outer due·bounded형상/메모리; wrapper 부모 닫힌 feedback·외부언어/호스트hook·원본 전체옵션/실행 parity는 미승인(open).",
+      "evidenceFixtureIds": [
+        "m11-independent-functions-terminate/discrete",
+        "m11-independent-functions-terminate/continuous"
+      ],
+      "declaredModes": [
+        "discrete",
+        "continuous"
+      ],
+      "requiredBindingsActuallyConnected": [
+        "in"
+      ],
+      "newlyApproved": true,
+      "priorStatus": "미구현",
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open"
+    }
+  ]
+}

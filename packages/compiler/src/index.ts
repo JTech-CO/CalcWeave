@@ -1,7 +1,7 @@
 import { getBlockDefinition, getBlockPorts, getDirectFeedthroughPorts, isDirectFeedthrough, type BlockDefinition } from '../../block-library/src';
 import { parseExpression } from '../../expression/src';
 import {
-  canonicalSemantic, continuousStateElementCount, conversionCoefficients, divideUnits, discreteMemoryElementCount, isSafeIdentifier, MODEL_LIMITS, ModelError, multiplyUnits, normalizeSolverSettings, parseModel, reciprocalUnit, SIGNAL_LIMITS, signalElementCount, sqrtUnit, squareUnit, validateSignal,
+  canonicalSemantic, continuousStateElementCount, conversionCoefficients, divideUnits, discreteMemoryElementCount, isSafeIdentifier, MODEL_LIMITS, ModelError, multiplyUnits, normalizeSolverSettings, parseModel, reciprocalUnit, SIGNAL_LIMITS, signalElementCount, sqrtUnit, squareUnit, validateSignal, validateAnySignal, zeroAnySignal,
   type CalcModel, type CompiledModel, type Diagnostic, type IRNode, type SignalDescriptor,
 } from '../../model/src';
 import { initialDiscreteDescriptor, validateDiscreteParameters } from './discrete';
@@ -15,6 +15,7 @@ import { inferM8Outputs, validateM8Parameters } from './m8';
 import { initialM9Outputs, inferM9Outputs, validateM9Parameters, validateM9StateInputs } from './m9';
 import { validateDataType, validateTypedSignal } from '../../model/src/typed';
 import { applyM10TypePropagation, guardM10LegacyInputs, initialM10Outputs, inferM10Outputs, validateM10Parameters, validateM10StateInputs, validateM10UnitSystems } from './m10';
+import { guardM11LegacyInputs, inferM11Outputs, initialM11Outputs, isM11Block, prepareM11Bindings, validateM11Hierarchy, validateM11Parameters, validateM11StateInputs, type M11CompileContext } from './m11';
 
 const compareId = (a: string, b: string): number => a < b ? -1 : a > b ? 1 : 0;
 
@@ -59,6 +60,7 @@ function parseParameters(definition: BlockDefinition, values: Record<string, unk
       case 'expression': if (typeof value !== 'string' || value.length === 0 || value.length > (descriptor.maxLength ?? 512)) fail(); break;
       case 'text': if (typeof value !== 'string' || value.length > (descriptor.maxLength ?? 64)) fail(); break;
       case 'value': try { validateSignal(value); } catch { fail(); } break;
+      case 'signal-value': try { validateAnySignal(value); } catch { fail(); } break;
       case 'typed-value': try { validateTypedSignal(value); } catch { fail(); } break;
       case 'data-type': try { validateDataType(value); } catch { fail(); } break;
       case 'numeric-vector':
@@ -106,13 +108,15 @@ function deepFreeze<T>(value: T): T {
   return value;
 }
 
-function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRNode>, definitions: Map<string, BlockDefinition>): void {
+function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRNode>, definitions: Map<string, BlockDefinition>, context: M11CompileContext): void {
   applyM10TypePropagation(ordered, byId);
   const originals = new Map(model.nodes.map((node) => [node.id, node]));
   const scalarState = (): SignalDescriptor => ({ valueType: 'float64', shape: [], unit: '1' });
   const sameShape = (a: SignalDescriptor, b: SignalDescriptor): boolean => a.shape.length === b.shape.length && a.shape.every((length, index) => length === b.shape[index]);
   const clone = (descriptor: SignalDescriptor): SignalDescriptor => ({ ...descriptor, shape: [...descriptor.shape] });
   for (const node of ordered) {
+    const m11Outputs = initialM11Outputs(node);
+    if (m11Outputs) { Object.assign(node.outputs, m11Outputs); continue; }
     const m10Outputs = initialM10Outputs(node, originals.get(node.id)!.unit ?? '1');
     if (m10Outputs) { Object.assign(node.outputs, m10Outputs); continue; }
     const m9Outputs = initialM9Outputs(node, originals.get(node.id)!.unit ?? '1');
@@ -126,7 +130,8 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
     }
   }
   for (const node of ordered) {
-    guardM10LegacyInputs(node, port => { const endpoint = node.inputs[port]; return endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; });
+    if (!isM11Block(node.blockType)) guardM10LegacyInputs(node, port => { const endpoint = node.inputs[port]; return endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; });
+    guardM11LegacyInputs(node, port => { const endpoint = node.inputs[port]; return endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; });
     const fail = (code: string, message: string, portId?: string): never => { throw new ModelError([{ code, message, nodeId: node.id, ...(portId ? { portId } : {}) }]); };
     const input = (port: string): SignalDescriptor => {
       const endpoint = node.inputs[port];
@@ -134,6 +139,13 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
       if (!descriptor) fail('SIGNAL_INFERENCE_FAILED', `${node.id}의 입력 ${port} 형상을 추론할 수 없습니다.`, port);
       return descriptor!;
     };
+    const m11Outputs = inferM11Outputs(node, input, model, byId, context, originals.get(node.id)!.unit ?? '1');
+    if (m11Outputs) {
+      Object.assign(node.outputs, m11Outputs);
+      const declaredUnit = originals.get(node.id)!.unit;
+      if (declaredUnit !== undefined) for (const [port, descriptor] of Object.entries(node.outputs)) if (declaredUnit !== descriptor.unit) fail('UNIT_ANNOTATION_MISMATCH', `지정한 단위 ${declaredUnit}가 추론 단위 ${descriptor.unit}와 다릅니다.`, port);
+      continue;
+    }
     const numeric = (port: string): SignalDescriptor => {
       const descriptor = input(port);
       if (descriptor.valueType !== 'float64') fail('TYPE_MISMATCH', `${node.id}의 ${port}에는 float64 신호가 필요합니다.`, port);
@@ -339,7 +351,9 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
   }
   for (const node of ordered) {
     const inferredInput = (port: string): SignalDescriptor => { const endpoint = node.inputs[port]; const descriptor = endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; if (!descriptor) throw new ModelError([{ code: 'SIGNAL_INFERENCE_FAILED', nodeId: node.id, portId: port, message: '입력 신호의 자료형을 추론할 수 없습니다.' }]); return descriptor; };
-    guardM10LegacyInputs(node, inferredInput);
+    if (!isM11Block(node.blockType)) guardM10LegacyInputs(node, inferredInput);
+    guardM11LegacyInputs(node, inferredInput);
+    if (validateM11StateInputs(node, inferredInput)) continue;
     if (validateM10StateInputs(node, inferredInput)) continue;
     if (validateM9StateInputs(node, port => { const endpoint = node.inputs[port]; const descriptor = endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; if (!descriptor) throw new ModelError([{ code: 'SIGNAL_INFERENCE_FAILED', nodeId: node.id, portId: port, message: 'M9 입력의형상을추론할수없습니다.' }]); return descriptor; })) continue;
     if (definitions.get(node.id)!.state === 'none' || node.blockType === 'source.random') continue;
@@ -369,8 +383,9 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
 }
 
 /** Compile bounded typed contracts; editor text is parsed into AST and never executed as code. */
-function compileFlatModel(input: unknown): CompiledModel {
+function compileFlatModel(input: unknown, context: M11CompileContext, allowNoOutputs = false): CompiledModel {
   const model = parseModel(input);
+  context = { ...context, declaredUnits: Object.fromEntries(model.nodes.filter(node => node.unit !== undefined).map(node => [node.id, node.unit!])) };
   if (model.execution.mode === 'continuous') model.execution.solver = normalizeSolverSettings(model.execution);
   const diagnostics: Diagnostic[] = [];
   const definitions = new Map<string, BlockDefinition>();
@@ -414,7 +429,8 @@ function compileFlatModel(input: unknown): CompiledModel {
       validateM8Parameters(ir);
       validateM9Parameters(ir, model);
       validateM10Parameters(ir);
-      if (definition.id === 'math.expression') ir.expression = parseExpression(parameters.expression as string);
+      validateM11Parameters(ir, model, context);
+      if (definition.id === 'math.expression' || definition.id === 'functions.typed') ir.expression = parseExpression(parameters.expression as string);
       nodeById.set(node.id, ir);
     } catch (error) {
       if (!(error instanceof ModelError)) throw error;
@@ -424,7 +440,8 @@ function compileFlatModel(input: unknown): CompiledModel {
   if (diagnostics.length > 0) throw new ModelError(diagnostics.slice(0, 20));
 
   const adjacency = new Map<string, Set<string>>(model.nodes.map((node) => [node.id, new Set<string>()]));
-  const ports = new Map(model.nodes.map((node) => [node.id, getBlockPorts(node)]));
+  const portContext = { subsystems: [...context.definitions.values()] };
+  const ports = new Map(model.nodes.map((node) => [node.id, getBlockPorts(node, portContext)]));
   const indegree = new Map<string, number>(model.nodes.map((node) => [node.id, 0]));
   const writtenInputs = new Set<string>();
   for (const edge of [...model.edges].sort((a, b) => compareId(a.id, b.id))) {
@@ -450,22 +467,26 @@ function compileFlatModel(input: unknown): CompiledModel {
     }
     writtenInputs.add(inputKey);
     nodeById.get(edge.target.nodeId)!.inputs[edge.target.portId] = { ...edge.source };
-    if (getDirectFeedthroughPorts(nodeById.get(edge.target.nodeId)!).includes(edge.target.portId) && !adjacency.get(edge.source.nodeId)!.has(edge.target.nodeId)) {
+    if ((getDirectFeedthroughPorts(nodeById.get(edge.target.nodeId)!).includes(edge.target.portId) || (isM11Block(target.id) && target.directFeedthrough)) && !adjacency.get(edge.source.nodeId)!.has(edge.target.nodeId)) {
       adjacency.get(edge.source.nodeId)!.add(edge.target.nodeId);
       indegree.set(edge.target.nodeId, indegree.get(edge.target.nodeId)! + 1);
     }
   }
   for (const node of model.nodes) {
-    for (const portId of getBlockPorts(node).inputs) {
+    for (const portId of getBlockPorts(node, portContext).inputs) {
       if (!writtenInputs.has(`${node.id}:${portId}`)) diagnostics.push({
         code: 'REQUIRED_INPUT_MISSING', nodeId: node.id, portId,
         message: `${node.id}의 입력 ${portId}에 연결이 필요합니다.`,
       });
     }
   }
-  const outputIds = model.nodes.filter((node) => node.blockType === 'sink.display' || node.blockType === 'io.output' || node.blockType === 'sink.scope').map((node) => node.id).sort(compareId);
+  const effectDependencies = prepareM11Bindings([...nodeById.values()], context);
+  for (const [sourceId, targetId] of effectDependencies) {
+    if (!adjacency.get(sourceId)!.has(targetId)) { adjacency.get(sourceId)!.add(targetId); indegree.set(targetId, indegree.get(targetId)! + 1); }
+  }
+  const outputIds = model.nodes.filter((node) => ['sink.display', 'io.output', 'sink.scope', 'io.structured-output', 'sink.sequence-viewer'].includes(node.blockType)).map((node) => node.id).sort(compareId);
   const stateIds = model.nodes.filter((node) => definitions.get(node.id)!.state !== 'none').map((node) => node.id).sort(compareId);
-  if (outputIds.length === 0) diagnostics.push({ code: 'OUTPUT_REQUIRED', message: '모델에 결과 블럭을 한 개 이상 연결해 주세요.' });
+  if (outputIds.length === 0 && !allowNoOutputs) diagnostics.push({ code: 'OUTPUT_REQUIRED', message: '모델에 결과 블럭을 한 개 이상 연결해 주세요.' });
   if (diagnostics.length > 0) throw new ModelError(diagnostics.slice(0, 20));
 
   const ready = [...indegree].filter(([, degree]) => degree === 0).map(([id]) => id).sort(compareId);
@@ -485,16 +506,16 @@ function compileFlatModel(input: unknown): CompiledModel {
     const omitted = cycle.length > 12 ? ` → … (${cycle.length - 12}개 연결 생략)` : '';
     const message = `현재 입력을 즉시 사용하는 순환입니다: ${shownPath}${omitted}. 의도한 지연이나 상태를 명시해 주세요.`;
     throw new ModelError([...new Set(cycle)].slice(0, 20).map((nodeId) => ({
-      code: 'CYCLIC_DEPENDENCY', nodeId,
+      code: effectDependencies.length ? 'M11_EFFECT_DEPENDENCY_CYCLE' : 'CYCLIC_DEPENDENCY', nodeId,
       message,
     })));
   }
-  inferSignals(model, ordered, nodeById, definitions);
+  inferSignals(model, ordered, nodeById, definitions, context);
   inferContinuousDomains(model, ordered);
   if (model.execution.mode === 'discrete') {
     for (const edge of model.edges) {
       const source = nodeById.get(edge.source.nodeId)!; const target = nodeById.get(edge.target.nodeId)!;
-      if (getBlockDefinition(source.blockType)!.sampleTime === 'constant' || target.blockType === 'time.rate-transition') continue;
+      if (getBlockDefinition(source.blockType)!.sampleTime === 'constant' || target.blockType === 'time.rate-transition' || (target.blockType === 'hierarchy.function-call' && edge.target.portId === 'call' && target.parameters.callEventRate)) continue;
       if (source.sampleTime.period !== target.sampleTime.period || source.sampleTime.offset !== target.sampleTime.offset) {
         diagnostics.push({ code: 'SAMPLE_TIME_MISMATCH', nodeId: target.id, portId: edge.target.portId, message: `입력 ${edge.target.portId}의 샘플시간이 다릅니다. ${source.sampleTime.period}/${source.sampleTime.offset} → ${target.sampleTime.period}/${target.sampleTime.offset} 사이에 Rate Transition을 연결해 주세요.` });
       }
@@ -517,8 +538,26 @@ export function compileModel(input: unknown): CompiledModel {
     if (original.execution.mode === 'discrete') node.sampleTime = { ...(node.sampleTime ?? { period: 1, offset: 0 }) };
   }
   if (original.execution.mode === 'continuous') original.execution.solver = normalizeSolverSettings(original.execution);
+  validateM11Hierarchy(original);
   const flattened = flattenHierarchy(original);
-  const compiled = compileFlatModel(flattened.model);
+  const rootContext: M11CompileContext = { definitions: new Map((original.subsystems ?? []).map(definition => [definition.id, definition])), depth: 0, loopDepth: 0, ancestors: [], scopePath: [], origins: flattened.origins, budget: { nodes: flattened.model.nodes.length },
+    compileChild: (definition, bindings, context) => {
+      const body = structuredClone(original);
+      body.nodes = structuredClone(definition.nodes); body.edges = structuredClone(definition.edges); body.layout = structuredClone(definition.layout); delete body.dashboard;
+      context.budget!.nodes += body.nodes.length;
+      if (context.budget!.nodes > MODEL_LIMITS.maxNodes) throw new ModelError([{ code: 'M11_PROGRAM_EXPANSION_BUDGET', message: '계층 실행 IR 전체의 컴파일 블럭 예산은1,000개입니다.' }]);
+      body.modelId = definition.id; body.name = definition.name;
+      body.execution = { mode: 'discrete', startTime: 0, stopTime: 0, step: original.execution.mode === 'continuous' ? Number(original.execution.solver?.discreteStep ?? original.execution.step) : original.execution.step };
+      for (const port of definition.inputs) {
+        const marker = body.nodes.find(node => node.id === port.nodeId)!;
+        const descriptor = bindings[port.id]!;
+        marker.blockType = 'source.signal'; marker.parameters = { value: zeroAnySignal(descriptor) }; marker.unit = descriptor.unit;
+      }
+      for (const node of body.nodes) if (node.sampleTime && (node.sampleTime.period !== 1 || node.sampleTime.offset !== 0)) throw new ModelError([{ code: 'M11_CHILD_SAMPLE_TIME', nodeId: node.id, message: '선택 실행 정의 내부의 rate는1/0이며 부모 호출 rate를 상속합니다.' }]);
+      const expanded = flattenHierarchy(body);
+      return compileFlatModel(expanded.model, { ...context, origins: expanded.origins, boundSignals: Object.fromEntries(definition.inputs.map(port => [port.nodeId, bindings[port.id]!])) }, definition.outputs.length === 0);
+    } };
+  const compiled = compileFlatModel(flattened.model, rootContext);
   original.execution = structuredClone(compiled.model.execution);
   validateDashboard(original, compiled);
   return deepFreeze({ ...compiled, model: original, semanticKey: canonicalSemantic(original), ...(flattened.instances.length ? { hierarchy: { origins: flattened.origins, instances: flattened.instances } } : {}) });

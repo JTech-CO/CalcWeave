@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M11",
+  "generatedAt": "2026-10-03T05:27:20.148159+00:00",
+  "engineVersion": "0.12.0-m11",
+  "purpose": "Final required hierarchy diagnostic navigation and the M10 pagination regression follow-up, on the final diagnostic build.",
+  "baselineUiProof": {
+    "path": "docs/evidence/m11-ui-browser-verification.json",
+    "sha256": "c9c5eb9e2772803595266623a86de92eb6125439edb17cbb7ddee34a74fe5c3b",
+    "browserTests": 8,
+    "unchangedHistoricalRecord": true
+  },
+  "priorRootFullBrowser": {
+    "rawReport": ".test-generated/m11-full-browser.json",
+    "rawReportSha256": "227758d674e5f45bb49d40849d7a98af3b53a061c00cf9b00a54cc5c110e0e07",
+    "passed": 145,
+    "failed": 1,
+    "failedTest": "M10 n-D result tables expose true row-major coordinates and 100-element pages",
+    "observedDefect": "Structured validation cloned immutable typed values on parent status/autosave renders. The new clone reset TypedSignalResult paging, so page 3 remained at 100 rows instead of the expected 56.",
+    "correctionOwner": "root",
+    "correction": "SignalResult memoizes validated values by the original immutable value; typed child pages remain stable on unrelated parent renders.",
+    "rootFullReportDoesNotClaimAllPassed": true
+  },
+  "commands": [
+    "npm run build",
+    "npx tsc --noEmit",
+    "npx vitest run tests/m11-ui-values.test.ts tests/m11-hierarchy-editor.test.ts tests/m11-examples.test.ts --reporter=json --outputFile=.test-generated/m11-ui-diagnostic-navigation-unit-final.json",
+    "npx playwright test tests/e2e/m11-editor.spec.ts tests/e2e/m10-editor.spec.ts --output=.test-generated/m11-ui-navigation-and-m10-regression-artifacts --reporter=line,json"
+  ],
+  "browser": {
+    "passed": 16,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "m11Passed": 9,
+    "m10RegressionPassed": 7,
+    "durationMs": 52175.282999999996,
+    "rawReport": ".test-generated/m11-ui-navigation-and-m10-regression.json",
+    "rawReportSha256": "c5bd1b4f3af41edc93b6526f9ab95f8e0a33d4bbe03bcdcceda1f8b5d9c633b4",
+    "tests": [
+      {
+        "title": "M10 typed integer fields preserve 64-bit edits, block invalid drafts, save/import, and download CSV/TS",
+        "status": "passed",
+        "durationMs": 4566
+      },
+      {
+        "title": "M10 data-type parameters edit fixed metadata and keep invalid metadata uncommitted",
+        "status": "passed",
+        "durationMs": 2602
+      },
+      {
+        "title": "M10 n-D result tables expose true row-major coordinates and 100-element pages",
+        "status": "passed",
+        "durationMs": 2620
+      },
+      {
+        "title": "M10 complex scalar editors preserve signed zero and complex matrices display independent components",
+        "status": "passed",
+        "durationMs": 2689
+      },
+      {
+        "title": "M10 categorized string and enum examples escape markup and validate enum membership",
+        "status": "passed",
+        "durationMs": 2679
+      },
+      {
+        "title": "M10 typed controls and exact results stay contained at narrow widths and 200% text",
+        "status": "passed",
+        "durationMs": 3383
+      },
+      {
+        "title": "M10 typed finite curves visualize fixed state-space and uint64 while keeping exact records",
+        "status": "passed",
+        "durationMs": 2915
+      },
+      {
+        "title": "M11 controlled instances open active definitions, save versions, reload, and retain exact source models",
+        "status": "passed",
+        "durationMs": 3780
+      },
+      {
+        "title": "M11 execution mode changes retain data connections and expose real control ports and settings",
+        "status": "passed",
+        "durationMs": 2585
+      },
+      {
+        "title": "M11 newly grouped diagrams edit boundary aliases and execute real ForEach partitions",
+        "status": "passed",
+        "durationMs": 3032
+      },
+      {
+        "title": "M11 independent state and enable hold/reset examples compute different actual state banks",
+        "status": "passed",
+        "durationMs": 2500
+      },
+      {
+        "title": "M11 for/while loops expose automatic boundaries, bounded drafts, and zero-call initial output",
+        "status": "passed",
+        "durationMs": 3748
+      },
+      {
+        "title": "M11 nested bus editor preserves exact typed leaves, rejects invalid drafts, and escapes payload text",
+        "status": "passed",
+        "durationMs": 3601
+      },
+      {
+        "title": "M11 message queue exposes previous-tick batches and exact payloads in history CSV and TS downloads",
+        "status": "passed",
+        "durationMs": 3236
+      },
+      {
+        "title": "M11 structured forms and result trees stay readable at 320px and 200% text in both themes",
+        "status": "passed",
+        "durationMs": 2966
+      },
+      {
+        "title": "M11 failing while child diagnostic opens and fits the actual error node before repair",
+        "status": "passed",
+        "durationMs": 2373
+      }
+    ]
+  },
+  "unit": {
+    "passed": 27,
+    "failed": 0,
+    "files": 3,
+    "rawReport": ".test-generated/m11-ui-diagnostic-navigation-unit-final.json",
+    "rawReportSha256": "e1517579f01c25d16302c40c8b7102e3ec9463001e7ee2a64f2766e3b2de0be8",
+    "newDiagnosticCases": 3
+  },
+  "typecheck": {
+    "command": "npx tsc --noEmit",
+    "exitCode": 0
+  },
+  "diagnosticContract": [
+    "Resolve exact existing instance paths of rank 0..8, then the actual childNodeId; never silently select a same-name root node for stale paths.",
+    "Support controlled nested definitions and the currently selected Variant definition; own a copy of the diagnostic path.",
+    "Open the real child canvas, select and mark the real error node, and focus only after React Flow measurements match the view.",
+    "On a genuine while child reciprocal(0) failure, the browser sees NUMERIC_DIVIDE_BY_ZERO, opens loop/bias, confirms the complete node bounding box lies in the canvas, repairs operation to square, and computes final result 4.",
+    "Old/stale/missing/overdeep locations leave the editor location intact and show a clear notice."
+  ],
+  "sourceInventory": [
+    {
+      "path": "apps/web/src/App.tsx",
+      "sha256": "a65671cfae21fc1f3e6772a1bfb6c8fe8e09039fc20eb328a8ede1b426ddaa33"
+    },
+    {
+      "path": "apps/web/src/hierarchy-editor.ts",
+      "sha256": "02a8b1b33ea9e4196204cb9d9a16973c85da4bb370c7c563291b9362ec9ffa8a"
+    },
+    {
+      "path": "apps/web/src/hierarchy-modes.ts",
+      "sha256": "b277bebb985ef3257335bf67cfa323842a31e3ccafff1aa9858985c1786b9040"
+    },
+    {
+      "path": "apps/web/src/components/BlockNode.tsx",
+      "sha256": "3f9b53ec1cf1ad198d26ea0b53828873bc3ef3208d17487592d1872437df5d01"
+    },
+    {
+      "path": "apps/web/src/components/SignalResult.tsx",
+      "sha256": "2c5ff6e9c3ebcc01eb8309d9995e493f323290d91f4b89eb7bac3d712487705c"
+    },
+    {
+      "path": "apps/web/src/components/TemporalSignalResult.tsx",
+      "sha256": "8e005d258df9e4e65f695670fb4f5622d77b42483c416dca7e588df9c12f776d"
+    },
+    {
+      "path": "apps/web/src/components/ResultPlot.tsx",
+      "sha256": "28ee36d638dd54279b8f8c072efb9f24b61eecc91df18e065f8eb6a958cac52c"
+    },
+    {
+      "path": "apps/web/src/components/StructuredSignalField.tsx",
+      "sha256": "a15758e07eba06a605ded7f2d96068d5303b95c006a78e1aa9a44ce77328af9f"
+    },
+    {
+      "path": "apps/web/src/components/BoundaryPortField.tsx",
+      "sha256": "454c4442c5366b00e4449f3f4077e6c8d00ef45474d1542f16cf6fae8b586371"
+    },
+    {
+      "path": "apps/web/src/styles.css",
+      "sha256": "34242afb853836152ecf78b050232591837015bf8e72e2d9386f7a33219b82fd"
+    },
+    {
+      "path": "apps/web/src/examples.ts",
+      "sha256": "7b184eb9fae01d313e986f5eb356fd966c1f2df9398f1f6f76bfbd8f63d561e9"
+    },
+    {
+      "path": "apps/web/src/m11-examples.ts",
+      "sha256": "cdfdc17ee69805c16580ef39d9878bcb927bb4db6a0249e2728a53b5c31df897"
+    },
+    {
+      "path": "tests/m11-ui-values.test.ts",
+      "sha256": "c815fe4dafa6ddd907e09232ebeab5c528cded5ea4de1d130aeddd943d427b20"
+    },
+    {
+      "path": "tests/m11-hierarchy-editor.test.ts",
+      "sha256": "5ec78e9d7bcebf09e5c7af4d257a7194c7d07ece1fa419a55f67e5a0fd745373"
+    },
+    {
+      "path": "tests/m11-examples.test.ts",
+      "sha256": "5a28632a4885961ffc4f19542c33afb5c19cc1c22cbc73ddaa8a2777d0eb666c"
+    },
+    {
+      "path": "tests/e2e/m11-editor.spec.ts",
+      "sha256": "35ed5923547e1095d92f1161be55d121c284fa997bec8e3a7e4835985011af9f"
+    },
+    {
+      "path": "tests/e2e/m10-editor.spec.ts",
+      "sha256": "25e36877260dfc8375824827f680418e255923f8c658f233f6560c99a7ec641c"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": ".test-generated/m11-ui-navigation-and-m10-regression-artifacts/m11-editor-M11-failing-whi-332b0-al-error-node-before-repair/child-diagnostic-location.png",
+      "sha256": "540c39ce426f5cb7fa54bff9db34b7acd45d0d92d335fa9269aaa542abce50c8",
+      "visuallyInspected": true,
+      "observation": "The child diagnostic selects and centers the actual error node with its error marker."
+    },
+    {
+      "path": ".test-generated/m11-ui-navigation-and-m10-regression-artifacts/m11-editor-M11-structured--109df-and-200-text-in-both-themes/structured-field-dark-320-2x.png",
+      "sha256": "5383e1b4b20cde3d7b0b6e77991b9f9aec7113af36cd8157f3ea776b732819bb",
+      "visuallyInspected": true,
+      "observation": "Large text and controls stay contained; help wraps; dark/light contrast is preserved."
+    },
+    {
+      "path": ".test-generated/m11-ui-navigation-and-m10-regression-artifacts/m11-editor-M11-structured--109df-and-200-text-in-both-themes/structured-field-light-320-2x.png",
+      "sha256": "8b5d31a4ed4d4e58e215f52d8461a72ed8ad70a78eb983b8a2bd9729377987fe",
+      "visuallyInspected": true,
+      "observation": "Large text and controls stay contained; help wraps; dark/light contrast is preserved."
+    },
+    {
+      "path": ".test-generated/m11-ui-navigation-and-m10-regression-artifacts/m10-editor-M10-typed-contr-1fef6--narrow-widths-and-200-text/typed-field-dark-320-2x.png",
+      "sha256": "c7948a8354660508eb05fc5622c38e4a43e6aa7cc27ba81f0749d22a7e677593",
+      "visuallyInspected": true,
+      "observation": "Large text and controls stay contained; help wraps; dark/light contrast is preserved."
+    },
+    {
+      "path": ".test-generated/m11-ui-navigation-and-m10-regression-artifacts/m10-editor-M10-typed-contr-1fef6--narrow-widths-and-200-text/typed-field-light-320-2x.png",
+      "sha256": "587feaf93c87b5a0bb3a8f60f1740eb9270c8de8413e98d7e7c18f54b15d96b3",
+      "visuallyInspected": true,
+      "observation": "Large text and controls stay contained; help wraps; dark/light contrast is preserved."
+    }
+  ],
+  "fullSimulinkEquivalenceClaimed": false,
+  "sourceCoverageApprovalOwner": "root"
+}

@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M11",
+  "generatedAt": "2026-10-03T05:14:25.976565+00:00",
+  "environment": "local Windows Chromium; fresh isolated contexts against root-path final build",
+  "engineVersion": "0.12.0-m11",
+  "commands": [
+    "npm run build",
+    "npx vitest run tests/m11-ui-values.test.ts tests/m11-hierarchy-editor.test.ts tests/m11-examples.test.ts --reporter=json --outputFile=.test-generated/m11-ui-after-fit-fix.json",
+    "npx playwright test tests/e2e/m11-editor.spec.ts --output=.test-generated/m11-ui-browser-final-artifacts --reporter=line,json"
+  ],
+  "browser": {
+    "passed": 8,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "durationMs": 82843.453,
+    "tests": [
+      {
+        "title": "M11 controlled instances open active definitions, save versions, reload, and retain exact source models",
+        "status": "passed",
+        "durationMs": 12545
+      },
+      {
+        "title": "M11 execution mode changes retain data connections and expose real control ports and settings",
+        "status": "passed",
+        "durationMs": 2852
+      },
+      {
+        "title": "M11 newly grouped diagrams edit boundary aliases and execute real ForEach partitions",
+        "status": "passed",
+        "durationMs": 3271
+      },
+      {
+        "title": "M11 independent state and enable hold/reset examples compute different actual state banks",
+        "status": "passed",
+        "durationMs": 2793
+      },
+      {
+        "title": "M11 for/while loops expose automatic boundaries, bounded drafts, and zero-call initial output",
+        "status": "passed",
+        "durationMs": 3517
+      },
+      {
+        "title": "M11 nested bus editor preserves exact typed leaves, rejects invalid drafts, and escapes payload text",
+        "status": "passed",
+        "durationMs": 3198
+      },
+      {
+        "title": "M11 message queue exposes previous-tick batches and exact payloads in history CSV and TS downloads",
+        "status": "passed",
+        "durationMs": 3219
+      },
+      {
+        "title": "M11 structured forms and result trees stay readable at 320px and 200% text in both themes",
+        "status": "passed",
+        "durationMs": 6214
+      }
+    ],
+    "rawReport": ".test-generated/m11-ui-browser-final.json",
+    "rawReportSha256": "7bdba9a1dd0ad33b991d55b7085f641159e19e53355325fa21711c9ab420df37"
+  },
+  "firstRun": {
+    "passed": 4,
+    "failed": 4,
+    "rawReport": ".test-generated/m11-ui-browser-first-failed.json",
+    "rawReportSha256": "6d5c34231644a86bc7c7150f6bb0469a5b0f289ed7464bb2a803461f4e2245cb",
+    "failures": [
+      "Three genuine hidden child-canvas failures after hierarchy entry. hierarchyView returned a new view model on every store-render, resetting React Flow measurements.",
+      "One test read the debounced persisted model too early."
+    ],
+    "corrections": [
+      "Memoize hierarchyView by rootModel and hierarchyPath; re-arm the measured fit effect on navigation instead of fitting an unmeasured view.",
+      "Poll the actual persisted model before asserting execution mode and connections."
+    ]
+  },
+  "unit": {
+    "passed": 24,
+    "failed": 0,
+    "files": 3,
+    "rawReport": ".test-generated/m11-ui-after-fit-fix.json",
+    "rawReportSha256": "4dafbd2043d4b1c5c6d5bfe6f199ba67704c6b7912c3aabe8912707f33bb6105"
+  },
+  "responsive": {
+    "themes": [
+      "dark",
+      "light"
+    ],
+    "cases": [
+      [
+        1440,
+        1
+      ],
+      [
+        390,
+        1
+      ],
+      [
+        320,
+        2
+      ]
+    ],
+    "assertions": [
+      "no document horizontal overflow",
+      "all input/select/textarea controls contained in their form",
+      "theme changed through the actual UI button"
+    ]
+  },
+  "contract": [
+    "Controlled references and compile-selected Variant open the correct child canvas; actual nodes are visible and editable.",
+    "Child edits advance the selected version and survive local save, reload, model download and import.",
+    "New ForEach grouped boundaries can be renamed without losing connections and compute actual [6,9] outputs.",
+    "Independent instance state and enabled hold/reset have distinct actual literal results.",
+    "For/While automatic boundaries and bounded repeat drafts are backed by compiler/runtime outputs.",
+    "Structured JSON keeps quoted int/fixed codes exact; invalid drafts do not commit and block execution; markup stays escaped.",
+    "Message previous-tick empty batches, producer metadata and exact payloads appear in result samples and downloaded history/CSV/TS source.",
+    "Actual standalone generated TS execution and source coverage approval are root gates, not implied by download tests."
+  ],
+  "limitations": [
+    "All native/source options remain open; the 48 new definitions do not imply 73 full native mechanisms.",
+    "Variant selection is fixed before a run; dynamic switching within a run is unsupported.",
+    "Hierarchy diagnostics currently carry paths in the compiler/runtime but the editor click handler only selects nodeId in the current canvas.",
+    "Feedback-latch initialDescriptor uses the generic text editor and compiler validation."
+  ],
+  "sourceInventory": [
+    {
+      "path": "apps/web/src/App.tsx",
+      "sha256": "5958c352ba078da4c763c0ad478e0f29f915b64f401cfa731be5b58ee4199e26"
+    },
+    {
+      "path": "apps/web/src/hierarchy-editor.ts",
+      "sha256": "47daab2b3134ebf7e1ff3b1e62d42af0f51ef9fdfefa3bc74bd54511f127ead3"
+    },
+    {
+      "path": "apps/web/src/hierarchy-modes.ts",
+      "sha256": "b277bebb985ef3257335bf67cfa323842a31e3ccafff1aa9858985c1786b9040"
+    },
+    {
+      "path": "apps/web/src/components/BlockNode.tsx",
+      "sha256": "3f9b53ec1cf1ad198d26ea0b53828873bc3ef3208d17487592d1872437df5d01"
+    },
+    {
+      "path": "apps/web/src/components/SignalResult.tsx",
+      "sha256": "8b74603d0c592b5b2a6d66f9bdde3225a05602c11566decb684c54887752f3bc"
+    },
+    {
+      "path": "apps/web/src/components/TemporalSignalResult.tsx",
+      "sha256": "8e005d258df9e4e65f695670fb4f5622d77b42483c416dca7e588df9c12f776d"
+    },
+    {
+      "path": "apps/web/src/components/ResultPlot.tsx",
+      "sha256": "28ee36d638dd54279b8f8c072efb9f24b61eecc91df18e065f8eb6a958cac52c"
+    },
+    {
+      "path": "apps/web/src/components/StructuredSignalField.tsx",
+      "sha256": "a15758e07eba06a605ded7f2d96068d5303b95c006a78e1aa9a44ce77328af9f"
+    },
+    {
+      "path": "apps/web/src/components/BoundaryPortField.tsx",
+      "sha256": "454c4442c5366b00e4449f3f4077e6c8d00ef45474d1542f16cf6fae8b586371"
+    },
+    {
+      "path": "apps/web/src/styles.css",
+      "sha256": "34242afb853836152ecf78b050232591837015bf8e72e2d9386f7a33219b82fd"
+    },
+    {
+      "path": "apps/web/src/examples.ts",
+      "sha256": "7b184eb9fae01d313e986f5eb356fd966c1f2df9398f1f6f76bfbd8f63d561e9"
+    },
+    {
+      "path": "apps/web/src/m11-examples.ts",
+      "sha256": "cdfdc17ee69805c16580ef39d9878bcb927bb4db6a0249e2728a53b5c31df897"
+    },
+    {
+      "path": "tests/m11-ui-values.test.ts",
+      "sha256": "c815fe4dafa6ddd907e09232ebeab5c528cded5ea4de1d130aeddd943d427b20"
+    },
+    {
+      "path": "tests/m11-hierarchy-editor.test.ts",
+      "sha256": "eb88d9a9dce09190dd17aa71905154fb203307af7e482d1c9c2ba87b01bfef20"
+    },
+    {
+      "path": "tests/m11-examples.test.ts",
+      "sha256": "5a28632a4885961ffc4f19542c33afb5c19cc1c22cbc73ddaa8a2777d0eb666c"
+    },
+    {
+      "path": "tests/e2e/m11-editor.spec.ts",
+      "sha256": "c888d5fb45fe6ae69d3a16c7d08642809613acc058a2f16df37264586d871f84"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": ".test-generated/m11-ui-browser-final-artifacts/m11-editor-M11-structured--109df-and-200-text-in-both-themes/structured-field-dark-320-2x.png",
+      "sha256": "5383e1b4b20cde3d7b0b6e77991b9f9aec7113af36cd8157f3ea776b732819bb",
+      "theme": "dark",
+      "viewportWidth": 320,
+      "textScale": 2,
+      "visuallyInspected": true,
+      "observation": "Large text and JSON editor remain inside the field; help wraps at the field width; black/gray theme contrast is preserved."
+    },
+    {
+      "path": ".test-generated/m11-ui-browser-final-artifacts/m11-editor-M11-structured--109df-and-200-text-in-both-themes/structured-field-light-320-2x.png",
+      "sha256": "8b5d31a4ed4d4e58e215f52d8461a72ed8ad70a78eb983b8a2bd9729377987fe",
+      "theme": "light",
+      "viewportWidth": 320,
+      "textScale": 2,
+      "visuallyInspected": true,
+      "observation": "Large text and JSON editor remain inside the field; help wraps at the field width; black/gray theme contrast is preserved."
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { evaluateM11Node, m11OperationCost } from './m11';
 import { evaluateExpression, expressionNodeCount } from '../../expression/src';
 import { ModelError, type IRNode, type SignalDescriptor, type SignalValue } from '../../model/src/types';
 import { matrixMultiply, transpose, determinant, inverse, solve, cholesky, lu, lookup2D, prelookup } from '../../advanced-math/src';
@@ -8,6 +9,7 @@ import { evaluateM8Node, m8OperationCost } from './m8';
 import { m9OperationCost } from './m9';
 import { cloneTypedSignal, equalDataType, typedDescriptor, typedStorageElements, validateTypedSignal } from '../../model/src/typed';
 import { evaluateM10Node, m10OperationCost } from './m10';
+import { copyAnySignal, describeAnySignal, sameSignalDescriptor, structuredStorageElements, validateAnySignal } from '../../model/src/structured';
 
 export function numericFailure(code: string, nodeId: string, message: string): never {
   throw new ModelError([{ code, nodeId, message }]);
@@ -21,13 +23,14 @@ export function finiteNumber(value: unknown, nodeId: string): number {
 }
 
 export function signalElements(descriptor: SignalDescriptor): number {
+  if (descriptor.valueType === 'bus' || descriptor.valueType === 'messages') return structuredStorageElements(descriptor);
   if (descriptor.valueType === 'typed') return typedStorageElements(descriptor);
   return descriptor.shape.reduce((size, dimension) => size * dimension, 1);
 }
 
 /** Results own their array storage; editing a result cannot mutate the next run's inputs. */
 export function copySignal(value: SignalValue): SignalValue {
-  if (typeof value === 'object' && !Array.isArray(value)) return cloneTypedSignal(value);
+  if (typeof value === 'object' && !Array.isArray(value)) return copyAnySignal(value);
   if (!Array.isArray(value)) return value;
   return Array.isArray(value[0])
     ? (value as number[][] | boolean[][]).map((row) => [...row]) as number[][] | boolean[][]
@@ -49,6 +52,8 @@ export function nodeOperationCost(node: IRNode, byId: Map<string, IRNode>): numb
   if (m8Cost !== undefined) return m8Cost;
   const m9Cost = m9OperationCost(node, inputSize, outputSize);
   if (m9Cost !== undefined) return m9Cost;
+  const m11Cost = m11OperationCost(node, inputSize, outputSize);
+  if (m11Cost !== undefined) return m11Cost;
   const m10Cost = m10OperationCost(node, inputSize, outputSize);
   if (m10Cost !== undefined) return m10Cost;
   if (node.blockType === 'math.matrix-multiply') {
@@ -101,6 +106,16 @@ function shaped(values: (number | boolean)[], shape: number[]): SignalValue {
 /** Verify every emitted port against immutable compiler metadata, including multi-output nodes. */
 export function checkSignal(value: SignalValue | undefined, descriptor: SignalDescriptor, nodeId: string): SignalValue {
   if (value === undefined) numericFailure('RUNTIME_INVALID_IR', nodeId, '실행 출력이 중간 표현에 없습니다.');
+  if (descriptor.valueType === 'bus' || descriptor.valueType === 'messages') {
+    const signal = validateAnySignal(value), actual = describeAnySignal(signal);
+    const same = (v: SignalValue, d: SignalDescriptor): boolean => {
+      if (d.valueType === 'bus') return typeof v === 'object' && !Array.isArray(v) && v.kind === 'bus' && v.fields.length === d.bus!.fields.length && v.fields.every((field, index) => field.name === d.bus!.fields[index]!.name && same(field.value, d.bus!.fields[index]!.descriptor));
+      if (d.valueType === 'messages') return typeof v === 'object' && !Array.isArray(v) && v.kind === 'messages' && v.items.length <= d.message!.maxBatch && v.items.every(item => same(item.payload, d.message!.payload));
+      const a = describeAnySignal(v); return sameSignalDescriptor({ ...a, unit: d.unit, fields: d.fields, representation: d.representation }, d);
+    };
+    if (actual.valueType !== descriptor.valueType || !same(signal, descriptor)) numericFailure('RUNTIME_TYPE_MISMATCH', nodeId, 'Bus·메시지 필드·payload 자료형이 선언과 다릅니다.');
+    return value;
+  }
   if (descriptor.valueType === 'typed') {
     try {
       const typed = validateTypedSignal(value), actual = typedDescriptor(typed);
@@ -128,6 +143,8 @@ export function checkSignal(value: SignalValue | undefined, descriptor: SignalDe
 
 /** M1 finite real/boolean kernels. Arbitrary model text never becomes executable syntax. */
 export function evaluateSignalNode(node: IRNode, input: (port: string) => SignalValue, state?: SignalValue, time = 0): Record<string, SignalValue> {
+  const m11 = evaluateM11Node(node, input, time);
+  if (m11) return m11;
   const m10 = evaluateM10Node(node, input);
   if (m10) return m10;
   const m8 = evaluateM8Node(node, input);

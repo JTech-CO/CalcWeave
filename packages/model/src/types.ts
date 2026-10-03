@@ -1,7 +1,15 @@
-export const ENGINE_VERSION = '0.11.0-m10';
+export const ENGINE_VERSION = '0.12.0-m11';
 
 export type ExecutionMode = 'static' | 'discrete' | 'continuous';
 export type BlockType =
+  | 'source.signal' | 'hierarchy.atomic' | 'hierarchy.enabled' | 'hierarchy.triggered' | 'hierarchy.enabled-triggered' | 'hierarchy.resettable'
+  | 'hierarchy.action' | 'hierarchy.function-call' | 'hierarchy.for-iterator' | 'hierarchy.while-iterator' | 'hierarchy.for-each' | 'hierarchy.variant'
+  | 'hierarchy.array-processing' | 'hierarchy.neighborhood-processing' | 'hierarchy.pixel-processing'
+  | 'functions.call' | 'functions.initialize' | 'functions.reinitialize' | 'functions.reset' | 'functions.terminate' | 'functions.element' | 'functions.typed'
+  | 'hierarchy.if' | 'hierarchy.switch-case' | 'route.structured-bus' | 'route.structured-select' | 'route.structured-assign'
+  | 'events.send' | 'events.queue' | 'events.receive' | 'events.message-merge' | 'events.function-call-generator' | 'events.function-call-split' | 'events.feedback-latch' | 'events.hit-scheduler'
+  | 'route.merge' | 'route.goto' | 'route.from' | 'route.tag-visibility' | 'route.data-store-memory' | 'route.data-store-read' | 'route.data-store-write'
+  | 'state.reader' | 'state.writer' | 'state.parameter-writer' | 'sink.sequence-viewer' | 'io.structured-input' | 'io.structured-output'
   | 'source.typed' | 'source.enum'
   | 'signal.cast' | 'signal.cast-inherited' | 'signal.to-legacy' | 'signal.type-duplicate'
   | 'signal.type-propagation' | 'signal.scaling-strip' | 'signal.representation' | 'signal.specification'
@@ -79,16 +87,21 @@ export interface TypedSignal extends TypedDataType {
   shape: number[];
   data: TypedCell[];
 }
-export type SignalValue = LegacySignalValue | TypedSignal;
-export type StateValue = number | boolean | string | null | TypedSignal | StateValue[] | { [key: string]: StateValue };
+export interface BusSignal { kind: 'bus'; fields: { name: string; value: SignalValue }[] }
+export interface MessageItem { producer: string; sequence: number; time: number; priority: number; payload: SignalValue }
+export interface MessageSignal { kind: 'messages'; items: MessageItem[] }
+export type SignalValue = LegacySignalValue | TypedSignal | BusSignal | MessageSignal;
+export type StateValue = number | boolean | string | null | TypedSignal | BusSignal | MessageSignal | StateValue[] | { [key: string]: StateValue };
 export interface SampleTime { period: number; offset: number }
 export interface SignalDescriptor {
-  valueType: 'float64' | 'boolean' | 'typed';
+  valueType: 'float64' | 'boolean' | 'typed' | 'bus' | 'messages';
   /** Scalar [], vector [length], or row-major matrix [rows, columns]. */
   shape: number[];
   unit: string;
   /** Present only when valueType is typed. No implicit conversion to legacy kernels. */
   typed?: TypedDataType;
+  bus?: { fields: { name: string; descriptor: SignalDescriptor }[] };
+  message?: { payload: SignalDescriptor; maxBatch: number };
   /** A homogeneous scalar bus is represented as a vector with named fields. */
   fields?: string[];
   /** Compiler representation contract for explicitly converted homogeneous buses. */
@@ -188,6 +201,9 @@ export interface Diagnostic {
   /** Discrete execution failure location; compiler diagnostics omit these fields. */
   tick?: number;
   time?: number;
+  hierarchyPath?: string[];
+  childNodeId?: string;
+  iteration?: number;
 }
 export class ModelError extends Error {
   constructor(public readonly diagnostics: Diagnostic[], public readonly partialResult?: RunResult) {

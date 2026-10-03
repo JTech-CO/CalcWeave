@@ -1,3 +1,5 @@
+import { validateAnyDescriptor, validateAnySignal, isStructuredSignal, structuredStorageElements } from '../../../packages/model/src/structured';
+import { checkSignal } from '../../../packages/runtime/src/kernels';
 import { parseModel, canonicalSemantic, ModelError, UNITS, type CalcModel, type RunResult, type SignalDescriptor } from '../../../packages/model/src';
 import { sha256 } from '../../../packages/codegen-ts/src/sha256';
 import type { ExportManifest } from '../../../packages/codegen-ts/src';
@@ -49,8 +51,9 @@ export function validateRunHistory(raw: unknown): HistoryRecord[] {
     if (!result || !['completed', 'cancelled', 'failed'].includes(result.status) || !Array.isArray(result.samples) || result.samples.length > 10001 || result.steps !== result.samples.length || !Array.isArray(record.outputIds) || record.outputIds.length > 1000 || !record.outputTypes || typeof record.outputTypes !== 'object') invalid('실행 기록 결과 형식을 확인해 주세요.');
     if (new Set(record.outputIds).size !== record.outputIds.length || record.outputIds.some(id => typeof id !== 'string' || id.length > 1024 || !Object.hasOwn(record.outputTypes, id))) invalid('기록된 출력 연결이 올바르지 않습니다.');
     for (const descriptor of Object.values(record.outputTypes)) {
-      if (!descriptor || !['float64', 'boolean', 'typed'].includes(descriptor.valueType) || !Array.isArray(descriptor.shape) || descriptor.shape.length > (descriptor.valueType === 'typed' ? 8 : 2) || descriptor.shape.some(size => !Number.isInteger(size) || size < 1 || size > 1024) || descriptor.fields && (!Array.isArray(descriptor.fields) || descriptor.fields.length > 16 || descriptor.fields.some(field => typeof field !== 'string' || field.length > 64))) invalid('기록된 출력 자료형이 올바르지 않습니다.');
+      if (!descriptor || !['float64', 'boolean', 'typed', 'bus', 'messages'].includes(descriptor.valueType) || !Array.isArray(descriptor.shape) || descriptor.shape.length > (descriptor.valueType === 'typed' ? 8 : 2) || descriptor.shape.some(size => !Number.isInteger(size) || size < 1 || size > 1024) || descriptor.fields && (!Array.isArray(descriptor.fields) || descriptor.fields.length > 16 || descriptor.fields.some(field => typeof field !== 'string' || field.length > 64))) invalid('기록된 출력 자료형이 올바르지 않습니다.');
       try {
+        validateAnyDescriptor(descriptor);
         if (!allowedUnits.has(descriptor.unit)) invalid('기록된 출력 단위가 올바르지 않습니다.');
         if (descriptor.valueType === 'typed') { validateTypedShape(descriptor.shape); validateDataType(descriptor.typed); }
         else if (descriptor.typed !== undefined) invalid('기록된 출력 자료형이 올바르지 않습니다.');
@@ -61,12 +64,13 @@ export function validateRunHistory(raw: unknown): HistoryRecord[] {
     const count = (value: unknown, descriptor?: SignalDescriptor): number => {
       if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
         try {
+          if (isStructuredSignal(value)) { const signal = validateAnySignal(value); if (descriptor) checkSignal(signal, descriptor, record.id); return structuredStorageElements(signal); }
           const typed = validateTypedSignal(value);
           if (descriptor && (descriptor.valueType !== 'typed' || JSON.stringify(descriptor.shape) !== JSON.stringify(typed.shape) || !equalDataType(validateDataType(descriptor.typed), { dtype: typed.dtype, ...(typed.fixed ? { fixed: typed.fixed } : {}), ...(typed.enum ? { enum: typed.enum } : {}) }))) invalid('기록된 신호의 자료형·크기가 선언과 다릅니다.');
           return typedStorageElements(typed);
         } catch { return invalid('기록된 신호의 자료형·크기가 올바르지 않습니다.'); }
       }
-      if (descriptor?.valueType === 'typed') invalid('기록된 신호에 선언한 typed 자료형이 없습니다.');
+      if (descriptor?.valueType === 'typed' || descriptor?.valueType === 'bus' || descriptor?.valueType === 'messages') invalid('기록된 신호에 선언한 typed 자료형이 없습니다.');
       return Array.isArray(value) ? value.reduce((sum, item) => sum + count(item), 0) : typeof value === 'number' || typeof value === 'boolean' ? 1 : invalid('기록된 신호의 자료형이 올바르지 않습니다.');
     };
     let previous = -Infinity;

@@ -89,7 +89,7 @@ function validateGraph(graph: Graph, definition: SubsystemDefinition | undefined
     }
     for (const port of ports) {
       const marker = nodes.get(port.nodeId);
-      if (!marker || marker.blockType !== blockType) fail('INVALID_SUBSYSTEM_PORT', `${port.id}의 경계 블럭은 ${blockType}이어야 합니다.`, port.nodeId, port.id);
+      if (!marker || (marker.blockType !== blockType && marker.blockType !== (blockType === 'io.input' ? 'io.structured-input' : 'io.structured-output'))) fail('INVALID_SUBSYSTEM_PORT', `${port.id}의 경계 블럭은 ${blockType}이어야 합니다.`, port.nodeId, port.id);
       boundaryAnnotation(marker);
     }
   }

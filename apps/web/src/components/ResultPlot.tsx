@@ -11,7 +11,7 @@ export function formatNumber(value: number) {
 /** Approximate float64 plotting only. Original typed values stay in result/history/exports. */
 export function plotSignalNumber(value: SignalValue | undefined): number | undefined {
   if (typeof value === 'number') return Number.isFinite(value) ? value : undefined;
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;
+  if (!value || typeof value !== 'object' || Array.isArray(value) || value.kind !== 'typed') return undefined;
   const typed = validateTypedSignal(value);
   if (typed.shape.length) return undefined;
   const cell = typed.data[0]!;
@@ -20,8 +20,10 @@ export function plotSignalNumber(value: SignalValue | undefined): number | undef
 }
 
 export function ResultPlot({ samples, outputId, label }: { samples: RunSample[]; outputId: string; label: string }) {
-  const typed = samples.some(sample => { const value = sample.values[outputId]; return value !== null && typeof value === 'object' && !Array.isArray(value); });
+  const structured = samples.some(sample => { const value = sample.values[outputId]; return typeof value === 'object' && !Array.isArray(value) && value.kind !== 'typed'; });
+  const typed = samples.some(sample => { const value = sample.values[outputId]; return typeof value === 'object' && !Array.isArray(value) && value.kind === 'typed'; });
   const plot = useMemo(() => {
+    if (structured) return null;
     const filtered = samples.flatMap(sample => { const value = plotSignalNumber(sample.values[outputId]); return value !== undefined ? [{ time: sample.time, value }] : []; });
     // A nonfinite/unsupported typed sample must not silently bridge a gap with a line.
     if (typed && filtered.length !== samples.length) return null;
@@ -36,8 +38,8 @@ export function ResultPlot({ samples, outputId, label }: { samples: RunSample[];
     const y = (value: number) => 122 - (value / scale - yMin) / (yMax - yMin) * 114;
     // The model budget caps this at 10,001 samples. Keep every point, including brief peaks.
     return { path: filtered.map((sample, index) => `${index ? 'L' : 'M'}${x(sample.time).toFixed(2)},${y(sample.value).toFixed(2)}`).join(' '), high, low, timeMin, timeMax, single: filtered.length === 1, dotX: x(filtered[0].time), dotY: y(filtered[0].value) };
-  }, [samples, outputId, typed]);
-  if (!plot) return <div className="plot-empty">{typed ? '곡선은 유한한 실수 스칼라 자료형만 지원합니다. NaN·무한대·복소수·문자열·열거 값·배열은 아래 결과표에서 확인하세요.' : '표시할 수치 결과가 없습니다.'}</div>;
+  }, [samples, outputId, typed, structured]);
+  if (!plot) return <div className="plot-empty">{structured ? '버스와 메시지는 아래 원본 기록에서 필드·payload·발행 순서를 확인하세요.' : typed ? '곡선은 유한한 실수 스칼라 자료형만 지원합니다. NaN·무한대·복소수·문자열·열거 값·배열은 아래 결과표에서 확인하세요.' : '표시할 수치 결과가 없습니다.'}</div>;
   return <>{typed && <p className="typed-plot-note">곡선은 float64 시각화입니다. 정확한 값과 저장 코드는 결과표에 보존됩니다.</p>}<div className="plot-frame">
     <div className="plot-y-labels" aria-hidden="true"><span>{formatNumber(plot.high)}</span><span>{formatNumber(plot.low)}</span></div>
     <svg className="result-plot" viewBox="0 0 700 140" preserveAspectRatio="none" role="img" aria-label={`${label} 시간 그래프. 시작 ${formatNumber(plot.timeMin)}, 종료 ${formatNumber(plot.timeMax)}, 최소 ${formatNumber(plot.low)}, 최대 ${formatNumber(plot.high)}. 아래 표에서 전체 수치를 확인할 수 있습니다.`}>

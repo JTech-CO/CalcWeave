@@ -471,3 +471,7 @@ Python `python-m7-v1`을 첫 추가 타깃으로 선정했다. 승인된 정적�
 ## M10 납품 기록 — 자료형·복소수·고정소수점·n-D
 
 앱0.11.0·엔진0.11.0-m10,선택로컬engineering완료. 기존211정의보존,신규34정의·10preset·6예제,총245정의·45예제/7범주. source subset245행/미구현140행. 전체unit2669/2669,209actual TypeScript·484samples·4011exacttypedcell 비교,UI7/7,design188/pageErrors0,성능6예산/root-project70검사통과. 루트browser135/138 최초통과와3문제해결후관련21/21을분리기록한다. [M10 검증](m10-validation.md). 공개배포는M12최종통합릴리스에서확인한다. 전체Simulink옵션동등성과서비스출시승인은별도열린게이트다.
+
+## M11 납품 기록 — 조건부 계층·반복·구조화 메시지
+
+앱0.12.0·엔진0.12.0-m11,선택 로컬engineering완료. 기존245정의보존·신규48종으로293종,53예제/8범주. 원본73행중58선택승인(신규48·확장10),이전2유지·미지원13,현재subset293/385·missing92. 전체unit2896/2896,TS138실행·419표본,UI9+M10회귀7,project4,design188/pageErrors0·성능6예산·각release70검사PASS. 최초전체browser145/146 뒤pagination교정후관련16/16을분리기록한다. [M11 검증](m11-validation.md). 전체옵션·원본실행 parity·서비스출시승인은열린후속이며공개배포는M12최종통합릴리스에서확인한다.

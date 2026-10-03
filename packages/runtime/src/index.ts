@@ -88,6 +88,7 @@ export async function runModel(compiled: CompiledModel, options: RunOptions = {}
   }
   const samples: RunSample[] = [];
   let operations = 0;
+  let scopeInvocations = 0;
   let nextBudgetCheck = 64;
   let chunkStarted = performance.now();
   let steps = 0;
@@ -101,8 +102,11 @@ export async function runModel(compiled: CompiledModel, options: RunOptions = {}
     }
   }
 
-  function charge(node: IRNode): void {
-    const nextOperations = operations + costs.get(node.id)!;
+  function charge(node: IRNode, explicitWork?: number, scopeInvocation = false): void {
+    if (scopeInvocation && ++scopeInvocations > 4096) throw new ModelError([{ code: 'M11_INVOCATION_LIMIT', nodeId: node.id, message: '한 실행 경계의 계층 호출4096회를 초과했습니다.' }]);
+    const cost = explicitWork ?? costs.get(node.id)!;
+    if (!Number.isSafeInteger(cost) || cost < 0) throw new ModelError([{ code: 'RUNTIME_INVALID_IR', nodeId: node.id, message: '연산 비용이 유효하지 않습니다.' }]);
+    const nextOperations = operations + cost;
     if (nextOperations > maxOperations) fail('RUNTIME_OPERATION_BUDGET', '계산 연산 한도를 초과했습니다.', node.id);
     operations = nextOperations;
     if (operations >= nextBudgetCheck) { checkBudget(); nextBudgetCheck = operations + 64; }
@@ -202,6 +206,7 @@ export async function runModel(compiled: CompiledModel, options: RunOptions = {}
     if (settings.mode !== 'static') await pauseAtBoundary();
     if (options.signal?.aborted) return result('cancelled');
     checkBudget();
+    scopeInvocations = 0;
     tickCheckpoint = discrete?.checkpoint();
     if (previousValues) {
       if (discrete) sampleStep(index - 1, settings.startTime + (index - 1) * settings.step, () => discrete.transition(previousValues!, index - 1)); else transition(previousValues);

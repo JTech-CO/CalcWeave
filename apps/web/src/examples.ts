@@ -2,6 +2,7 @@ import type { CalcModel, CalcNode } from '../../../packages/model/src/types';
 import { getBlockDefinition } from '../../../packages/block-library/src';
 import { importDataset } from '../../../packages/data/src';
 import { createSubsystemFromSelection } from '../../../packages/compiler/src/hierarchy';
+import { createM11Examples } from './m11-examples';
 
 function node(id: string, blockType: string, label: string, parameters: Record<string, unknown>, unit?: string): CalcNode {
   return { id, blockType, blockVersion: 1, label, parameters, ...(unit ? { unit } : {}) };
@@ -18,6 +19,7 @@ export const EXAMPLE_CATEGORIES = [
   { id: 'workspace', label: '데이터와 도식 관리', description: '데이터 재생·이름 있는 신호·하위 도식을 다룹니다.' },
   { id: 'advanced', label: '행렬·표·양자화', description: '행렬 풀이·표 보간·저장 정수의 규칙을 비교합니다.' },
   { id: 'typed', label: '자료형·복소수·n-D', description: '정확한 정수·고정소수점·복소수와 다차원 배열을 다룹니다.' },
+  { id: 'hierarchy', label: '조건·반복·메시지', description: '독립 상태·실행 조건·반복·구조화 버스와 메시지를 확인합니다.' },
 ] as const;
 export type ExampleCategoryId = typeof EXAMPLE_CATEGORIES[number]['id'];
 export interface CalcExample { id: string; title: string; description: string; category: ExampleCategoryId; model: CalcModel }
@@ -414,6 +416,8 @@ EXAMPLES.push({ id: 'typed-ieee-cast', category: 'typed', title: '자료형 변�
   execution: { mode: 'static', startTime: 0, stopTime: 0, step: .1 }, layout: { value: { x: 40, y: 30 }, cast: { x: 340, y: 30 }, special: { x: 40, y: 290 }, result: { x: 650, y: 30 }, 'special-result': { x: 650, y: 290 } },
   notes: 'float32로 반올림한 0.1은 0.10000000149011612입니다. IEEE 특수값은 JSON 숫자가 아닌 NaN·Infinity·-Infinity·-0 태그로 저장합니다. 기존 유한 실수 블럭으로 연결할 때에는 명시 경계와 자료형 범위를 확인하세요.',
 } });
+
+EXAMPLES.push(...createM11Examples());
 
 export function createExample(id: string): CalcModel {
   return structuredClone((EXAMPLES.find(example => example.id === id) ?? EXAMPLES[0]).model);
