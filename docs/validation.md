@@ -1,6 +1,6 @@
 # CalcWeave 검증 상태
 
-앱 `0.17.0` · 엔진 `0.17.0-m16`. 이 문서는 현행 구현의 검증 범위와 최신 배포 증거를 연결한다. 과거 단계의 수치·실패 기록은 `evidence/`에 보존한다. 공개 CI와 최종 파일 확인은 아래 결과를 확정한 뒤 기록한다.
+앱 `0.17.0` · 엔진 `0.17.0-m16`. 이 문서는 현행 구현의 검증 범위와 최신 배포 증거를 연결한다. 과거 단계의 수치·실패 기록은 `evidence/`에 보존한다. 최종 공개 CI와 정확한 배포 파일·브라우저 검사를 완료했다.
 
 ## 지원 감사
 
@@ -15,7 +15,7 @@
 | 검사 | 확인 범위와 근거 |
 | --- | --- |
 | 단위 검사 | 최종 전체 3,883/3,883 PASS. [최종 원본](evidence/m16-unit-results.json). 추가 감사 검사 전 3,882개 결과는 [초기 원본](evidence/m16-initial-unit-results.json)에 따로 보존한다. |
-| 지원 화면 | 최종 8/8 PASS. 검색·분류·타깃·동명 Display·preset·미지원·JSON·모델 불변·모달 단축키·키보드 목록 탐색과 8개 화면/테마/글자 확대 조건을 확인했다. [화면 기록](evidence/m16-support-ui-verification.json)·[실제 브라우저 결과](evidence/m16-support-browser-results.json). 최종 공개 응답은 별도 재검사한다. |
+| 지원 화면 | 최종 8/8 PASS. 검색·분류·타깃·동명 Display·preset·미지원·JSON·모델 불변·모달 단축키·키보드 목록 탐색과 8개 화면/테마/글자 확대 조건을 확인했다. [화면 기록](evidence/m16-support-ui-verification.json)·[실제 브라우저 결과](evidence/m16-support-browser-results.json). 최종 공개 대응표도 아래 공개 검사에서 재확인했다. |
 | 생성 Python | 현재 엔진에서 실제 프로그램 142개·정상 256표본. [현재 실행](evidence/m15-python-regression-on-m16.json). Python 69개 정의의 선택 구성만 승인한다. |
 | 생성 WASM | 현재 엔진에서 실제 module/runner 128개. [현재 실행](evidence/m15-wasm-regression-on-m16.json). WASM 16개 정의의 유한 실수 scalar DAG 선택 구성만 승인한다. |
 | 상호운용·패키지 | [실제 통합 실행](evidence/m15-regression-on-m16.json): MAT/SLX/MDL 3개 선택 분석 경로, 원본 bytes/재분석, native JSON, 서명 검증·명시 검토가 필요한 8개 과거 엔진 프로필. |
@@ -28,7 +28,7 @@
 
 지원 창에서 뒤쪽 공통 CSS가 의도한 폭을 덮던 문제를 교정했다. 최종 실제 폭은 1440px 화면에서 1040px, 1024px에서 992px, 작은 화면에서 viewport−16px이며 브라우저 assertion과 화면으로 확인했다. 교정 전 8개 기능 검사 결과는 이전 폭의 검사로 구분한다.
 
-[로컬 종합 검증](evidence/m16-engineering-checks.json)은 위 결과와 보호 자료 SHA를 연결한다. 전체 브라우저 197개에 대한 단일 최종 실행 결과는 공개 CI에서 확정하며, 로컬의 집중 8개 검사나 프로젝트 경로 4개 검사로 전체 실행을 대체했다고 표시하지 않는다.
+[로컬 종합 검증](evidence/m16-engineering-checks.json)은 위 결과와 보호 자료 SHA를 연결한다. 전체 브라우저 197개는 최종 공개 CI에서 모두 통과했다. 로컬 집중 8개와 프로젝트 경로 4개 결과는 별도 기록이며, 로컬 단일 197개 실행을 주장하지 않는다.
 
 ## 재현 명령
 
@@ -61,8 +61,16 @@ npm run test:e2e
 
 ## 공개 배포와 문서 정리
 
-최종 공개 배포 검사는 대기 상태다. [운영 안내](operations.md)의 기본 브랜치 수동 workflow와 정확한 artifact 검증을 따른다. 공개 주소는 [CalcWeave](https://jtech-co.github.io/CalcWeave/)다. 기술적 앱 배포와 목표 도메인·정식 출시·실제 novice 관찰·원본 옵션 동등성은 별도 판정한다.
+M16 앱 `0.17.0` / 엔진 `0.17.0-m16`의 공개 배포 검사를 완료했다. [운영 안내](operations.md)의 기본 브랜치 수동 workflow와 정확한 artifact 검증을 따른다. 공개 주소는 [CalcWeave](https://jtech-co.github.io/CalcWeave/)다. 기술적 앱 배포와 목표 도메인·정식 출시·실제 novice 관찰·원본 옵션 동등성은 별도 판정한다.
 
 M16 구현 검사 후 중복된 M0~M15 계약·진행 기록과 이전 계획·배포 MD 44개를 현행 기술·디자인·운영·검증·지원 문서로 통합했다. M16부터 현행 검증 문서를 사용한다. 원본 dataset, 실제 정책, 보호 baseline MD/JSON, 기계 판독 계획과 실패/수치/배포 증거 JSON은 보존했다. 삭제 파일의 정확한 이전 SHA와 보존 상태는 [정리 기록](evidence/document-consolidation-manifest.json)에 기록했다. 과거 문서가 필요한 경우 [정리 전 Git 기록](https://github.com/JTech-CO/CalcWeave/tree/9f314bbb2c41d4e6b087c90b9da435e61a850996/docs)을 확인한다.
 
 원본의 C/C++·MATLAB·S-function 실행 환경, 원본 전수 옵션 inventory와 수치 대조, 편집한 native 모델 export는 미승인/미검증으로 유지한다. 계정·원격 DB·결제·개인정보 수집을 추가할 때는 현재 로컬 베타의 해당없음 항목을 그대로 재사용하지 않는다.
+
+## M16 공개 결과
+
+[Actions 37128098577](https://github.com/JTech-CO/CalcWeave/actions/runs/37128098577)는 main `736603c7988699e2001cb102d7f1ca64fa1c4a55`에서 단위 3,883/3,883·전체 브라우저 197/197·프로젝트 경로 4/4, 모든 단계 회귀와 release 91검사를 통과한 뒤 게시했다. 공개 asset 16개 및 service worker를 로컬에서 검증한 프로젝트 경로 artifact와 byte/SHA로 대조했다. release ID는 `43f40da7eb7e5cb4bb6c6e890e550868621fb3d7019bf42eb4c6046f1a93bbef`다.
+
+공개 기본 9검사는 초기 fit·Worker·오프라인 편집·정책·Python ZIP을 확인했다. 추가 21케이스는 M16 대응표 8케이스와 다운로드한 Python의 실제 격리 실행, WASM binary/runner의 실제 브라우저 계산, 서명된 migration 검토·undo, MAT/SLX/MDL 선택 분석 경로·원본 보존·변조/코드 거부·반응형 조건을 확인했다. 대응표 SHA는 `e5d706d7fc127081fc8470189b3f580d03ed61ba938a8168a5aa8e3730bb875e`다. 로컬 지원 UI 결과는 문서 헤더 갱신 전 데이터였으며, 이 공개 검사는 최종 데이터에 대한 결과다.
+
+[공개 결과](evidence/m16-public-release.json)·[CI 원본 요약](evidence/m16-actions-verification.json)·[정확한 파일 검사](evidence/m16-deployment-verification.json)·[공개 기본 브라우저](evidence/m16-public-browser-verification.json)·[공개 추가 브라우저](evidence/m16-public-feature-browser-results.json)·[로컬 종합 검증](evidence/m16-engineering-checks.json). 공개 앱의 빌드 커밋은 위 main SHA이며 이후 증거 문서 병합은 동일 artifact를 다시 게시하지 않는다. 기술적 앱 배포는 PASS이고 calcweave.com 소유/DNS·실제 초보자 관찰·정식 출시·원본 전수 옵션/MathWorks reference 동등성은 별도 판정이다.
