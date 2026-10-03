@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "stage": "M16",
+  "engineVersion": "0.17.0-m16",
+  "purpose": "Four historical M1 fixed presets revalidated with source-specific literal oracles; no original proof rewritten.",
+  "rawFixtures": 4,
+  "actualStandalonePrograms": 4,
+  "checkedSamples": 4,
+  "fixtures": [
+    {
+      "id": "m16-m1-add",
+      "sourceId": "08-002",
+      "canonical": "math.sum",
+      "parameters": {
+        "signs": "++"
+      },
+      "modes": [
+        "static"
+      ],
+      "expected": 9,
+      "actual": 9,
+      "modelHash": "74bc0ec3999e9a1251fb058548507f1ce1cbdff82170e3c9b71fe63fa84fce57",
+      "generatedSourceSha256": "271e1fbcf2fd03624df2ab950ed4e62f9ebe23e94f65ee714b85fef3402dda9b",
+      "actualStandaloneTypeScript": true,
+      "nativeLiteralOracle": true,
+      "manifestParity": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true
+    },
+    {
+      "id": "m16-m1-subtract",
+      "sourceId": "08-032",
+      "canonical": "math.sum",
+      "parameters": {
+        "signs": "+-"
+      },
+      "modes": [
+        "static"
+      ],
+      "expected": 5,
+      "actual": 5,
+      "modelHash": "6c6b2bcb23e373d648d41adbb2b09d923d13e610c431a01494849d9055190d7b",
+      "generatedSourceSha256": "cb54765272a36bd86ead00129eb7130920abee2ea0734508236b4dc1eba98021",
+      "actualStandaloneTypeScript": true,
+      "nativeLiteralOracle": true,
+      "manifestParity": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true
+    },
+    {
+      "id": "m16-m1-pi",
+      "sourceId": "21-006",
+      "canonical": "source.constant",
+      "parameters": {
+        "value": 3.141592653589793
+      },
+      "modes": [
+        "static"
+      ],
+      "expected": 3.141592653589793,
+      "actual": 3.141592653589793,
+      "modelHash": "5d23aabbe2239957ddc2c0dd0c121030080c164f2530c59c6bb72a4d17b1aa00",
+      "generatedSourceSha256": "89846509c2c036a430f90d59db8a9864b71071cc39bf0f8f284dd694b4b7408e",
+      "actualStandaloneTypeScript": true,
+      "nativeLiteralOracle": true,
+      "manifestParity": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true
+    },
+    {
+      "id": "m16-m1-zero",
+      "sourceId": "21-007",
+      "canonical": "source.constant",
+      "parameters": {
+        "value": 0
+      },
+      "modes": [
+        "static"
+      ],
+      "expected": 0,
+      "actual": 0,
+      "modelHash": "2c736e6578528f59dfcac94e5b65f31d57c9f0443c82697aa4ddebcf21cee1e1",
+      "generatedSourceSha256": "92bb44c82f70870ea437af22bcba9045fbd4c3e756479610e756b929651ba4bc",
+      "actualStandaloneTypeScript": true,
+      "nativeLiteralOracle": true,
+      "manifestParity": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true
+    }
+  ],
+  "fullSimulinkEquivalenceClaimed": false,
+  "originalSourceRuntimeExecuted": false
+}

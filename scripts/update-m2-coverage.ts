@@ -42,6 +42,6 @@ const updated = source.split(/\r?\n/).map(line => {
   counts[cells[8]!] = (counts[cells[8]!] ?? 0) + 1; return `| ${cells.join(' | ')} |`;
 }).join('\n');
 if (Object.values(counts).reduce((sum, value) => sum + value, 0) !== 385) throw new Error('Coverage rows changed');
-const summary = `- 상태: M2 구현 기록. 원본385행 중 M2 승인 subset ${counts['M2 승인 subset'] ?? 0}행, M1 정적 subset ${counts['M1 정적 subset'] ?? 0}행(정수 tick 이산에도 확장), preset ${counts['M1 preset subset'] ?? 0}행, AST 독립 대체 ${counts['M1 AST 독립 대체 subset'] ?? 0}행, M0 연속 scalar 실험 ${counts['M0 연속 scalar 실험'] ?? 0}행, 미구현 ${counts['미구현'] ?? 0}행이다. 전체 옵션·Simulink 동등성을 뜻하지 않는다. 실제 경계는 [M2 구현 계약](m2-contract.md)과 [검증 기록](m2-validation.md)에 기록한다.`;
+const summary = `- 상태: M2 구현 기록. 원본385행 중 M2 승인 subset ${counts['M2 승인 subset'] ?? 0}행, M1 정적 subset ${counts['M1 정적 subset'] ?? 0}행(정수 tick 이산에도 확장), preset ${counts['M1 preset subset'] ?? 0}행, AST 독립 대체 ${counts['M1 AST 독립 대체 subset'] ?? 0}행, M0 연속 scalar 실험 ${counts['M0 연속 scalar 실험'] ?? 0}행, 미구현 ${counts['미구현'] ?? 0}행이다. 전체 옵션·Simulink 동등성을 뜻하지 않는다. 실제 경계는 [M2 구현 계약](01-technical-whitepaper.md)과 [검증 기록](validation.md)에 기록한다.`;
 await writeFile(path, updated.replace('- 문서 버전: v0.2', '- 문서 버전: v0.3').replace(/^- 상태: .+$/m, summary) + (updated.endsWith('\n') ? '' : '\n'));
 process.stdout.write(JSON.stringify(counts, null, 2) + '\n');

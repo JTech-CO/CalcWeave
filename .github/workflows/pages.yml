@@ -33,6 +33,7 @@ jobs:
       - run: npm test
       - run: npm run verify:coverage
       - run: npm run verify:roadmap
+      - run: npm run verify:docs
       - run: npm run verify:m7
       - run: npm run verify:catalog
       - run: npm run verify:m8
@@ -48,6 +49,7 @@ jobs:
       - run: npm run verify:m14
       - run: npx tsx scripts/update-m14-coverage.ts --verify
       - run: npm run verify:m15
+      - run: npm run verify:m16
       - run: npm run build
       - run: npm run verify:release
       - run: npx playwright install --with-deps chromium

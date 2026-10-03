@@ -47,6 +47,6 @@ const updated = content.split(/\r?\n/).map(line => {
 }).join('\n');
 const total = Object.values(counts).reduce((sum, count) => sum + count, 0);
 if (total !== 385) throw new Error(`Coverage count changed: ${total}`);
-const summary = `- 상태: M1 구현 기록. 원본 385행 중 정적 subset ${counts['M1 정적 subset'] ?? 0}행, preset ${counts['M1 preset subset'] ?? 0}행, 제한 AST 독립 대체 ${counts['M1 AST 독립 대체 subset'] ?? 0}행, 기존 이산/연속 scalar 실험 ${(counts['M0 이산 scalar 실험'] ?? 0) + (counts['M0 연속 scalar 실험'] ?? 0)}행, 미구현 ${counts['미구현'] ?? 0}행이다. 전체 옵션·Simulink 동등성을 뜻하지 않는다. 실제 경계는 [M1 구현 계약](m1-contract.md)과 [검증 기록](m1-validation.md)에 기록한다.`;
+const summary = `- 상태: M1 구현 기록. 원본 385행 중 정적 subset ${counts['M1 정적 subset'] ?? 0}행, preset ${counts['M1 preset subset'] ?? 0}행, 제한 AST 독립 대체 ${counts['M1 AST 독립 대체 subset'] ?? 0}행, 기존 이산/연속 scalar 실험 ${(counts['M0 이산 scalar 실험'] ?? 0) + (counts['M0 연속 scalar 실험'] ?? 0)}행, 미구현 ${counts['미구현'] ?? 0}행이다. 전체 옵션·Simulink 동등성을 뜻하지 않는다. 실제 경계는 [M1 구현 계약](01-technical-whitepaper.md)과 [검증 기록](validation.md)에 기록한다.`;
 await writeFile(path, updated.replace(/^- 상태: .+$/m, summary) + (updated.endsWith('\n') ? '' : '\n'));
 process.stdout.write(JSON.stringify(counts, null, 2) + '\n');

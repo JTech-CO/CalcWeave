@@ -1,0 +1,1635 @@
+{
+  "schemaVersion": 1,
+  "engineVersion": "0.17.0-m16",
+  "generatedAt": "2026-10-03T12:34:37.806Z",
+  "registryDefinitions": 337,
+  "addedDefinitions": 3,
+  "predecessorDefinitionsUnchanged": 334,
+  "fullSimulinkEquivalenceClaimed": false,
+  "counts": {
+    "rawFixtures": 20,
+    "definitionFixtures": 3,
+    "boundaryFixtures": 17,
+    "failures": 18,
+    "modeExecutions": 28,
+    "actualTypeScript": 32,
+    "strictTypeScriptPrograms": 3,
+    "checkedSamples": 85
+  },
+  "parityTolerance": 3e-12,
+  "fixtures": [
+    {
+      "id": "m14-independent-wasm-affine",
+      "sourceIds": [
+        "19-001"
+      ],
+      "mode": "static",
+      "blockIds": [
+        "adapter.wasm-affine"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-affine",
+          "parameters": {
+            "gain": 3,
+            "bias": -1,
+            "adapterIdentity": {
+              "id": "calcweave.wasm-affine-f64-v1",
+              "version": 1,
+              "sha256": "fc7801ff3c8d616c38773a0e26af62181f8281c8f06430193d0ed20fb239cb95",
+              "abiVersion": 1
+            }
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": false,
+      "independentFullStateMemoryOracle": false,
+      "modelHash": "0ec3767557b48c95bb05244d1465a563632aeb8e9ae7d4a588f8cc475e9e7e56",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": true,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-independent-wasm-affine",
+      "sourceIds": [
+        "19-001"
+      ],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.wasm-affine"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-affine",
+          "parameters": {
+            "gain": 3,
+            "bias": -1,
+            "adapterIdentity": {
+              "id": "calcweave.wasm-affine-f64-v1",
+              "version": 1,
+              "sha256": "fc7801ff3c8d616c38773a0e26af62181f8281c8f06430193d0ed20fb239cb95",
+              "abiVersion": 1
+            }
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": false,
+      "independentFullStateMemoryOracle": false,
+      "modelHash": "a05978d48d36e8b2987b8f9bd104917523a0dc8fc33609448cd7acb6f1d5d7c9",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": true,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-independent-wasm-affine",
+      "sourceIds": [
+        "19-001"
+      ],
+      "mode": "continuous",
+      "blockIds": [
+        "adapter.wasm-affine"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-affine",
+          "parameters": {
+            "gain": 3,
+            "bias": -1,
+            "adapterIdentity": {
+              "id": "calcweave.wasm-affine-f64-v1",
+              "version": 1,
+              "sha256": "fc7801ff3c8d616c38773a0e26af62181f8281c8f06430193d0ed20fb239cb95",
+              "abiVersion": 1
+            }
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "solver": {
+        "method": "rk4",
+        "initialStep": 0.5,
+        "minStep": 1e-8,
+        "maxStep": 0.5,
+        "atol": 1e-8,
+        "rtol": 0.000001,
+        "maxSteps": 100000,
+        "maxRejects": 10000,
+        "maxEvaluations": 1000000,
+        "eventTolerance": 1e-8,
+        "maxEvents": 10000,
+        "discreteStep": 0.5
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": false,
+      "independentFullStateMemoryOracle": false,
+      "modelHash": "12eefca6cbb7d9de095cae40152e5a56bce1725140b745fdb2d852da7f663903",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": true,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-independent-wasm-accumulator",
+      "sourceIds": [
+        "19-002"
+      ],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.wasm-accumulator"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-accumulator",
+          "parameters": {
+            "initial": 1,
+            "gain": 2,
+            "resetMode": "rising",
+            "adapterIdentity": {
+              "id": "calcweave.wasm-accumulator-f64-v1",
+              "version": 1,
+              "sha256": "e39e9c9c08547876adeb3a521111b47b778fae11ca90a881995428a264376a65",
+              "abiVersion": 1
+            },
+            "m14StateElements": 16
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": true,
+      "independentFullStateMemoryOracle": true,
+      "modelHash": "806f346eb3d25dc2cd943588cbf0cb61e899393b5b67e089049dca3a00fbf584",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-independent-entity-transport",
+      "sourceIds": [
+        "02-016"
+      ],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.entity-transport"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.entity-transport",
+          "parameters": {
+            "capacity": 4,
+            "overflow": "error",
+            "maxRelease": 2,
+            "adapterIdentity": {
+              "id": "calcweave.entity-fixed-deadline-v1",
+              "version": 1,
+              "abiVersion": 1
+            },
+            "entityPayloadDescriptor": {
+              "valueType": "float64",
+              "shape": [],
+              "unit": "1"
+            },
+            "entityInitial": {
+              "kind": "messages",
+              "items": []
+            },
+            "m14StateElements": 8664
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": true,
+      "independentFullStateMemoryOracle": true,
+      "modelHash": "f73442736717785dad100c8a9c7ba9dbd5deb8f1caf7f2e0ab40ad3f8ef7715d",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-affine-negative",
+      "sourceIds": [],
+      "mode": "static",
+      "blockIds": [
+        "adapter.wasm-affine"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-affine",
+          "parameters": {
+            "gain": -2,
+            "bias": 0.5,
+            "adapterIdentity": {
+              "id": "calcweave.wasm-affine-f64-v1",
+              "version": 1,
+              "sha256": "fc7801ff3c8d616c38773a0e26af62181f8281c8f06430193d0ed20fb239cb95",
+              "abiVersion": 1
+            }
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": false,
+      "independentFullStateMemoryOracle": false,
+      "modelHash": "08f5c347a9316ac7d8529167d190059b11a4e6a565daec822dee8264241d7d39",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-affine-negative",
+      "sourceIds": [],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.wasm-affine"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-affine",
+          "parameters": {
+            "gain": -2,
+            "bias": 0.5,
+            "adapterIdentity": {
+              "id": "calcweave.wasm-affine-f64-v1",
+              "version": 1,
+              "sha256": "fc7801ff3c8d616c38773a0e26af62181f8281c8f06430193d0ed20fb239cb95",
+              "abiVersion": 1
+            }
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": false,
+      "independentFullStateMemoryOracle": false,
+      "modelHash": "e2a5b74e8de6c2396eb500af749808b0b09ae5022b5f419fb2c019d8337132d6",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-affine-negative",
+      "sourceIds": [],
+      "mode": "continuous",
+      "blockIds": [
+        "adapter.wasm-affine"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-affine",
+          "parameters": {
+            "gain": -2,
+            "bias": 0.5,
+            "adapterIdentity": {
+              "id": "calcweave.wasm-affine-f64-v1",
+              "version": 1,
+              "sha256": "fc7801ff3c8d616c38773a0e26af62181f8281c8f06430193d0ed20fb239cb95",
+              "abiVersion": 1
+            }
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "solver": {
+        "method": "rk4",
+        "initialStep": 0.5,
+        "minStep": 1e-8,
+        "maxStep": 0.5,
+        "atol": 1e-8,
+        "rtol": 0.000001,
+        "maxSteps": 100000,
+        "maxRejects": 10000,
+        "maxEvaluations": 1000000,
+        "eventTolerance": 1e-8,
+        "maxEvents": 10000,
+        "discreteStep": 0.5
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": false,
+      "independentFullStateMemoryOracle": false,
+      "modelHash": "d52ab3acc250dbd8e58a315b49a1dc85195d3bae9977ae5baceb45563e4f5a9d",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-affine-zero-gain",
+      "sourceIds": [],
+      "mode": "static",
+      "blockIds": [
+        "adapter.wasm-affine"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-affine",
+          "parameters": {
+            "gain": 0,
+            "bias": -7,
+            "adapterIdentity": {
+              "id": "calcweave.wasm-affine-f64-v1",
+              "version": 1,
+              "sha256": "fc7801ff3c8d616c38773a0e26af62181f8281c8f06430193d0ed20fb239cb95",
+              "abiVersion": 1
+            }
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 1,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": false,
+      "independentFullStateMemoryOracle": false,
+      "modelHash": "17e8532cb829ade25dc1ac45a8feeb83e1a09662422813b34703c093b208951d",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-affine-zero-gain",
+      "sourceIds": [],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.wasm-affine"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-affine",
+          "parameters": {
+            "gain": 0,
+            "bias": -7,
+            "adapterIdentity": {
+              "id": "calcweave.wasm-affine-f64-v1",
+              "version": 1,
+              "sha256": "fc7801ff3c8d616c38773a0e26af62181f8281c8f06430193d0ed20fb239cb95",
+              "abiVersion": 1
+            }
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": false,
+      "independentFullStateMemoryOracle": false,
+      "modelHash": "8f589fcce03e15c8ee008428533e3d15d7bebb682f80b85d8a48b6aa26b85dde",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-affine-zero-gain",
+      "sourceIds": [],
+      "mode": "continuous",
+      "blockIds": [
+        "adapter.wasm-affine"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-affine",
+          "parameters": {
+            "gain": 0,
+            "bias": -7,
+            "adapterIdentity": {
+              "id": "calcweave.wasm-affine-f64-v1",
+              "version": 1,
+              "sha256": "fc7801ff3c8d616c38773a0e26af62181f8281c8f06430193d0ed20fb239cb95",
+              "abiVersion": 1
+            }
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "solver": {
+        "method": "rk4",
+        "initialStep": 0.5,
+        "minStep": 1e-8,
+        "maxStep": 0.5,
+        "atol": 1e-8,
+        "rtol": 0.000001,
+        "maxSteps": 100000,
+        "maxRejects": 10000,
+        "maxEvaluations": 1000000,
+        "eventTolerance": 1e-8,
+        "maxEvents": 10000,
+        "discreteStep": 0.5
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": false,
+      "independentFullStateMemoryOracle": false,
+      "modelHash": "787d6ce90384a0c2bdeecf621429c12c2f008787d74278daa2b202f8fdaace5b",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-affine-time-varying",
+      "sourceIds": [],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.wasm-affine"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-affine",
+          "parameters": {
+            "gain": 2,
+            "bias": -1,
+            "adapterIdentity": {
+              "id": "calcweave.wasm-affine-f64-v1",
+              "version": 1,
+              "sha256": "fc7801ff3c8d616c38773a0e26af62181f8281c8f06430193d0ed20fb239cb95",
+              "abiVersion": 1
+            }
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": false,
+      "independentFullStateMemoryOracle": false,
+      "modelHash": "e120938b8e75d95ab52fbc482408ed3bdb2b88d8db96737b82b4c174b4917b35",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-affine-time-varying",
+      "sourceIds": [],
+      "mode": "continuous",
+      "blockIds": [
+        "adapter.wasm-affine"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-affine",
+          "parameters": {
+            "gain": 2,
+            "bias": -1,
+            "adapterIdentity": {
+              "id": "calcweave.wasm-affine-f64-v1",
+              "version": 1,
+              "sha256": "fc7801ff3c8d616c38773a0e26af62181f8281c8f06430193d0ed20fb239cb95",
+              "abiVersion": 1
+            }
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "solver": {
+        "method": "rk4",
+        "initialStep": 0.5,
+        "minStep": 1e-8,
+        "maxStep": 0.5,
+        "atol": 1e-8,
+        "rtol": 0.000001,
+        "maxSteps": 100000,
+        "maxRejects": 10000,
+        "maxEvaluations": 1000000,
+        "eventTolerance": 1e-8,
+        "maxEvents": 10000,
+        "discreteStep": 0.5
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": false,
+      "independentFullStateMemoryOracle": false,
+      "modelHash": "7fdd016f6848dfb7ada38edd947810b1e55d3a8df157f5f4a421e28086fbea98",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-accumulator-rising",
+      "sourceIds": [],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.wasm-accumulator"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-accumulator",
+          "parameters": {
+            "initial": 1,
+            "gain": 2,
+            "resetMode": "rising",
+            "adapterIdentity": {
+              "id": "calcweave.wasm-accumulator-f64-v1",
+              "version": 1,
+              "sha256": "e39e9c9c08547876adeb3a521111b47b778fae11ca90a881995428a264376a65",
+              "abiVersion": 1
+            },
+            "m14StateElements": 16
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 5,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": true,
+      "independentFullStateMemoryOracle": true,
+      "modelHash": "bc8f75cfe82f5f765ce9456be877579bab73748327b2b48a987aee62bbec1324",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-accumulator-level",
+      "sourceIds": [],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.wasm-accumulator"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-accumulator",
+          "parameters": {
+            "initial": 1,
+            "gain": 2,
+            "resetMode": "level",
+            "adapterIdentity": {
+              "id": "calcweave.wasm-accumulator-f64-v1",
+              "version": 1,
+              "sha256": "e39e9c9c08547876adeb3a521111b47b778fae11ca90a881995428a264376a65",
+              "abiVersion": 1
+            },
+            "m14StateElements": 16
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 5,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": true,
+      "independentFullStateMemoryOracle": true,
+      "modelHash": "81997d46a9762e4230bae46538be0e24b1d3e34a6ac7706fae0d4a39d8ad25f4",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-accumulator-feedback",
+      "sourceIds": [],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.wasm-accumulator"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-accumulator",
+          "parameters": {
+            "initial": 1,
+            "gain": 1,
+            "resetMode": "rising",
+            "adapterIdentity": {
+              "id": "calcweave.wasm-accumulator-f64-v1",
+              "version": 1,
+              "sha256": "e39e9c9c08547876adeb3a521111b47b778fae11ca90a881995428a264376a65",
+              "abiVersion": 1
+            },
+            "m14StateElements": 16
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 4,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": true,
+      "independentFullStateMemoryOracle": true,
+      "modelHash": "f48540355bc251db6f45925c77a6ac30d76ecc330d8edc542ddec7c08e5b1a62",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-independent-accumulators",
+      "sourceIds": [],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.wasm-accumulator"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-accumulator",
+          "parameters": {
+            "initial": 1,
+            "gain": 2,
+            "resetMode": "rising",
+            "adapterIdentity": {
+              "id": "calcweave.wasm-accumulator-f64-v1",
+              "version": 1,
+              "sha256": "e39e9c9c08547876adeb3a521111b47b778fae11ca90a881995428a264376a65",
+              "abiVersion": 1
+            },
+            "m14StateElements": 16
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        },
+        "Other": {
+          "blockType": "adapter.wasm-accumulator",
+          "parameters": {
+            "initial": -2,
+            "gain": -1,
+            "resetMode": "rising",
+            "adapterIdentity": {
+              "id": "calcweave.wasm-accumulator-f64-v1",
+              "version": 1,
+              "sha256": "e39e9c9c08547876adeb3a521111b47b778fae11ca90a881995428a264376a65",
+              "abiVersion": 1
+            },
+            "m14StateElements": 16
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": true,
+      "independentFullStateMemoryOracle": true,
+      "modelHash": "731dab61c4d6f56a7d2054efca13b5f461b2ae0eb162544c2dc3d770dca4977a",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-accumulator-multirate",
+      "sourceIds": [],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.wasm-accumulator"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-accumulator",
+          "parameters": {
+            "initial": 3,
+            "gain": -1,
+            "resetMode": "rising",
+            "adapterIdentity": {
+              "id": "calcweave.wasm-accumulator-f64-v1",
+              "version": 1,
+              "sha256": "e39e9c9c08547876adeb3a521111b47b778fae11ca90a881995428a264376a65",
+              "abiVersion": 1
+            },
+            "m14StateElements": 16
+          },
+          "sampleTime": {
+            "period": 2,
+            "offset": 1
+          }
+        }
+      },
+      "samples": 5,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": true,
+      "independentFullStateMemoryOracle": true,
+      "modelHash": "48cc189650984958f4d3ae3ac744423b8cdb5e57d05395d72294321665ebee14",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-accumulator-stop",
+      "sourceIds": [],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.wasm-accumulator"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.wasm-accumulator",
+          "parameters": {
+            "initial": 1,
+            "gain": 2,
+            "resetMode": "rising",
+            "adapterIdentity": {
+              "id": "calcweave.wasm-accumulator-f64-v1",
+              "version": 1,
+              "sha256": "e39e9c9c08547876adeb3a521111b47b778fae11ca90a881995428a264376a65",
+              "abiVersion": 1
+            },
+            "m14StateElements": 16
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 2,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": true,
+      "independentFullStateMemoryOracle": true,
+      "modelHash": "c690b2029cb67e9d02cd111892e12d0ae5490ef034c37b3b24e6ff14560fcad5",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-zero-delay",
+      "sourceIds": [],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.entity-transport"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.entity-transport",
+          "parameters": {
+            "capacity": 1,
+            "overflow": "error",
+            "maxRelease": 1,
+            "adapterIdentity": {
+              "id": "calcweave.entity-fixed-deadline-v1",
+              "version": 1,
+              "abiVersion": 1
+            },
+            "entityPayloadDescriptor": {
+              "valueType": "float64",
+              "shape": [],
+              "unit": "1"
+            },
+            "entityInitial": {
+              "kind": "messages",
+              "items": []
+            },
+            "m14StateElements": 8412
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": true,
+      "independentFullStateMemoryOracle": true,
+      "modelHash": "56f9d56b2e14dae0065a7493c01db4816d361f7254e6ac44c23fa3c792af4dbf",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-max-release-one",
+      "sourceIds": [],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.entity-transport"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.entity-transport",
+          "parameters": {
+            "capacity": 4,
+            "overflow": "error",
+            "maxRelease": 1,
+            "adapterIdentity": {
+              "id": "calcweave.entity-fixed-deadline-v1",
+              "version": 1,
+              "abiVersion": 1
+            },
+            "entityPayloadDescriptor": {
+              "valueType": "float64",
+              "shape": [],
+              "unit": "1"
+            },
+            "entityInitial": {
+              "kind": "messages",
+              "items": []
+            },
+            "m14StateElements": 8664
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": true,
+      "independentFullStateMemoryOracle": true,
+      "modelHash": "644f7a355b2b0866c279b53a358423cbcbf5bc92f0324213a488aeaad63d8705",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-drop-newest",
+      "sourceIds": [],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.entity-transport"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.entity-transport",
+          "parameters": {
+            "capacity": 1,
+            "overflow": "drop-newest",
+            "maxRelease": 1,
+            "adapterIdentity": {
+              "id": "calcweave.entity-fixed-deadline-v1",
+              "version": 1,
+              "abiVersion": 1
+            },
+            "entityPayloadDescriptor": {
+              "valueType": "float64",
+              "shape": [],
+              "unit": "1"
+            },
+            "entityInitial": {
+              "kind": "messages",
+              "items": []
+            },
+            "m14StateElements": 8412
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": true,
+      "independentFullStateMemoryOracle": true,
+      "modelHash": "29e0aae611f5b713cb67a06b17cbafad5f78486aacef8950f4ac5c8cd50a016d",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-drop-oldest",
+      "sourceIds": [],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.entity-transport"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.entity-transport",
+          "parameters": {
+            "capacity": 1,
+            "overflow": "drop-oldest",
+            "maxRelease": 1,
+            "adapterIdentity": {
+              "id": "calcweave.entity-fixed-deadline-v1",
+              "version": 1,
+              "abiVersion": 1
+            },
+            "entityPayloadDescriptor": {
+              "valueType": "float64",
+              "shape": [],
+              "unit": "1"
+            },
+            "entityInitial": {
+              "kind": "messages",
+              "items": []
+            },
+            "m14StateElements": 8412
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": true,
+      "independentFullStateMemoryOracle": true,
+      "modelHash": "6e8f338aa9b106dc6f9f5f7d96de63fbf9a76569ff9560799b4f4bac35577280",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-variable-duration-fifo",
+      "sourceIds": [],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.entity-transport"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.entity-transport",
+          "parameters": {
+            "capacity": 4,
+            "overflow": "error",
+            "maxRelease": 2,
+            "adapterIdentity": {
+              "id": "calcweave.entity-fixed-deadline-v1",
+              "version": 1,
+              "abiVersion": 1
+            },
+            "entityPayloadDescriptor": {
+              "valueType": "float64",
+              "shape": [],
+              "unit": "1"
+            },
+            "entityInitial": {
+              "kind": "messages",
+              "items": []
+            },
+            "m14StateElements": 8664
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 4,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": true,
+      "independentFullStateMemoryOracle": true,
+      "modelHash": "bf29f150d1f04d65bc995ec351bdfee6c4b12413ad154383d4b3ad8c7dc4ddb8",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-fifo-ignores-priority",
+      "sourceIds": [],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.entity-transport"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.entity-transport",
+          "parameters": {
+            "capacity": 2,
+            "overflow": "error",
+            "maxRelease": 1,
+            "adapterIdentity": {
+              "id": "calcweave.entity-fixed-deadline-v1",
+              "version": 1,
+              "abiVersion": 1
+            },
+            "entityPayloadDescriptor": {
+              "valueType": "float64",
+              "shape": [],
+              "unit": "1"
+            },
+            "entityInitial": {
+              "kind": "messages",
+              "items": []
+            },
+            "m14StateElements": 8496
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": false,
+      "independentFullStateMemoryOracle": false,
+      "modelHash": "7cdf634e0f0463d4fcee543e27c6e26afca0181c72f13b19ffdffbeb0af45fac",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-typed-payload-metadata",
+      "sourceIds": [],
+      "mode": "discrete",
+      "blockIds": [
+        "adapter.entity-transport"
+      ],
+      "parameters": {
+        "Block": {
+          "blockType": "adapter.entity-transport",
+          "parameters": {
+            "capacity": 2,
+            "overflow": "error",
+            "maxRelease": 1,
+            "adapterIdentity": {
+              "id": "calcweave.entity-fixed-deadline-v1",
+              "version": 1,
+              "abiVersion": 1
+            },
+            "entityPayloadDescriptor": {
+              "valueType": "bus",
+              "shape": [],
+              "unit": "1",
+              "bus": {
+                "fields": [
+                  {
+                    "name": "label",
+                    "descriptor": {
+                      "valueType": "typed",
+                      "shape": [],
+                      "unit": "1",
+                      "typed": {
+                        "dtype": "string"
+                      }
+                    }
+                  },
+                  {
+                    "name": "code",
+                    "descriptor": {
+                      "valueType": "typed",
+                      "shape": [],
+                      "unit": "1",
+                      "typed": {
+                        "dtype": "uint64"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "entityInitial": {
+              "kind": "messages",
+              "items": []
+            },
+            "m14StateElements": 10842
+          },
+          "sampleTime": {
+            "period": 1,
+            "offset": 0
+          }
+        }
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": false,
+      "independentFullStateMemoryOracle": false,
+      "modelHash": "6a94b4084a923dfb3acbb1f5f960f7d18f27e379a0bf683053f2f66096a8db66",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-nested-affine",
+      "sourceIds": [],
+      "mode": "discrete",
+      "blockIds": [],
+      "parameters": {},
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": false,
+      "independentFullStateMemoryOracle": false,
+      "modelHash": "cb85cee8655eafdd8c9ebdd5314902894b70fc02900ce5d4d211ee6422673410",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    },
+    {
+      "id": "m14-boundary-nested-affine",
+      "sourceIds": [],
+      "mode": "continuous",
+      "blockIds": [],
+      "parameters": {},
+      "solver": {
+        "method": "rk4",
+        "initialStep": 0.5,
+        "minStep": 1e-8,
+        "maxStep": 0.5,
+        "atol": 1e-8,
+        "rtol": 0.000001,
+        "maxSteps": 100000,
+        "maxRejects": 10000,
+        "maxEvaluations": 1000000,
+        "eventTolerance": 1e-8,
+        "maxEvents": 10000,
+        "discreteStep": 0.5
+      },
+      "samples": 3,
+      "maximumAbsoluteError": 0,
+      "maximumScaledError": 0,
+      "oracleTolerance": 1e-12,
+      "parityTolerance": 3e-12,
+      "independentLiteralOracle": true,
+      "metadataOracleFromDeclaredRegistry": false,
+      "independentFullFinalStateOracle": false,
+      "independentFullStateMemoryOracle": false,
+      "modelHash": "213dea0ab9334c7796893d4fae6a8d8dac48b667f020b1c082cb2df9dd087727",
+      "targetVersion": "typescript-m14-v1",
+      "strictStandaloneTemplateModeVerified": true,
+      "strictProgramIndividuallyChecked": false,
+      "importFreeStandalone": true,
+      "actualStandaloneTypeScript": true,
+      "fullSamplesFinalStateMemoryParity": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "pythonUnsupportedNodeDiagnostics": true
+    }
+  ],
+  "failures": [
+    {
+      "name": "m14-failure-affine-overflow",
+      "phase": "runtime",
+      "diagnosticCode": "M14_ADAPTER_NONFINITE",
+      "actualTypeScriptExecuted": true,
+      "strictProgramIndividuallyChecked": false,
+      "fullPartialParity": true
+    },
+    {
+      "name": "m14-failure-accumulator-overflow",
+      "phase": "runtime",
+      "diagnosticCode": "M14_ADAPTER_NONFINITE",
+      "actualTypeScriptExecuted": true,
+      "strictProgramIndividuallyChecked": false,
+      "fullPartialParity": true
+    },
+    {
+      "name": "m14-failure-entity-late-capacity",
+      "phase": "runtime",
+      "diagnosticCode": "M14_ENTITY_CAPACITY",
+      "actualTypeScriptExecuted": true,
+      "strictProgramIndividuallyChecked": false,
+      "fullPartialParity": true
+    },
+    {
+      "name": "m14-failure-negative-delay",
+      "phase": "runtime",
+      "diagnosticCode": "M14_ENTITY_DELAY",
+      "actualTypeScriptExecuted": true,
+      "strictProgramIndividuallyChecked": false,
+      "fullPartialParity": true
+    },
+    {
+      "name": "m14-failure-abi-4",
+      "phase": "compile",
+      "diagnosticCode": "M14_ABI_SCALAR_REQUIRED",
+      "actualTypeScriptExecuted": false
+    },
+    {
+      "name": "m14-failure-abi-5",
+      "phase": "compile",
+      "diagnosticCode": "M14_ABI_SCALAR_REQUIRED",
+      "actualTypeScriptExecuted": false
+    },
+    {
+      "name": "m14-failure-abi-6",
+      "phase": "compile",
+      "diagnosticCode": "M14_ABI_SCALAR_REQUIRED",
+      "actualTypeScriptExecuted": false
+    },
+    {
+      "name": "m14-failure-user-bytes",
+      "phase": "compile",
+      "diagnosticCode": "INVALID_PARAMETERS",
+      "actualTypeScriptExecuted": false
+    },
+    {
+      "name": "m14-failure-nested-adapter-wasm-accumulator",
+      "phase": "compile",
+      "diagnosticCode": "M14_STATEFUL_ROOT_ONLY",
+      "actualTypeScriptExecuted": false
+    },
+    {
+      "name": "m14-failure-nested-adapter-entity-transport",
+      "phase": "compile",
+      "diagnosticCode": "M14_STATEFUL_ROOT_ONLY",
+      "actualTypeScriptExecuted": false
+    },
+    {
+      "name": "m14-failure-native-entity-transport-delay",
+      "phase": "compile",
+      "diagnosticCode": "M14_NATIVE_ENVIRONMENT_UNAVAILABLE",
+      "actualTypeScriptExecuted": false
+    },
+    {
+      "name": "m14-failure-native-c-caller",
+      "phase": "compile",
+      "diagnosticCode": "M14_NATIVE_ENVIRONMENT_UNAVAILABLE",
+      "actualTypeScriptExecuted": false
+    },
+    {
+      "name": "m14-failure-native-c-function",
+      "phase": "compile",
+      "diagnosticCode": "M14_NATIVE_ENVIRONMENT_UNAVAILABLE",
+      "actualTypeScriptExecuted": false
+    },
+    {
+      "name": "m14-failure-native-interpreted-matlab-function",
+      "phase": "compile",
+      "diagnosticCode": "M14_NATIVE_ENVIRONMENT_UNAVAILABLE",
+      "actualTypeScriptExecuted": false
+    },
+    {
+      "name": "m14-failure-native-level-2-matlab-s-function",
+      "phase": "compile",
+      "diagnosticCode": "M14_NATIVE_ENVIRONMENT_UNAVAILABLE",
+      "actualTypeScriptExecuted": false
+    },
+    {
+      "name": "m14-failure-native-matlab-system",
+      "phase": "compile",
+      "diagnosticCode": "M14_NATIVE_ENVIRONMENT_UNAVAILABLE",
+      "actualTypeScriptExecuted": false
+    },
+    {
+      "name": "m14-failure-native-s-function",
+      "phase": "compile",
+      "diagnosticCode": "M14_NATIVE_ENVIRONMENT_UNAVAILABLE",
+      "actualTypeScriptExecuted": false
+    },
+    {
+      "name": "m14-failure-native-s-function-builder",
+      "phase": "compile",
+      "diagnosticCode": "M14_NATIVE_ENVIRONMENT_UNAVAILABLE",
+      "actualTypeScriptExecuted": false
+    }
+  ]
+}

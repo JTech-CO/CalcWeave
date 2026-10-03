@@ -1,0 +1,3025 @@
+{
+  "schemaVersion": 1,
+  "stage": "M16",
+  "engineVersion": "0.17.0-m16",
+  "generatedAt": "2026-10-03T13:22:21.044Z",
+  "status": "passed-selected-tracking-contract",
+  "counts": {
+    "trackedSourceRows": 385,
+    "uniqueSourceNames": 339,
+    "selectedSubsetRows": 367,
+    "unsupportedRows": 18,
+    "unverifiedInventoryRows": 385,
+    "fullOptionEquivalentRows": 0,
+    "registryDefinitions": 337,
+    "canonicalContracts": 352,
+    "widgetContracts": 5,
+    "unavailableContracts": 10,
+    "pythonDefinitionMembership": 69,
+    "wasmDefinitionMembership": 16,
+    "trackingDecisionCompleteRows": 385
+  },
+  "matrix": {
+    "path": "docs/support-matrix.json",
+    "sha256": "e5d706d7fc127081fc8470189b3f580d03ed61ba938a8168a5aa8e3730bb875e",
+    "utf8Bytes": 5181337
+  },
+  "markdown": {
+    "path": "docs/support-matrix.md",
+    "sha256": "b5b7d2da44b66a3ae7c8e403a7e49f531287fc8b7ddc1eeb36b35ab2c5af765c"
+  },
+  "sourceArtifactHashes": {
+    "packages/support-matrix/src/types.ts": "946e56969c474e98d54ab8f20ffe58f7a9a6cf775956f5f2fad87190845b0f97",
+    "packages/support-matrix/src/validate.ts": "9cc7753cf3b902d86f5c07e3b1afc7298764c5058b7873f217bfc383b900d7b3",
+    "packages/support-matrix/src/index.ts": "2bb58067bc981169125d6098437945874ec27a3c0d256576f6474f9d48b05252",
+    "scripts/m16-support-source.ts": "a68df29046322ad577959eeff25aeb637082f4d769f41e0fbc9fbc1be0b5fb85",
+    "scripts/generate-support-matrix.ts": "81eb4a9f8e7a1cb4c023b10116572b57edfe9249720d1fa9d16306c4c070a5e1",
+    "scripts/m16-presets.ts": "33b2a016ba069543a764db2c587257e4fc4d24d05419a239a5ff2c146e8e70d8",
+    "scripts/verify-m16.ts": "7b3157513d3c62521af33d9f4e053f462f73f270bdcccffc21765784c40a553e",
+    "tests/m16-independent-presets.ts": "ffbc2ca59dfba2b90160627ea40ce6060a2d2b36bcc841d813f4b3875fe3a19f",
+    "tests/m16-support-matrix.test.ts": "0b2ba1e9be4657f20d13169dfc6caafb1676dac8239e3156f10248c6a37d10d4"
+  },
+  "protectedArtifacts": {
+    "dataset/Simulink_Basic_Blocks_R2024b.md": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+    "docs/baselines/catalog-block-coverage.md": "bfad433de22c3302b53369be3465ec1d4bb3e072dd8f3ce310bc4af1ea967774",
+    "docs/simulink-coverage-roadmap.json": "86ec3c3f75939dc72a00b39d6760d86d9ef21f2a63922daf110c5db2fe7932cd",
+    "docs/baselines/m10-registry.json": "d23bc34bdbd450b1ea2be671b419f8ccfb74fa97238d541c3f9ffd97230cf8dc",
+    "docs/evidence/m10-source-approvals.json": "d8c938fb999555aaf61f24b68b7b631e158611dc2760542bd08d0f94d3221f4b",
+    "docs/evidence/m10-verification.json": "659a11814e1420f217068f4cab4c6726cd3070154f69fd1064afd3a4aee52e6d",
+    "docs/evidence/m10-reference-review.json": "fb9572178cc5c5caf19658e9010709a67d0d6611f83b9f3ce8993dffee493325",
+    "docs/evidence/m8-source-approvals.json": "4f558f5040f9dda1a9c2b5bbd2b848b825b4961489a03228dd3c12370b2c4d60",
+    "docs/evidence/m9-source-approvals.json": "7d49f1b15a6b325050a55295bca4d29411fe123dd0752e2ac98766641ccc18ca",
+    "docs/evidence/m8-verification.json": "351b5ba6031dff1a2f4dfb8b51e4e63e2747998277ee93e56decc4b908ff75d6",
+    "docs/evidence/m8-presets-verification.json": "55cef48ebe57a97ca02922225330f36b1f1d0866d2ad92d69f74fcceb7771f01",
+    "docs/evidence/m9-verification.json": "1d3fee9b56017db6c12b8f7f778d4c064efd4fa7f7d0014a2a38b6ffdd13a23f",
+    "docs/baselines/m11-registry.json": "daaf1ec9df9b5b7b43efdfd57863d0467b3f5636b3bcb4fd3b5450322fe8bf2e",
+    "docs/evidence/m11-source-approvals.json": "492abedeb09b84e601d206cf85ead66b3ba7596af0894f0f9519fd9af8aac8c7",
+    "docs/evidence/m11-verification.json": "716939d06a20c53a3fb9655820fb5c366fde0b1bb0fd5fd37adb39abadafea76",
+    "docs/baselines/m12-registry.json": "5eb19914ff0643307bb8c5c01b22557ad935558230a217e50ff8de6ee1867a73",
+    "docs/evidence/m12-source-approvals.json": "a3e2201b9672a4eac21f90a37b893ee0daf2c2a9b6d912654b46b1e1618a449b",
+    "docs/evidence/m12-verification.json": "79253d162a1af3ca5f5bbe2eb9de14d0fbc3e5aaa107795586678ab8f896f0c7",
+    "docs/baselines/m13-registry.json": "a4f8cadc0e8333cdc029c64de294077d90a98ae6d1f1746753649549f4f6a0d2",
+    "docs/evidence/m13-source-approvals.json": "bffe058d20baa23783f5682537787dbb9b6ac7aea06746d738b0972286af72bc",
+    "docs/evidence/m13-verification.json": "aa67d7976bd891f122f8a25eff41deb8b2054bc31ba660082b873e269883b598",
+    "docs/baselines/m13-block-coverage.md": "8d736de7dbf8dbda6eaca70790b0162afe7c78a168a09006e752c5fe8401e8c6",
+    "docs/baselines/m14-registry.json": "711fcb2062a90dcebdc4b2265f3a8660aadb3d8f2c4ede0de436a4f768ce0b40",
+    "docs/evidence/m14-source-approvals.json": "f7bf8f2a18377afd4d151b1b5bbea6e6eb72396e5c66b97c9a1a5b138c40448a",
+    "docs/evidence/m14-verification.json": "6886130299827a0d52e99533c0b0cf0ea827e27b5bceb56ca687e18fa4954f65"
+  },
+  "qa": {
+    "sourceIdentityRowsChecked": 385,
+    "sourceDecisionRowsChecked": 385,
+    "canonicalParameterContractsChecked": 352,
+    "registryDefinitionsObjectExact": 337,
+    "officialSourceOptionInventoriesVerified": 0,
+    "unverifiedSourceInventoryRows": 385,
+    "sourceRowsWithActualLinkedProfiles": 251,
+    "linkedProfiles": 276,
+    "selectedRowsWithoutLinkedOptionProfile": 116,
+    "declaredMetadataOracleProfiles": 1,
+    "profileParameterSelectorsMatchedActualExecutedFixtures": true,
+    "compilerNormalizedProfileChecks": 48,
+    "generationByteIdentical": true,
+    "sourceSpecificPresetActualPrograms": 4
+  },
+  "verifiedRawFixtureFiles": {
+    "tests/m10-independent-fixtures.ts": "26d95f65369b250bf5a7e61f940b1759b5f66f99061815b038f22a279385210c",
+    "tests/m11-independent-fixtures.ts": "5a3cd6db5fb29ac4a1baf37ef98a87a182c62cc7ad33814b4aeb702da238eb70",
+    "tests/m12-independent-fixtures.ts": "9be92717422097c164688c05c277711e22128e6a1e59ba8d568f27d14a0b1b84",
+    "tests/m13-independent-fixtures.ts": "dbe45a5f32968e073420c01f83319b434958c9c97857871dd4ab5ffc70e74f21",
+    "tests/m14-independent-fixtures.ts": "72b7f98ed1c12fa22d900cab6862f046aef37f887591783cdcf2036e4064a978"
+  },
+  "supportUnitEvidence": {
+    "path": "docs/evidence/m16-support-unit-results.json",
+    "sha256": "ff3947061b7e0729c179c571e8f9f4c92ff1b0ec5e7918fa5057f7c6e862ac9b",
+    "passed": 28,
+    "failed": 0,
+    "files": 1
+  },
+  "profileAudits": [
+    {
+      "sourceId": "01-001",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "01-002",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "01-004",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 33,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "01-009",
+      "evidencePath": "docs/evidence/m8-presets-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "01-010",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "01-014",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-002",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-002",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-002",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-005",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-005",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-005",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-007",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-007",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-007",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-007",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-007",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-007",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-009",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-009",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-009",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-013",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-013",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-014",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "02-016",
+      "evidencePath": "docs/evidence/m14-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "discrete"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-001",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-002",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-003",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-006",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-008",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-009",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-010",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-011",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-012",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-013",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-014",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-015",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-016",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-017",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-019",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-021",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-022",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-023",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-024",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-025",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-026",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-027",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-028",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-029",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-030",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-031",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-032",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-033",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-034",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-035",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-036",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "03-037",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "04-001",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "04-002",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "04-004",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "04-006",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 5,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "04-008",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "04-008",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "discrete"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "04-009",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "04-012",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "04-013",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "04-014",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "05-005",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 24,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "05-006",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 16,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "05-007",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "05-009",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 8,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "05-010",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "05-013",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "05-015",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 4,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "05-016",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "05-017",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "05-018",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "05-020",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-001",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-002",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-003",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-004",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-005",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-006",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 6,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-007",
+      "evidencePath": "docs/evidence/m8-presets-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-009",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-010",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-011",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-012",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-013",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-014",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-015",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-016",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 15,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-017",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-019",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "06-022",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 6,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "07-003",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 6,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "07-004",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "07-005",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 5,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "07-006",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 6,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "07-008",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 12,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "07-009",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 10,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-002",
+      "evidencePath": "docs/evidence/m16-preset-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-003",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-003",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-004",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-006",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-007",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-010",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-012",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-017",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-018",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-022",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-023",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-027",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-028",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-031",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-032",
+      "evidencePath": "docs/evidence/m16-preset-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-036",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "08-038",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "09-001",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "09-004",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "09-006",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "09-008",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 6,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "09-009",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "09-010",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 4,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "09-013",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 5,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "09-014",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "09-015",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "09-016",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "10-002",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "10-003",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "10-005",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "10-006",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "10-007",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "10-008",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "11-001",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "11-002",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "11-003",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "11-004",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "11-005",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "11-006",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "11-007",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "11-008",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "11-009",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "11-010",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "11-011",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "12-001",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": true
+    },
+    {
+      "sourceId": "12-004",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "12-004",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "12-004",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "12-005",
+      "evidencePath": "docs/evidence/m12-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-001",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-002",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-003",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-004",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-005",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-006",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-007",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-008",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-009",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-010",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-011",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-012",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-013",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-014",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-016",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-019",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-020",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-023",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-024",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-025",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-026",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-027",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-028",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "13-029",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "14-001",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "14-002",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 33,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "14-003",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "14-004",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "14-005",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "14-006",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "14-007",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "14-008",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "14-010",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 6,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "14-011",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "14-013",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 5,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "14-014",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "15-001",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "15-002",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "15-003",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "15-004",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "15-005",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "15-006",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "15-008",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "15-009",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "15-010",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "15-012",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "15-015",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "15-016",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "15-018",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "15-020",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "15-021",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "16-002",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "16-004",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "16-005",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "discrete"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "16-005",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "16-007",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "discrete"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "16-007",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "16-007",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "16-009",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "discrete"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "16-010",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "discrete"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "16-011",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "discrete"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "17-001",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 5,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "17-005",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "17-006",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 8,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "17-008",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "17-010",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "17-012",
+      "evidencePath": "docs/evidence/m8-presets-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "17-014",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "17-022",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "17-023",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 5,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "17-027",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-001",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-002",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-003",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-004",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-005",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-006",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-007",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-008",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-009",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-010",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-011",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-012",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-013",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-014",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-015",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-016",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-016",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-016",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-016",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-016",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-016",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "18-016",
+      "evidencePath": "docs/evidence/m13-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "19-001",
+      "evidencePath": "docs/evidence/m14-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "19-002",
+      "evidencePath": "docs/evidence/m14-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "discrete"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "19-004",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "19-005",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "19-008",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "19-010",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "19-011",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "19-014",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "19-015",
+      "evidencePath": "docs/evidence/m11-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "20-001",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "20-002",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 5,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "20-003",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "20-004",
+      "evidencePath": "docs/evidence/m8-presets-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "20-005",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "20-006",
+      "evidencePath": "docs/evidence/m9-verification.json",
+      "fixtures": 2,
+      "modes": [
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "20-007",
+      "evidencePath": "docs/evidence/m8-presets-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "20-008",
+      "evidencePath": "docs/evidence/m8-presets-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "20-009",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "21-001",
+      "evidencePath": "docs/evidence/m8-presets-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "21-002",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "21-003",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "21-004",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "21-005",
+      "evidencePath": "docs/evidence/m8-presets-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "21-006",
+      "evidencePath": "docs/evidence/m16-preset-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "21-007",
+      "evidencePath": "docs/evidence/m16-preset-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "21-008",
+      "evidencePath": "docs/evidence/m8-presets-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "21-009",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "21-010",
+      "evidencePath": "docs/evidence/m8-verification.json",
+      "fixtures": 1,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "21-011",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "21-012",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    },
+    {
+      "sourceId": "21-013",
+      "evidencePath": "docs/evidence/m10-verification.json",
+      "fixtures": 3,
+      "modes": [
+        "static",
+        "discrete",
+        "continuous"
+      ],
+      "declaredMetadataOnly": false
+    }
+  ],
+  "presetEvidence": {
+    "path": "docs/evidence/m16-preset-verification.json",
+    "sha256": "0da5a18154408809556ed7f496e61905fc9979db221496a08f20a2fd82bab927",
+    "actualStandalonePrograms": 4,
+    "checkedSamples": 4
+  },
+  "freshActualTargets": {
+    "reports": [
+      {
+        "path": "docs/evidence/m15-regression-on-m16.json",
+        "sha256": "338605fcd5bff3b3e2ea6022b5f0ae259931d71db34f90288bed48a5074e60e7"
+      },
+      {
+        "path": "docs/evidence/m15-python-regression-on-m16.json",
+        "sha256": "2e80ebbb92a047942e3dc8ba37cece5588e5da35f6547822b811b39727529125"
+      },
+      {
+        "path": "docs/evidence/m15-wasm-regression-on-m16.json",
+        "sha256": "b489ec9cfd92f7617beace47f8e0c6922cd061803537b0e6321541b1a7f5b875"
+      },
+      {
+        "path": "docs/evidence/m14-regression-on-m16.json",
+        "sha256": "71327e315e02b3de22748165f006b988db4aba801a2d7a7e98e3f80bb993a15a"
+      }
+    ],
+    "pythonPrograms": 142,
+    "pythonDefinitions": 69,
+    "wasmActualPrograms": 128,
+    "wasmDefinitions": 16,
+    "adapterActualTypeScript": 32,
+    "adapterSamples": 85
+  },
+  "fullSimulinkEquivalenceClaimed": false,
+  "nativeSourceReferenceRuntimeExecuted": false,
+  "exhaustiveR2024bOptionInventoryComplete": false,
+  "limitations": [
+    "Tracking and declared capability QA does not close any original full options. All385 official inventories remain unverified.",
+    "367 existing selected-subset rows and18 unsupported purposes remain unchanged. Missing source-specific early-stage profiles remain explicitly unverified.",
+    "Source option selectors are matched against preserved actual fixture parameters; partial selectors do not imply every parameter default or every combination was executed.",
+    "Declared-metadata oracle profiles such as Block Support Table verify the public catalog declaration, not independent MathWorks numerical parity.",
+    "Fresh target execution reports are verified separately; their nondeterministic timestamps/logs never enter deterministic public matrix generation.",
+    "No native C/C++ executable target or MATLAB/Simulink reference runtime is claimed."
+  ]
+}

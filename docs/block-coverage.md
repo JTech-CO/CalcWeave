@@ -1,140 +1,14 @@
-# CalcWeave 블록 구현 범위 및 원자료 추적표
+# CalcWeave 블럭 구현 대응표
 
-- 문서 버전: v0.9
-- 작성일: 2026-10-03
-- 현재 M14 승인 범위: 원본385행 중 독립 대체3행을 추가해 선택 subset367행·미구현18행. 기존334정의 보존·실제3정의 추가로337종이다. 최초 배정8행의 native 환경은 모두unavailable이고 나머지5행은 실행 승격하지 않았다. [M14 계약](m14-contract.md)·[실제 TS 증거](evidence/m14-verification.json)·[source 승인](evidence/m14-source-approvals.json). 전체옵션8행 모두open·native runtime동등성 미승인.
-- 현재 M13 승인 범위: 원본385행 중 선택 subset364행·미구현21행. 최초 배정75행의 신규59행을 승인하고 기존16행은 이전 mapping/status를 유지한다. registry334 정의와 source행은 별도 집계다. [M13 계약](m13-contract.md)·[실제 TS 증거](evidence/m13-verification.json)·[화면/데이터 작업](evidence/m13-ui-workflow-verification.json)·[source 승인](evidence/m13-source-approvals.json)를 따른다. 전체옵션75행 모두open·원본실행동등성 미승인이다.
-- 현재 M12 승인 범위: 원본385행 중 선택 subset305행·미구현80행. 최초 배정26행의 신규12행을 승인하고 기존14행은 이전 선택 mapping을 유지한다. registry304 정의와 source행은 별도 집계다. [M12 계약](m12-contract.md)·[실제 TS 증거](evidence/m12-verification.json)·[source 승인](evidence/m12-source-approvals.json)를 따른다. 전체옵션26행 모두open·원본실행동등성 미승인이다.
-- 현재 M11 승인 범위: 원본385행 중 선택 subset293행·미구현92행. 최초 배정73행의 신규48행·기존mapping확장10행을 승인하며 기존Subsystem2행·선언workflow대기0행·명시미지원13행을 구분한다. registry293 정의와 source행·adapter·목적대체는 별도 집계다. [M11 계약](m11-contract.md)·[실제 TS 증거](evidence/m11-verification.json)·[source 승인](evidence/m11-source-approvals.json)를 따른다. 전체옵션73행 모두open·원본실행동등성 미승인이다.
-- 현재 M10 승인 범위: 원본385행 중 선택 subset245행·미구현140행. M10 최초 배정38행에서 신규34행·기존 mapping 확장3행을 검증하고 기존14-012 Unit Conversion1행은 원형을 보존한다. registry245 정의·10 preset·원본행 수를 구분한다. [M10 계약](m10-contract.md)·[독립 수치/TS 증거](evidence/m10-verification.json)·[source 승인](evidence/m10-source-approvals.json)를 따른다. 원본 전체 옵션·Simulink 실행/bit parity는 open이다.
-- 현재 M9 승인 범위: M9 납품 당시 원본385행 중 제한된 subset211행·미구현174행. 신규31행 승인과 기존 전달함수1행의 계수 순서 추적 교정을 구분한다. registry211 정의·15개 기본 구성·원본행 수는 별도 지표다. [M9 계약](m9-contract.md)·[검증](m9-validation.md)·[승인 근거](evidence/m9-source-approvals.json)를 따른다. 원본 전체 옵션·실행 동등 완료를 뜻하지 않는다.
-- 현재 M8 승인 범위: M8 납품 당시 원본385행 중 검증된 subset180행·미구현205행. 신규46행은 등록 옵션의 제한 범위이며 Find Nonzero padded 출력과 Wrap To Zero 경계 선택은 독립 대체로 분리한다. registry185 정의와 원본행·preset·독립 kernel 수는 별도다. [M8 계약](m8-contract.md)·[검증](m8-validation.md)·[승인 근거](evidence/m8-source-approvals.json)를 따른다. 모든 원본 옵션의 완료를 뜻하지 않는다.
-- 상태: catalog 수학·신호 확장 구현 기록. 원본385행 중 catalog 승인 subset 20행, M5 승인 subset 5행, M5 독립 대체 subset 2행, M4 승인 subset 18행, M3 승인 subset 15행, M2 승인 subset 29행, M1 정적 subset 40행, preset 4행, AST 독립 대체 1행, 미구현 251행이다. registry 144항목(기존74+수학64+시간파형6)과 원본행 승인 수는 다르며 alias/preset·공유 수치 kernel을 독립 엔진으로 합산하지 않는다. 실제 경계는 아래 행별 설명과 [수치 증거](evidence/catalog-verification.json)를 따른다. 전체 옵션·Simulink 동등성을 뜻하지 않는다.
-- 기준 원자료: [Simulink 기본 라이브러리 블록 목록](../dataset/Simulink_Basic_Blocks_R2024b.md), R2024b 기준, 원자료 작성일 2026-10-01.
-- 관련 문서: [기술 백서](01-technical-whitepaper.md), [디자인 백서](02-design-whitepaper.md), [마일스톤 로드맵](03-milestone-roadmap.md).
+R2024b 참고 자료의 원본385행을 보존한 상세 추적표다. 337개 registry 정의와 선택 승인367행·미지원18행은 서로 다른 지표이며 전체 옵션 동등 승인0행이다. 공유 설정·독립 대체·조건부/레거시의 실제 범위를 실행 지원과 구분한다.
 
-## 1. 이 표가 약속하는 범위
+현행 옵션·자료형·실행 모드·타깃·외부 조건·증거는 [공개 지원표](support-matrix.md)와 [기계 판독 지원표](support-matrix.json)를 읽는다. 모델별 실행 가능 여부는 현재 compiler와 타깃 진단을 통과해야 한다. 원본 전수 옵션 inventory·MathWorks reference 실행 동등성은 검증되지 않았다.
 
-M7에서 Python 타깃의 승인 50개 primitive와 조건부 계층 지원을 추가했다. registry의 exportTargets는 생성기와 같은 capability 상수를 사용하며 Python은 정적·이산만 지원한다. 모델 패키지는 기존 승인 블럭의 재사용이며 새 계산 블럭이나 MATLAB/S-function 어댑터를 설치하지 않는다. 이 M7 export 작업 자체는 원자료 수학 구현 상태를 변경하지 않았다. 이후 수학·신호 catalog 승격은 별도의 아래 기록과 증거를 따른다. 정확한 타깃/출처/가져오기 경계는 [M7 계약](m7-contract.md)·[검증](m7-validation.md)을 따른다.
+[기술 백서](01-technical-whitepaper.md) · [디자인 백서](02-design-whitepaper.md) · [검증과 증거](validation.md) · [운영 안내](operations.md) · [보존 원자료](../dataset/Simulink_Basic_Blocks_R2024b.md)
 
-CalcWeave는 설치 없이 수학 도식을 작성·계산·시뮬레이션하는 독립 제품이다. 원자료의 수학적 기능과 작업 흐름을 빠짐없이 검토하되, MATLAB/Simulink 실행 환경이나 라이선스가 필요한 외부 코드를 브라우저에서 그대로 재현한다고 약속하지 않는다. 원본명은 검색·추적을 위한 참조 이름이며 CalcWeave의 사용자 표시명·엔진 식별자는 별도로 확정한다.
+아래 원본 행의 식별·열·선택 승인 문구는 과거 source approvals와 연계되어 있으므로 byte/hash를 보존한다. 동결한 `baselines`·`evidence`의 과거 문서 경로와 버전은 당시 기록의 메타데이터이며 현재 계약은 위 통합 문서를 따른다.
 
-**01~21절의 수록 행은 385행**이다. 아래는 이 385행을 하나도 생략하지 않은 결정 기록이다. 원자료에서 동일한 영어 이름 문자열을 중복 제거하면 339개지만, Dashboard/Sinks 같은 동명 이의 항목이 있으므로 339 역시 독립 기능이나 엔진 수가 아니다. `canonical capability`는 후보 재사용 단위다. 구현 시 registry·수치 계약·preset 분리를 확정하기 전까지 독립 canonical 엔진의 최종 개수는 미확정으로 둔다.
-
-한 엔진의 설정 변형, 검색 별칭, 다른 분류의 바로가기는 공유 capability로 연결한다. 대표적으로 Sum/Add/Subtract/Sum of Elements, Sqrt 계열, Quick Insert 상수, 일반/사용자화 gauge 등은 원본행을 보존하면서 구현을 재사용한다. Dashboard Display와 Sinks Display, Memory와 Unit Delay, Mux와 Bus Creator, Merge와 Switch, 시간 Source Sine Wave와 Math Sine Wave Function은 시간 바인딩의 차이를 보존한다. Sine Wave Function은 외부 입력을 시간 t로 사용하는 A·sin(ωt+φ)+bias 설정이고 Trigonometric Function의 sin(u)와 구분한다. 두 waveform 구성은 수학 kernel을 재사용할 수 있다. [MathWorks Sine Wave Function](https://www.mathworks.com/help/simulink/slref/sinewavefunction.html)
-
-각 ID는 **원자료 절 번호-그 절 안 블록 표의 순번**이다. 예를 들어 `03-024`는 03절의 24번째 원본행이다. ID 링크는 원자료 절로 연결하며, 괄호의 L번호는 현재 원자료의 1-based 행 번호다. 원자료가 수정되면 ID·행 번호·원본명·조건의 대조 검사를 다시 수행한다. 21절의 마지막 파라미터 옵션 표와 22~25절 보조 항목은 385에 합산하지 않는다.
-
-### 계획 지원 구분
-
-| 구분 | 의미 | 지원 완료의 조건 |
-| --- | --- | --- |
-| 직접 | CalcWeave 자체 엔진/UI/컴파일러에서 해당 능력을 구현할 계획 | 수치·형상·시간·오류 계약에 기재한 subset과 fixture를 통과해야 함 |
-| 구성 | 공유 capability의 파라미터, 사전 구성, 조합 또는 중복 접근 | 다른 원본행과 엔진을 공유해도 원본행별 설정 의미를 검증함 |
-| 독립 대체 | 비슷한 목적을 CalcWeave 자체 작업 흐름으로 제공 | 원본 언어·UI·파일 형식·ABI와의 차이를 사용자에게 드러냄 |
-| 미지원·adapter 연구 | 초기 제품 범위에서 실행하지 않고 경계와 확장 가능성을 조사 | adapter·실행 격리·라이선스·검증 gate가 별도로 승인되기 전 실행 차단 |
-
-'직접'은 해당 Simulink 블록의 모든 파라미터·자료형·릴리스·가속 모드와 동일함을 뜻하지 않는다. '예정'은 첫 CalcWeave subset 후보 또는 연구를 수행할 시점이며 해당 단계의 모든 행을 동시에 완료한다는 약속이 아니다. M0에서 핵심 capability를 선택한 뒤 나머지 행의 배치를 재조정한다. 지원 완료 날짜나 완전 호환 출시 약속이 아니며 각 행의 검증/경계가 지원 계약에 우선한다.
-
-### 공통 마일스톤
-
-| 단계 | 범위 |
-| --- | --- |
-| M0 | 제품/IR/수치 계약·reference fixture·solver spike·지원표 |
-| M1 | 정적 실수·배열 계산 MVP·기본 연결·제한 수식 |
-| M2 | 이산시간 상태·sample scheduler·TS export |
-| M3 | 비강성 연속 ODE·RK4/RK45·event/zero crossing |
-| M4 | 데이터·계층·단위·Dashboard·결과 관리 |
-| M5 | 복소수·고정소수점·메시지·고급 제어·호환 경계 |
-| M6 | 공개 베타/출시 검증·접근성·보안·운영; 클라우드는 선택 확장 |
-| M7 | 확장 export·plugin·외부 환경 adapter/생태계 |
-
-## 2. JS/TS 구현 가능성의 검증 경계
-
-JS/TS에서 산술 함수와 상태 기계를 구현하는 것은 가능하다. 그러나 기본 라이브러리의 이름 수만으로 작업량을 판단하면 수치 solver, 시간 모델, 자료형 전파, 조건부 실행, 데이터형과 외부 런타임의 복잡도가 사라진다. 아래는 CalcWeave의 설계 결정이며 공개 설명을 근거로 한 독립 구현 계획이다.
-
-- **시간과 상태:** M2는 정수 tick 기반 고정 sample time과 검증한 harmonic multi-rate를 시작점으로 삼는다. 추론 sample time, 상태 읽기/갱신의 두 단계, 동시 event 순서를 IR 계약에 저장한다. Memory는 직전 major integration step이고 Unit Delay는 지정한 discrete sample 지연이다. 두 블록을 이름만 바꾸어 같은 동작으로 처리하지 않는다. [MathWorks Memory 설명](https://www.mathworks.com/help/simulink/slref/memory.html)
-- **연속·불연속:** M3의 ODE 지원은 비강성 실수 시스템에 우선 한정한다. step/relay/saturation/reset 등에서 event 시각, 허용오차, 최대 반복, chattering 정책을 함께 검증한다. 단순히 매 프레임 적분하거나 sample 끝의 부호만 비교하면 경계 통과를 놓칠 수 있다. [MathWorks Zero-Crossing Detection](https://www.mathworks.com/help/simulink/ug/zero-crossing-detection.html)
-- **대수 루프/DAE:** direct feedthrough를 가진 cycle은 위상 정렬만으로 계산할 수 없다. M1~M4에서 direct-feedthrough cycle을 명시적으로 거부하고, M5에서 매끄러운 실수 index-1 사례의 수렴을 연구한다. 실패하면 근거 없는 값을 계속 내보내지 않는다. Descriptor State-Space의 비특이 E는 선형 solve를 통해 명시적 상태공간으로 바꿀 수 있으나 특이 E는 일반 ODE로 간주할 수 없다. [MathWorks Algebraic Loop Concepts](https://www.mathworks.com/help/simulink/ug/algebraic-loops.html), [Descriptor State-Space](https://www.mathworks.com/help/simulink/slref/descriptorstatespace.html)
-- **자료형:** M1은 finite float64/boolean과 vector/2D subset, M2는 승인한 32비트 이하 정수·비트, M5는 float32·64bit/BigInt·complex·fixed-point와 일반 n-D를 구분해 확장한다. 고정소수점은 word length·signedness·scale·overflow·rounding을 별도로 모델링하며 float 치환으로 bit 수준 동일성을 주장하지 않는다. MathWorks의 제품 사용 조건과 CalcWeave의 자체 numeric backend 구현은 별개다. [MathWorks 고정소수점 조건](https://www.mathworks.com/help/simulink/ug/specify-fixed-point-data-types.html)
-- **메시지와 엔터티:** 기본 메시지는 bounded typed queue/event를 자체 구현할 수 있다. SimEvents의 엔터티/미들웨어 의미와 일반 신호 지연은 별도 계약이며 Entity Transport Delay를 Transport Delay의 별칭으로 제공하지 않는다. [MathWorks Simulink Messages Overview](https://www.mathworks.com/help/simulink/ug/simulink-messages-overview.html)
-- **사용자 코드와 export:** Fcn/MATLAB Function은 제한 수식 AST나 typed CalcWeave function으로 목적을 대체한다. MATLAB interpreter/System object, C compiler/ABI, S-function callback를 JS 함수 하나로 자동 변환하지 않는다. TS export에는 source map·동일 runtime 계약·IR 버전이 필요하며 지원 밖 블록이 있으면 원인과 블록 ID를 포함해 export를 거부한다. C/C++/Python/WASM 등은 M7의 별도 target으로 검토한다. [MathWorks MATLAB Function](https://www.mathworks.com/help/simulink/slref/matlabfunction.html)
-- **지식재산과 호환성:** 공개 수식·표준 알고리즘·CalcWeave 자체 사양을 근거로 구현한다. MathWorks 실행 바이너리, 아이콘, 도움말 문구, 독점 파일/ABI 동작을 권리 검토 없이 가져오지 않는다. SLX/MDL import, 툴박스 실행, 원본 MAT 파일 자동 호환, 자동 PID tuning, Coder/HDL 코드 생성은 기본 약속 범위에서 제외하고 adapter·권리·fixture 검증을 별도 gate로 둔다.
-
-이 검증 시점에 열람한 현행 MathWorks 문서에는 R2026b가 표시될 수 있다. 이 문서의 원자료 행과 버전 조건은 R2024b 목록을 그대로 보존하며, 현행 문서의 새 옵션을 R2024b 목록에 추가하거나 소급하지 않는다.
-
-### M4에서 확인한 범위
-
-M4 신규 승격은 원본 18행이다. CSV/JSON 데이터 재생·명시 단위 변환·동종 scalar 두 필드 bus·내장 서브시스템·일반 텍스트 문서·대시보드 5종 및 Slider Gain 바인딩에 한정한다. 동일 이름의 Customizable Blocks, 여러 gauge 모양, Atomic Subsystem, 외부 Model/Subsystem Reference, From Spreadsheet, 문자열 신호 실행은 승격하지 않았다. 실행 기록·파라미터 스윕·결과 CSV/JSON·export ZIP은 별도 CalcWeave 작업 흐름으로 제공하며 새로운 원본행으로 합산하지 않는다.
-
-기존 M3의 First Order Hold 원본명은 하이픈 없는 `02-003`이다. `F03-first-order-hold`의 모든 원시 표본·JSON·독립 TS·manifest 검증이 이미 통과했으므로 `time.first-order-hold` causal 외삽 subset으로 대응 누락 1행을 교정했다. 미래 샘플 interpolation과 전체 Simulink 동등성을 뜻하지 않으며 M4 신규 18행에 포함하지 않는다.
-
-### M5에서 확인한 범위
-
-원본 5행을 실수 행렬 곱·전치, 2D Lookup·Prelookup의 승인 subset으로 승격했다. Data Type Conversion 2행은 정확한 1~32bit 양자화 목적의 독립 대체다. 일반 cast·fixed-point 타입 전파를 구현했다고 표시하지 않는다. 동일 Product의 기존 원소별 구현 상태는 유지하며 별도 행렬 구성만 추가 설명한다. Hermitian Transpose, n-D/Dynamic/Interpolation Using Prelookup, Stored Integer 증감은 승격하지 않았다.
-
-Determinant·Inverse·Linear Solve·Cholesky·LU는 원자료에 없는 CalcWeave 추가 기능5종이다. 실수 정방·각축≤32·단위/수치 안정성 경계와 잔차를 검증하지만 복소수·일반 최소제곱·희소/고차 tensor로 확대하지 않는다. quantizer 이후 산술은 float64이다. 신규10 registry와 원본7행 승격은 서로 다른 수치다. 메시지·조건/반복·DAE·수치 선형화·외부 runtime·실제 사용자 조사·배포는 이번 구현 승인에서 제외한다.
-
-### 수학·신호 catalog에서 확인한 범위
-
-기존74 registry에 서로 다른 수식·집계·벡터/행렬 변환의 수학64카드와 시간파형6카드를 추가해144항목이다. 공유 unary/binary/집계/행렬 dispatch를 재사용하므로144개 독립 수치 엔진을 구현했다는 뜻은 아니다. 신규 표시카드70개·원자료 신규 승인19행·기존 Divide 대응 누락 교정1행은 각각 다른 수치다. 원자료385행·339개 이름 문자열·R2024b 조건·원본 digest는 보존한다. 후보65개를 모두 구현 완료로 바꾸지 않으며 실제 선택 목록은 [확장 조사와 구현 기록](block-expansion-plan.md)을 따른다.
-
-승인20행은 source별 수학/형상/단위 subset과 지원 모드의 해석식 oracle·JSON 왕복·독립 TS parity 증거가 있는 경우에 한한다. Math Function과 Trigonometric의 기존 승인 상태는 유지하며 별도 신규 함수 ID를 추가 설명한다. Divide는 기존 math.multiply(operation=divide)의 세 모드 독립 oracle을 확인한 추적 교정으로 신규 계산카드 수를 늘리지 않는다. Chirp는 seconds/Hz 선형 sweep와 위상 연속성을 확인하며 static을 거부한다. 나머지 시간파형5종은 CalcWeave 추가 기능이며 원자료 승인행 수에 합산하지 않는다.
-
-실수/boolean scalar·1D·2D의 명시 subset이며 complex/f32/일반fixed/n-D·동적 index/경계·일반DAE·외부 MATLAB/C/ABI·hardware·message/조건부 그래프는 이번 승인에 포함하지 않는다. 신규70카드 exportTargets는 TypeScript만 승인한다. 새 비선형/구간 연산의 continuous 지원은 RK stage에서 값 평가하는 범위다. 시간에 따라 바뀌는 Sign/mod/remainder/Quantizer/predicate/boolean 집계가 직접 ODE 상태 입력으로 이어지는 경로는 UNREGISTERED_DISCONTINUITY로 거부한다. Zero Order Hold의 승인 이산 경계 또는 등록된 Step/Relay/Hit Crossing 사건을 사용해야 한다. Dead Zone의 꺾임을 포함한 새 경계의 zero-crossing event 탐지·경계 시각 정지와 solver 오차 보장은 별도 검증 전까지 승인하지 않는다.
-
-## 3. 수록 행 수와 계획 결정 집계
-
-| 원자료 절 | 분류 | 원본 수록 행 |
-| --- | --- | ---: |
-| 01 | Commonly Used Blocks | 23 |
-| 02 | Continuous | 16 |
-| 03 | Dashboard | 37 |
-| 04 | Discontinuities | 14 |
-| 05 | Discrete | 21 |
-| 06 | Logic and Bit Operations | 22 |
-| 07 | Lookup Tables | 9 |
-| 08 | Math Operations | 38 |
-| 09 | Matrix Operations | 19 |
-| 10 | Messages & Events | 8 |
-| 11 | Model Verification | 11 |
-| 12 | Model-Wide Utilities | 5 |
-| 13 | Ports & Subsystems | 29 |
-| 14 | Signal Attributes | 14 |
-| 15 | Signal Routing | 27 |
-| 16 | Sinks | 11 |
-| 17 | Sources | 27 |
-| 18 | String | 16 |
-| 19 | User-Defined Functions | 15 |
-| 20 | Additional Math & Discrete | 9 |
-| 21 | Quick Insert | 14 |
-| 합계 | 01~21 원본행 | **385** |
-
-| 계획 지원 구분 | 원본행 수 |
-| --- | ---: |
-| 직접 | 202 |
-| 구성 | 149 |
-| 독립 대체 | 25 |
-| 미지원·adapter 연구 | 9 |
-| 합계 | **385** |
-
-| 첫 예정 단계/연구 단계 | 원본행 수 |
-| --- | ---: |
-| M0 | 1 |
-| M1 | 108 |
-| M2 | 74 |
-| M3 | 19 |
-| M4 | 78 |
-| M5 | 97 |
-| M6 | 0 |
-| M7 | 8 |
-| 합계 | **385** |
-
-M6의 0행은 새 capability 도입을 집계하지 않는다는 뜻이다. 앞 단계에서 구현한 범위를 출시 gate로 검증하는 작업은 M6에서 반드시 수행한다. 위 숫자는 완료율이나 독립 엔진 수가 아니며 동일 capability를 참조하는 여러 원본행을 포함한다.
-
-## 4. 385행 전체 추적표
-
-모든 원본 블록명과 '구버전·사용 조건'을 유지했다. 원본 하위 문맥은 일반 항목과 사용자화/조건부/별칭을 구분한다. canonical ID는 제품 사양을 위한 후보 이름이며 registry의 최종 공개 API로 아직 확정하지 않았다.
+## 원본 385행 추적표
 
 ### 01. Commonly Used Blocks
 

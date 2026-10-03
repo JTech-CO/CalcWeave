@@ -83,13 +83,15 @@ const lines = original.split(/\r?\n/).map(line => {
   cells[4] = `\`${approved.canonical}\``; cells[7] = approved.boundary; cells[8] = approved.status; seen++; return `| ${cells.join(' | ')} |`;
 });
 assert.equal(seen, 46);
-const summary = `- 현재 M8 승인 범위: M8 납품 당시 원본385행 중 검증된 subset180행·미구현205행. 신규46행은 등록 옵션의 제한 범위이며 Find Nonzero padded 출력과 Wrap To Zero 경계 선택은 독립 대체로 분리한다. registry${evidence.registryCount} 정의와 원본행·preset·독립 kernel 수는 별도다. [M8 계약](m8-contract.md)·[검증](m8-validation.md)·[승인 근거](evidence/m8-source-approvals.json)를 따른다. 모든 원본 옵션의 완료를 뜻하지 않는다.`;
-if (!lines.some(line => line.startsWith('- 현재 M8 승인 범위:'))) lines.splice(4, 0, summary);
+const summary = `- 현재 M8 승인 범위: M8 납품 당시 원본385행 중 검증된 subset180행·미구현205행. 신규46행은 등록 옵션의 제한 범위이며 Find Nonzero padded 출력과 Wrap To Zero 경계 선택은 독립 대체로 분리한다. registry${evidence.registryCount} 정의와 원본행·preset·독립 kernel 수는 별도다. [M8 계약](01-technical-whitepaper.md)·[검증](validation.md)·[승인 근거](evidence/m8-source-approvals.json)를 따른다. 모든 원본 옵션의 완료를 뜻하지 않는다.`;
+// Keep the consolidated current header; historical approvals remain in frozen JSON.
+const consolidatedHeader = original.includes('[기계 판독 지원표](support-matrix.json)');
+if (!consolidatedHeader) { if (!lines.some(line => line.startsWith('- 현재 M8 승인 범위:'))) lines.splice(4, 0, summary); }
 const record = { generatedAt: new Date().toISOString(), stage: 'M8', engineVersion: evidence.engineVersion, datasetSha256: datasetHash, evidencePath, evidenceSha256: hash(await readFile(evidencePath)), presetEvidencePath, presetEvidenceSha256: hash(await readFile(presetEvidencePath)), registryDefinitions: evidence.registryCount, approvedAdditionalSourceRows: 46, fullSimulinkEquivalenceClaimed: false, approvals: approval };
 if (args[0] === '--write') { await writeFile(coveragePath, lines.join('\n')); await writeFile('docs/evidence/m8-source-approvals.json', JSON.stringify(record, null, 2) + '\n'); }
 if (args[0] === '--verify') {
   for (const approved of approval) { const applied = original.split(/\r?\n/).find(line => line.startsWith(`| [${approved.sourceId}]`)); assert(applied, approved.sourceId); const cells = applied.slice(1, -1).split('|').map(cell => cell.trim()); assert.equal(cells[4], `\`${approved.canonical}\``); assert.equal(cells[7], approved.boundary); assert.equal(cells[8], approved.status); }
-  assert(original.includes(summary), 'M8 historical summary changed');
+  if (!consolidatedHeader) assert(original.includes(summary), 'M8 historical summary changed');
   const { generatedAt: _storedTime, ...stored } = JSON.parse(await readFile('docs/evidence/m8-source-approvals.json', 'utf8')); const { generatedAt: _currentTime, ...expected } = record; assert.deepEqual(stored, expected, 'Applied source approvals drifted from verified evidence');
 }
 assert.equal(hash(await readFile(sourcePath)), datasetHash, 'Original dataset must remain unchanged');

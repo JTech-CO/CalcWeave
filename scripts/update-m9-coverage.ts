@@ -70,13 +70,15 @@ const lines = original.split(/\r?\n/).map(line => {
   assert.equal(cells.length, 9); assert.equal(cells[1], row.sourceName); assert.equal(Number(match[2]), row.sourceLine); assert(cells[8] === row.baselineStatus || cells[8] === approved.status, `${row.sourceId}: unexpected prior status`);
   cells[4] = `\`${approved.canonical}\``; cells[7] = approved.boundary; cells[8] = approved.status; seen++; return `| ${cells.join(' | ')} |`;
 }); assert.equal(seen, 32);
-const summary = `- 현재 M9 승인 범위: M9 납품 당시 원본385행 중 제한된 subset211행·미구현174행. 신규31행 승인과 기존 전달함수1행의 계수 순서 추적 교정을 구분한다. registry${evidence.registryCount} 정의·15개 기본 구성·원본행 수는 별도 지표다. [M9 계약](m9-contract.md)·[검증](m9-validation.md)·[승인 근거](evidence/m9-source-approvals.json)를 따른다. 원본 전체 옵션·실행 동등 완료를 뜻하지 않는다.`;
-if (!lines.some(line => line.startsWith('- 현재 M9 승인 범위:'))) lines.splice(4, 0, summary);
+const summary = `- 현재 M9 승인 범위: M9 납품 당시 원본385행 중 제한된 subset211행·미구현174행. 신규31행 승인과 기존 전달함수1행의 계수 순서 추적 교정을 구분한다. registry${evidence.registryCount} 정의·15개 기본 구성·원본행 수는 별도 지표다. [M9 계약](01-technical-whitepaper.md)·[검증](validation.md)·[승인 근거](evidence/m9-source-approvals.json)를 따른다. 원본 전체 옵션·실행 동등 완료를 뜻하지 않는다.`;
+// Keep the consolidated current header; historical approvals remain in frozen JSON.
+const consolidatedHeader = original.includes('[기계 판독 지원표](support-matrix.json)');
+if (!consolidatedHeader) { if (!lines.some(line => line.startsWith('- 현재 M9 승인 범위:'))) lines.splice(4, 0, summary); }
 const record = { generatedAt: new Date().toISOString(), stage: 'M9', engineVersion: evidence.engineVersion, datasetSha256: datasetHash, evidencePath, evidenceSha256: hash(await readFile(evidencePath)), registryDefinitions: evidence.registryCount, approvedAdditionalSourceRows: 31, existingTraceCorrections: 1, fullSimulinkEquivalenceClaimed: false, approvals };
 if (args[0] === '--write') { await writeFile(coveragePath, lines.join('\n')); await writeFile('docs/evidence/m9-source-approvals.json', JSON.stringify(record, null, 2) + '\n'); }
 if (args[0] === '--verify') {
   for (const approved of approvals) { const applied = original.split(/\r?\n/).find(line => line.startsWith(`| [${approved.sourceId}]`)); assert(applied); const cells = applied.slice(1, -1).split('|').map(cell => cell.trim()); assert.equal(cells[4], `\`${approved.canonical}\``); assert.equal(cells[7], approved.boundary); assert.equal(cells[8], approved.status); }
-  assert(original.includes(summary)); const { generatedAt: _stored, ...stored } = JSON.parse(await readFile('docs/evidence/m9-source-approvals.json', 'utf8')); const { generatedAt: _current, ...expected } = record; assert.deepEqual(stored, expected, 'Applied approvals drifted from verification');
+  if (!consolidatedHeader) assert(original.includes(summary)); const { generatedAt: _stored, ...stored } = JSON.parse(await readFile('docs/evidence/m9-source-approvals.json', 'utf8')); const { generatedAt: _current, ...expected } = record; assert.deepEqual(stored, expected, 'Applied approvals drifted from verification');
 }
 assert.equal(hash(await readFile(sourcePath)), datasetHash);
 process.stdout.write(JSON.stringify({ sourceRows: 385, additionalSourceApprovals: 31, traceCorrections: 1, registryDefinitions: blockRegistry.length, mutated: args[0] === '--write' }) + '\n');
