@@ -1,5 +1,37 @@
 # CalcWeave Pages 경로·공개 배포 검증
 
+최신 공개 앱0.13.0 · 엔진0.13.0-m12 · registry304 · 2026-10-03
+
+[공개 작업 공간](https://jtech-co.github.io/CalcWeave/)에 M10→M11→M12의 선택 구현을 통합 게시했다. 실제 main 배포와 로컬 검증 artifact의 바이트 동일성을 아래 증거로 확인했다. M9의0.10.1 patch·초기0.10.0·이전0.8.1 기록과 실패/교정 증거는 아래 역사로 보존한다.
+
+## M12 main CI·공개 artifact
+
+[workflow 37104252395](https://github.com/JTech-CO/CalcWeave/actions/runs/37104252395)는 main `27e01d6fad98ae39c149c8e577ec0eede4922769`에서 verify/deploy 모두 성공했다. 실제 CI 로그는 unit3,007/3,007·루트browser156/156·project browser4/4 통과와 확인 시 npm 취약점0을 기록한다. [Actions 증거](evidence/m12-actions-verification.json)는 run/head SHA·두 job·실제 로그 요약과 digest를 보존한다.
+
+공개 HTTPS200·HTTP→HTTPS·정책4페이지200·private4경로404·manifest/SW·정적14파일의 바이트/SHA-256을 검사했다. 비교 대상은 로컬 최종 project artifact `.test-generated/m12-frozen-source/dist`이며 scope는 `/CalcWeave/`, 정적파일 총2,504,919바이트다. 공개 manifest와 서비스워커·모든 allowlist 파일이 이 artifact와 정확히 일치했다. releaseId는 `e23ce356d45b9707b06946dcb1982c4db97c8a8ceeb70c32c35ce861087264ed`다. [배포 파일 증거](evidence/m12-deployment-verification.json)·[로컬 project release](evidence/m12-project-release-verification.json)를 따른다.
+
+루트 `/` artifact는78checks·14files·2,504,659바이트/releaseId `fc2593f0c5dd03b4b33aa7d19818f21bf404f25bcd4f8e818e30192fad53eabf`로 별도 검증했다. 공개 Pages 주소와 비교한 것은 `/CalcWeave/` artifact이며 두 경로의 releaseId를 같은 것으로 취급하지 않는다. [로컬 root release](evidence/m12-root-release-verification.json)를 보존한다.
+
+## M12 실제 공개 브라우저
+
+사용자의 브라우저 저장소를 사용하지 않는 새 격리 Chromium context의9개 검사(4.484초)가 통과했다. 실제304개 라이브러리·지원표, 앱0.13.0/엔진0.13.0-m12, badge/footnote의0.13.0 표시, 최초 캔버스 안의 node bounds와 중심 오차2px 이내를 확인했다. 실제 Worker의 기본 결과6, 정책4개의 정적 HTML200과 경로 탐색, 정확한 project scope의SW/cache를 검사했다. 정적14파일과manifest를 합한 캐시15개가 모두 앱 범위 안에 있다.
+
+오프라인 재로딩 뒤 gain을5로 편집하여 실제 Worker 결과10을 얻었고 오프라인 정책 탐색도 통과했다. Python ZIP의 모델·manifest·내장IR·hash·전체 raw 기대출력은 검사했으며 Python 코드는 이 공개 검사에서 실행하지 않았다. pageErrors0·앱 범위 밖 요청0이다. [공개 브라우저 증거](evidence/m12-public-browser-verification.json)·[실제 공개 화면](evidence/m12-public-desktop.png)을 보존한다.
+
+이9개 공개 검사는 새 M12 솔버·대수 제약·DAE·분석 예제를 공개 주소에서 직접 실행한 검사가 아니다. 새 수치 기능의 실제 실행은 [독립 TypeScript 증거](evidence/m12-verification.json), 로컬/CI 전체 테스트와 [M12 검증 기록](m12-validation.md)을 따른다. 실제 Python 실행은 [타깃별 이전 단계 회귀](evidence/m12-predecessor-regressions.json)의 별도 증거이며, 공개 ZIP 내용 검사를 Python 실행 결과로 해석하지 않는다.
+
+## M12 판정과 남은 확인
+
+공개 artifact는304개 정의와61개 예제/9범주를 포함한다. source subset305/385·미구현80행은 registry304종과 다른 지표다. M10/M11/M12의 전체 원본 옵션과 MathWorks 실행 동등성은 열린 후속이며 [선택 source 승인](evidence/m12-source-approvals.json)을 확대 해석하지 않는다.
+
+기술적 앱 배포는 PASS이고 `verifiedApplicationDeployment=true`다. 공개 응답에서 HSTS는 `max-age=31556952`, Set-Cookie는 없었다. CSP/nosniff/frame/referrer/permissions HTTP헤더는 관찰되지 않았고 HTML의 CSP/no-referrer meta와 구분한다. 관찰되지 않은 헤더를 적용했다고 표시하지 않는다.
+
+목표 도메인 calcweave.com의 소유/DNS/custom domain, 실제 F06 초보자 관찰, 문의 이메일 보유/처리 정책과 후속 운영·호스트 설정은 이번 자동 검증으로 완료하지 않는다. 서버 계정·원격DB·유료 API가 없는 현재 구조의 해당없음 항목과 이런 미확인 항목을 구분한다. `fullSimulinkEquivalence=false`와 `verifiedPublicLaunch=false`를 유지한다. [출시 점검 범위](pages-launch-review.md)·[M12 검증 기록](m12-validation.md).
+
+## 이전0.10.1 M9 patch 공개 배포 기록
+
+아래는 당시 원문 기록이다. ‘최신’·‘현재’는 M9 확인 시점을 뜻한다.
+
 최신 공개 앱0.10.1 · 엔진0.10.0-m9 · registry211 · 2026-10-03
 
 [공개 작업 공간](https://jtech-co.github.io/CalcWeave/)의0.10.1 artifact와 실제211개 registry·지원표·Worker·오프라인 동작을 검증했다. 버전 표시를 APP_VERSION에 연결하고 실제 캔버스 크기 구독·DOM 측정 일치·취소 가능한2프레임 안정화로 최초 fit의 측정 경합을 수정했다. 수치 계약과 source 승인은 유지하며 M9 최초 engineering 앱0.10.0의 측정은 아래 초기 기록으로 보존한다.
