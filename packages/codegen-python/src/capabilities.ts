@@ -1,5 +1,5 @@
 /** Lightweight, frozen target metadata shared with the block registry. No runtime imports. */
-export const PYTHON_TARGET = Object.freeze({
+export const PYTHON_M7_TARGET = Object.freeze({
   id: 'python-m7-v1' as const, label: 'Python' as const, minimumVersion: '3.10' as const,
   supportedModes: Object.freeze(['static', 'discrete'] as const),
   blockIds: Object.freeze([
@@ -16,3 +16,18 @@ export const PYTHON_TARGET = Object.freeze({
     'hierarchy.subsystem',
   ] as readonly string[]),
 });
+
+/** Versioned executable capabilities. Canonical block definitions keep M7 metadata. */
+export const PYTHON_TARGET = Object.freeze({
+  id: 'python-m15-v1' as const, label: 'Python' as const, minimumVersion: '3.10' as const,
+  supportedModes: Object.freeze(['static', 'discrete'] as const),
+  blockIds: Object.freeze([
+    ...PYTHON_M7_TARGET.blockIds,
+    'source.string-constant', 'string.ascii-to-string', 'string.compose', 'string.scan',
+    'string.string-compare', 'string.string-concatenate', 'string.string-contains',
+    'string.string-count', 'string.string-find', 'string.string-length',
+    'string.string-to-ascii', 'string.parse-number', 'string.parse-enum',
+    'string.substring', 'string.to-string', 'source.typed', 'source.enum', 'source.signal',
+  ] as readonly string[]),
+});
+export type PythonTarget = typeof PYTHON_TARGET | typeof PYTHON_M7_TARGET;

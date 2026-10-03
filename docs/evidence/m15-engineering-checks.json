@@ -1,0 +1,243 @@
+{
+  "generatedAt": "2026-10-03T11:21:21.187Z",
+  "stage": "M15",
+  "appVersion": "0.16.0",
+  "engineVersion": "0.16.0-m15",
+  "engineeringMilestoneStatus": "complete-selected-scope",
+  "registryDefinitions": 337,
+  "examples": 75,
+  "categories": 12,
+  "typecheck": true,
+  "unit": {
+    "passed": 3854,
+    "total": 3854,
+    "path": "docs/evidence/m15-unit-results.json",
+    "sha256": "46b3a288f557114a9554b4defd9a7835104aad15e29099b0ae6da07c1be41b82"
+  },
+  "integration": {
+    "path": "docs/evidence/m15-verification.json",
+    "sha256": "ed7567783d067e85c0497dbdfd0961cfe097f5e2fac8f768fc16b19abf6e486d"
+  },
+  "python": {
+    "evidencePath": "docs/evidence/m15-python-verification.json",
+    "evidenceSha256": "06822cb6671866f301236a7e161f397d91b068bc136ddd583b092fa5d14215bd",
+    "actualPrograms": 142,
+    "checkedSamples": 256,
+    "supportedDefinitions": 69,
+    "originalDefinitionsRetained": 51
+  },
+  "wasm": {
+    "evidencePath": "docs/evidence/m15-wasm-verification.json",
+    "evidenceSha256": "dd0f4c33f783509dc3d7ae73b5d1ec90884151e32eaaa487ebc24887a957e5d1",
+    "counts": {
+      "rawFixtures": 21,
+      "successModes": 41,
+      "runtimeFailures": 5,
+      "targetRejections": 10,
+      "actualPrimaryPrograms": 46,
+      "actualIncludingJsonReversePrograms": 128,
+      "checkedSuccessfulSamples": 43
+    },
+    "supportedDefinitions": 16
+  },
+  "interopProfiles": 3,
+  "legacyMigrationProfiles": 7,
+  "interopUi": {
+    "path": "docs/evidence/m15-interop-ui-verification.json",
+    "sha256": "b3d0f77cc3e27773acab99878c92fad45c3c74f9c2bb3c2f39dcebec0d7032d9"
+  },
+  "packageExportFocusedUnit": {
+    "path": "docs/evidence/m15-package-export-unit-results.json",
+    "sha256": "fbc5771e2226e9ae8f36a29aa6348df1a0d33ca923fa16d9858f7afc33678ac2"
+  },
+  "wholeBrowser": {
+    "startTime": "2026-10-03T11:05:10.302Z",
+    "duration": 684697.639,
+    "expected": 188,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0,
+    "path": "docs/evidence/m15-browser-results.json",
+    "sha256": "05191a4fa2effac3d938f6021594d4d6fddf80ad3949fdf38412aaae6c31db6b"
+  },
+  "exportBrowser": {
+    "startTime": "2026-10-03T11:01:35.403Z",
+    "duration": 76674.01000000001,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "path": "docs/evidence/m15-export-browser-results.json",
+    "sha256": "4e8c02c7127e73402ed362e6145b1b094d25b8aba4ed98828907e99178920b11"
+  },
+  "interopBrowser": {
+    "startTime": "2026-10-03T11:00:53.009Z",
+    "duration": 25203.220999999998,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "projectBrowser": {
+    "startTime": "2026-10-03T11:04:40.456Z",
+    "duration": 49734.852,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "design": {
+    "observations": 188,
+    "pageErrors": [],
+    "path": "docs/evidence/m15-design-verification.json",
+    "sha256": "23f87a75348217806703af60bb8834f7af8b5e19d70b1c1bfeeec231ccf420e2"
+  },
+  "performance": {
+    "budgets": {
+      "coldLoad": true,
+      "warmLoad": true,
+      "node1000": true,
+      "cancellation": true,
+      "retainedHeap": true,
+      "pageErrors": true
+    },
+    "path": "docs/evidence/m15-performance.json",
+    "sha256": "6c51a86d6d2af5724daeaed86270f597840af3928bd98cd1099e2186a24453b1"
+  },
+  "rootRelease": {
+    "checks": 83,
+    "releaseId": "f5aa5f4383c9704ccff24ed695f570f3fb89919c4a9b37ac0646b71001866146",
+    "path": "docs/evidence/m15-root-release-verification.json",
+    "sha256": "45889e244f5b3cf85e8441103dea3543571da49f2c07c18571e41abcf2e7e1c5"
+  },
+  "projectRelease": {
+    "checks": 83,
+    "releaseId": "3ecb932e8c94a6bb2fea24e71e494f1555afea0240da888b7b8f9d4bddedd90f",
+    "path": "docs/evidence/m15-project-release-verification.json",
+    "sha256": "3edf7f5567cfb237268eed447b5403552295f4f6f27e0b2d12bff12a2885296f"
+  },
+  "predecessorActualTypeScript": [
+    {
+      "stage": "M13",
+      "counts": {
+        "rawFixtures": 139,
+        "definitionFixtures": 30,
+        "boundaryFixtures": 109,
+        "failures": 15,
+        "modeExecutions": 350,
+        "actualTypeScript": 361,
+        "strictTypeScriptPrograms": 3,
+        "checkedSamples": 846
+      },
+      "path": "docs/evidence/m13-regression-on-m15.json",
+      "sha256": "3861b05d7660e3e78e1a62d9e17461818c0a98c4aa8d79080a2f33f9fa218daa"
+    },
+    {
+      "stage": "M14",
+      "counts": {
+        "rawFixtures": 20,
+        "definitionFixtures": 3,
+        "boundaryFixtures": 17,
+        "failures": 18,
+        "modeExecutions": 28,
+        "actualTypeScript": 32,
+        "strictTypeScriptPrograms": 3,
+        "checkedSamples": 85
+      },
+      "path": "docs/evidence/m14-regression-on-m15.json",
+      "sha256": "31775e5e7650b93e1ecf60222ca20614f9e89cac5417a2280f49e4b54c5a0eac"
+    }
+  ],
+  "predecessorApprovalAndPlanLogs": {
+    "roadmap": {
+      "sha256": "90b929d23106d8a8a5f2025742091439095c993c226487ddf64b740d869419f1",
+      "summary": "}"
+    },
+    "coverage": {
+      "sha256": "55e7f39a587d938d22f99c6202f69ce7f5b06efe6523bdd95c7ce5542aa4d32d",
+      "summary": "}"
+    },
+    "m10-approval-regression": {
+      "sha256": "d4573c76cfc781a8d9276ff5d7cc99b9e2ecb73e85a2210e64ee7505e7c11030",
+      "summary": "{\"sourceRows\":385,\"firstWorkSourceRows\":38,\"additionalSourceApprovals\":34,\"existingMappingExtensions\":3,\"preservedUnitRows\":1,\"pendingRows\":0,\"registryDefinitions\":337,\"mutated\":false}"
+    },
+    "m11-approval-regression": {
+      "sha256": "dd61a7de06bcc3caa26cd111a15d29298c9c52183966d0b8725537e4ba11651e",
+      "summary": "{\"sourceRows\":385,\"uniqueSourceNameStrings\":339,\"firstWorkSourceRows\":73,\"approvedSourceRows\":58,\"additionalSourceApprovals\":48,\"existingMappingExtensions\":10,\"preservedPredecessorRows\":2,\"pendingSourceWorkflowRows\":0,\"explicitlyUnsupportedRows\":13,\"selectionCounts\":{\"verified-native-scope\":31,\"verified-shared-configuration\":17,\"verified-independent-alternative\":8,\"verified-conditional-adapter\":2},\"fullSourceOptionsClosed\":0,\"mutated\":false}"
+    },
+    "m12-approval-regression": {
+      "sha256": "5947acff4c97c99e5ff357f408b62271bfd72fb4ff97ffa4c6fcf5731298a177",
+      "summary": "{\"sourceRows\":385,\"registryDefinitions\":304,\"firstWorkSourceRows\":26,\"additionalSourceApprovals\":12,\"preservedPredecessorRows\":14,\"currentSourceSubset\":305,\"missingSourceRows\":80,\"fullSourceOptionsClosed\":0,\"mutated\":false}"
+    },
+    "m13-approval-regression": {
+      "sha256": "bd16c539ed957721487841612e39d31f5d644c35b6d17faa624fa7e4b27a6dbc",
+      "summary": "{\"sourceRows\":385,\"registryDefinitions\":334,\"firstWorkSourceRows\":75,\"additionalSourceApprovals\":59,\"preservedPredecessorRows\":16,\"currentSourceSubset\":364,\"missingSourceRows\":21,\"fullSourceOptionsClosed\":0,\"mutated\":false}"
+    },
+    "m14-approval-regression": {
+      "sha256": "f01874db8c766eae5fa63373b4592441526af880163f340bcb22eb5f1589179f",
+      "summary": "{\"registryDefinitions\":337,\"firstWorkSourceRows\":8,\"sourceApprovals\":3,\"sourceSubset\":367,\"missingSourceRows\":18,\"nativeUnavailableRows\":8,\"fullSourceOptionsClosed\":0,\"predecessorSourceRowsUnchanged\":382,\"protectedArtifacts\":22,\"mutated\":false}"
+    }
+  },
+  "audit": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "sha256": "d92c7a80e2ac756cb6d2f48893d845b4c546c07f32c0b7fc5a1ca48f842ea0b5"
+  },
+  "sourceApprovalsAdded": 0,
+  "sourceSubset": 367,
+  "missingSourceRows": 18,
+  "fullSourceOptionsClosed": 0,
+  "protectedArtifacts": {
+    "dataset/Simulink_Basic_Blocks_R2024b.md": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+    "docs/baselines/catalog-block-coverage.md": "bfad433de22c3302b53369be3465ec1d4bb3e072dd8f3ce310bc4af1ea967774",
+    "docs/simulink-coverage-roadmap.json": "86ec3c3f75939dc72a00b39d6760d86d9ef21f2a63922daf110c5db2fe7932cd",
+    "docs/baselines/m10-registry.json": "d23bc34bdbd450b1ea2be671b419f8ccfb74fa97238d541c3f9ffd97230cf8dc",
+    "docs/evidence/m10-source-approvals.json": "d8c938fb999555aaf61f24b68b7b631e158611dc2760542bd08d0f94d3221f4b",
+    "docs/evidence/m10-verification.json": "659a11814e1420f217068f4cab4c6726cd3070154f69fd1064afd3a4aee52e6d",
+    "docs/evidence/m10-reference-review.json": "fb9572178cc5c5caf19658e9010709a67d0d6611f83b9f3ce8993dffee493325",
+    "docs/evidence/m8-source-approvals.json": "4f558f5040f9dda1a9c2b5bbd2b848b825b4961489a03228dd3c12370b2c4d60",
+    "docs/evidence/m9-source-approvals.json": "7d49f1b15a6b325050a55295bca4d29411fe123dd0752e2ac98766641ccc18ca",
+    "docs/evidence/m8-verification.json": "351b5ba6031dff1a2f4dfb8b51e4e63e2747998277ee93e56decc4b908ff75d6",
+    "docs/evidence/m8-presets-verification.json": "55cef48ebe57a97ca02922225330f36b1f1d0866d2ad92d69f74fcceb7771f01",
+    "docs/evidence/m9-verification.json": "1d3fee9b56017db6c12b8f7f778d4c064efd4fa7f7d0014a2a38b6ffdd13a23f",
+    "docs/baselines/m11-registry.json": "daaf1ec9df9b5b7b43efdfd57863d0467b3f5636b3bcb4fd3b5450322fe8bf2e",
+    "docs/evidence/m11-source-approvals.json": "492abedeb09b84e601d206cf85ead66b3ba7596af0894f0f9519fd9af8aac8c7",
+    "docs/evidence/m11-verification.json": "716939d06a20c53a3fb9655820fb5c366fde0b1bb0fd5fd37adb39abadafea76",
+    "docs/baselines/m12-registry.json": "5eb19914ff0643307bb8c5c01b22557ad935558230a217e50ff8de6ee1867a73",
+    "docs/evidence/m12-source-approvals.json": "a3e2201b9672a4eac21f90a37b893ee0daf2c2a9b6d912654b46b1e1618a449b",
+    "docs/evidence/m12-verification.json": "79253d162a1af3ca5f5bbe2eb9de14d0fbc3e5aaa107795586678ab8f896f0c7",
+    "docs/baselines/m13-registry.json": "a4f8cadc0e8333cdc029c64de294077d90a98ae6d1f1746753649549f4f6a0d2",
+    "docs/evidence/m13-source-approvals.json": "bffe058d20baa23783f5682537787dbb9b6ac7aea06746d738b0972286af72bc",
+    "docs/evidence/m13-verification.json": "aa67d7976bd891f122f8a25eff41deb8b2054bc31ba660082b873e269883b598",
+    "docs/baselines/m13-block-coverage.md": "8d736de7dbf8dbda6eaca70790b0162afe7c78a168a09006e752c5fe8401e8c6",
+    "docs/baselines/m14-registry.json": "711fcb2062a90dcebdc4b2265f3a8660aadb3d8f2c4ede0de436a4f768ce0b40",
+    "docs/evidence/m14-source-approvals.json": "f7bf8f2a18377afd4d151b1b5bbea6e6eb72396e5c66b97c9a1a5b138c40448a",
+    "docs/evidence/m14-verification.json": "6886130299827a0d52e99533c0b0cf0ea827e27b5bceb56ca687e18fa4954f65"
+  },
+  "verifiedPublicLaunch": false,
+  "publicDeploymentClaimed": false,
+  "limitations": [
+    "C/C++ native generator/ABI execution remains unavailable.",
+    "Native MAT/SLX/MDL import supports only the declared bounded profiles; original bytes and locations are preserved, edited native export and MATLAB numerical reference parity remain unsupported/unverified.",
+    "Migration signature applies to the retained original payload; current compilation does not prove prior-engine numerical equivalence.",
+    "337 definitions and 367 selected source mappings do not claim complete Simulink option equivalence.",
+    "M13/M14/M15 combined public deployment follows the engineering checks; actual novice study and full public launch are separate."
+  ],
+  "finalContinuousBrowser": {
+    "startTime": "2026-10-03T11:18:22.346Z",
+    "duration": 9582.509,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "path": "docs/evidence/m15-continuous-browser-results.json",
+    "sha256": "a23fe26a7c7972b055f500b7fa5060d6ebdd5da03561421a5113dd5d198e012e"
+  },
+  "browserInterpretation": "All 189 cases are covered by 188 passing initial cases and the passing affected recheck. The initial continuous Worker test timed out at a generic five-second locator deadline while its 20,000-step run was still active. An unchanged isolated recheck passed; the final test aligns its result wait with the bounded 30-second runtime budget. Product behavior and numerical assertions are unchanged. This is not a single final local 189/189 run."
+}

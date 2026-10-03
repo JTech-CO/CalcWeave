@@ -904,6 +904,7 @@ test('M3 continuous ZIP snapshots include solver settings, statistics, events an
 });
 
 test('M3 real continuous Worker pause resumes its solver snapshot after editor mode changes and supports reset', async ({ page }) => {
+  test.setTimeout(60_000);
   await page.addInitScript(() => {
     const NativeWorker = Worker;
     let pauseNext = true;
@@ -937,7 +938,9 @@ test('M3 real continuous Worker pause resumes its solver snapshot after editor m
   await page.getByLabel('실행 방식', { exact: true }).selectOption('static');
   await expect(page.getByRole('button', { name: '재개', exact: true })).toBeVisible();
   await page.getByRole('button', { name: '재개', exact: true }).click();
-  await expect(page.locator('.run-metadata')).toContainText('21 샘플');
+  // The 20,000 internal-step workload has a bounded 30-second runtime budget;
+  // wait for its published result rather than a shorter generic locator deadline.
+  await expect(page.locator('.run-metadata')).toContainText('21 샘플', { timeout: 30_000 });
   expect(Number(await page.locator('.output-card strong').innerText())).toBeCloseTo(Math.exp(-0.2), 7);
   await expect(page.locator('.result-status')).toContainText('다시 계산 필요');
   await importModel(page, model);

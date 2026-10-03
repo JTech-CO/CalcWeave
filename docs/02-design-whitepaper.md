@@ -1,10 +1,12 @@
 # CalcWeave 디자인 백서
 
-> 버전: v0.15 · 작성일: 2026-10-03 · 상태: 로컬 앱0.15.0·엔진0.15.0-m14·337 블럭·75예제/12범주·M14 선택 UI 검증 완료; M14 선택 engineering 검증 완료; 통합 공개 배포 대기; 검증된 공개 버전은 M12 앱0.13.0
+> 버전: v0.16 · 작성일: 2026-10-03 · 상태: 로컬 앱0.16.0·엔진0.16.0-m15·337 블럭·75예제/12범주·M15 선택 로컬 engineering 완료; interop UI9개·내보내기4개·디자인188관측·성능6예산 PASS; 전체browser 최초188/189 및 영향1/1 재검증 구분; 공개 CI·배포 대기; 검증된 공개 버전은 M12 앱0.13.0
 > 제품명: **CalcWeave** · 목표 브랜드 도메인: **CalcWeave.com**  
 > 대상: 제품·디자인·프런트엔드·계산 엔진 개발자와 초기 사용자 검증 담당자
 
-M14는 ‘확장 실행’ 지원 탭과 선택 노드 inspector에서 고정 어댑터3개와 unavailable native 환경8개의 ABI·SHA·자원·출처·권리 상태를 표시한다. 실제 WASM 계산·독립 누산 lifecycle·FIFO 예제6개를 추가해337종·75예제/12범주다. 사용자 코드·모듈 업로드 입력 없이 실행과 실패·취소·재실행을 확인했고 UI unit35개/회귀73개·M14 browser9개·디자인188관측과 어댑터 dark/light 화면8개를 검증했다. [M14 계약](m14-contract.md)·[검증](m14-validation.md)·[UI 증거](evidence/m14-ui-workflow-verification.json)를 현재 선택 화면의 기준으로 사용한다. 전체 browser176개 중172개 PASS 뒤 다운로드 보안 assertion4개를 실제 실행 AST 검사로 갱신해 해당4/4를 재검증했다. 제품 소스는 변경하지 않았다. 성능6개 예산을 포함해 선택 engineering 검증을 완료했고 공개 M12는 [배포 기록](pages-validation.md)을 따른다. 실제 초보자 사용성 조사·원본 실행 등가는 별도다.
+현재 M15는 기존337종·75예제/12범주를 유지하고 코드 타깃에서 Python69종·WASM16종의 선택 구성과 C/C++ unavailable 이유를 구분한다. 생성 전에 자료형·모드·옵션과 원래 노드 위치를 안내한다. 외부 파일은 분석 결과·지원/미지원 항목·원본 위치와 Inport 명시 입력을 먼저 보여 준다. `.cwinterop.json` 복구와 원본 byte 다운로드는 CalcWeave 편집본 내보내기와 별도 동작이며 편집한 SLX/MDL/MAT 생성이나 MATLAB 실행 동등성을 약속하지 않는다. 과거 공유 패키지는 원본 서명·출처 확인과 별도 migration 검토를 거친다. 실제 interop73unit/9browser·직접 검토한 반응형8화면,내보내기4browser·디자인188관측/pageErrors0을 [M15 계약](m15-contract.md)·[검증 기록](m15-validation.md)에 연결했다. 전체 browser 최초188/189와 테스트 대기 조정 후 영향1/1 PASS를 분리 기록한다. 성능6개 예산·최종typecheck를 통과해 선택 로컬 engineering을 완료했고 공개 CI·배포는 대기 상태이며 실제 초보자 사용성 조사를 수행하지 않았다. 아래 M14 및 이전 단계의 관측 수치는 역사 기록으로 보존한다.
+
+직전 M14는 ‘확장 실행’ 지원 탭과 선택 노드 inspector에서 고정 어댑터3개와 unavailable native 환경8개의 ABI·SHA·자원·출처·권리 상태를 표시한다. 실제 WASM 계산·독립 누산 lifecycle·FIFO 예제6개를 추가해337종·75예제/12범주다. 사용자 코드·모듈 업로드 입력 없이 실행과 실패·취소·재실행을 확인했고 UI unit35개/회귀73개·M14 browser9개·디자인188관측과 어댑터 dark/light 화면8개를 검증했다. [M14 계약](m14-contract.md)·[검증](m14-validation.md)·[UI 증거](evidence/m14-ui-workflow-verification.json)를 이전 단계의 선택 화면 기준으로 보존한다. 전체 browser176개 중172개 PASS 뒤 다운로드 보안 assertion4개를 실제 실행 AST 검사로 갱신해 해당4/4를 재검증했다. 제품 소스는 변경하지 않았다. 성능6개 예산을 포함해 선택 engineering 검증을 완료했고 공개 M12는 [배포 기록](pages-validation.md)을 따른다. 실제 초보자 사용성 조사·원본 실행 등가는 별도다.
 
 직전 M13은 문자열 결과·형식 입력,37개 Dashboard 설정·이산 조작 재생,기록/XY·Dataset 저장,bounded XLSX와 편집 provenance를 검증했다. 이전304개 정의·61예제/9범주를 보존하고334개 정의·69예제/11범주로 확장했으며 UI116개·전체browser167개와 최종 BOM/live/37설정 영향 경계3개를 확인했다. [M13 계약](m13-contract.md)·[검증](m13-validation.md)·[UI 증거](evidence/m13-ui-workflow-verification.json)는 이전 단계의 수치와 화면 사양으로 보존한다.
 
@@ -12,11 +14,11 @@ M9 최초 engineering 납품 앱0.10.0·엔진0.10.0-m9는 직전185개 정의�
 
 직전 M8의41개 정의·8preset 납품은 검증 완료했으며 총185개 정의·35예제와 승인subset180행·미구현205행을 M9 이전 기준으로 보존한다. [M8 계약](m8-contract.md)·[검증](m8-validation.md)은 단계 기록이다. 전체 R2024b 옵션·MathWorks 실행/seed bit parity와 실제 초보자 사용성은 별도로 검증한다.
 
-앱0.8.1의 [GitHub Pages 웹 베타](https://jtech-co.github.io/CalcWeave/)와 M9 앱0.10.1의211종·지원표·Worker·오프라인9검사는 이전 배포 기록이다. 현재 검증된 공개 버전은 M12 앱0.13.0/304종이며 로컬 M14는0.15.0/337종이다. [배포 검증](pages-validation.md)과 [M8~M16 전체 대응 후속 로드맵](05-simulink-coverage-roadmap.md)을 따르며 목표 도메인·실제 초보자 조사·전체 옵션 동등성은 별도다.
+앱0.8.1의 [GitHub Pages 웹 베타](https://jtech-co.github.io/CalcWeave/)와 M9 앱0.10.1의211종·지원표·Worker·오프라인9검사는 이전 배포 기록이다. 현재 검증된 공개 버전은 M12 앱0.13.0/304종이며 로컬 M15는0.16.0/337종이다. [배포 검증](pages-validation.md)과 [M8~M16 전체 대응 후속 로드맵](05-simulink-coverage-roadmap.md)을 따르며 목표 도메인·실제 초보자 조사·전체 옵션 동등성은 별도다.
 
-M9 시점의 로컬·공개 버전은211종 블럭과39예제를 제공했다. 당시 예제는 기초·신호 입력·이산 상태·연속/혼합·데이터/도식·행렬/표/양자화의6범주였으며 M13은69예제/11범주,현재 M14는75예제/12범주다. 제목·설명·블럭 ID 검색,Enter/방향키/Escape와 IME 구분, 작은 화면의 메뉴 배치를 유지한다. 빠른 추가 버튼의 K와 예제 버튼의 문자 v는 제거하고 dropdown은 SVG 아이콘을 쓴다. 단축키와 접근성 설명은 유지한다. 라이브러리는 신규 블럭의 식별 기호를 제공하며 캔버스는 종류 이름·핵심 값만 표시하는 간결한 계약을 유지한다. 검정/밝은 회색 테마, 본문16px/보조14px, 도식과 결과의 좌우 배치를 유지한다. 이전 [확장 계약](catalog-contract.md)·[검증](catalog-validation.md)도 단계 기록으로 보존한다.
+M9 시점의 로컬·공개 버전은211종 블럭과39예제를 제공했다. 당시 예제는 기초·신호 입력·이산 상태·연속/혼합·데이터/도식·행렬/표/양자화의6범주였으며 M13은69예제/11범주,M14와 현재 M15는75예제/12범주다. 제목·설명·블럭 ID 검색,Enter/방향키/Escape와 IME 구분, 작은 화면의 메뉴 배치를 유지한다. 빠른 추가 버튼의 K와 예제 버튼의 문자 v는 제거하고 dropdown은 SVG 아이콘을 쓴다. 단축키와 접근성 설명은 유지한다. 라이브러리는 신규 블럭의 식별 기호를 제공하며 캔버스는 종류 이름·핵심 값만 표시하는 간결한 계약을 유지한다. 검정/밝은 회색 테마, 본문16px/보조14px, 도식과 결과의 좌우 배치를 유지한다. 이전 [확장 계약](catalog-contract.md)·[검증](catalog-validation.md)도 단계 기록으로 보존한다.
 
-M9의4개 학습 예제는 이산 필터 응답·이전 세 샘플·샘플주기와 순환 카운터·2DOF PI 목표 가중치다. 속성에서는 z⁻¹/descending-z·실현 구조·IC 좌표·reset/enable, 초 단위Ts와 period/offset, 지연의 zero-lag와 floor 발행 경계를 설명한다. 공유 preset이나 독립 설정 대체를 원본 전체 옵션 지원으로 표시하지 않는다. Python은 승인51개만 안내하며 M9 블럭은 TypeScript 타깃의 이유와 원본 노드 위치를 보여 준다.
+M9의4개 학습 예제는 이산 필터 응답·이전 세 샘플·샘플주기와 순환 카운터·2DOF PI 목표 가중치다. 속성에서는 z⁻¹/descending-z·실현 구조·IC 좌표·reset/enable, 초 단위Ts와 period/offset, 지연의 zero-lag와 floor 발행 경계를 설명한다. 공유 preset이나 독립 설정 대체를 원본 전체 옵션 지원으로 표시하지 않는다. M9 당시 Python은 승인51개만 안내했고 M9 블럭은 TypeScript 타깃의 이유와 원본 노드 위치를 보여 준다.
 
 M7에서 코드 타깃 선택·모델 패키지·가져오기 보고 창을 추가했다. Python 타깃은 현재 도식의 지원 여부와 원본 위치별 이유를 먼저 보여주며, 파일로 받은 서명만으로 출처를 신뢰하지 않고 별도로 확인한 fingerprint 입력을 요구한다. native 모델의 계산 오류는 편집할 수 있고 외부 형식 변환은 수행하지 않았음을 표시한다. [M7 계약](m7-contract.md)·[검증](m7-validation.md)은 단계 기록으로 보존한다.
 

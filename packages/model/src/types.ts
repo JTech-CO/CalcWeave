@@ -1,4 +1,4 @@
-export const ENGINE_VERSION = '0.15.0-m14';
+export const ENGINE_VERSION = '0.16.0-m15';
 
 export type ExecutionMode = 'static' | 'discrete' | 'continuous';
 export type BlockType =
@@ -160,7 +160,7 @@ export interface SolverSettings {
 }
 export type DatasetCell = number | boolean | string;
 export interface DatasetColumn { name: string; kind: 'number' | 'boolean' | 'string'; unit: string }
-export interface DatasetProvenance { format: 'csv' | 'json' | 'xlsx' | 'editor'; filename?: string; sheet?: string; sourceHash: string; transforms: string[] }
+export interface DatasetProvenance { format: 'csv' | 'json' | 'xlsx' | 'editor' | 'mat-v5'; filename?: string; sheet?: string; sourceHash: string; transforms: string[] }
 export interface Dataset {
   id: string;
   name: string;

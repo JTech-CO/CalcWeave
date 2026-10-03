@@ -1,5 +1,6 @@
 import { compileModel } from '../../compiler/src';
 import { MODEL_LIMITS, ModelError, parseModelJson, type CalcModel, type Diagnostic } from '../../model/src';
+export * from './native';
 
 export const MODEL_IMPORT_LIMITS = Object.freeze({ maxBytes: MODEL_LIMITS.maxBytes, maxDepth: MODEL_LIMITS.maxDepth });
 export interface ModelImportInspection {

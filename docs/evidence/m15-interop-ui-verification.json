@@ -1,0 +1,292 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M15",
+  "status": "passed",
+  "scope": "Bounded selected MAT/SLX/MDL native import, staged explicit application and separate byte-preserving archive",
+  "unit": {
+    "passed": 73,
+    "failed": 0,
+    "files": 2,
+    "selectedInteropPassed": 43,
+    "predecessorXlsxDataPassed": 30,
+    "log": "docs/evidence/m15-interop-unit-results.json",
+    "sha256": "c31f0c5d3ed4a91eacb2d043a5a7e8ca26323ba67bd12c6f5c6d82c31b90e0b8",
+    "sourceReport": ".test-generated/m15-interop-unit-final.json"
+  },
+  "browser": {
+    "passed": 9,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "elapsedMs": 25203.220999999998,
+    "report": "docs/evidence/m15-interop-browser-results.json",
+    "sha256": "27507e1eb35f4e573f97a69b9d3c4e40892de3e7d9034d175b85084942f15022",
+    "sourceReport": ".test-generated/m15-interop-browser.json",
+    "baseURL": "http://127.0.0.1:4175",
+    "testFilter": "tests/e2e/m15-interop.spec.ts",
+    "tests": [
+      {
+        "title": "M15 MDL preview preserves current model until explicit loss review and actual Worker computes the converted graph",
+        "file": "m15-interop.spec.ts",
+        "status": "passed"
+      },
+      {
+        "title": "M15 SLX referenced root system imports and continuous Worker agrees with an analytic integral",
+        "file": "m15-interop.spec.ts",
+        "status": "passed"
+      },
+      {
+        "title": "M15 native Unit Delay ordering is retained by the real discrete Worker",
+        "file": "m15-interop.spec.ts",
+        "status": "passed"
+      },
+      {
+        "title": "M15 unbound Inport stays unsupported and finite explicit inputs are rechecked before applying",
+        "file": "m15-interop.spec.ts",
+        "status": "passed"
+      },
+      {
+        "title": "M15 MAT column-major table imports exact values and preserves raw source in its separate archive",
+        "file": "m15-interop.spec.ts",
+        "status": "passed"
+      },
+      {
+        "title": "M15 archive reimport rejects altered reports and model claims, then reparses the genuine raw source",
+        "file": "m15-interop.spec.ts",
+        "status": "passed"
+      },
+      {
+        "title": "M15 callback, unknown expression and external relationships remain escaped and inert",
+        "file": "m15-interop.spec.ts",
+        "status": "passed"
+      },
+      {
+        "title": "M15 malformed and oversized files preserve the workspace with distinct parsing failures",
+        "file": "m15-interop.spec.ts",
+        "status": "passed"
+      },
+      {
+        "title": "M15 located loss reports and exact source SHA stay readable in dark/light 320px with 200% text",
+        "file": "m15-interop.spec.ts",
+        "status": "passed"
+      }
+    ]
+  },
+  "nativeProfiles": [
+    {
+      "format": "mat-v5",
+      "selected": "Named 2D dense finite real mxDOUBLE arrays, first column time(s), remaining columns unit1. Signed zero unsupported.",
+      "actualFileParsing": true,
+      "endianVariants": [
+        "little",
+        "big"
+      ],
+      "smallTag": true,
+      "compressedZlib": true,
+      "rawAndCompressedAggregateBudget": true,
+      "exactTableValues": true,
+      "originalBytesRecoveredExactly": true
+    },
+    {
+      "format": "slx",
+      "selected": "Bounded OPC ZIP/XML root scalar graph, inline root or strict empty System Ref to known internal part; nine block types only.",
+      "actualFileParsing": true,
+      "actualWorkerModes": [
+        "static",
+        "continuous"
+      ],
+      "actualNodeRuntimeModesAlso": [
+        "discrete"
+      ],
+      "refInlineContentBlocked": true,
+      "originalBytesRecoveredExactly": true
+    },
+    {
+      "format": "mdl",
+      "selected": "Bounded UTF8 balanced brace/string Model/System root graph; nine block types only.",
+      "actualFileParsing": true,
+      "actualWorkerModes": [
+        "static",
+        "discrete"
+      ],
+      "actualNodeRuntimeModesAlso": [
+        "continuous"
+      ],
+      "originalBytesRecoveredExactly": true
+    }
+  ],
+  "selectedBlockTypes": [
+    "Constant",
+    "Gain",
+    "Sum",
+    "Product",
+    "UnitDelay",
+    "Integrator",
+    "Scope",
+    "Inport",
+    "Outport"
+  ],
+  "stagedApplication": {
+    "currentModelPreservedDuringPreview": true,
+    "explicitLossReviewRequired": true,
+    "noAutomaticExecution": true,
+    "unboundInportNotZero": true,
+    "finiteInputRechecked": true,
+    "invalidDraftNotCommitted": true,
+    "toolbarReachableAt320Text2x": true
+  },
+  "archive": {
+    "format": "calcweave-interop",
+    "version": 1,
+    "extension": ".cwinterop.json",
+    "separateFromCalcModelSchema": true,
+    "sourceBase64AndSha256": true,
+    "restoredFromRawReparse": true,
+    "reportClaimsCompared": true,
+    "modelSemanticAndFileHashesCompared": true,
+    "sourceLocationAndConvertedIdClaimsCompared": true,
+    "originalBytesExact": true,
+    "editedNativeRegeneration": "unsupported",
+    "authorAuthentication": "not-claimed"
+  },
+  "reportAxes": [
+    "parse",
+    "graphCompile",
+    "execution",
+    "numericalEquivalence",
+    "roundTrip"
+  ],
+  "nativeNumericalEquivalence": "unverified",
+  "referenceMatlabOrSimulinkExecuted": false,
+  "fullNativeCompatibilityClaimed": false,
+  "fixtures": {
+    "file": "tests/fixtures/m15-native.ts",
+    "provenance": "Independently authored format fixtures; not MATLAB-exported/reference-executed models.",
+    "analyticOracles": [
+      "2*3=6",
+      "ordered signed Sum=-2 and Product=8",
+      "UnitDelay initial followed by due inputs",
+      "integral 1+2*t",
+      "MAT column-major data cells"
+    ],
+    "actualWorkerUsed": true
+  },
+  "boundaries": {
+    "limits": {
+      "maxInputBytes": 2097152,
+      "maxExpandedBytes": 8388608,
+      "maxEntries": 64,
+      "maxXmlNodes": 100000,
+      "maxDepth": 32,
+      "maxIssues": 2000,
+      "maxArchiveBytes": 5242880,
+      "maxMatVariables": 64
+    },
+    "mat": {
+      "variables": 64,
+      "rows": 4000,
+      "columnsIncludingTime": 16,
+      "cells": 20000
+    },
+    "unsupportedOptionsLocated": true,
+    "callbacksNeverExecuted": true,
+    "externalReferencesNeverFetched": true,
+    "escapedScriptPreviewInert": true,
+    "unknownOrMalformedNodesNeverSubstitutedIntoExecutableModel": true,
+    "negativeZeroNotSilentlyNormalized": true,
+    "xlsxPolicyPreserved": true
+  },
+  "responsive": [
+    {
+      "theme": "dark",
+      "width": 1440,
+      "textScale": 1,
+      "actualBrowserBoundsPassed": true,
+      "shaRenderedFullyWithinDialogViewport": true,
+      "personallyInspected": true,
+      "screenshot": "docs/evidence/m15-interop-dark-1440-1x.png",
+      "note": "Native modal width and wrapped source options inspected."
+    },
+    {
+      "theme": "dark",
+      "width": 1024,
+      "textScale": 1,
+      "actualBrowserBoundsPassed": true,
+      "shaRenderedFullyWithinDialogViewport": true,
+      "personallyInspected": true,
+      "screenshot": "docs/evidence/m15-interop-dark-1024-1x.png",
+      "note": "Native modal width and wrapped source options inspected."
+    },
+    {
+      "theme": "dark",
+      "width": 390,
+      "textScale": 1,
+      "actualBrowserBoundsPassed": true,
+      "shaRenderedFullyWithinDialogViewport": true,
+      "personallyInspected": true,
+      "screenshot": "docs/evidence/m15-interop-dark-390-1x.png",
+      "note": "Native modal width and wrapped source options inspected."
+    },
+    {
+      "theme": "dark",
+      "width": 320,
+      "textScale": 2,
+      "actualBrowserBoundsPassed": true,
+      "shaRenderedFullyWithinDialogViewport": true,
+      "personallyInspected": true,
+      "screenshot": "docs/evidence/m15-interop-dark-320-2x.png",
+      "note": "Scrolled to source SHA; vertical scrolling exposes the remaining content."
+    },
+    {
+      "theme": "light",
+      "width": 1440,
+      "textScale": 1,
+      "actualBrowserBoundsPassed": true,
+      "shaRenderedFullyWithinDialogViewport": true,
+      "personallyInspected": true,
+      "screenshot": "docs/evidence/m15-interop-light-1440-1x.png",
+      "note": "Native modal width and wrapped source options inspected."
+    },
+    {
+      "theme": "light",
+      "width": 1024,
+      "textScale": 1,
+      "actualBrowserBoundsPassed": true,
+      "shaRenderedFullyWithinDialogViewport": true,
+      "personallyInspected": true,
+      "screenshot": "docs/evidence/m15-interop-light-1024-1x.png",
+      "note": "Native modal width and wrapped source options inspected."
+    },
+    {
+      "theme": "light",
+      "width": 390,
+      "textScale": 1,
+      "actualBrowserBoundsPassed": true,
+      "shaRenderedFullyWithinDialogViewport": true,
+      "personallyInspected": true,
+      "screenshot": "docs/evidence/m15-interop-light-390-1x.png",
+      "note": "Native modal width and wrapped source options inspected."
+    },
+    {
+      "theme": "light",
+      "width": 320,
+      "textScale": 2,
+      "actualBrowserBoundsPassed": true,
+      "shaRenderedFullyWithinDialogViewport": true,
+      "personallyInspected": true,
+      "screenshot": "docs/evidence/m15-interop-light-320-2x.png",
+      "note": "Scrolled to source SHA; vertical scrolling exposes the remaining content."
+    }
+  ],
+  "manualUserStudyClaimed": false,
+  "productionSourceChangedAfterFinalBrowser": false,
+  "testEntryChangeAfterFocusedRun": {
+    "previous": "page.goto('/')",
+    "changedBy": "root",
+    "current": "page.goto('./')",
+    "followupWholeAndPublicVerification": "Root is running or recording follow-up checks on the current entry; their results are separate from this focused 9-test record.",
+    "file": "tests/e2e/m15-interop.spec.ts",
+    "originalFocusedRawReportPreserved": true,
+    "reason": "Reuse the same tests with the GitHub Pages base path."
+  }
+}

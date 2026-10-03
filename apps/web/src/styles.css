@@ -783,3 +783,21 @@ textarea:focus-visible { outline:2px solid var(--focus); outline-offset:3px; }
   .adapter-profile-list button { width:100%; }
   .adapter-catalog .support-filters { grid-template-columns:minmax(0,1fr); }
 }
+/* Native import review uses the existing dialog geometry and shared theme tokens. */
+.interop-content { min-width: 0; }
+.interop-content h3 { margin: 1.25rem 0 .65rem; }
+.interop-content details { margin: 1rem 0; }
+.interop-content summary { cursor: pointer; font-weight: 600; }
+.interop-content ul { padding-inline-start: 1.35rem; }
+.interop-content li { margin: .8rem 0; overflow-wrap: anywhere; }
+.interop-content li p { margin: .3rem 0; }
+.interop-content pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 12rem; overflow: auto; font: inherit; }
+.interop-hash { overflow-wrap: anywhere; font-family: var(--font-mono, monospace); }
+.interop-inputs { max-width: 38rem; }
+.interop-review { display: flex; align-items: flex-start; gap: .75rem; margin: 1.5rem 0 1rem; line-height: 1.55; }
+.interop-review input { flex: 0 0 auto; width: 1.15rem; height: 1.15rem; margin-top: .22rem; }
+.interop-table { overflow: auto; max-width: 100%; }
+.interop-table table { border-collapse: collapse; width: 100%; }
+.interop-table th, .interop-table td { text-align: left; padding: .6rem .8rem; border-bottom: 1px solid var(--line); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.interop-content .dialog-actions { flex-wrap: wrap; }
+@media (max-width: 600px) { .interop-stages.support-metadata > div { grid-template-columns: 1fr; gap: .35rem; } .interop-content .dialog-actions > button { max-width: 100%; white-space: normal; text-align: left; } }

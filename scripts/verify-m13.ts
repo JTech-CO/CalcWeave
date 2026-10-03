@@ -8,7 +8,7 @@ import { blockRegistry } from '../packages/block-library/src';
 import { M13_BLOCK_IDS } from '../packages/block-library/src/m13';
 import { compileModel } from '../packages/compiler/src';
 import { createExportManifest, exportTypeScript } from '../packages/codegen-ts/src';
-import { getPythonDiagnostics } from '../packages/codegen-python/src';
+import { getPythonDiagnostics, PYTHON_TARGET } from '../packages/codegen-python/src';
 import { ENGINE_VERSION, ModelError, parseModelJson, serializeModel, type CalcModel, type RunResult } from '../packages/model/src';
 import { runModel } from '../packages/runtime/src';
 import { M13_INDEPENDENT_DEFINITION_FIXTURES, M13_INDEPENDENT_BOUNDARY_FIXTURES, M13_INDEPENDENT_FAILURE_FIXTURES, type M13IndependentFixture } from '../tests/m13-independent-fixtures';
@@ -97,13 +97,14 @@ async function verify(entry: M13IndependentFixture, mode: CalcModel['execution']
   const reversed = structuredClone(model); reversed.nodes.reverse(); reversed.edges.reverse(); const reordered = compileModel(reversed); assert.equal(reordered.semanticKey, compiled.semanticKey); compare(stable(await runModel(reordered)), stable(result), `${entry.name}/reversed full contract`, parityTolerance);
   const newNodes = compiled.nodes.filter(node => (M13_BLOCK_IDS as readonly string[]).includes(node.blockType));
   const pythonDiagnostics = getPythonDiagnostics(compiled);
-  for (const node of newNodes) assert(pythonDiagnostics.some(diagnostic => diagnostic.nodeId === node.id), `${entry.name}/${node.id}: unsupported Python diagnostic`);
+  const pythonUnsupportedNodes = newNodes.filter(node => !PYTHON_TARGET.blockIds.includes(node.blockType));
+  for (const node of pythonUnsupportedNodes) assert(pythonDiagnostics.some(diagnostic => diagnostic.nodeId === node.id), `${entry.name}/${node.id}: unsupported Python diagnostic`);
   return { id:entry.name, ...(entry.sourceIds?{sourceIds:entry.sourceIds}:{}), mode, blockIds:[...new Set(newNodes.map(node=>node.blockType))],
     parameters:Object.fromEntries(newNodes.map(node=>[node.id,{blockType:node.blockType,parameters:node.parameters,sampleTime:node.sampleTime}])), solver:compiled.model.execution.solver,
     samples:count, maximumAbsoluteError,maximumScaledError,oracleTolerance:tolerance,parityTolerance,independentLiteralOracle:entry.metadataOracleFromDeclaredRegistry !== true, metadataOracleFromDeclaredRegistry:entry.metadataOracleFromDeclaredRegistry === true,
     independentFullFinalStateOracle:entry.expectedFinalState!==undefined,independentFullStateMemoryOracle:entry.expectedStateMemory!==undefined,
     modelHash:manifest.modelHash,targetVersion:manifest.targetVersion,strictStandaloneTemplateModeVerified:true,strictProgramIndividuallyChecked:individuallyStrictChecked,importFreeStandalone:true,actualStandaloneTypeScript:true,
-    fullSamplesFinalStateMemoryParity:true,exactManifest:true,jsonRoundtrip:true,insertionOrderIndependent:true,pythonUnsupportedNodeDiagnostics:true };
+    fullSamplesFinalStateMemoryParity:true,exactManifest:true,jsonRoundtrip:true,insertionOrderIndependent:true,pythonUnsupportedNodeDiagnostics:pythonUnsupportedNodes.length===newNodes.length,pythonTargetVersion:PYTHON_TARGET.id,pythonUnsupportedNodeIds:pythonUnsupportedNodes.map(node=>node.id),pythonTargetDiagnostics:pythonDiagnostics };
 }
 const fixtures = [];
 for (const entry of [...M13_INDEPENDENT_DEFINITION_FIXTURES,...M13_INDEPENDENT_BOUNDARY_FIXTURES]) for (const mode of entry.declaredModes) fixtures.push(await verify(entry,mode));

@@ -1,0 +1,3559 @@
+{
+  "generatedAt": "2026-10-03T11:00:49.947Z",
+  "stage": "M15",
+  "engineVersion": "0.16.0-m15",
+  "target": {
+    "id": "wasm-m15-v1",
+    "label": "WebAssembly (스칼라 도식)",
+    "supportedModes": [
+      "static",
+      "discrete"
+    ],
+    "blockIds": [
+      "source.constant",
+      "io.input",
+      "source.clock",
+      "source.step",
+      "source.ramp",
+      "math.gain",
+      "math.sum",
+      "math.multiply",
+      "math.abs",
+      "math.sqrt",
+      "math.minmax",
+      "math.function",
+      "sink.display",
+      "sink.scope",
+      "io.output",
+      "io.terminator"
+    ],
+    "abi": {
+      "version": 1,
+      "exportName": "evaluate",
+      "parameters": [
+        "i32",
+        "f64"
+      ],
+      "result": "f64",
+      "meaning": "compiler-ordered node value index and absolute simulation time"
+    },
+    "limits": {
+      "maxNodes": 64,
+      "maxOutputs": 16,
+      "maxBinaryBytes": 65536,
+      "maxTickIntervals": 10000,
+      "maxRecordedElements": 1000000,
+      "maxOperations": 50000000,
+      "maxActiveWallMs": 30000
+    },
+    "semantics": "Stateless scalar DAG; every node must use base tick period1/offset0. Physical units preserve validated descriptors. math.function supports square/reciprocal only.",
+    "dependencies": [
+      "WebAssembly Core 1 Module/Instance host",
+      "No external compiler, imports, memory, table, globals, start, loops or calls"
+    ]
+  },
+  "registryDefinitions": 337,
+  "predecessorDefinitionsUnchanged": 337,
+  "sourceSubsetUnchanged": 367,
+  "counts": {
+    "rawFixtures": 21,
+    "successModes": 41,
+    "runtimeFailures": 5,
+    "targetRejections": 10,
+    "actualPrimaryPrograms": 46,
+    "actualIncludingJsonReversePrograms": 128,
+    "checkedSuccessfulSamples": 43
+  },
+  "fixtures": [
+    {
+      "id": "wasm-gain",
+      "mode": "static",
+      "modelHash": "a7d448a1e8ae2a842e77314dbfb4d4752ab9fae8f0ae73a1491765fbbada0d3e",
+      "nodeIds": [
+        "input",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "7202fd3ec53c6735d09a8bc6c34c38e3af21cacf7f2657e81b3b09edcc45bbbc",
+      "bytes": 121,
+      "instructionCount": 33,
+      "evaluationCallsPerTick": 3,
+      "maximumOperations": 99,
+      "opcodes": {
+        "20": 12,
+        "21": 7,
+        "41": 3,
+        "44": 3,
+        "46": 3,
+        "a2": 1,
+        "1b": 3,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0000.wasm",
+          "sha256": "7202fd3ec53c6735d09a8bc6c34c38e3af21cacf7f2657e81b3b09edcc45bbbc"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0000.mjs",
+          "sha256": "0ea71cc379faf010c5cedac25ce6a0c19234cb935b3dba43ddf211436fc02c3f"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0000.manifest.json",
+          "sha256": "5da8444d4ed5c7d9d633f605b08aa78f941f2040372e6ad68c9008c8d7dde555"
+        }
+      }
+    },
+    {
+      "id": "wasm-gain",
+      "mode": "discrete",
+      "modelHash": "7a7d8f1e23b7386d460b6b46de32f2acbcb6bde6c7500975c0ce775903d5d0e8",
+      "nodeIds": [
+        "input",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "7202fd3ec53c6735d09a8bc6c34c38e3af21cacf7f2657e81b3b09edcc45bbbc",
+      "bytes": 121,
+      "instructionCount": 33,
+      "evaluationCallsPerTick": 3,
+      "maximumOperations": 99,
+      "opcodes": {
+        "20": 12,
+        "21": 7,
+        "41": 3,
+        "44": 3,
+        "46": 3,
+        "a2": 1,
+        "1b": 3,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0003.wasm",
+          "sha256": "7202fd3ec53c6735d09a8bc6c34c38e3af21cacf7f2657e81b3b09edcc45bbbc"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0003.mjs",
+          "sha256": "7a7b9e59768407233f456587e18970f59486fc05913cb47812529b459435e47f"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0003.manifest.json",
+          "sha256": "e4cd142d3ec98c59535b18408d5890a887c94323175e222cb6378b36e28156d3"
+        }
+      }
+    },
+    {
+      "id": "wasm-abs",
+      "mode": "static",
+      "modelHash": "aaa0951a94f24f0c44a9af3c0981a50473f380f50589cd06f778de2169f725b8",
+      "nodeIds": [
+        "input",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "e4d865865b7aef808d7c4b9fb60368bb92ad10e78ce75d514205ef12e5e6fe05",
+      "bytes": 112,
+      "instructionCount": 32,
+      "evaluationCallsPerTick": 3,
+      "maximumOperations": 96,
+      "opcodes": {
+        "20": 12,
+        "21": 7,
+        "41": 3,
+        "44": 2,
+        "46": 3,
+        "99": 1,
+        "1b": 3,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0006.wasm",
+          "sha256": "e4d865865b7aef808d7c4b9fb60368bb92ad10e78ce75d514205ef12e5e6fe05"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0006.mjs",
+          "sha256": "1c96d4579b248e51a778c5e25a6a833afcd5f499037c217661698e544328e81a"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0006.manifest.json",
+          "sha256": "af0cf83d0aa892711e3057437b3c0ba179c5d083514a9d031429516d19c68a29"
+        }
+      }
+    },
+    {
+      "id": "wasm-abs",
+      "mode": "discrete",
+      "modelHash": "5e154753d351fa94d2a64b483f4fa13de965d0081a582e4b4f4317b1d1a669c0",
+      "nodeIds": [
+        "input",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "e4d865865b7aef808d7c4b9fb60368bb92ad10e78ce75d514205ef12e5e6fe05",
+      "bytes": 112,
+      "instructionCount": 32,
+      "evaluationCallsPerTick": 3,
+      "maximumOperations": 96,
+      "opcodes": {
+        "20": 12,
+        "21": 7,
+        "41": 3,
+        "44": 2,
+        "46": 3,
+        "99": 1,
+        "1b": 3,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0009.wasm",
+          "sha256": "e4d865865b7aef808d7c4b9fb60368bb92ad10e78ce75d514205ef12e5e6fe05"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0009.mjs",
+          "sha256": "9522b7c0799762e9c33fc917c6ea19716d43be800c23d9bf05c7e0b09a0e6970"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0009.manifest.json",
+          "sha256": "12d0f8ed490e264846998d05877f87b9ce4046c148a9302e1d8ff47ed75ad7a0"
+        }
+      }
+    },
+    {
+      "id": "wasm-sqrt",
+      "mode": "static",
+      "modelHash": "6ecf9a08dae997a99c2bbe544725b4eb230fc999167789bc42ba689657685769",
+      "nodeIds": [
+        "input",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "79ef7c9675dde1fca900ed30d566b3ba8902ef4269bff3cb877ac3d7aaf16d16",
+      "bytes": 112,
+      "instructionCount": 32,
+      "evaluationCallsPerTick": 3,
+      "maximumOperations": 96,
+      "opcodes": {
+        "20": 12,
+        "21": 7,
+        "41": 3,
+        "44": 2,
+        "46": 3,
+        "9f": 1,
+        "1b": 3,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0012.wasm",
+          "sha256": "79ef7c9675dde1fca900ed30d566b3ba8902ef4269bff3cb877ac3d7aaf16d16"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0012.mjs",
+          "sha256": "da9b39d50c03f6d0152909aae1e69281103f0b81967d256b4f3bc928fe4db5e4"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0012.manifest.json",
+          "sha256": "eec677efd594d734678fff18510495ee9746b8fb9b69badad4d051bcd61b983e"
+        }
+      }
+    },
+    {
+      "id": "wasm-sqrt",
+      "mode": "discrete",
+      "modelHash": "bbc4ed9982855b4e15bc2b8e347e5ae3e67731d52286c5adf0fa0697f0ed9b4e",
+      "nodeIds": [
+        "input",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "79ef7c9675dde1fca900ed30d566b3ba8902ef4269bff3cb877ac3d7aaf16d16",
+      "bytes": 112,
+      "instructionCount": 32,
+      "evaluationCallsPerTick": 3,
+      "maximumOperations": 96,
+      "opcodes": {
+        "20": 12,
+        "21": 7,
+        "41": 3,
+        "44": 2,
+        "46": 3,
+        "9f": 1,
+        "1b": 3,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0015.wasm",
+          "sha256": "79ef7c9675dde1fca900ed30d566b3ba8902ef4269bff3cb877ac3d7aaf16d16"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0015.mjs",
+          "sha256": "0e34e0729018956b8943a9accf58c87c4a28ef3c4eb753d808e9ecf29b95c3a9"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0015.manifest.json",
+          "sha256": "0078915e1a3fde9296f008cef1ea019c59173ae30c0c9940eb7b2f097f299baa"
+        }
+      }
+    },
+    {
+      "id": "wasm-square",
+      "mode": "static",
+      "modelHash": "4d12500b437809b594a4f8437fd9a67be9d4eac72489d951077a2e980c89ddbd",
+      "nodeIds": [
+        "input",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "58b279e2697720c7245e56b6386506e76a5670fa75336e8512480dd79c96547e",
+      "bytes": 114,
+      "instructionCount": 33,
+      "evaluationCallsPerTick": 3,
+      "maximumOperations": 99,
+      "opcodes": {
+        "20": 13,
+        "21": 7,
+        "41": 3,
+        "44": 2,
+        "46": 3,
+        "a2": 1,
+        "1b": 3,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0018.wasm",
+          "sha256": "58b279e2697720c7245e56b6386506e76a5670fa75336e8512480dd79c96547e"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0018.mjs",
+          "sha256": "3364a53618e64265c3db9518c9d9ff2960a02dbb210a0bb10347e6442089f900"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0018.manifest.json",
+          "sha256": "7a7f0e7708eaaebb61358aa341cffb450afac3913f81da0b17c926972bda2d24"
+        }
+      }
+    },
+    {
+      "id": "wasm-square",
+      "mode": "discrete",
+      "modelHash": "b727107ddbc4980637f9e2626c0610478cd3026c0edce5f63d2984a8084b7bea",
+      "nodeIds": [
+        "input",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "58b279e2697720c7245e56b6386506e76a5670fa75336e8512480dd79c96547e",
+      "bytes": 114,
+      "instructionCount": 33,
+      "evaluationCallsPerTick": 3,
+      "maximumOperations": 99,
+      "opcodes": {
+        "20": 13,
+        "21": 7,
+        "41": 3,
+        "44": 2,
+        "46": 3,
+        "a2": 1,
+        "1b": 3,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0021.wasm",
+          "sha256": "58b279e2697720c7245e56b6386506e76a5670fa75336e8512480dd79c96547e"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0021.mjs",
+          "sha256": "f1aa9c3031f95218ace71ad095d959454efc9b0e1265bedf9c9455fc0d6f0028"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0021.manifest.json",
+          "sha256": "ffb553f2469eeac191af6fc2827fa198d250238b575fe4fea1213ae29adf84e7"
+        }
+      }
+    },
+    {
+      "id": "wasm-reciprocal",
+      "mode": "static",
+      "modelHash": "413db6f4661a8f0595373f25ea05779b1e835c227a707b82a93b1ef01b9ed9d5",
+      "nodeIds": [
+        "input",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "52c5e4297a019ae68413e4abb4b6d0c95ccc9c1038259aebb5d45ef89b836230",
+      "bytes": 121,
+      "instructionCount": 33,
+      "evaluationCallsPerTick": 3,
+      "maximumOperations": 99,
+      "opcodes": {
+        "20": 12,
+        "21": 7,
+        "41": 3,
+        "44": 3,
+        "46": 3,
+        "a3": 1,
+        "1b": 3,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0024.wasm",
+          "sha256": "52c5e4297a019ae68413e4abb4b6d0c95ccc9c1038259aebb5d45ef89b836230"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0024.mjs",
+          "sha256": "93a83a44ba199f7b0a5b884a5162701ef8f8e7d213dcff7bc6cc85a8020c8490"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0024.manifest.json",
+          "sha256": "0fe04770349a8a1057099888d5be5022eb076022dcf4125b9813f0351dd212f6"
+        }
+      }
+    },
+    {
+      "id": "wasm-reciprocal",
+      "mode": "discrete",
+      "modelHash": "44312c0c6adf290366f6e8e1345c1cc53fafd6717dad173fcb4e889af0e003f2",
+      "nodeIds": [
+        "input",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "52c5e4297a019ae68413e4abb4b6d0c95ccc9c1038259aebb5d45ef89b836230",
+      "bytes": 121,
+      "instructionCount": 33,
+      "evaluationCallsPerTick": 3,
+      "maximumOperations": 99,
+      "opcodes": {
+        "20": 12,
+        "21": 7,
+        "41": 3,
+        "44": 3,
+        "46": 3,
+        "a3": 1,
+        "1b": 3,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0027.wasm",
+          "sha256": "52c5e4297a019ae68413e4abb4b6d0c95ccc9c1038259aebb5d45ef89b836230"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0027.mjs",
+          "sha256": "7945ee71d33a8949b8288476a6e4537ea025ea1de7adefe1ff3dfee706c526b0"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0027.manifest.json",
+          "sha256": "3d87f7ec01b1f68ddd3bbb9b34e58e5522598170059b6505200c4acb376cf5b8"
+        }
+      }
+    },
+    {
+      "id": "wasm-min-reduce",
+      "mode": "static",
+      "modelHash": "b6bc5a076ba7340b1eea0401caeb0276155682e6d7dc904a5a2790fe5418a1c6",
+      "nodeIds": [
+        "input",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "bf1a14e5992e5e8c28afc3409def972e15950e57f935baa49bc52aed7b6e237e",
+      "bytes": 111,
+      "instructionCount": 31,
+      "evaluationCallsPerTick": 3,
+      "maximumOperations": 93,
+      "opcodes": {
+        "20": 12,
+        "21": 7,
+        "41": 3,
+        "44": 2,
+        "46": 3,
+        "1b": 3,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0030.wasm",
+          "sha256": "bf1a14e5992e5e8c28afc3409def972e15950e57f935baa49bc52aed7b6e237e"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0030.mjs",
+          "sha256": "d7b3c4e1b5ab3de2445a5ad5214fb2660956673e5a2afe4310d0e838d6a5e6de"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0030.manifest.json",
+          "sha256": "adf7bd278b462a4068c5ef41305b24bb5d1dfd0d3043ff8eeafa892466060431"
+        }
+      }
+    },
+    {
+      "id": "wasm-min-reduce",
+      "mode": "discrete",
+      "modelHash": "7eb042e12a14de19f7347a4293677770d12925f659cc647dee139df7232a8e5c",
+      "nodeIds": [
+        "input",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "bf1a14e5992e5e8c28afc3409def972e15950e57f935baa49bc52aed7b6e237e",
+      "bytes": 111,
+      "instructionCount": 31,
+      "evaluationCallsPerTick": 3,
+      "maximumOperations": 93,
+      "opcodes": {
+        "20": 12,
+        "21": 7,
+        "41": 3,
+        "44": 2,
+        "46": 3,
+        "1b": 3,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0033.wasm",
+          "sha256": "bf1a14e5992e5e8c28afc3409def972e15950e57f935baa49bc52aed7b6e237e"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0033.mjs",
+          "sha256": "782ebffecaf598c37a6d0c644b815c7fb69a2652bb2647426bb293b6b083ccae"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0033.manifest.json",
+          "sha256": "d9ddb0a711004020153182908b68ff1df6a9248669df086ed403ee87b9c0fcc9"
+        }
+      }
+    },
+    {
+      "id": "wasm-max-reduce",
+      "mode": "static",
+      "modelHash": "42b88f7a61f75105eb0fe933bf929f532390ebe6e050dcfc67f83c2bdde5755c",
+      "nodeIds": [
+        "input",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "bf1a14e5992e5e8c28afc3409def972e15950e57f935baa49bc52aed7b6e237e",
+      "bytes": 111,
+      "instructionCount": 31,
+      "evaluationCallsPerTick": 3,
+      "maximumOperations": 93,
+      "opcodes": {
+        "20": 12,
+        "21": 7,
+        "41": 3,
+        "44": 2,
+        "46": 3,
+        "1b": 3,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0036.wasm",
+          "sha256": "bf1a14e5992e5e8c28afc3409def972e15950e57f935baa49bc52aed7b6e237e"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0036.mjs",
+          "sha256": "01972dea5c1796d62b884770573cf292faa03f943d9fc34d1571593fb5200cb0"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0036.manifest.json",
+          "sha256": "a9740c62c0bd6598f95b9b1fc1b0b7e0cec5c025a3a475affeb3ec48f0ff7d1a"
+        }
+      }
+    },
+    {
+      "id": "wasm-max-reduce",
+      "mode": "discrete",
+      "modelHash": "2f878dc1264fa99ff623d2e17c891f905f66f8fc3980303f6ad4d03a86189882",
+      "nodeIds": [
+        "input",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "bf1a14e5992e5e8c28afc3409def972e15950e57f935baa49bc52aed7b6e237e",
+      "bytes": 111,
+      "instructionCount": 31,
+      "evaluationCallsPerTick": 3,
+      "maximumOperations": 93,
+      "opcodes": {
+        "20": 12,
+        "21": 7,
+        "41": 3,
+        "44": 2,
+        "46": 3,
+        "1b": 3,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0039.wasm",
+          "sha256": "bf1a14e5992e5e8c28afc3409def972e15950e57f935baa49bc52aed7b6e237e"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0039.mjs",
+          "sha256": "08f9202eaadca92001e33aecbdc6eb5b87c3b2943f7b79746c0442a31f835755"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0039.manifest.json",
+          "sha256": "cad473c9bdb63fc53c4a9cda71e5fdb0580501425d765cd7fcf1259f4000e7af"
+        }
+      }
+    },
+    {
+      "id": "wasm-sum-0",
+      "mode": "static",
+      "modelHash": "8bacf3676d846a0058dd6d2b385cd90193bf0105a8061a5c3a1f8d08e385bda4",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "576d052194c10ab14b2ca5939b4d8581713c75c513965c6d5a8de1f6a59640e9",
+      "bytes": 137,
+      "instructionCount": 42,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 168,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "a0": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0042.wasm",
+          "sha256": "576d052194c10ab14b2ca5939b4d8581713c75c513965c6d5a8de1f6a59640e9"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0042.mjs",
+          "sha256": "bf0f5b4f194bfe0a12f66cedde9cc68456a1891cb3ed9bf8a71a6bfe143ab97b"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0042.manifest.json",
+          "sha256": "c8598aa25fa2f3cf34950ac4a59206f8220917f58a36e5db630672ac94a97852"
+        }
+      }
+    },
+    {
+      "id": "wasm-sum-0",
+      "mode": "discrete",
+      "modelHash": "bd0d7751f3513824c02ba63c08e081eec6a4ced6794190056afb0fa88fbb022f",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "576d052194c10ab14b2ca5939b4d8581713c75c513965c6d5a8de1f6a59640e9",
+      "bytes": 137,
+      "instructionCount": 42,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 168,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "a0": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0045.wasm",
+          "sha256": "576d052194c10ab14b2ca5939b4d8581713c75c513965c6d5a8de1f6a59640e9"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0045.mjs",
+          "sha256": "749b682a3a3c240f435357c7e2b3b61f14146858b5c3714ab285f7cf3196dafa"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0045.manifest.json",
+          "sha256": "ee9353cec93a25b5223692d9351361996186b0b3362a67bfae86a452d26cc4ed"
+        }
+      }
+    },
+    {
+      "id": "wasm-sum-1",
+      "mode": "static",
+      "modelHash": "954721b3d0a589b915df57dc65b91267791c985d6110ea86293f115b38e3f769",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "2aea58554b377399a2b36b581c0d6e95105520c4a1cbc56e50a12886b1d7b0e3",
+      "bytes": 138,
+      "instructionCount": 43,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 172,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "9a": 1,
+        "a0": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0048.wasm",
+          "sha256": "2aea58554b377399a2b36b581c0d6e95105520c4a1cbc56e50a12886b1d7b0e3"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0048.mjs",
+          "sha256": "04704f6cf4f2b75388041c394a1140918e8a1a2967d8952b83afbfaa6e5d9a17"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0048.manifest.json",
+          "sha256": "5eabbd995f6c8f3277169792bcf545ed662a1b76cd0f2ac66012cb7a441c336c"
+        }
+      }
+    },
+    {
+      "id": "wasm-sum-1",
+      "mode": "discrete",
+      "modelHash": "94b043044be832890b0f4d6f1d19c8343fe6f0074ecd6f771518cba4e36970c3",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "2aea58554b377399a2b36b581c0d6e95105520c4a1cbc56e50a12886b1d7b0e3",
+      "bytes": 138,
+      "instructionCount": 43,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 172,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "9a": 1,
+        "a0": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0051.wasm",
+          "sha256": "2aea58554b377399a2b36b581c0d6e95105520c4a1cbc56e50a12886b1d7b0e3"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0051.mjs",
+          "sha256": "15bc74b8550a1690a8eb24c1192ee5382fc7fe090519186efb3aae6e6a1d71c0"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0051.manifest.json",
+          "sha256": "275cc376d532e9602b5d75751ea3610539ae13c67c16e715139653375328dc56"
+        }
+      }
+    },
+    {
+      "id": "wasm-sum-2",
+      "mode": "static",
+      "modelHash": "e87c11686105646331dfd2866488b75eccc9804e13e218103933e87dd530f7a1",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "a258c97c3f7c5dca60182d715c403927590d94c040024d8f2c012e27acdf335c",
+      "bytes": 138,
+      "instructionCount": 43,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 172,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "9a": 1,
+        "a0": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0054.wasm",
+          "sha256": "a258c97c3f7c5dca60182d715c403927590d94c040024d8f2c012e27acdf335c"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0054.mjs",
+          "sha256": "ed9443236044bc1b28e45ca19f21a6cef3a67126ca9126834ea1846b6cfe4a73"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0054.manifest.json",
+          "sha256": "99e3d2a3255de0c4f9868cf25d999bae880ea757ea253bd926fa479acaae8417"
+        }
+      }
+    },
+    {
+      "id": "wasm-sum-2",
+      "mode": "discrete",
+      "modelHash": "1a4966712691dadfc888af8b59549ff07dbf8cd769cc9568509b81cde4038dde",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "a258c97c3f7c5dca60182d715c403927590d94c040024d8f2c012e27acdf335c",
+      "bytes": 138,
+      "instructionCount": 43,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 172,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "9a": 1,
+        "a0": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0057.wasm",
+          "sha256": "a258c97c3f7c5dca60182d715c403927590d94c040024d8f2c012e27acdf335c"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0057.mjs",
+          "sha256": "4727492e1b7320064ca1910037944faa55f06d3cda95c99b54c8460a321a1334"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0057.manifest.json",
+          "sha256": "df6894d459f34a060002ee782e41d009c1f82f3ba4acdcca9cbd068853e7a7ab"
+        }
+      }
+    },
+    {
+      "id": "wasm-sum-3",
+      "mode": "static",
+      "modelHash": "e0bade2de6e5046a493d4e364e6ec7e7775ee35a515c295573cee3686fa6ef6f",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "5d16b5c7f3df833c04b5032004632343f2613a7edbd2751a899051bdcf129c0a",
+      "bytes": 139,
+      "instructionCount": 44,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 176,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "9a": 2,
+        "a0": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0060.wasm",
+          "sha256": "5d16b5c7f3df833c04b5032004632343f2613a7edbd2751a899051bdcf129c0a"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0060.mjs",
+          "sha256": "770b5847f019b6e1603e8cb525140eed2a4694ea659c4d98e2177fe51e3fb98a"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0060.manifest.json",
+          "sha256": "e0cef06614a47e799cbdd8fdea7b32f7cce603bff149f50767ef6bf45bed0eca"
+        }
+      }
+    },
+    {
+      "id": "wasm-sum-3",
+      "mode": "discrete",
+      "modelHash": "3afc76135707092a9208120ebebef31de3ad8c23f9f08abdd5e819462fd91301",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "5d16b5c7f3df833c04b5032004632343f2613a7edbd2751a899051bdcf129c0a",
+      "bytes": 139,
+      "instructionCount": 44,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 176,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "9a": 2,
+        "a0": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0063.wasm",
+          "sha256": "5d16b5c7f3df833c04b5032004632343f2613a7edbd2751a899051bdcf129c0a"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0063.mjs",
+          "sha256": "a20441822fc2e74f6c8415f3ec960144dfe36ceb897a45ff653b458d6a8ebf09"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0063.manifest.json",
+          "sha256": "fd9dba5d5c122a5f5a3750994c26166008b318f9c4289d0f55c2aa99b266c202"
+        }
+      }
+    },
+    {
+      "id": "wasm-multiply",
+      "mode": "static",
+      "modelHash": "b0d89ca06f14efbc8f4e70ed2d423427fcfc1fa0d8485fe5d625c37f8ed827d9",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "95d4295f8b33628d86041ba1253c6c4cd8ce9ab0ffebf7b5887c20b1233169fd",
+      "bytes": 137,
+      "instructionCount": 42,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 168,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "a2": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0066.wasm",
+          "sha256": "95d4295f8b33628d86041ba1253c6c4cd8ce9ab0ffebf7b5887c20b1233169fd"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0066.mjs",
+          "sha256": "807452259f0d4a0b0512c0b05b43a00621bff648fd43d6bb05840fbdcae13fe3"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0066.manifest.json",
+          "sha256": "f5851dc5b080dbb8f18898c0e8a8e02af2e803780358898c82461da134c12983"
+        }
+      }
+    },
+    {
+      "id": "wasm-multiply",
+      "mode": "discrete",
+      "modelHash": "489ed76cbee060d38eb8d2a21c8141017c78cdd13b2095289e031469a2d31a02",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "95d4295f8b33628d86041ba1253c6c4cd8ce9ab0ffebf7b5887c20b1233169fd",
+      "bytes": 137,
+      "instructionCount": 42,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 168,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "a2": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0069.wasm",
+          "sha256": "95d4295f8b33628d86041ba1253c6c4cd8ce9ab0ffebf7b5887c20b1233169fd"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0069.mjs",
+          "sha256": "6cdc213fa44a359549e61b4976c5c322884c9e29bf3b0824082629628bf8dca4"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0069.manifest.json",
+          "sha256": "46635593254e8f7da40f0db7a785885c96d39f953328fced5aa11789cdd4f4b8"
+        }
+      }
+    },
+    {
+      "id": "wasm-divide",
+      "mode": "static",
+      "modelHash": "d3c4438966ef1343df06b2ae94eb159fd171bd1393a63d9d78483ee9fbecb1ef",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "ef43c393bf2dadd5b92475616410f6091368d8ca9ee036b1293f8d42282f1f41",
+      "bytes": 137,
+      "instructionCount": 42,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 168,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "a3": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0072.wasm",
+          "sha256": "ef43c393bf2dadd5b92475616410f6091368d8ca9ee036b1293f8d42282f1f41"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0072.mjs",
+          "sha256": "aab2f777ceed85fe83428efd8301d5bd2cb7bfa8f9ae93b073afb6fa5d003b71"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0072.manifest.json",
+          "sha256": "cce05aa035233a3386963787ddb86aaf099cb398ddc59ea1924d909f8ccc831d"
+        }
+      }
+    },
+    {
+      "id": "wasm-divide",
+      "mode": "discrete",
+      "modelHash": "e94e666c8791b03d39817aa32778ab4078307475b05c05d9cdbf8fb81d5e063d",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "ef43c393bf2dadd5b92475616410f6091368d8ca9ee036b1293f8d42282f1f41",
+      "bytes": 137,
+      "instructionCount": 42,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 168,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "a3": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0075.wasm",
+          "sha256": "ef43c393bf2dadd5b92475616410f6091368d8ca9ee036b1293f8d42282f1f41"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0075.mjs",
+          "sha256": "21ff4661cef8edfb7a53f93c97218285bd9cff5d9ba79827c6758f22fc79de4c"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0075.manifest.json",
+          "sha256": "67f4d613ad87044b6f40756527eee2f8f1c3bfaa7f2227fe1333701d965718d7"
+        }
+      }
+    },
+    {
+      "id": "wasm-min-pair",
+      "mode": "static",
+      "modelHash": "fe6963b36338227cf7f8d0afb97fd3d84507bf524a0ac35e7c30ce089b4c7d76",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "66507787559323f8936a5e5c4101f3272ddb89696ccd161540380bc02bc05403",
+      "bytes": 137,
+      "instructionCount": 42,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 168,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "a4": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0078.wasm",
+          "sha256": "66507787559323f8936a5e5c4101f3272ddb89696ccd161540380bc02bc05403"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0078.mjs",
+          "sha256": "36a3eacd2f9cb94a227f6488f5bf8d9a4e92f6603ed8941d30d2e4358cd3441d"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0078.manifest.json",
+          "sha256": "cdc3b193b48c0403e36087c895aa587f4b6283104d0226f614efca540c4115ab"
+        }
+      }
+    },
+    {
+      "id": "wasm-min-pair",
+      "mode": "discrete",
+      "modelHash": "8318f5a6965c90876f42b98c596c06ab5d4f66974208cc39857231b7e78f2966",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "66507787559323f8936a5e5c4101f3272ddb89696ccd161540380bc02bc05403",
+      "bytes": 137,
+      "instructionCount": 42,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 168,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "a4": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0081.wasm",
+          "sha256": "66507787559323f8936a5e5c4101f3272ddb89696ccd161540380bc02bc05403"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0081.mjs",
+          "sha256": "07d333df602d88b9833b4820679ff5d80fda04ff1a271825cf9c5be00b5b35e3"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0081.manifest.json",
+          "sha256": "bf068ce3adf5a23d9e7108bebccc9caf4c4d9e61c33ab043794189c21b141504"
+        }
+      }
+    },
+    {
+      "id": "wasm-max-pair",
+      "mode": "static",
+      "modelHash": "2884a702632f8d9f4233638b9505f44424dbe0fe840a35ee4c3a3baf756936de",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "c285953ed6464d5f4d4e1d2764cec282df7f1da794e451e15ec231d427d13d68",
+      "bytes": 137,
+      "instructionCount": 42,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 168,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "a5": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0084.wasm",
+          "sha256": "c285953ed6464d5f4d4e1d2764cec282df7f1da794e451e15ec231d427d13d68"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0084.mjs",
+          "sha256": "1bbadb746946b4238f272e9ac9c987db1e698c706e421d6015b85c2e88a0ac18"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0084.manifest.json",
+          "sha256": "6af18bed0aace1f51c64d63864e97ce68bf158a815100f252b4966725f648c1d"
+        }
+      }
+    },
+    {
+      "id": "wasm-max-pair",
+      "mode": "discrete",
+      "modelHash": "9164b18adc34d8a95a43276c5a93b2f86a618241340034cd1a0daedfd2daa396",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "c285953ed6464d5f4d4e1d2764cec282df7f1da794e451e15ec231d427d13d68",
+      "bytes": 137,
+      "instructionCount": 42,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 168,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "a5": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0087.wasm",
+          "sha256": "c285953ed6464d5f4d4e1d2764cec282df7f1da794e451e15ec231d427d13d68"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0087.mjs",
+          "sha256": "5faa19a81d8ff0f24ef67f01a1e56efd3d45fe4725b9fb889639ef048a14d8bc"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0087.manifest.json",
+          "sha256": "872d10ef026903844a34fe4d2fa3d97a2591115e32232433eb78910228c867f4"
+        }
+      }
+    },
+    {
+      "id": "wasm-time-grid",
+      "mode": "discrete",
+      "modelHash": "93e5e88ff06907927b37d29292093266540d8e86128d72976491f53970a67bca",
+      "nodeIds": [
+        "clock",
+        "clockOut",
+        "ramp",
+        "rampOut",
+        "step",
+        "stepOut",
+        "unused"
+      ],
+      "outputIds": [
+        "clockOut",
+        "rampOut",
+        "stepOut"
+      ],
+      "outputTypes": {
+        "clockOut": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "s"
+        },
+        "rampOut": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "stepOut": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "6c054022773692777b8a66a3bec3eb92311ee019191f3321e58078dc56064d1a",
+      "bytes": 239,
+      "instructionCount": 80,
+      "evaluationCallsPerTick": 7,
+      "maximumOperations": 1680,
+      "opcodes": {
+        "20": 29,
+        "21": 15,
+        "41": 7,
+        "44": 8,
+        "46": 7,
+        "63": 1,
+        "a1": 1,
+        "a5": 1,
+        "a2": 1,
+        "a0": 1,
+        "1b": 8,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 3,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0090.wasm",
+          "sha256": "6c054022773692777b8a66a3bec3eb92311ee019191f3321e58078dc56064d1a"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0090.mjs",
+          "sha256": "3e265864959badda6b0ae44f9b3cecff49b4fb1add39d880755b3e36af5c9ac8"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0090.manifest.json",
+          "sha256": "a060be66870048d655719b0f8d04b073a3f39e0529939b000d4ca037855091b1"
+        }
+      }
+    },
+    {
+      "id": "wasm-physical-units",
+      "mode": "static",
+      "modelHash": "75983ffa9f4f606f4f977cb7cc86c89461f4d2293544cc0be42a9a216c86685a",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "m"
+        }
+      },
+      "artifactHash": "8567632f0361525bab9b332bd18a9bb07f15a6e79fc702b34150afda3e8ad03f",
+      "bytes": 138,
+      "instructionCount": 43,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 172,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "9a": 1,
+        "a0": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0093.wasm",
+          "sha256": "8567632f0361525bab9b332bd18a9bb07f15a6e79fc702b34150afda3e8ad03f"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0093.mjs",
+          "sha256": "291dae06d851dbb61d9874cd320ca23616d51df699260994080dcf5f19bd2890"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0093.manifest.json",
+          "sha256": "3c21f8b18db680bbc993b28085de0889c01a7387e1dbc80c16ef4b45a8ca9d46"
+        }
+      }
+    },
+    {
+      "id": "wasm-physical-units",
+      "mode": "discrete",
+      "modelHash": "4585f661bbf296270903ece3da9406022a85abe96be9e8138eab6ef50444195c",
+      "nodeIds": [
+        "a",
+        "b",
+        "op",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "m"
+        }
+      },
+      "artifactHash": "8567632f0361525bab9b332bd18a9bb07f15a6e79fc702b34150afda3e8ad03f",
+      "bytes": 138,
+      "instructionCount": 43,
+      "evaluationCallsPerTick": 4,
+      "maximumOperations": 172,
+      "opcodes": {
+        "20": 16,
+        "21": 9,
+        "41": 4,
+        "44": 3,
+        "46": 4,
+        "9a": 1,
+        "a0": 1,
+        "1b": 4,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0096.wasm",
+          "sha256": "8567632f0361525bab9b332bd18a9bb07f15a6e79fc702b34150afda3e8ad03f"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0096.mjs",
+          "sha256": "34a617959e921b6bf81e5a59b0e16953d4b9b7994cee918d0cf603f56dab3d16"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0096.manifest.json",
+          "sha256": "cf71b210972f714ecc28d829482d8699d866d9b25deed77c991ecf1efc5e834c"
+        }
+      }
+    },
+    {
+      "id": "wasm-signed-zero",
+      "mode": "static",
+      "modelHash": "f1ab531e6f42e7e1b8761dbf524a12c966b9ff0d292f17cc8eea46fbc1dd7974",
+      "nodeIds": [
+        "input",
+        "negative",
+        "absolute",
+        "absoluteOut",
+        "negativeOut",
+        "squareRoot",
+        "sqrtOut"
+      ],
+      "outputIds": [
+        "absoluteOut",
+        "negativeOut",
+        "sqrtOut"
+      ],
+      "outputTypes": {
+        "absoluteOut": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "negativeOut": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "sqrtOut": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "bcea3e448c2eb051b60edc98a45c74de522280acec60e1c5862d7e6a1e6dbe75",
+      "bytes": 189,
+      "instructionCount": 71,
+      "evaluationCallsPerTick": 7,
+      "maximumOperations": 497,
+      "opcodes": {
+        "20": 28,
+        "21": 15,
+        "41": 7,
+        "44": 3,
+        "46": 7,
+        "99": 1,
+        "a2": 1,
+        "9f": 1,
+        "1b": 7,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0099.wasm",
+          "sha256": "bcea3e448c2eb051b60edc98a45c74de522280acec60e1c5862d7e6a1e6dbe75"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0099.mjs",
+          "sha256": "dc02d2e5e034a8fb6b4367b5eb5daad90b59f4b24155ca496ffaf7ae8e0f76b1"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0099.manifest.json",
+          "sha256": "9bcb4a3a703bdd7682a926a504568944972889f4ef6f6e3804cda85e5fbda189"
+        }
+      }
+    },
+    {
+      "id": "wasm-signed-zero",
+      "mode": "discrete",
+      "modelHash": "bc38913d9fa965e212d17f7a704fba95e7dac7ee936c391132af329762ef61f1",
+      "nodeIds": [
+        "input",
+        "negative",
+        "absolute",
+        "absoluteOut",
+        "negativeOut",
+        "squareRoot",
+        "sqrtOut"
+      ],
+      "outputIds": [
+        "absoluteOut",
+        "negativeOut",
+        "sqrtOut"
+      ],
+      "outputTypes": {
+        "absoluteOut": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "negativeOut": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "sqrtOut": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "bcea3e448c2eb051b60edc98a45c74de522280acec60e1c5862d7e6a1e6dbe75",
+      "bytes": 189,
+      "instructionCount": 71,
+      "evaluationCallsPerTick": 7,
+      "maximumOperations": 497,
+      "opcodes": {
+        "20": 28,
+        "21": 15,
+        "41": 7,
+        "44": 3,
+        "46": 7,
+        "99": 1,
+        "a2": 1,
+        "9f": 1,
+        "1b": 7,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0102.wasm",
+          "sha256": "bcea3e448c2eb051b60edc98a45c74de522280acec60e1c5862d7e6a1e6dbe75"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0102.mjs",
+          "sha256": "cfbf602aaffc742901fffc769233ce03e8ff830627c3b1451b7de2b3d0fecf91"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0102.manifest.json",
+          "sha256": "7050112c850ad1e2ac9c8071ae335fef342a78c9fcf516a5f39c93d645267741"
+        }
+      }
+    },
+    {
+      "id": "wasm-shared-dag",
+      "mode": "static",
+      "modelHash": "7747f02730c2eac797bbc0e0eb168e110e07c22f629668dd2d0c7c56c6818ad9",
+      "nodeIds": [
+        "input",
+        "gain",
+        "one",
+        "sum",
+        "two"
+      ],
+      "outputIds": [
+        "one",
+        "two"
+      ],
+      "outputTypes": {
+        "one": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "two": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "a169cf09180a146f8643823880e0c81d776518520b776b677209522bf04ae362",
+      "bytes": 156,
+      "instructionCount": 53,
+      "evaluationCallsPerTick": 5,
+      "maximumOperations": 265,
+      "opcodes": {
+        "20": 21,
+        "21": 11,
+        "41": 5,
+        "44": 3,
+        "46": 5,
+        "a2": 1,
+        "a0": 1,
+        "1b": 5,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0105.wasm",
+          "sha256": "a169cf09180a146f8643823880e0c81d776518520b776b677209522bf04ae362"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0105.mjs",
+          "sha256": "c71aba7e468a7047ee58fdf932942b575c8c605be2023e6092f3ab6d7a92c758"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0105.manifest.json",
+          "sha256": "3459aee2cc90476c5fd85839c826ec207cb6278ea3f4547d379d465896ba07f1"
+        }
+      }
+    },
+    {
+      "id": "wasm-shared-dag",
+      "mode": "discrete",
+      "modelHash": "125d2d3b79fe4ec97330cb6f987036e59a4fa5b2e7f83fea0008274a12240e23",
+      "nodeIds": [
+        "input",
+        "gain",
+        "one",
+        "sum",
+        "two"
+      ],
+      "outputIds": [
+        "one",
+        "two"
+      ],
+      "outputTypes": {
+        "one": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "two": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "a169cf09180a146f8643823880e0c81d776518520b776b677209522bf04ae362",
+      "bytes": 156,
+      "instructionCount": 53,
+      "evaluationCallsPerTick": 5,
+      "maximumOperations": 265,
+      "opcodes": {
+        "20": 21,
+        "21": 11,
+        "41": 5,
+        "44": 3,
+        "46": 5,
+        "a2": 1,
+        "a0": 1,
+        "1b": 5,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0108.wasm",
+          "sha256": "a169cf09180a146f8643823880e0c81d776518520b776b677209522bf04ae362"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0108.mjs",
+          "sha256": "34dc6add9559fe8ad16f1d863bded4174c9456c1c3ab4b47ef5a9a7b71f681d7"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0108.manifest.json",
+          "sha256": "1c88d808b116c43db81f130847b44b1739ae5d10a013516e7e3126a03d8cc2ad"
+        }
+      }
+    },
+    {
+      "id": "wasm-64-node-boundary",
+      "mode": "static",
+      "modelHash": "b84263da372753805e52c3b27399b144387ee5e564a40f15c35793613f94edaf",
+      "nodeIds": [
+        "input",
+        "gain0",
+        "gain1",
+        "gain2",
+        "gain3",
+        "gain4",
+        "gain5",
+        "gain6",
+        "gain7",
+        "gain8",
+        "gain9",
+        "gain10",
+        "gain11",
+        "gain12",
+        "gain13",
+        "gain14",
+        "gain15",
+        "gain16",
+        "gain17",
+        "gain18",
+        "gain19",
+        "gain20",
+        "gain21",
+        "gain22",
+        "gain23",
+        "gain24",
+        "gain25",
+        "gain26",
+        "gain27",
+        "gain28",
+        "gain29",
+        "gain30",
+        "gain31",
+        "gain32",
+        "gain33",
+        "gain34",
+        "gain35",
+        "gain36",
+        "gain37",
+        "gain38",
+        "gain39",
+        "gain40",
+        "gain41",
+        "gain42",
+        "gain43",
+        "gain44",
+        "gain45",
+        "gain46",
+        "gain47",
+        "gain48",
+        "gain49",
+        "gain50",
+        "gain51",
+        "gain52",
+        "gain53",
+        "gain54",
+        "gain55",
+        "gain56",
+        "gain57",
+        "gain58",
+        "gain59",
+        "gain60",
+        "gain61",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "60eb3084678d282e08f2a830dd8adecd8bc7093e3899dea8b1686380aef2ca8b",
+      "bytes": 1709,
+      "instructionCount": 704,
+      "evaluationCallsPerTick": 64,
+      "maximumOperations": 45056,
+      "opcodes": {
+        "20": 256,
+        "21": 129,
+        "41": 64,
+        "44": 64,
+        "46": 64,
+        "a2": 62,
+        "1b": 64,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0111.wasm",
+          "sha256": "60eb3084678d282e08f2a830dd8adecd8bc7093e3899dea8b1686380aef2ca8b"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0111.mjs",
+          "sha256": "47b462afeacfce5a198b734c2bfe76181095aebc2131ffed9afab2745e84c9c2"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0111.manifest.json",
+          "sha256": "cf0789d64130d907de027f23c0f3091d3dfccf787d4ee42f8e82716cc60a9034"
+        }
+      }
+    },
+    {
+      "id": "wasm-64-node-boundary",
+      "mode": "discrete",
+      "modelHash": "fc0c29369e90e1058d2bc369cd82880d5f54ebb2acc58120f15fbab5e7104461",
+      "nodeIds": [
+        "input",
+        "gain0",
+        "gain1",
+        "gain2",
+        "gain3",
+        "gain4",
+        "gain5",
+        "gain6",
+        "gain7",
+        "gain8",
+        "gain9",
+        "gain10",
+        "gain11",
+        "gain12",
+        "gain13",
+        "gain14",
+        "gain15",
+        "gain16",
+        "gain17",
+        "gain18",
+        "gain19",
+        "gain20",
+        "gain21",
+        "gain22",
+        "gain23",
+        "gain24",
+        "gain25",
+        "gain26",
+        "gain27",
+        "gain28",
+        "gain29",
+        "gain30",
+        "gain31",
+        "gain32",
+        "gain33",
+        "gain34",
+        "gain35",
+        "gain36",
+        "gain37",
+        "gain38",
+        "gain39",
+        "gain40",
+        "gain41",
+        "gain42",
+        "gain43",
+        "gain44",
+        "gain45",
+        "gain46",
+        "gain47",
+        "gain48",
+        "gain49",
+        "gain50",
+        "gain51",
+        "gain52",
+        "gain53",
+        "gain54",
+        "gain55",
+        "gain56",
+        "gain57",
+        "gain58",
+        "gain59",
+        "gain60",
+        "gain61",
+        "output"
+      ],
+      "outputIds": [
+        "output"
+      ],
+      "outputTypes": {
+        "output": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "60eb3084678d282e08f2a830dd8adecd8bc7093e3899dea8b1686380aef2ca8b",
+      "bytes": 1709,
+      "instructionCount": 704,
+      "evaluationCallsPerTick": 64,
+      "maximumOperations": 45056,
+      "opcodes": {
+        "20": 256,
+        "21": 129,
+        "41": 64,
+        "44": 64,
+        "46": 64,
+        "a2": 62,
+        "1b": 64,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0114.wasm",
+          "sha256": "60eb3084678d282e08f2a830dd8adecd8bc7093e3899dea8b1686380aef2ca8b"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0114.mjs",
+          "sha256": "3252fd9d3be1f1b1181bc8700806acf4c5e42de357a9c6f9c2ba8d0ccb307c4d"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0114.manifest.json",
+          "sha256": "7fa7550bf70e40d86c2d1b8a829ac27bf36ff68fd7ecc62a7b0e8a041a0ed3bb"
+        }
+      }
+    },
+    {
+      "id": "wasm-16-output-boundary",
+      "mode": "static",
+      "modelHash": "fdb7019188eb224d3ce6101706a1cbc8bc18e66641d138001accb28633316cf9",
+      "nodeIds": [
+        "input",
+        "output0",
+        "output1",
+        "output10",
+        "output11",
+        "output12",
+        "output13",
+        "output14",
+        "output15",
+        "output2",
+        "output3",
+        "output4",
+        "output5",
+        "output6",
+        "output7",
+        "output8",
+        "output9"
+      ],
+      "outputIds": [
+        "output0",
+        "output1",
+        "output10",
+        "output11",
+        "output12",
+        "output13",
+        "output14",
+        "output15",
+        "output2",
+        "output3",
+        "output4",
+        "output5",
+        "output6",
+        "output7",
+        "output8",
+        "output9"
+      ],
+      "outputTypes": {
+        "output0": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output1": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output10": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output11": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output12": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output13": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output14": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output15": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output2": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output3": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output4": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output5": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output6": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output7": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output8": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output9": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "c2983da54e46769b1cdc292748bd94527c5d67b364de2de5a591d743e919ebe5",
+      "bytes": 337,
+      "instructionCount": 157,
+      "evaluationCallsPerTick": 17,
+      "maximumOperations": 2669,
+      "opcodes": {
+        "20": 68,
+        "21": 35,
+        "41": 17,
+        "44": 2,
+        "46": 17,
+        "1b": 17,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0117.wasm",
+          "sha256": "c2983da54e46769b1cdc292748bd94527c5d67b364de2de5a591d743e919ebe5"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0117.mjs",
+          "sha256": "81087991912b2456d6b21ea2fdfb90e1894577fe92cb59c0640bb4a7c6c5beb0"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0117.manifest.json",
+          "sha256": "ed3125e6493d7238983aa6940e0462ea37db563d7b40c0843c644e35005a3302"
+        }
+      }
+    },
+    {
+      "id": "wasm-16-output-boundary",
+      "mode": "discrete",
+      "modelHash": "cb90d742b89df68b9a69ce1cf6fc4cc6970ef01af98b361c796e4fb4b8898bee",
+      "nodeIds": [
+        "input",
+        "output0",
+        "output1",
+        "output10",
+        "output11",
+        "output12",
+        "output13",
+        "output14",
+        "output15",
+        "output2",
+        "output3",
+        "output4",
+        "output5",
+        "output6",
+        "output7",
+        "output8",
+        "output9"
+      ],
+      "outputIds": [
+        "output0",
+        "output1",
+        "output10",
+        "output11",
+        "output12",
+        "output13",
+        "output14",
+        "output15",
+        "output2",
+        "output3",
+        "output4",
+        "output5",
+        "output6",
+        "output7",
+        "output8",
+        "output9"
+      ],
+      "outputTypes": {
+        "output0": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output1": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output10": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output11": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output12": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output13": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output14": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output15": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output2": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output3": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output4": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output5": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output6": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output7": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output8": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        },
+        "output9": {
+          "valueType": "float64",
+          "shape": [],
+          "unit": "1"
+        }
+      },
+      "artifactHash": "c2983da54e46769b1cdc292748bd94527c5d67b364de2de5a591d743e919ebe5",
+      "bytes": 337,
+      "instructionCount": 157,
+      "evaluationCallsPerTick": 17,
+      "maximumOperations": 2669,
+      "opcodes": {
+        "20": 68,
+        "21": 35,
+        "41": 17,
+        "44": 2,
+        "46": 17,
+        "1b": 17,
+        "b": 1
+      },
+      "sections": [
+        1,
+        3,
+        7,
+        10
+      ],
+      "samples": 1,
+      "independentLiteralOracle": true,
+      "actualWebAssemblyModuleInstance": true,
+      "nativeFullGridParity": true,
+      "signedZeroExact": true,
+      "deterministicBytes": true,
+      "exactManifest": true,
+      "jsonRoundtrip": true,
+      "insertionOrderIndependent": true,
+      "defensiveBytesAndManifestCopy": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0120.wasm",
+          "sha256": "c2983da54e46769b1cdc292748bd94527c5d67b364de2de5a591d743e919ebe5"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0120.mjs",
+          "sha256": "d042027b54e8d5182d469c6b910147cf81451672388b587507505d470ccf4f6f"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0120.manifest.json",
+          "sha256": "f0dcf429725f85b4170d477c7c66284a2e2269767361e8ebe8325c99d009345f"
+        }
+      }
+    }
+  ],
+  "failures": [
+    {
+      "id": "wasm-sqrt-domain",
+      "phase": "runtime",
+      "diagnosticCode": "NUMERIC_DOMAIN",
+      "nodeId": "op",
+      "tick": 0,
+      "time": 0,
+      "samples": 0,
+      "actualModuleExecuted": true,
+      "independentPartialOracle": true,
+      "nativePartialParity": true,
+      "staticNativeLocationOmitted": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0123.wasm",
+          "sha256": "cdbce63833bea8e31590c95e9613557f46ffb52aa3a981610d01da08557e4985"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0123.mjs",
+          "sha256": "a9e78d93fbf4057418fbfb369f76b020a519b6574fd39298096617e94a06734a"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0123.manifest.json",
+          "sha256": "211f0ded6901ffa8a34541c8b905211269e4e6529a2f48fcd6209c4a03c0c2e0"
+        }
+      }
+    },
+    {
+      "id": "wasm-reciprocal-zero",
+      "phase": "runtime",
+      "diagnosticCode": "NUMERIC_DIVIDE_BY_ZERO",
+      "nodeId": "op",
+      "tick": 0,
+      "time": 0,
+      "samples": 0,
+      "actualModuleExecuted": true,
+      "independentPartialOracle": true,
+      "nativePartialParity": true,
+      "staticNativeLocationOmitted": true,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0124.wasm",
+          "sha256": "37b469d5ec269f26890305239da189786adb07b421c0f117e7f7b3faf2c80e37"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0124.mjs",
+          "sha256": "41be152826f6ef51ed59d10aaccaf4c0061867f2fed72901f06167098a9eec75"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0124.manifest.json",
+          "sha256": "475e2b870e9005cacd44170e157ff391d69b47a38b709b89ba82fc0af4880211"
+        }
+      }
+    },
+    {
+      "id": "wasm-overflow",
+      "phase": "runtime",
+      "diagnosticCode": "NUMERIC_NONFINITE",
+      "nodeId": "op",
+      "tick": 3,
+      "time": 1.5,
+      "samples": 3,
+      "actualModuleExecuted": true,
+      "independentPartialOracle": true,
+      "nativePartialParity": true,
+      "staticNativeLocationOmitted": false,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0125.wasm",
+          "sha256": "8bb62e148b0ca7072210e173991d9cd489993936f53d2453d43e9eb4dbe31a3a"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0125.mjs",
+          "sha256": "ae0b8c01592d342bbb36fa88c60c333a3484f50726c5b5a46d70fe23da98574c"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0125.manifest.json",
+          "sha256": "3e807db11d0206f34c341860a9f77ed6e651ea555872f60278d9e92605960fac"
+        }
+      }
+    },
+    {
+      "id": "wasm-crossing-divide",
+      "phase": "runtime",
+      "diagnosticCode": "NUMERIC_DIVIDE_BY_ZERO",
+      "nodeId": "op",
+      "tick": 2,
+      "time": 1,
+      "samples": 2,
+      "actualModuleExecuted": true,
+      "independentPartialOracle": true,
+      "nativePartialParity": true,
+      "staticNativeLocationOmitted": false,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0126.wasm",
+          "sha256": "981e0d913cc73b20134e3dd87fa428110d9ced1522824a47f02c9bb83f63438f"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0126.mjs",
+          "sha256": "106db650c48ca92c60fdfbe62090b77e8f5dab424263b9266fc4c99ecd9e97ac"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0126.manifest.json",
+          "sha256": "d9a7c47b27a9b1435b4ec34fff33d9eff17ad0e876cb3197e8966ff930d44d87"
+        }
+      }
+    },
+    {
+      "id": "wasm-unused-branch",
+      "phase": "runtime",
+      "diagnosticCode": "NUMERIC_NONFINITE",
+      "nodeId": "op",
+      "tick": 1,
+      "time": 0.5,
+      "samples": 1,
+      "actualModuleExecuted": true,
+      "independentPartialOracle": true,
+      "nativePartialParity": true,
+      "staticNativeLocationOmitted": false,
+      "artifactFiles": {
+        "binary": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0127.wasm",
+          "sha256": "80bc9224e71de6cac7f61f54c86c0ee8f37f3257c775ed973241f801ed47e56a"
+        },
+        "runner": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0127.mjs",
+          "sha256": "12686dd7b7a657f982522961e24d7ed7057da97c407000105bd8909c6bf445c7"
+        },
+        "manifest": {
+          "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m15-wasm-verification\\0127.manifest.json",
+          "sha256": "bf37adb71a5a0f1a7342b88b777e3eb25f5a1a99293b254f57a0a76fd0cabf1e"
+        }
+      }
+    },
+    {
+      "id": "wasm-unsupported-function",
+      "phase": "target",
+      "diagnosticCode": "WASM_UNSUPPORTED_OPTION",
+      "diagnostics": [
+        {
+          "code": "WASM_UNSUPPORTED_OPTION",
+          "message": "Math Function WASM은 square/reciprocal만 지원합니다.",
+          "nodeId": "op"
+        }
+      ],
+      "actualModuleExecuted": false
+    },
+    {
+      "id": "wasm-vector",
+      "phase": "target",
+      "diagnosticCode": "WASM_SCALAR_REQUIRED",
+      "diagnostics": [
+        {
+          "code": "WASM_SCALAR_REQUIRED",
+          "message": "WASM ABI는 legacy float64 scalar만 받습니다. typed·boolean·배열은 별도 타깃을 선택하세요.",
+          "nodeId": "input",
+          "portId": "out"
+        },
+        {
+          "code": "WASM_SCALAR_REQUIRED",
+          "message": "WASM 고정 입력은 유한 숫자 scalar여야 합니다.",
+          "nodeId": "input",
+          "portId": "out"
+        },
+        {
+          "code": "WASM_SCALAR_REQUIRED",
+          "message": "WASM ABI는 legacy float64 scalar만 받습니다. typed·boolean·배열은 별도 타깃을 선택하세요.",
+          "nodeId": "op",
+          "portId": "out"
+        },
+        {
+          "code": "WASM_SCALAR_REQUIRED",
+          "message": "WASM ABI는 legacy float64 scalar만 받습니다. typed·boolean·배열은 별도 타깃을 선택하세요.",
+          "nodeId": "output",
+          "portId": "out"
+        }
+      ],
+      "actualModuleExecuted": false
+    },
+    {
+      "id": "wasm-boolean",
+      "phase": "target",
+      "diagnosticCode": "WASM_SCALAR_REQUIRED",
+      "diagnostics": [
+        {
+          "code": "WASM_SCALAR_REQUIRED",
+          "message": "WASM ABI는 legacy float64 scalar만 받습니다. typed·boolean·배열은 별도 타깃을 선택하세요.",
+          "nodeId": "input",
+          "portId": "out"
+        },
+        {
+          "code": "WASM_SCALAR_REQUIRED",
+          "message": "WASM 고정 입력은 유한 숫자 scalar여야 합니다.",
+          "nodeId": "input",
+          "portId": "out"
+        },
+        {
+          "code": "WASM_SCALAR_REQUIRED",
+          "message": "WASM ABI는 legacy float64 scalar만 받습니다. typed·boolean·배열은 별도 타깃을 선택하세요.",
+          "nodeId": "output",
+          "portId": "out"
+        }
+      ],
+      "actualModuleExecuted": false
+    },
+    {
+      "id": "wasm-state",
+      "phase": "target",
+      "diagnosticCode": "WASM_STATE_UNSUPPORTED",
+      "diagnostics": [
+        {
+          "code": "WASM_STATE_UNSUPPORTED",
+          "message": "WASM 선택 타깃은 저장 상태·solver를 지원하지 않습니다.",
+          "nodeId": "op"
+        },
+        {
+          "code": "WASM_UNSUPPORTED_BLOCK",
+          "message": "discrete.unit-delay는 선택 WASM 타깃에 없습니다.",
+          "nodeId": "op"
+        }
+      ],
+      "actualModuleExecuted": false
+    },
+    {
+      "id": "wasm-node-budget",
+      "phase": "target",
+      "diagnosticCode": "WASM_NODE_BUDGET",
+      "diagnostics": [
+        {
+          "code": "WASM_NODE_BUDGET",
+          "message": "WASM 도식은64개 이하 노드여야 합니다."
+        }
+      ],
+      "actualModuleExecuted": false
+    },
+    {
+      "id": "wasm-output-budget",
+      "phase": "target",
+      "diagnosticCode": "WASM_OUTPUT_BUDGET",
+      "diagnostics": [
+        {
+          "code": "WASM_OUTPUT_BUDGET",
+          "message": "WASM 기록 출력은16개 이하여야 합니다."
+        }
+      ],
+      "actualModuleExecuted": false
+    },
+    {
+      "id": "wasm-work-budget",
+      "phase": "target",
+      "diagnosticCode": "WASM_OPERATION_BUDGET",
+      "diagnostics": [
+        {
+          "code": "WASM_OPERATION_BUDGET",
+          "message": "중간값 검사에 필요한 실제 전체 WASM 호출 연산이50m 상한을 초과합니다. 시간 범위를 줄여 주세요."
+        }
+      ],
+      "actualModuleExecuted": false
+    },
+    {
+      "id": "wasm-rate",
+      "phase": "target",
+      "diagnosticCode": "WASM_RATE_UNSUPPORTED",
+      "diagnostics": [
+        {
+          "code": "WASM_RATE_UNSUPPORTED",
+          "message": "WASM의 모든 노드는 base tick period1/offset0이어야 합니다.",
+          "nodeId": "op"
+        },
+        {
+          "code": "WASM_RATE_UNSUPPORTED",
+          "message": "WASM의 모든 노드는 base tick period1/offset0이어야 합니다.",
+          "nodeId": "output"
+        }
+      ],
+      "actualModuleExecuted": false
+    },
+    {
+      "id": "wasm-typed",
+      "phase": "target",
+      "diagnosticCode": "WASM_SCALAR_REQUIRED",
+      "diagnostics": [
+        {
+          "code": "WASM_UNSUPPORTED_BLOCK",
+          "message": "source.typed는 선택 WASM 타깃에 없습니다.",
+          "nodeId": "input"
+        },
+        {
+          "code": "WASM_SCALAR_REQUIRED",
+          "message": "WASM ABI는 legacy float64 scalar만 받습니다. typed·boolean·배열은 별도 타깃을 선택하세요.",
+          "nodeId": "output",
+          "portId": "out"
+        }
+      ],
+      "actualModuleExecuted": false
+    },
+    {
+      "id": "wasm-continuous",
+      "phase": "target",
+      "diagnosticCode": "WASM_UNSUPPORTED_MODE",
+      "diagnostics": [
+        {
+          "code": "WASM_UNSUPPORTED_MODE",
+          "message": "WASM은 정적·이산 스칼라 DAG만 지원합니다.",
+          "nodeId": "input"
+        },
+        {
+          "code": "WASM_UNSUPPORTED_MODE",
+          "message": "WASM은 정적·이산 스칼라 DAG만 지원합니다.",
+          "nodeId": "op"
+        },
+        {
+          "code": "WASM_UNSUPPORTED_MODE",
+          "message": "WASM은 정적·이산 스칼라 DAG만 지원합니다.",
+          "nodeId": "output"
+        }
+      ],
+      "actualModuleExecuted": false
+    }
+  ],
+  "cCpp": {
+    "profile": {
+      "id": "c-cpp-native-m15-v1",
+      "label": "C/C++ (환경 필요)",
+      "available": false,
+      "diagnosticCode": "NATIVE_TOOLCHAIN_UNAVAILABLE",
+      "reason": "이 릴리스는 검증한 native C/C++ compiler·host ABI 실행 어댑터를 제공하지 않습니다. 코드 emit만으로 실행 지원을 승인하지 않습니다.",
+      "dependencies": [
+        "Native C/C++ compiler and linker",
+        "Versioned host ABI and runtime",
+        "Actual build/run parity fixtures",
+        "User and third-party source/redistribution rights"
+      ],
+      "executableGeneratorApproved": false,
+      "fullSimulinkEquivalenceClaimed": false
+    },
+    "pathDiscovery": [
+      {
+        "name": "clang",
+        "found": false
+      },
+      {
+        "name": "clang++",
+        "found": false
+      },
+      {
+        "name": "gcc",
+        "found": false
+      },
+      {
+        "name": "g++",
+        "found": false
+      },
+      {
+        "name": "cl",
+        "found": false
+      },
+      {
+        "name": "cmake",
+        "found": false
+      }
+    ],
+    "knownExecutableLocations": [
+      {
+        "path": "C:/Program Files/LLVM/bin/clang.exe",
+        "exists": false
+      },
+      {
+        "path": "C:/msys64/mingw64/bin/gcc.exe",
+        "exists": false
+      },
+      {
+        "path": "C:/mingw64/bin/gcc.exe",
+        "exists": false
+      }
+    ],
+    "visualStudio2022RootExists": true,
+    "visualStudio2022Entries": [],
+    "probeScope": "Read-only PATH and explicit standard locations, not an exhaustive device inventory",
+    "nativeCompilerBuildExecuted": false,
+    "nativeGeneratorApproved": false
+  },
+  "sourceArtifactHashes": {
+    "packages/codegen-wasm/src/index.ts": "483990b6336baf2fd79d1488a0aedc3ad9e3b78c12259053a2a61b8e6d5bc4c5",
+    "packages/codegen-wasm/src/capabilities.ts": "9452c71576a62c0aef4723713a6925e6dedbe5886fe40dfb914945db2d3f1b94",
+    "packages/codegen-wasm/src/binary.ts": "23fcb09b05617cdc416c6db5522d4c290e611605fbe1f4f4965b15cd3cc02f37",
+    "packages/codegen-wasm/src/runner.ts": "526f525f7f280a70aee6a6b33bb0863c0591004852098eda550fddfab9eded5c",
+    "packages/codegen-wasm/src/sha256.ts": "d4029cb7ed28c0439a2dea41e13fa24bbd17f85ee15347471359a052e9c119c8",
+    "tests/m15-wasm-independent-fixtures.ts": "f2237351e60deb50514158c51c7fc7c4633043128c989105da1937040e6905f7",
+    "scripts/verify-m15-wasm.ts": "2b949b41997f041a9675c618f589c5cb800f0e53c99365fb42827013dd91f67c"
+  },
+  "protectedArtifacts": {
+    "docs/baselines/m14-registry.json": "711fcb2062a90dcebdc4b2265f3a8660aadb3d8f2c4ede0de436a4f768ce0b40",
+    "docs/evidence/m14-source-approvals.json": "f7bf8f2a18377afd4d151b1b5bbea6e6eb72396e5c66b97c9a1a5b138c40448a",
+    "docs/evidence/m14-verification.json": "6886130299827a0d52e99533c0b0cf0ea827e27b5bceb56ca687e18fa4954f65"
+  },
+  "fullSimulinkEquivalenceClaimed": false,
+  "arbitraryModuleImporter": false,
+  "primarySourceRuntimeExecuted": false
+}

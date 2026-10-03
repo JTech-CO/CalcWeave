@@ -9,7 +9,7 @@ import { getM12Ports, getM12DirectFeedthroughPorts, M12_BLOCK_DEFINITIONS } from
 import { getM13Ports, M13_BLOCK_DEFINITIONS } from './m13';
 import { getM14DirectFeedthroughPorts, M14_BLOCK_DEFINITIONS } from './m14';
 import { UNITS } from '../../model/src/signal';
-import { PYTHON_TARGET } from '../../codegen-python/src/capabilities';
+import { PYTHON_M7_TARGET } from '../../codegen-python/src/capabilities';
 
 export interface ParameterDefinition {
   readonly kind: 'number' | 'integer' | 'value' | 'signal-value' | 'typed-value' | 'data-type' | 'numeric-vector' | 'enum' | 'expression' | 'text' | 'bounded-json';
@@ -144,7 +144,7 @@ function deepFreeze<T>(value: T): T {
 }
 
 /** Typed algebraic, fixed-tick discrete and bounded continuous/mixed contracts. */
-const pythonBlockIds: ReadonlySet<string> = new Set(PYTHON_TARGET.blockIds);
+const pythonBlockIds: ReadonlySet<string> = new Set(PYTHON_M7_TARGET.blockIds);
 export const blockRegistry: readonly BlockDefinition[] = deepFreeze([...definitions, ...EXPANSION_BLOCK_DEFINITIONS, ...TIME_SOURCE_DEFINITIONS, ...M8_BLOCK_DEFINITIONS, ...M9_BLOCK_DEFINITIONS, ...M10_BLOCK_DEFINITIONS, ...M11_BLOCK_DEFINITIONS, ...M12_BLOCK_DEFINITIONS, ...M13_BLOCK_DEFINITIONS, ...M14_BLOCK_DEFINITIONS].map(definition => ({
   ...definition, exportTargets: pythonBlockIds.has(definition.id) ? ['typescript', 'python'] as const : ['typescript'] as const,
 })));

@@ -1,6 +1,6 @@
 /** Fixed filenames and bounded, deterministic ZIP store records; no archive imports/extraction. */
 export const EXPORT_ARCHIVE_LIMITS = Object.freeze({ maxFileBytes: 16 * 1024 * 1024, maxArchiveBytes: 32 * 1024 * 1024, maxFiles: 6 });
-const ALLOWED_FILES = new Set(['model.ts', 'model.py', 'model.cw.json', 'manifest.json', 'expected-output.json', 'run-example.ts', 'run-example.py', 'README.md']);
+const ALLOWED_FILES = new Set(['model.ts', 'model.py', 'model.wasm', 'runner.mjs', 'model.cw.json', 'manifest.json', 'expected-output.json', 'run-example.ts', 'run-example.py', 'README.md']);
 const crcTable = Uint32Array.from({ length: 256 }, (_, value) => {
   let crc = value;
   for (let bit = 0; bit < 8; bit++) crc = crc & 1 ? 0xedb88320 ^ (crc >>> 1) : crc >>> 1;
@@ -12,16 +12,16 @@ function crc32(bytes: Uint8Array): number {
   return (crc ^ 0xffffffff) >>> 0;
 }
 
-export function createExportArchive(files: Readonly<Record<string, string>>): Uint8Array<ArrayBuffer> {
+export function createExportArchive(files: Readonly<Record<string, string | Uint8Array>>): Uint8Array<ArrayBuffer> {
   const entries = Object.entries(files);
   if (entries.length === 0 || entries.length > EXPORT_ARCHIVE_LIMITS.maxFiles) throw new Error('실행 묶음의 파일 개수가 올바르지 않습니다.');
   const encoder = new TextEncoder();
   let localSize = 0, centralSize = 0;
   const encoded = entries.map(([name, text]) => {
-    if (!ALLOWED_FILES.has(name) || typeof text !== 'string') throw new Error('실행 묶음의 파일 이름이나 내용이 올바르지 않습니다.');
+    if (!ALLOWED_FILES.has(name) || typeof text !== 'string' && !(name === 'model.wasm' && text instanceof Uint8Array)) throw new Error('실행 묶음의 파일 이름이나 내용이 올바르지 않습니다.');
     // Bound UTF-16 text before allocating its UTF-8 representation as well.
     if (text.length > EXPORT_ARCHIVE_LIMITS.maxFileBytes) throw new Error('실행 묶음의 한 파일은 16 MiB 이하여야 합니다. 기록 범위를 줄여 주세요.');
-    const nameBytes = encoder.encode(name), bytes = encoder.encode(text);
+    const nameBytes = encoder.encode(name), bytes = typeof text === 'string' ? encoder.encode(text) : Uint8Array.from(text);
     if (bytes.byteLength > EXPORT_ARCHIVE_LIMITS.maxFileBytes) throw new Error('실행 묶음의 한 파일은 16 MiB 이하여야 합니다. 기록 범위를 줄여 주세요.');
     const offset = localSize;
     localSize += 30 + nameBytes.length + bytes.length; centralSize += 46 + nameBytes.length;

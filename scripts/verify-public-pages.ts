@@ -6,6 +6,7 @@ import { chromium, expect as playwrightExpect, type Browser, type Page } from '@
 import config from '../playwright.config';
 import { ENGINE_VERSION, canonicalSemantic } from '../packages/model/src';
 import type { PythonExportManifest } from '../packages/codegen-python/src';
+import { PYTHON_TARGET } from '../packages/codegen-python/src/capabilities';
 import type { HistoryRecord } from '../apps/web/src/run-history';
 import type { OfflineManifest } from './offline-build';
 import { APP_VERSION } from '../packages/release/src';
@@ -241,7 +242,7 @@ async function main() {
     assert.deepEqual(model, edited.model); assert.deepEqual(JSON.parse(files['expected-output.json']!), expected);
     assert.equal(manifest.modelHash, edited.semanticHash); assert.equal(manifest.modelHash, hash(canonicalSemantic(model)));
     assert.equal(manifest.modelHashAlgorithm, 'SHA-256'); assert.equal(manifest.engineVersion, edited.engineVersion);
-    assert.equal(manifest.targetVersion, 'python-m7-v1'); assert.equal(manifest.minimumVersion, '3.10');
+    assert.equal(manifest.targetVersion, PYTHON_TARGET.id); assert.equal(manifest.minimumVersion, '3.10');
     assert.equal(manifest.runtime, 'python-standard-library'); assert.deepEqual(manifest.execution, model.execution);
     assert.deepEqual(manifest.outputTypes, edited.outputTypes); assert.deepEqual(manifest.nodes, edited.manifest.nodes);
     const embedded = (key: string) => {
