@@ -2193,22 +2193,22 @@
     "Root may update current validation and final QA metadata after the final measurements; frozen historical artifacts remain unchanged."
   ],
   "finalCurrentDocuments": {
-    "checkedAt": "2026-10-03T13:55:26.742Z",
+    "checkedAt": "2026-10-03T14:31:13.791Z",
     "command": "npm run verify:docs",
     "result": {
       "currentDocuments": 10,
       "requiredDocuments": 10,
       "retiredDocumentsAbsent": 44,
-      "localLinks": 601,
-      "localAnchors": 3,
-      "externalLinksDeclaredOnly": 15,
+      "localLinks": 608,
+      "localAnchors": 4,
+      "externalLinksDeclaredOnly": 16,
       "updaterSources": 13,
       "historicalBaselinesAndEvidenceExcluded": true,
       "externalAvailabilityVerified": false
     },
     "currentHashes": {
-      "README.md": "0a948d3e2165692d1a86648087c2a41fa2eb387c168b432ba13d244423cc0872",
-      "docs/validation.md": "0b8bad431a989a6d2cee10c9a956653d9a77dd5722f171973ede5eb21c4ecee0",
+      "README.md": "05f0f0a8906b516018a7aa10d4b7ecebc5f8b4a3be18ea9a8fad5e37f463bd8c",
+      "docs/validation.md": "abc716b262a5c1094c825860555bf14d86c3ad767e383f887bd86147eb6b06ee",
       "docs/01-technical-whitepaper.md": "c751fe40cabb2115d61b94fd54b8437ef47ff1cf7b709f90f31f35a05519b5f0",
       "docs/02-design-whitepaper.md": "d3ec20dcdd91920cd51ae733c7c5c38adf2f4b6ecaa2b1a35f95c3606b7f9e2d",
       "docs/operations.md": "d5982385bbaa9393443a1b0db007dcf66ade89efe8623d6640154e446d5c8d0c",
