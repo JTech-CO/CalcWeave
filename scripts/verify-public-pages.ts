@@ -31,6 +31,25 @@ const hash = (value: string | Uint8Array) => createHash('sha256').update(value).
 const approved = (url: string) => { const value = new URL(url); return value.origin === new URL(TARGET).origin && value.pathname.startsWith(BASE) && !value.search && !value.hash; };
 const localDownload = (url: string) => { const value = new URL(url); return value.protocol === 'blob:' && value.origin === new URL(TARGET).origin; };
 
+async function diagramBounds(page: Page) {
+  return page.evaluate(() => {
+    const element = document.querySelector('.canvas-area > .react-flow');
+    const nodes = [...document.querySelectorAll('.react-flow__node')].map(node => {
+      const { x, y, width, height } = node.getBoundingClientRect();
+      return { x, y, width, height };
+    });
+    if (!element || !nodes.length || nodes.some(node => node.width <= 0 || node.height <= 0)) return null;
+    const { x, y, width, height } = element.getBoundingClientRect();
+    const left = Math.min(...nodes.map(node => node.x)), top = Math.min(...nodes.map(node => node.y));
+    const right = Math.max(...nodes.map(node => node.x + node.width)), bottom = Math.max(...nodes.map(node => node.y + node.height));
+    return {
+      canvas: { x, y, width, height }, nodes,
+      contained: left >= x - 1 && top >= y - 1 && right <= x + width + 1 && bottom <= y + height + 1,
+      centerError: { x: (left + right) / 2 - (x + width / 2), y: (top + bottom) / 2 - (y + height / 2) },
+    };
+  });
+}
+
 async function history(page: Page): Promise<HistoryRecord[]> {
   return page.evaluate(() => new Promise<HistoryRecord[]>((resolveRecords, reject) => {
     const opening = indexedDB.open('calcweave-m0', 1);
@@ -138,7 +157,13 @@ async function main() {
     assert(moduleURL?.startsWith(`${BASE}assets/`));
     await expect(page.locator('.research-badge')).toHaveText(`${APP_VERSION} 작업 공간`);
     await expect(page.locator('.library-footnote .small-square')).toHaveText(APP_VERSION);
-    check('fresh public workspace and current registered blocks', { url: page.url(), moduleURL, isolatedContext: true, visibleAppVersion: APP_VERSION });
+    let initialDiagramFit: Awaited<ReturnType<typeof diagramBounds>> = null;
+    await expect.poll(async () => {
+      initialDiagramFit = await diagramBounds(page!);
+      return initialDiagramFit !== null && initialDiagramFit.contained
+        && Math.abs(initialDiagramFit.centerError.x) <= 2 && Math.abs(initialDiagramFit.centerError.y) <= 2;
+    }, { timeout: 5_000, message: 'Fresh public diagram must fit and center in the measured canvas.' }).toBe(true);
+    check('fresh public workspace and current registered blocks', { url: page.url(), moduleURL, isolatedContext: true, visibleAppVersion: APP_VERSION, initialDiagramFit });
 
     const initial = await calculate(page, 1);
     assert.equal(initial.result.samples[0]!.values.result, 6);

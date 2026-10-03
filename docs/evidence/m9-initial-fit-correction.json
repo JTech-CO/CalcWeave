@@ -1,0 +1,210 @@
+{
+  "generatedAt": "2026-10-03T01:50:18.339Z",
+  "appVersion": "0.10.1",
+  "engineVersion": "0.10.0-m9",
+  "ci": {
+    "runId": "37085874548",
+    "failedTest": "First load and delayed saved-model restoration fit the actual 1440px canvas without resetting later user navigation",
+    "failedStage": "first default-model fit",
+    "exactTriggerEstablished": false,
+    "conclusion": "A controlled stale positive canvas measurement reproduces the same visible/centered failure. The exact event in the original CI run was not observed and is not claimed."
+  },
+  "unchangedContract": {
+    "centerTolerancePx": 2,
+    "containmentTolerancePx": 1,
+    "pollTimeoutMs": 5000,
+    "noRetriesAdded": true
+  },
+  "uncontrolledReproduction": {
+    "fresh1440Contexts": 24,
+    "normalCpu": 12,
+    "cpuThrottle4x": 12,
+    "allCentered": true,
+    "canvasSizeChangesObserved": false
+  },
+  "controlledCase": {
+    "sequence": "Initial canvas is measured at 500x730. Before node measurement it changes to 558x692. All canvas ResizeObserver deliveries are held and then released; node measurements proceed normally.",
+    "original": {
+      "releaseId": "d592c1d3bfdb76c27a4835eb81a06f9a16ce92062532ba92f2717765a696c8e7",
+      "beforeDelivery": {
+        "canvas": {
+          "x": 250,
+          "y": 226,
+          "width": 558,
+          "height": 692
+        },
+        "measured": {
+          "width": 500,
+          "height": 730
+        },
+        "bounds": {
+          "left": 229.60000610351562,
+          "top": 552.5999755859375,
+          "right": 770.3999633789062,
+          "bottom": 629.4000244140625
+        },
+        "centerError": {
+          "x": -29.000015258789062,
+          "y": 19
+        },
+        "transform": "translate(-52.4px, 214.6px) scale(0.8)"
+      },
+      "afterDelivery": {
+        "canvas": {
+          "x": 250,
+          "y": 226,
+          "width": 558,
+          "height": 692
+        },
+        "measured": {
+          "width": 558,
+          "height": 692
+        },
+        "bounds": {
+          "left": 229.60000610351562,
+          "top": 552.5999755859375,
+          "right": 770.3999633789062,
+          "bottom": 629.4000244140625
+        },
+        "centerError": {
+          "x": -29.000015258789062,
+          "y": 19
+        },
+        "transform": "translate(-52.4px, 214.6px) scale(0.8)"
+      },
+      "newRegressionExpectedFailure": true,
+      "testDurationMs": 5759,
+      "reporterDurationMs": 150537.451,
+      "reporterDurationNote": "Includes Windows owned-preview shutdown waiting. Only helper port 4175/PID 28512, started at 10:47:03 local, was stopped; existing preview port 4173/PID 69668 was preserved."
+    },
+    "fixed": {
+      "releaseId": "c7af7562eea83b5ced811cc322fbb33bf9043329688be895ee3087a99e9dad6d",
+      "beforeDelivery": {
+        "canvas": {
+          "x": 250,
+          "y": 226,
+          "width": 558,
+          "height": 692
+        },
+        "measured": {
+          "width": 500,
+          "height": 730
+        },
+        "bounds": {
+          "left": 290,
+          "top": 366,
+          "right": 966,
+          "bottom": 462
+        },
+        "centerError": {
+          "x": 99,
+          "y": -158
+        },
+        "transform": "translate(0px, 0px) scale(1)"
+      },
+      "afterDelivery": {
+        "canvas": {
+          "x": 250,
+          "y": 226,
+          "width": 558,
+          "height": 692
+        },
+        "measured": {
+          "width": 558,
+          "height": 692
+        },
+        "bounds": {
+          "left": 258.6000061035156,
+          "top": 533.5999755859375,
+          "right": 799.3999633789062,
+          "bottom": 610.4000244140625
+        },
+        "centerError": {
+          "x": -0.0000152587890625,
+          "y": 0
+        },
+        "transform": "translate(-23.4px, 195.6px) scale(0.8)"
+      },
+      "newRegressionPassed": true
+    }
+  },
+  "changes": [
+    "Subscribe to numeric canvas width and height rather than a positive-dimensions boolean.",
+    "Require React Flow measurements to equal the actual DOM offset dimensions.",
+    "Check the settled dimensions over two cancellable animation frames before requesting the first fit.",
+    "Mark the one-time fit complete only after its promise succeeds while the dimensions still match.",
+    "Cancel pending startup frames when the measured canvas or restored model changes.",
+    "After completion, preserve user zoom and pan across later canvas resizes, edits and runs.",
+    "Keep the original visible/centered thresholds and include canvas, nodes, center error and viewport in test failures."
+  ],
+  "validation": {
+    "typecheck": "pass",
+    "productionRootBuild": "pass",
+    "targeted": {
+      "passed": 7,
+      "failed": 0,
+      "flaky": 0,
+      "durationMs": 25668.717,
+      "tests": [
+        {
+          "name": "Initial fit waits for a delayed positive canvas measurement and preserves later navigation",
+          "status": "expected",
+          "durationMs": 1705
+        },
+        {
+          "name": "First load and delayed saved-model restoration fit the actual 1440px canvas without resetting later user navigation",
+          "status": "expected",
+          "durationMs": 4759
+        },
+        {
+          "name": "First load and delayed saved-model restoration fit the actual 1920px canvas without resetting later user navigation",
+          "status": "expected",
+          "durationMs": 4882
+        },
+        {
+          "name": "Canvas middle dragging pans while left dragging draws a blue marquee without moving diagram blocks",
+          "status": "expected",
+          "durationMs": 2742
+        },
+        {
+          "name": "Space fits only the focused canvas and leaves field, button, modal, IME and repeated-key behavior intact",
+          "status": "expected",
+          "durationMs": 3164
+        },
+        {
+          "name": "Worker calculation, semantic staleness, undo and local restoration",
+          "status": "expected",
+          "durationMs": 4031
+        },
+        {
+          "name": "Desktop and horizontal tablet keep full-height results beside the canvas; narrow screens stack them",
+          "status": "expected",
+          "durationMs": 1880
+        }
+      ]
+    },
+    "totalBrowserTests": 130
+  },
+  "evidence": [
+    {
+      "path": ".test-generated/canvas-fit-probe.json",
+      "sha256": "877f619605f1568f1b45138dec0dfb81a9f942bb4b7caaccc15c920c88c3820b"
+    },
+    {
+      "path": ".test-generated/canvas-fit-regression-original-final.json",
+      "sha256": "976758600fced650daf3b287cbf222948183c949a2850039c5f25cbb37c1092e"
+    },
+    {
+      "path": ".test-generated/canvas-fit-regression-after-final.json",
+      "sha256": "d60eea3515d85937ea2e22dd99acc09d3e7bee4e4f04ac0565f0f7267dea22ce"
+    },
+    {
+      "path": ".test-generated/canvas-fit-delayed-measurement-original.json",
+      "sha256": "828f961e8a28aba62ddad5b75aa8e1adb72090559a4603fb14253da483c85c1e"
+    },
+    {
+      "path": ".test-generated/canvas-fit-delayed-measurement-fixed.json",
+      "sha256": "276e3a4d60ef96bdf7b864efee46a92791746c35624d44badd7b31831b83758b"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-10-03T01:39:35.833764+00:00",
+  "runId": 37085874548,
+  "runUrl": "https://github.com/JTech-CO/CalcWeave/actions/runs/37085874548",
+  "sourceSha": "3aa6e719b6ae953a8ee083a6f87f90dadbb3d2e9",
+  "appVersion": "0.10.1",
+  "engineVersion": "0.10.0-m9",
+  "status": "failed-before-publication",
+  "deploymentSkipped": true,
+  "browserPassed": 128,
+  "browserFailed": 1,
+  "browserDuration": "6.5m",
+  "failedTest": "First load and delayed saved-model restoration fit the actual 1440px canvas without resetting later user navigation",
+  "failedPhase": "Initial default model fit, before delayed IndexedDB restoration.",
+  "assertion": "All measured diagram nodes visible and centered within the actual canvas; center tolerance 2px.",
+  "observedFailure": "The 5-second predicate did not become true. Exact CI geometry was not included in the original test log.",
+  "localOriginalTargetedReproduction": {
+    "passed": 2,
+    "failed": 0,
+    "durationSeconds": 15.8
+  },
+  "diagnosisScope": "Code review found an existing initial-fit race involving boolean positive-dimension subscriptions. The exact CI timing event is not established by the log.",
+  "numericEngineSourceChanged": false
+}

@@ -153,14 +153,22 @@
   },
   "initialEngineeringAppVersion": "0.10.0",
   "releasePatch": {
-    "reason": "Replace legacy 0.8 header and library labels with APP_VERSION. Numerical engine and registry contracts unchanged.",
+    "reason": "Synchronize release version labels and wait for actual canvas measurements before completing initial fit. Numerical engine and registry contracts unchanged.",
     "appVersion": "0.10.1",
     "engineVersion": "0.10.0-m9",
-    "targetedBrowserPassed": 4,
+    "targetedBrowserPassed": 7,
     "targetedBrowserFailed": 0,
-    "targetedBrowserDurationSeconds": 18.5,
+    "targetedBrowserDurationSeconds": 25.668717,
     "rootEvidence": "m9-root-release-verification.json",
     "projectEvidence": "m9-project-release-verification.json",
-    "publicationPending": true
+    "publicationPending": true,
+    "versionLabelTargetedBrowser": {
+      "passed": 4,
+      "failed": 0,
+      "durationSeconds": 18.5
+    },
+    "initialFitCorrectionEvidence": "m9-initial-fit-correction.json",
+    "failedPublicationAttemptEvidence": "m9-presentation-patch-failed-attempt.json",
+    "plannedRootBrowserTotal": 130
   }
 }
