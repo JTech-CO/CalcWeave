@@ -39,7 +39,12 @@ h1, h2, h3, p { margin: 0; }
 .project-divider { width:1px; height:26px; background:var(--line); margin-right:3px; }
 .project-name>input { background:transparent; border:1px solid transparent; color:var(--text); width:185px; max-width:45%; padding:5px 6px; border-radius:5px; font-size:var(--text-small); font-weight:500; }
 .project-name>input:hover { border-color:var(--line); }
-.save-indicator { color:var(--muted); font-size:var(--text-small); display:flex; align-items:center; gap:6px; white-space:nowrap; }.save-indicator.failed { color:var(--error); }
+.save-indicator { color:var(--muted); font-size:var(--text-small); display:grid; grid-template-columns:6px minmax(0,1fr); align-items:center; gap:6px; white-space:nowrap; }.save-indicator.failed { color:var(--error); }
+/* Reserve every status label so autosave cannot add a header row after the first canvas fit. */
+.save-indicator>.status-dot { grid-area:1/1; }
+.save-status-label,.save-status-reserve { grid-area:1/2; min-width:0; }
+.save-status-reserve { visibility:hidden; pointer-events:none; }
+.save-status-reserve:before { content:attr(data-label); }
 .status-dot { width:6px; height:6px; display:inline-block; flex:none; background:var(--success); border-radius:50%; }.status-dot.error,.save-indicator.failed .status-dot { background:var(--error); }.status-dot.working { background:var(--accent); }
 .header-actions { display:flex; align-items:center; gap:4px; }
 .code-icon { font-family:monospace; font-size:var(--text-body); letter-spacing:-2px; font-weight:600; }.code-badge { margin-left:5px; font-size:var(--text-small); color:var(--violet); border:1px solid var(--line); padding:1px 3px; border-radius:3px; }

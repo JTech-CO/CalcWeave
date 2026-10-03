@@ -1,0 +1,582 @@
+{
+  "generatedAt": "2026-10-03T02:13:22.095Z",
+  "appVersion": "0.10.1",
+  "engineVersion": "0.10.0-m9",
+  "ci": {
+    "runId": "37087756063",
+    "passed": 129,
+    "total": 130,
+    "failedStage": "First default-model fit at 1440px",
+    "observed": {
+      "canvas": {
+        "x": 250,
+        "y": 248,
+        "width": 558,
+        "height": 670
+      },
+      "viewport": {
+        "x": -23.4,
+        "y": 195.6,
+        "zoom": 0.8
+      },
+      "centerError": {
+        "x": -0.0000152587890625,
+        "y": 11
+      }
+    },
+    "conclusion": "The fit used height 692 before a late 22px increase in the top area. Controlled first-autosave label wrapping reproduces the exact CI canvas, viewport and node coordinates. CI did not directly record the header status transition."
+  },
+  "unchangedContract": {
+    "centerTolerancePx": 2,
+    "containmentTolerancePx": 1,
+    "pollTimeoutMs": 5000,
+    "noRetriesAdded": true
+  },
+  "reproduction": {
+    "condition": "At 1440px the project-name minimum width is 288px. A 47px input row and 22px status row reproduce the Linux font/layout metrics. The first 500ms autosave callback is held until the initial fit completes, then released.",
+    "originalReleaseId": "c7af7562eea83b5ced811cc322fbb33bf9043329688be895ee3087a99e9dad6d",
+    "newTestFailed": true,
+    "originalTestReport": {
+      "startTime": "2026-10-03T02:10:01.860Z",
+      "duration": 3969.983,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "originalTestDurationMs": 1419,
+    "before": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 72
+      },
+      "project": {
+        "x": 303.1875,
+        "y": 12,
+        "width": 288,
+        "height": 47
+      },
+      "status": {
+        "x": 537.1875,
+        "y": 24.5,
+        "width": 54,
+        "height": 22
+      },
+      "label": "변경됨",
+      "canvas": {
+        "x": 250,
+        "y": 226,
+        "width": 558,
+        "height": 692
+      },
+      "nodes": [
+        {
+          "x": 258.6000061035156,
+          "y": 533.5999755859375,
+          "width": 140.80001831054688,
+          "height": 76.800048828125
+        },
+        {
+          "x": 458.6000061035156,
+          "y": 533.5999755859375,
+          "width": 140.80001831054688,
+          "height": 76.800048828125
+        },
+        {
+          "x": 658.5999755859375,
+          "y": 533.5999755859375,
+          "width": 140.79998779296875,
+          "height": 76.800048828125
+        }
+      ],
+      "transform": "translate(-23.4px, 195.6px) scale(0.8)"
+    },
+    "after": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 94
+      },
+      "project": {
+        "x": 303.1875,
+        "y": 12,
+        "width": 288,
+        "height": 69
+      },
+      "status": {
+        "x": 303.1875,
+        "y": 59,
+        "width": 127.84375,
+        "height": 22
+      },
+      "label": "브라우저에 저장됨",
+      "canvas": {
+        "x": 250,
+        "y": 248,
+        "width": 558,
+        "height": 670
+      },
+      "nodes": [
+        {
+          "x": 258.6000061035156,
+          "y": 555.5999755859375,
+          "width": 140.80001831054688,
+          "height": 76.800048828125
+        },
+        {
+          "x": 458.6000061035156,
+          "y": 555.5999755859375,
+          "width": 140.80001831054688,
+          "height": 76.800048828125
+        },
+        {
+          "x": 658.5999755859375,
+          "y": 555.5999755859375,
+          "width": 140.79998779296875,
+          "height": 76.800048828125
+        }
+      ],
+      "transform": "translate(-23.4px, 195.6px) scale(0.8)"
+    },
+    "headerHeightDelta": 22,
+    "canvasHeightDelta": -22,
+    "centerErrorAfter": {
+      "x": -0.0000152587890625,
+      "y": 11
+    }
+  },
+  "correction": {
+    "fixedReleaseId": "dd0b2b9d808162100ffcf09c8e58db21f2ee40a7570e90f05f25c894a6a7b89b",
+    "changes": [
+      "Use a two-column grid for the status dot and current label.",
+      "Overlay five empty aria-hidden reservation spans in the label cell. CSS pseudo content reads their data-label attributes and reserves the maximum intrinsic width and height for all states.",
+      "Allow wrapping and font enlargement while retaining a constant header footprint across loading, changed, saving, saved and failure messages.",
+      "Keep only the current actual state in DOM textContent and the existing polite live region; reservations neither falsely signal saved readiness nor create accessible labels.",
+      "Preserve the previous startup dimension checks and the completed user viewport across later saves, edits and resizes."
+    ],
+    "before": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 94
+      },
+      "project": {
+        "x": 303.1875,
+        "y": 12,
+        "width": 288,
+        "height": 69
+      },
+      "status": {
+        "x": 303.1875,
+        "y": 59,
+        "width": 198.375,
+        "height": 22
+      },
+      "label": "변경됨",
+      "canvas": {
+        "x": 250,
+        "y": 248,
+        "width": 558,
+        "height": 670
+      },
+      "nodes": [
+        {
+          "x": 258.6000061035156,
+          "y": 544.5999755859375,
+          "width": 140.80001831054688,
+          "height": 76.800048828125
+        },
+        {
+          "x": 458.6000061035156,
+          "y": 544.5999755859375,
+          "width": 140.80001831054688,
+          "height": 76.800048828125
+        },
+        {
+          "x": 658.5999755859375,
+          "y": 544.5999755859375,
+          "width": 140.79998779296875,
+          "height": 76.800048828125
+        }
+      ],
+      "transform": "translate(-23.4px, 184.6px) scale(0.8)"
+    },
+    "after": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 94
+      },
+      "project": {
+        "x": 303.1875,
+        "y": 12,
+        "width": 288,
+        "height": 69
+      },
+      "status": {
+        "x": 303.1875,
+        "y": 59,
+        "width": 198.375,
+        "height": 22
+      },
+      "label": "브라우저에 저장됨",
+      "canvas": {
+        "x": 250,
+        "y": 248,
+        "width": 558,
+        "height": 670
+      },
+      "nodes": [
+        {
+          "x": 258.6000061035156,
+          "y": 544.5999755859375,
+          "width": 140.80001831054688,
+          "height": 76.800048828125
+        },
+        {
+          "x": 458.6000061035156,
+          "y": 544.5999755859375,
+          "width": 140.80001831054688,
+          "height": 76.800048828125
+        },
+        {
+          "x": 658.5999755859375,
+          "y": 544.5999755859375,
+          "width": 140.79998779296875,
+          "height": 76.800048828125
+        }
+      ],
+      "transform": "translate(-23.4px, 184.6px) scale(0.8)"
+    },
+    "headerHeightDelta": 0,
+    "canvasHeightDelta": 0,
+    "centerErrorAfter": {
+      "x": -0.0000152587890625,
+      "y": 0
+    }
+  },
+  "validation": {
+    "productionRootBuild": "pass",
+    "targeted": {
+      "passed": 8,
+      "failed": 0,
+      "flaky": 0,
+      "durationMs": 28534.075999999997,
+      "tests": [
+        {
+          "name": "Initial fit waits for a delayed positive canvas measurement and preserves later navigation",
+          "status": "expected",
+          "durationMs": 2566
+        },
+        {
+          "name": "First autosave keeps the header and initially fitted canvas stable when status labels wrap",
+          "status": "expected",
+          "durationMs": 2119
+        },
+        {
+          "name": "First load and delayed saved-model restoration fit the actual 1440px canvas without resetting later user navigation",
+          "status": "expected",
+          "durationMs": 4820
+        },
+        {
+          "name": "First load and delayed saved-model restoration fit the actual 1920px canvas without resetting later user navigation",
+          "status": "expected",
+          "durationMs": 5051
+        },
+        {
+          "name": "Canvas middle dragging pans while left dragging draws a blue marquee without moving diagram blocks",
+          "status": "expected",
+          "durationMs": 2835
+        },
+        {
+          "name": "Space fits only the focused canvas and leaves field, button, modal, IME and repeated-key behavior intact",
+          "status": "expected",
+          "durationMs": 2704
+        },
+        {
+          "name": "Worker calculation, semantic staleness, undo and local restoration",
+          "status": "expected",
+          "durationMs": 3081
+        },
+        {
+          "name": "Desktop and horizontal tablet keep full-height results beside the canvas; narrow screens stack them",
+          "status": "expected",
+          "durationMs": 1894
+        }
+      ]
+    },
+    "targetedTextLayout": {
+      "passed": 8,
+      "observations": [
+        {
+          "theme": "dark",
+          "width": 1440,
+          "fontPercent": 100,
+          "visibleStatus": true,
+          "beforeHeader": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 94
+          },
+          "afterHeader": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 94
+          },
+          "canvasUnchanged": true,
+          "actualLabels": [
+            "변경됨",
+            "브라우저에 저장됨"
+          ],
+          "reservationElements": 5,
+          "reservationDomTextEmpty": true,
+          "reservationAriaHidden": true,
+          "reservationVisibility": "hidden",
+          "visibleLabelOverflow": false,
+          "documentOverflow": false,
+          "pass": true
+        },
+        {
+          "theme": "dark",
+          "width": 1440,
+          "fontPercent": 200,
+          "visibleStatus": true,
+          "beforeHeader": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 179
+          },
+          "afterHeader": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 179
+          },
+          "canvasUnchanged": true,
+          "actualLabels": [
+            "변경됨",
+            "브라우저에 저장됨"
+          ],
+          "reservationElements": 5,
+          "reservationDomTextEmpty": true,
+          "reservationAriaHidden": true,
+          "reservationVisibility": "hidden",
+          "visibleLabelOverflow": false,
+          "documentOverflow": false,
+          "pass": true
+        },
+        {
+          "theme": "dark",
+          "width": 390,
+          "fontPercent": 100,
+          "visibleStatus": false,
+          "beforeHeader": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 245
+          },
+          "afterHeader": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 245
+          },
+          "canvasUnchanged": true,
+          "actualLabels": [
+            "변경됨",
+            "브라우저에 저장됨"
+          ],
+          "reservationElements": 5,
+          "reservationDomTextEmpty": true,
+          "reservationAriaHidden": true,
+          "reservationVisibility": "hidden",
+          "visibleLabelOverflow": null,
+          "documentOverflow": false,
+          "pass": true
+        },
+        {
+          "theme": "dark",
+          "width": 320,
+          "fontPercent": 200,
+          "visibleStatus": false,
+          "beforeHeader": {
+            "x": 0,
+            "y": 0,
+            "width": 320,
+            "height": 471
+          },
+          "afterHeader": {
+            "x": 0,
+            "y": 0,
+            "width": 320,
+            "height": 471
+          },
+          "canvasUnchanged": true,
+          "actualLabels": [
+            "변경됨",
+            "브라우저에 저장됨"
+          ],
+          "reservationElements": 5,
+          "reservationDomTextEmpty": true,
+          "reservationAriaHidden": true,
+          "reservationVisibility": "hidden",
+          "visibleLabelOverflow": null,
+          "documentOverflow": false,
+          "pass": true
+        },
+        {
+          "theme": "light",
+          "width": 1440,
+          "fontPercent": 100,
+          "visibleStatus": true,
+          "beforeHeader": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 94
+          },
+          "afterHeader": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 94
+          },
+          "canvasUnchanged": true,
+          "actualLabels": [
+            "변경됨",
+            "브라우저에 저장됨"
+          ],
+          "reservationElements": 5,
+          "reservationDomTextEmpty": true,
+          "reservationAriaHidden": true,
+          "reservationVisibility": "hidden",
+          "visibleLabelOverflow": false,
+          "documentOverflow": false,
+          "pass": true
+        },
+        {
+          "theme": "light",
+          "width": 1440,
+          "fontPercent": 200,
+          "visibleStatus": true,
+          "beforeHeader": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 179
+          },
+          "afterHeader": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 179
+          },
+          "canvasUnchanged": true,
+          "actualLabels": [
+            "변경됨",
+            "브라우저에 저장됨"
+          ],
+          "reservationElements": 5,
+          "reservationDomTextEmpty": true,
+          "reservationAriaHidden": true,
+          "reservationVisibility": "hidden",
+          "visibleLabelOverflow": false,
+          "documentOverflow": false,
+          "pass": true
+        },
+        {
+          "theme": "light",
+          "width": 390,
+          "fontPercent": 100,
+          "visibleStatus": false,
+          "beforeHeader": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 245
+          },
+          "afterHeader": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 245
+          },
+          "canvasUnchanged": true,
+          "actualLabels": [
+            "변경됨",
+            "브라우저에 저장됨"
+          ],
+          "reservationElements": 5,
+          "reservationDomTextEmpty": true,
+          "reservationAriaHidden": true,
+          "reservationVisibility": "hidden",
+          "visibleLabelOverflow": null,
+          "documentOverflow": false,
+          "pass": true
+        },
+        {
+          "theme": "light",
+          "width": 320,
+          "fontPercent": 200,
+          "visibleStatus": false,
+          "beforeHeader": {
+            "x": 0,
+            "y": 0,
+            "width": 320,
+            "height": 471
+          },
+          "afterHeader": {
+            "x": 0,
+            "y": 0,
+            "width": 320,
+            "height": 471
+          },
+          "canvasUnchanged": true,
+          "actualLabels": [
+            "변경됨",
+            "브라우저에 저장됨"
+          ],
+          "reservationElements": 5,
+          "reservationDomTextEmpty": true,
+          "reservationAriaHidden": true,
+          "reservationVisibility": "hidden",
+          "visibleLabelOverflow": null,
+          "documentOverflow": false,
+          "pass": true
+        }
+      ]
+    },
+    "totalBrowserTests": 131
+  },
+  "evidence": [
+    {
+      "path": ".test-generated/canvas-fit-late-save-original.json",
+      "sha256": "20f51dec7675dd24ae47da301bd4354f5515df76690bc3129641918754ca926b"
+    },
+    {
+      "path": ".test-generated/canvas-fit-late-save-fixed.json",
+      "sha256": "4a7c4bc9b2da8aec95fb5b79fe4337958f62576c4979b7d0873825460af10e73"
+    },
+    {
+      "path": ".test-generated/canvas-fit-late-save-before-test.json",
+      "sha256": "f0a2250927cb80b9c8d06a058080cea2b189ee31ddc5312233310dd20c4d5327"
+    },
+    {
+      "path": ".test-generated/canvas-fit-late-save-after-tests.json",
+      "sha256": "266b715f91e365d74f58b8e3ad5dd6e92819cbe12f71c510c38c63084d5fa7aa"
+    },
+    {
+      "path": ".test-generated/save-layout-variants.json",
+      "sha256": "e1cd3b61e6ad020a12a151089ad450f348eff1f330d8d750bd9c1fb4a9267a29"
+    }
+  ]
+}

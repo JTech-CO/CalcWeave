@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-03T01:45:33.653Z",
+  "generatedAt": "2026-10-03T02:14:31.733Z",
   "appVersion": "0.10.1",
   "engineVersion": "0.10.0-m9",
   "scope": "/",
-  "releaseId": "c7af7562eea83b5ced811cc322fbb33bf9043329688be895ee3087a99e9dad6d",
+  "releaseId": "dd0b2b9d808162100ffcf09c8e58db21f2ee40a7570e90f05f25c894a6a7b89b",
   "checks": [
     "app/engine release versions",
     "single registry retains catalog definitions with unique executable IDs",
@@ -16,18 +16,18 @@
     "bounded unique offline allowlist",
     "safe static asset /assets/engine.worker-f0TJDrgW.js",
     "final built bytes match /assets/engine.worker-f0TJDrgW.js",
-    "safe static asset /assets/index-B8m45v-n.js",
-    "final built bytes match /assets/index-B8m45v-n.js",
-    "safe static asset /assets/index-BSvd8MHu.css",
-    "final built bytes match /assets/index-BSvd8MHu.css",
-    "safe static asset /assets/src-BfwcQL_c.js",
-    "final built bytes match /assets/src-BfwcQL_c.js",
-    "safe static asset /assets/src-BjMPHxPQ.js",
-    "final built bytes match /assets/src-BjMPHxPQ.js",
-    "safe static asset /assets/src-Cs_FVgdO.js",
-    "final built bytes match /assets/src-Cs_FVgdO.js",
-    "safe static asset /assets/src-D-yXlapu.js",
-    "final built bytes match /assets/src-D-yXlapu.js",
+    "safe static asset /assets/index-Bm8oa_Nx.js",
+    "final built bytes match /assets/index-Bm8oa_Nx.js",
+    "safe static asset /assets/index-N6WA8X30.css",
+    "final built bytes match /assets/index-N6WA8X30.css",
+    "safe static asset /assets/src-BRypbB66.js",
+    "final built bytes match /assets/src-BRypbB66.js",
+    "safe static asset /assets/src-BWJO4ACh.js",
+    "final built bytes match /assets/src-BWJO4ACh.js",
+    "safe static asset /assets/src-D9cHsmmt.js",
+    "final built bytes match /assets/src-D9cHsmmt.js",
+    "safe static asset /assets/src-yHhN51Qj.js",
+    "final built bytes match /assets/src-yHhN51Qj.js",
     "safe static asset /cookies/index.html",
     "final built bytes match /cookies/index.html",
     "safe static asset /index.html",
@@ -58,11 +58,11 @@
     "all code/Worker/lazy chunks are in static release",
     "all code/Worker/lazy chunks are in static release",
     "no recognized secret material in assets\\engine.worker-f0TJDrgW.js",
-    "no recognized secret material in assets\\index-B8m45v-n.js",
-    "no recognized secret material in assets\\src-BfwcQL_c.js",
-    "no recognized secret material in assets\\src-BjMPHxPQ.js",
-    "no recognized secret material in assets\\src-Cs_FVgdO.js",
-    "no recognized secret material in assets\\src-D-yXlapu.js",
+    "no recognized secret material in assets\\index-Bm8oa_Nx.js",
+    "no recognized secret material in assets\\src-BRypbB66.js",
+    "no recognized secret material in assets\\src-BWJO4ACh.js",
+    "no recognized secret material in assets\\src-D9cHsmmt.js",
+    "no recognized secret material in assets\\src-yHhN51Qj.js",
     "no recognized secret material in cookies\\index.html",
     "no recognized secret material in index.html",
     "no recognized secret material in notices\\index.html",
@@ -83,34 +83,34 @@
       "sha256": "61bbaba28b73e6343beb7e387af0b5682cd175e7c98f36b6692585e9417de817"
     },
     {
-      "url": "/assets/index-B8m45v-n.js",
-      "bytes": 1054400,
-      "sha256": "1812dd4a1012eae23bf8263f245a7e1926c2b28695d70a14b1028af56c59ca5c"
+      "url": "/assets/index-Bm8oa_Nx.js",
+      "bytes": 1054582,
+      "sha256": "330d8989810cc30b572268d12268b747c56570f921b807ec3ec8c2cc1c0234bd"
     },
     {
-      "url": "/assets/index-BSvd8MHu.css",
-      "bytes": 83890,
-      "sha256": "477ffef561dac5dc6001c8476736c61014980bbf4ee0ecbdf07ccd51bbd891b5"
+      "url": "/assets/index-N6WA8X30.css",
+      "bytes": 84150,
+      "sha256": "a4d411404f825dd1f47bde516c3b45b0b4f3dd61c5664723e46bb64af35b6488"
     },
     {
-      "url": "/assets/src-BfwcQL_c.js",
-      "bytes": 36483,
-      "sha256": "0497be1b9843365a787b958fd6c207085e5c1fe8f1be7a1382388bf47c30d61e"
-    },
-    {
-      "url": "/assets/src-BjMPHxPQ.js",
-      "bytes": 1775,
-      "sha256": "fb64d12b22fe4b24cd077687700ba1ca4d586b39e0c3c5a60c3aa4c6fd5a7df2"
-    },
-    {
-      "url": "/assets/src-Cs_FVgdO.js",
-      "bytes": 7155,
-      "sha256": "d25e93f809b3facaf44655e1d15ec0bece7df6b7d9b1d7a7e463273e0c200fb6"
-    },
-    {
-      "url": "/assets/src-D-yXlapu.js",
+      "url": "/assets/src-BRypbB66.js",
       "bytes": 258340,
-      "sha256": "1ed847d0d855487f6ee2d729bbb0dbaa9951cd454b3dcd2ecde300a0daae33f6"
+      "sha256": "b1f2071b578396428667b9a8522279213e83170097d04b09aa80bcdfb1ba53c1"
+    },
+    {
+      "url": "/assets/src-BWJO4ACh.js",
+      "bytes": 36483,
+      "sha256": "8ca6c9232ac3d08bc4b72ac72be646ad71778641b392bb8e0a3bff7c24b86846"
+    },
+    {
+      "url": "/assets/src-D9cHsmmt.js",
+      "bytes": 7155,
+      "sha256": "b89c9cd973bb9531f4f635667a9b89789c1481de8f469d008fd64de89549855f"
+    },
+    {
+      "url": "/assets/src-yHhN51Qj.js",
+      "bytes": 1775,
+      "sha256": "d1d8839519aa3dcd5ed9071124ce2429d2a1d2d29fe92798a992420225f5c9a8"
     },
     {
       "url": "/cookies/index.html",
@@ -120,7 +120,7 @@
     {
       "url": "/index.html",
       "bytes": 1077,
-      "sha256": "0f87baba91492367553089c6c2ed76781c862a2d46ab143918c057e0b631b51c"
+      "sha256": "f90995779274f882a62397369681d321689c072b65b622bf5a1334780c509e23"
     },
     {
       "url": "/notices/index.html",
@@ -138,6 +138,6 @@
       "sha256": "620e00e98f765be04bed9b926e16d4d6299fbadd8abf9be752e0359cc6bfadaf"
     }
   ],
-  "totalStaticBytes": 1873314,
+  "totalStaticBytes": 1873756,
   "publicDeploymentClaimed": false
 }

@@ -153,12 +153,12 @@
   },
   "initialEngineeringAppVersion": "0.10.0",
   "releasePatch": {
-    "reason": "Synchronize release version labels and wait for actual canvas measurements before completing initial fit. Numerical engine and registry contracts unchanged.",
+    "reason": "Synchronize release version labels, wait for actual canvas measurements before completing initial fit, and reserve fixed save-status label geometry across first autosave. Numerical engine and registry contracts unchanged.",
     "appVersion": "0.10.1",
     "engineVersion": "0.10.0-m9",
-    "targetedBrowserPassed": 7,
+    "targetedBrowserPassed": 8,
     "targetedBrowserFailed": 0,
-    "targetedBrowserDurationSeconds": 25.668717,
+    "targetedBrowserDurationSeconds": 28.534076,
     "rootEvidence": "m9-root-release-verification.json",
     "projectEvidence": "m9-project-release-verification.json",
     "publicationPending": true,
@@ -169,6 +169,13 @@
     },
     "initialFitCorrectionEvidence": "m9-initial-fit-correction.json",
     "failedPublicationAttemptEvidence": "m9-presentation-patch-failed-attempt.json",
-    "plannedRootBrowserTotal": 130
+    "plannedRootBrowserTotal": 131,
+    "initialFitTargetedBrowser": {
+      "passed": 7,
+      "failed": 0,
+      "durationSeconds": 25.668717
+    },
+    "saveStatusLayoutCorrectionEvidence": "m9-save-status-layout-correction.json",
+    "lateLayoutFailedPublicationAttemptEvidence": "m9-late-layout-failed-attempt.json"
   }
 }
