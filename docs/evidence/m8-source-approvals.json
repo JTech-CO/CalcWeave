@@ -1,0 +1,727 @@
+{
+  "generatedAt": "2026-10-03T00:11:12.531Z",
+  "stage": "M8",
+  "engineVersion": "0.9.0-m8",
+  "datasetSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+  "evidencePath": "docs/evidence/m8-verification.json",
+  "evidenceSha256": "351b5ba6031dff1a2f4dfb8b51e4e63e2747998277ee93e56decc4b908ff75d6",
+  "presetEvidencePath": "docs/evidence/m8-presets-verification.json",
+  "presetEvidenceSha256": "55cef48ebe57a97ca02922225330f36b1f1d0866d2ad92d69f74fcceb7771f01",
+  "registryDefinitions": 185,
+  "approvedAdditionalSourceRows": 46,
+  "fullSimulinkEquivalenceClaimed": false,
+  "approvals": [
+    {
+      "sourceId": "01-009",
+      "sourceName": "Ground",
+      "canonical": "source.constant",
+      "parameters": {
+        "value": 0
+      },
+      "status": "M8 preset subset",
+      "boundary": "숫자·boolean·벡터·2D 값을 보냅니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [],
+      "presetEvidenceIds": [
+        "ground/static",
+        "ground/discrete",
+        "ground/continuous"
+      ],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "04-002",
+      "sourceName": "Coulomb and Viscous Friction",
+      "canonical": "nonlinear.friction",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "sign(x)·(gain·abs(x)+offset). 영에서는 0이며 계수는 고정 scalar입니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "nonlinear.friction"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "04-004",
+      "sourceName": "Dead Zone Dynamic",
+      "canonical": "nonlinear.dead-zone-dynamic",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "같은 단위의 lower·upper 입력으로 불감대를 정합니다. 경계는 scalar 또는 입력과 같은 형상입니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "nonlinear.dead-zone-dynamic"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "04-012",
+      "sourceName": "Saturation Dynamic",
+      "canonical": "nonlinear.saturation-dynamic",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "같은 단위의 lower·upper 입력 사이로 신호를 제한합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "nonlinear.saturation-dynamic"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "04-014",
+      "sourceName": "Wrap To Zero",
+      "canonical": "nonlinear.wrap-to-zero",
+      "parameters": {},
+      "status": "M8 독립 대체 subset",
+      "boundary": "threshold 초과(gt) 또는 이상(ge) 값을 0으로 바꿉니다. modulo가 아닙니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "nonlinear.wrap-to-zero",
+        "wrap-inclusive-equality"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "06-005",
+      "sourceName": "Combinatorial Logic",
+      "canonical": "logic.truth-table",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "길이 1~8 boolean 벡터를 MSB 우선 정수로 읽어 2^width개의 boolean 표에서 값을 선택합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "logic.truth-table",
+        "truth-table-first-bit-is-MSB"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "06-006",
+      "sourceName": "Compare To Constant",
+      "canonical": "logic.compare-constant",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "입력을 같은 단위의 고정 constant와 원소별로 비교합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "logic.compare-constant",
+        "compare-gt",
+        "compare-lt",
+        "compare-lte",
+        "compare-eq",
+        "compare-neq"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "06-007",
+      "sourceName": "Compare To Zero",
+      "canonical": "logic.compare-constant",
+      "parameters": {
+        "constant": 0
+      },
+      "status": "M8 preset subset",
+      "boundary": "입력을 같은 단위의 고정 constant와 원소별로 비교합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "logic.compare-constant",
+        "compare-gt",
+        "compare-lt",
+        "compare-lte",
+        "compare-eq",
+        "compare-neq"
+      ],
+      "presetEvidenceIds": [
+        "compare-zero/static",
+        "compare-zero/discrete",
+        "compare-zero/continuous"
+      ],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "06-019",
+      "sourceName": "Interval Test Dynamic",
+      "canonical": "logic.interval-dynamic",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "동적 경계와 열린·닫힌 구간 조건으로 원소별 boolean을 계산합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "logic.interval-dynamic"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "07-004",
+      "sourceName": "Direct Lookup Table (n-D)",
+      "canonical": "lookup.direct",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "rank 1~10, 축 1~32의 행 우선 flat 표를 정수 query로 조회합니다. 마지막 축이 가장 빠릅니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "lookup.direct",
+        "direct-lookup-index-base-and-clamp",
+        "maximum-bounded-direct-rank-ten-corner"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "07-005",
+      "sourceName": "Interpolation Using Prelookup",
+      "canonical": "lookup.interpolate-prelookup",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "0-based 구간 index와 [0,1] fraction으로 표를 보간합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "lookup.interpolate-prelookup",
+        "nearest-half-chooses-lower",
+        "prelookup-flat",
+        "prelookup-clamp",
+        "subnormal-midpoint-rounds-to-even"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "07-006",
+      "sourceName": "Lookup Table Dynamic",
+      "canonical": "lookup.dynamic",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "strictly increasing breakpoints와 같은 길이 표를 입력으로 받아 scalar query를 보간합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "lookup.dynamic",
+        "dynamic-linear-extrapolation",
+        "dynamic-nearest-tie",
+        "dynamic-flat-exact-last-knot",
+        "dynamic-clamp",
+        "dynamic-maximum-bounded-axis"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "07-009",
+      "sourceName": "n-D Lookup Table",
+      "canonical": "lookup.nd",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "rank 1~10의 고정 축과 행 우선 flat 표를 scalar 또는 query 벡터로 조회해 scalar를 출력합니다. 표와 보간 corner는 각각 1,024개 이하입니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "lookup.nd",
+        "rank-four-exact-corner",
+        "constant-table-extrapolation",
+        "rank-two-center",
+        "rank-one-extrapolation",
+        "ND-nearest-half-lower",
+        "ND-flat-exact-upper-axis",
+        "ND-clamp-all-axes",
+        "maximum-bounded-rank-ten-center",
+        "upper-knot-does-not-evaluate-zero-weight-overflow-branch"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "08-004",
+      "sourceName": "Assignment",
+      "canonical": "matrix.assign",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "행 우선 0-based 고정 indices에 같은 타입·단위의 scalar 또는 벡터 값을 대입하여 새 배열을 만듭니다. 중복 index는 허용하지 않습니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "matrix.assign",
+        "assignment-boolean-storage"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "08-010",
+      "sourceName": "Find Nonzero Elements",
+      "canonical": "matrix.find-nonzero",
+      "parameters": {},
+      "status": "M8 독립 대체 subset",
+      "boundary": "CalcWeave 고정 폭 대체: column-major 순서로 찾은 위치와 count를 출력합니다. 원본의 가변 길이 출력과 다릅니다. 0-based 빈 칸은 -1, 1-based는 0입니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "matrix.find-nonzero",
+        "find-nonzero-empty-padded-independent-alternative",
+        "find-nonzero-scalar-and-boolean"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "08-018",
+      "sourceName": "Permute Dimensions",
+      "canonical": "matrix.permute-dimensions",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "현재 1D·2D 축의 0-based 순열만 허용합니다. 벡터 [0], 행렬 [0,1] 또는 [1,0]입니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "matrix.permute-dimensions",
+        "identity-vector-permutation"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "08-023",
+      "sourceName": "Reciprocal Sqrt",
+      "canonical": "math.reciprocal-sqrt",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "양수 입력에 1/sqrt(x)를 계산합니다. 영과 음수를 거부합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "math.reciprocal-sqrt"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "08-027",
+      "sourceName": "Signed Sqrt",
+      "canonical": "math.signed-sqrt",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "sign(x)·sqrt(abs(x))를 계산합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "math.signed-sqrt"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "08-028",
+      "sourceName": "Sine Wave Function",
+      "canonical": "math.sine-wave-function",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "입력 t에 amplitude·sin(frequency·t+phase)+bias를 계산합니다. t는 단위 없는 숫자 또는 초(s)입니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "math.sine-wave-function"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "08-031",
+      "sourceName": "Squeeze",
+      "canonical": "matrix.squeeze",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "원본 Squeeze의 현재 scalar·벡터·2D 계약은 입력 형상을 유지합니다. 3D 이상 신호는 현재 지원하지 않습니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "matrix.squeeze",
+        "squeeze-rank-two-singletons-are-preserved"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "08-036",
+      "sourceName": "Unary Minus",
+      "canonical": "math.negate",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "각 숫자 원소의 부호를 반전합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "math.negate"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "09-004",
+      "sourceName": "Expand Scalar",
+      "canonical": "matrix.expand-scalar",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "고정 ElementValue를 지정한 벡터 또는 행렬 크기로 채웁니다. 입력 포트 없는 배열 생성기입니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "matrix.expand-scalar",
+        "expand-source-vector"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "09-009",
+      "sourceName": "IsSymmetric",
+      "canonical": "matrix.is-symmetric",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "정방 실수 행렬의 전치 대응 원소가 절대 tolerance 안에서 같은지 확인합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "matrix.is-symmetric",
+        "symmetry-is-structural",
+        "symmetry-explicit-CalcWeave-tolerance"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "09-010",
+      "sourceName": "IsTriangular",
+      "canonical": "matrix.is-triangular",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "실수 행렬의 위·아래 또는 어느 한 삼각형 바깥 원소가 tolerance 이하인지 검사합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "matrix.is-triangular",
+        "neither-triangle",
+        "lower-triangle",
+        "triangle-explicit-CalcWeave-tolerance"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "09-013",
+      "sourceName": "Matrix Square",
+      "canonical": "matrix.square",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "실수 행렬 A에 AᵀA를 계산합니다. 벡터는 column으로 보아 1×1 내적을 출력합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "matrix.square",
+        "rectangular-matrix-square-is-Gram",
+        "unoriented-vector-square-is-column-Gram",
+        "vector-Gram-does-not-use-matrix-axis-limit",
+        "maximum-bounded-vector-Gram"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "09-015",
+      "sourceName": "Permute Matrix",
+      "canonical": "matrix.permute-rows-cols",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "0-based 행·열 index의 완전한 순열로 행렬을 재배치합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "matrix.permute-rows-cols"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "11-001",
+      "sourceName": "Assertion",
+      "canonical": "verify.assert",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "boolean 입력의 모든 값 또는 한 값 이상이 참인지 검증합니다. 실패하면 실행을 진단과 함께 중단하고 성공하면 scalar true입니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "verify.assert",
+        "assert-any"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "11-003",
+      "sourceName": "Check Dynamic Gap",
+      "canonical": "verify.bounds",
+      "parameters": {
+        "source": "dynamic",
+        "kind": "gap"
+      },
+      "status": "M8 승인 subset",
+      "boundary": "고정·동적 lower/upper의 범위·범위 밖·아래·위 조건을 검증합니다. 위반하면 실행을 중단하며 성공하면 입력 형상의 true입니다. gap은 설정한 내부 구간의 여집합이다. closed는 경계를 제외하고 open은 경계를 포함하므로 원본 InclusiveUpper/Lower 설정은 반전하여 대응해야 한다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "dynamic-gap-complement"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "11-004",
+      "sourceName": "Check Dynamic Lower Bound",
+      "canonical": "verify.bounds",
+      "parameters": {
+        "source": "dynamic",
+        "kind": "lower"
+      },
+      "status": "M8 승인 subset",
+      "boundary": "고정·동적 lower/upper의 범위·범위 밖·아래·위 조건을 검증합니다. 위반하면 실행을 중단하며 성공하면 입력 형상의 true입니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "dynamic-lower-only-port"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "11-005",
+      "sourceName": "Check Dynamic Range",
+      "canonical": "verify.bounds",
+      "parameters": {
+        "source": "dynamic",
+        "kind": "range"
+      },
+      "status": "M8 승인 subset",
+      "boundary": "고정·동적 lower/upper의 범위·범위 밖·아래·위 조건을 검증합니다. 위반하면 실행을 중단하며 성공하면 입력 형상의 true입니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "dynamic-closed-range"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "11-006",
+      "sourceName": "Check Dynamic Upper Bound",
+      "canonical": "verify.bounds",
+      "parameters": {
+        "source": "dynamic",
+        "kind": "upper"
+      },
+      "status": "M8 승인 subset",
+      "boundary": "고정·동적 lower/upper의 범위·범위 밖·아래·위 조건을 검증합니다. 위반하면 실행을 중단하며 성공하면 입력 형상의 true입니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "dynamic-upper-only-port"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "11-008",
+      "sourceName": "Check Static Gap",
+      "canonical": "verify.bounds",
+      "parameters": {
+        "source": "static",
+        "kind": "gap"
+      },
+      "status": "M8 승인 subset",
+      "boundary": "고정·동적 lower/upper의 범위·범위 밖·아래·위 조건을 검증합니다. 위반하면 실행을 중단하며 성공하면 입력 형상의 true입니다. gap은 설정한 내부 구간의 여집합이다. closed는 경계를 제외하고 open은 경계를 포함하므로 원본 InclusiveUpper/Lower 설정은 반전하여 대응해야 한다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "static-gap"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "11-009",
+      "sourceName": "Check Static Lower Bound",
+      "canonical": "verify.bounds",
+      "parameters": {
+        "source": "static",
+        "kind": "lower"
+      },
+      "status": "M8 승인 subset",
+      "boundary": "고정·동적 lower/upper의 범위·범위 밖·아래·위 조건을 검증합니다. 위반하면 실행을 중단하며 성공하면 입력 형상의 true입니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "static-open-lower"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "11-010",
+      "sourceName": "Check Static Range",
+      "canonical": "verify.bounds",
+      "parameters": {
+        "source": "static",
+        "kind": "range"
+      },
+      "status": "M8 승인 subset",
+      "boundary": "고정·동적 lower/upper의 범위·범위 밖·아래·위 조건을 검증합니다. 위반하면 실행을 중단하며 성공하면 입력 형상의 true입니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "verify.bounds"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "11-011",
+      "sourceName": "Check Static Upper Bound",
+      "canonical": "verify.bounds",
+      "parameters": {
+        "source": "static",
+        "kind": "upper"
+      },
+      "status": "M8 승인 subset",
+      "boundary": "고정·동적 lower/upper의 범위·범위 밖·아래·위 조건을 검증합니다. 위반하면 실행을 중단하며 성공하면 입력 형상의 true입니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "static-open-upper"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "15-012",
+      "sourceName": "Manual Switch",
+      "canonical": "route.manual-switch",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "선택 파라미터 1 또는 2에 따라 같은 타입·형상·단위의 a 또는 b를 보냅니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "route.manual-switch"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "15-016",
+      "sourceName": "Multiport Switch",
+      "canonical": "route.multiport-switch",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "scalar 정수 index로 2~16개의 같은 타입·형상·단위 입력 중 하나를 선택합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "route.multiport-switch",
+        "multiport-clamps-to-last-boolean-input"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "17-012",
+      "sourceName": "Ground",
+      "canonical": "source.constant",
+      "parameters": {
+        "value": 0
+      },
+      "status": "M8 preset subset",
+      "boundary": "숫자·boolean·벡터·2D 값을 보냅니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [],
+      "presetEvidenceIds": [
+        "ground/static",
+        "ground/discrete",
+        "ground/continuous"
+      ],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "20-004",
+      "sourceName": "Decrement Real World",
+      "canonical": "math.increment",
+      "parameters": {
+        "delta": -1,
+        "clamp": "none"
+      },
+      "status": "M8 preset subset",
+      "boundary": "같은 단위의 delta를 원소별로 더하고 선택적으로 영 이상으로 제한합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [],
+      "presetEvidenceIds": [
+        "decrement/static",
+        "decrement/discrete",
+        "decrement/continuous"
+      ],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "20-007",
+      "sourceName": "Decrement To Zero",
+      "canonical": "math.increment",
+      "parameters": {
+        "delta": -1,
+        "clamp": "zero"
+      },
+      "status": "M8 preset subset",
+      "boundary": "같은 단위의 delta를 원소별로 더하고 선택적으로 영 이상으로 제한합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "math.increment"
+      ],
+      "presetEvidenceIds": [
+        "decrement-to-zero/static",
+        "decrement-to-zero/discrete",
+        "decrement-to-zero/continuous"
+      ],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "20-008",
+      "sourceName": "Increment Real World",
+      "canonical": "math.increment",
+      "parameters": {
+        "delta": 1,
+        "clamp": "none"
+      },
+      "status": "M8 preset subset",
+      "boundary": "같은 단위의 delta를 원소별로 더하고 선택적으로 영 이상으로 제한합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [],
+      "presetEvidenceIds": [
+        "increment/static",
+        "increment/discrete",
+        "increment/continuous"
+      ],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "21-001",
+      "sourceName": "Eulers Number",
+      "canonical": "source.constant",
+      "parameters": {
+        "value": 2.718281828459045
+      },
+      "status": "M8 preset subset",
+      "boundary": "숫자·boolean·벡터·2D 값을 보냅니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [],
+      "presetEvidenceIds": [
+        "eulers-number/static",
+        "eulers-number/discrete",
+        "eulers-number/continuous"
+      ],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "21-005",
+      "sourceName": "One",
+      "canonical": "source.constant",
+      "parameters": {
+        "value": 1
+      },
+      "status": "M8 preset subset",
+      "boundary": "숫자·boolean·벡터·2D 값을 보냅니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [],
+      "presetEvidenceIds": [
+        "one/static",
+        "one/discrete",
+        "one/continuous"
+      ],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "21-008",
+      "sourceName": "Square Root",
+      "canonical": "math.sqrt",
+      "parameters": {},
+      "status": "M8 preset subset",
+      "boundary": "음수가 아닌 숫자의 원소별 제곱근을 계산합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [],
+      "presetEvidenceIds": [
+        "square-root/static",
+        "square-root/discrete",
+        "square-root/continuous"
+      ],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "21-009",
+      "sourceName": "Signed Square Root",
+      "canonical": "math.signed-sqrt",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "sign(x)·sqrt(abs(x))를 계산합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "math.signed-sqrt"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    },
+    {
+      "sourceId": "21-010",
+      "sourceName": "Reciprocal Square Root",
+      "canonical": "math.reciprocal-sqrt",
+      "parameters": {},
+      "status": "M8 승인 subset",
+      "boundary": "양수 입력에 1/sqrt(x)를 계산합니다. 영과 음수를 거부합니다. · finite float64/boolean 및 등록 형상·단위·모드만; 원본 전체 옵션/R2024b 실행 동등 미검증. M8 후속 옵션 inventory는 열린 상태다.",
+      "evidenceFixtureIds": [
+        "math.reciprocal-sqrt"
+      ],
+      "presetEvidenceIds": [],
+      "nativeFullEquivalent": false
+    }
+  ]
+}

@@ -497,7 +497,7 @@ function Workspace() {
       const { exportTypeScript } = await import('../../../packages/codegen-ts/src');
       const code = exportTypeScript(compiled, manifest);
       const completed = lastRun?.semanticKey === compiled.semanticKey && lastRun.result.status === 'completed' ? lastRun.result : undefined;
-      const files: Record<string, string> = { 'model.ts': code, 'model.cw.json': serializeModel(compiled.model), 'manifest.json': JSON.stringify(manifest, null, 2), 'run-example.ts': EXPORT_RUN_EXAMPLE, 'README.md': exportArchiveReadme(!!completed, compiled.model.execution.mode, manifest.targetVersion === 'typescript-m4-v1', String(manifest.targetVersion) === 'typescript-m5-v1', String(manifest.targetVersion) === 'typescript-catalog-v1') };
+      const files: Record<string, string> = { 'model.ts': code, 'model.cw.json': serializeModel(compiled.model), 'manifest.json': JSON.stringify(manifest, null, 2), 'run-example.ts': EXPORT_RUN_EXAMPLE, 'README.md': exportArchiveReadme(!!completed, compiled.model.execution.mode, manifest.targetVersion === 'typescript-m4-v1', String(manifest.targetVersion) === 'typescript-m5-v1', ['typescript-catalog-v1', 'typescript-m8-v1', 'typescript-m9-v1'].includes(String(manifest.targetVersion))) };
       if (completed) {
         const { elapsedMs: _elapsedMs, ...expected } = completed;
         files['expected-output.json'] = JSON.stringify(expected, null, 2);
@@ -518,7 +518,7 @@ function Workspace() {
         if (!archive) downloadText(code, 'model.ts', 'text/plain');
         else {
           const completed = lastRun?.semanticKey === compiled.semanticKey && lastRun.result.status === 'completed' ? lastRun.result : undefined;
-          const files: Record<string, string> = { 'model.ts': code, 'model.cw.json': serializeModel(compiled.model), 'manifest.json': JSON.stringify(manifest, null, 2), 'run-example.ts': EXPORT_RUN_EXAMPLE, 'README.md': exportArchiveReadme(!!completed, compiled.model.execution.mode, manifest!.targetVersion === 'typescript-m4-v1', String(manifest!.targetVersion) === 'typescript-m5-v1', String(manifest!.targetVersion) === 'typescript-catalog-v1') };
+          const files: Record<string, string> = { 'model.ts': code, 'model.cw.json': serializeModel(compiled.model), 'manifest.json': JSON.stringify(manifest, null, 2), 'run-example.ts': EXPORT_RUN_EXAMPLE, 'README.md': exportArchiveReadme(!!completed, compiled.model.execution.mode, manifest!.targetVersion === 'typescript-m4-v1', String(manifest!.targetVersion) === 'typescript-m5-v1', ['typescript-catalog-v1', 'typescript-m8-v1', 'typescript-m9-v1'].includes(String(manifest!.targetVersion))) };
           if (completed) { const { elapsedMs: _elapsedMs, ...expected } = completed; files['expected-output.json'] = JSON.stringify(expected, null, 2); }
           const url = URL.createObjectURL(new Blob([createExportArchive(files)], { type: 'application/zip' }));
           const anchor = document.createElement('a'); anchor.href = url; anchor.download = 'CalcWeave-execution.zip'; anchor.click(); window.setTimeout(() => URL.revokeObjectURL(url), 1000);

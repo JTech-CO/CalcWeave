@@ -4,10 +4,13 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium, expect as playwrightExpect, type Browser, type Page } from '@playwright/test';
 import config from '../playwright.config';
-import { canonicalSemantic } from '../packages/model/src';
+import { ENGINE_VERSION, canonicalSemantic } from '../packages/model/src';
 import type { PythonExportManifest } from '../packages/codegen-python/src';
 import type { HistoryRecord } from '../apps/web/src/run-history';
 import type { OfflineManifest } from './offline-build';
+import { APP_VERSION } from '../packages/release/src';
+import { blockRegistry } from '../packages/block-library/src';
+const stage = String(APP_VERSION) === '0.8.1' ? 'pages' : ENGINE_VERSION.split('-').at(-1);
 
 // This verifier never selects a user's profile, imports their storage, or sends mail.
 // Run only after the approved public deployment has finished: npx tsx scripts/verify-public-pages.ts
@@ -15,8 +18,8 @@ const TARGET = 'https://jtech-co.github.io/CalcWeave/';
 const BASE = '/CalcWeave/';
 const TIMEOUT_MS = 60_000;
 const expect = playwrightExpect.configure({ timeout: TIMEOUT_MS });
-const EVIDENCE = resolve('docs/evidence/pages-public-browser-verification.json');
-const SCREENSHOT = resolve('docs/evidence/pages-public-desktop.png');
+const EVIDENCE = resolve(`docs/evidence/${stage}-public-browser-verification.json`);
+const SCREENSHOT = resolve(`docs/evidence/${stage}-public-desktop.png`);
 const POLICY_PAGES = [
   { label: '이용약관', suffix: 'terms/', heading: '베타 이용 안내' },
   { label: '개인정보 처리방침', suffix: 'privacy/', heading: '개인정보' },
@@ -48,7 +51,7 @@ async function calculate(page: Page, expectedCount: number): Promise<HistoryReco
   const record = (await history(page))[0]!;
   assert.equal(record.model.modelId, 'first-calculation');
   assert.equal(record.result.status, 'completed');
-  assert.equal(record.engineVersion, '0.8.0-catalog');
+  assert.equal(record.engineVersion, ENGINE_VERSION);
   assert.equal(record.result.samples.length, 1);
   return record;
 }
@@ -130,10 +133,10 @@ async function main() {
     assert.equal(response?.status(), 200); await expect(page).toHaveURL(TARGET);
     await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨');
     assert.deepEqual(await history(page), [], 'New browser context has no user model history');
-    await expect(page.locator('.library-item')).toHaveCount(144);
+    await expect(page.locator('.library-item')).toHaveCount(blockRegistry.length);
     const moduleURL = await page.locator('script[type="module"]').getAttribute('src');
     assert(moduleURL?.startsWith(`${BASE}assets/`));
-    check('fresh public workspace and 144 registered blocks', { url: page.url(), moduleURL, isolatedContext: true });
+    check('fresh public workspace and current registered blocks', { url: page.url(), moduleURL, isolatedContext: true });
 
     const initial = await calculate(page, 1);
     assert.equal(initial.result.samples[0]!.values.result, 6);
@@ -142,9 +145,9 @@ async function main() {
 
     await page.getByRole('button', { name: '지원·릴리스', exact: true }).click();
     const support = page.getByRole('dialog', { name: '지원·릴리스', exact: true });
-    await expect(support).toContainText('CalcWeave 0.8.1 · 엔진 0.8.0-catalog · 144개 블록');
-    await expect(support.locator('.support-block-list > button')).toHaveCount(144);
-    check('0.8.1 release support table', { appVersion: '0.8.1', engineVersion: '0.8.0-catalog', blockCount: 144 });
+    await expect(support).toContainText(`CalcWeave ${APP_VERSION} · 엔진 ${ENGINE_VERSION} · ${blockRegistry.length}개 블록`);
+    await expect(support.locator('.support-block-list > button')).toHaveCount(blockRegistry.length);
+    check('current release support table', { appVersion: APP_VERSION, engineVersion: ENGINE_VERSION, blockCount: blockRegistry.length });
     await support.getByRole('button', { name: '정책·로컬 저장', exact: true }).click();
     for (const policy of POLICY_PAGES) await expect(support.getByRole('link', { name: policy.label, exact: true })).toHaveAttribute('href', BASE + policy.suffix);
     await expect(support.getByRole('link', { name: 'GitHub Pages에서 열기', exact: true })).toHaveAttribute('href', TARGET);
@@ -174,7 +177,7 @@ async function main() {
       const response = await fetch(path); if (!response.ok) throw new Error('Offline manifest HTTP failure.');
       return await response.json();
     }, BASE + 'offline-manifest.json') as OfflineManifest;
-    assert.equal(offline.appVersion, '0.8.1'); assert.equal(offline.engineVersion, '0.8.0-catalog'); assert.equal(offline.scope, BASE);
+    assert.equal(offline.appVersion, APP_VERSION); assert.equal(offline.engineVersion, ENGINE_VERSION); assert.equal(offline.scope, BASE);
     assert.match(offline.releaseId, /^[a-f0-9]{64}$/); assert(offline.assets.every(asset => approved(new URL(asset.url, TARGET).href)));
     const cache = await page.evaluate(async () => {
       const scope = (await navigator.serviceWorker.getRegistration())?.scope;
@@ -240,7 +243,7 @@ async function main() {
     if (timer) clearTimeout(timer);
     if (browser) { try { await browser.close(); } catch (error) { verified = false; errorMessage ??= `Browser close failed: ${String(error)}`; } }
     await mkdir(resolve('docs/evidence'), { recursive: true });
-    await writeFile(EVIDENCE, JSON.stringify({ schemaVersion: 1, checkedAt: new Date().toISOString(), targetURL: TARGET, status: verified ? 'passed' : 'failed', verified, timeoutMs: TIMEOUT_MS, elapsedMs: Date.now() - started, isolatedFreshContext: true, screenshot: verified ? 'docs/evidence/pages-public-desktop.png' : null, checks, requests, workerURLs: workers, pageErrors, outsideAppRequests: violations, ...(errorMessage ? { error: errorMessage } : {}) }, null, 2) + '\n', 'utf8');
+    await writeFile(EVIDENCE, JSON.stringify({ schemaVersion: 1, checkedAt: new Date().toISOString(), targetURL: TARGET, status: verified ? 'passed' : 'failed', verified, timeoutMs: TIMEOUT_MS, elapsedMs: Date.now() - started, isolatedFreshContext: true, screenshot: verified ? `docs/evidence/${stage}-public-desktop.png` : null, checks, requests, workerURLs: workers, pageErrors, outsideAppRequests: violations, ...(errorMessage ? { error: errorMessage } : {}) }, null, 2) + '\n', 'utf8');
   }
   console.log(`Public Pages browser verification: ${verified ? 'PASS' : 'FAIL'} (${checks.length} checks). ${EVIDENCE}`);
   if (!verified) { console.error(errorMessage ?? 'Public verification failed.'); process.exitCode = 1; }

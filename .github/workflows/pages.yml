@@ -35,6 +35,7 @@ jobs:
       - run: npm run verify:roadmap
       - run: npm run verify:m7
       - run: npm run verify:catalog
+      - run: npm run verify:m8
       - run: npm run build
       - run: npm run verify:release
       - run: npx playwright install --with-deps chromium

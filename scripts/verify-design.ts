@@ -1,3 +1,4 @@
+import { ENGINE_VERSION } from '../packages/model/src';
 import { chromium } from '@playwright/test';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import config from '../playwright.config';
@@ -7,7 +8,7 @@ const m7 = catalog || process.argv.includes('--m7');
 const m6 = m7 || process.argv.includes('--m6');
 const m5 = m6 || process.argv.includes('--m5');
 const m4 = m5 || process.argv.includes('--m4');
-const screenshotPrefix = catalog ? 'catalog-sane' : m7 ? 'm7-sane' : m6 ? 'm6-sane' : m5 ? 'm5-sane' : m4 ? 'm4-sane' : 'sane';
+const screenshotPrefix = catalog ? `${ENGINE_VERSION.split('-').at(-1)}-sane` : m7 ? 'm7-sane' : m6 ? 'm6-sane' : m5 ? 'm5-sane' : m4 ? 'm4-sane' : 'sane';
 
 // Inspect the built local preview in a separate browser context, preserving the user's tab.
 const browser = await chromium.launch(config.use?.launchOptions);

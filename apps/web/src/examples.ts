@@ -319,6 +319,29 @@ EXAMPLES.push({ id: 'signal-curves', category: 'signals', title: '신호 곡선 
   notes: 'Gaussian 펄스는 중심 1초에서 1이고, Logistic 곡선은 같은 시각에 0.5입니다. 감쇠 사인은 1 Hz 진동의 크기가 exp(−0.5t)로 줄어듭니다. 모든 입력을 0.05초 간격으로 3초까지 기록합니다.',
 } });
 
+EXAMPLES.push({ id: 'dynamic-limits', category: 'signals', title: '입력 신호로 범위 제한하기', description: '사인파를 동적 아래·위 경계 사이로 제한하고 원래 파형과 비교합니다.', model: {
+  schemaVersion: 1, modelId: 'dynamic-limits', name: '입력 신호로 범위 제한하기',
+  nodes: [node('wave', 'source.sine-wave', '원래 파형', { amplitude: 3, frequency: 1, phase: 0, bias: 0 }), node('lower', 'source.constant', '아래 경계', { value: -1 }), node('upper', 'source.constant', '위 경계', { value: 1 }), node('limit', 'nonlinear.saturation-dynamic', '동적 포화', {}), node('original', 'sink.scope', '원래 파형', {}), node('limited', 'sink.scope', '제한한 파형', {})],
+  edges: [edge('wave-limit', 'wave', 'limit', 'in'), edge('lower-limit', 'lower', 'limit', 'lower'), edge('upper-limit', 'upper', 'limit', 'upper'), edge('wave-original', 'wave', 'original', 'in'), edge('limit-limited', 'limit', 'limited', 'in')],
+  execution: { mode: 'discrete', startTime: 0, stopTime: 2, step: .05 },
+  layout: { wave: { x: 40, y: 20 }, lower: { x: 40, y: 170 }, upper: { x: 40, y: 320 }, limit: { x: 340, y: 150 }, original: { x: 650, y: 20 }, limited: { x: 650, y: 220 } },
+  notes: '출력은 max(-1,min(1,3sin(2πt)))입니다. 경계도 입력 신호로 연결하므로 값을 바꾸어 다시 계산할 수 있습니다. 시간에 따라 변하는 불연속 신호를 연속 ODE 미분 입력에 연결하는 기능은 후속 사건 검증 단계입니다.',
+} });
+EXAMPLES.push({ id: 'nd-lookup', category: 'advanced', title: '3차원 표에서 값 찾기', description: 'x+2y+3z를 기록한 표를 세 좌표로 보간하면 3.25가 됩니다.', model: {
+  schemaVersion: 1, modelId: 'nd-lookup', name: '3차원 표에서 값 찾기',
+  nodes: [node('query', 'source.constant', '조회 좌표', { value: [.5, .25, .75] }), node('table', 'lookup.nd', '3차원 조회 표', { rank: 3, axis1: [0, 1], axis2: [0, 1], axis3: [0, 1], table: [0, 3, 2, 5, 1, 4, 3, 6], interpolation: 'linear', outside: 'error' }), node('result', 'sink.display', '보간 결과', {})],
+  edges: [edge('query-table', 'query', 'table', 'in'), edge('table-result', 'table', 'result', 'in')],
+  execution: { mode: 'static', startTime: 0, stopTime: 0, step: .1 }, layout: { query: { x: 40, y: 120 }, table: { x: 320, y: 120 }, result: { x: 620, y: 120 } },
+  notes: '표 값의 마지막 축 z가 가장 빠르게 변합니다. 조회 좌표는 벡터이고 출력은 scalar입니다. 3차원 신호 자체를 만드는 기능과 구분하며 표 크기는 1,024개 값 이하입니다.',
+} });
+EXAMPLES.push({ id: 'matrix-inspection', category: 'advanced', title: '행렬 구조와 영이 아닌 값', description: 'AᵀA와 영이 아닌 원소의 인덱스·개수를 함께 확인합니다.', model: {
+  schemaVersion: 1, modelId: 'matrix-inspection', name: '행렬 구조와 영이 아닌 값',
+  nodes: [node('matrix', 'source.constant', '행렬 A', { value: [[0, 5], [4, 0]] }), node('square', 'matrix.square', 'AᵀA', {}), node('find', 'matrix.find-nonzero', '영이 아닌 값', { indexBase: 0 }), node('gram', 'sink.display', '행렬 곱', {}), node('indices', 'sink.display', '인덱스', {}), node('count', 'sink.display', '개수', {})],
+  edges: [edge('matrix-square', 'matrix', 'square', 'in'), edge('matrix-find', 'matrix', 'find', 'in'), edge('square-gram', 'square', 'gram', 'in'), { id: 'find-indices', source: { nodeId: 'find', portId: 'indices' }, target: { nodeId: 'indices', portId: 'in' } }, { id: 'find-count', source: { nodeId: 'find', portId: 'count' }, target: { nodeId: 'count', portId: 'in' } }],
+  execution: { mode: 'static', startTime: 0, stopTime: 0, step: .1 }, layout: { matrix: { x: 40, y: 160 }, square: { x: 320, y: 10 }, find: { x: 320, y: 220 }, gram: { x: 620, y: 10 }, indices: { x: 620, y: 200 }, count: { x: 620, y: 360 } },
+  notes: 'AᵀA=[[16,0],[0,25]]입니다. column-major 인덱스는 [1,2,-1,-1], 유효 개수는 2입니다. CalcWeave의 Find Nonzero는 고정 폭과 개수로 결과를 표시하며 남는 자리는 -1입니다. 원본의 가변 길이 출력과 구분합니다.',
+} });
+
 export function createExample(id: string): CalcModel {
   return structuredClone((EXAMPLES.find(example => example.id === id) ?? EXAMPLES[0]).model);
 }

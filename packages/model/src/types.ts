@@ -1,7 +1,17 @@
-export const ENGINE_VERSION = '0.8.0-catalog';
+export const ENGINE_VERSION = '0.9.0-m8';
 
 export type ExecutionMode = 'static' | 'discrete' | 'continuous';
 export type BlockType =
+  | 'nonlinear.friction' | 'nonlinear.dead-zone-dynamic' | 'nonlinear.saturation-dynamic' | 'nonlinear.wrap-to-zero'
+  | 'logic.compare-constant' | 'logic.interval-dynamic' | 'logic.truth-table'
+  | 'math.signed-sqrt' | 'math.reciprocal-sqrt' | 'math.negate' | 'math.sine-wave-function' | 'math.increment'
+  | 'matrix.assign' | 'matrix.find-nonzero' | 'matrix.permute-dimensions' | 'matrix.squeeze' | 'matrix.expand-scalar'
+  | 'matrix.is-symmetric' | 'matrix.is-triangular' | 'matrix.square' | 'matrix.permute-rows-cols'
+  | 'route.manual-switch' | 'route.multiport-switch' | 'verify.assert' | 'verify.bounds'
+  | 'lookup.direct' | 'lookup.interpolate-prelookup' | 'lookup.dynamic' | 'lookup.nd'
+  | 'math.gain-matrix' | 'math.sum-inputs' | 'math.product-inputs' | 'logic.combine' | 'route.switch-threshold'
+  | 'vector.select-dynamic' | 'matrix.select-dynamic' | 'route.mux-inputs' | 'route.demux-widths'
+  | 'math.concatenate-inputs' | 'matrix.reshape-column-major' | 'reduce.axis'
   | 'math.bias' | 'math.sign' | 'math.cbrt' | 'math.expm1' | 'math.log1p' | 'math.log2' | 'math.exp2'
   | 'math.sinh' | 'math.cosh' | 'math.tanh' | 'math.asinh' | 'math.acosh' | 'math.atanh' | 'math.sinc' | 'math.polynomial'
   | 'math.power' | 'math.hypot' | 'math.atan2' | 'math.mod' | 'math.remainder'

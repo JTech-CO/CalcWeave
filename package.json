@@ -1,6 +1,6 @@
 {
   "name": "calcweave",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "private": true,
   "type": "module",
   "description": "CalcWeave: expanded mathematical and signal blocks with categorized learning examples",
@@ -37,7 +37,8 @@
     "verify:performance:catalog": "tsx scripts/verify-performance-m6.ts",
     "verify:roadmap": "tsx scripts/verify-roadmap.ts",
     "test:e2e:pages": "playwright test --config=playwright.pages.config.ts",
-    "verify:pages:browser": "tsx scripts/verify-public-pages.ts"
+    "verify:pages:browser": "tsx scripts/verify-public-pages.ts",
+    "verify:m8": "tsx scripts/verify-m8.ts"
   },
   "dependencies": {
     "@xyflow/react": "12.12.0",

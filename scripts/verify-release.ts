@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile, readdir, mkdir, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
-import { getReleaseCatalog } from '../packages/release/src';
+import { APP_VERSION, getReleaseCatalog } from '../packages/release/src';
 import { isOfflineAssetUrl, type OfflineManifest } from './offline-build';
 import { parseDeploymentBase } from './pages-base';
 import { PYTHON_TARGET } from '../packages/codegen-python/src/capabilities';
@@ -10,8 +10,8 @@ import { MODEL_PACKAGE_PERMISSIONS, MODEL_PACKAGE_REGISTRY } from '../packages/m
 
 const catalog = getReleaseCatalog(), checks: string[] = [];
 function check(condition: unknown, message: string): void { assert(condition, message); checks.push(message); }
-check(catalog.version === '0.8.1' && catalog.engineVersion === '0.8.0-catalog', 'app/engine release versions');
-check(catalog.blocks.length === 144 && new Set(catalog.blocks.map(block => block.id)).size === 144, 'single registry 144 unique executable definitions');
+check(catalog.version === APP_VERSION && /^\d+\.\d+\.\d+-(?:m\d+|catalog)$/.test(catalog.engineVersion), 'app/engine release versions');
+check(catalog.blocks.length >= 144 && new Set(catalog.blocks.map(block => block.id)).size === catalog.blocks.length, 'single registry retains catalog definitions with unique executable IDs');
 check(PYTHON_TARGET.blockIds.length === 51 && new Set(PYTHON_TARGET.blockIds).size === 51 && catalog.blocks.every(block => block.exportTargets.includes('python') === PYTHON_TARGET.blockIds.includes(block.id)), 'Python registry export metadata equals approved target capabilities');
 check(PYTHON_TARGET.supportedModes.join(',') === 'static,discrete', 'Python target does not claim continuous solver support');
 check(MODEL_PACKAGE_REGISTRY.length === catalog.blocks.length && MODEL_PACKAGE_PERMISSIONS.join(',') === 'local-model' && Object.isFrozen(MODEL_PACKAGE_REGISTRY), 'model packages bind approved immutable registry and local-only permissions');
@@ -65,5 +65,6 @@ check(workflow.includes('npx tsx scripts/verify-pages-target.ts') && targetValid
 check(workflow.includes("CALCWEAVE_BASE_PATH: ${{ format('{0}/', steps.pages.outputs.base_path) }}") && workflow.includes('npm run test:e2e:pages') && workflow.indexOf('Verify the exact Pages artifact') < workflow.indexOf('actions/upload-pages-artifact'), 'configured-path build and verification precede artifact publication');
 await mkdir('docs/evidence', { recursive: true });
 const evidence = { generatedAt: new Date().toISOString(), appVersion: catalog.version, engineVersion: catalog.engineVersion, scope, releaseId, checks, files: manifest.assets, totalStaticBytes: manifest.assets.reduce((total, asset) => total + asset.bytes, 0), publicDeploymentClaimed: false };
-await writeFile(`docs/evidence/pages-${scope === '/' ? 'root' : 'project'}-release-verification.json`, JSON.stringify(evidence, null, 2) + '\n');
+const evidenceStage = String(APP_VERSION) === '0.8.1' ? 'pages' : catalog.engineVersion.split('-').at(-1);
+await writeFile(`docs/evidence/${evidenceStage}-${scope === '/' ? 'root' : 'project'}-release-verification.json`, JSON.stringify(evidence, null, 2) + '\n');
 process.stdout.write(JSON.stringify({ checks: checks.length, staticFiles: manifest.assets.length, totalStaticBytes: evidence.totalStaticBytes, releaseId }) + '\n');

@@ -5,7 +5,7 @@ import { APP_VERSION } from '../../packages/release/src';
 import type { CalcModel } from '../../packages/model/src';
 import type { HistoryRecord } from '../../apps/web/src/run-history';
 
-const evidencePath = (name: string) => `docs/evidence/${APP_VERSION === '0.8.1' ? 'pages' : ENGINE_VERSION.split('-').at(-1)}-${name}`;
+const evidencePath = (name: string) => `docs/evidence/${String(APP_VERSION) === '0.8.1' ? 'pages' : ENGINE_VERSION.split('-').at(-1)}-${name}`;
 
 function delayModel(): CalcModel {
   return {

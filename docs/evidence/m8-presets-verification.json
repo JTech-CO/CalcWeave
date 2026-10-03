@@ -1,0 +1,384 @@
+{
+  "generatedAt": "2026-10-03T00:01:08.092Z",
+  "engineVersion": "0.9.0-m8",
+  "registryCount": 185,
+  "newDefinitions": 41,
+  "presets": 8,
+  "datasetSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+  "strictTypeScriptModes": [
+    "static",
+    "discrete",
+    "continuous"
+  ],
+  "checkedSamples": 56,
+  "actualGeneratedPrograms": 24,
+  "fixtures": [],
+  "presetEvidence": [
+    {
+      "id": "ground",
+      "blockIds": [
+        "source.constant"
+      ],
+      "parameters": {
+        "value": 0
+      },
+      "mode": "static",
+      "samples": 1,
+      "modelHash": "ebb9c4ce7ee0226deb2edcbce2a7360a55b90c5ef638f2b73ceb391a7500ae36",
+      "targetVersion": "typescript-m2-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "ground",
+      "blockIds": [
+        "source.constant"
+      ],
+      "parameters": {
+        "value": 0
+      },
+      "mode": "discrete",
+      "samples": 3,
+      "modelHash": "35a32b96e28e33930d482943f4118b2fe6108bc3ea7835fc03de057a55a44fff",
+      "targetVersion": "typescript-m2-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "ground",
+      "blockIds": [
+        "source.constant"
+      ],
+      "parameters": {
+        "value": 0
+      },
+      "mode": "continuous",
+      "samples": 3,
+      "modelHash": "b4841de58057cdb8b25ba7c81cb5164fb4031f03242808ff107b805b50d560c4",
+      "targetVersion": "typescript-m3-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "eulers-number",
+      "blockIds": [
+        "source.constant"
+      ],
+      "parameters": {
+        "value": 2.718281828459045
+      },
+      "mode": "static",
+      "samples": 1,
+      "modelHash": "6326a7d5be5666a4a37d8c267c7122b711c1be08a27b46bb82d85de44c441bdd",
+      "targetVersion": "typescript-m2-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "eulers-number",
+      "blockIds": [
+        "source.constant"
+      ],
+      "parameters": {
+        "value": 2.718281828459045
+      },
+      "mode": "discrete",
+      "samples": 3,
+      "modelHash": "53b4297d1d8ee5ce8336ab7de48d94b7f63ca01366936aec5af98b3f54c6bdb6",
+      "targetVersion": "typescript-m2-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "eulers-number",
+      "blockIds": [
+        "source.constant"
+      ],
+      "parameters": {
+        "value": 2.718281828459045
+      },
+      "mode": "continuous",
+      "samples": 3,
+      "modelHash": "f5e48c7b03098989eff21662d0a74ca065aa268dbd79aa169c1e3d559da515f6",
+      "targetVersion": "typescript-m3-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "one",
+      "blockIds": [
+        "source.constant"
+      ],
+      "parameters": {
+        "value": 1
+      },
+      "mode": "static",
+      "samples": 1,
+      "modelHash": "eed838e8a08381aab1d037f01d0525d2de41ab7ba5a5499c6cd4e867dceec13b",
+      "targetVersion": "typescript-m2-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "one",
+      "blockIds": [
+        "source.constant"
+      ],
+      "parameters": {
+        "value": 1
+      },
+      "mode": "discrete",
+      "samples": 3,
+      "modelHash": "0a9358083cdbcf642499a921075fc0163b85992ec4f8625e062cedc17585c8e3",
+      "targetVersion": "typescript-m2-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "one",
+      "blockIds": [
+        "source.constant"
+      ],
+      "parameters": {
+        "value": 1
+      },
+      "mode": "continuous",
+      "samples": 3,
+      "modelHash": "2e41aa13d91ef7f18c24499a23542e3cdcece1c34fb344d83e82c331aa2afc33",
+      "targetVersion": "typescript-m3-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "compare-zero",
+      "blockIds": [
+        "logic.compare-constant"
+      ],
+      "parameters": {
+        "constant": 0
+      },
+      "mode": "static",
+      "samples": 1,
+      "modelHash": "2212605e8c0c11dbcdee09d7764ca593e9721483b7bd205e3299d8fe78f811f7",
+      "targetVersion": "typescript-m8-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "compare-zero",
+      "blockIds": [
+        "logic.compare-constant"
+      ],
+      "parameters": {
+        "constant": 0
+      },
+      "mode": "discrete",
+      "samples": 3,
+      "modelHash": "ae6b976a2827d009d27ba81208422e809e2d72afee87de175b4f2e298b0c74ef",
+      "targetVersion": "typescript-m8-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "compare-zero",
+      "blockIds": [
+        "logic.compare-constant"
+      ],
+      "parameters": {
+        "constant": 0
+      },
+      "mode": "continuous",
+      "samples": 3,
+      "modelHash": "a7cbd5bf49dc9f12a1b04a549decf4cccf2fcd8536e8d9dd02079d86834f0283",
+      "targetVersion": "typescript-m8-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "increment",
+      "blockIds": [
+        "math.increment"
+      ],
+      "parameters": {
+        "delta": 1,
+        "clamp": "none"
+      },
+      "mode": "static",
+      "samples": 1,
+      "modelHash": "c262e2269314a2980eec6729f555565b2db0a5b340df302dfb80a9bc7768f8ff",
+      "targetVersion": "typescript-m8-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "increment",
+      "blockIds": [
+        "math.increment"
+      ],
+      "parameters": {
+        "delta": 1,
+        "clamp": "none"
+      },
+      "mode": "discrete",
+      "samples": 3,
+      "modelHash": "fb05cff95a26e42bae6084eaf9f58a4b6f07d8bd24773ad7568aef6cf61470df",
+      "targetVersion": "typescript-m8-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "increment",
+      "blockIds": [
+        "math.increment"
+      ],
+      "parameters": {
+        "delta": 1,
+        "clamp": "none"
+      },
+      "mode": "continuous",
+      "samples": 3,
+      "modelHash": "f4270cf6c05a2c168a15fb24bb2d26d9bbcfaf76215dbee5256bd7267c5f2a31",
+      "targetVersion": "typescript-m8-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "decrement",
+      "blockIds": [
+        "math.increment"
+      ],
+      "parameters": {
+        "delta": -1,
+        "clamp": "none"
+      },
+      "mode": "static",
+      "samples": 1,
+      "modelHash": "11970505debf5ad588fd86d8b118aff46566472a0ec847eaffe6b7f0ffce3a62",
+      "targetVersion": "typescript-m8-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "decrement",
+      "blockIds": [
+        "math.increment"
+      ],
+      "parameters": {
+        "delta": -1,
+        "clamp": "none"
+      },
+      "mode": "discrete",
+      "samples": 3,
+      "modelHash": "5be53de3c3e53d369941cb4fb45aeaf1a83ec359b55f1f44931ab66494fd3a2f",
+      "targetVersion": "typescript-m8-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "decrement",
+      "blockIds": [
+        "math.increment"
+      ],
+      "parameters": {
+        "delta": -1,
+        "clamp": "none"
+      },
+      "mode": "continuous",
+      "samples": 3,
+      "modelHash": "865cbb73f6a4cd4131978ea4e59c2de3e7d4ff6ee6bcfa1282bb71c0622df7c5",
+      "targetVersion": "typescript-m8-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "decrement-to-zero",
+      "blockIds": [
+        "math.increment"
+      ],
+      "parameters": {
+        "delta": -1,
+        "clamp": "zero"
+      },
+      "mode": "static",
+      "samples": 1,
+      "modelHash": "07c9d825af3c30b0c063eb64fce5fbe6d3f2476bfa0f03482583be1569e92d2e",
+      "targetVersion": "typescript-m8-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "decrement-to-zero",
+      "blockIds": [
+        "math.increment"
+      ],
+      "parameters": {
+        "delta": -1,
+        "clamp": "zero"
+      },
+      "mode": "discrete",
+      "samples": 3,
+      "modelHash": "a067a63ce00b74882b710f2aee613764c96ac902cbe818bb9e712239e8582315",
+      "targetVersion": "typescript-m8-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "decrement-to-zero",
+      "blockIds": [
+        "math.increment"
+      ],
+      "parameters": {
+        "delta": -1,
+        "clamp": "zero"
+      },
+      "mode": "continuous",
+      "samples": 3,
+      "modelHash": "6533cb7c9dd17b31ceedc550e7584478207453edfa7375600241eb487a078bbf",
+      "targetVersion": "typescript-m8-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "square-root",
+      "blockIds": [
+        "math.sqrt"
+      ],
+      "parameters": {},
+      "mode": "static",
+      "samples": 1,
+      "modelHash": "6f69550bd119ab3b71b16bea224f359c939c3e9bf7dcbe3590e1c35783d38739",
+      "targetVersion": "typescript-m2-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "square-root",
+      "blockIds": [
+        "math.sqrt"
+      ],
+      "parameters": {},
+      "mode": "discrete",
+      "samples": 3,
+      "modelHash": "ea40b793c563959225d15d1444b5f3db470e3f70a3040935e35efdd96d0fd0a4",
+      "targetVersion": "typescript-m2-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    },
+    {
+      "id": "square-root",
+      "blockIds": [
+        "math.sqrt"
+      ],
+      "parameters": {},
+      "mode": "continuous",
+      "samples": 3,
+      "modelHash": "d5a8f600d3ed24d4af9a50c6ac6153425ada5b26e5f39d6915d901c5a5b3fc43",
+      "targetVersion": "typescript-m3-v1",
+      "actualStandaloneTypeScript": true,
+      "independentOracle": true
+    }
+  ],
+  "failures": [],
+  "methodology": "Literal independent scalar/vector/matrix/boolean outputs in every declared mode. Every raw sample, JSON roundtrip, reversed insertion order, manifests and executed standalone TypeScript compared. Strict import-free ES2022 compilation per mode; failure codes identify original nodes and match generated programs. No MathWorks execution or full-option equivalence claimed.",
+  "fullSimulinkEquivalenceClaimed": false
+}
