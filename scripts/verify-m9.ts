@@ -9,7 +9,7 @@ import { M9_BLOCK_IDS, M9_BLOCK_PRESETS } from '../packages/block-library/src/m9
 import { compileModel } from '../packages/compiler/src';
 import { runModel } from '../packages/runtime/src';
 import { createExportManifest, exportTypeScript } from '../packages/codegen-ts/src';
-import { getPythonDiagnostics } from '../packages/codegen-python/src';
+import { getPythonDiagnostics, PYTHON_M7_TARGET } from '../packages/codegen-python/src';
 import { ENGINE_VERSION, ModelError, parseModelJson, serializeModel, type CalcModel, type RunResult, type SignalValue, type StateValue } from '../packages/model/src';
 import { M9_FIXTURES, M9_FAILURE_FIXTURES, M9_PRESET_FIXTURES } from '../tests/m9-fixtures';
 
@@ -82,7 +82,7 @@ async function verify(entry: Oracle) {
   assert.deepEqual(stable(await runModel(compileModel(parseModelJson(serializeModel(entry.model))))), stable(result));
   const reversed = structuredClone(entry.model); reversed.nodes.reverse(); reversed.edges.reverse(); assert.deepEqual(stable(await runModel(compileModel(reversed))), stable(result));
   const newNodes = compiled.nodes.filter(node => (M9_BLOCK_IDS as readonly string[]).includes(node.blockType));
-  const pythonDiagnostics = getPythonDiagnostics(compiled); assert(newNodes.length > 0);
+  const pythonDiagnostics = getPythonDiagnostics(compiled, PYTHON_M7_TARGET); assert(newNodes.length > 0);
   for (const node of newNodes) assert(pythonDiagnostics.some(item => item.nodeId === node.id), `${entry.name}/${node.id}: unsupported Python node must be identified`);
   const parameters = Object.fromEntries(newNodes.map(node => [node.id, { blockType: node.blockType, parameters: node.parameters, sampleTime: node.sampleTime }]));
   return { id: entry.name, ...(entry.presetId ? { presetId: entry.presetId } : {}), mode: entry.model.execution.mode, blockIds: [...new Set(newNodes.map(node => node.blockType))], parameters, samples: result.samples.length, maximumAbsoluteError, maximumScaledError, tolerance, exactSubnormalOracles: true, independentOracle: true, independentMemoryOracle: entry.expectedMemory !== undefined, modelHash: manifest.modelHash, targetVersion: manifest.targetVersion, actualStandaloneTypeScript: true, finalStateAndMemoryParity: true, jsonRoundtrip: true, insertionOrderIndependent: true, pythonUnsupportedNodeDiagnostics: true };
@@ -103,6 +103,6 @@ for (const entry of M9_FAILURE_FIXTURES) {
   }
   failures.push({ id: entry.name, modelHash: manifest.modelHash, diagnostics: failure.diagnostics, ...(failure.partialResult ? { partialSamples: failure.partialResult.samples.length } : {}), actualStandaloneFailureParity: true, partialStateAndMemoryParity: !!failure.partialResult });
 }
-const report = { generatedAt: new Date().toISOString(), engineVersion: ENGINE_VERSION, registryCount: blockRegistry.length, predecessorDefinitions: predecessor.length, newDefinitions: M9_BLOCK_IDS.length, presets: M9_BLOCK_PRESETS.length, datasetSha256: createHash('sha256').update(await readFile('dataset/Simulink_Basic_Blocks_R2024b.md')).digest('hex'), strictTypeScriptModes: [...strictModes], checkedSamples, actualGeneratedPrograms: ordinal, fixtures, presetEvidence, failures, methodology: 'Independent raw sample-series oracles and selected literal final-memory oracles. JSON roundtrip, reversed insertion order, actual standalone TypeScript, exact manifest and full finalState/stateMemory parity. Failure diagnostics and partial-state rollback compared with generated programs. All 185 predecessor definition objects preserved. Python remains its approved subset; M9 nodes explicitly rejected. No MathWorks seed sequence or full-option equivalence claimed.', fullSimulinkEquivalenceClaimed: false };
+const report = { pythonDiagnosticTarget: PYTHON_M7_TARGET.id, generatedAt: new Date().toISOString(), engineVersion: ENGINE_VERSION, registryCount: blockRegistry.length, predecessorDefinitions: predecessor.length, newDefinitions: M9_BLOCK_IDS.length, presets: M9_BLOCK_PRESETS.length, datasetSha256: createHash('sha256').update(await readFile('dataset/Simulink_Basic_Blocks_R2024b.md')).digest('hex'), strictTypeScriptModes: [...strictModes], checkedSamples, actualGeneratedPrograms: ordinal, fixtures, presetEvidence, failures, methodology: 'Independent raw sample-series oracles and selected literal final-memory oracles. JSON roundtrip, reversed insertion order, actual standalone TypeScript, exact manifest and full finalState/stateMemory parity. Failure diagnostics and partial-state rollback compared with generated programs. All 185 predecessor definition objects preserved. Python remains its approved subset; M9 nodes explicitly rejected. No MathWorks seed sequence or full-option equivalence claimed.', fullSimulinkEquivalenceClaimed: false };
 await writeFile(`docs/evidence/${evidenceName}.json`, JSON.stringify(report, null, 2) + '\n');
 process.stdout.write(JSON.stringify({ fixtures: fixtures.length, presetFixtures: presetEvidence.length, failureFixtures: failures.length, checkedSamples, actualGeneratedPrograms: ordinal, newDefinitions: M9_BLOCK_IDS.length, registryCount: blockRegistry.length, strictTypeScriptModes: [...strictModes] }) + '\n');

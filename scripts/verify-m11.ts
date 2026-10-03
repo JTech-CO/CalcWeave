@@ -8,7 +8,7 @@ import { blockRegistry } from '../packages/block-library/src';
 import { M11_BLOCK_IDS } from '../packages/block-library/src/m11';
 import { compileModel } from '../packages/compiler/src';
 import { createExportManifest, exportTypeScript } from '../packages/codegen-ts/src';
-import { getPythonDiagnostics } from '../packages/codegen-python/src';
+import { getPythonDiagnostics, PYTHON_M7_TARGET } from '../packages/codegen-python/src';
 import { ENGINE_VERSION, ModelError, parseModelJson, serializeModel, type CalcModel, type RunResult, type TypedSignal } from '../packages/model/src';
 import { runModel } from '../packages/runtime/src';
 import { M11_INDEPENDENT_DEFINITION_FIXTURES, M11_INDEPENDENT_BOUNDARY_FIXTURES, M11_INDEPENDENT_FAILURE_FIXTURES, type M11IndependentFixture } from '../tests/m11-independent-fixtures';
@@ -96,7 +96,7 @@ async function verify(entry: M11IndependentFixture) {
   const roundtrip = compileModel(parseModelJson(serializeModel(entry.model))); assert.equal(roundtrip.semanticKey, compiled.semanticKey); compare(stable(await runModel(roundtrip)), stable(result), `${entry.name}/JSON full contract`);
   const reversed = structuredClone(entry.model); reversed.nodes.reverse(); reversed.edges.reverse(); const reordered = compileModel(reversed); assert.equal(reordered.semanticKey, compiled.semanticKey); compare(stable(await runModel(reordered)), stable(result), `${entry.name}/reversed insertion full contract`);
   const newNodes = compiled.nodes.filter(node => (M11_BLOCK_IDS as readonly string[]).includes(node.blockType)); assert(newNodes.length > 0);
-  const pythonDiagnostics = getPythonDiagnostics(compiled); for (const node of newNodes) assert(pythonDiagnostics.some(diagnostic => diagnostic.nodeId === node.id), `${entry.name}/${node.id}: unsupported Python original node diagnostic`);
+  const pythonDiagnostics = getPythonDiagnostics(compiled, PYTHON_M7_TARGET); for (const node of newNodes) assert(pythonDiagnostics.some(diagnostic => diagnostic.nodeId === node.id), `${entry.name}/${node.id}: unsupported Python original node diagnostic`);
   return { id: entry.name, ...(entry.presetId ? { presetId: entry.presetId } : {}), ...(entry.sourceIds ? { sourceIds: entry.sourceIds } : {}), mode: entry.model.execution.mode,
     blockIds: [...new Set(newNodes.map(node => node.blockType))], parameters: Object.fromEntries(newNodes.map(node => [node.id, { blockType: node.blockType, parameters: node.parameters, sampleTime: node.sampleTime }])),
     samples: result.samples.length, maximumAbsoluteError, maximumScaledError, float64Tolerance: tolerance, typedMetadataTagsAndStringsExact: true, float32BitTrueExact: true, exactZerosAndSubnormals: true,
@@ -127,7 +127,7 @@ for (const entry of M11_INDEPENDENT_FAILURE_FIXTURES) {
   try { generated.run(); assert.fail('Generated program must fail'); } catch(error) {const actual=error as {diagnostics:unknown;partialResult:RunResult};assert.deepEqual(actual.diagnostics,failed.diagnostics);assert(actual.partialResult);compare(stable(actual.partialResult),stable(failed.partialResult!),entry.name+'/full partial parity');}
   failures.push({name:entry.name,phase:'runtime',diagnosticCode:entry.code,actualTypeScriptExecuted:true,strictProgramIndividuallyChecked:individuallyStrictChecked,fullPartialParity:true});
 }
-const report = { schemaVersion:1,engineVersion:ENGINE_VERSION,generatedAt:new Date().toISOString(),registryDefinitions:blockRegistry.length,addedDefinitions:M11_BLOCK_IDS.length,predecessorDefinitionsUnchanged:245,fullSimulinkEquivalenceClaimed:false,
+const report = { pythonDiagnosticTarget: PYTHON_M7_TARGET.id, schemaVersion:1,engineVersion:ENGINE_VERSION,generatedAt:new Date().toISOString(),registryDefinitions:blockRegistry.length,addedDefinitions:M11_BLOCK_IDS.length,predecessorDefinitionsUnchanged:245,fullSimulinkEquivalenceClaimed:false,
  counts:{rawFixtures:M11_INDEPENDENT_DEFINITION_FIXTURES.length+M11_INDEPENDENT_BOUNDARY_FIXTURES.length,definitionFixtures:48,boundaryFixtures:M11_INDEPENDENT_BOUNDARY_FIXTURES.length,failures:failures.length,modeExecutions:fixtures.length,actualTypeScript:ordinal,strictTypeScriptPrograms:strictPrograms,checkedSamples,exactTypedCells}, tolerance,fixtures,failures };
 await writeFile(join('docs/evidence',evidenceName+'.json'),JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report.counts));

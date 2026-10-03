@@ -59,3 +59,7 @@ M15는 canonical registry의 기존 exportTargets를 수정하지 않고 버전 
 | [M14 actual TS](evidence/m14-verification.json) | `6886130299827a0d52e99533c0b0cf0ea827e27b5bceb56ca687e18fa4954f65` |
 
 공유 registry projection SHA와 위 full registry JSON SHA는 각각의 승인 대상이 다르다. 서명·migration 보고서·생성 manifest의 model/artifact hash도 구분한다. 생성 코드에는 inert bounded data만 포함하고 임의 callback/code/module upload를 실행하지 않는다. 파일/ZIP/XML/MDL/MAT의 자원·구조·원본 위치를 제한하고 HTML은 escaping하며 서버 API·DB·추가 개인정보·시크릿·외부 권리를 도입하거나 추정하지 않는다.
+
+## 이전 타깃 검사와 배포 CI
+
+첫 공개 CI는 M10의 uint64 source가 Python에서 미지원이라는 과거 부정 검사에서 실패했고 deploy는 수행하지 않았다. M15가 해당 scalar를 실제 지원하므로, catalog와 M8~M12의 역사 검사는 당시 승인한 `python-m7-v1`에 명시적으로 고정했다. 현재69개 지원은 M15의 별도142개 actual Python 검사로 확인한다. 생산 코드와 동결한 과거25개 자료는 바뀌지 않았다. 수정한 M10의 실제 TS209개/484표본과 M11의138개/419표본은 로컬에서 통과했다. 최종 전체 CI·공개 파일 검증은 후속 기록을 따른다. [첫 CI](evidence/m15-actions-initial-failure.json)·[타깃 계약 분리 증거](evidence/m15-ci-target-regression-fix.json).
