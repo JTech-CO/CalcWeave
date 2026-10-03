@@ -47,6 +47,7 @@ import { recordLocalOperation } from './local-operations';
 import { LocalDataDialog } from './components/LocalDataDialog';
 import { CodeExportDialog, type CodeTarget } from './components/CodeExportDialog';
 import { ModelPackageDialog } from './components/ModelPackageDialog';
+import { InteropImportDialog } from './components/InteropImportDialog';
 import { ModelImportReportDialog, type ModelImportReport } from './components/ModelImportReportDialog';
 import { ExampleCatalog } from './components/ExampleCatalog';
 import './styles.css';
@@ -175,6 +176,7 @@ function Workspace() {
   const [managementOpen, setManagementOpen] = useState(false);
   const [codeExportOpen, setCodeExportOpen] = useState(false);
   const [packageOpen, setPackageOpen] = useState(false);
+  const [interopOpen, setInteropOpen] = useState(false);
   const [analysisOpen, setAnalysisOpen] = useState(false);
   const [importReport, setImportReport] = useState<ModelImportReport | null>(null);
   const [importReportOpen, setImportReportOpen] = useState(false);
@@ -566,6 +568,20 @@ function Workspace() {
         }
         setNotice(archive ? 'TypeScript 독립 실행 묶음을 다운로드했습니다.' : '현재 모델의 model.ts를 다운로드했습니다.'); return;
       }
+      if (target === 'wasm') {
+        const api = await import('../../../packages/codegen-wasm/src');
+        const bytes = Uint8Array.from(api.generateWasm(compiled)), manifest = api.createWasmManifest(compiled, bytes);
+        let payload: Blob, filename: string;
+        if (!archive) { payload = new Blob([bytes], { type: 'application/wasm' }); filename = 'model.wasm'; }
+        else {
+          const completed = lastRun?.semanticKey === compiled.semanticKey && lastRun.result.status === 'completed' ? lastRun.result : undefined;
+          const files: Record<string, string | Uint8Array> = { 'model.wasm': bytes, 'runner.mjs': api.generateWasmRunner(compiled, bytes, manifest), 'model.cw.json': serializeModel(compiled.model), 'manifest.json': JSON.stringify(manifest, null, 2), 'README.md': '# CalcWeave WASM execution\n\nRun with a WebAssembly Core 1 JavaScript host (Node.js ES2022). The self-contained runner embeds the same model.wasm bytes.\n\nnode --input-type=module -e "import(\'./runner.mjs\').then(async m=>console.log(JSON.stringify(await m.run())))"\n\nmanifest.json records the exact model/artifact SHA-256, ABI, units, sample grid and resource limits. Only the selected scalar DAG profile is supported; this is not full Simulink or C/C++ equivalence.\n' };
+          if (completed) { const { elapsedMs: _elapsedMs, ...expected } = completed; files['expected-output.json'] = JSON.stringify(expected, null, 2); }
+          payload = new Blob([createExportArchive(files)], { type: 'application/zip' }); filename = 'CalcWeave-wasm-execution.zip';
+        }
+        const url = URL.createObjectURL(payload), anchor = document.createElement('a'); anchor.href = url; anchor.download = filename; anchor.click(); window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+        setNotice(archive ? 'WASM 모듈·독립 실행 코드·ABI·해시 묶음을 다운로드했습니다.' : '현재 모델의 WASM 모듈을 다운로드했습니다. 실행 묶음에서 ABI와 실행 코드를 함께 보관할 수 있습니다.'); return;
+      }
       const api = await import('../../../packages/codegen-python/src');
       const targetDiagnostics = api.getPythonDiagnostics(compiled);
       if (targetDiagnostics.length) throw new ModelError(targetDiagnostics);
@@ -643,7 +659,7 @@ function Workspace() {
     if (event.code !== 'Space' && event.key !== ' ') return;
     if (event.defaultPrevented || event.nativeEvent.isComposing || event.nativeEvent.keyCode === 229
       || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey
-      || quickInsertOpen || recovery || helpOpen || codeExportOpen || packageOpen || importReportOpen || isCanvasControl(event.target)) return;
+      || quickInsertOpen || recovery || helpOpen || codeExportOpen || packageOpen || interopOpen || importReportOpen || isCanvasControl(event.target)) return;
     // Capture Space before React Flow can select a focused block or scroll the page.
     event.preventDefault();
     event.stopPropagation();
@@ -668,7 +684,7 @@ function Workspace() {
       if (event.isComposing) return;
       const target = event.target as HTMLElement;
       // Native dialogs own focus and Escape; canvas commands must not edit behind them.
-      if (quickInsertOpen || recovery || helpOpen || managementOpen || codeExportOpen || packageOpen || importReportOpen || analysisOpen) return;
+      if (quickInsertOpen || recovery || helpOpen || managementOpen || codeExportOpen || packageOpen || interopOpen || importReportOpen || analysisOpen) return;
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); setQuickInsertOpen(true); return; }
       if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') { event.preventDefault(); void run(); }
       if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement || target.isContentEditable) return;
@@ -682,7 +698,7 @@ function Workspace() {
       if (event.key === 'Escape') { setExamplesOpen(false); setHelpOpen(false); if (quickInsertOpen) setQuickInsertOpen(false); else if (recovery) setRecovery(null); else if (busy) cancel(); }
     };
     window.addEventListener('keydown', listener); return () => window.removeEventListener('keydown', listener);
-  }, [run, undo, redo, removeSelection, copyBlocks, pasteBlocks, quickInsertOpen, recovery, helpOpen, managementOpen, codeExportOpen, packageOpen, importReportOpen, analysisOpen, busy, cancel]);
+  }, [run, undo, redo, removeSelection, copyBlocks, pasteBlocks, quickInsertOpen, recovery, helpOpen, managementOpen, codeExportOpen, packageOpen, interopOpen, importReportOpen, analysisOpen, busy, cancel]);
 
   const displayPlotId = lastRun?.outputIds.includes(plotId) ? plotId : lastRun?.outputIds[0] ?? '';
   const runOutputLabels = useMemo(() => lastRun ? outputLabels(lastRun.model) : {}, [lastRun]);
@@ -713,6 +729,7 @@ function Workspace() {
       <nav className="header-actions" aria-label="파일과 보기">
         <button className="button subtle analysis-trigger" onClick={() => setAnalysisOpen(true)}><Icon name="chart"/><span>분석</span></button>
         <button className="button subtle" onClick={() => fileRef.current?.click()}><Icon name="upload"/>가져오기</button>
+        <button className="button subtle" disabled={busy} onClick={() => setInteropOpen(true)}><Icon name="upload"/><span>외부 형식 가져오기</span></button>
         <button className="button subtle" onClick={downloadModel}><Icon name="download"/>모델 다운로드</button>
         <button className="button subtle code-download" title="현재 모델의 검증된 실행 계획을 독립 TypeScript 코드로 다운로드합니다." onClick={downloadCode}><span className="code-icon" aria-hidden="true">&lt;/&gt;</span><span>코드 다운로드<span className="code-badge">TS</span></span></button>
         <button className="icon-button" aria-label="코드 타깃 선택" title="TypeScript 또는 Python의 지원 범위를 확인하고 코드를 내보냅니다." onClick={() => setCodeExportOpen(true)}><Icon name="chevron-down" size={16}/></button>
@@ -755,6 +772,7 @@ function Workspace() {
     {analysisOpen && <AnalysisDialog model={rootModel} invalidDraft={invalidNumericCount > 0} busy={busy} onClose={() => setAnalysisOpen(false)}/>}
     {packageOpen && <ModelPackageDialog model={rootModel} busy={busy} invalidDraft={invalidNumericCount > 0} onClose={() => setPackageOpen(false)} onImport={(next, checkedDiagnostics) => { replaceRoot(next); setSelectedIds([]); setSelectedEdgeIds([]); setDiagnostics(checkedDiagnostics); if (checkedDiagnostics.length) setResultsTab('diagnostics'); setNotice(`${next.name} 공유 모델을 가져왔습니다. 실행 취소로 이전 모델로 돌아갈 수 있습니다.`); window.requestAnimationFrame(() => void fitView({ ...READABLE_VIEW, duration: 0 })); }}/>}
     {importReportOpen && importReport && <ModelImportReportDialog report={importReport} onClose={() => setImportReportOpen(false)}/>}
+    {interopOpen && <InteropImportDialog model={rootModel} busy={busy} invalidDraft={invalidNumericCount > 0} onClose={() => setInteropOpen(false)} onApplyModel={next => { if (busy) throw new Error('계산이 끝난 뒤 가져오세요.'); replaceRoot(structuredClone(next)); setSelectedIds([]); setSelectedEdgeIds([]); setDiagnostics([]); setNotice(`${next.name} 외부 도식을 가져왔습니다. 실행 취소로 이전 모델을 복원할 수 있습니다.`); window.requestAnimationFrame(() => void fitView({ ...READABLE_VIEW, duration: 0 })); }} onApplyDataset={dataset => { if (busy) throw new Error('계산이 끝난 뒤 가져오세요.'); if ((rootRef.current.datasets?.length ?? 0) >= 8) throw new Error('모델에는 최대8개 데이터표를 보관할 수 있습니다.'); if (rootRef.current.datasets?.some(value => value.id === dataset.id)) throw new Error('같은 ID의 데이터표가 있습니다. 기존 표를 확인해 주세요.'); commitRoot(current => ({ ...current, datasets: [...current.datasets ?? [], structuredClone(dataset)] })); setNotice(`${dataset.name} MAT 데이터표를 추가했습니다. 실행 취소로 되돌릴 수 있습니다.`); }}/>}
     {helpOpen && <SupportDialog onClose={() => setHelpOpen(false)} onManage={() => { setHelpOpen(false); setManagementOpen(true); }}/>} 
   </div></NumericValidityContext.Provider>;
 }

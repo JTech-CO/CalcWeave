@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { promisify } from 'node:util';
 import { describe, expect, it } from 'vitest';
 import { compileModel } from '../packages/compiler/src';
-import { createPythonExportManifest, exportPython, getPythonDiagnostics, PYTHON_TARGET } from '../packages/codegen-python/src';
+import { createPythonExportManifest as currentManifest, exportPython as currentExport, getPythonDiagnostics as currentDiagnostics, PYTHON_M7_TARGET as PYTHON_TARGET } from '../packages/codegen-python/src';
 import { importDataset } from '../packages/data/src';
 import { ModelError, type CalcModel, type CompiledModel, type RunResult, type SubsystemDefinition } from '../packages/model/src';
 import { runModel } from '../packages/runtime/src';
@@ -14,6 +14,10 @@ import { block, connect, M1_ENGINE_FIXTURES, M1_FAILURE_FIXTURES, staticModel } 
 import { m2Edge, M2_ENGINE_FIXTURES, m2Model, m2Node, m2Unary, rateTransitionFixture, seededFixture, unsignedFixture } from './m2-engine-fixtures';
 
 const execute = promisify(execFile);
+// Historical contract remains executable without changing its frozen evidence.
+const createPythonExportManifest = (compiled: CompiledModel) => currentManifest(compiled, PYTHON_TARGET);
+const exportPython = (compiled: CompiledModel, manifest?: ReturnType<typeof currentManifest>) => currentExport(compiled, manifest, PYTHON_TARGET);
+const getPythonDiagnostics = (compiled: CompiledModel) => currentDiagnostics(compiled, PYTHON_TARGET);
 // These tests execute the generated program with an actual independent Python interpreter.
 const python = ['python', 'python3', 'py'].find(command => {
   try { return /^Python 3\.(1[0-9]|[2-9][0-9])\./.test(execFileSync(command, ['--version'], { encoding: 'utf8', windowsHide: true }).trim()); }

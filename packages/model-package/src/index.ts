@@ -2,6 +2,8 @@ import { z } from 'zod';
 import { blockRegistry } from '../../block-library/src';
 import { compileModel } from '../../compiler/src';
 import { ENGINE_VERSION, MODEL_LIMITS, ModelError, parseModel, type CalcModel, type Diagnostic } from '../../model/src';
+import { PACKAGE_MIGRATION_BASELINES, type PackageMigrationReport } from './migrations';
+export { PACKAGE_MIGRATION_BASELINES, type PackageMigrationReport } from './migrations';
 
 /** A declarative model container. It cannot extend the executable block registry. */
 export const MODEL_PACKAGE_FORMAT = 'calcweave-model-package' as const;
@@ -21,6 +23,7 @@ export interface ModelPackageInspection {
   modelHash: string;
   diagnostics: Diagnostic[];
   executable: boolean;
+  migration?: PackageMigrationReport;
 }
 
 const identifier = z.string().min(1).max(64).regex(/^[A-Za-z][A-Za-z0-9_-]*$/);
@@ -151,10 +154,10 @@ function signedBytes(envelope: Omit<PackageEnvelope, 'signature'>): Uint8Array<A
   return encoder.encode(`CALCWEAVE-MODEL-PACKAGE\u0000${canonicalJson(envelope)}`);
 }
 function checkContract(envelope: PackageEnvelope): void {
-  if (envelope.packageVersion !== MODEL_PACKAGE_VERSION || envelope.modelSchemaVersion !== 1 || envelope.engineVersion !== ENGINE_VERSION) {
-    fail('PACKAGE_VERSION_UNSUPPORTED', '패키지·모델·엔진 버전이 현재 CalcWeave와 일치해야 합니다.');
+  if (envelope.packageVersion !== MODEL_PACKAGE_VERSION || envelope.modelSchemaVersion !== 1 || envelope.engineVersion !== ENGINE_VERSION && !PACKAGE_MIGRATION_BASELINES.some(baseline => baseline.engineVersion === envelope.engineVersion)) {
+    fail('PACKAGE_VERSION_UNSUPPORTED', '현재 형식 또는 명시적으로 승인된 이전 엔진의 schema1 패키지만 가져올 수 있습니다.');
   }
-  if (canonicalJson(envelope.registry) !== canonicalJson(MODEL_PACKAGE_REGISTRY)) {
+  if (envelope.engineVersion === ENGINE_VERSION && canonicalJson(envelope.registry) !== canonicalJson(MODEL_PACKAGE_REGISTRY)) {
     fail('PACKAGE_REGISTRY_MISMATCH', '패키지는 현재 승인된 블럭·포트·파라미터 계약만 사용할 수 있습니다.');
   }
   if (envelope.permissions.length !== 1 || envelope.permissions[0] !== 'local-model') {
@@ -209,21 +212,34 @@ export async function inspectModelPackage(text: string): Promise<ModelPackageIns
   } catch { fail('INVALID_PACKAGE_SIGNATURE', '패키지 공개키 또는 서명이 유효하지 않습니다.'); }
   if (!verified) fail('INVALID_PACKAGE_SIGNATURE', '패키지 서명이 일치하지 않습니다.');
   const fingerprint = await hashBytes(publicKey);
+  let migration: PackageMigrationReport | undefined;
+  if (envelope.engineVersion !== ENGINE_VERSION) {
+    // Verify the original signed payload before allowing a known legacy registry migration.
+    const originalRegistrySha256 = await hashBytes(encoder.encode(canonicalJson(envelope.registry)));
+    const baseline = PACKAGE_MIGRATION_BASELINES.find(entry => entry.engineVersion === envelope.engineVersion);
+    if (!baseline || envelope.registry.length !== baseline.entries || originalRegistrySha256 !== baseline.registrySha256) fail('PACKAGE_REGISTRY_MISMATCH', '이전 패키지의 블럭 계약이 승인된 기준 snapshot과 일치하지 않습니다.');
+    const currentById = new Map<string, unknown>(MODEL_PACKAGE_REGISTRY.map(entry => [entry.blockId, entry]));
+    if (envelope.registry.some(entry => canonicalJson(entry) !== canonicalJson(currentById.get(entry.blockId)))) fail('PACKAGE_MIGRATION_CONTRACT_CHANGED', '이전 패키지의 포트·파라미터 계약을 현재 엔진에 그대로 대응할 수 없습니다.');
+    const originalIds = new Set(envelope.registry.map(entry => entry.blockId));
+    if ([model, ...(model.subsystems ?? [])].some(graph => graph.nodes.some(node => !originalIds.has(node.blockType)))) fail('PACKAGE_MIGRATION_UNDECLARED_BLOCK', '이전 서명 registry에 없는 블럭을 변환할 수 없습니다.');
+    migration = { fromEngineVersion: envelope.engineVersion, toEngineVersion: ENGINE_VERSION, originalRegistrySha256, currentRegistrySha256: await hashBytes(encoder.encode(canonicalJson(MODEL_PACKAGE_REGISTRY))), originalModelHash: envelope.modelHash, normalizedModelHash: await hashBytes(encoder.encode(canonicalJson(model))), currentSemanticHash: '', schemaVersion: 1, signatureAppliesTo: 'original-payload', originalIntegrityVerified: true, originalBytesMustBeRetained: true, normalizedModelChanged: canonicalJson(envelope.model) !== canonicalJson(model), currentCompilationPassed: false, numericalParityWithOriginalEngineVerified: false, optionCoercionPerformed: false };
+  }
   let diagnostics: Diagnostic[] = [];
-  try { compileModel(model); } catch (error) {
+  try { const compiled = compileModel(model); if (migration) { migration.currentSemanticHash = await hashBytes(encoder.encode(compiled.semanticKey)); migration.currentCompilationPassed = true; } } catch (error) {
     if (!(error instanceof ModelError)) fail('PACKAGE_VALIDATION_FAILED', '패키지 모델을 검증할 수 없습니다.');
     diagnostics = error.diagnostics;
   }
-  return { model, fingerprint, packageVersion: envelope.packageVersion, modelHash: envelope.modelHash, diagnostics, executable: diagnostics.length === 0 };
+  return { model, fingerprint, packageVersion: envelope.packageVersion, modelHash: envelope.modelHash, diagnostics, executable: diagnostics.length === 0, ...(migration ? { migration } : {}) };
 }
 
 /** Call only with a fingerprint independently obtained from the intended sender. No trust is stored. */
-export async function acceptModelPackage(text: string, trustedFingerprint: string): Promise<CalcModel> {
+export async function acceptModelPackage(text: string, trustedFingerprint: string, options: { reviewedMigration?: boolean } = {}): Promise<CalcModel> {
   if (typeof trustedFingerprint !== 'string' || !/^[a-f0-9]{64}$/.test(trustedFingerprint)) {
     fail('PACKAGE_TRUST_REQUIRED', '발신자에게 별도로 확인한 SHA-256 공개키 지문 64자리를 입력해 주세요.');
   }
   const inspection = await inspectModelPackage(text);
   if (inspection.fingerprint !== trustedFingerprint) fail('PACKAGE_TRUST_MISMATCH', '별도로 확인한 공개키 지문과 패키지 서명 키가 일치하지 않습니다.');
+  if (inspection.migration && options.reviewedMigration !== true) fail('PACKAGE_MIGRATION_REVIEW_REQUIRED', '이전 엔진에서 가져오는 변환 보고서를 확인한 뒤 적용해 주세요.');
   if (!inspection.executable) throw new ModelError(inspection.diagnostics);
   return inspection.model;
 }

@@ -1,10 +1,14 @@
 # CalcWeave 기술 백서
 
-> 버전: v0.15 · 작성일: 2026-10-03 · 상태: 로컬 앱0.15.0·엔진0.15.0-m14·337 registry·M14 선택 수치·상태·UI와 source 승인 완료; M14 선택 engineering 검증 완료; 통합 공개 배포 대기; 검증된 공개 버전은 M12 앱0.13.0
+> 버전: v0.16 · 작성일: 2026-10-03 · 상태: 로컬 앱0.16.0·엔진0.16.0-m15·337 registry·M15 선택 로컬 engineering 검증 완료; 전체unit3854개·성능6예산·최종typecheck PASS; 전체browser 최초188/189 및 영향1/1 재검증 구분; 공개 CI·배포 대기; 검증된 공개 버전은 M12 앱0.13.0
 > 대상: 제품 설계자, 프런트엔드 개발자, 수치 엔진 개발자  
 > 연결 문서: [디자인 백서](02-design-whitepaper.md) · [마일스톤](03-milestone-roadmap.md) · [블럭 대응표](block-coverage.md)
 
-현재 M14는 이전334개 정의를 보존하고 실제 고정 WASM affine·누산 lifecycle·bounded 메시지 FIFO3개를 추가해337종·75예제/12범주다. 전체unit3632개·실제TS32개/85표본·UI35개/회귀73개·M14 browser9개·디자인188관측·root/project각81검사·project browser4개·fresh M13 TS361개를 확인했다. 전체 browser176개 중172개 PASS 뒤 다운로드 보안 assertion4개를 실제 실행 AST 검사로 갱신해 해당4/4를 재검증했다. 제품 소스는 변경하지 않았다. 성능6개 예산·dependency audit0·최종typecheck·M10~M14 source 승인/roadmap/coverage 회귀도 통과했다. 원본8행의 native 환경은 모두 unavailable이며3개 독립 대체만 승인해 subset367/385·미구현18행이고 나머지5행은 승격하지 않았다. [M14 계약](m14-contract.md)·[검증](m14-validation.md)·[대응표](m14-implementation-map.json)를 현재 선택 실행 사양의 기준으로 사용한다. engineering 동결 뒤 M15를 진행하고 통합 배포하며 공개 M12의0.13.0/304종은 [배포 기록](pages-validation.md)을 따른다. 전체 원본 옵션과 MathWorks 실행 동등성은 완료로 표시하지 않는다.
+현재 M15는 기존337개 정의·75예제/12범주와 source subset367/385·미구현18행을 보존한다. 과거 canonical 정의의 exportTargets를 바꾸지 않고 별도 versioned capability로 Python69종과 WASM16종의 선택 구성을 제공한다. 실제 Python과 standalone TypeScript142개씩·정상256표본,실제 WASM host128개·정상43표본을 독립 기준값과 비교했다. C/C++는 검증된 native build/run 환경이 없어 unavailable이며 emit만으로 지원 승인하지 않는다. 전체unit3854개·interop73unit/9browser·내보내기4browser·root/project각83검사/14assets·project browser4개·디자인188관측과 fresh M13 TS361/M14 TS32실행을 확인했다. [M15 계약](m15-contract.md)·[검증 기록](m15-validation.md)을 현재 추가 범위의 기준으로 사용하며 전체 browser 최초188/189와 테스트 대기 조정 후 영향1/1 PASS를 분리 기록한다. 성능6개 예산·최종typecheck도 통과해 선택 로컬 engineering을 완료했고 공개 CI·배포는 대기 상태다.
+
+M15 공유 패키지는 승인된7개 과거 엔진 식별자와 정확한 registry projection을 확인하고 원본 서명·출처 인증·별도 migration 검토를 유지한다. bounded MAT v5와 SLX/MDL scalar 도식은 원본 위치·미지원 항목을 보고하며 명시 Inport 입력으로 CalcWeave 사본을 만든다. 원본 bytes·SHA·분석 결과를 보관한 `.cwinterop.json`은 원본 재분석으로 복구를 검증한다. 편집한 native 형식 생성·MathWorks 수치 동등성은 미승인이고 파일 파싱만으로 source 대응 수를 늘리지 않는다. 전체 원본 옵션 닫힘은0행이다. 아래 M14 및 이전 단계의 수치와 지원 범위는 당시 납품 기록으로 보존한다.
+
+직전 M14는 이전334개 정의를 보존하고 실제 고정 WASM affine·누산 lifecycle·bounded 메시지 FIFO3개를 추가해337종·75예제/12범주다. 전체unit3632개·실제TS32개/85표본·UI35개/회귀73개·M14 browser9개·디자인188관측·root/project각81검사·project browser4개·fresh M13 TS361개를 확인했다. 전체 browser176개 중172개 PASS 뒤 다운로드 보안 assertion4개를 실제 실행 AST 검사로 갱신해 해당4/4를 재검증했다. 제품 소스는 변경하지 않았다. 성능6개 예산·dependency audit0·최종typecheck·M10~M14 source 승인/roadmap/coverage 회귀도 통과했다. 원본8행의 native 환경은 모두 unavailable이며3개 독립 대체만 승인해 subset367/385·미구현18행이고 나머지5행은 승격하지 않았다. [M14 계약](m14-contract.md)·[검증](m14-validation.md)·[대응표](m14-implementation-map.json)를 이전 단계의 선택 실행 사양으로 보존한다. M14 engineering 동결 뒤 M15를 진행하고 통합 배포하며 공개 M12의0.13.0/304종은 [배포 기록](pages-validation.md)을 따른다. 전체 원본 옵션과 MathWorks 실행 동등성은 완료로 표시하지 않는다.
 
 직전 M13은 이전304개 정의를 보존하고30개를 추가해334종·69예제/11범주를 검증했다. 문자열 typed 값·제한 형식 파싱,Dashboard37개 설정·이산 live receipt 재생,기록/XY/종료,로컬 XLSX·CSV/JSON·편집 provenance를 포함했다. 전체unit3515개·실제TS361개/846표본·UI116개,전체browser167개와 최종 영향 경계3개를 확인했고 신규59행/이전16행 유지로 subset364/385·미구현21행이었다. [M13 계약](m13-contract.md)·[검증](m13-validation.md)은 이전 단계의 수치·한도·source 증거로 보존한다.
 
@@ -14,7 +18,7 @@ M9 최초 engineering 납품 앱0.10.0·엔진0.10.0-m9는 직전185개 정의�
 
 ## 1. 제품 정의와 현재 상태
 
-앱0.8.1의 [GitHub Pages 웹 베타](https://jtech-co.github.io/CalcWeave/)와 M9의 공개 앱0.10.1/211종·브라우저9개 검증은 이전 배포 기록이다. 현재 검증된 공개 버전은 M12 앱0.13.0/304종이고 로컬 M14는0.15.0/337종이다. [배포 검증](pages-validation.md)과 [M8~M16 전체 대응 후속 로드맵](05-simulink-coverage-roadmap.md)을 따르며 목표 도메인·실제 초보자 조사·전체 옵션 동등성은 별도다.
+앱0.8.1의 [GitHub Pages 웹 베타](https://jtech-co.github.io/CalcWeave/)와 M9의 공개 앱0.10.1/211종·브라우저9개 검증은 이전 배포 기록이다. 현재 검증된 공개 버전은 M12 앱0.13.0/304종이고 로컬 M15는0.16.0/337종이다. [배포 검증](pages-validation.md)과 [M8~M16 전체 대응 후속 로드맵](05-simulink-coverage-roadmap.md)을 따르며 목표 도메인·실제 초보자 조사·전체 옵션 동등성은 별도다.
 
 0.8.0의 수학·신호 확장은 승인된 수학·통계·벡터·행렬 64종과 시간 입력 6종을 추가한다. registry는 144종, 정적 지원은107종이며 Python 승인 51종은 그대로다. 기존74종의 파라미터·포트·모드·타입/형상/단위 계약을 유지한다. 신규 생성 타깃은 `typescript-catalog-v1`이며 import 없는 고정 실행 소스와 데이터만 내보낸다. 독립 oracle·모든 지원 모드·JSON roundtrip·실제 TS 결과를 검증한 범위만 대응표에 승인한다. 원자료385행/339이름과 registry 정의 수는 서로 다른 지표다. [확장 계약](catalog-contract.md)·[검증](catalog-validation.md)·[대응 계획](block-expansion-plan.md)을 현재 추가 범위의 기준으로 사용하고 아래 M0~M7 기록은 각 단계의 계약으로 보존한다.
 

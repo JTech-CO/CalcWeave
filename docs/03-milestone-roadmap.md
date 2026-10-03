@@ -1,18 +1,26 @@
 # CalcWeave 마일스톤별 구축 방향
 
-> 버전: v0.15 · 작성일: 2026-10-03 · 상태: 로컬 앱0.15.0·엔진0.15.0-m14·337 registry·M14 선택 수치·상태·UI와 source 승인 완료; M14 선택 engineering 검증 완료; 통합 공개 배포 대기; 검증된 공개 버전은 M12 앱0.13.0
+> 버전: v0.16 · 작성일: 2026-10-03 · 상태: 로컬 앱0.16.0·엔진0.16.0-m15·337 registry·M15 선택 로컬 engineering 완료; 전체unit3854개·성능6예산·최종typecheck PASS; 전체browser 최초188/189 및 영향1/1 재검증 구분; 공개 CI·배포 대기; 검증된 공개 버전은 M12 앱0.13.0
 > 대상 브랜드: **CalcWeave** · 예정 공개 도메인: **CalcWeave.com**  
 > 도메인 등록·소유권·상표 사용 가능 여부는 별도 확인 항목이며, 현재 확보 완료로 간주하지 않는다.
 
 관련 문서: [기술 백서](01-technical-whitepaper.md) · [디자인 백서](02-design-whitepaper.md) · [블럭 대응표](block-coverage.md) · [원본 데이터셋](../dataset/Simulink_Basic_Blocks_R2024b.md)
 
-현재 M14 선택 범위는 기존334개 정의 보존·신규3개로337종,75예제/12범주다. 최초 배정8행의 native C/MATLAB/SimEvents 환경은 모두 unavailable이며 실제 고정 WASM·누산 lifecycle·메시지 FIFO3개만 독립 대체로 승인해 subset367/385·미구현18행이다. 전체unit3632개·TS32실행/85표본·UI35개/회귀73개·M14 browser9개·디자인188관측·root/project각81검사·project browser4개·fresh M13 TS361개를 확인했다. 전체 browser176개 중172개 PASS 뒤 다운로드 보안 assertion4개를 실제 실행 AST 검사로 갱신해 해당4/4를 재검증했다. 제품 소스는 변경하지 않았다. 성능6개 예산·dependency audit0·최종typecheck·M10~M14 source 승인/roadmap/coverage 회귀도 통과해 선택 engineering 검증을 완료했다. [M14 계약](m14-contract.md)·[검증](m14-validation.md)·[8행 대응표](m14-implementation-map.json)를 따른다. M14 동결 후 M15를 순서대로 진행하고 통합 공개 배포하며 현재 공개 검증 버전은 M12 앱0.13.0이다. 원본 전체 옵션과 MathWorks 실행 동등성은 후속 로드맵에 남긴다.
+현재 M15는337종·75예제/12범주·source subset367/385·미구현18행을 보존한다. Python69종의 실제 Python/TypeScript142개씩·256표본과 WASM16종의 실제 host128개·43표본을 검증했다. 승인된7개 과거 엔진의 공유 패키지 원본 서명·출처 확인·migration 검토와 bounded MAT v5·SLX/MDL 분석/사본 변환·원본 byte archive를 연결한다. C/C++ 실행 환경과 native 편집본 생성·MathWorks 수치 동등성은 미승인이며 단순 파싱으로 source 승인 수를 늘리지 않는다. 전체unit3854개·interop73unit/9browser·내보내기4browser·root/project각83검사/14assets·project browser4개·디자인188관측과 fresh M13 TS361/M14 TS32를 확인했다. 전체 browser는 최초188/189와 테스트 대기 조정 후 영향1/1 PASS를 분리 기록한다. 성능6개 예산·최종typecheck를 통과해 선택 로컬 engineering을 완료했고 공개 CI·배포는 대기 상태다. [M15 계약](m15-contract.md)·[검증 기록](m15-validation.md)을 따른다. M13→M14는 차례로 동결·병합됐고 현재 공개 검증 버전은 M12 앱0.13.0이다. 아래 단계별 수치는 당시 납품 기록으로 보존한다.
+
+직전 M14 선택 범위는 기존334개 정의 보존·신규3개로337종,75예제/12범주다. 최초 배정8행의 native C/MATLAB/SimEvents 환경은 모두 unavailable이며 실제 고정 WASM·누산 lifecycle·메시지 FIFO3개만 독립 대체로 승인해 subset367/385·미구현18행이다. 전체unit3632개·TS32실행/85표본·UI35개/회귀73개·M14 browser9개·디자인188관측·root/project각81검사·project browser4개·fresh M13 TS361개를 확인했다. 전체 browser176개 중172개 PASS 뒤 다운로드 보안 assertion4개를 실제 실행 AST 검사로 갱신해 해당4/4를 재검증했다. 제품 소스는 변경하지 않았다. 성능6개 예산·dependency audit0·최종typecheck·M10~M14 source 승인/roadmap/coverage 회귀도 통과해 선택 engineering 검증을 완료했다. [M14 계약](m14-contract.md)·[검증](m14-validation.md)·[8행 대응표](m14-implementation-map.json)를 따른다. M14 동결 후 M15를 순서대로 진행하고 통합 공개 배포하며 현재 공개 검증 버전은 M12 앱0.13.0이다. 원본 전체 옵션과 MathWorks 실행 동등성은 후속 로드맵에 남긴다.
 
 M9 최초 engineering 납품 앱0.10.0·엔진0.10.0-m9는 기존185개 정의에26개 DSP·이산 상태·샘플시간 정의를 더해 registry211개를 구성한다. M9 preset15개·예제39개/6카테고리와58개 firstWork 원본행의 제한 대응을 [M9 계약](m9-contract.md)·[구현 맵](m9-implementation-map.json)·[검증 기록](m9-validation.md)에 기록한다. M8·M9의 선언 범위는 마지막 수치 경계 수정 후 로컬 검증을 완료했다. 원본행 승인 기록은 현재subset211행·미구현174행이며, 전체 옵션 완료나 engineering 최종 검증 완료를 이 숫자로 대신하지 않는다. 공개 Pages의 이번 버전 배포·실제 주소 확인도 완료했다.
 
 사용자 선택에 따라 M7 이후 확장은 수학·신호부터 진행했다.0.8.0 시점은74→144종과27→32예제/6카테고리, toolbar 문자 표시 정리를 포함한다. 해당 단계의 원자료 승인20행(신규19·기존Divide 추적교정1)과baseline 미구현251행은 과거 기록으로 보존한다. 모든 원본 블럭300여종의 동등 구현 완료로 기록하지 않는다. 원자료·registry·공유 kernel·preset을 구분하고 실제 계산/생성 코드 oracle를 승인 조건으로 사용한다. [확장 계획](block-expansion-plan.md)·[계약](catalog-contract.md)·[검증](catalog-validation.md)은 단계 증거다. 공개 출시 확인은 기존 M6 조건을 따른다.
 
 앱0.8.1의 [Pages 웹 베타](https://jtech-co.github.io/CalcWeave/) 배포와 실제 공개 주소 검사는 이전 배포 기록이다. [배포 검증](pages-validation.md)을 참고하며 M9의 공개 배포·실제 브라우저 검증은 새 증거로 완료했고 기존 M6의 실제 초보자 조사·목표 도메인·문의 운영 정책은 별도다.
+
+## M15 납품 기록 — 추가 타깃·패키지 migration·native 분석
+
+앱0.16.0·엔진0.16.0-m15는 기존337개 정의·75예제/12범주를 유지한다. Python69종은 과거51종을 보존한 선택 확장이며 실제 Python/standalone TS142개씩·256표본을 확인했다. WASM16종은 정적·base tick 이산 legacy float64 scalar DAG를 실제 자체 module/runner128개·43표본으로 확인했다. C/C++는 검증된 native toolchain·host ABI가 없어 unavailable이다. 이 타깃 목록은 기존 블럭 정의를 수정하거나 신규 계산 블럭으로 합산하지 않는다.
+
+승인된7개 과거 엔진의 공유 패키지는 원본 서명·출처 확인 뒤 exact registry projection과 별도 migration 검토로 읽는다. 제한된 MAT v5 데이터와 SLX/MDL9종 root scalar 도식의 분석·CalcWeave 사본 변환,원본 bytes·SHA·보고서 archive 복구를 구현한다. 편집한 native 파일 생성·MathWorks 수치 동등성과 전체 옵션은 미승인이다. 원본385행의 배정·source subset367/385·missing18·전체옵션닫힘0을 그대로 유지한다. 전체unit3854개·interop73unit/9browser·내보내기4browser·root/project각83검사/14assets·project browser4개·디자인188관측·audit0 및 이전 M13/M14 생성 회귀는 통과했다. 전체 browser 최초188/189와 테스트 대기 조정 후 영향1/1 PASS를 분리 기록한다. 성능6개 예산·최종typecheck를 통과해 선택 로컬 engineering을 완료했고 공개 CI·배포는 대기 상태다. [M15 계약](m15-contract.md)·[검증 기록](m15-validation.md)에서 분리해 기록한다.
 
 ## 1. 로드맵이 만드는 결과
 

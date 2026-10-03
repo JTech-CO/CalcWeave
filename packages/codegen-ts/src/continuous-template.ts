@@ -150,7 +150,7 @@ export const CONTINUOUS_TEMPLATE = [
   "    unit: string;",
   "}",
   "interface DatasetProvenance {",
-  "    format: 'csv' | 'json' | 'xlsx' | 'editor';",
+  "    format: 'csv' | 'json' | 'xlsx' | 'editor' | 'mat-v5';",
   "    filename?: string;",
   "    sheet?: string;",
   "    sourceHash: string;",

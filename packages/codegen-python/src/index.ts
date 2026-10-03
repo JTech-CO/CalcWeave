@@ -3,14 +3,14 @@ import { discreteMemoryElementCount, ModelError, sha256, type CompiledModel, typ
 import { nodeOperationCost, signalElements } from '../../runtime/src/kernels';
 import { manifestForHash, type ExportManifest } from '../../codegen-ts/src/manifest';
 import { PYTHON_RUNTIME } from './runtime';
-import { PYTHON_TARGET } from './capabilities';
-export { PYTHON_TARGET } from './capabilities';
+import { PYTHON_M15_EXTENSION } from './runtime-m15';
+import { PYTHON_TARGET, type PythonTarget } from './capabilities';
+export { PYTHON_TARGET, PYTHON_M7_TARGET, type PythonTarget } from './capabilities';
 
-const supported = new Set(PYTHON_TARGET.blockIds);
 export const PYTHON_EXPORT_LIMITS = Object.freeze({ maxFileBytes: 16 * 1024 * 1024, maxDataBytes: 8 * 1024 * 1024 });
 
 export interface PythonExportManifest extends Omit<ExportManifest, 'targetVersion'> {
-  targetVersion: 'python-m7-v1';
+  targetVersion: 'python-m7-v1' | 'python-m15-v1';
   runtime: 'python-standard-library';
   minimumVersion: '3.10';
   /** Integrity of the exact compiler-owned IR JSON, distinct from the source semantic hash. */
@@ -18,8 +18,9 @@ export interface PythonExportManifest extends Omit<ExportManifest, 'targetVersio
   artifactDataHashAlgorithm: 'SHA-256';
 }
 
-export function getPythonDiagnostics(compiled: CompiledModel): Diagnostic[] {
-  const modeUnsupported = !PYTHON_TARGET.supportedModes.some(mode => mode === compiled.model.execution.mode);
+export function getPythonDiagnostics(compiled: CompiledModel, target: PythonTarget = PYTHON_TARGET): Diagnostic[] {
+  const supported = new Set(target.blockIds);
+  const modeUnsupported = !target.supportedModes.some(mode => mode === compiled.model.execution.mode);
   const diagnostics: Diagnostic[] = [];
   const location = (nodeId: string, code: string, message: string): Diagnostic => {
     const origin = compiled.hierarchy?.origins[nodeId];
@@ -32,6 +33,13 @@ export function getPythonDiagnostics(compiled: CompiledModel): Diagnostic[] {
   }
   for (const node of compiled.nodes) if (!supported.has(node.blockType)) diagnostics.push(location(node.id, 'PYTHON_UNSUPPORTED_BLOCK',
     `${node.blockType}는 Python export의 승인 지원 범위에 없습니다. TypeScript를 선택해 주세요.`));
+  if (target.id === 'python-m15-v1') for (const node of compiled.nodes) for (const [port, descriptor] of Object.entries(node.outputs)) {
+    if (descriptor.valueType === 'bus' || descriptor.valueType === 'messages' || descriptor.typed?.dtype === 'complex128') {
+      diagnostics.push(location(node.id, 'PYTHON_UNSUPPORTED_DTYPE', `${port}: structured bus·messages·complex 자료형은 이 Python 타깃에서 지원하지 않습니다.`));
+    } else if (descriptor.valueType === 'typed' && descriptor.shape.length && !(descriptor.typed?.dtype === 'uint8' && descriptor.shape.length === 1 && descriptor.shape[0]! <= 256)) {
+      diagnostics.push(location(node.id, 'PYTHON_UNSUPPORTED_SHAPE', `${port}: typed 출력은 scalar 또는 ASCII용 길이1~256 uint8 vector만 지원합니다.`));
+    }
+  }
   return diagnostics;
 }
 
@@ -42,10 +50,10 @@ function stable(value: unknown): string {
 }
 
 /** Recompile the source at the export boundary: forged/stale IR is never executable input. */
-function verified(compiled: CompiledModel): CompiledModel {
+function verified(compiled: CompiledModel, target: PythonTarget): CompiledModel {
   const checked = compileModel(compiled.model);
   if (stable(checked) !== stable(compiled)) throw new ModelError([{ code: 'PYTHON_INVALID_IR', message: 'Python export의 실행 스냅샷과 원본 모델이 일치하지 않습니다.' }]);
-  const diagnostics = getPythonDiagnostics(checked);
+  const diagnostics = getPythonDiagnostics(checked, target);
   if (diagnostics.length) throw new ModelError(diagnostics);
   return checked;
 }
@@ -81,27 +89,30 @@ function boundedDataText(compiled: CompiledModel): string {
   return JSON.stringify(data);
 }
 
-function manifest(compiled: CompiledModel, dataText: string): PythonExportManifest {
+function manifest(compiled: CompiledModel, dataText: string, target: PythonTarget): PythonExportManifest {
   return {
-    ...manifestForHash(compiled, sha256(compiled.semanticKey)), targetVersion: PYTHON_TARGET.id,
-    runtime: 'python-standard-library', minimumVersion: PYTHON_TARGET.minimumVersion,
+    ...manifestForHash(compiled, sha256(compiled.semanticKey)), targetVersion: target.id,
+    runtime: 'python-standard-library', minimumVersion: target.minimumVersion,
     artifactDataHash: sha256(dataText), artifactDataHashAlgorithm: 'SHA-256',
   };
 }
 
-export function createPythonExportManifest(compiled: CompiledModel): PythonExportManifest {
-  const checked = verified(compiled);
-  return manifest(checked, boundedDataText(checked));
+export function createPythonExportManifest(compiled: CompiledModel, target: PythonTarget = PYTHON_TARGET): PythonExportManifest {
+  const checked = verified(compiled, target);
+  return manifest(checked, boundedDataText(checked), target);
 }
 
 /** Fixed code plus UTF-8 hexadecimal data. User text never becomes Python source syntax. */
-export function exportPython(compiled: CompiledModel, suppliedManifest?: PythonExportManifest): string {
-  const checked = verified(compiled), dataText = boundedDataText(checked), metadata = manifest(checked, dataText);
+export function exportPython(compiled: CompiledModel, suppliedManifest?: PythonExportManifest, target: PythonTarget = PYTHON_TARGET): string {
+  const checked = verified(compiled, target), dataText = boundedDataText(checked), metadata = manifest(checked, dataText, target);
   if (suppliedManifest && stable(suppliedManifest) !== stable(metadata)) throw new ModelError([{ code: 'EXPORT_MANIFEST_MISMATCH', message: 'manifest가 Python 실행 스냅샷과 다릅니다.' }]);
   const encoder = new TextEncoder(), manifestText = JSON.stringify(metadata);
-  if (2 * encoder.encode(dataText).byteLength + 2 * encoder.encode(manifestText).byteLength + encoder.encode(PYTHON_RUNTIME).byteLength + 1024 > PYTHON_EXPORT_LIMITS.maxFileBytes) {
+  const entry = '\nif __name__ == "__main__":\n';
+  if (PYTHON_RUNTIME.split(entry).length !== 2) throw new Error('Repository Python entry point changed.');
+  const runtime = target.id === 'python-m15-v1' ? PYTHON_RUNTIME.replace(entry, `${PYTHON_M15_EXTENSION}${entry}`) : PYTHON_RUNTIME;
+  if (2 * encoder.encode(dataText).byteLength + 2 * encoder.encode(manifestText).byteLength + encoder.encode(runtime).byteLength + 1024 > PYTHON_EXPORT_LIMITS.maxFileBytes) {
     throw new ModelError([{ code: 'EXPORT_RESOURCE_LIMIT', message: '생성할 Python 파일은 16 MiB 이하여야 합니다. 모델의 블럭·데이터 크기를 줄여 주세요.' }]);
   }
   const hex = (text: string) => Array.from(new TextEncoder().encode(text), byte => byte.toString(16).padStart(2, '0')).join('');
-  return `# Generated by CalcWeave. Python 3.10+; standard library only.\n# Source model SHA-256: ${metadata.modelHash}\n# Model values and IDs are inert JSON data, never executable identifiers.\nimport copy\nimport hashlib\nimport json\nimport math\nimport sys\nimport time\n\n_DATA_TEXT = bytes.fromhex("${hex(dataText)}")\n_MANIFEST_TEXT = bytes.fromhex("${hex(manifestText)}")\n${PYTHON_RUNTIME}\n`;
+  return `# Generated by CalcWeave. Python 3.10+; standard library only.\n# Source model SHA-256: ${metadata.modelHash}\n# Model values and IDs are inert JSON data, never executable identifiers.\nimport copy\nimport hashlib\nimport json\nimport math\nimport sys\nimport time\n\n_DATA_TEXT = bytes.fromhex("${hex(dataText)}")\n_MANIFEST_TEXT = bytes.fromhex("${hex(manifestText)}")\n${runtime}\n`;
 }

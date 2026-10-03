@@ -5,6 +5,7 @@ import { spawnSync } from 'node:child_process';
 import { createExample } from '../../apps/web/src/examples';
 import { createModelPackage } from '../../packages/model-package/src';
 import type { CalcModel } from '../../packages/model/src';
+import { PYTHON_TARGET } from '../../packages/codegen-python/src/capabilities';
 
 async function open(page: Page) { await page.goto('/'); await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨'); }
 async function importModel(page: Page, model: CalcModel | unknown) { await page.getByLabel('CalcWeave 모델 파일 선택').setInputFiles({ name: 'm7.cw.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(model)) }); }
@@ -29,7 +30,7 @@ test('M7 target dialog creates standalone Python code and a six-file archive wit
   expect(code.bytes.toString('utf8')).toContain('def run('); expect(code.bytes.toString('utf8')).toContain('get_manifest'); expect(code.bytes.toString('utf8')).not.toMatch(/\beval\(|\bexec\(|\burllib\b|https?:\/\//);
   const archive = await bytesFromDownload(page, 'Python 실행 묶음'); expect(archive.name).toBe('CalcWeave-python-execution.zip');
   const files = zipTexts(archive.bytes); expect(Object.keys(files).sort()).toEqual(['README.md', 'expected-output.json', 'manifest.json', 'model.cw.json', 'model.py', 'run-example.py']);
-  const manifest = JSON.parse(files['manifest.json']); expect(manifest.targetVersion).toBe('python-m7-v1'); expect(manifest.minimumVersion).toBe('3.10');
+  const manifest = JSON.parse(files['manifest.json']); expect(manifest.targetVersion).toBe(PYTHON_TARGET.id); expect(manifest.minimumVersion).toBe('3.10');
   expect(files['README.md']).toContain('표준 라이브러리'); expect(files['run-example.py']).toContain('from model import run, get_manifest');
   const expected = JSON.parse(files['expected-output.json']); expect(expected.status).toBe('completed');
   const pythonFile = testInfo.outputPath('downloaded-model.py'); await mkdir(dirname(pythonFile), { recursive: true }); await writeFile(pythonFile, files['model.py'], 'utf8');
