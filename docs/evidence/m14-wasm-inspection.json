@@ -1,0 +1,376 @@
+{
+  "schemaVersion": 1,
+  "stage": "M14",
+  "generatedAt": "2026-10-03T09:36:12.767Z",
+  "implementationAuthor": "JTech-Co",
+  "origin": "Self-authored CalcWeave straight-line binary encoding; no third-party WASM code",
+  "mathWorksReferenceRuntimeUsed": false,
+  "nativeRuntimeEquivalenceClaimed": false,
+  "licensesAssumed": false,
+  "rights": {
+    "license": "NOASSERTION",
+    "externalCodeRedistribution": "NOASSERTION",
+    "executionAndTargetExport": "Project-authorized bundled implementation and declared fixed TypeScript target"
+  },
+  "modules": [
+    {
+      "id": "calcweave.wasm-affine-f64-v1",
+      "watSpecification": "(module (func (export \"affine\") (param f64 f64 f64) (result f64) local.get 0 local.get 1 f64.mul local.get 2 f64.add))",
+      "sha256": "fc7801ff3c8d616c38773a0e26af62181f8281c8f06430193d0ed20fb239cb95",
+      "hashMatchesCatalog": true,
+      "inspection": {
+        "profileId": "calcweave.wasm-affine-f64-v1",
+        "byteLength": 48,
+        "pinnedSha256": "fc7801ff3c8d616c38773a0e26af62181f8281c8f06430193d0ed20fb239cb95",
+        "abiVersion": 1,
+        "sections": [
+          1,
+          3,
+          7,
+          10
+        ],
+        "exports": [
+          {
+            "name": "affine",
+            "parameters": [
+              "f64",
+              "f64",
+              "f64"
+            ],
+            "result": "f64"
+          }
+        ],
+        "instructionCount": 6,
+        "imports": 0,
+        "memories": 0,
+        "tables": 0,
+        "globals": 0,
+        "start": false,
+        "loops": false,
+        "calls": false
+      },
+      "hostImports": [],
+      "hostExports": [
+        {
+          "name": "affine",
+          "kind": "function"
+        }
+      ],
+      "validation": true,
+      "bytes": [
+        0,
+        97,
+        115,
+        109,
+        1,
+        0,
+        0,
+        0,
+        1,
+        8,
+        1,
+        96,
+        3,
+        124,
+        124,
+        124,
+        1,
+        124,
+        3,
+        2,
+        1,
+        0,
+        7,
+        10,
+        1,
+        6,
+        97,
+        102,
+        102,
+        105,
+        110,
+        101,
+        0,
+        0,
+        10,
+        12,
+        1,
+        10,
+        0,
+        32,
+        0,
+        32,
+        1,
+        162,
+        32,
+        2,
+        160,
+        11
+      ]
+    },
+    {
+      "id": "calcweave.wasm-accumulator-f64-v1",
+      "watSpecification": "(module (func (export \"initialize\") (param f64) (result f64) local.get 0) (func (export \"read\") (param f64) (result f64) local.get 0) (func (export \"accumulate\") (param f64 f64 f64) (result f64) local.get 0 local.get 1 local.get 2 f64.mul f64.add) (func (export \"reset\") (param f64) (result f64) local.get 0) (func (export \"terminate\") (param f64) (result f64) local.get 0))",
+      "sha256": "e39e9c9c08547876adeb3a521111b47b778fae11ca90a881995428a264376a65",
+      "hashMatchesCatalog": true,
+      "inspection": {
+        "profileId": "calcweave.wasm-accumulator-f64-v1",
+        "byteLength": 121,
+        "pinnedSha256": "e39e9c9c08547876adeb3a521111b47b778fae11ca90a881995428a264376a65",
+        "abiVersion": 1,
+        "sections": [
+          1,
+          3,
+          7,
+          10
+        ],
+        "exports": [
+          {
+            "name": "initialize",
+            "parameters": [
+              "f64"
+            ],
+            "result": "f64"
+          },
+          {
+            "name": "read",
+            "parameters": [
+              "f64"
+            ],
+            "result": "f64"
+          },
+          {
+            "name": "accumulate",
+            "parameters": [
+              "f64",
+              "f64",
+              "f64"
+            ],
+            "result": "f64"
+          },
+          {
+            "name": "reset",
+            "parameters": [
+              "f64"
+            ],
+            "result": "f64"
+          },
+          {
+            "name": "terminate",
+            "parameters": [
+              "f64"
+            ],
+            "result": "f64"
+          }
+        ],
+        "instructionCount": 14,
+        "imports": 0,
+        "memories": 0,
+        "tables": 0,
+        "globals": 0,
+        "start": false,
+        "loops": false,
+        "calls": false
+      },
+      "hostImports": [],
+      "hostExports": [
+        {
+          "name": "initialize",
+          "kind": "function"
+        },
+        {
+          "name": "read",
+          "kind": "function"
+        },
+        {
+          "name": "accumulate",
+          "kind": "function"
+        },
+        {
+          "name": "reset",
+          "kind": "function"
+        },
+        {
+          "name": "terminate",
+          "kind": "function"
+        }
+      ],
+      "validation": true,
+      "bytes": [
+        0,
+        97,
+        115,
+        109,
+        1,
+        0,
+        0,
+        0,
+        1,
+        13,
+        2,
+        96,
+        1,
+        124,
+        1,
+        124,
+        96,
+        3,
+        124,
+        124,
+        124,
+        1,
+        124,
+        3,
+        6,
+        5,
+        0,
+        0,
+        1,
+        0,
+        0,
+        7,
+        54,
+        5,
+        10,
+        105,
+        110,
+        105,
+        116,
+        105,
+        97,
+        108,
+        105,
+        122,
+        101,
+        0,
+        0,
+        4,
+        114,
+        101,
+        97,
+        100,
+        0,
+        1,
+        10,
+        97,
+        99,
+        99,
+        117,
+        109,
+        117,
+        108,
+        97,
+        116,
+        101,
+        0,
+        2,
+        5,
+        114,
+        101,
+        115,
+        101,
+        116,
+        0,
+        3,
+        9,
+        116,
+        101,
+        114,
+        109,
+        105,
+        110,
+        97,
+        116,
+        101,
+        0,
+        4,
+        10,
+        32,
+        5,
+        4,
+        0,
+        32,
+        0,
+        11,
+        4,
+        0,
+        32,
+        0,
+        11,
+        10,
+        0,
+        32,
+        0,
+        32,
+        1,
+        32,
+        2,
+        162,
+        160,
+        11,
+        4,
+        0,
+        32,
+        0,
+        11,
+        4,
+        0,
+        32,
+        0,
+        11
+      ]
+    }
+  ],
+  "checks": {
+    "focusedRuntimeTests": 61,
+    "artifact": ".test-generated/m14-runtime-second.json",
+    "singleByteTamperChecks": 169,
+    "realLifecycleCallbacks": true,
+    "samePureInstance": true,
+    "terminationAllowancePrepaid": true,
+    "terminationChangesPublishedState": false
+  },
+  "scope": {
+    "arbitraryInputBytesAccepted": false,
+    "externalURLs": false,
+    "userImports": false,
+    "memory": false,
+    "tables": false,
+    "globals": false,
+    "start": false,
+    "loops": false,
+    "calls": false,
+    "hostCallbacks": false,
+    "network": false,
+    "filesystem": false,
+    "numericalState": "Owned JSON checkpoint only",
+    "statefulRootGraphOnly": true,
+    "entityTransport": "Separate bounded fixed-deadline message alternative; no SimEvents delay integral"
+  },
+  "reviewedFiles": [
+    {
+      "file": "packages/runtime/src/m14.ts",
+      "sha256": "e168497b2fe1acdeaeddd55c13779687d4ece5d06efa688680ab54fb0d3d0766"
+    },
+    {
+      "file": "packages/runtime/src/m14-wasm.ts",
+      "sha256": "01335cf3dbbbb6216e31e3b32a15c5ebb9284ad4607ed9cdca1795120ba06ef9"
+    },
+    {
+      "file": "packages/runtime/src/discrete-machine.ts",
+      "sha256": "fa745e00c58b352369031dfd332c5c00df10a1c41a42975423b629d3b782f1e2"
+    },
+    {
+      "file": "packages/runtime/src/kernels.ts",
+      "sha256": "2ac5409ea1cf46886c75ee86705775721d1577bcb6b9494a206d663a60b4e772"
+    },
+    {
+      "file": "tests/m14-runtime.test.ts",
+      "sha256": "265fd45bf801c1f70cb6ecd1465ddbab6a0480f025e3d901cd47512d8a2c2e2c"
+    },
+    {
+      "file": "tests/m14-independent-fixtures.ts",
+      "sha256": "72b7f98ed1c12fa22d900cab6862f046aef37f887591783cdcf2036e4064a978"
+    }
+  ]
+}

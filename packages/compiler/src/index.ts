@@ -1,7 +1,7 @@
 import { getBlockDefinition, getBlockPorts, getDirectFeedthroughPorts, isDirectFeedthrough, type BlockDefinition } from '../../block-library/src';
 import { parseExpression } from '../../expression/src';
 import {
-  canonicalSemantic, continuousStateElementCount, conversionCoefficients, divideUnits, discreteMemoryElementCount, isSafeIdentifier, MODEL_LIMITS, ModelError, multiplyUnits, normalizeSolverSettings, parseModel, reciprocalUnit, SIGNAL_LIMITS, signalElementCount, sqrtUnit, squareUnit, validateSignal, validateAnySignal, zeroAnySignal,
+  adapterAvailabilityDiagnostic, getAdapterProfile, canonicalSemantic, continuousStateElementCount, conversionCoefficients, divideUnits, discreteMemoryElementCount, isSafeIdentifier, MODEL_LIMITS, ModelError, multiplyUnits, normalizeSolverSettings, parseModel, reciprocalUnit, SIGNAL_LIMITS, signalElementCount, sqrtUnit, squareUnit, validateSignal, validateAnySignal, zeroAnySignal,
   type CalcModel, type CompiledModel, type Diagnostic, type IRNode, type SignalDescriptor,
 } from '../../model/src';
 import { initialDiscreteDescriptor, validateDiscreteParameters } from './discrete';
@@ -18,6 +18,7 @@ import { applyM10TypePropagation, guardM10LegacyInputs, initialM10Outputs, infer
 import { guardM11LegacyInputs, inferM11Outputs, initialM11Outputs, isM11Block, prepareM11Bindings, validateM11Hierarchy, validateM11Parameters, validateM11StateInputs, type M11CompileContext } from './m11';
 import { initialM12Outputs, inferM12Outputs, prepareM12Algebraic, validateM12AlgebraicSignals, validateM12Parameters, validateM12StateInputs, type M12CompileContext } from './m12';
 import { inferM13Outputs, isM13Block, parseM13Json, prepareM13Bindings, validateM13Parameters, validateM13StateInputs } from './m13';
+import { inferM14Outputs, initialM14Outputs, isM14Block, validateM14Parameters, validateM14StateInputs } from './m14';
 
 const compareId = (a: string, b: string): number => a < b ? -1 : a > b ? 1 : 0;
 
@@ -118,6 +119,8 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
   const sameShape = (a: SignalDescriptor, b: SignalDescriptor): boolean => a.shape.length === b.shape.length && a.shape.every((length, index) => length === b.shape[index]);
   const clone = (descriptor: SignalDescriptor): SignalDescriptor => ({ ...descriptor, shape: [...descriptor.shape] });
   for (const node of ordered) {
+    const m14Outputs = initialM14Outputs(node);
+    if (m14Outputs) { Object.assign(node.outputs, m14Outputs); continue; }
     const m12Outputs = initialM12Outputs(node);
     if (m12Outputs) { Object.assign(node.outputs, m12Outputs); continue; }
     const m11Outputs = initialM11Outputs(node);
@@ -135,8 +138,8 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
     }
   }
   for (const node of ordered) {
-    if (!isM11Block(node.blockType) && !isM13Block(node.blockType)) guardM10LegacyInputs(node, port => { const endpoint = node.inputs[port]; return endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; });
-    if (!isM13Block(node.blockType)) guardM11LegacyInputs(node, port => { const endpoint = node.inputs[port]; return endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; });
+    if (!isM11Block(node.blockType) && !isM13Block(node.blockType) && !isM14Block(node.blockType)) guardM10LegacyInputs(node, port => { const endpoint = node.inputs[port]; return endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; });
+    if (!isM13Block(node.blockType) && !isM14Block(node.blockType)) guardM11LegacyInputs(node, port => { const endpoint = node.inputs[port]; return endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; });
     const fail = (code: string, message: string, portId?: string): never => { throw new ModelError([{ code, message, nodeId: node.id, ...(portId ? { portId } : {}) }]); };
     const input = (port: string): SignalDescriptor => {
       const endpoint = node.inputs[port];
@@ -144,7 +147,7 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
       if (!descriptor) fail('SIGNAL_INFERENCE_FAILED', `${node.id}의 입력 ${port} 형상을 추론할 수 없습니다.`, port);
       return descriptor!;
     };
-    const m11Outputs = inferM13Outputs(node, input, model, byId) ?? inferM12Outputs(node, input, model, context) ?? inferM11Outputs(node, input, model, byId, context, originals.get(node.id)!.unit ?? '1');
+    const m11Outputs = inferM14Outputs(node, input) ?? inferM13Outputs(node, input, model, byId) ?? inferM12Outputs(node, input, model, context) ?? inferM11Outputs(node, input, model, byId, context, originals.get(node.id)!.unit ?? '1');
     if (m11Outputs) {
       Object.assign(node.outputs, m11Outputs);
       const declaredUnit = originals.get(node.id)!.unit;
@@ -356,8 +359,9 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
   }
   for (const node of ordered) {
     const inferredInput = (port: string): SignalDescriptor => { const endpoint = node.inputs[port]; const descriptor = endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; if (!descriptor) throw new ModelError([{ code: 'SIGNAL_INFERENCE_FAILED', nodeId: node.id, portId: port, message: '입력 신호의 자료형을 추론할 수 없습니다.' }]); return descriptor; };
-    if (!isM11Block(node.blockType) && !isM13Block(node.blockType)) guardM10LegacyInputs(node, inferredInput);
-    if (!isM13Block(node.blockType)) guardM11LegacyInputs(node, inferredInput);
+    if (!isM11Block(node.blockType) && !isM13Block(node.blockType) && !isM14Block(node.blockType)) guardM10LegacyInputs(node, inferredInput);
+    if (!isM13Block(node.blockType) && !isM14Block(node.blockType)) guardM11LegacyInputs(node, inferredInput);
+    if (validateM14StateInputs(node, inferredInput)) continue;
     if (validateM13StateInputs(node)) continue;
     if (validateM12StateInputs(node, inferredInput)) continue;
     if (validateM11StateInputs(node, inferredInput)) continue;
@@ -401,6 +405,7 @@ function compileFlatModel(input: unknown, context: M12CompileContext, allowNoOut
   for (const node of model.nodes) {
     const definition = getBlockDefinition(node.blockType);
     if (!definition) {
+      if (getAdapterProfile(node.blockType)?.availability === 'unavailable') { diagnostics.push(adapterAvailabilityDiagnostic(node.blockType, node.id)!); continue; }
       diagnostics.push({ code: 'UNKNOWN_BLOCK', nodeId: node.id, message: `${node.id}의 블럭은 현재 지원 목록에 없습니다.` });
       continue;
     }
@@ -440,6 +445,7 @@ function compileFlatModel(input: unknown, context: M12CompileContext, allowNoOut
       validateM11Parameters(ir, model, context);
       validateM12Parameters(ir, model);
       validateM13Parameters(ir, model, context.depth);
+      validateM14Parameters(ir, model, context);
       if (definition.id === 'math.expression' || definition.id === 'functions.typed') ir.expression = parseExpression(parameters.expression as string);
       nodeById.set(node.id, ir);
     } catch (error) {

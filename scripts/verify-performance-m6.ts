@@ -3,6 +3,8 @@ import { cpus, platform, release, totalmem } from 'node:os';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { chromium, expect, type Page } from '@playwright/test';
 import config from '../playwright.config';
+const verificationOrigin = process.env.CALCWEAVE_VERIFY_ORIGIN ?? 'http://127.0.0.1:4173';
+if (!/^http:\/\/127\.0\.0\.1:(?:4173|4175)$/.test(verificationOrigin)) throw new Error('Only dedicated local verification origins are allowed');
 import { compileModel } from '../packages/compiler/src';
 import { runModel } from '../packages/runtime/src';
 import { ENGINE_VERSION, type CalcModel } from '../packages/model/src';
@@ -61,7 +63,7 @@ try {
   for (let iteration = 0; iteration < 5; iteration++) {
     const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } }), page = await context.newPage();
     page.on('pageerror', error => errors.push(error.message));
-    let start = performance.now(); await page.goto('http://127.0.0.1:4173/'); await ready(page); cold.push(performance.now() - start);
+    let start = performance.now(); await page.goto(verificationOrigin + '/'); await ready(page); cold.push(performance.now() - start);
     // Same context retains HTTP cache and local workspace; SW readiness has its own actual offline tests.
     start = performance.now(); await page.reload(); await ready(page); warm.push(performance.now() - start);
     await context.close();
@@ -72,7 +74,7 @@ try {
     try { new PerformanceObserver(entries => { for (const entry of entries.getEntries()) { longTasks.push(entry.duration); if (longTasks.length > 500) longTasks.shift(); } }).observe({ type: 'longtask', buffered: true }); } catch { /* Unsupported is reported, not required by the app. */ }
   });
   const page = await context.newPage(); page.on('pageerror', error => errors.push(error.message));
-  await page.goto('http://127.0.0.1:4173/'); await ready(page);
+  await page.goto(verificationOrigin + '/'); await ready(page);
   const graphResults = [];
   for (const count of [100, 1000]) {
     await imported(page, chain(count)); const values: number[] = [];
@@ -116,6 +118,6 @@ try {
 const coldLoad = stats(cold), warmLoad = stats(warm), manifest = JSON.parse(await readFile('dist/offline-manifest.json', 'utf8')) as { releaseId: string };
 const budgets = { coldLoad: coldLoad.p95Ms <= 3000, warmLoad: warmLoad.p95Ms <= 2000, node1000: nodeBenchmarks[1]!.compileAndRun.p95Ms <= 1000, cancellation: cancellation!.p95Ms <= 1000, retainedHeap: endurance!.retainedGrowthBytes <= 32 * 1024 * 1024, pageErrors: errors.length === 0 };
 await mkdir('docs/evidence', { recursive: true });
-const report = { generatedAt: new Date().toISOString(), engineVersion: ENGINE_VERSION, releaseId: manifest.releaseId, environment: { node: process.version, os: `${platform()} ${release()}`, cpu: cpus()[0]?.model, logicalCpus: cpus().length, memoryBytes: totalmem(), browser: browser.version(), viewport: { width: 1440, height: 1000 }, origin: 'http://127.0.0.1:4173' }, coldLoad, warmLoad, nodeBenchmarks, browserGraphs, cancellation, endurance, errors, budgets, actualNoviceStudyClaimed: false, publicNetworkPerformanceClaimed: false };
+const report = { generatedAt: new Date().toISOString(), engineVersion: ENGINE_VERSION, releaseId: manifest.releaseId, environment: { node: process.version, os: `${platform()} ${release()}`, cpu: cpus()[0]?.model, logicalCpus: cpus().length, memoryBytes: totalmem(), browser: browser.version(), viewport: { width: 1440, height: 1000 }, origin: verificationOrigin }, coldLoad, warmLoad, nodeBenchmarks, browserGraphs, cancellation, endurance, errors, budgets, actualNoviceStudyClaimed: false, publicNetworkPerformanceClaimed: false };
 await writeFile(`docs/evidence/${ENGINE_VERSION.split('-').at(-1)}-performance.json`, JSON.stringify(report, null, 2) + '\n');
 assert(Object.values(budgets).every(Boolean), JSON.stringify(budgets)); process.stdout.write(JSON.stringify({ budgets, coldP95: coldLoad.p95Ms, warmP95: warmLoad.p95Ms, node1000P95: nodeBenchmarks[1]!.compileAndRun.p95Ms, cancelP95: cancellation!.p95Ms, retainedGrowthBytes: endurance!.retainedGrowthBytes }) + '\n');

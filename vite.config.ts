@@ -14,7 +14,7 @@ export default defineConfig(({ command, isPreview }) => {
   const dev = command === 'serve' && !isPreview;
   const nonce = dev ? randomBytes(18).toString('base64') : undefined;
   const csp = [
-    "default-src 'self'", `script-src 'self'${nonce ? ` 'nonce-${nonce}'` : ''}`,
+    "default-src 'self'", `script-src 'self' 'wasm-unsafe-eval'${nonce ? ` 'nonce-${nonce}'` : ''}`,
     "style-src 'self' 'unsafe-inline'", "img-src 'self' data:", "worker-src 'self'",
     `connect-src 'self'${dev ? ' ws://127.0.0.1:5173' : ''}`,
     "object-src 'none'", "base-uri 'self'", "form-action 'self'", "frame-ancestors 'none'",

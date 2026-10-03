@@ -1,0 +1,229 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\MSI\\AppData\\Local\\fnm_multishells\\59468_1790895586082\\node.exe",
+      "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config=.test-generated/m14-root.config.ts",
+      "--grep",
+      "M10 typed integer fields|Model and standalone TypeScript downloads|M2 execution archive|M3 continuous ZIP snapshots",
+      "--output=test-results-m14-download-boundary"
+    ],
+    "configFile": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m14-root.config.ts",
+    "rootDir": "C:/Users/MSI/Desktop/내 폴더/코딩/기획/CalcWeave/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/MSI/Desktop/내 폴더/코딩/기획/CalcWeave/test-results-m14-download-boundary",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/MSI/Desktop/내 폴더/코딩/기획/CalcWeave/tests/e2e",
+        "testIgnore": [
+          "**/pages-subpath.spec.ts"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "m10-editor.spec.ts",
+      "file": "m10-editor.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "M10 typed integer fields preserve 64-bit edits, block invalid drafts, save/import, and download CSV/TS",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5252,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T09:56:52.904Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "39a655c459ea65984315-f355a594bcfe6d03341b",
+          "file": "m10-editor.spec.ts",
+          "line": 31,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "workspace.spec.ts",
+      "file": "workspace.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Model and standalone TypeScript downloads reflect the current snapshot",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1973,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T09:56:59.459Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b163ed09f68681248ada-ade76aa7294a3259736d",
+          "file": "workspace.spec.ts",
+          "line": 534,
+          "column": 1
+        },
+        {
+          "title": "M2 execution archive includes current manifest and raw expected fixture, omitting stale results",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2764,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T09:57:01.475Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b163ed09f68681248ada-8264fac03a2ef9d0b708",
+          "file": "workspace.spec.ts",
+          "line": 752,
+          "column": 1
+        },
+        {
+          "title": "M3 continuous ZIP snapshots include solver settings, statistics, events and a matching model hash",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2499,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T09:57:04.253Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b163ed09f68681248ada-2b4ef9ab0dd2c291cd56",
+          "file": "workspace.spec.ts",
+          "line": 890,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-03T09:56:51.320Z",
+    "duration": 16439.086,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

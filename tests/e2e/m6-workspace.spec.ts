@@ -115,6 +115,6 @@ test('M6 policies use local static routes and identify the actual operator witho
   await expect(page.getByRole('dialog')).toContainText('JTech-Co'); await expect(page.getByRole('dialog')).toContainText('jtech-bryan@proton.me');
   for (const [label, path] of [['개인정보 처리방침', '/privacy/'], ['이용약관', '/terms/'], ['쿠키·로컬 저장 안내', '/cookies/'], ['릴리스·오픈소스 고지', '/notices/']] as const) {
     await expect(page.getByRole('link', { name: label, exact: true })).toHaveAttribute('href', path);
-    const policy = await context.newPage(); await policy.goto(path); await expect(policy.locator('h1')).toBeVisible(); expect(new URL(policy.url()).origin).toBe('http://127.0.0.1:4173'); await policy.close();
+    const policy = await context.newPage(); await policy.goto(path); await expect(policy.locator('h1')).toBeVisible(); expect(new URL(policy.url()).origin).toBe(new URL(page.url()).origin); await policy.close();
   }
 });

@@ -2,6 +2,8 @@ import { ENGINE_VERSION } from '../packages/model/src';
 import { chromium } from '@playwright/test';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import config from '../playwright.config';
+const verificationOrigin = process.env.CALCWEAVE_VERIFY_ORIGIN ?? 'http://127.0.0.1:4173';
+if (!/^http:\/\/127\.0\.0\.1:(?:4173|4175)$/.test(verificationOrigin)) throw new Error('Only dedicated local verification origins are allowed');
 import { createExample } from '../apps/web/src/examples';
 const catalog = process.argv.includes('--catalog');
 const m7 = catalog || process.argv.includes('--m7');
@@ -123,7 +125,7 @@ async function inspectDialog(name: string) {
 }
 
 try {
-  await page.goto('http://127.0.0.1:4173/');
+  await page.goto(verificationOrigin + '/');
   await page.locator('.save-indicator').filter({ hasText: '브라우저에 저장됨' }).waitFor();
   await page.getByRole('button', { name: '계산하기' }).click();
   await page.locator('.output-card strong').filter({ hasText: '6' }).waitFor();

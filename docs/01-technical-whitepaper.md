@@ -1,10 +1,12 @@
 # CalcWeave 기술 백서
 
-> 버전: v0.14 · 작성일: 2026-10-03 · 상태: 로컬 앱0.14.0·엔진0.14.0-m13·334 registry·M13 선택 실행·UI 검증 완료; 검증된 공개 버전은 M12 앱0.13.0
+> 버전: v0.15 · 작성일: 2026-10-03 · 상태: 로컬 앱0.15.0·엔진0.15.0-m14·337 registry·M14 선택 수치·상태·UI와 source 승인 완료; M14 선택 engineering 검증 완료; 통합 공개 배포 대기; 검증된 공개 버전은 M12 앱0.13.0
 > 대상: 제품 설계자, 프런트엔드 개발자, 수치 엔진 개발자  
 > 연결 문서: [디자인 백서](02-design-whitepaper.md) · [마일스톤](03-milestone-roadmap.md) · [블럭 대응표](block-coverage.md)
 
-현재 M13은 이전304개 정의를 보존하고30개 정의를 추가해334종·69예제/11범주다. 문자열 typed 값·제한 형식 파싱, Dashboard37개 설정과 이산 live receipt 재생, bounded 기록/XY/종료, 로컬 XLSX·CSV/JSON·편집 provenance를 검증했다. 전체unit3515개·실제TS361개/846표본·UI116개,전체browser167개와 최종 경계의 영향 범위3개를 확인했다. 원본75행 중 신규59행을 승인하고 기존16행을 보존해 선택subset364/385·미구현21행이다. [M13 계약](m13-contract.md)·[검증](m13-validation.md)·[대응표](m13-implementation-map.json)를 현재 실행 사양의 기준으로 사용한다. M13 병합·공개 배포는 별도 게이트이며 공개 M12의0.13.0/304종은 [배포 기록](pages-validation.md)을 따른다. 아래 M0~M12의 수치·한도는 해당 단계의 기록이며 전체 원본 옵션과 MathWorks 실행 동등성은 완료로 표시하지 않는다.
+현재 M14는 이전334개 정의를 보존하고 실제 고정 WASM affine·누산 lifecycle·bounded 메시지 FIFO3개를 추가해337종·75예제/12범주다. 전체unit3632개·실제TS32개/85표본·UI35개/회귀73개·M14 browser9개·디자인188관측·root/project각81검사·project browser4개·fresh M13 TS361개를 확인했다. 전체 browser176개 중172개 PASS 뒤 다운로드 보안 assertion4개를 실제 실행 AST 검사로 갱신해 해당4/4를 재검증했다. 제품 소스는 변경하지 않았다. 성능6개 예산·dependency audit0·최종typecheck·M10~M14 source 승인/roadmap/coverage 회귀도 통과했다. 원본8행의 native 환경은 모두 unavailable이며3개 독립 대체만 승인해 subset367/385·미구현18행이고 나머지5행은 승격하지 않았다. [M14 계약](m14-contract.md)·[검증](m14-validation.md)·[대응표](m14-implementation-map.json)를 현재 선택 실행 사양의 기준으로 사용한다. engineering 동결 뒤 M15를 진행하고 통합 배포하며 공개 M12의0.13.0/304종은 [배포 기록](pages-validation.md)을 따른다. 전체 원본 옵션과 MathWorks 실행 동등성은 완료로 표시하지 않는다.
+
+직전 M13은 이전304개 정의를 보존하고30개를 추가해334종·69예제/11범주를 검증했다. 문자열 typed 값·제한 형식 파싱,Dashboard37개 설정·이산 live receipt 재생,기록/XY/종료,로컬 XLSX·CSV/JSON·편집 provenance를 포함했다. 전체unit3515개·실제TS361개/846표본·UI116개,전체browser167개와 최종 영향 경계3개를 확인했고 신규59행/이전16행 유지로 subset364/385·미구현21행이었다. [M13 계약](m13-contract.md)·[검증](m13-validation.md)은 이전 단계의 수치·한도·source 증거로 보존한다.
 
 M9 최초 engineering 납품 앱0.10.0·엔진0.10.0-m9는 직전185개 정의에26개 DSP·이산 상태·샘플시간 정의를 더해 registry211개를 구성한다. M9의15개 명명 preset은 공유 설정이며 독립 kernel 수로 합산하지 않는다. 예제는39개·6개 카테고리다. [M9 계약](m9-contract.md)·[구현 맵](m9-implementation-map.json)·[검증 기록](m9-validation.md)을 현재 검증한 선언 범위의 기준으로 사용한다. 현재 source 승인 기록은 신규31행과 기존05-009 추적 교정1행을 반영해 subset211행·미구현174행이다. 마지막 수치 경계 수정 후 engineering 선언 범위를 검증 완료했으며 공개 Pages의0.10.0 배포·실제 주소 검증도 완료했다.
 
@@ -12,7 +14,7 @@ M9 최초 engineering 납품 앱0.10.0·엔진0.10.0-m9는 직전185개 정의�
 
 ## 1. 제품 정의와 현재 상태
 
-앱0.8.1의 [GitHub Pages 웹 베타](https://jtech-co.github.io/CalcWeave/)와 M9의 공개 앱0.10.1/211종·브라우저9개 검증은 이전 배포 기록이다. 현재 검증된 공개 버전은 M12 앱0.13.0/304종이고 로컬 M13은0.14.0/334종이다. [배포 검증](pages-validation.md)과 [M8~M16 전체 대응 후속 로드맵](05-simulink-coverage-roadmap.md)을 따르며 목표 도메인·실제 초보자 조사·전체 옵션 동등성은 별도다.
+앱0.8.1의 [GitHub Pages 웹 베타](https://jtech-co.github.io/CalcWeave/)와 M9의 공개 앱0.10.1/211종·브라우저9개 검증은 이전 배포 기록이다. 현재 검증된 공개 버전은 M12 앱0.13.0/304종이고 로컬 M14는0.15.0/337종이다. [배포 검증](pages-validation.md)과 [M8~M16 전체 대응 후속 로드맵](05-simulink-coverage-roadmap.md)을 따르며 목표 도메인·실제 초보자 조사·전체 옵션 동등성은 별도다.
 
 0.8.0의 수학·신호 확장은 승인된 수학·통계·벡터·행렬 64종과 시간 입력 6종을 추가한다. registry는 144종, 정적 지원은107종이며 Python 승인 51종은 그대로다. 기존74종의 파라미터·포트·모드·타입/형상/단위 계약을 유지한다. 신규 생성 타깃은 `typescript-catalog-v1`이며 import 없는 고정 실행 소스와 데이터만 내보낸다. 독립 oracle·모든 지원 모드·JSON roundtrip·실제 TS 결과를 검증한 범위만 대응표에 승인한다. 원자료385행/339이름과 registry 정의 수는 서로 다른 지표다. [확장 계약](catalog-contract.md)·[검증](catalog-validation.md)·[대응 계획](block-expansion-plan.md)을 현재 추가 범위의 기준으로 사용하고 아래 M0~M7 기록은 각 단계의 계약으로 보존한다.
 

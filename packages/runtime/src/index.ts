@@ -198,8 +198,9 @@ export async function runModel(compiled: CompiledModel, options: RunOptions = {}
   }
 
   function result(status: RunResult['status']): RunResult {
+    const adapterLifecycle = discrete?.finalize(status);
     const stateMemory = discrete?.stateMemory();
-    return { samples, finalState: discrete ? discrete.finalState() : objectValues(states), ...(stateMemory === undefined ? {} : { stateMemory }), status, elapsedMs: activeElapsed(), steps, ...(options.trackOperations ? { resources: { operations } } : {}) };
+    return { samples, finalState: discrete ? discrete.finalState() : objectValues(states), ...(stateMemory === undefined ? {} : { stateMemory }), ...(adapterLifecycle?.length ? { adapterLifecycle } : {}), status, elapsedMs: activeElapsed(), steps, ...(options.trackOperations ? { resources: { operations } } : {}) };
   }
 
   let previousValues: PortValues | undefined;

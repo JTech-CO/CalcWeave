@@ -5,6 +5,7 @@ import { createSubsystemFromSelection } from '../../../packages/compiler/src/hie
 import { createM11Examples } from './m11-examples';
 import { createM13Examples } from './m13-examples';
 import { createM12Examples } from './m12-examples';
+import { createM14Examples } from './m14-examples';
 
 function node(id: string, blockType: string, label: string, parameters: Record<string, unknown>, unit?: string): CalcNode {
   return { id, blockType, blockVersion: 1, label, parameters, ...(unit ? { unit } : {}) };
@@ -24,6 +25,7 @@ export const EXAMPLE_CATEGORIES = [
   { id: 'hierarchy', label: '조건·반복·메시지', description: '독립 상태·실행 조건·반복·구조화 버스와 메시지를 확인합니다.' },
   { id: 'dashboard', label: '조작·관측·기록', description: '조작 기록·XY 궤적·로컬 저장과 정상 종료를 확인합니다.' },
   { id: 'strings', label: '문자열과 형식', description: 'Unicode·ASCII·형식 문자열과 정확한 숫자 변환을 확인합니다.' },
+  { id: 'adapters', label: '확장 실행과 전달', description: '고정 WASM·독립 상태·용량이 정해진 전달을 확인합니다.' },
   { id: 'solver', label: '솔버·제약·분석', description: '강성 감쇠·대수 제약·연속 사건·국소 선형화를 실제 계산합니다.' },
 ] as const;
 export type ExampleCategoryId = typeof EXAMPLE_CATEGORIES[number]['id'];
@@ -425,6 +427,7 @@ EXAMPLES.push({ id: 'typed-ieee-cast', category: 'typed', title: '자료형 변�
 EXAMPLES.push(...createM11Examples());
 EXAMPLES.push(...createM12Examples());
 EXAMPLES.push(...createM13Examples());
+EXAMPLES.push(...createM14Examples());
 
 export function createExample(id: string): CalcModel {
   return structuredClone((EXAMPLES.find(example => example.id === id) ?? EXAMPLES[0]).model);

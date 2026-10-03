@@ -1,0 +1,430 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\MSI\\AppData\\Local\\fnm_multishells\\59468_1790895586082\\node.exe",
+      "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config=.test-generated/m14-root.config.ts",
+      "tests/e2e/m14-editor.spec.ts",
+      "--output=test-results-m14-focused"
+    ],
+    "configFile": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\.test-generated\\m14-root.config.ts",
+    "rootDir": "C:/Users/MSI/Desktop/내 폴더/코딩/기획/CalcWeave/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/MSI/Desktop/내 폴더/코딩/기획/CalcWeave/test-results-m14-focused",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/MSI/Desktop/내 폴더/코딩/기획/CalcWeave/tests/e2e",
+        "testIgnore": [
+          "**/pages-subpath.spec.ts"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "m14-editor.spec.ts",
+      "file": "m14-editor.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "M14 catalog shows all three pinned alternatives and eight unavailable native environments without executable inputs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5807,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T09:37:50.379Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5fca57fd8a1d77b7bb4f-06603fe456bf41dcfb06",
+          "file": "m14-editor.spec.ts",
+          "line": 14,
+          "column": 1
+        },
+        {
+          "title": "M14 real static WASM and bounded manual expression agree, inspector pins and saved manifest stay exact",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4114,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T09:37:57.327Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5fca57fd8a1d77b7bb4f-85b180f5daa6d48db1b8",
+          "file": "m14-editor.spec.ts",
+          "line": 23,
+          "column": 1
+        },
+        {
+          "title": "M14 pure WASM is evaluated by the continuous Worker solver against analytic decay",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2751,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T09:38:01.476Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5fca57fd8a1d77b7bb4f-5a69fcee5753907b2521",
+          "file": "m14-editor.spec.ts",
+          "line": 27,
+          "column": 1
+        },
+        {
+          "title": "M14 actual reset modes and two independent WASM states terminate with matching lifecycle receipts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4247,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T09:38:04.248Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5fca57fd8a1d77b7bb4f-1c2cf2e96d825da7eb23",
+          "file": "m14-editor.spec.ts",
+          "line": 31,
+          "column": 1
+        },
+        {
+          "title": "M14 FIFO delay preserves head order, arrival time and exact uint64 message payload",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3000,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T09:38:08.531Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5fca57fd8a1d77b7bb4f-703ccb3cd03215e7c2b4",
+          "file": "m14-editor.spec.ts",
+          "line": 36,
+          "column": 1
+        },
+        {
+          "title": "M14 capacity policies retain distinct first or last message without changing envelope metadata",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2453,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T09:38:11.569Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5fca57fd8a1d77b7bb4f-14addff372fe41c8aff6",
+          "file": "m14-editor.spec.ts",
+          "line": 41,
+          "column": 1
+        },
+        {
+          "title": "M14 capacity and WASM failure report real nodes, terminate states and recover after inspector repair",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4145,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T09:38:14.048Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5fca57fd8a1d77b7bb4f-e060448cf448a5d164da",
+          "file": "m14-editor.spec.ts",
+          "line": 45,
+          "column": 1
+        },
+        {
+          "title": "M14 cancelling a real initialized Worker returns terminated receipts and allows a fresh independent run",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7894,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.result-status')\nExpected substring: \u001b[32m\"부분 결과\"\u001b[39m\nReceived string:    \u001b[31m\"아직 계산하지 않았습니다\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('.result-status') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.result-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <span class=\"result-status \">아직 계산하지 않았습니다</span>\u001b[22m\n\u001b[2m       - unexpected value \"아직 계산하지 않았습니다\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.result-status')\nExpected substring: \u001b[32m\"부분 결과\"\u001b[39m\nReceived string:    \u001b[31m\"아직 계산하지 않았습니다\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('.result-status') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.result-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <span class=\"result-status \">아직 계산하지 않았습니다</span>\u001b[22m\n\u001b[2m       - unexpected value \"아직 계산하지 않았습니다\"\u001b[22m\n\n    at C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\tests\\e2e\\m14-editor.spec.ts:54:1011",
+                    "location": {
+                      "file": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\tests\\e2e\\m14-editor.spec.ts",
+                      "column": 1011,
+                      "line": 54
+                    },
+                    "snippet": "  52 |   test.setTimeout(60_000);\n  53 |   await page.addInitScript(() => { const NativeWorker = Worker; let pause = true; class ObservedWorker extends NativeWorker { constructor(url: string | URL, options?: WorkerOptions) { super(url, options); this.addEventListener('message', event => { if (pause && event.data.type === 'progress') { pause = false; const button = [...document.querySelectorAll('button')].find(button => button.textContent?.trim() === '일시정지'); if (!button) throw new Error('Actual pause button missing'); button.click(); } }); } } Reflect.set(window, 'Worker', ObservedWorker); });\n> 54 |   await workspace(page); const model = structuredClone(createM14Examples()[3].model); model.execution = { mode: 'discrete', startTime: 0, stopTime: 1000, step: 1 }; model.layout = {}; let previous = 'one'; for (let index = 0; index < 64; index++) { const id = `cost-${index}`; model.nodes.push({ id, blockType: 'math.gain', blockVersion: 1, label: '배율', parameters: { gain: 1 } }); model.edges.push({ id: `cost-wire-${index}`, source: { nodeId: previous, portId: 'out' }, target: { nodeId: id, portId: 'in' } }); previous = id; } model.edges.push({ id: 'observed-cost', source: { nodeId: previous, portId: 'out' }, target: { nodeId: 'first', portId: 'in' } }); model.edges = model.edges.filter(edge => edge.id !== 'one-out-first-in'); await importModel(page, model); await page.locator('.run-button').click(); await expect(page.getByRole('button', { name: '재개', exact: true })).toBeVisible(); await page.getByRole('button', { name: '계산 취소', exact: true }).click(); await expect(page.locator('.result-status')).toContainText('부분 결과'); const cancelled = await history(page); expect(cancelled.result.status).toBe('cancelled'); expect(cancelled.result.samples.length).toBeGreaterThan(0); expect(cancelled.result.samples.length).toBeLessThan(1001); expect(cancelled.result.adapterLifecycle).toHaveLength(2); cancelled.result.adapterLifecycle.forEach((row: { reason: string; initialized: boolean; terminated: boolean }) => expect(row).toMatchObject({ reason: 'cancelled', initialized: true, terminated: true })); await example(page, 'wasm-independent-instances'); await run(page); const fresh = await history(page); expect(fresh.result.samples.map((sample: { values: Record<string, number> }) => sample.values['first-result'])).toEqual([0, 1, 2, 3]); expect(fresh.result.adapterLifecycle.every((row: { reason: string }) => row.reason === 'completed')).toBe(true);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ^\n  55 | });\n  56 |\n  57 | test('M14 adapter metadata fits dark and light layouts through 320px with 200% text', async ({ page }, testInfo) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\tests\\e2e\\m14-editor.spec.ts",
+                        "column": 1011,
+                        "line": 54
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.result-status')\nExpected substring: \u001b[32m\"부분 결과\"\u001b[39m\nReceived string:    \u001b[31m\"아직 계산하지 않았습니다\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('.result-status') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.result-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <span class=\"result-status \">아직 계산하지 않았습니다</span>\u001b[22m\n\u001b[2m       - unexpected value \"아직 계산하지 않았습니다\"\u001b[22m\n\n\n  52 |   test.setTimeout(60_000);\n  53 |   await page.addInitScript(() => { const NativeWorker = Worker; let pause = true; class ObservedWorker extends NativeWorker { constructor(url: string | URL, options?: WorkerOptions) { super(url, options); this.addEventListener('message', event => { if (pause && event.data.type === 'progress') { pause = false; const button = [...document.querySelectorAll('button')].find(button => button.textContent?.trim() === '일시정지'); if (!button) throw new Error('Actual pause button missing'); button.click(); } }); } } Reflect.set(window, 'Worker', ObservedWorker); });\n> 54 |   await workspace(page); const model = structuredClone(createM14Examples()[3].model); model.execution = { mode: 'discrete', startTime: 0, stopTime: 1000, step: 1 }; model.layout = {}; let previous = 'one'; for (let index = 0; index < 64; index++) { const id = `cost-${index}`; model.nodes.push({ id, blockType: 'math.gain', blockVersion: 1, label: '배율', parameters: { gain: 1 } }); model.edges.push({ id: `cost-wire-${index}`, source: { nodeId: previous, portId: 'out' }, target: { nodeId: id, portId: 'in' } }); previous = id; } model.edges.push({ id: 'observed-cost', source: { nodeId: previous, portId: 'out' }, target: { nodeId: 'first', portId: 'in' } }); model.edges = model.edges.filter(edge => edge.id !== 'one-out-first-in'); await importModel(page, model); await page.locator('.run-button').click(); await expect(page.getByRole('button', { name: '재개', exact: true })).toBeVisible(); await page.getByRole('button', { name: '계산 취소', exact: true }).click(); await expect(page.locator('.result-status')).toContainText('부분 결과'); const cancelled = await history(page); expect(cancelled.result.status).toBe('cancelled'); expect(cancelled.result.samples.length).toBeGreaterThan(0); expect(cancelled.result.samples.length).toBeLessThan(1001); expect(cancelled.result.adapterLifecycle).toHaveLength(2); cancelled.result.adapterLifecycle.forEach((row: { reason: string; initialized: boolean; terminated: boolean }) => expect(row).toMatchObject({ reason: 'cancelled', initialized: true, terminated: true })); await example(page, 'wasm-independent-instances'); await run(page); const fresh = await history(page); expect(fresh.result.samples.map((sample: { values: Record<string, number> }) => sample.values['first-result'])).toEqual([0, 1, 2, 3]); expect(fresh.result.adapterLifecycle.every((row: { reason: string }) => row.reason === 'completed')).toBe(true);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ^\n  55 | });\n  56 |\n  57 | test('M14 adapter metadata fits dark and light layouts through 320px with 200% text', async ({ page }, testInfo) => {\n    at C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\tests\\e2e\\m14-editor.spec.ts:54:1011"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T09:38:18.220Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\test-results-m14-focused\\m14-editor-M14-cancelling--2fe9b-ows-a-fresh-independent-run\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\test-results-m14-focused\\m14-editor-M14-cancelling--2fe9b-ows-a-fresh-independent-run\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\test-results-m14-focused\\m14-editor-M14-cancelling--2fe9b-ows-a-fresh-independent-run\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\MSI\\Desktop\\내 폴더\\코딩\\기획\\CalcWeave\\tests\\e2e\\m14-editor.spec.ts",
+                    "column": 1011,
+                    "line": 54
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "5fca57fd8a1d77b7bb4f-9719fa17c7b77fbc1efc",
+          "file": "m14-editor.spec.ts",
+          "line": 51,
+          "column": 1
+        },
+        {
+          "title": "M14 adapter metadata fits dark and light layouts through 320px with 200% text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3807,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T09:39:54.235Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5fca57fd8a1d77b7bb4f-18d0bd88d845257758df",
+          "file": "m14-editor.spec.ts",
+          "line": 57,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-03T09:37:49.072Z",
+    "duration": 185481.095,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

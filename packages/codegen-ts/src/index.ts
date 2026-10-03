@@ -56,7 +56,7 @@ type ExpressionNode =
   | { type: 'call'; name: string; args: ExpressionNode[] };
 type IRNode = { id: string; blockType: string; parameters: Record<string, unknown>; inputs: Record<string, { nodeId: string; portId: string }>; outputs: Record<string, SignalDescriptor>; sampleTime: { period: number; offset: number }; expression?: ExpressionNode; cost?: number };
 type Sample = { time: number; values: Record<string, SignalValue> };
-type Result = { samples: Sample[]; finalState: Record<string, SignalValue>; stateMemory?: Record<string, StateValue>; status: 'completed' | 'failed'; steps: number; stopReason?: { nodeId: string; tick: number; time: number } };
+type Result = { samples: Sample[]; finalState: Record<string, SignalValue>; stateMemory?: Record<string, StateValue>; status: 'completed' | 'failed'; steps: number; stopReason?: { nodeId: string; tick: number; time: number }; adapterLifecycle?: AdapterLifecycle[] };
 const data: { settings: { mode: string; startTime: number; stopTime: number; step: number }; nodes: IRNode[]; states: string[]; outputs: string[]; outputTypes: Record<string, SignalDescriptor>; recordedElements: number; stateElements: number } = ${literal};
 const exportManifest = ${manifestLiteral};
 /** The generator computed SHA-256 synchronously over the same canonical semantic key as Web Crypto. */
@@ -99,8 +99,9 @@ export function run(): Result {
   };
   const machine = settings.mode === 'discrete' ? sampleStep(0,settings.startTime,()=>createDiscreteMachine(nodes, states, settings.step, settings.startTime, charge)) : undefined;
   const snapshot = (status: Result['status']): Result => {
+    const adapterLifecycle = machine?.finalize(status);
     const stateMemory = machine?.stateMemory();
-    return { samples, finalState: machine?.finalState() ?? {}, ...(stateMemory === undefined ? {} : { stateMemory }), status, steps: samples.length, ...(stopReason ? { stopReason: { ...stopReason } } : {}) };
+    return { samples, finalState: machine?.finalState() ?? {}, ...(stateMemory === undefined ? {} : { stateMemory }), ...(adapterLifecycle?.length ? { adapterLifecycle } : {}), status, steps: samples.length, ...(stopReason ? { stopReason: { ...stopReason } } : {}) };
   };
   let previousValues: Map<string, Record<string, SignalValue>> | undefined;
   let tickCheckpoint: ReturnType<NonNullable<typeof machine>['checkpoint']> | undefined;
