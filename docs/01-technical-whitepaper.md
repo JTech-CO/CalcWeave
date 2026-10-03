@@ -1,8 +1,10 @@
 # CalcWeave 기술 백서
 
-> 버전: v0.12 · 작성일: 2026-10-03 · 상태: 앱0.10.1·엔진0.10.0-m9·211 registry·M9 선언 범위 및 공개 앱 배포 검증 완료
+> 버전: v0.14 · 작성일: 2026-10-03 · 상태: 로컬 앱0.14.0·엔진0.14.0-m13·334 registry·M13 선택 실행·UI 검증 완료; 검증된 공개 버전은 M12 앱0.13.0
 > 대상: 제품 설계자, 프런트엔드 개발자, 수치 엔진 개발자  
 > 연결 문서: [디자인 백서](02-design-whitepaper.md) · [마일스톤](03-milestone-roadmap.md) · [블럭 대응표](block-coverage.md)
+
+현재 M13은 이전304개 정의를 보존하고30개 정의를 추가해334종·69예제/11범주다. 문자열 typed 값·제한 형식 파싱, Dashboard37개 설정과 이산 live receipt 재생, bounded 기록/XY/종료, 로컬 XLSX·CSV/JSON·편집 provenance를 검증했다. 전체unit3515개·실제TS361개/846표본·UI116개,전체browser167개와 최종 경계의 영향 범위3개를 확인했다. 원본75행 중 신규59행을 승인하고 기존16행을 보존해 선택subset364/385·미구현21행이다. [M13 계약](m13-contract.md)·[검증](m13-validation.md)·[대응표](m13-implementation-map.json)를 현재 실행 사양의 기준으로 사용한다. M13 병합·공개 배포는 별도 게이트이며 공개 M12의0.13.0/304종은 [배포 기록](pages-validation.md)을 따른다. 아래 M0~M12의 수치·한도는 해당 단계의 기록이며 전체 원본 옵션과 MathWorks 실행 동등성은 완료로 표시하지 않는다.
 
 M9 최초 engineering 납품 앱0.10.0·엔진0.10.0-m9는 직전185개 정의에26개 DSP·이산 상태·샘플시간 정의를 더해 registry211개를 구성한다. M9의15개 명명 preset은 공유 설정이며 독립 kernel 수로 합산하지 않는다. 예제는39개·6개 카테고리다. [M9 계약](m9-contract.md)·[구현 맵](m9-implementation-map.json)·[검증 기록](m9-validation.md)을 현재 검증한 선언 범위의 기준으로 사용한다. 현재 source 승인 기록은 신규31행과 기존05-009 추적 교정1행을 반영해 subset211행·미구현174행이다. 마지막 수치 경계 수정 후 engineering 선언 범위를 검증 완료했으며 공개 Pages의0.10.0 배포·실제 주소 검증도 완료했다.
 
@@ -10,7 +12,7 @@ M9 최초 engineering 납품 앱0.10.0·엔진0.10.0-m9는 직전185개 정의�
 
 ## 1. 제품 정의와 현재 상태
 
-앱0.8.1의 [GitHub Pages 웹 베타](https://jtech-co.github.io/CalcWeave/) 게시와 프로젝트 경로의 계산·정책·오프라인 검증은 이전 배포 기록이다. 현재 공개 앱0.10.1은 Pages의211 registry와 실제 브라우저9개 검증을 완료했다. [배포 검증](pages-validation.md)과 [M8~M16 전체 대응 후속 로드맵](05-simulink-coverage-roadmap.md)을 따르며 목표 도메인·실제 초보자 조사·전체 옵션 동등성은 별도다.
+앱0.8.1의 [GitHub Pages 웹 베타](https://jtech-co.github.io/CalcWeave/)와 M9의 공개 앱0.10.1/211종·브라우저9개 검증은 이전 배포 기록이다. 현재 검증된 공개 버전은 M12 앱0.13.0/304종이고 로컬 M13은0.14.0/334종이다. [배포 검증](pages-validation.md)과 [M8~M16 전체 대응 후속 로드맵](05-simulink-coverage-roadmap.md)을 따르며 목표 도메인·실제 초보자 조사·전체 옵션 동등성은 별도다.
 
 0.8.0의 수학·신호 확장은 승인된 수학·통계·벡터·행렬 64종과 시간 입력 6종을 추가한다. registry는 144종, 정적 지원은107종이며 Python 승인 51종은 그대로다. 기존74종의 파라미터·포트·모드·타입/형상/단위 계약을 유지한다. 신규 생성 타깃은 `typescript-catalog-v1`이며 import 없는 고정 실행 소스와 데이터만 내보낸다. 독립 oracle·모든 지원 모드·JSON roundtrip·실제 TS 결과를 검증한 범위만 대응표에 승인한다. 원자료385행/339이름과 registry 정의 수는 서로 다른 지표다. [확장 계약](catalog-contract.md)·[검증](catalog-validation.md)·[대응 계획](block-expansion-plan.md)을 현재 추가 범위의 기준으로 사용하고 아래 M0~M7 기록은 각 단계의 계약으로 보존한다.
 
@@ -464,6 +466,6 @@ v0.1의 설계 기준, v0.2의 M1, v0.3의 M2, v0.4의 M3에 이어 v0.5는 승�
 
 보안 기준 반영: 사용자 수식의 임의 실행을 제외하고, 모델·데이터의 상한 검증과 선택 서버의 소유자 조건·시크릿 분리를 기본 설계에 포함했다.
 
-현재 공개 앱은0.10.1이며 엔진0.10.0-m9·211개 정의·39예제/6범주와 source subset211행/미구현174행은 유지한다. 버전 표시를 APP_VERSION에 연결하고 실제 캔버스 크기 구독·DOM 측정 일치·취소 가능한2프레임 안정화로 최초 fit의 측정 경합을 수정했다. [최신 공개 검증](pages-validation.md)과 [초기0.10.0 증거](evidence/m9-initial-release-actions-verification.json)를 구분한다. 원본 옵션·수치 계약·승인 범위를 추가하거나 완료 처리하지 않는다.
+M9 공개 수정 당시 앱0.10.1·엔진0.10.0-m9·211개 정의·39예제/6범주와 source subset211행/미구현174행을 유지했다. 버전 표시를 APP_VERSION에 연결하고 실제 캔버스 크기 구독·DOM 측정 일치·취소 가능한2프레임 안정화로 최초 fit의 측정 경합을 수정했다. [최신 공개 검증](pages-validation.md)과 [초기0.10.0 증거](evidence/m9-initial-release-actions-verification.json)를 구분한다. 이 수정 자체가 원본 옵션·수치 계약·승인 범위를 추가하거나 완료 처리한 것은 아니다.
 
 자동 저장의5개 상태 문구 크기를 미리 확보해 최초 fit 뒤 헤더/캔버스 높이가 달라지는 경계를 교정했다. 추가 측정용 span은 비어 있고 aria-hidden이며 현재 DOMtext는 실제 현재 상태만 포함한다. [저장 상태 교정](evidence/m9-save-status-layout-correction.json)과 [두 번째 게시 전 실패](evidence/m9-late-layout-failed-attempt.json)를 보존한다.

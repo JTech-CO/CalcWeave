@@ -67,7 +67,7 @@ describe('M12 solver and analysis presentation', () => {
     expect(html.match(/class="block-name[^"]*"[^>]*>(.*?)<\/div>/)?.[1]).not.toContain('Selected');
   });
   it('preserves every earlier category and adds eight executable solver examples', () => {
-    expect(EXAMPLES).toHaveLength(61); expect(new Set(EXAMPLES.map(example => example.id)).size).toBe(61); expect(EXAMPLE_CATEGORIES).toHaveLength(9);
+    expect(EXAMPLES.length).toBeGreaterThanOrEqual(61); expect(new Set(EXAMPLES.map(example => example.id)).size).toBe(EXAMPLES.length); expect(EXAMPLE_CATEGORIES.length).toBeGreaterThanOrEqual(9);
     expect(EXAMPLES.filter(example => example.category === 'solver')).toHaveLength(8); expect(EXAMPLES.filter(example => example.category === 'hierarchy')).toHaveLength(8);
     for (const id of ['first-calculation', 'continuous-decay', 'typed-integer64', 'controlled-variant']) expect(EXAMPLES.some(example => example.id === id)).toBe(true);
   });

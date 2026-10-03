@@ -43,6 +43,8 @@ jobs:
       - run: npx tsx scripts/update-m11-coverage.ts --verify
       - run: npm run verify:m12
       - run: npx tsx scripts/update-m12-coverage.ts --verify
+      - run: npm run verify:m13
+      - run: npx tsx scripts/update-m13-coverage.ts --verify
       - run: npm run build
       - run: npm run verify:release
       - run: npx playwright install --with-deps chromium

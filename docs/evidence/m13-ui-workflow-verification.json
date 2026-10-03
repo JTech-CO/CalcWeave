@@ -1,0 +1,1251 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M13",
+  "status": "passed",
+  "generatedAt": "2026-10-03T08:43:15.131Z",
+  "manualUserStudyConducted": false,
+  "unit": {
+    "files": [
+      "tests/m10-history.test.ts",
+      "tests/m11-history.test.ts",
+      "tests/m12-ui.test.ts",
+      "tests/m13-data-import.test.ts",
+      "tests/m13-history.test.ts",
+      "tests/m13-ui-models.test.ts",
+      "tests/m13-worker.test.ts"
+    ],
+    "passed": 116,
+    "failed": 0,
+    "log": "docs/evidence/m13-ui-unit-results.json",
+    "ownM13Passed": 92
+  },
+  "browser": {
+    "status": "passed",
+    "total": 11,
+    "passed": 11,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "report": "docs/evidence/m13-browser-workflow-results.json",
+    "rawReport": "docs/evidence/m13-browser-raw.json",
+    "testFilter": "tests/e2e/m13-editor.spec.ts",
+    "tests": [
+      {
+        "name": "M13 Unicode, Compose/Scan and ASCII examples preserve actual tagged output values",
+        "file": "m13-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 3722
+      },
+      {
+        "name": "M13 bounded JSON drafts block execution and escaped string previews stay inert",
+        "file": "m13-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 3269
+      },
+      {
+        "name": "M13 CSV formulas are blocked beyond preview while numeric negatives are imported with provenance",
+        "file": "m13-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 2199
+      },
+      {
+        "name": "M13 XLSX reads verified actual ZIP cells and rejects formula/external workbook files",
+        "file": "m13-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 1963
+      },
+      {
+        "name": "M13 scenario editor checks increasing time and saves true named points for interpolation",
+        "file": "m13-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 2131
+      },
+      {
+        "name": "M13 scheduled dashboard controls expose real gauges/bands and replay stable time orders",
+        "file": "m13-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 2992
+      },
+      {
+        "name": "M13 XY/floating/record workflow downloads raw points and saves real scalar dataset",
+        "file": "m13-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 2971
+      },
+      {
+        "name": "M13 Stop Simulation returns completed with an exact final valid sample and reason",
+        "file": "m13-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 2512
+      },
+      {
+        "name": "M13 live Worker edits apply at next tick, preserve initial values and replay exact raw samples",
+        "file": "m13-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 5381
+      },
+      {
+        "name": "M13 data and dashboard controls fit both themes at 320px and 200% text",
+        "file": "m13-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 4066
+      },
+      {
+        "name": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "file": "m13-editor.spec.ts",
+        "status": "passed",
+        "durationMs": 7708
+      }
+    ],
+    "reportOrigin": {
+      "path": ".test-generated/m13-full-browser.json",
+      "sha256": "8b015d76d1a7c44fba6cd79f71cef04eb68c30e7b9f011eb150148080dbbe1ab",
+      "fullSuiteStats": {
+        "startTime": "2026-10-03T08:25:20.277Z",
+        "duration": 522057.288,
+        "expected": 167,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "postChangeReport": {
+        "path": ".test-generated/m13-final-boundary-browser.json",
+        "committedReport": "docs/evidence/m13-browser-boundary-results.json",
+        "sha256": "16cff98d3c595f794188697d615a7945dcd8cd6c0fef15e206b764a5aea83f68",
+        "stats": {
+          "startTime": "2026-10-03T08:40:09.857Z",
+          "duration": 61714.239,
+          "expected": 3,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "replacedTests": [
+          "M13 CSV formulas are blocked beyond preview while numeric negatives are imported with provenance",
+          "M13 live Worker edits apply at next tick, preserve initial values and replay exact raw samples",
+          "M13 all37 source dashboard profiles render real independent controls and observed values"
+        ],
+        "sourceChange": "UTF8 TextDecoder retains BOM so CSV/JSON SHA256 includes all raw bytes; runtime live control validation normalizes numeric -0 to0 for replay. Whole167-case browser suite precedes these isolated final boundary repairs. Three affected CSV/live/all37 cases are re-executed after final build."
+      }
+    },
+    "fullSuiteSourceBoundary": "Whole167-case report is after Worker mode hook repair, before isolated UTF8 BOM provenance and later control numeric-policy boundary repairs.",
+    "finalBoundaryRecheck": "passed-focused-affected-workflows"
+  },
+  "dashboardProfiles": {
+    "total": 37,
+    "controls": 20,
+    "indicators": 15,
+    "actions": 2,
+    "renderChecks": [
+      {
+        "sourceRowId": "03-001",
+        "sourceName": "Callback Button",
+        "blockType": "dashboard.action",
+        "parameters": {
+          "action": "run",
+          "events": "[]",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-001"
+      },
+      {
+        "sourceRowId": "03-002",
+        "sourceName": "Check Box",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "check-box",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "check-box",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-002"
+      },
+      {
+        "sourceRowId": "03-003",
+        "sourceName": "Combo Box",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "combo-box",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "combo-box",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-003"
+      },
+      {
+        "sourceRowId": "03-004",
+        "sourceName": "Dashboard Scope",
+        "blockType": "dashboard.indicator",
+        "parameters": {
+          "kind": "scope",
+          "min": 0,
+          "max": 1,
+          "thresholds": [
+            0.5
+          ],
+          "labels": "[\"낮음\",\"높음\"]",
+          "gaugeStyle": "full",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "scope",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "gaugeStyle": "full",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-004"
+      },
+      {
+        "sourceRowId": "03-005",
+        "sourceName": "Display",
+        "blockType": "dashboard.indicator",
+        "parameters": {
+          "kind": "display",
+          "min": 0,
+          "max": 1,
+          "thresholds": [
+            0.5
+          ],
+          "labels": "[\"낮음\",\"높음\"]",
+          "gaugeStyle": "full",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "display",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "gaugeStyle": "full",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-005"
+      },
+      {
+        "sourceRowId": "03-006",
+        "sourceName": "Edit",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "edit",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "edit",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-006"
+      },
+      {
+        "sourceRowId": "03-007",
+        "sourceName": "Gauge",
+        "blockType": "dashboard.indicator",
+        "parameters": {
+          "kind": "gauge",
+          "min": 0,
+          "max": 1,
+          "thresholds": [
+            0.5
+          ],
+          "labels": "[\"낮음\",\"높음\"]",
+          "gaugeStyle": "full",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "gauge",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "gaugeStyle": "full",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-007"
+      },
+      {
+        "sourceRowId": "03-008",
+        "sourceName": "Half Gauge",
+        "blockType": "dashboard.indicator",
+        "parameters": {
+          "kind": "gauge",
+          "min": 0,
+          "max": 1,
+          "thresholds": [
+            0.5
+          ],
+          "labels": "[\"낮음\",\"높음\"]",
+          "gaugeStyle": "half",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "gauge",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "gaugeStyle": "half",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-008"
+      },
+      {
+        "sourceRowId": "03-009",
+        "sourceName": "Knob",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "knob",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "knob",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-009"
+      },
+      {
+        "sourceRowId": "03-010",
+        "sourceName": "Lamp",
+        "blockType": "dashboard.indicator",
+        "parameters": {
+          "kind": "lamp",
+          "min": 0,
+          "max": 1,
+          "thresholds": [
+            0.5
+          ],
+          "labels": "[\"낮음\",\"높음\"]",
+          "gaugeStyle": "full",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "lamp",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "gaugeStyle": "full",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-010"
+      },
+      {
+        "sourceRowId": "03-011",
+        "sourceName": "Linear Gauge",
+        "blockType": "dashboard.indicator",
+        "parameters": {
+          "kind": "gauge",
+          "min": 0,
+          "max": 1,
+          "thresholds": [
+            0.5
+          ],
+          "labels": "[\"낮음\",\"높음\"]",
+          "gaugeStyle": "linear",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "gauge",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "gaugeStyle": "linear",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-011"
+      },
+      {
+        "sourceRowId": "03-012",
+        "sourceName": "MultiStateImage",
+        "blockType": "dashboard.indicator",
+        "parameters": {
+          "kind": "multi-state-image",
+          "min": 0,
+          "max": 1,
+          "thresholds": [
+            0.5
+          ],
+          "labels": "[\"낮음\",\"높음\"]",
+          "gaugeStyle": "full",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "multi-state-image",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "gaugeStyle": "full",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-012"
+      },
+      {
+        "sourceRowId": "03-013",
+        "sourceName": "Push Button",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "push-button",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "push-button",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-013"
+      },
+      {
+        "sourceRowId": "03-014",
+        "sourceName": "Quarter Gauge",
+        "blockType": "dashboard.indicator",
+        "parameters": {
+          "kind": "gauge",
+          "min": 0,
+          "max": 1,
+          "thresholds": [
+            0.5
+          ],
+          "labels": "[\"낮음\",\"높음\"]",
+          "gaugeStyle": "quarter",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "gauge",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "gaugeStyle": "quarter",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-014"
+      },
+      {
+        "sourceRowId": "03-015",
+        "sourceName": "Radio Button",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "radio-button",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "radio-button",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-015"
+      },
+      {
+        "sourceRowId": "03-016",
+        "sourceName": "Rocker Switch",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "rocker-switch",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "rocker-switch",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-016"
+      },
+      {
+        "sourceRowId": "03-017",
+        "sourceName": "Rotary Switch",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "rotary-switch",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "rotary-switch",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-017"
+      },
+      {
+        "sourceRowId": "03-018",
+        "sourceName": "Slider",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "slider",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "slider",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-018"
+      },
+      {
+        "sourceRowId": "03-019",
+        "sourceName": "Slider Switch",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "slider-switch",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "slider-switch",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-019"
+      },
+      {
+        "sourceRowId": "03-020",
+        "sourceName": "Toggle Switch",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "toggle-switch",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "standard",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "toggle-switch",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-020"
+      },
+      {
+        "sourceRowId": "03-021",
+        "sourceName": "Callback Button",
+        "blockType": "dashboard.action",
+        "parameters": {
+          "action": "run",
+          "events": "[]",
+          "appearance": "custom",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-021"
+      },
+      {
+        "sourceRowId": "03-022",
+        "sourceName": "Check Box",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "check-box",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "custom",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "check-box",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-022"
+      },
+      {
+        "sourceRowId": "03-023",
+        "sourceName": "Circular Gauge",
+        "blockType": "dashboard.indicator",
+        "parameters": {
+          "kind": "gauge",
+          "min": 0,
+          "max": 1,
+          "thresholds": [
+            0.5
+          ],
+          "labels": "[\"낮음\",\"높음\"]",
+          "gaugeStyle": "full",
+          "appearance": "custom",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "gauge",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "gaugeStyle": "full",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-023"
+      },
+      {
+        "sourceRowId": "03-024",
+        "sourceName": "Display",
+        "blockType": "dashboard.indicator",
+        "parameters": {
+          "kind": "display",
+          "min": 0,
+          "max": 1,
+          "thresholds": [
+            0.5
+          ],
+          "labels": "[\"낮음\",\"높음\"]",
+          "gaugeStyle": "full",
+          "appearance": "custom",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "display",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "gaugeStyle": "full",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-024"
+      },
+      {
+        "sourceRowId": "03-025",
+        "sourceName": "Half Gauge",
+        "blockType": "dashboard.indicator",
+        "parameters": {
+          "kind": "gauge",
+          "min": 0,
+          "max": 1,
+          "thresholds": [
+            0.5
+          ],
+          "labels": "[\"낮음\",\"높음\"]",
+          "gaugeStyle": "half",
+          "appearance": "custom",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "gauge",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "gaugeStyle": "half",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-025"
+      },
+      {
+        "sourceRowId": "03-026",
+        "sourceName": "Horizontal Gauge",
+        "blockType": "dashboard.indicator",
+        "parameters": {
+          "kind": "gauge",
+          "min": 0,
+          "max": 1,
+          "thresholds": [
+            0.5
+          ],
+          "labels": "[\"낮음\",\"높음\"]",
+          "gaugeStyle": "linear",
+          "appearance": "custom",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "gauge",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "gaugeStyle": "linear",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-026"
+      },
+      {
+        "sourceRowId": "03-027",
+        "sourceName": "Horizontal Slider",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "slider",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "custom",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "slider",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-027"
+      },
+      {
+        "sourceRowId": "03-028",
+        "sourceName": "Knob",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "knob",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "custom",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "knob",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-028"
+      },
+      {
+        "sourceRowId": "03-029",
+        "sourceName": "Lamp",
+        "blockType": "dashboard.indicator",
+        "parameters": {
+          "kind": "lamp",
+          "min": 0,
+          "max": 1,
+          "thresholds": [
+            0.5
+          ],
+          "labels": "[\"낮음\",\"높음\"]",
+          "gaugeStyle": "full",
+          "appearance": "custom",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "lamp",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "gaugeStyle": "full",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-029"
+      },
+      {
+        "sourceRowId": "03-030",
+        "sourceName": "Push Button",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "push-button",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "custom",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "push-button",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-030"
+      },
+      {
+        "sourceRowId": "03-031",
+        "sourceName": "Quarter Gauge",
+        "blockType": "dashboard.indicator",
+        "parameters": {
+          "kind": "gauge",
+          "min": 0,
+          "max": 1,
+          "thresholds": [
+            0.5
+          ],
+          "labels": "[\"낮음\",\"높음\"]",
+          "gaugeStyle": "quarter",
+          "appearance": "custom",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "gauge",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "gaugeStyle": "quarter",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-031"
+      },
+      {
+        "sourceRowId": "03-032",
+        "sourceName": "Rocker Switch",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "rocker-switch",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "custom",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "rocker-switch",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-032"
+      },
+      {
+        "sourceRowId": "03-033",
+        "sourceName": "Rotary Switch",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "rotary-switch",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "custom",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "rotary-switch",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-033"
+      },
+      {
+        "sourceRowId": "03-034",
+        "sourceName": "Slider Switch",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "slider-switch",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "custom",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "slider-switch",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-034"
+      },
+      {
+        "sourceRowId": "03-035",
+        "sourceName": "Toggle Switch",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "toggle-switch",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "custom",
+          "orientation": "horizontal",
+          "title": ""
+        },
+        "kind": "toggle-switch",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-035"
+      },
+      {
+        "sourceRowId": "03-036",
+        "sourceName": "Vertical Gauge",
+        "blockType": "dashboard.indicator",
+        "parameters": {
+          "kind": "gauge",
+          "min": 0,
+          "max": 1,
+          "thresholds": [
+            0.5
+          ],
+          "labels": "[\"낮음\",\"높음\"]",
+          "gaugeStyle": "linear",
+          "appearance": "custom",
+          "orientation": "vertical",
+          "title": ""
+        },
+        "kind": "gauge",
+        "appearance": "custom",
+        "orientation": "vertical",
+        "gaugeStyle": "linear",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-036"
+      },
+      {
+        "sourceRowId": "03-037",
+        "sourceName": "Vertical Slider",
+        "blockType": "dashboard.control",
+        "parameters": {
+          "kind": "slider",
+          "initial": 0,
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "choices": [
+            0,
+            1
+          ],
+          "events": "[]",
+          "appearance": "custom",
+          "orientation": "vertical",
+          "title": ""
+        },
+        "kind": "slider",
+        "appearance": "custom",
+        "orientation": "vertical",
+        "widgetRendered": true,
+        "controlOrObservationValidated": true,
+        "evidenceTest": "M13 all37 source dashboard profiles render real independent controls and observed values",
+        "unitAssertion": "renders and executes source-specific dashboard profile 03-037"
+      }
+    ],
+    "nativeDashboardEquivalenceClaimed": false,
+    "interactionEvidence": "Actual browser edits all selected controls, observes all selected indicators at0.75, invokes both run actions and compares raw Worker history; SSR units independently compile and execute all37 configured profiles."
+  },
+  "files": {
+    "checks": [
+      {
+        "id": "xlsx-bounded-import",
+        "passed": true,
+        "evidenceTest": "M13 XLSX reads verified actual ZIP cells and rejects formula/external workbook files"
+      },
+      {
+        "id": "csv-json-import",
+        "passed": true,
+        "evidenceTest": "M13 CSV formulas are blocked beyond preview while numeric negatives are imported with provenance",
+        "unitEvidence": "reads UTF8 CSV quoted newlines and JSON and preserves numeric negatives",
+        "jsonImportTestedIn": "actual helper unit test; browser case covers CSV"
+      },
+      {
+        "id": "data-editor-provenance",
+        "passed": true,
+        "evidenceTest": "M13 scenario editor checks increasing time and saves true named points for interpolation"
+      },
+      {
+        "id": "recording-json-export",
+        "passed": true,
+        "evidenceTest": "M13 XY/floating/record workflow downloads raw points and saves real scalar dataset"
+      },
+      {
+        "id": "recording-dataset-export",
+        "passed": true,
+        "evidenceTest": "M13 XY/floating/record workflow downloads raw points and saves real scalar dataset"
+      },
+      {
+        "id": "signal-editor-scenario",
+        "passed": true,
+        "evidenceTest": "M13 scenario editor checks increasing time and saves true named points for interpolation"
+      }
+    ],
+    "localOnly": true,
+    "executableFormulasSupported": false,
+    "externalLinksSupported": false,
+    "macrosSupported": false,
+    "formats": [
+      "csv",
+      "json",
+      "xlsx"
+    ],
+    "xlsxLimits": {
+      "inputBytes": 2097152,
+      "zipEntries": 64,
+      "entryExpandedBytes": 2097152,
+      "totalExpandedBytes": 8388608,
+      "xmlNodesAcrossWorkbook": 100000,
+      "xmlDepth": 32,
+      "attributesPerElement": 64,
+      "attributeLength": 16384,
+      "sheets": 8,
+      "rows": 4000,
+      "columns": 16,
+      "cells": 20000,
+      "cellStringLength": 1000
+    },
+    "scenarioLimits": {
+      "points": 1000,
+      "strictlyIncreasingTimes": true,
+      "finiteValues": true
+    },
+    "provenance": "Original-source SHA-256 and normalized table-content SHA-256 are stored separately with bounded filename/sheet/transformation metadata."
+  },
+  "compatibility": {
+    "predecessorDefinitionObjectsPreservedBySeparateRegistryGate": 304,
+    "predecessorExampleIdsPreserved": 61,
+    "predecessorCategoryIdsPreserved": 9,
+    "currentExamples": 69,
+    "currentCategories": 11,
+    "staticAndContinuousWorkerRegression": "Four actual strict Worker entry tests cover legacy static, int64 static, continuous and discrete modes; live-event hook is supplied only for discrete mode."
+  },
+  "liveReplay": {
+    "tested": true,
+    "executionMode": "discrete",
+    "nodeTypes": [
+      "dashboard.control",
+      "math.slider-gain"
+    ],
+    "queueCap": 256,
+    "drainCap": 32,
+    "eventSemantics": "Pending events apply at next eligible due tick; receipt time/order becomes model events. Initial parameter is preserved and future planned events retain their time order.",
+    "browserEvidence": "M13 live Worker edits apply at next tick, preserve initial values and replay exact raw samples",
+    "exactRawReplayCompared": true,
+    "sampleCount": 2001,
+    "arbitraryCallbacksAllowed": false
+  },
+  "responsive": {
+    "themes": [
+      "dark",
+      "light"
+    ],
+    "viewports": [
+      {
+        "width": 1440,
+        "textScale": 1
+      },
+      {
+        "width": 1024,
+        "textScale": 1
+      },
+      {
+        "width": 390,
+        "textScale": 1
+      },
+      {
+        "width": 320,
+        "textScale": 2
+      }
+    ],
+    "browserEvidence": "M13 data and dashboard controls fit both themes at 320px and 200% text",
+    "geometryChecks": "No document horizontal overflow and all visible workspace inputs/selects/textareas stay within viewport in both data and dashboard panels.",
+    "visualInspection": {
+      "conducted": true,
+      "evidence": [
+        "docs/evidence/m13-dashboard-dark-1440-1x.png",
+        "docs/evidence/m13-dashboard-dark-320-2x.png",
+        "docs/evidence/m13-dashboard-light-1440-1x.png",
+        "docs/evidence/m13-dashboard-light-320-2x.png",
+        "docs/evidence/m13-data-dark-1440-1x.png",
+        "docs/evidence/m13-data-dark-320-2x.png",
+        "docs/evidence/m13-data-light-1440-1x.png",
+        "docs/evidence/m13-data-light-320-2x.png"
+      ],
+      "checks": [
+        "Black dark theme and light-gray theme retained.",
+        "All eight saved panel images inspected; control labels, raw values and inputs remain legible.",
+        "320px at200% text uses vertical flow with wrapping labels; no viewport-width overflow or clipped input controls."
+      ],
+      "manualUserStudyConducted": false
+    }
+  },
+  "knownLimits": [
+    "The37 dashboard source rows use explicitly configured independent wired control/indicator/action workflows; native portless arbitrary tunable binding, custom images and arbitrary code callbacks are not claimed.",
+    "XLSX import is a bounded value-only subset. Formula, macro, external-link, merged-cell, error/date-cell and unsupported archive/XML forms are rejected.",
+    "Live control overlays run only in discrete browser Workers; static/continuous models retain their prior execution and planned-event replay contracts.",
+    "Scalar recording-to-dataset accepts finite legacy real scalars with declared unit; exact structured records remain available through JSON/CSV rather than automatic numeric coercion.",
+    "Browser/unit engineering checks and visual inspection do not constitute manual user research or MathWorks runtime equivalence."
+  ]
+}

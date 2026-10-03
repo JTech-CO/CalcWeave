@@ -1,7 +1,11 @@
-export const ENGINE_VERSION = '0.13.0-m12';
+export const ENGINE_VERSION = '0.14.0-m13';
 
 export type ExecutionMode = 'static' | 'discrete' | 'continuous';
 export type BlockType =
+  | 'source.string-constant' | 'string.ascii-to-string' | 'string.compose' | 'string.scan' | 'string.string-compare' | 'string.string-concatenate'
+  | 'string.string-contains' | 'string.string-count' | 'string.string-find' | 'string.string-length' | 'string.string-to-ascii' | 'string.parse-number' | 'string.parse-enum' | 'string.substring' | 'string.to-string'
+  | 'dashboard.control' | 'dashboard.indicator' | 'dashboard.action' | 'sink.record' | 'sink.xy-graph' | 'sink.floating-scope' | 'sink.stop' | 'signal.probe' | 'math.slider-gain'
+  | 'data.output-file' | 'data.output-dataset' | 'data.input-table' | 'data.signal-editor' | 'source.waveform' | 'model.support-catalog'
   | 'continuous.descriptor' | 'continuous.integrator-limited' | 'continuous.second-order-limited' | 'continuous.pid-2dof'
   | 'time.variable-delay' | 'time.variable-transport-delay' | 'nonlinear.backlash' | 'nonlinear.rate-limiter-continuous' | 'nonlinear.rate-limiter-dynamic'
   | 'solver.algebraic-constraint' | 'analysis.linearization'
@@ -155,6 +159,7 @@ export interface SolverSettings {
 }
 export type DatasetCell = number | boolean | string;
 export interface DatasetColumn { name: string; kind: 'number' | 'boolean' | 'string'; unit: string }
+export interface DatasetProvenance { format: 'csv' | 'json' | 'xlsx' | 'editor'; filename?: string; sheet?: string; sourceHash: string; transforms: string[] }
 export interface Dataset {
   id: string;
   name: string;
@@ -164,6 +169,7 @@ export interface Dataset {
   timeColumn: string;
   columns: DatasetColumn[];
   rows: DatasetCell[][];
+  provenance?: DatasetProvenance;
 }
 export interface SubsystemDefinition {
   id: string;
@@ -248,6 +254,8 @@ export interface HierarchyInstance { nodeId: string; path: string[]; definitionI
 export interface HierarchyMetadata { origins: Record<string, HierarchyOrigin>; instances: HierarchyInstance[] }
 
 export interface RunSample { time: number; values: Record<string, SignalValue> }
+export interface DashboardLiveEvent { nodeId: string; value: number }
+export interface DashboardAppliedEvent extends DashboardLiveEvent { time: number; order: number }
 export interface RunResult {
   samples: RunSample[];
   finalState: Record<string, SignalValue>;
@@ -260,6 +268,8 @@ export interface RunResult {
   solverStatistics?: SolverStatistics;
   events?: SimulationEvent[];
   resources?: { operations: number };
+  /** Graceful root Stop Simulation, after a complete validated observation. */
+  stopReason?: { nodeId: string; tick: number; time: number };
 }
 export interface SolverStatistics {
   method: 'rk4' | 'rk45' | 'implicit-euler';
@@ -279,6 +289,7 @@ export interface RunOptions {
   maxOperations?: number;
   trackOperations?: boolean;
   onProgress?: (progress: { steps: number; time: number }) => void;
-  control?: { isPaused: () => boolean; waitForResume: () => Promise<void> };
+  control?: { isPaused: () => boolean; waitForResume: () => Promise<void>; takeDashboardEvents?: () => DashboardLiveEvent[] };
   onPauseChange?: (paused: boolean) => void;
+  onDashboardEventApplied?: (event: DashboardAppliedEvent) => void;
 }

@@ -1,6 +1,6 @@
 {
   "name": "calcweave",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "private": true,
   "type": "module",
   "description": "CalcWeave: bounded mathematical diagrams, simulation and executable code export",
@@ -42,7 +42,8 @@
     "verify:m9": "tsx scripts/verify-m9.ts",
     "verify:m10": "tsx scripts/verify-m10.ts",
     "verify:m11": "tsx scripts/verify-m11.ts",
-    "verify:m12": "tsx scripts/verify-m12.ts"
+    "verify:m12": "tsx scripts/verify-m12.ts",
+    "verify:m13": "tsx scripts/verify-m13.ts"
   },
   "dependencies": {
     "@xyflow/react": "12.12.0",

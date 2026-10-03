@@ -1,0 +1,3642 @@
+{
+  "generatedAt": "2026-10-03T08:53:14.584Z",
+  "stage": "M13",
+  "engineVersion": "0.14.0-m13",
+  "datasetSha256": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+  "sourceRows": 385,
+  "uniqueSourceNameStrings": 339,
+  "firstWorkSourceRows": 75,
+  "registryDefinitions": 334,
+  "approvedAdditionalSourceRows": 59,
+  "existingMappingExtensions": 0,
+  "approvedSourceRows": 59,
+  "currentSourceSubset": 364,
+  "missingSourceRows": 21,
+  "fullSourceOptionsClosed": 0,
+  "evidencePath": "docs/evidence/m13-verification.json",
+  "evidenceSha256": "aa67d7976bd891f122f8a25eff41deb8b2054bc31ba660082b873e269883b598",
+  "fixturePath": "tests/m13-independent-fixtures.ts",
+  "fixtureSha256": "dbe45a5f32968e073420c01f83319b434958c9c97857871dd4ab5ffc70e74f21",
+  "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+  "uiWorkflowEvidenceSha256": "b6700692a5aa60e66255b533ddc2daa93134f95213e3290acd1a0a3520312fbb",
+  "uiBackingReports": {
+    "docs/evidence/m13-ui-unit-results.json": "15fe56a7afb637f5bd14855745385f820200cfcad2cdca7e584052218df00f43",
+    "docs/evidence/m13-browser-workflow-results.json": "6115afd02ce12f73ee1ed400cc80fd0c73ac06afaa722f5e27cc27bb7496554c"
+  },
+  "protectedArtifacts": {
+    "dataset/Simulink_Basic_Blocks_R2024b.md": "cfa9bc90f5fc50c64f85aabc3a3f74cc0329954289ff570618e94798524813d7",
+    "docs/baselines/catalog-block-coverage.md": "bfad433de22c3302b53369be3465ec1d4bb3e072dd8f3ce310bc4af1ea967774",
+    "docs/simulink-coverage-roadmap.json": "86ec3c3f75939dc72a00b39d6760d86d9ef21f2a63922daf110c5db2fe7932cd",
+    "docs/baselines/m10-registry.json": "d23bc34bdbd450b1ea2be671b419f8ccfb74fa97238d541c3f9ffd97230cf8dc",
+    "docs/evidence/m10-source-approvals.json": "d8c938fb999555aaf61f24b68b7b631e158611dc2760542bd08d0f94d3221f4b",
+    "docs/evidence/m10-verification.json": "659a11814e1420f217068f4cab4c6726cd3070154f69fd1064afd3a4aee52e6d",
+    "docs/evidence/m10-reference-review.json": "fb9572178cc5c5caf19658e9010709a67d0d6611f83b9f3ce8993dffee493325",
+    "docs/evidence/m8-source-approvals.json": "4f558f5040f9dda1a9c2b5bbd2b848b825b4961489a03228dd3c12370b2c4d60",
+    "docs/evidence/m9-source-approvals.json": "7d49f1b15a6b325050a55295bca4d29411fe123dd0752e2ac98766641ccc18ca",
+    "docs/evidence/m8-verification.json": "351b5ba6031dff1a2f4dfb8b51e4e63e2747998277ee93e56decc4b908ff75d6",
+    "docs/evidence/m8-presets-verification.json": "55cef48ebe57a97ca02922225330f36b1f1d0866d2ad92d69f74fcceb7771f01",
+    "docs/evidence/m9-verification.json": "1d3fee9b56017db6c12b8f7f778d4c064efd4fa7f7d0014a2a38b6ffdd13a23f",
+    "docs/baselines/m11-registry.json": "daaf1ec9df9b5b7b43efdfd57863d0467b3f5636b3bcb4fd3b5450322fe8bf2e",
+    "docs/evidence/m11-source-approvals.json": "492abedeb09b84e601d206cf85ead66b3ba7596af0894f0f9519fd9af8aac8c7",
+    "docs/evidence/m11-verification.json": "716939d06a20c53a3fb9655820fb5c366fde0b1bb0fd5fd37adb39abadafea76",
+    "docs/baselines/m12-registry.json": "5eb19914ff0643307bb8c5c01b22557ad935558230a217e50ff8de6ee1867a73",
+    "docs/evidence/m12-source-approvals.json": "a3e2201b9672a4eac21f90a37b893ee0daf2c2a9b6d912654b46b1e1618a449b",
+    "docs/evidence/m12-verification.json": "79253d162a1af3ca5f5bbe2eb9de14d0fbc3e5aaa107795586678ab8f896f0c7"
+  },
+  "preservedSourceRows": [
+    {
+      "sourceId": "01-018",
+      "rowSha256": "42aef7fb527b5c24224fee25146db27f981e56be59afc63c46c777fef2e40bd7",
+      "reason": "Previous selected mapping/status retained; M13 source variants do not upgrade prior unverified native/full-option scope."
+    },
+    {
+      "sourceId": "01-022",
+      "rowSha256": "5bb7e0c63aa6de90f64cecd70c782413c15c82682441967e47c6df6b7f040a24",
+      "reason": "Previous selected mapping/status retained; M13 source variants do not upgrade prior unverified native/full-option scope."
+    },
+    {
+      "sourceId": "03-004",
+      "rowSha256": "12aa9daf2fd9e17b5379940a82615e698a6fb0c075d454c4ed68386271f350c5",
+      "reason": "Previous selected mapping/status retained; M13 source variants do not upgrade prior unverified native/full-option scope."
+    },
+    {
+      "sourceId": "03-005",
+      "rowSha256": "05fe39ccfc365a1b26e25987e7353a90978a8caee1bb3129596ac40d8a640851",
+      "reason": "Previous selected mapping/status retained; M13 source variants do not upgrade prior unverified native/full-option scope."
+    },
+    {
+      "sourceId": "03-007",
+      "rowSha256": "87de0576f3a11ac79d28289070545069352fc76ccf8f05a9ac576848da47fd7f",
+      "reason": "Previous selected mapping/status retained; M13 source variants do not upgrade prior unverified native/full-option scope."
+    },
+    {
+      "sourceId": "03-018",
+      "rowSha256": "b6ddab269246dc541eae8d3bb5d5e165ac7428ba501d5e3d446426edb17116ee",
+      "reason": "Previous selected mapping/status retained; M13 source variants do not upgrade prior unverified native/full-option scope."
+    },
+    {
+      "sourceId": "03-020",
+      "rowSha256": "7210bc03d693b19c16c40153f44230bf6abbf43da65e0abb35bc75998c0d27e9",
+      "reason": "Previous selected mapping/status retained; M13 source variants do not upgrade prior unverified native/full-option scope."
+    },
+    {
+      "sourceId": "08-029",
+      "rowSha256": "e8e16e85f88b8f4e94f6b363c5546169ecdd5174ef0181b953b2483ebf0a26b4",
+      "reason": "Previous selected mapping/status retained; M13 source variants do not upgrade prior unverified native/full-option scope."
+    },
+    {
+      "sourceId": "12-002",
+      "rowSha256": "e4203916ed0fe341b78f4bc517546be06078f82075cfab7a0a9d65e7af98c127",
+      "reason": "Previous selected mapping/status retained; M13 source variants do not upgrade prior unverified native/full-option scope."
+    },
+    {
+      "sourceId": "12-003",
+      "rowSha256": "760fe375eba95f6c65cc34efcf748241d5dabc0c5a46fc64b5158127227586a2",
+      "reason": "Previous selected mapping/status retained; M13 source variants do not upgrade prior unverified native/full-option scope."
+    },
+    {
+      "sourceId": "16-001",
+      "rowSha256": "6b7340a3880b590ca8700e4daf47a807b8bfa9241eb9e239407b4426b509ae80",
+      "reason": "Previous selected mapping/status retained; M13 source variants do not upgrade prior unverified native/full-option scope."
+    },
+    {
+      "sourceId": "16-006",
+      "rowSha256": "c1f47240928a6e0ede66e61b65d6ee50464d727cb09c5105a537b7225a8e4cbb",
+      "reason": "Previous selected mapping/status retained; M13 source variants do not upgrade prior unverified native/full-option scope."
+    },
+    {
+      "sourceId": "16-008",
+      "rowSha256": "a92f3da850cf280eec0ce325806439342b730752d9fe38863d19b730b3b9ed93",
+      "reason": "Previous selected mapping/status retained; M13 source variants do not upgrade prior unverified native/full-option scope."
+    },
+    {
+      "sourceId": "17-009",
+      "rowSha256": "dcc15593e227443534c89859c5b7c23688d72650f6e469886321082646ea5580",
+      "reason": "Previous selected mapping/status retained; M13 source variants do not upgrade prior unverified native/full-option scope."
+    },
+    {
+      "sourceId": "17-011",
+      "rowSha256": "46d8c8531f61400ad189598463ba3f58fdc709bc379d16ca09643b5daff9447c",
+      "reason": "Previous selected mapping/status retained; M13 source variants do not upgrade prior unverified native/full-option scope."
+    },
+    {
+      "sourceId": "17-015",
+      "rowSha256": "a0c1319907c7912846f02f6df07e06d5a3300f45a63447134525534a0aac9447",
+      "reason": "Previous selected mapping/status retained; M13 source variants do not upgrade prior unverified native/full-option scope."
+    }
+  ],
+  "approvals": [
+    {
+      "sourceId": "03-001",
+      "sourceName": "Callback Button",
+      "sourceLine": 156,
+      "canonical": "dashboard.action",
+      "selectedParameters": {
+        "action": "run",
+        "events": "[]",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-001",
+          "configuredNodeId": "Action",
+          "selectedParameters": {
+            "action": "run",
+            "events": "[]",
+            "appearance": "standard",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-001/static",
+            "m13-source-03-001/discrete",
+            "m13-source-03-001/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-001/static",
+        "m13-source-03-001/discrete",
+        "m13-source-03-001/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"action\":\"run\",\"events\":\"[]\",\"appearance\":\"standard\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-001"
+    },
+    {
+      "sourceId": "03-002",
+      "sourceName": "Check Box",
+      "sourceLine": 157,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "check-box",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-002",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "check-box",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "standard",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-002/static",
+            "m13-source-03-002/discrete",
+            "m13-source-03-002/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-002/static",
+        "m13-source-03-002/discrete",
+        "m13-source-03-002/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"check-box\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"standard\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-002"
+    },
+    {
+      "sourceId": "03-003",
+      "sourceName": "Combo Box",
+      "sourceLine": 158,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "combo-box",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-003",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "combo-box",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "standard",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-003/static",
+            "m13-source-03-003/discrete",
+            "m13-source-03-003/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-003/static",
+        "m13-source-03-003/discrete",
+        "m13-source-03-003/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"combo-box\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"standard\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-003"
+    },
+    {
+      "sourceId": "03-006",
+      "sourceName": "Edit",
+      "sourceLine": 161,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "edit",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-006",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "edit",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "standard",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-006/static",
+            "m13-source-03-006/discrete",
+            "m13-source-03-006/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-006/static",
+        "m13-source-03-006/discrete",
+        "m13-source-03-006/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"edit\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"standard\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-006"
+    },
+    {
+      "sourceId": "03-008",
+      "sourceName": "Half Gauge",
+      "sourceLine": 163,
+      "canonical": "dashboard.indicator",
+      "selectedParameters": {
+        "kind": "gauge",
+        "min": 0,
+        "max": 1,
+        "thresholds": [
+          0.5
+        ],
+        "labels": "[\"낮음\",\"높음\"]",
+        "gaugeStyle": "half",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-03-008",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "kind": "gauge",
+            "min": 0,
+            "max": 1,
+            "thresholds": [
+              0.5
+            ],
+            "labels": "[\"낮음\",\"높음\"]",
+            "gaugeStyle": "half",
+            "appearance": "standard",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-03-008/static",
+            "m13-independent-source-03-008/discrete",
+            "m13-independent-source-03-008/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-03-008/static",
+        "m13-independent-source-03-008/discrete",
+        "m13-independent-source-03-008/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"gauge\",\"min\":0,\"max\":1,\"thresholds\":[0.5],\"labels\":\"[\\\"낮음\\\",\\\"높음\\\"]\",\"gaugeStyle\":\"half\",\"appearance\":\"standard\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-008"
+    },
+    {
+      "sourceId": "03-009",
+      "sourceName": "Knob",
+      "sourceLine": 164,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "knob",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-009",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "knob",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "standard",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-009/static",
+            "m13-source-03-009/discrete",
+            "m13-source-03-009/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-009/static",
+        "m13-source-03-009/discrete",
+        "m13-source-03-009/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"knob\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"standard\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-009"
+    },
+    {
+      "sourceId": "03-010",
+      "sourceName": "Lamp",
+      "sourceLine": 165,
+      "canonical": "dashboard.indicator",
+      "selectedParameters": {
+        "kind": "lamp",
+        "min": 0,
+        "max": 1,
+        "thresholds": [
+          0.5
+        ],
+        "labels": "[\"낮음\",\"높음\"]",
+        "gaugeStyle": "full",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-03-010",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "kind": "lamp",
+            "min": 0,
+            "max": 1,
+            "thresholds": [
+              0.5
+            ],
+            "labels": "[\"낮음\",\"높음\"]",
+            "gaugeStyle": "full",
+            "appearance": "standard",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-03-010/static",
+            "m13-independent-source-03-010/discrete",
+            "m13-independent-source-03-010/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-03-010/static",
+        "m13-independent-source-03-010/discrete",
+        "m13-independent-source-03-010/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"lamp\",\"min\":0,\"max\":1,\"thresholds\":[0.5],\"labels\":\"[\\\"낮음\\\",\\\"높음\\\"]\",\"gaugeStyle\":\"full\",\"appearance\":\"standard\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-010"
+    },
+    {
+      "sourceId": "03-011",
+      "sourceName": "Linear Gauge",
+      "sourceLine": 166,
+      "canonical": "dashboard.indicator",
+      "selectedParameters": {
+        "kind": "gauge",
+        "min": 0,
+        "max": 1,
+        "thresholds": [
+          0.5
+        ],
+        "labels": "[\"낮음\",\"높음\"]",
+        "gaugeStyle": "linear",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-03-011",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "kind": "gauge",
+            "min": 0,
+            "max": 1,
+            "thresholds": [
+              0.5
+            ],
+            "labels": "[\"낮음\",\"높음\"]",
+            "gaugeStyle": "linear",
+            "appearance": "standard",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-03-011/static",
+            "m13-independent-source-03-011/discrete",
+            "m13-independent-source-03-011/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-03-011/static",
+        "m13-independent-source-03-011/discrete",
+        "m13-independent-source-03-011/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"gauge\",\"min\":0,\"max\":1,\"thresholds\":[0.5],\"labels\":\"[\\\"낮음\\\",\\\"높음\\\"]\",\"gaugeStyle\":\"linear\",\"appearance\":\"standard\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-011"
+    },
+    {
+      "sourceId": "03-012",
+      "sourceName": "MultiStateImage",
+      "sourceLine": 167,
+      "canonical": "dashboard.indicator",
+      "selectedParameters": {
+        "kind": "multi-state-image",
+        "min": 0,
+        "max": 1,
+        "thresholds": [
+          0.5
+        ],
+        "labels": "[\"낮음\",\"높음\"]",
+        "gaugeStyle": "full",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-03-012",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "kind": "multi-state-image",
+            "min": 0,
+            "max": 1,
+            "thresholds": [
+              0.5
+            ],
+            "labels": "[\"낮음\",\"높음\"]",
+            "gaugeStyle": "full",
+            "appearance": "standard",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-03-012/static",
+            "m13-independent-source-03-012/discrete",
+            "m13-independent-source-03-012/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-03-012/static",
+        "m13-independent-source-03-012/discrete",
+        "m13-independent-source-03-012/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"multi-state-image\",\"min\":0,\"max\":1,\"thresholds\":[0.5],\"labels\":\"[\\\"낮음\\\",\\\"높음\\\"]\",\"gaugeStyle\":\"full\",\"appearance\":\"standard\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-012"
+    },
+    {
+      "sourceId": "03-013",
+      "sourceName": "Push Button",
+      "sourceLine": 168,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "push-button",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-013",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "push-button",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "standard",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-013/static",
+            "m13-source-03-013/discrete",
+            "m13-source-03-013/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-013/static",
+        "m13-source-03-013/discrete",
+        "m13-source-03-013/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"push-button\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"standard\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-013"
+    },
+    {
+      "sourceId": "03-014",
+      "sourceName": "Quarter Gauge",
+      "sourceLine": 169,
+      "canonical": "dashboard.indicator",
+      "selectedParameters": {
+        "kind": "gauge",
+        "min": 0,
+        "max": 1,
+        "thresholds": [
+          0.5
+        ],
+        "labels": "[\"낮음\",\"높음\"]",
+        "gaugeStyle": "quarter",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-03-014",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "kind": "gauge",
+            "min": 0,
+            "max": 1,
+            "thresholds": [
+              0.5
+            ],
+            "labels": "[\"낮음\",\"높음\"]",
+            "gaugeStyle": "quarter",
+            "appearance": "standard",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-03-014/static",
+            "m13-independent-source-03-014/discrete",
+            "m13-independent-source-03-014/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-03-014/static",
+        "m13-independent-source-03-014/discrete",
+        "m13-independent-source-03-014/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"gauge\",\"min\":0,\"max\":1,\"thresholds\":[0.5],\"labels\":\"[\\\"낮음\\\",\\\"높음\\\"]\",\"gaugeStyle\":\"quarter\",\"appearance\":\"standard\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-014"
+    },
+    {
+      "sourceId": "03-015",
+      "sourceName": "Radio Button",
+      "sourceLine": 170,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "radio-button",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-015",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "radio-button",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "standard",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-015/static",
+            "m13-source-03-015/discrete",
+            "m13-source-03-015/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-015/static",
+        "m13-source-03-015/discrete",
+        "m13-source-03-015/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"radio-button\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"standard\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-015"
+    },
+    {
+      "sourceId": "03-016",
+      "sourceName": "Rocker Switch",
+      "sourceLine": 171,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "rocker-switch",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-016",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "rocker-switch",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "standard",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-016/static",
+            "m13-source-03-016/discrete",
+            "m13-source-03-016/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-016/static",
+        "m13-source-03-016/discrete",
+        "m13-source-03-016/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"rocker-switch\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"standard\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-016"
+    },
+    {
+      "sourceId": "03-017",
+      "sourceName": "Rotary Switch",
+      "sourceLine": 172,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "rotary-switch",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-017",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "rotary-switch",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "standard",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-017/static",
+            "m13-source-03-017/discrete",
+            "m13-source-03-017/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-017/static",
+        "m13-source-03-017/discrete",
+        "m13-source-03-017/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"rotary-switch\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"standard\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-017"
+    },
+    {
+      "sourceId": "03-019",
+      "sourceName": "Slider Switch",
+      "sourceLine": 174,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "slider-switch",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "standard",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-019",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "slider-switch",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "standard",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-019/static",
+            "m13-source-03-019/discrete",
+            "m13-source-03-019/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-019/static",
+        "m13-source-03-019/discrete",
+        "m13-source-03-019/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"slider-switch\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"standard\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-019"
+    },
+    {
+      "sourceId": "03-021",
+      "sourceName": "Callback Button",
+      "sourceLine": 185,
+      "canonical": "dashboard.action",
+      "selectedParameters": {
+        "action": "run",
+        "events": "[]",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-021",
+          "configuredNodeId": "Action",
+          "selectedParameters": {
+            "action": "run",
+            "events": "[]",
+            "appearance": "custom",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-021/static",
+            "m13-source-03-021/discrete",
+            "m13-source-03-021/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-021/static",
+        "m13-source-03-021/discrete",
+        "m13-source-03-021/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"action\":\"run\",\"events\":\"[]\",\"appearance\":\"custom\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-021"
+    },
+    {
+      "sourceId": "03-022",
+      "sourceName": "Check Box",
+      "sourceLine": 186,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "check-box",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-022",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "check-box",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "custom",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-022/static",
+            "m13-source-03-022/discrete",
+            "m13-source-03-022/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-022/static",
+        "m13-source-03-022/discrete",
+        "m13-source-03-022/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"check-box\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"custom\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-022"
+    },
+    {
+      "sourceId": "03-023",
+      "sourceName": "Circular Gauge",
+      "sourceLine": 187,
+      "canonical": "dashboard.indicator",
+      "selectedParameters": {
+        "kind": "gauge",
+        "min": 0,
+        "max": 1,
+        "thresholds": [
+          0.5
+        ],
+        "labels": "[\"낮음\",\"높음\"]",
+        "gaugeStyle": "full",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-03-023",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "kind": "gauge",
+            "min": 0,
+            "max": 1,
+            "thresholds": [
+              0.5
+            ],
+            "labels": "[\"낮음\",\"높음\"]",
+            "gaugeStyle": "full",
+            "appearance": "custom",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-03-023/static",
+            "m13-independent-source-03-023/discrete",
+            "m13-independent-source-03-023/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-03-023/static",
+        "m13-independent-source-03-023/discrete",
+        "m13-independent-source-03-023/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"gauge\",\"min\":0,\"max\":1,\"thresholds\":[0.5],\"labels\":\"[\\\"낮음\\\",\\\"높음\\\"]\",\"gaugeStyle\":\"full\",\"appearance\":\"custom\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-023"
+    },
+    {
+      "sourceId": "03-024",
+      "sourceName": "Display",
+      "sourceLine": 188,
+      "canonical": "dashboard.indicator",
+      "selectedParameters": {
+        "kind": "display",
+        "min": 0,
+        "max": 1,
+        "thresholds": [
+          0.5
+        ],
+        "labels": "[\"낮음\",\"높음\"]",
+        "gaugeStyle": "full",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-03-024",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "kind": "display",
+            "min": 0,
+            "max": 1,
+            "thresholds": [
+              0.5
+            ],
+            "labels": "[\"낮음\",\"높음\"]",
+            "gaugeStyle": "full",
+            "appearance": "custom",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-03-024/static",
+            "m13-independent-source-03-024/discrete",
+            "m13-independent-source-03-024/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-03-024/static",
+        "m13-independent-source-03-024/discrete",
+        "m13-independent-source-03-024/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"display\",\"min\":0,\"max\":1,\"thresholds\":[0.5],\"labels\":\"[\\\"낮음\\\",\\\"높음\\\"]\",\"gaugeStyle\":\"full\",\"appearance\":\"custom\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-024"
+    },
+    {
+      "sourceId": "03-025",
+      "sourceName": "Half Gauge",
+      "sourceLine": 189,
+      "canonical": "dashboard.indicator",
+      "selectedParameters": {
+        "kind": "gauge",
+        "min": 0,
+        "max": 1,
+        "thresholds": [
+          0.5
+        ],
+        "labels": "[\"낮음\",\"높음\"]",
+        "gaugeStyle": "half",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-03-025",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "kind": "gauge",
+            "min": 0,
+            "max": 1,
+            "thresholds": [
+              0.5
+            ],
+            "labels": "[\"낮음\",\"높음\"]",
+            "gaugeStyle": "half",
+            "appearance": "custom",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-03-025/static",
+            "m13-independent-source-03-025/discrete",
+            "m13-independent-source-03-025/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-03-025/static",
+        "m13-independent-source-03-025/discrete",
+        "m13-independent-source-03-025/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"gauge\",\"min\":0,\"max\":1,\"thresholds\":[0.5],\"labels\":\"[\\\"낮음\\\",\\\"높음\\\"]\",\"gaugeStyle\":\"half\",\"appearance\":\"custom\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-025"
+    },
+    {
+      "sourceId": "03-026",
+      "sourceName": "Horizontal Gauge",
+      "sourceLine": 190,
+      "canonical": "dashboard.indicator",
+      "selectedParameters": {
+        "kind": "gauge",
+        "min": 0,
+        "max": 1,
+        "thresholds": [
+          0.5
+        ],
+        "labels": "[\"낮음\",\"높음\"]",
+        "gaugeStyle": "linear",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-03-026",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "kind": "gauge",
+            "min": 0,
+            "max": 1,
+            "thresholds": [
+              0.5
+            ],
+            "labels": "[\"낮음\",\"높음\"]",
+            "gaugeStyle": "linear",
+            "appearance": "custom",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-03-026/static",
+            "m13-independent-source-03-026/discrete",
+            "m13-independent-source-03-026/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-03-026/static",
+        "m13-independent-source-03-026/discrete",
+        "m13-independent-source-03-026/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"gauge\",\"min\":0,\"max\":1,\"thresholds\":[0.5],\"labels\":\"[\\\"낮음\\\",\\\"높음\\\"]\",\"gaugeStyle\":\"linear\",\"appearance\":\"custom\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-026"
+    },
+    {
+      "sourceId": "03-027",
+      "sourceName": "Horizontal Slider",
+      "sourceLine": 191,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "slider",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-027",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "slider",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "custom",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-027/static",
+            "m13-source-03-027/discrete",
+            "m13-source-03-027/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-027/static",
+        "m13-source-03-027/discrete",
+        "m13-source-03-027/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"slider\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"custom\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-027"
+    },
+    {
+      "sourceId": "03-028",
+      "sourceName": "Knob",
+      "sourceLine": 192,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "knob",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-028",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "knob",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "custom",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-028/static",
+            "m13-source-03-028/discrete",
+            "m13-source-03-028/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-028/static",
+        "m13-source-03-028/discrete",
+        "m13-source-03-028/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"knob\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"custom\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-028"
+    },
+    {
+      "sourceId": "03-029",
+      "sourceName": "Lamp",
+      "sourceLine": 193,
+      "canonical": "dashboard.indicator",
+      "selectedParameters": {
+        "kind": "lamp",
+        "min": 0,
+        "max": 1,
+        "thresholds": [
+          0.5
+        ],
+        "labels": "[\"낮음\",\"높음\"]",
+        "gaugeStyle": "full",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-03-029",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "kind": "lamp",
+            "min": 0,
+            "max": 1,
+            "thresholds": [
+              0.5
+            ],
+            "labels": "[\"낮음\",\"높음\"]",
+            "gaugeStyle": "full",
+            "appearance": "custom",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-03-029/static",
+            "m13-independent-source-03-029/discrete",
+            "m13-independent-source-03-029/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-03-029/static",
+        "m13-independent-source-03-029/discrete",
+        "m13-independent-source-03-029/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"lamp\",\"min\":0,\"max\":1,\"thresholds\":[0.5],\"labels\":\"[\\\"낮음\\\",\\\"높음\\\"]\",\"gaugeStyle\":\"full\",\"appearance\":\"custom\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-029"
+    },
+    {
+      "sourceId": "03-030",
+      "sourceName": "Push Button",
+      "sourceLine": 194,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "push-button",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-030",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "push-button",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "custom",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-030/static",
+            "m13-source-03-030/discrete",
+            "m13-source-03-030/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-030/static",
+        "m13-source-03-030/discrete",
+        "m13-source-03-030/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"push-button\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"custom\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-030"
+    },
+    {
+      "sourceId": "03-031",
+      "sourceName": "Quarter Gauge",
+      "sourceLine": 195,
+      "canonical": "dashboard.indicator",
+      "selectedParameters": {
+        "kind": "gauge",
+        "min": 0,
+        "max": 1,
+        "thresholds": [
+          0.5
+        ],
+        "labels": "[\"낮음\",\"높음\"]",
+        "gaugeStyle": "quarter",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-03-031",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "kind": "gauge",
+            "min": 0,
+            "max": 1,
+            "thresholds": [
+              0.5
+            ],
+            "labels": "[\"낮음\",\"높음\"]",
+            "gaugeStyle": "quarter",
+            "appearance": "custom",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-03-031/static",
+            "m13-independent-source-03-031/discrete",
+            "m13-independent-source-03-031/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-03-031/static",
+        "m13-independent-source-03-031/discrete",
+        "m13-independent-source-03-031/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"gauge\",\"min\":0,\"max\":1,\"thresholds\":[0.5],\"labels\":\"[\\\"낮음\\\",\\\"높음\\\"]\",\"gaugeStyle\":\"quarter\",\"appearance\":\"custom\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-031"
+    },
+    {
+      "sourceId": "03-032",
+      "sourceName": "Rocker Switch",
+      "sourceLine": 196,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "rocker-switch",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-032",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "rocker-switch",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "custom",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-032/static",
+            "m13-source-03-032/discrete",
+            "m13-source-03-032/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-032/static",
+        "m13-source-03-032/discrete",
+        "m13-source-03-032/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"rocker-switch\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"custom\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-032"
+    },
+    {
+      "sourceId": "03-033",
+      "sourceName": "Rotary Switch",
+      "sourceLine": 197,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "rotary-switch",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-033",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "rotary-switch",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "custom",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-033/static",
+            "m13-source-03-033/discrete",
+            "m13-source-03-033/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-033/static",
+        "m13-source-03-033/discrete",
+        "m13-source-03-033/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"rotary-switch\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"custom\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-033"
+    },
+    {
+      "sourceId": "03-034",
+      "sourceName": "Slider Switch",
+      "sourceLine": 198,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "slider-switch",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-034",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "slider-switch",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "custom",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-034/static",
+            "m13-source-03-034/discrete",
+            "m13-source-03-034/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-034/static",
+        "m13-source-03-034/discrete",
+        "m13-source-03-034/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"slider-switch\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"custom\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-034"
+    },
+    {
+      "sourceId": "03-035",
+      "sourceName": "Toggle Switch",
+      "sourceLine": 199,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "toggle-switch",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "custom",
+        "orientation": "horizontal",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-035",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "toggle-switch",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "custom",
+            "orientation": "horizontal",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-035/static",
+            "m13-source-03-035/discrete",
+            "m13-source-03-035/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-035/static",
+        "m13-source-03-035/discrete",
+        "m13-source-03-035/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"toggle-switch\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"custom\",\"orientation\":\"horizontal\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-035"
+    },
+    {
+      "sourceId": "03-036",
+      "sourceName": "Vertical Gauge",
+      "sourceLine": 200,
+      "canonical": "dashboard.indicator",
+      "selectedParameters": {
+        "kind": "gauge",
+        "min": 0,
+        "max": 1,
+        "thresholds": [
+          0.5
+        ],
+        "labels": "[\"낮음\",\"높음\"]",
+        "gaugeStyle": "linear",
+        "appearance": "custom",
+        "orientation": "vertical",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-03-036",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "kind": "gauge",
+            "min": 0,
+            "max": 1,
+            "thresholds": [
+              0.5
+            ],
+            "labels": "[\"낮음\",\"높음\"]",
+            "gaugeStyle": "linear",
+            "appearance": "custom",
+            "orientation": "vertical",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-03-036/static",
+            "m13-independent-source-03-036/discrete",
+            "m13-independent-source-03-036/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-03-036/static",
+        "m13-independent-source-03-036/discrete",
+        "m13-independent-source-03-036/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"gauge\",\"min\":0,\"max\":1,\"thresholds\":[0.5],\"labels\":\"[\\\"낮음\\\",\\\"높음\\\"]\",\"gaugeStyle\":\"linear\",\"appearance\":\"custom\",\"orientation\":\"vertical\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-036"
+    },
+    {
+      "sourceId": "03-037",
+      "sourceName": "Vertical Slider",
+      "sourceLine": 201,
+      "canonical": "dashboard.control",
+      "selectedParameters": {
+        "kind": "slider",
+        "initial": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "choices": [
+          0,
+          1
+        ],
+        "events": "[]",
+        "appearance": "custom",
+        "orientation": "vertical",
+        "title": ""
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-03-037",
+          "configuredNodeId": "Control",
+          "selectedParameters": {
+            "kind": "slider",
+            "initial": 0,
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "choices": [
+              0,
+              1
+            ],
+            "events": "[]",
+            "appearance": "custom",
+            "orientation": "vertical",
+            "title": ""
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-03-037/static",
+            "m13-source-03-037/discrete",
+            "m13-source-03-037/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-03-037/static",
+        "m13-source-03-037/discrete",
+        "m13-source-03-037/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Configured control/indicator/action with separately saved standard/custom appearance; original portless arbitrary MATLAB variable/parameter connection and callback execution not claimed. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"slider\",\"initial\":0,\"min\":0,\"max\":1,\"step\":0.1,\"choices\":[0,1],\"events\":\"[]\",\"appearance\":\"custom\",\"orientation\":\"vertical\",\"title\":\"\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": "03-037"
+    },
+    {
+      "sourceId": "12-001",
+      "sourceName": "Block Support Table",
+      "sourceLine": 477,
+      "canonical": "model.support-catalog",
+      "selectedParameters": {},
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-model-support-catalog",
+          "configuredNodeId": "Block",
+          "selectedParameters": {},
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-independent-model-support-catalog/static",
+            "m13-independent-model-support-catalog/discrete",
+            "m13-independent-model-support-catalog/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": true
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-model-support-catalog/static",
+        "m13-independent-model-support-catalog/discrete",
+        "m13-independent-model-support-catalog/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Actual registry/engine/mode counts from public CalcWeave declarations; independently verified metadata oracle, not a Simulink data-type support table or MATLAB launch. · 실제 선택 구성 [{\"parameters\":{},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "14-008",
+      "sourceName": "Probe",
+      "sourceLine": 548,
+      "canonical": "signal.probe",
+      "selectedParameters": {},
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-signal-probe",
+          "configuredNodeId": "Block",
+          "selectedParameters": {},
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-signal-probe/static",
+            "m13-independent-signal-probe/discrete",
+            "m13-independent-signal-probe/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-signal-probe/static",
+        "m13-independent-signal-probe/discrete",
+        "m13-independent-signal-probe/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Actual width/rank/padded8 dimensions/complex and declared CalcWeave sample-grid metadata in a structured bus; native separate selectable output ports, output dtypes and native continuous/constant sample-time encoding are not claimed. · 실제 선택 구성 [{\"parameters\":{},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "16-002",
+      "sourceName": "Floating Scope",
+      "sourceLine": 613,
+      "canonical": "sink.floating-scope",
+      "selectedParameters": {
+        "sourceNodeId": "source",
+        "sourcePortId": "out"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-16-002",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "sourceNodeId": "source",
+            "sourcePortId": "out"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-source-16-002/static",
+            "m13-source-16-002/discrete",
+            "m13-source-16-002/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-16-002/static",
+        "m13-source-16-002/discrete",
+        "m13-source-16-002/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{\"sourceNodeId\":\"source\",\"sourcePortId\":\"out\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "16-005",
+      "sourceName": "Record",
+      "sourceLine": 616,
+      "canonical": "sink.record",
+      "selectedParameters": {
+        "name": "record",
+        "capacity": 128
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-16-005",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "name": "record",
+            "capacity": 128
+          },
+          "declaredModes": [
+            "discrete"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-source-16-005/discrete"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        },
+        {
+          "rawFixtureId": "m13-independent-record-complex-bus",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "name": "record",
+            "capacity": 3
+          },
+          "declaredModes": [
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-record-complex-bus/discrete",
+            "m13-independent-record-complex-bus/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-16-005/discrete",
+        "m13-independent-record-complex-bus/discrete",
+        "m13-independent-record-complex-bus/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{\"name\":\"record\",\"capacity\":128},\"modes\":[\"discrete\"]},{\"parameters\":{\"name\":\"record\",\"capacity\":3},\"modes\":[\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "16-007",
+      "sourceName": "Stop Simulation",
+      "sourceLine": 618,
+      "canonical": "sink.stop",
+      "selectedParameters": {},
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-sink-stop",
+          "configuredNodeId": "Stop",
+          "selectedParameters": {},
+          "declaredModes": [
+            "discrete"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-sink-stop/discrete"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        },
+        {
+          "rawFixtureId": "m13-independent-stop-static-true",
+          "configuredNodeId": "Stop",
+          "selectedParameters": {},
+          "declaredModes": [
+            "static"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-stop-static-true/static"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        },
+        {
+          "rawFixtureId": "m13-independent-stop-static-false",
+          "configuredNodeId": "Stop",
+          "selectedParameters": {},
+          "declaredModes": [
+            "static"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-stop-static-false/static"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-sink-stop/discrete",
+        "m13-independent-stop-static-true/static",
+        "m13-independent-stop-static-false/static"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{},\"modes\":[\"discrete\"]},{\"parameters\":{},\"modes\":[\"static\"]},{\"parameters\":{},\"modes\":[\"static\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "16-009",
+      "sourceName": "To File",
+      "sourceLine": 620,
+      "canonical": "data.output-file",
+      "selectedParameters": {
+        "name": "record",
+        "capacity": 128,
+        "format": "json"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-16-009",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "name": "record",
+            "capacity": 128,
+            "format": "json"
+          },
+          "declaredModes": [
+            "discrete"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-source-16-009/discrete"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-16-009/discrete"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Actual bounded local data/import/edit/export/replay workflow; no MATLAB MAT workspace/script/remote-file access. · 실제 선택 구성 [{\"parameters\":{\"name\":\"record\",\"capacity\":128,\"format\":\"json\"},\"modes\":[\"discrete\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "16-010",
+      "sourceName": "To Workspace",
+      "sourceLine": 621,
+      "canonical": "data.output-dataset",
+      "selectedParameters": {
+        "name": "record",
+        "capacity": 128
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-16-010",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "name": "record",
+            "capacity": 128
+          },
+          "declaredModes": [
+            "discrete"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-source-16-010/discrete"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-16-010/discrete"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Actual bounded local data/import/edit/export/replay workflow; no MATLAB MAT workspace/script/remote-file access. · 실제 선택 구성 [{\"parameters\":{\"name\":\"record\",\"capacity\":128},\"modes\":[\"discrete\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "16-011",
+      "sourceName": "XY Graph",
+      "sourceLine": 622,
+      "canonical": "sink.xy-graph",
+      "selectedParameters": {
+        "name": "record",
+        "capacity": 128
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-16-011",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "name": "record",
+            "capacity": 128
+          },
+          "declaredModes": [
+            "discrete"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "x",
+            "y"
+          ],
+          "evidenceFixtureIds": [
+            "m13-source-16-011/discrete"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-16-011/discrete"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{\"name\":\"record\",\"capacity\":128},\"modes\":[\"discrete\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "17-010",
+      "sourceName": "From Spreadsheet",
+      "sourceLine": 647,
+      "canonical": "data.input-table",
+      "selectedParameters": {
+        "datasetId": "data",
+        "column": "value",
+        "interpolation": "previous",
+        "outside": "hold"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-data-input-table-number-previous",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "datasetId": "data",
+            "column": "value",
+            "interpolation": "previous",
+            "outside": "hold"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-independent-data-input-table-number-previous/static",
+            "m13-independent-data-input-table-number-previous/discrete",
+            "m13-independent-data-input-table-number-previous/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-data-input-table-number-previous/static",
+        "m13-independent-data-input-table-number-previous/discrete",
+        "m13-independent-data-input-table-number-previous/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Actual bounded local data/import/edit/export/replay workflow; no MATLAB MAT workspace/script/remote-file access. · 실제 선택 구성 [{\"parameters\":{\"datasetId\":\"data\",\"column\":\"value\",\"interpolation\":\"previous\",\"outside\":\"hold\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "17-022",
+      "sourceName": "Signal Editor",
+      "sourceLine": 659,
+      "canonical": "data.signal-editor",
+      "selectedParameters": {
+        "datasetId": "data",
+        "column": "value",
+        "interpolation": "previous",
+        "outside": "hold"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-data-signal-editor-number-previous",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "datasetId": "data",
+            "column": "value",
+            "interpolation": "previous",
+            "outside": "hold"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-independent-data-signal-editor-number-previous/static",
+            "m13-independent-data-signal-editor-number-previous/discrete",
+            "m13-independent-data-signal-editor-number-previous/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-data-signal-editor-number-previous/static",
+        "m13-independent-data-signal-editor-number-previous/discrete",
+        "m13-independent-data-signal-editor-number-previous/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Actual bounded local data/import/edit/export/replay workflow; no MATLAB MAT workspace/script/remote-file access. · 실제 선택 구성 [{\"parameters\":{\"datasetId\":\"data\",\"column\":\"value\",\"interpolation\":\"previous\",\"outside\":\"hold\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "17-027",
+      "sourceName": "Waveform Generator",
+      "sourceLine": 664,
+      "canonical": "source.waveform",
+      "selectedParameters": {
+        "kind": "sine",
+        "amplitude": 1,
+        "frequency": 1,
+        "phase": 0,
+        "bias": 0,
+        "duty": 0.5
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-17-027",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "kind": "sine",
+            "amplitude": 1,
+            "frequency": 1,
+            "phase": 0,
+            "bias": 0,
+            "duty": 0.5
+          },
+          "declaredModes": [
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-17-027/discrete",
+            "m13-source-17-027/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-17-027/discrete",
+        "m13-source-17-027/continuous"
+      ],
+      "selectionKind": "verified-independent-alternative",
+      "status": "M13 독립 대체 subset",
+      "boundary": "Actual bounded local data/import/edit/export/replay workflow; no MATLAB MAT workspace/script/remote-file access. · 실제 선택 구성 [{\"parameters\":{\"kind\":\"sine\",\"amplitude\":1,\"frequency\":1,\"phase\":0,\"bias\":0,\"duty\":0.5},\"modes\":[\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "18-001",
+      "sourceName": "ASCII to String",
+      "sourceLine": 680,
+      "canonical": "string.ascii-to-string",
+      "selectedParameters": {},
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-string-ascii-to-string",
+          "configuredNodeId": "Block",
+          "selectedParameters": {},
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-string-ascii-to-string/static",
+            "m13-independent-string-ascii-to-string/discrete",
+            "m13-independent-string-ascii-to-string/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-string-ascii-to-string/static",
+        "m13-independent-string-ascii-to-string/discrete",
+        "m13-independent-string-ascii-to-string/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "18-002",
+      "sourceName": "Compose String",
+      "sourceLine": 681,
+      "canonical": "string.compose",
+      "selectedParameters": {
+        "format": "%s"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-18-002",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "format": "%s"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "arg1"
+          ],
+          "evidenceFixtureIds": [
+            "m13-source-18-002/static",
+            "m13-source-18-002/discrete",
+            "m13-source-18-002/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-18-002/static",
+        "m13-source-18-002/discrete",
+        "m13-source-18-002/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{\"format\":\"%s\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "18-003",
+      "sourceName": "Scan String",
+      "sourceLine": 682,
+      "canonical": "string.scan",
+      "selectedParameters": {
+        "format": "%s",
+        "invalid": "error"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-18-003",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "format": "%s",
+            "invalid": "error"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-18-003/static",
+            "m13-independent-source-18-003/discrete",
+            "m13-independent-source-18-003/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-18-003/static",
+        "m13-independent-source-18-003/discrete",
+        "m13-independent-source-18-003/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{\"format\":\"%s\",\"invalid\":\"error\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "18-004",
+      "sourceName": "String Compare",
+      "sourceLine": 683,
+      "canonical": "string.string-compare",
+      "selectedParameters": {
+        "caseSensitive": "yes",
+        "firstN": 0
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-18-004",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "caseSensitive": "yes",
+            "firstN": 0
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "a",
+            "b"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-18-004/static",
+            "m13-independent-source-18-004/discrete",
+            "m13-independent-source-18-004/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-18-004/static",
+        "m13-independent-source-18-004/discrete",
+        "m13-independent-source-18-004/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{\"caseSensitive\":\"yes\",\"firstN\":0},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "18-005",
+      "sourceName": "String Concatenate",
+      "sourceLine": 684,
+      "canonical": "string.string-concatenate",
+      "selectedParameters": {
+        "count": 2
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-18-005-ascii",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "count": 2
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in1",
+            "in2"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-18-005-ascii/static",
+            "m13-independent-source-18-005-ascii/discrete",
+            "m13-independent-source-18-005-ascii/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-18-005-ascii/static",
+        "m13-independent-source-18-005-ascii/discrete",
+        "m13-independent-source-18-005-ascii/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{\"count\":2},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "18-006",
+      "sourceName": "String Constant",
+      "sourceLine": 685,
+      "canonical": "source.string-constant",
+      "selectedParameters": {
+        "value": "CalcWeave"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-18-006",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "value": "CalcWeave"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [],
+          "evidenceFixtureIds": [
+            "m13-source-18-006/static",
+            "m13-source-18-006/discrete",
+            "m13-source-18-006/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-18-006/static",
+        "m13-source-18-006/discrete",
+        "m13-source-18-006/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{\"value\":\"CalcWeave\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "18-007",
+      "sourceName": "String Contains",
+      "sourceLine": 686,
+      "canonical": "string.string-contains",
+      "selectedParameters": {
+        "caseSensitive": "yes"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-18-007-ascii",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "caseSensitive": "yes"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in",
+            "pattern"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-18-007-ascii/static",
+            "m13-independent-source-18-007-ascii/discrete",
+            "m13-independent-source-18-007-ascii/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-18-007-ascii/static",
+        "m13-independent-source-18-007-ascii/discrete",
+        "m13-independent-source-18-007-ascii/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{\"caseSensitive\":\"yes\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "18-008",
+      "sourceName": "String Count",
+      "sourceLine": 687,
+      "canonical": "string.string-count",
+      "selectedParameters": {
+        "caseSensitive": "yes"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-string-string-count",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "caseSensitive": "yes"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in",
+            "pattern"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-string-string-count/static",
+            "m13-independent-string-string-count/discrete",
+            "m13-independent-string-string-count/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-string-string-count/static",
+        "m13-independent-string-string-count/discrete",
+        "m13-independent-string-string-count/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{\"caseSensitive\":\"yes\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "18-009",
+      "sourceName": "String Find",
+      "sourceLine": 688,
+      "canonical": "string.string-find",
+      "selectedParameters": {
+        "caseSensitive": "yes"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-18-009-ascii",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "caseSensitive": "yes"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in",
+            "pattern"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-18-009-ascii/static",
+            "m13-independent-source-18-009-ascii/discrete",
+            "m13-independent-source-18-009-ascii/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-18-009-ascii/static",
+        "m13-independent-source-18-009-ascii/discrete",
+        "m13-independent-source-18-009-ascii/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{\"caseSensitive\":\"yes\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "18-010",
+      "sourceName": "String Length",
+      "sourceLine": 689,
+      "canonical": "string.string-length",
+      "selectedParameters": {},
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-18-010-ascii",
+          "configuredNodeId": "Block",
+          "selectedParameters": {},
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-18-010-ascii/static",
+            "m13-independent-source-18-010-ascii/discrete",
+            "m13-independent-source-18-010-ascii/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-18-010-ascii/static",
+        "m13-independent-source-18-010-ascii/discrete",
+        "m13-independent-source-18-010-ascii/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "18-011",
+      "sourceName": "String to ASCII",
+      "sourceLine": 690,
+      "canonical": "string.string-to-ascii",
+      "selectedParameters": {
+        "capacity": 128
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-18-011",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "capacity": 128
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-18-011/static",
+            "m13-independent-source-18-011/discrete",
+            "m13-independent-source-18-011/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-18-011/static",
+        "m13-independent-source-18-011/discrete",
+        "m13-independent-source-18-011/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{\"capacity\":128},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "18-012",
+      "sourceName": "String to Double",
+      "sourceLine": 691,
+      "canonical": "string.parse-number",
+      "selectedParameters": {
+        "dtype": "float64",
+        "invalid": "error",
+        "special": "error"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-string-parse-number",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "dtype": "float64",
+            "invalid": "error",
+            "special": "error"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-string-parse-number/static",
+            "m13-independent-string-parse-number/discrete",
+            "m13-independent-string-parse-number/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-string-parse-number/static",
+        "m13-independent-string-parse-number/discrete",
+        "m13-independent-string-parse-number/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{\"dtype\":\"float64\",\"invalid\":\"error\",\"special\":\"error\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "18-013",
+      "sourceName": "String to Enum",
+      "sourceLine": 692,
+      "canonical": "string.parse-enum",
+      "selectedParameters": {
+        "type": {
+          "dtype": "enum",
+          "enum": {
+            "name": "State",
+            "labels": [
+              "Off",
+              "On"
+            ]
+          }
+        }
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-string-parse-enum",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "type": {
+              "dtype": "enum",
+              "enum": {
+                "name": "State",
+                "labels": [
+                  "Off",
+                  "On"
+                ]
+              }
+            }
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-string-parse-enum/static",
+            "m13-independent-string-parse-enum/discrete",
+            "m13-independent-string-parse-enum/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-string-parse-enum/static",
+        "m13-independent-string-parse-enum/discrete",
+        "m13-independent-string-parse-enum/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{\"type\":{\"dtype\":\"enum\",\"enum\":{\"name\":\"State\",\"labels\":[\"Off\",\"On\"]}}},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "18-014",
+      "sourceName": "String to Single",
+      "sourceLine": 693,
+      "canonical": "string.parse-number",
+      "selectedParameters": {
+        "dtype": "float32",
+        "invalid": "error",
+        "special": "error"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-parse-single",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "dtype": "float32",
+            "invalid": "error",
+            "special": "error"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-parse-single/static",
+            "m13-independent-parse-single/discrete",
+            "m13-independent-parse-single/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-parse-single/static",
+        "m13-independent-parse-single/discrete",
+        "m13-independent-parse-single/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{\"dtype\":\"float32\",\"invalid\":\"error\",\"special\":\"error\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "18-015",
+      "sourceName": "Substring",
+      "sourceLine": 694,
+      "canonical": "string.substring",
+      "selectedParameters": {
+        "toEnd": "no"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-source-18-015-ascii",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "toEnd": "no"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "length",
+            "in",
+            "start"
+          ],
+          "evidenceFixtureIds": [
+            "m13-source-18-015-ascii/static",
+            "m13-source-18-015-ascii/discrete",
+            "m13-source-18-015-ascii/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-source-18-015-ascii/static",
+        "m13-source-18-015-ascii/discrete",
+        "m13-source-18-015-ascii/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{\"toEnd\":\"no\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    },
+    {
+      "sourceId": "18-016",
+      "sourceName": "To String",
+      "sourceLine": 695,
+      "canonical": "string.to-string",
+      "selectedParameters": {
+        "format": "%g"
+      },
+      "configuredProfiles": [
+        {
+          "rawFixtureId": "m13-independent-source-18-016",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "format": "%g"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-source-18-016/static",
+            "m13-independent-source-18-016/discrete",
+            "m13-independent-source-18-016/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        },
+        {
+          "rawFixtureId": "m13-independent-g-small-exponent",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "format": "%g"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-g-small-exponent/static",
+            "m13-independent-g-small-exponent/discrete",
+            "m13-independent-g-small-exponent/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        },
+        {
+          "rawFixtureId": "m13-independent-g-fixed-threshold",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "format": "%g"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-g-fixed-threshold/static",
+            "m13-independent-g-fixed-threshold/discrete",
+            "m13-independent-g-fixed-threshold/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        },
+        {
+          "rawFixtureId": "m13-independent-g-rounding-exponent",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "format": "%g"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-g-rounding-exponent/static",
+            "m13-independent-g-rounding-exponent/discrete",
+            "m13-independent-g-rounding-exponent/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        },
+        {
+          "rawFixtureId": "m13-independent-g-negative",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "format": "%.4g"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-g-negative/static",
+            "m13-independent-g-negative/discrete",
+            "m13-independent-g-negative/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        },
+        {
+          "rawFixtureId": "m13-independent-e-padded",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "format": "%.2e"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-e-padded/static",
+            "m13-independent-e-padded/discrete",
+            "m13-independent-e-padded/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        },
+        {
+          "rawFixtureId": "m13-independent-f-large-exact",
+          "configuredNodeId": "Block",
+          "selectedParameters": {
+            "format": "%.2f"
+          },
+          "declaredModes": [
+            "static",
+            "discrete",
+            "continuous"
+          ],
+          "requiredBindingsActuallyConnected": [
+            "in"
+          ],
+          "evidenceFixtureIds": [
+            "m13-independent-f-large-exact/static",
+            "m13-independent-f-large-exact/discrete",
+            "m13-independent-f-large-exact/continuous"
+          ],
+          "metadataOracleFromDeclaredRegistry": false
+        }
+      ],
+      "evidenceFixtureIds": [
+        "m13-independent-source-18-016/static",
+        "m13-independent-source-18-016/discrete",
+        "m13-independent-source-18-016/continuous",
+        "m13-independent-g-small-exponent/static",
+        "m13-independent-g-small-exponent/discrete",
+        "m13-independent-g-small-exponent/continuous",
+        "m13-independent-g-fixed-threshold/static",
+        "m13-independent-g-fixed-threshold/discrete",
+        "m13-independent-g-fixed-threshold/continuous",
+        "m13-independent-g-rounding-exponent/static",
+        "m13-independent-g-rounding-exponent/discrete",
+        "m13-independent-g-rounding-exponent/continuous",
+        "m13-independent-g-negative/static",
+        "m13-independent-g-negative/discrete",
+        "m13-independent-g-negative/continuous",
+        "m13-independent-e-padded/static",
+        "m13-independent-e-padded/discrete",
+        "m13-independent-e-padded/continuous",
+        "m13-independent-f-large-exact/static",
+        "m13-independent-f-large-exact/discrete",
+        "m13-independent-f-large-exact/continuous"
+      ],
+      "selectionKind": "verified-native-scope",
+      "status": "M13 승인 subset",
+      "boundary": "Configured bounded contract only; full R2024b parameters/types/targets/reference runtime remain open. · 실제 선택 구성 [{\"parameters\":{\"format\":\"%g\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]},{\"parameters\":{\"format\":\"%g\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]},{\"parameters\":{\"format\":\"%g\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]},{\"parameters\":{\"format\":\"%g\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]},{\"parameters\":{\"format\":\"%.4g\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]},{\"parameters\":{\"format\":\"%.2e\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]},{\"parameters\":{\"format\":\"%.2f\"},\"modes\":[\"static\",\"discrete\",\"continuous\"]}]; 독립 literal 또는 공개 catalog 선언 metadata oracle·실제 TS/JSON·삽입 역순·화면/로컬 파일 작업만 확인. 원본 전체 옵션·MathWorks 실행 parity는 미승인(open).",
+      "newlyApproved": true,
+      "nativeFullEquivalent": false,
+      "sourceOptionCompletionStatus": "open",
+      "uiWorkflowEvidencePath": "docs/evidence/m13-ui-workflow-verification.json",
+      "uiProfileSourceId": null
+    }
+  ],
+  "primarySourceRuntimeExecuted": false,
+  "fullSimulinkEquivalenceClaimed": false
+}

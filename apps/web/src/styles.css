@@ -709,3 +709,49 @@ textarea:focus-visible { outline:2px solid var(--focus); outline-offset:3px; }
 .analysis-table caption { color:var(--muted); text-align:left; padding:10px 0; }
 .analysis-content .field textarea { max-width:100%; min-width:0; font-size:var(--text-body); }
 @media(max-width:600px) { .analysis-dialog { width:calc(100vw - 20px); } .analysis-content .field-pair { grid-template-columns:minmax(0,1fr); } .analysis-table th,.analysis-table td { padding:10px 6px; } }
+/* M13 local data and dashboard workflows share the workspace palette. */
+.signal-scenario-editor { min-width: 0; }
+.scenario-points { min-height: 190px; font-family: var(--font-mono, monospace); font-size: 1rem; line-height: 1.6; resize: vertical; }
+.m13-dashboard { padding-bottom: 28px; }
+.m13-widget { min-width: 0; overflow-wrap: anywhere; }
+.m13-widget .tag { flex-shrink: 0; }
+.m13-widget fieldset { border: 0; min-width: 0; padding: 0; margin: 0; }
+.m13-radio { display: flex; flex-wrap: wrap; gap: 16px; }
+.m13-radio legend { font-size: 1rem; margin-bottom: 12px; }
+.m13-radio label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+.custom-widget { background: var(--subtle); border-radius: 16px; }
+.custom-widget .dashboard-card-heading { padding-bottom: 12px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+.custom-widget .dashboard-range input[type=range] { accent-color: var(--accent); height: 44px; }
+.vertical-widget .dashboard-range { align-items: center; }
+.vertical-widget .dashboard-range input[type=range] { writing-mode: vertical-lr; direction: rtl; height: 160px; width: 44px; }
+.m13-knob { border: 1px solid var(--line); border-radius: 50%; width: 60px; height: 60px; display: grid; place-items: center; font-size: 26px; background: var(--surface); }
+.m13-event-log { max-height: 220px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-size: .9375rem; line-height: 1.5; }
+.m13-band-state { display: flex; align-items: center; gap: 12px; min-height: 44px; margin-top: 12px; }
+.m13-band-state i { display: inline-block; width: 18px; height: 18px; border-radius: 50%; background: var(--muted); }
+.m13-band-state.band-1 i { background: #95b4d9; }
+.m13-band-state.band-2 i { background: #8fbc9f; }
+.m13-band-state.band-3 i { background: #d3aa79; }
+.m13-gauge { display: grid; gap: 8px; margin-top: 14px; }
+.m13-gauge meter { width: 100%; height: 26px; }
+.gauge-half meter { border-radius: 40px 40px 4px 4px; }
+.gauge-quarter meter { border-radius: 4px 40px 4px 4px; }
+.m13-xy-plot { margin: 18px 0; }
+.m13-xy-plot svg { width: 100%; height: auto; }
+.xy-axis { fill: none; stroke: var(--line); stroke-width: 1; }
+.xy-line { fill: none; stroke: var(--accent); stroke-width: 2; }
+.m13-xy-plot text { fill: var(--muted); font-size: .875rem; }
+.m13-xy-plot figcaption { font-size: .9375rem; color: var(--muted); line-height: 1.5; }
+.floating-scope-view .result-plot { min-height: 380px; }
+.workbook-sheet { max-width: 440px; margin: 20px 0; }
+@media (max-width: 600px) { .m13-dashboard .dashboard-grid { grid-template-columns: minmax(0, 1fr); } .m13-widget { padding: 16px; } .m13-widget .dashboard-card-heading { flex-wrap: wrap; } .scenario-points { font-size: 1rem; } .signal-scenario-editor .tool-field-grid { grid-template-columns: minmax(0, 1fr); } }
+
+.m13-gauge svg { width: 100%; max-width: 210px; height: auto; justify-self: center; }
+.gauge-track { fill: none; stroke: var(--strong-line); stroke-width: 8; stroke-linecap: round; }
+.gauge-needle { stroke: var(--accent); stroke-width: 3; }
+.gauge-center { fill: var(--accent); }
+.m13-state-image { display: grid; place-items: center; width: 52px; height: 52px; border: 1px solid var(--strong-line); background: var(--subtle); border-radius: 10px; font-size: 1.125rem; }
+.toggle-rocker-switch { padding: 10px; border: 1px solid var(--line); border-radius: 7px; background: var(--subtle); }
+.toggle-toggle-switch input, .toggle-slider-switch input { width: 38px; height: 22px; accent-color: var(--accent); }
+
+.vertical-widget .gauge-linear { justify-items: center; }
+.vertical-widget .gauge-linear meter { writing-mode: vertical-lr; width: 32px; height: 160px; }

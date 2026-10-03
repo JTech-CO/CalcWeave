@@ -22,7 +22,7 @@ function inspectDataset(input: unknown): void {
   while (stack.length) {
     const { value, depth, leave } = stack.pop()!;
     if (leave) { active.delete(value as object); continue; }
-    if (++visited > DATASET_LIMITS.maxCells + DATASET_LIMITS.maxRows + 200 || depth > 5) fail('DATASET_RESOURCE_LIMIT', '데이터의 크기나 중첩 깊이가 상한을 초과했습니다.');
+    if (++visited > DATASET_LIMITS.maxCells + DATASET_LIMITS.maxRows + 240 || depth > 7) fail('DATASET_RESOURCE_LIMIT', '데이터의 크기나 중첩 깊이가 상한을 초과했습니다.');
     if (typeof value === 'string') { bytes += encoder.encode(JSON.stringify(value)).byteLength; }
     else if (typeof value === 'number') { if (!Number.isFinite(value)) fail('NONFINITE_DATASET', '데이터 숫자는 유한해야 합니다.'); bytes += 24; }
     else if (typeof value === 'boolean' || value === null) bytes += 5;
@@ -52,7 +52,12 @@ export function validateDataset(input: unknown): Dataset {
   if (!input || typeof input !== 'object' || Array.isArray(input)) fail('INVALID_DATASET', '데이터 객체가 필요합니다.');
   const dataset = input as Dataset;
   const fields = ['id', 'name', 'version', 'sourceHash', 'contentHash', 'timeColumn', 'columns', 'rows'];
-  if (Object.keys(input).length !== fields.length || fields.some((key) => !Object.hasOwn(input, key))) fail('INVALID_DATASET', '데이터 필드가 누락되었거나 알 수 없는 필드가 있습니다.');
+  if (Object.keys(input).some(key => !fields.includes(key) && key !== 'provenance') || fields.some((key) => !Object.hasOwn(input, key))) fail('INVALID_DATASET', '데이터 필드가 누락되었거나 알 수 없는 필드가 있습니다.');
+  if (Object.hasOwn(input, 'provenance')) {
+    const provenance = dataset.provenance;
+    if (!provenance || typeof provenance !== 'object' || Array.isArray(provenance) || Object.keys(provenance).some(key => !['format', 'filename', 'sheet', 'sourceHash', 'transforms'].includes(key)) || !['csv', 'json', 'xlsx', 'editor'].includes(provenance.format) || provenance.sourceHash !== dataset.sourceHash || !Array.isArray(provenance.transforms) || provenance.transforms.length > 8 || provenance.transforms.some(value => typeof value !== 'string' || value.length > 100)) fail('INVALID_DATASET_PROVENANCE', '데이터 출처와 정리 기록을 확인하세요.');
+    if (provenance.filename !== undefined && (typeof provenance.filename !== 'string' || provenance.filename.length > 100) || provenance.sheet !== undefined && (typeof provenance.sheet !== 'string' || provenance.sheet.length > 80)) fail('INVALID_DATASET_PROVENANCE', '파일명과 시트 이름의 길이를 확인하세요.');
+  }
   if (typeof dataset.id !== 'string' || !/^[A-Za-z][A-Za-z0-9_-]{0,63}$/.test(dataset.id) || reserved.has(dataset.id)) fail('INVALID_DATASET', '데이터 ID를 확인하세요.');
   if (typeof dataset.name !== 'string' || dataset.name.length < 1 || dataset.name.length > 120 || !Number.isSafeInteger(dataset.version) || dataset.version < 1 || dataset.version > 1_000_000) fail('INVALID_DATASET', '데이터 이름과 버전을 확인하세요.');
   if (typeof dataset.sourceHash !== 'string' || typeof dataset.contentHash !== 'string' || !/^[a-f0-9]{64}$/.test(dataset.sourceHash) || !/^[a-f0-9]{64}$/.test(dataset.contentHash)) fail('INVALID_DATASET_HASH', '데이터 해시는 소문자 SHA-256이어야 합니다.');

@@ -17,6 +17,7 @@ import { validateDataType, validateTypedSignal } from '../../model/src/typed';
 import { applyM10TypePropagation, guardM10LegacyInputs, initialM10Outputs, inferM10Outputs, validateM10Parameters, validateM10StateInputs, validateM10UnitSystems } from './m10';
 import { guardM11LegacyInputs, inferM11Outputs, initialM11Outputs, isM11Block, prepareM11Bindings, validateM11Hierarchy, validateM11Parameters, validateM11StateInputs, type M11CompileContext } from './m11';
 import { initialM12Outputs, inferM12Outputs, prepareM12Algebraic, validateM12AlgebraicSignals, validateM12Parameters, validateM12StateInputs, type M12CompileContext } from './m12';
+import { inferM13Outputs, isM13Block, parseM13Json, prepareM13Bindings, validateM13Parameters, validateM13StateInputs } from './m13';
 
 const compareId = (a: string, b: string): number => a < b ? -1 : a > b ? 1 : 0;
 
@@ -60,6 +61,7 @@ function parseParameters(definition: BlockDefinition, values: Record<string, unk
       case 'enum': if (typeof value !== 'string' || !descriptor.options?.includes(value)) fail(); break;
       case 'expression': if (typeof value !== 'string' || value.length === 0 || value.length > (descriptor.maxLength ?? 512)) fail(); break;
       case 'text': if (typeof value !== 'string' || value.length > (descriptor.maxLength ?? 64)) fail(); break;
+      case 'bounded-json': try { parseM13Json(value, descriptor.maxLength); } catch { fail(); } break;
       case 'value': try { validateSignal(value); } catch { fail(); } break;
       case 'signal-value': try { validateAnySignal(value); } catch { fail(); } break;
       case 'typed-value': try { validateTypedSignal(value); } catch { fail(); } break;
@@ -133,8 +135,8 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
     }
   }
   for (const node of ordered) {
-    if (!isM11Block(node.blockType)) guardM10LegacyInputs(node, port => { const endpoint = node.inputs[port]; return endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; });
-    guardM11LegacyInputs(node, port => { const endpoint = node.inputs[port]; return endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; });
+    if (!isM11Block(node.blockType) && !isM13Block(node.blockType)) guardM10LegacyInputs(node, port => { const endpoint = node.inputs[port]; return endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; });
+    if (!isM13Block(node.blockType)) guardM11LegacyInputs(node, port => { const endpoint = node.inputs[port]; return endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; });
     const fail = (code: string, message: string, portId?: string): never => { throw new ModelError([{ code, message, nodeId: node.id, ...(portId ? { portId } : {}) }]); };
     const input = (port: string): SignalDescriptor => {
       const endpoint = node.inputs[port];
@@ -142,7 +144,7 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
       if (!descriptor) fail('SIGNAL_INFERENCE_FAILED', `${node.id}의 입력 ${port} 형상을 추론할 수 없습니다.`, port);
       return descriptor!;
     };
-    const m11Outputs = inferM12Outputs(node, input, model, context) ?? inferM11Outputs(node, input, model, byId, context, originals.get(node.id)!.unit ?? '1');
+    const m11Outputs = inferM13Outputs(node, input, model, byId) ?? inferM12Outputs(node, input, model, context) ?? inferM11Outputs(node, input, model, byId, context, originals.get(node.id)!.unit ?? '1');
     if (m11Outputs) {
       Object.assign(node.outputs, m11Outputs);
       const declaredUnit = originals.get(node.id)!.unit;
@@ -354,8 +356,9 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
   }
   for (const node of ordered) {
     const inferredInput = (port: string): SignalDescriptor => { const endpoint = node.inputs[port]; const descriptor = endpoint && byId.get(endpoint.nodeId)?.outputs[endpoint.portId]; if (!descriptor) throw new ModelError([{ code: 'SIGNAL_INFERENCE_FAILED', nodeId: node.id, portId: port, message: '입력 신호의 자료형을 추론할 수 없습니다.' }]); return descriptor; };
-    if (!isM11Block(node.blockType)) guardM10LegacyInputs(node, inferredInput);
-    guardM11LegacyInputs(node, inferredInput);
+    if (!isM11Block(node.blockType) && !isM13Block(node.blockType)) guardM10LegacyInputs(node, inferredInput);
+    if (!isM13Block(node.blockType)) guardM11LegacyInputs(node, inferredInput);
+    if (validateM13StateInputs(node)) continue;
     if (validateM12StateInputs(node, inferredInput)) continue;
     if (validateM11StateInputs(node, inferredInput)) continue;
     if (validateM10StateInputs(node, inferredInput)) continue;
@@ -436,6 +439,7 @@ function compileFlatModel(input: unknown, context: M12CompileContext, allowNoOut
       validateM10Parameters(ir);
       validateM11Parameters(ir, model, context);
       validateM12Parameters(ir, model);
+      validateM13Parameters(ir, model, context.depth);
       if (definition.id === 'math.expression' || definition.id === 'functions.typed') ir.expression = parseExpression(parameters.expression as string);
       nodeById.set(node.id, ir);
     } catch (error) {
@@ -487,11 +491,12 @@ function compileFlatModel(input: unknown, context: M12CompileContext, allowNoOut
     }
   }
   const effectDependencies = prepareM11Bindings([...nodeById.values()], context);
+  const observerDependencies = prepareM13Bindings([...nodeById.values()]);
   const algebraicDependencies = prepareM12Algebraic([...nodeById.values()], model);
-  for (const [sourceId, targetId] of [...effectDependencies, ...algebraicDependencies]) {
+  for (const [sourceId, targetId] of [...effectDependencies, ...algebraicDependencies, ...observerDependencies]) {
     if (!adjacency.get(sourceId)!.has(targetId)) { adjacency.get(sourceId)!.add(targetId); indegree.set(targetId, indegree.get(targetId)! + 1); }
   }
-  const outputIds = model.nodes.filter((node) => ['sink.display', 'io.output', 'sink.scope', 'io.structured-output', 'sink.sequence-viewer'].includes(node.blockType)).map((node) => node.id).sort(compareId);
+  const outputIds = model.nodes.filter((node) => ['sink.display', 'io.output', 'sink.scope', 'io.structured-output', 'sink.sequence-viewer', 'sink.record', 'sink.xy-graph', 'sink.floating-scope', 'data.output-file', 'data.output-dataset', 'dashboard.control', 'dashboard.indicator', 'dashboard.action'].includes(node.blockType)).map((node) => node.id).sort(compareId);
   const stateIds = model.nodes.filter((node) => definitions.get(node.id)!.state !== 'none').map((node) => node.id).sort(compareId);
   if (outputIds.length === 0 && !allowNoOutputs) diagnostics.push({ code: 'OUTPUT_REQUIRED', message: '모델에 결과 블럭을 한 개 이상 연결해 주세요.' });
   if (diagnostics.length > 0) throw new ModelError(diagnostics.slice(0, 20));

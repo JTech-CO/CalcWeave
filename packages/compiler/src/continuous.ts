@@ -3,11 +3,12 @@ import { getBlockDefinition, getDirectFeedthroughPorts, isDirectFeedthrough } fr
 import { M9_BLOCK_IDS } from '../../block-library/src/m9';
 import { M11_BLOCK_DEFINITIONS } from '../../block-library/src/m11';
 import { M12_BLOCK_IDS } from '../../block-library/src/m12';
+import { M13_BLOCK_DEFINITIONS, M13_STRING_IDS } from '../../block-library/src/m13';
 import { EXPANDED_TIME_SOURCE_IDS } from '../../block-library/src/time-sources';
 import { m8HasUnregisteredJump, m8JumpControlPorts } from './m8';
 
-const continuousSources: ReadonlySet<string> = new Set(['source.step', 'source.ramp', 'source.sine-wave', 'source.repeating-sequence', 'source.clock', ...EXPANDED_TIME_SOURCE_IDS]);
-const sampled: ReadonlySet<string> = new Set(['nonlinear.rate-limiter-dynamic', 'source.random', 'source.digital-clock', 'source.pulse', 'logic.edge-detect', 'time.rate-transition', 'time.zero-order-hold', 'fixed.state-space', ...M9_BLOCK_IDS, ...M11_BLOCK_DEFINITIONS.filter(definition => definition.state !== 'none' || definition.sampleTime === 'fixed-tick' || ['route.data-store-read', 'route.data-store-write', 'state.reader', 'state.writer', 'state.parameter-writer'].includes(definition.id)).map(definition => definition.id)]);
+const continuousSources: ReadonlySet<string> = new Set(['source.step', 'source.ramp', 'source.sine-wave', 'source.repeating-sequence', 'source.clock', 'source.waveform', ...EXPANDED_TIME_SOURCE_IDS]);
+const sampled: ReadonlySet<string> = new Set(['nonlinear.rate-limiter-dynamic', 'source.random', 'source.digital-clock', 'source.pulse', 'logic.edge-detect', 'time.rate-transition', 'time.zero-order-hold', 'fixed.state-space', ...M9_BLOCK_IDS, ...M11_BLOCK_DEFINITIONS.filter(definition => definition.state !== 'none' || definition.sampleTime === 'fixed-tick' || ['route.data-store-read', 'route.data-store-write', 'state.reader', 'state.writer', 'state.parameter-writer'].includes(definition.id)).map(definition => definition.id), ...M13_BLOCK_DEFINITIONS.filter(definition => definition.state !== 'none' || definition.sampleTime === 'fixed-tick').map(definition => definition.id)]);
 const boundary = new Set(['time.zero-order-hold', 'time.first-order-hold']);
 const continuousM12 = new Set<string>(M12_BLOCK_IDS.filter(id => id !== 'nonlinear.rate-limiter-dynamic'));
 const fail = (node: IRNode, code: string, message: string, portId?: string): never => { throw new ModelError([{ code, nodeId: node.id, message, ...(portId ? { portId } : {}) }]); };
@@ -72,7 +73,7 @@ export function inferContinuousDomains(model: CalcModel, ordered: IRNode[]): voi
   const explicit = new Map(model.nodes.map((node) => [node.id, !!node.sampleTime && (node.sampleTime.period !== 1 || node.sampleTime.offset !== 0)]));
   for (const node of ordered) {
     if (getBlockDefinition(node.blockType)!.sampleTime === 'constant' || node.blockType.startsWith('annotation.')) node.executionDomain = 'constant';
-    else if (node.blockType === 'source.dataset') node.executionDomain = node.parameters.dataKind === 'boolean' ? 'discrete' : 'continuous';
+    else if (['source.dataset', 'data.input-table', 'data.signal-editor'].includes(node.blockType)) node.executionDomain = ['boolean', 'string'].includes(String(node.parameters.dataKind)) ? 'discrete' : 'continuous';
     else if (node.blockType.startsWith('discrete.') || sampled.has(node.blockType)) node.executionDomain = 'discrete';
     else if (CONTINUOUS_STATE_TYPES.includes(node.blockType) || CONTINUOUS_BOUNDARY_TYPES.includes(node.blockType) || continuousSources.has(node.blockType) || (continuousM12.has(node.blockType) && !(node.blockType === 'nonlinear.rate-limiter-continuous' && explicit.get(node.id)))) node.executionDomain = 'continuous';
     else if (explicit.get(node.id)) node.executionDomain = 'discrete';
@@ -95,6 +96,7 @@ export function inferContinuousDomains(model: CalcModel, ordered: IRNode[]): voi
   for (const node of ordered) {
     for (const [portId, endpoint] of Object.entries(node.inputs)) {
       const source = byId.get(endpoint.nodeId)!;
+      if ((M13_STRING_IDS as readonly string[]).includes(node.blockType) && source.executionDomain === 'continuous') fail(node, 'M13_STRING_BOUNDARY_REQUIRED', '문자열 변환·파싱 입력은 상수 또는 명시적인 이산 신호여야 합니다. 변하는 연속 값은 Zero Order Hold로 샘플하세요.', portId);
       if (portId === 'reset' && node.blockType === 'continuous.integrator') {
         if (source.blockType !== 'logic.hit-crossing' && source.executionDomain !== 'discrete' && source.executionDomain !== 'constant') fail(node, 'UNSUPPORTED_RESET_EVENT', 'rising 초기화는 Hit Crossing 출력 또는 이산·상수 boolean 제어 신호를 사용해 주세요.', portId);
         continue;
@@ -201,6 +203,16 @@ function validateRegisteredDiscontinuities(ordered: IRNode[], byId: Map<string, 
     if ((quantizingCast || quantizingMath || sampledBits) && changesContinuously(node)) fail(node, 'TYPED_CONTINUOUS_BOUNDARY_REQUIRED', '자료형 양자화·비트·fixed LUT 연산의 입력은 상수 또는 이산 held 신호여야 합니다. 연속 입력에는 Zero Order Hold를 연결해 샘플 경계를 지정해 주세요.');
   }
   for (const state of ordered.filter((node) => CONTINUOUS_STATE_TYPES.includes(node.blockType) || continuousM12.has(node.blockType))) {
+    // Preserve the indicator port: out is smooth, band jumps at thresholds.
+    const bandPending = Object.values(state.inputs), bandSeen = new Set<string>();
+    while (bandPending.length) {
+      const endpoint = bandPending.pop()!, key = `${endpoint.nodeId}/${endpoint.portId}`;
+      if (bandSeen.has(key)) continue; bandSeen.add(key);
+      const producer = byId.get(endpoint.nodeId)!;
+      if (producer.executionDomain !== 'continuous' || CONTINUOUS_STATE_TYPES.includes(producer.blockType) || CONTINUOUS_BOUNDARY_TYPES.includes(producer.blockType)) continue;
+      if (producer.blockType === 'dashboard.indicator' && endpoint.portId === 'band' && changesContinuously(producer)) fail(producer, 'M13_INDICATOR_BOUNDARY_REQUIRED', '대시보드 구간 index의 threshold 전환은 연속 솔버 사건이 아닙니다. 연속 상태로 연결하려면 Zero Order Hold로 샘플 경계를 지정하세요.', 'band');
+      bandPending.push(...Object.values(producer.inputs));
+    }
     const pending = continuousM12.has(state.blockType) ? Object.entries(state.inputs).filter(([port]) => !['reset', 'trigger'].includes(port)).map(([, endpoint]) => endpoint.nodeId) : state.inputs.in ? [state.inputs.in.nodeId] : [];
     const seen = new Set<string>();
     while (pending.length) {

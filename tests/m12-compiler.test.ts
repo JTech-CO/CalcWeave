@@ -21,7 +21,7 @@ describe('M12 real numerical compiler contracts', () => {
   it('preserves293 definitions exactly, registers11 kernels, and keeps per-block public parameter cap16', () => {
     const baseline = JSON.parse(readFileSync(new URL('../docs/baselines/m11-registry.json', import.meta.url), 'utf8')) as { id: string }[]; expect(baseline).toHaveLength(293);
     for (const definition of baseline) expect(getBlockDefinition(definition.id)).toEqual(definition);
-    expect(M12_BLOCK_IDS).toHaveLength(11); expect(blockRegistry).toHaveLength(304); expect(new Set(blockRegistry.map(definition => definition.id)).size).toBe(304);
+    expect(M12_BLOCK_IDS).toHaveLength(11); expect(blockRegistry.length).toBeGreaterThanOrEqual(304); expect(new Set(blockRegistry.map(definition => definition.id)).size).toBe(blockRegistry.length);
     for (const id of M12_BLOCK_IDS) expect(Object.keys(getBlockDefinition(id)!.parameters).length).toBeLessThanOrEqual(16);
     expect(Object.keys(getBlockDefinition('continuous.pid-2dof')!.parameters)).toHaveLength(16);
   });

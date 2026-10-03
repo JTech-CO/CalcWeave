@@ -5,6 +5,7 @@ import { checkSignal, copySignal, finiteNumber, nodeOperationCost, signalElement
 import { createDiscreteMachine } from './discrete-machine';
 import { createContinuousMachine, type ContinuousEvent, type ContinuousValues } from './continuous-machine';
 import { implicitEulerTrial, implicitNextStep, rkErrorNorm, rkNextStep, rkTrial } from './continuous-solver';
+import { m13StopRequest } from './m13';
 
 /** Pure, bounded state machine shared by browser execution and independent TS. */
 export function createContinuousExecution(compiled: CompiledModel, hooks: { check?: () => void; maxRecordedValues?: number; maxOperations?: number; trackOperations?: boolean } = {}) {
@@ -48,6 +49,7 @@ export function createContinuousExecution(compiled: CompiledModel, hooks: { chec
   let stepSize = Math.min(solver.initialStep, machine.maximumDelayStep);
   let values: ContinuousValues = new Map(), started = false, finished = false;
   const samples: RunSample[] = [], events: SimulationEvent[] = [];
+  let stopReason: RunResult['stopReason'];
   const stats: SolverStatistics = { method: solver.method, acceptedSteps: 0, rejectedSteps: 0, evaluations: 0, events: 0, lastStep: 0, minAcceptedStep: 0, maxAcceptedStep: 0 };
   const near = (a: number, b: number): boolean => Number.isFinite(a) && Number.isFinite(b) && Math.abs(a - b) <= Math.max(Number.EPSILON * Math.max(1, Math.abs(a), Math.abs(b)) * 8, execution.step * 1e-12);
   const outputTime = (): number => execution.startTime + outputIndex * execution.step;
@@ -57,6 +59,8 @@ export function createContinuousExecution(compiled: CompiledModel, hooks: { chec
   function record(): void {
     samples.push({ time: outputTime(), values: Object.fromEntries(compiled.outputIds.map((id) => [id, copySignal(checkSignal(values.get(id)?.out, compiled.outputTypes[id]!, id))])) });
     outputIndex += 1;
+    const stopNodeId = m13StopRequest(nodes, values);
+    if (stopNodeId) { stopReason = { nodeId: stopNodeId, tick: outputIndex - 1, time: samples.at(-1)!.time }; finished = true; }
   }
   function tickBoundary(mask = new Set<string>()): Set<string> {
     scopeInvocations = 0;
@@ -269,17 +273,17 @@ export function createContinuousExecution(compiled: CompiledModel, hooks: { chec
     const projected = values.size ? machine.finalState(state, values) : {};
     return { samples: samples.map((sample) => ({ time: sample.time, values: Object.fromEntries(Object.entries(sample.values).map(([id, value]) => [id, copySignal(value)])) })),
       finalState: { ...projected, ...discrete.finalState() }, stateMemory: { ...machine.stateMemory(state), ...discrete.stateMemory(true) }, stateTime: time, status, elapsedMs, steps: samples.length, ...(hooks.trackOperations ? { resources: { operations } } : {}),
-      solverStatistics: { ...stats }, events: events.map((event) => ({ ...event, nodeIds: [...event.nodeIds] })) };
+      solverStatistics: { ...stats }, events: events.map((event) => ({ ...event, nodeIds: [...event.nodeIds] })), ...(stopReason ? { stopReason: { ...stopReason } } : {}) };
   }
   function advance(): boolean {
-    const saved = { state, time, values, frozen, outputIndex, tick, previousTickValues, previousTick, started, finished,
+    const saved = { state, time, values, frozen, outputIndex, tick, previousTickValues, previousTick, started, finished, stopReason,
       sampleLength: samples.length, eventLength: events.length, memory: machine.checkpoint(), discrete: discrete.checkpoint(),
       lastEvents: new Map(lastEventTimes), recordedEvents: new Map(lastRecordedEvents), acceptedSteps: stats.acceptedSteps, eventCount: stats.events,
       lastStep: stats.lastStep, minStep: stats.minAcceptedStep, maxStep: stats.maxAcceptedStep };
     try { return advanceInternal(); }
     catch (error) {
       state = saved.state; time = saved.time; values = saved.values; frozen = saved.frozen; outputIndex = saved.outputIndex; tick = saved.tick;
-      previousTickValues = saved.previousTickValues; previousTick = saved.previousTick; started = saved.started; finished = saved.finished;
+      previousTickValues = saved.previousTickValues; previousTick = saved.previousTick; started = saved.started; finished = saved.finished; stopReason = saved.stopReason;
       samples.length = saved.sampleLength; events.length = saved.eventLength;
       machine.restore(saved.memory); discrete.restore(saved.discrete); lastEventTimes.clear(); saved.lastEvents.forEach((value, id) => lastEventTimes.set(id, value));
       lastRecordedEvents.clear(); saved.recordedEvents.forEach((value, id) => lastRecordedEvents.set(id, value));

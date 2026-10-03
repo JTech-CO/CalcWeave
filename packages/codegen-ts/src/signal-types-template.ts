@@ -78,5 +78,13 @@ export const SIGNAL_TYPES_TEMPLATE = [
   "interface Endpoint {",
   "    nodeId: string;",
   "    portId: string;",
+  "}",
+  "interface DashboardLiveEvent {",
+  "    nodeId: string;",
+  "    value: number;",
+  "}",
+  "interface DashboardAppliedEvent extends DashboardLiveEvent {",
+  "    time: number;",
+  "    order: number;",
   "}"
 ].join('\n');

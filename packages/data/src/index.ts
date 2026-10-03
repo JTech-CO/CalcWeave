@@ -332,3 +332,5 @@ function exportTypedResultCsv(result: RunResult, labels: Record<string, string>)
   }
   return lines.join('');
 }
+export { inspectLocalDataFile, workbookSheetSource, importLocalDataSource, scenarioSource, type LocalDataSource, type EditedScenario } from './file-import';
+export { importBoundedWorkbook, readBoundedXlsxZip, XLSX_LIMITS, type BoundedWorkbook } from './bounded-xlsx';

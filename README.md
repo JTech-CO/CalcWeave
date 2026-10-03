@@ -1,11 +1,15 @@
 # CalcWeave
 
 > 블럭을 연결해 수학을 계산하고, 시간에 따른 변화를 관찰하며, 모델을 데이터와 실행 코드로 이어가는 웹 도구.  
-> 기준일: 2026-10-03 · 앱: 0.13.0 · 엔진: 0.13.0-m12 · 현재 상태: M10→M11→M12 선택 범위 구축·검증·병합 및 GitHub Pages 통합 배포 완료. 블럭304종·예제61개·9개 카테고리. 전체 Simulink 옵션 대응은 후속 로드맵을 따릅니다.
+> 기준일: 2026-10-03 · 로컬 앱: 0.14.0 · 엔진: 0.14.0-m13 · 현재 상태: M13 선택 구현·독립 실행·UI 로컬 검증 완료. 블럭334종·예제69개·11개 카테고리. M13 병합·공개 배포는 별도 게이트이며 검증된 공개 버전은 M12 앱0.13.0입니다. 전체 Simulink 옵션 대응은 후속 로드맵을 따릅니다.
 
 CalcWeave는 MATLAB 설치 없이 브라우저에서 사용할 수 있는 블럭 기반 수학 계산·시뮬레이션 도구를 목표로 합니다. Simulink 기본 라이브러리의 기능 개념을 참고하면서, 초보자가 입력·계산·결과를 이해하고 점차 고급 모델로 확장할 수 있는 독립적인 사용 경험을 설계합니다.
 
 웹 베타 주소: [CalcWeave 작업 공간](https://jtech-co.github.io/CalcWeave/). 배포 결과와 실제 공개 파일 검증은 [Pages 배포 기록](docs/pages-validation.md)에 남깁니다.
+
+## M13 문자열·대시보드·기록·로컬 데이터
+
+기존304개 정의를 보존하고 문자열·대시보드·기록·파일/표 재생 등30개 실제 정의를 추가했습니다. source 선택 subset은364/385행·미구현21행이며, 원본75행 중 신규59행을 승인하고 이전16행은 보존했습니다. 문자열 typed 값과 제한된 Compose/Scan,37개 Dashboard 설정, 이산 live 조작의 실제 적용 시각을 저장한 재생 모델, XY/기록 내보내기, bounded XLSX·CSV/JSON·편집 provenance를 제공합니다. 전체unit3515개,139raw/350모드·실제TS361개/846표본,UI 관련116개를 확인했습니다. 전체browser167개 후 최종 입력 경계의 영향 범위3개를 재검사했습니다. M13 공개 배포는 후속 릴리스 게이트이며 전체 원본 옵션·MathWorks 실행 등가는 승인하지 않았습니다. [M13 계약](docs/m13-contract.md)·[검증](docs/m13-validation.md)·[75행 대응표](docs/m13-implementation-map.json)
 
 ## M12 연속 솔버·제약·DAE·분석
 
@@ -63,9 +67,9 @@ production preview와 HTTPS에서는 검증된 정적 릴리스를 오프라인�
 
 웹 베타 호스팅은 [JTech-CO/CalcWeave](https://github.com/JTech-CO/CalcWeave)의 GitHub Pages, 주소는 **https://jtech-co.github.io/CalcWeave/**, 목표 도메인은 **calcweave.com**, 운영자는 **JTech-Co**, 문의는 **jtech-bryan@proton.me**입니다. `.github/workflows/pages.yml`은 기본 브랜치에서 수동 실행하는 검증·배포 workflow입니다. README를 변환하는 legacy 게시 대신 검증된 `dist`를 게시하는 GitHub Actions 구성을 사용합니다. 목표 도메인의 DNS·소유권 확인은 별도입니다. [현재 배포 구성](docs/pages-deployment.md)을 참고하세요. [M6 계약](docs/m6-contract.md) · [검증 기록](docs/m6-validation.md) · [배포 설정](docs/m6-deployment.md) · [운영·복구](docs/m6-operations.md)를 참고하세요.
 
-## 현재 가능한 작업
+## M9까지의 기본 작업 기록
 
-- registry **211종**을 검색·추가·연결합니다. 선언 모드별 정의 수는 정적148종·이산198종·연속210종이며 이산·연속·혼합 실행은 타입·단위·rate와 블럭별 조건을 검사합니다. 연속 선언은 모든 ODE 연결·event solver의 지원을 뜻하지 않습니다. `Ctrl+K`에서 Pi·Zero·True·False·Add·Subtract와M9의15개 명명 preset도 선택할 수 있습니다. 단축키는 동작하며 버튼의 K·v 문자 표시는 제거했습니다.
+- M9 기준 registry **211종**을 검색·추가·연결합니다. 당시 선언 모드별 정의 수는 정적148종·이산198종·연속210종입니다. M13의 현재 선언 수는 정적222종·이산312종·연속333종이며 연결별 타입·단위·rate와 조건을 검사합니다. 연속 선언은 모든 ODE 연결·event solver의 지원을 뜻하지 않습니다. `Ctrl+K`에서 Pi·Zero·True·False·Add·Subtract와M9의15개 명명 preset도 선택할 수 있습니다. 단축키는 동작하며 버튼의 K·v 문자 표시는 제거했습니다.
 - 새 70종은 기본 수학·쌍곡선·다항식·통계·벡터·행렬 변환 64종과 Chirp·Gaussian·감쇠 Sine·Exponential·Logistic·Sinc 시간 입력 6종입니다. 시간 입력은 이산·연속 실행만 지원합니다. 새 불연속 연산을 시간변화 ODE 미분 경로에 연결하면 미승인 사건을 설명하고 거부합니다. [확장 계약](docs/catalog-contract.md)과 [검증](docs/catalog-validation.md)을 참고하세요.
 - float64·boolean의 스칼라·벡터·2D 값, 기본 단위 호환성, 제한 수식을 편집하고 Worker에서 계산합니다. 동적 Demux 출력, 배열 전체 원소 표와 포트별 오류 위치를 제공합니다.
 - 다중 선택, 내부 연결을 포함한 복사·붙여넣기·복제·삭제, undo/redo, 실행 취소와 결과의 현재/이전 모델 구분을 제공합니다. 기본 테마는 검정·차콜이며 회색 라이트 설정도 브라우저에 기억합니다.
@@ -89,7 +93,7 @@ production preview와 HTTPS에서는 검증된 정적 릴리스를 오프라인�
 - **2D Lookup**은 행·열의 비균일 기준점과 표를 편집해 bilinear·nearest·previous를 선택합니다. Prelookup은 구간 index·fraction을 출력합니다.
 - **Fixed Quantize**는 1~32bit 폭·소수 비트·부호·반올림·saturate/wrap/error를 설정합니다. out은 복원 실수, stored는 정확한 정수 코드입니다. 다음 블럭의 산술은 float64이며 64bit·일반 fixed-point 타입 전파는 제외합니다.
 
-학습 예제는 **39개, 6개 카테고리**입니다. 기초·신호 입력·이산 상태·연속/혼합·데이터/도식·행렬/표/양자화로 탐색하며 제목·설명·블럭 ID를 검색합니다. M9에서는 이산 필터 응답·이전 샘플·물리적 샘플주기와 카운터·2DOF PI 가중치의4개 예제를 추가했습니다. 한 신호는 최대1,024원소이며 ODE 상태는 단위1 float64 scalar입니다. XLSX·MAT·일반 문자열 계산·이질/중첩 Bus·외부 모델 파일 참조·live tuning·일반 차원식, 강성/DAE·연속 MIMO·복소수·연속 가변 지연/임의 시각 발행 사건·계정은 후속 범위입니다. registry 수는 전체 Simulink 기능 지원을 뜻하지 않습니다.
+M9의 학습 예제는 **39개, 6개 카테고리**였습니다. 기초·신호 입력·이산 상태·연속/혼합·데이터/도식·행렬/표/양자화로 탐색하며 제목·설명·블럭 ID를 검색합니다. M9에서는 이산 필터 응답·이전 샘플·물리적 샘플주기와 카운터·2DOF PI 가중치의4개 예제를 추가했습니다. 당시 미지원이던 자료형·구조화 신호·DAE·가변 지연·문자열·XLSX·live 조작의 현재 선택 범위는 위 M10~M13 계약을 따릅니다. 현재 예제는69개/11범주이며 한 신호는 최대1,024원소입니다. MAT·외부 실행 환경·전체 차원식·일반 DAE·계정 등은 후속 범위입니다. registry 수는 전체 Simulink 기능 지원을 뜻하지 않습니다.
 
 [SANE 화면 수정](docs/04-sane-design-revision.md)에서는 본문 16px·보조 라벨 14px를 기준으로 화면을 재배치하고, 캔버스의 영어 종류 이름·핵심 숫자와 라이브러리/속성의 한영 설명을 구분했습니다. 중앙은 캔버스 왼쪽·결과 오른쪽으로 배치하고 작은 화면이나 글자 확대에서는 세로로 옮깁니다. 실행 시 CalcWeave 로고에 은은한 펄스를 표시하며 취소·오류 시 멈추고 모션 감소 설정을 따릅니다. 시간 그래프는 전체 샘플을 보존하고 수치 표는 100행씩 모든 기록에 접근합니다. 정적 계산은 결과값과 표를 제공합니다.
 
