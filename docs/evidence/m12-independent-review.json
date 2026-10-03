@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-03T06:22:17.497Z",
+  "reviewedAt": "2026-10-03T06:46:44.116Z",
   "stage": "M12",
   "reviewer": "independent compiler-contract subagent",
   "result": "PASS",
@@ -8,7 +8,7 @@
   "artifacts": {
     "docs/evidence/m12-source-approvals.json": "a3e2201b9672a4eac21f90a37b893ee0daf2c2a9b6d912654b46b1e1618a449b",
     "docs/evidence/m12-verification.json": "79253d162a1af3ca5f5bbe2eb9de14d0fbc3e5aaa107795586678ab8f896f0c7",
-    "docs/m12-implementation-map.json": "76605e4b2993584ed455dc9be1ea7f580fd9b9c8bfc879f1ecd3f38691bb08c2",
+    "docs/m12-implementation-map.json": "f819ff3b3be49e4b8ab1406127ea0b012020b146c8ab8190c49b97b2993da322",
     "docs/block-coverage.md": "7fe955b01d2a3e758ad481f7d3605bebe8c465275a5ed3f165f7244268299f99",
     "tests/m12-independent-fixtures.ts": "9be92717422097c164688c05c277711e22128e6a1e59ba8d568f27d14a0b1b84"
   },

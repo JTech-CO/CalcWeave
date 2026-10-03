@@ -183,7 +183,7 @@
         "continuous.descriptor"
       ],
       "sourceOptionCompletionStatus": "open",
-      "approvalStatus": "pending-independent-configured-fixture"
+      "approvalStatus": "verified-selected-scope"
     },
     {
       "id": "m12-bounded-continuous-state",
@@ -198,7 +198,7 @@
         "continuous.second-order-limited"
       ],
       "sourceOptionCompletionStatus": "open",
-      "approvalStatus": "pending-independent-configured-fixture"
+      "approvalStatus": "verified-selected-scope"
     },
     {
       "id": "m12-variable-delay",
@@ -211,7 +211,7 @@
         "time.variable-transport-delay"
       ],
       "sourceOptionCompletionStatus": "open",
-      "approvalStatus": "pending-independent-configured-fixture"
+      "approvalStatus": "verified-selected-scope"
     },
     {
       "id": "m12-nonlinear-accepted-state",
@@ -226,7 +226,7 @@
         "nonlinear.rate-limiter-dynamic"
       ],
       "sourceOptionCompletionStatus": "open",
-      "approvalStatus": "pending-independent-configured-fixture"
+      "approvalStatus": "verified-selected-scope"
     },
     {
       "id": "m12-algebraic-solver",
@@ -237,7 +237,7 @@
         "solver.algebraic-constraint"
       ],
       "sourceOptionCompletionStatus": "open",
-      "approvalStatus": "pending-independent-configured-fixture"
+      "approvalStatus": "verified-selected-scope"
     },
     {
       "id": "m12-local-linearization",
@@ -249,7 +249,7 @@
         "analysis.linearization"
       ],
       "sourceOptionCompletionStatus": "open",
-      "approvalStatus": "pending-independent-configured-fixture"
+      "approvalStatus": "verified-selected-scope"
     }
   ],
   "rows": [
