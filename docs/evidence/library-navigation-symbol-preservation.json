@@ -1,0 +1,2006 @@
+{
+  "checkedAt": "2026-10-04T00:32:47.695Z",
+  "status": "passed",
+  "parser": "TypeScript AST string literal extraction; no source code evaluated",
+  "baseline": {
+    "path": ".test-generated/m6-release-review/apps/web/src/components/BlockNode.tsx",
+    "sha256": "7c733794aa646b946946e3599f86bdcc800b655e9e1d8093ce344be7a5eddd76",
+    "explicitSymbols": 295
+  },
+  "current": {
+    "path": "apps/web/src/block-symbols.ts",
+    "sha256": "6df760c26069b26699d0ea450090ba68b518f043892bfccbc8a7300362af4cc0",
+    "explicitSymbols": 337
+  },
+  "registeredBlocks": 337,
+  "preservedOriginalSymbols": 295,
+  "originalMissing": 42,
+  "newlyCovered": 42,
+  "changed": [],
+  "removed": [],
+  "missingCurrent": [],
+  "addedSymbols": [
+    {
+      "id": "complex.dot",
+      "symbol": "zᴴw",
+      "englishName": "Complex Dot Product"
+    },
+    {
+      "id": "logic.combine",
+      "symbol": "∧",
+      "englishName": "N-Input Logical Operator"
+    },
+    {
+      "id": "logic.compare-constant",
+      "symbol": "<C",
+      "englishName": "Compare To Constant"
+    },
+    {
+      "id": "logic.interval-dynamic",
+      "symbol": "[↕]",
+      "englishName": "Interval Test Dynamic"
+    },
+    {
+      "id": "logic.truth-table",
+      "symbol": "01",
+      "englishName": "Combinatorial Logic"
+    },
+    {
+      "id": "lookup.direct",
+      "symbol": "[i]",
+      "englishName": "Direct Lookup Table (n-D)"
+    },
+    {
+      "id": "lookup.dynamic",
+      "symbol": "▱↕",
+      "englishName": "Lookup Table Dynamic"
+    },
+    {
+      "id": "lookup.interpolate-prelookup",
+      "symbol": "k→f",
+      "englishName": "Interpolation Using Prelookup"
+    },
+    {
+      "id": "lookup.nd",
+      "symbol": "nD",
+      "englishName": "n-D Lookup Table"
+    },
+    {
+      "id": "math.concatenate-inputs",
+      "symbol": "⊕n",
+      "englishName": "N-Input Concatenate"
+    },
+    {
+      "id": "math.gain-matrix",
+      "symbol": "Ku",
+      "englishName": "Matrix Gain"
+    },
+    {
+      "id": "math.increment",
+      "symbol": "+Δ",
+      "englishName": "Increment / Decrement"
+    },
+    {
+      "id": "math.negate",
+      "symbol": "−",
+      "englishName": "Unary Minus"
+    },
+    {
+      "id": "math.product-inputs",
+      "symbol": "Π",
+      "englishName": "N-Input Product"
+    },
+    {
+      "id": "math.reciprocal-sqrt",
+      "symbol": "1/√",
+      "englishName": "Reciprocal Sqrt"
+    },
+    {
+      "id": "math.signed-sqrt",
+      "symbol": "±√",
+      "englishName": "Signed Sqrt"
+    },
+    {
+      "id": "math.sine-wave-function",
+      "symbol": "sin",
+      "englishName": "Sine Wave Function"
+    },
+    {
+      "id": "math.sum-inputs",
+      "symbol": "Σ",
+      "englishName": "N-Input Sum"
+    },
+    {
+      "id": "matrix.assign",
+      "symbol": "A←",
+      "englishName": "Assignment"
+    },
+    {
+      "id": "matrix.expand-scalar",
+      "symbol": "1→A",
+      "englishName": "Expand Scalar"
+    },
+    {
+      "id": "matrix.find-nonzero",
+      "symbol": "≠0",
+      "englishName": "Find Nonzero (Padded)"
+    },
+    {
+      "id": "matrix.is-symmetric",
+      "symbol": "Aᵀ?",
+      "englishName": "IsSymmetric"
+    },
+    {
+      "id": "matrix.is-triangular",
+      "symbol": "△?",
+      "englishName": "IsTriangular"
+    },
+    {
+      "id": "matrix.permute-dimensions",
+      "symbol": "⇄",
+      "englishName": "Permute Dimensions"
+    },
+    {
+      "id": "matrix.permute-rows-cols",
+      "symbol": "PAQ",
+      "englishName": "Permute Matrix"
+    },
+    {
+      "id": "matrix.reshape-column-major",
+      "symbol": "A↓",
+      "englishName": "Column-Major Reshape"
+    },
+    {
+      "id": "matrix.select-dynamic",
+      "symbol": "A[i]",
+      "englishName": "Dynamic Selector (2D)"
+    },
+    {
+      "id": "matrix.square",
+      "symbol": "AᵀA",
+      "englishName": "Matrix Square"
+    },
+    {
+      "id": "matrix.squeeze",
+      "symbol": "⇥",
+      "englishName": "Squeeze"
+    },
+    {
+      "id": "nonlinear.dead-zone-dynamic",
+      "symbol": "DZ↕",
+      "englishName": "Dead Zone Dynamic"
+    },
+    {
+      "id": "nonlinear.friction",
+      "symbol": "μ",
+      "englishName": "Coulomb and Viscous Friction"
+    },
+    {
+      "id": "nonlinear.saturation-dynamic",
+      "symbol": "↔↕",
+      "englishName": "Saturation Dynamic"
+    },
+    {
+      "id": "nonlinear.wrap-to-zero",
+      "symbol": "→0",
+      "englishName": "Wrap To Zero"
+    },
+    {
+      "id": "reduce.axis",
+      "symbol": "Σᵢ",
+      "englishName": "Axis Reduction"
+    },
+    {
+      "id": "route.demux-widths",
+      "symbol": "⇉w",
+      "englishName": "Width-Aware Demux"
+    },
+    {
+      "id": "route.manual-switch",
+      "symbol": "1|2",
+      "englishName": "Manual Switch"
+    },
+    {
+      "id": "route.multiport-switch",
+      "symbol": "⇥n",
+      "englishName": "Multiport Switch"
+    },
+    {
+      "id": "route.mux-inputs",
+      "symbol": "⊞n",
+      "englishName": "N-Input Mux"
+    },
+    {
+      "id": "route.switch-threshold",
+      "symbol": ">?",
+      "englishName": "Threshold Switch"
+    },
+    {
+      "id": "vector.select-dynamic",
+      "symbol": "v[i]",
+      "englishName": "Dynamic Selector (1D)"
+    },
+    {
+      "id": "verify.assert",
+      "symbol": "✓",
+      "englishName": "Assertion"
+    },
+    {
+      "id": "verify.bounds",
+      "symbol": "[✓]",
+      "englishName": "Bounds Check"
+    }
+  ],
+  "comparison": [
+    {
+      "id": "adapter.entity-transport",
+      "baselineSymbol": "FIFO",
+      "currentSymbol": "FIFO",
+      "preserved": true
+    },
+    {
+      "id": "adapter.wasm-accumulator",
+      "baselineSymbol": "Σ",
+      "currentSymbol": "Σ",
+      "preserved": true
+    },
+    {
+      "id": "adapter.wasm-affine",
+      "baselineSymbol": "f",
+      "currentSymbol": "f",
+      "preserved": true
+    },
+    {
+      "id": "analysis.linearization",
+      "baselineSymbol": "J",
+      "currentSymbol": "J",
+      "preserved": true
+    },
+    {
+      "id": "annotation.model-info",
+      "baselineSymbol": "i",
+      "currentSymbol": "i",
+      "preserved": true
+    },
+    {
+      "id": "annotation.note",
+      "baselineSymbol": "¶",
+      "currentSymbol": "¶",
+      "preserved": true
+    },
+    {
+      "id": "complex.from-parts",
+      "baselineSymbol": "+i",
+      "currentSymbol": "+i",
+      "preserved": true
+    },
+    {
+      "id": "complex.from-polar",
+      "baselineSymbol": "∠",
+      "currentSymbol": "∠",
+      "preserved": true
+    },
+    {
+      "id": "complex.hermitian",
+      "baselineSymbol": "Aᴴ",
+      "currentSymbol": "Aᴴ",
+      "preserved": true
+    },
+    {
+      "id": "complex.is-hermitian",
+      "baselineSymbol": "H?",
+      "currentSymbol": "H?",
+      "preserved": true
+    },
+    {
+      "id": "complex.to-parts",
+      "baselineSymbol": "Re",
+      "currentSymbol": "Re",
+      "preserved": true
+    },
+    {
+      "id": "complex.to-polar",
+      "baselineSymbol": "|z|",
+      "currentSymbol": "|z|",
+      "preserved": true
+    },
+    {
+      "id": "continuous.derivative",
+      "baselineSymbol": "d/dt",
+      "currentSymbol": "d/dt",
+      "preserved": true
+    },
+    {
+      "id": "continuous.descriptor",
+      "baselineSymbol": "Eẋ",
+      "currentSymbol": "Eẋ",
+      "preserved": true
+    },
+    {
+      "id": "continuous.integrator",
+      "baselineSymbol": "∫",
+      "currentSymbol": "∫",
+      "preserved": true
+    },
+    {
+      "id": "continuous.integrator-limited",
+      "baselineSymbol": "∫",
+      "currentSymbol": "∫",
+      "preserved": true
+    },
+    {
+      "id": "continuous.pid",
+      "baselineSymbol": "PID",
+      "currentSymbol": "PID",
+      "preserved": true
+    },
+    {
+      "id": "continuous.pid-2dof",
+      "baselineSymbol": "PID",
+      "currentSymbol": "PID",
+      "preserved": true
+    },
+    {
+      "id": "continuous.second-order-integrator",
+      "baselineSymbol": "∫²",
+      "currentSymbol": "∫²",
+      "preserved": true
+    },
+    {
+      "id": "continuous.second-order-limited",
+      "baselineSymbol": "∫²",
+      "currentSymbol": "∫²",
+      "preserved": true
+    },
+    {
+      "id": "continuous.state-space",
+      "baselineSymbol": "ẋ",
+      "currentSymbol": "ẋ",
+      "preserved": true
+    },
+    {
+      "id": "continuous.transfer-function",
+      "baselineSymbol": "H(s)",
+      "currentSymbol": "H(s)",
+      "preserved": true
+    },
+    {
+      "id": "continuous.zero-pole",
+      "baselineSymbol": "ZP",
+      "currentSymbol": "ZP",
+      "preserved": true
+    },
+    {
+      "id": "dashboard.action",
+      "baselineSymbol": "▶",
+      "currentSymbol": "▶",
+      "preserved": true
+    },
+    {
+      "id": "dashboard.control",
+      "baselineSymbol": "↕",
+      "currentSymbol": "↕",
+      "preserved": true
+    },
+    {
+      "id": "dashboard.indicator",
+      "baselineSymbol": "▥",
+      "currentSymbol": "▥",
+      "preserved": true
+    },
+    {
+      "id": "data.input-table",
+      "baselineSymbol": "▤",
+      "currentSymbol": "▤",
+      "preserved": true
+    },
+    {
+      "id": "data.output-dataset",
+      "baselineSymbol": "▤",
+      "currentSymbol": "▤",
+      "preserved": true
+    },
+    {
+      "id": "data.output-file",
+      "baselineSymbol": "↓",
+      "currentSymbol": "↓",
+      "preserved": true
+    },
+    {
+      "id": "data.signal-editor",
+      "baselineSymbol": "∿",
+      "currentSymbol": "∿",
+      "preserved": true
+    },
+    {
+      "id": "discrete.delay",
+      "baselineSymbol": "z⁻ⁿ",
+      "currentSymbol": "z⁻ⁿ",
+      "preserved": true
+    },
+    {
+      "id": "discrete.delay-configured",
+      "baselineSymbol": "z⁻ⁿ",
+      "currentSymbol": "z⁻ⁿ",
+      "preserved": true
+    },
+    {
+      "id": "discrete.derivative",
+      "baselineSymbol": "Δt",
+      "currentSymbol": "Δt",
+      "preserved": true
+    },
+    {
+      "id": "discrete.difference",
+      "baselineSymbol": "Δ",
+      "currentSymbol": "Δ",
+      "preserved": true
+    },
+    {
+      "id": "discrete.difference-configured",
+      "baselineSymbol": "Δ",
+      "currentSymbol": "Δ",
+      "preserved": true
+    },
+    {
+      "id": "discrete.filter",
+      "baselineSymbol": "H",
+      "currentSymbol": "H",
+      "preserved": true
+    },
+    {
+      "id": "discrete.filter-time-varying",
+      "baselineSymbol": "Hₖ",
+      "currentSymbol": "Hₖ",
+      "preserved": true
+    },
+    {
+      "id": "discrete.fir",
+      "baselineSymbol": "FIR",
+      "currentSymbol": "FIR",
+      "preserved": true
+    },
+    {
+      "id": "discrete.integrator",
+      "baselineSymbol": "Σ",
+      "currentSymbol": "Σ",
+      "preserved": true
+    },
+    {
+      "id": "discrete.integrator-configured",
+      "baselineSymbol": "Σ",
+      "currentSymbol": "Σ",
+      "preserved": true
+    },
+    {
+      "id": "discrete.pid",
+      "baselineSymbol": "PID",
+      "currentSymbol": "PID",
+      "preserved": true
+    },
+    {
+      "id": "discrete.pid-2dof",
+      "baselineSymbol": "PID",
+      "currentSymbol": "PID",
+      "preserved": true
+    },
+    {
+      "id": "discrete.propagation-delay",
+      "baselineSymbol": "τ",
+      "currentSymbol": "τ",
+      "preserved": true
+    },
+    {
+      "id": "discrete.state-space",
+      "baselineSymbol": "xₖ",
+      "currentSymbol": "xₖ",
+      "preserved": true
+    },
+    {
+      "id": "discrete.state-space-mimo",
+      "baselineSymbol": "xₖ",
+      "currentSymbol": "xₖ",
+      "preserved": true
+    },
+    {
+      "id": "discrete.tapped-delay",
+      "baselineSymbol": "⇉",
+      "currentSymbol": "⇉",
+      "preserved": true
+    },
+    {
+      "id": "discrete.transfer-function",
+      "baselineSymbol": "H",
+      "currentSymbol": "H",
+      "preserved": true
+    },
+    {
+      "id": "discrete.unit-delay",
+      "baselineSymbol": "z⁻¹",
+      "currentSymbol": "z⁻¹",
+      "preserved": true
+    },
+    {
+      "id": "discrete.zero-pole",
+      "baselineSymbol": "ZP",
+      "currentSymbol": "ZP",
+      "preserved": true
+    },
+    {
+      "id": "events.feedback-latch",
+      "baselineSymbol": "z⁻¹",
+      "currentSymbol": "z⁻¹",
+      "preserved": true
+    },
+    {
+      "id": "events.function-call-generator",
+      "baselineSymbol": "f↗",
+      "currentSymbol": "f↗",
+      "preserved": true
+    },
+    {
+      "id": "events.function-call-split",
+      "baselineSymbol": "f⇉",
+      "currentSymbol": "f⇉",
+      "preserved": true
+    },
+    {
+      "id": "events.hit-scheduler",
+      "baselineSymbol": "t↗",
+      "currentSymbol": "t↗",
+      "preserved": true
+    },
+    {
+      "id": "events.message-merge",
+      "baselineSymbol": "⇉",
+      "currentSymbol": "⇉",
+      "preserved": true
+    },
+    {
+      "id": "events.queue",
+      "baselineSymbol": "Q",
+      "currentSymbol": "Q",
+      "preserved": true
+    },
+    {
+      "id": "events.receive",
+      "baselineSymbol": "↓",
+      "currentSymbol": "↓",
+      "preserved": true
+    },
+    {
+      "id": "events.send",
+      "baselineSymbol": "↑",
+      "currentSymbol": "↑",
+      "preserved": true
+    },
+    {
+      "id": "fixed.integer-increment",
+      "baselineSymbol": "+1",
+      "currentSymbol": "+1",
+      "preserved": true
+    },
+    {
+      "id": "fixed.quantize",
+      "baselineSymbol": "Q",
+      "currentSymbol": "Q",
+      "preserved": true
+    },
+    {
+      "id": "fixed.state-space",
+      "baselineSymbol": "Qx",
+      "currentSymbol": "Qx",
+      "preserved": true
+    },
+    {
+      "id": "fixed.trigonometric",
+      "baselineSymbol": "sin",
+      "currentSymbol": "sin",
+      "preserved": true
+    },
+    {
+      "id": "functions.call",
+      "baselineSymbol": "f()",
+      "currentSymbol": "f()",
+      "preserved": true
+    },
+    {
+      "id": "functions.element",
+      "baselineSymbol": "f",
+      "currentSymbol": "f",
+      "preserved": true
+    },
+    {
+      "id": "functions.initialize",
+      "baselineSymbol": "f₀",
+      "currentSymbol": "f₀",
+      "preserved": true
+    },
+    {
+      "id": "functions.reinitialize",
+      "baselineSymbol": "↺f",
+      "currentSymbol": "↺f",
+      "preserved": true
+    },
+    {
+      "id": "functions.reset",
+      "baselineSymbol": "↺",
+      "currentSymbol": "↺",
+      "preserved": true
+    },
+    {
+      "id": "functions.terminate",
+      "baselineSymbol": "f₁",
+      "currentSymbol": "f₁",
+      "preserved": true
+    },
+    {
+      "id": "functions.typed",
+      "baselineSymbol": "f(x)",
+      "currentSymbol": "f(x)",
+      "preserved": true
+    },
+    {
+      "id": "hierarchy.action",
+      "baselineSymbol": "?",
+      "currentSymbol": "?",
+      "preserved": true
+    },
+    {
+      "id": "hierarchy.array-processing",
+      "baselineSymbol": "[ ]",
+      "currentSymbol": "[ ]",
+      "preserved": true
+    },
+    {
+      "id": "hierarchy.atomic",
+      "baselineSymbol": "▦",
+      "currentSymbol": "▦",
+      "preserved": true
+    },
+    {
+      "id": "hierarchy.enabled",
+      "baselineSymbol": "E",
+      "currentSymbol": "E",
+      "preserved": true
+    },
+    {
+      "id": "hierarchy.enabled-triggered",
+      "baselineSymbol": "E↗",
+      "currentSymbol": "E↗",
+      "preserved": true
+    },
+    {
+      "id": "hierarchy.for-each",
+      "baselineSymbol": "each",
+      "currentSymbol": "each",
+      "preserved": true
+    },
+    {
+      "id": "hierarchy.for-iterator",
+      "baselineSymbol": "for",
+      "currentSymbol": "for",
+      "preserved": true
+    },
+    {
+      "id": "hierarchy.function-call",
+      "baselineSymbol": "f()",
+      "currentSymbol": "f()",
+      "preserved": true
+    },
+    {
+      "id": "hierarchy.if",
+      "baselineSymbol": "if",
+      "currentSymbol": "if",
+      "preserved": true
+    },
+    {
+      "id": "hierarchy.neighborhood-processing",
+      "baselineSymbol": "▦",
+      "currentSymbol": "▦",
+      "preserved": true
+    },
+    {
+      "id": "hierarchy.pixel-processing",
+      "baselineSymbol": "·",
+      "currentSymbol": "·",
+      "preserved": true
+    },
+    {
+      "id": "hierarchy.resettable",
+      "baselineSymbol": "↺",
+      "currentSymbol": "↺",
+      "preserved": true
+    },
+    {
+      "id": "hierarchy.subsystem",
+      "baselineSymbol": "▦",
+      "currentSymbol": "▦",
+      "preserved": true
+    },
+    {
+      "id": "hierarchy.switch-case",
+      "baselineSymbol": "case",
+      "currentSymbol": "case",
+      "preserved": true
+    },
+    {
+      "id": "hierarchy.triggered",
+      "baselineSymbol": "↗",
+      "currentSymbol": "↗",
+      "preserved": true
+    },
+    {
+      "id": "hierarchy.variant",
+      "baselineSymbol": "◇",
+      "currentSymbol": "◇",
+      "preserved": true
+    },
+    {
+      "id": "hierarchy.while-iterator",
+      "baselineSymbol": "while",
+      "currentSymbol": "while",
+      "preserved": true
+    },
+    {
+      "id": "io.input",
+      "baselineSymbol": "↗",
+      "currentSymbol": "↗",
+      "preserved": true
+    },
+    {
+      "id": "io.output",
+      "baselineSymbol": "↗",
+      "currentSymbol": "↗",
+      "preserved": true
+    },
+    {
+      "id": "io.structured-input",
+      "baselineSymbol": "{}→",
+      "currentSymbol": "{}→",
+      "preserved": true
+    },
+    {
+      "id": "io.structured-output",
+      "baselineSymbol": "→{}",
+      "currentSymbol": "→{}",
+      "preserved": true
+    },
+    {
+      "id": "io.terminator",
+      "baselineSymbol": "⊣",
+      "currentSymbol": "⊣",
+      "preserved": true
+    },
+    {
+      "id": "logic.approx-equal",
+      "baselineSymbol": "≈",
+      "currentSymbol": "≈",
+      "preserved": true
+    },
+    {
+      "id": "logic.bit-mask",
+      "baselineSymbol": "bit",
+      "currentSymbol": "bit",
+      "preserved": true
+    },
+    {
+      "id": "logic.bits-to-integer",
+      "baselineSymbol": "b→",
+      "currentSymbol": "b→",
+      "preserved": true
+    },
+    {
+      "id": "logic.bitwise",
+      "baselineSymbol": "&",
+      "currentSymbol": "&",
+      "preserved": true
+    },
+    {
+      "id": "logic.bitwise-typed",
+      "baselineSymbol": "&",
+      "currentSymbol": "&",
+      "preserved": true
+    },
+    {
+      "id": "logic.boolean",
+      "baselineSymbol": "∧",
+      "currentSymbol": "∧",
+      "preserved": true
+    },
+    {
+      "id": "logic.compare",
+      "baselineSymbol": "<",
+      "currentSymbol": "<",
+      "preserved": true
+    },
+    {
+      "id": "logic.edge-detect",
+      "baselineSymbol": "↑",
+      "currentSymbol": "↑",
+      "preserved": true
+    },
+    {
+      "id": "logic.extract-bits",
+      "baselineSymbol": "[b]",
+      "currentSymbol": "[b]",
+      "preserved": true
+    },
+    {
+      "id": "logic.float-extract-bits",
+      "baselineSymbol": "IEEE",
+      "currentSymbol": "IEEE",
+      "preserved": true
+    },
+    {
+      "id": "logic.hit-crossing",
+      "baselineSymbol": "↗",
+      "currentSymbol": "↗",
+      "preserved": true
+    },
+    {
+      "id": "logic.integer-to-bits",
+      "baselineSymbol": "→b",
+      "currentSymbol": "→b",
+      "preserved": true
+    },
+    {
+      "id": "logic.interval",
+      "baselineSymbol": "[ ]",
+      "currentSymbol": "[ ]",
+      "preserved": true
+    },
+    {
+      "id": "logic.is-integer",
+      "baselineSymbol": "ℤ",
+      "currentSymbol": "ℤ",
+      "preserved": true
+    },
+    {
+      "id": "logic.numeric-edge",
+      "baselineSymbol": "↗",
+      "currentSymbol": "↗",
+      "preserved": true
+    },
+    {
+      "id": "logic.shift-arithmetic",
+      "baselineSymbol": "≫",
+      "currentSymbol": "≫",
+      "preserved": true
+    },
+    {
+      "id": "lookup.2d",
+      "baselineSymbol": "▦",
+      "currentSymbol": "▦",
+      "preserved": true
+    },
+    {
+      "id": "lookup.interpolated",
+      "baselineSymbol": "▱",
+      "currentSymbol": "▱",
+      "preserved": true
+    },
+    {
+      "id": "lookup.prelookup",
+      "baselineSymbol": "k,f",
+      "currentSymbol": "k,f",
+      "preserved": true
+    },
+    {
+      "id": "math.abs",
+      "baselineSymbol": "|x|",
+      "currentSymbol": "|x|",
+      "preserved": true
+    },
+    {
+      "id": "math.acosh",
+      "baselineSymbol": "ach",
+      "currentSymbol": "ach",
+      "preserved": true
+    },
+    {
+      "id": "math.asinh",
+      "baselineSymbol": "ash",
+      "currentSymbol": "ash",
+      "preserved": true
+    },
+    {
+      "id": "math.atan2",
+      "baselineSymbol": "θ",
+      "currentSymbol": "θ",
+      "preserved": true
+    },
+    {
+      "id": "math.atanh",
+      "baselineSymbol": "ath",
+      "currentSymbol": "ath",
+      "preserved": true
+    },
+    {
+      "id": "math.bias",
+      "baselineSymbol": "+b",
+      "currentSymbol": "+b",
+      "preserved": true
+    },
+    {
+      "id": "math.cbrt",
+      "baselineSymbol": "∛",
+      "currentSymbol": "∛",
+      "preserved": true
+    },
+    {
+      "id": "math.concatenate",
+      "baselineSymbol": "⊕",
+      "currentSymbol": "⊕",
+      "preserved": true
+    },
+    {
+      "id": "math.cosh",
+      "baselineSymbol": "ch",
+      "currentSymbol": "ch",
+      "preserved": true
+    },
+    {
+      "id": "math.exp2",
+      "baselineSymbol": "2ˣ",
+      "currentSymbol": "2ˣ",
+      "preserved": true
+    },
+    {
+      "id": "math.expm1",
+      "baselineSymbol": "eˣ−1",
+      "currentSymbol": "eˣ−1",
+      "preserved": true
+    },
+    {
+      "id": "math.expression",
+      "baselineSymbol": "fx",
+      "currentSymbol": "fx",
+      "preserved": true
+    },
+    {
+      "id": "math.function",
+      "baselineSymbol": "f",
+      "currentSymbol": "f",
+      "preserved": true
+    },
+    {
+      "id": "math.gain",
+      "baselineSymbol": "×",
+      "currentSymbol": "×",
+      "preserved": true
+    },
+    {
+      "id": "math.hypot",
+      "baselineSymbol": "√∑",
+      "currentSymbol": "√∑",
+      "preserved": true
+    },
+    {
+      "id": "math.log1p",
+      "baselineSymbol": "ln1+",
+      "currentSymbol": "ln1+",
+      "preserved": true
+    },
+    {
+      "id": "math.log2",
+      "baselineSymbol": "log₂",
+      "currentSymbol": "log₂",
+      "preserved": true
+    },
+    {
+      "id": "math.matrix-multiply",
+      "baselineSymbol": "AB",
+      "currentSymbol": "AB",
+      "preserved": true
+    },
+    {
+      "id": "math.minmax",
+      "baselineSymbol": "↧",
+      "currentSymbol": "↧",
+      "preserved": true
+    },
+    {
+      "id": "math.mod",
+      "baselineSymbol": "mod",
+      "currentSymbol": "mod",
+      "preserved": true
+    },
+    {
+      "id": "math.multiply",
+      "baselineSymbol": "∏",
+      "currentSymbol": "∏",
+      "preserved": true
+    },
+    {
+      "id": "math.polynomial",
+      "baselineSymbol": "P(x)",
+      "currentSymbol": "P(x)",
+      "preserved": true
+    },
+    {
+      "id": "math.power",
+      "baselineSymbol": "xʸ",
+      "currentSymbol": "xʸ",
+      "preserved": true
+    },
+    {
+      "id": "math.remainder",
+      "baselineSymbol": "rem",
+      "currentSymbol": "rem",
+      "preserved": true
+    },
+    {
+      "id": "math.round",
+      "baselineSymbol": "≈",
+      "currentSymbol": "≈",
+      "preserved": true
+    },
+    {
+      "id": "math.running-minmax",
+      "baselineSymbol": "↧",
+      "currentSymbol": "↧",
+      "preserved": true
+    },
+    {
+      "id": "math.sign",
+      "baselineSymbol": "±",
+      "currentSymbol": "±",
+      "preserved": true
+    },
+    {
+      "id": "math.sinc",
+      "baselineSymbol": "sinc",
+      "currentSymbol": "sinc",
+      "preserved": true
+    },
+    {
+      "id": "math.sinh",
+      "baselineSymbol": "sh",
+      "currentSymbol": "sh",
+      "preserved": true
+    },
+    {
+      "id": "math.slider-gain",
+      "baselineSymbol": "×",
+      "currentSymbol": "×",
+      "preserved": true
+    },
+    {
+      "id": "math.sqrt",
+      "baselineSymbol": "√",
+      "currentSymbol": "√",
+      "preserved": true
+    },
+    {
+      "id": "math.sum",
+      "baselineSymbol": "+",
+      "currentSymbol": "+",
+      "preserved": true
+    },
+    {
+      "id": "math.tanh",
+      "baselineSymbol": "th",
+      "currentSymbol": "th",
+      "preserved": true
+    },
+    {
+      "id": "math.trigonometric",
+      "baselineSymbol": "sin",
+      "currentSymbol": "sin",
+      "preserved": true
+    },
+    {
+      "id": "matrix.cholesky",
+      "baselineSymbol": "LLᵀ",
+      "currentSymbol": "LLᵀ",
+      "preserved": true
+    },
+    {
+      "id": "matrix.column",
+      "baselineSymbol": "Aⱼ",
+      "currentSymbol": "Aⱼ",
+      "preserved": true
+    },
+    {
+      "id": "matrix.determinant",
+      "baselineSymbol": "|A|",
+      "currentSymbol": "|A|",
+      "preserved": true
+    },
+    {
+      "id": "matrix.diag-create",
+      "baselineSymbol": "D",
+      "currentSymbol": "D",
+      "preserved": true
+    },
+    {
+      "id": "matrix.diagonal",
+      "baselineSymbol": "↘",
+      "currentSymbol": "↘",
+      "preserved": true
+    },
+    {
+      "id": "matrix.horizontal",
+      "baselineSymbol": "A|B",
+      "currentSymbol": "A|B",
+      "preserved": true
+    },
+    {
+      "id": "matrix.identity",
+      "baselineSymbol": "I",
+      "currentSymbol": "I",
+      "preserved": true
+    },
+    {
+      "id": "matrix.inverse",
+      "baselineSymbol": "A⁻¹",
+      "currentSymbol": "A⁻¹",
+      "preserved": true
+    },
+    {
+      "id": "matrix.kronecker",
+      "baselineSymbol": "⊗",
+      "currentSymbol": "⊗",
+      "preserved": true
+    },
+    {
+      "id": "matrix.lu",
+      "baselineSymbol": "LU",
+      "currentSymbol": "LU",
+      "preserved": true
+    },
+    {
+      "id": "matrix.reshape",
+      "baselineSymbol": "↔",
+      "currentSymbol": "↔",
+      "preserved": true
+    },
+    {
+      "id": "matrix.row",
+      "baselineSymbol": "Aᵢ",
+      "currentSymbol": "Aᵢ",
+      "preserved": true
+    },
+    {
+      "id": "matrix.select",
+      "baselineSymbol": "Aᵢⱼ",
+      "currentSymbol": "Aᵢⱼ",
+      "preserved": true
+    },
+    {
+      "id": "matrix.solve",
+      "baselineSymbol": "A\\b",
+      "currentSymbol": "A\\b",
+      "preserved": true
+    },
+    {
+      "id": "matrix.symmetrize",
+      "baselineSymbol": "S",
+      "currentSymbol": "S",
+      "preserved": true
+    },
+    {
+      "id": "matrix.trace",
+      "baselineSymbol": "tr",
+      "currentSymbol": "tr",
+      "preserved": true
+    },
+    {
+      "id": "matrix.transpose",
+      "baselineSymbol": "Aᵀ",
+      "currentSymbol": "Aᵀ",
+      "preserved": true
+    },
+    {
+      "id": "matrix.triangle",
+      "baselineSymbol": "△",
+      "currentSymbol": "△",
+      "preserved": true
+    },
+    {
+      "id": "matrix.vertical",
+      "baselineSymbol": "A/B",
+      "currentSymbol": "A/B",
+      "preserved": true
+    },
+    {
+      "id": "model.support-catalog",
+      "baselineSymbol": "i",
+      "currentSymbol": "i",
+      "preserved": true
+    },
+    {
+      "id": "nonlinear.backlash",
+      "baselineSymbol": "⇄",
+      "currentSymbol": "⇄",
+      "preserved": true
+    },
+    {
+      "id": "nonlinear.dead-zone",
+      "baselineSymbol": "DZ",
+      "currentSymbol": "DZ",
+      "preserved": true
+    },
+    {
+      "id": "nonlinear.quantizer",
+      "baselineSymbol": "QΔ",
+      "currentSymbol": "QΔ",
+      "preserved": true
+    },
+    {
+      "id": "nonlinear.rate-limiter-continuous",
+      "baselineSymbol": "Δ/t",
+      "currentSymbol": "Δ/t",
+      "preserved": true
+    },
+    {
+      "id": "nonlinear.rate-limiter-dynamic",
+      "baselineSymbol": "Δ/t",
+      "currentSymbol": "Δ/t",
+      "preserved": true
+    },
+    {
+      "id": "nonlinear.relay",
+      "baselineSymbol": "⇄",
+      "currentSymbol": "⇄",
+      "preserved": true
+    },
+    {
+      "id": "nonlinear.saturation",
+      "baselineSymbol": "↔",
+      "currentSymbol": "↔",
+      "preserved": true
+    },
+    {
+      "id": "reduce.all",
+      "baselineSymbol": "∀",
+      "currentSymbol": "∀",
+      "preserved": true
+    },
+    {
+      "id": "reduce.any",
+      "baselineSymbol": "∃",
+      "currentSymbol": "∃",
+      "preserved": true
+    },
+    {
+      "id": "reduce.mean",
+      "baselineSymbol": "μ",
+      "currentSymbol": "μ",
+      "preserved": true
+    },
+    {
+      "id": "reduce.median",
+      "baselineSymbol": "Med",
+      "currentSymbol": "Med",
+      "preserved": true
+    },
+    {
+      "id": "reduce.norm-inf",
+      "baselineSymbol": "L∞",
+      "currentSymbol": "L∞",
+      "preserved": true
+    },
+    {
+      "id": "reduce.norm1",
+      "baselineSymbol": "L₁",
+      "currentSymbol": "L₁",
+      "preserved": true
+    },
+    {
+      "id": "reduce.norm2",
+      "baselineSymbol": "L₂",
+      "currentSymbol": "L₂",
+      "preserved": true
+    },
+    {
+      "id": "reduce.product",
+      "baselineSymbol": "Π",
+      "currentSymbol": "Π",
+      "preserved": true
+    },
+    {
+      "id": "reduce.rms",
+      "baselineSymbol": "RMS",
+      "currentSymbol": "RMS",
+      "preserved": true
+    },
+    {
+      "id": "reduce.std",
+      "baselineSymbol": "σ",
+      "currentSymbol": "σ",
+      "preserved": true
+    },
+    {
+      "id": "reduce.sum",
+      "baselineSymbol": "Σ",
+      "currentSymbol": "Σ",
+      "preserved": true
+    },
+    {
+      "id": "reduce.variance",
+      "baselineSymbol": "σ²",
+      "currentSymbol": "σ²",
+      "preserved": true
+    },
+    {
+      "id": "route.bus-create",
+      "baselineSymbol": "⊞",
+      "currentSymbol": "⊞",
+      "preserved": true
+    },
+    {
+      "id": "route.bus-select",
+      "baselineSymbol": "⇥",
+      "currentSymbol": "⇥",
+      "preserved": true
+    },
+    {
+      "id": "route.data-store-memory",
+      "baselineSymbol": "D",
+      "currentSymbol": "D",
+      "preserved": true
+    },
+    {
+      "id": "route.data-store-read",
+      "baselineSymbol": "D→",
+      "currentSymbol": "D→",
+      "preserved": true
+    },
+    {
+      "id": "route.data-store-write",
+      "baselineSymbol": "→D",
+      "currentSymbol": "→D",
+      "preserved": true
+    },
+    {
+      "id": "route.demux",
+      "baselineSymbol": "⇉",
+      "currentSymbol": "⇉",
+      "preserved": true
+    },
+    {
+      "id": "route.from",
+      "baselineSymbol": "G→",
+      "currentSymbol": "G→",
+      "preserved": true
+    },
+    {
+      "id": "route.goto",
+      "baselineSymbol": "→G",
+      "currentSymbol": "→G",
+      "preserved": true
+    },
+    {
+      "id": "route.merge",
+      "baselineSymbol": "⇉",
+      "currentSymbol": "⇉",
+      "preserved": true
+    },
+    {
+      "id": "route.mux",
+      "baselineSymbol": "⊞",
+      "currentSymbol": "⊞",
+      "preserved": true
+    },
+    {
+      "id": "route.structured-assign",
+      "baselineSymbol": "→{}",
+      "currentSymbol": "→{}",
+      "preserved": true
+    },
+    {
+      "id": "route.structured-bus",
+      "baselineSymbol": "{ }",
+      "currentSymbol": "{ }",
+      "preserved": true
+    },
+    {
+      "id": "route.structured-select",
+      "baselineSymbol": "{}→",
+      "currentSymbol": "{}→",
+      "preserved": true
+    },
+    {
+      "id": "route.switch",
+      "baselineSymbol": "?",
+      "currentSymbol": "?",
+      "preserved": true
+    },
+    {
+      "id": "route.tag-visibility",
+      "baselineSymbol": "G",
+      "currentSymbol": "G",
+      "preserved": true
+    },
+    {
+      "id": "signal.bus-to-vector",
+      "baselineSymbol": "⇥",
+      "currentSymbol": "⇥",
+      "preserved": true
+    },
+    {
+      "id": "signal.cast",
+      "baselineSymbol": "T→",
+      "currentSymbol": "T→",
+      "preserved": true
+    },
+    {
+      "id": "signal.cast-inherited",
+      "baselineSymbol": "T↘",
+      "currentSymbol": "T↘",
+      "preserved": true
+    },
+    {
+      "id": "signal.initial-condition",
+      "baselineSymbol": "IC",
+      "currentSymbol": "IC",
+      "preserved": true
+    },
+    {
+      "id": "signal.probe",
+      "baselineSymbol": "i",
+      "currentSymbol": "i",
+      "preserved": true
+    },
+    {
+      "id": "signal.representation",
+      "baselineSymbol": "↔",
+      "currentSymbol": "↔",
+      "preserved": true
+    },
+    {
+      "id": "signal.scaling-strip",
+      "baselineSymbol": "Q→",
+      "currentSymbol": "Q→",
+      "preserved": true
+    },
+    {
+      "id": "signal.specification",
+      "baselineSymbol": "T?",
+      "currentSymbol": "T?",
+      "preserved": true
+    },
+    {
+      "id": "signal.to-legacy",
+      "baselineSymbol": "↗",
+      "currentSymbol": "↗",
+      "preserved": true
+    },
+    {
+      "id": "signal.type-duplicate",
+      "baselineSymbol": "T=",
+      "currentSymbol": "T=",
+      "preserved": true
+    },
+    {
+      "id": "signal.type-propagation",
+      "baselineSymbol": "T←",
+      "currentSymbol": "T←",
+      "preserved": true
+    },
+    {
+      "id": "signal.unit-system",
+      "baselineSymbol": "SI",
+      "currentSymbol": "SI",
+      "preserved": true
+    },
+    {
+      "id": "signal.width",
+      "baselineSymbol": "n",
+      "currentSymbol": "n",
+      "preserved": true
+    },
+    {
+      "id": "sink.display",
+      "baselineSymbol": "▥",
+      "currentSymbol": "▥",
+      "preserved": true
+    },
+    {
+      "id": "sink.floating-scope",
+      "baselineSymbol": "▥",
+      "currentSymbol": "▥",
+      "preserved": true
+    },
+    {
+      "id": "sink.record",
+      "baselineSymbol": "●",
+      "currentSymbol": "●",
+      "preserved": true
+    },
+    {
+      "id": "sink.scope",
+      "baselineSymbol": "▥",
+      "currentSymbol": "▥",
+      "preserved": true
+    },
+    {
+      "id": "sink.sequence-viewer",
+      "baselineSymbol": "⇅",
+      "currentSymbol": "⇅",
+      "preserved": true
+    },
+    {
+      "id": "sink.stop",
+      "baselineSymbol": "■",
+      "currentSymbol": "■",
+      "preserved": true
+    },
+    {
+      "id": "sink.xy-graph",
+      "baselineSymbol": "XY",
+      "currentSymbol": "XY",
+      "preserved": true
+    },
+    {
+      "id": "solver.algebraic-constraint",
+      "baselineSymbol": "f=0",
+      "currentSymbol": "f=0",
+      "preserved": true
+    },
+    {
+      "id": "source.band-limited-noise",
+      "baselineSymbol": "⚄",
+      "currentSymbol": "⚄",
+      "preserved": true
+    },
+    {
+      "id": "source.chirp",
+      "baselineSymbol": "f↗",
+      "currentSymbol": "f↗",
+      "preserved": true
+    },
+    {
+      "id": "source.clock",
+      "baselineSymbol": "t",
+      "currentSymbol": "t",
+      "preserved": true
+    },
+    {
+      "id": "source.constant",
+      "baselineSymbol": "1",
+      "currentSymbol": "1",
+      "preserved": true
+    },
+    {
+      "id": "source.counter",
+      "baselineSymbol": "k",
+      "currentSymbol": "k",
+      "preserved": true
+    },
+    {
+      "id": "source.damped-sine",
+      "baselineSymbol": "e∿",
+      "currentSymbol": "e∿",
+      "preserved": true
+    },
+    {
+      "id": "source.dataset",
+      "baselineSymbol": "▤",
+      "currentSymbol": "▤",
+      "preserved": true
+    },
+    {
+      "id": "source.digital-clock",
+      "baselineSymbol": "tₖ",
+      "currentSymbol": "tₖ",
+      "preserved": true
+    },
+    {
+      "id": "source.enum",
+      "baselineSymbol": "E",
+      "currentSymbol": "E",
+      "preserved": true
+    },
+    {
+      "id": "source.exponential",
+      "baselineSymbol": "eˣ",
+      "currentSymbol": "eˣ",
+      "preserved": true
+    },
+    {
+      "id": "source.gaussian-pulse",
+      "baselineSymbol": "G",
+      "currentSymbol": "G",
+      "preserved": true
+    },
+    {
+      "id": "source.linspace",
+      "baselineSymbol": "Lin",
+      "currentSymbol": "Lin",
+      "preserved": true
+    },
+    {
+      "id": "source.logistic",
+      "baselineSymbol": "S",
+      "currentSymbol": "S",
+      "preserved": true
+    },
+    {
+      "id": "source.logspace",
+      "baselineSymbol": "Log",
+      "currentSymbol": "Log",
+      "preserved": true
+    },
+    {
+      "id": "source.pulse",
+      "baselineSymbol": "⌜",
+      "currentSymbol": "⌜",
+      "preserved": true
+    },
+    {
+      "id": "source.pwm",
+      "baselineSymbol": "⌜",
+      "currentSymbol": "⌜",
+      "preserved": true
+    },
+    {
+      "id": "source.ramp",
+      "baselineSymbol": "∕",
+      "currentSymbol": "∕",
+      "preserved": true
+    },
+    {
+      "id": "source.random",
+      "baselineSymbol": "⚄",
+      "currentSymbol": "⚄",
+      "preserved": true
+    },
+    {
+      "id": "source.random-configured",
+      "baselineSymbol": "⚄",
+      "currentSymbol": "⚄",
+      "preserved": true
+    },
+    {
+      "id": "source.repeating-sequence",
+      "baselineSymbol": "↻",
+      "currentSymbol": "↻",
+      "preserved": true
+    },
+    {
+      "id": "source.sequence-configured",
+      "baselineSymbol": "↻",
+      "currentSymbol": "↻",
+      "preserved": true
+    },
+    {
+      "id": "source.signal",
+      "baselineSymbol": "{ }",
+      "currentSymbol": "{ }",
+      "preserved": true
+    },
+    {
+      "id": "source.signal-generator",
+      "baselineSymbol": "∿",
+      "currentSymbol": "∿",
+      "preserved": true
+    },
+    {
+      "id": "source.sinc-pulse",
+      "baselineSymbol": "sinc",
+      "currentSymbol": "sinc",
+      "preserved": true
+    },
+    {
+      "id": "source.sine-configured",
+      "baselineSymbol": "∿",
+      "currentSymbol": "∿",
+      "preserved": true
+    },
+    {
+      "id": "source.sine-wave",
+      "baselineSymbol": "∿",
+      "currentSymbol": "∿",
+      "preserved": true
+    },
+    {
+      "id": "source.step",
+      "baselineSymbol": "⌐",
+      "currentSymbol": "⌐",
+      "preserved": true
+    },
+    {
+      "id": "source.string-constant",
+      "baselineSymbol": "S",
+      "currentSymbol": "S",
+      "preserved": true
+    },
+    {
+      "id": "source.typed",
+      "baselineSymbol": "T",
+      "currentSymbol": "T",
+      "preserved": true
+    },
+    {
+      "id": "source.variable-pulse",
+      "baselineSymbol": "⌜",
+      "currentSymbol": "⌜",
+      "preserved": true
+    },
+    {
+      "id": "source.waveform",
+      "baselineSymbol": "∿",
+      "currentSymbol": "∿",
+      "preserved": true
+    },
+    {
+      "id": "source.zeros",
+      "baselineSymbol": "0",
+      "currentSymbol": "0",
+      "preserved": true
+    },
+    {
+      "id": "state.parameter-writer",
+      "baselineSymbol": "→p",
+      "currentSymbol": "→p",
+      "preserved": true
+    },
+    {
+      "id": "state.reader",
+      "baselineSymbol": "x→",
+      "currentSymbol": "x→",
+      "preserved": true
+    },
+    {
+      "id": "state.writer",
+      "baselineSymbol": "→x",
+      "currentSymbol": "→x",
+      "preserved": true
+    },
+    {
+      "id": "string.ascii-to-string",
+      "baselineSymbol": "S",
+      "currentSymbol": "S",
+      "preserved": true
+    },
+    {
+      "id": "string.compose",
+      "baselineSymbol": "fmt",
+      "currentSymbol": "fmt",
+      "preserved": true
+    },
+    {
+      "id": "string.parse-enum",
+      "baselineSymbol": "E",
+      "currentSymbol": "E",
+      "preserved": true
+    },
+    {
+      "id": "string.parse-number",
+      "baselineSymbol": "N",
+      "currentSymbol": "N",
+      "preserved": true
+    },
+    {
+      "id": "string.scan",
+      "baselineSymbol": "scan",
+      "currentSymbol": "scan",
+      "preserved": true
+    },
+    {
+      "id": "string.string-compare",
+      "baselineSymbol": "=",
+      "currentSymbol": "=",
+      "preserved": true
+    },
+    {
+      "id": "string.string-concatenate",
+      "baselineSymbol": "+",
+      "currentSymbol": "+",
+      "preserved": true
+    },
+    {
+      "id": "string.string-contains",
+      "baselineSymbol": "∈",
+      "currentSymbol": "∈",
+      "preserved": true
+    },
+    {
+      "id": "string.string-count",
+      "baselineSymbol": "n",
+      "currentSymbol": "n",
+      "preserved": true
+    },
+    {
+      "id": "string.string-find",
+      "baselineSymbol": "i",
+      "currentSymbol": "i",
+      "preserved": true
+    },
+    {
+      "id": "string.string-length",
+      "baselineSymbol": "n",
+      "currentSymbol": "n",
+      "preserved": true
+    },
+    {
+      "id": "string.string-to-ascii",
+      "baselineSymbol": "ASCII",
+      "currentSymbol": "ASCII",
+      "preserved": true
+    },
+    {
+      "id": "string.substring",
+      "baselineSymbol": "[ ]",
+      "currentSymbol": "[ ]",
+      "preserved": true
+    },
+    {
+      "id": "string.to-string",
+      "baselineSymbol": "S",
+      "currentSymbol": "S",
+      "preserved": true
+    },
+    {
+      "id": "tensor.permute",
+      "baselineSymbol": "⇄",
+      "currentSymbol": "⇄",
+      "preserved": true
+    },
+    {
+      "id": "tensor.reshape",
+      "baselineSymbol": "↔",
+      "currentSymbol": "↔",
+      "preserved": true
+    },
+    {
+      "id": "tensor.squeeze",
+      "baselineSymbol": "⇥",
+      "currentSymbol": "⇥",
+      "preserved": true
+    },
+    {
+      "id": "time.decrement-to-zero",
+      "baselineSymbol": "T−",
+      "currentSymbol": "T−",
+      "preserved": true
+    },
+    {
+      "id": "time.first-order-hold",
+      "baselineSymbol": "FOH",
+      "currentSymbol": "FOH",
+      "preserved": true
+    },
+    {
+      "id": "time.memory",
+      "baselineSymbol": "M",
+      "currentSymbol": "M",
+      "preserved": true
+    },
+    {
+      "id": "time.rate-transition",
+      "baselineSymbol": "RT",
+      "currentSymbol": "RT",
+      "preserved": true
+    },
+    {
+      "id": "time.transport-delay",
+      "baselineSymbol": "τ",
+      "currentSymbol": "τ",
+      "preserved": true
+    },
+    {
+      "id": "time.variable-delay",
+      "baselineSymbol": "τ(t)",
+      "currentSymbol": "τ(t)",
+      "preserved": true
+    },
+    {
+      "id": "time.variable-transport-delay",
+      "baselineSymbol": "q",
+      "currentSymbol": "q",
+      "preserved": true
+    },
+    {
+      "id": "time.weighted-math",
+      "baselineSymbol": "Tₛ",
+      "currentSymbol": "Tₛ",
+      "preserved": true
+    },
+    {
+      "id": "time.zero-order-hold",
+      "baselineSymbol": "ZOH",
+      "currentSymbol": "ZOH",
+      "preserved": true
+    },
+    {
+      "id": "typed.math",
+      "baselineSymbol": "T+",
+      "currentSymbol": "T+",
+      "preserved": true
+    },
+    {
+      "id": "unit.convert",
+      "baselineSymbol": "↔",
+      "currentSymbol": "↔",
+      "preserved": true
+    },
+    {
+      "id": "vector.convolve",
+      "baselineSymbol": "∗",
+      "currentSymbol": "∗",
+      "preserved": true
+    },
+    {
+      "id": "vector.cross",
+      "baselineSymbol": "×",
+      "currentSymbol": "×",
+      "preserved": true
+    },
+    {
+      "id": "vector.cumprod",
+      "baselineSymbol": "Πₖ",
+      "currentSymbol": "Πₖ",
+      "preserved": true
+    },
+    {
+      "id": "vector.cumsum",
+      "baselineSymbol": "Σₖ",
+      "currentSymbol": "Σₖ",
+      "preserved": true
+    },
+    {
+      "id": "vector.difference",
+      "baselineSymbol": "Δv",
+      "currentSymbol": "Δv",
+      "preserved": true
+    },
+    {
+      "id": "vector.dot",
+      "baselineSymbol": "·",
+      "currentSymbol": "·",
+      "preserved": true
+    },
+    {
+      "id": "vector.normalize",
+      "baselineSymbol": "v̂",
+      "currentSymbol": "v̂",
+      "preserved": true
+    },
+    {
+      "id": "vector.repeat",
+      "baselineSymbol": "↻",
+      "currentSymbol": "↻",
+      "preserved": true
+    },
+    {
+      "id": "vector.reverse",
+      "baselineSymbol": "⇆",
+      "currentSymbol": "⇆",
+      "preserved": true
+    },
+    {
+      "id": "vector.select",
+      "baselineSymbol": "vᵢ",
+      "currentSymbol": "vᵢ",
+      "preserved": true
+    },
+    {
+      "id": "vector.slice",
+      "baselineSymbol": "[i:j]",
+      "currentSymbol": "[i:j]",
+      "preserved": true
+    },
+    {
+      "id": "vector.sort",
+      "baselineSymbol": "↕",
+      "currentSymbol": "↕",
+      "preserved": true
+    },
+    {
+      "id": "verify.gradient",
+      "baselineSymbol": "Δ?",
+      "currentSymbol": "Δ?",
+      "preserved": true
+    },
+    {
+      "id": "verify.resolution",
+      "baselineSymbol": "Q?",
+      "currentSymbol": "Q?",
+      "preserved": true
+    }
+  ]
+}

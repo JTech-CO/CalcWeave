@@ -1,6 +1,6 @@
 # CalcWeave 검증 상태
 
-현행 소스는 앱 `0.17.2` · 엔진 `0.17.0-m16`이다. 이 문서는 구현의 검증 범위와 배포 증거를 연결한다. 과거 단계의 수치·실패 기록은 `evidence/`에 보존한다. M16의 공개 결과와 보조 기능·도움말 정리의 검사는 별도로 기록한다.
+현행 소스는 앱 `0.17.3` · 엔진 `0.17.0-m16`이다. 이 문서는 구현의 검증 범위와 배포 증거를 연결한다. 과거 단계의 수치·실패 기록은 `evidence/`에 보존한다. M16의 공개 결과와 보조 기능·도움말 정리의 검사는 별도로 기록한다.
 
 ## 지원 감사
 
@@ -118,3 +118,20 @@ M16 구현 검사 후 중복된 M0~M15 계약·진행 기록과 이전 계획·�
 [공개 기본9검사](evidence/product-help-public-browser-verification.json)와 [실제 공개 기능35케이스](evidence/product-help-public-feature-browser-results.json)가 통과했다. 제품 중심 첫 안내·블록 검색·4개 메뉴·닫힌 기술/호환성 정보·기존 대응표와 어댑터 상세·탭 전환 스크롤·키보드 초점과 기존 백업·복구 경로를 독립 브라우저에서 확인했다. 사용자 브라우저의 저장 데이터는 접근하지 않았다.
 
 [변경·로컬 검증](evidence/product-help-engineering-checks.json)·[CI 원본 요약](evidence/product-help-actions-verification.json)·[정확한 공개 파일](evidence/product-help-deployment-verification.json)·[공개 결과](evidence/product-help-public-release.json). 과거 실패와 M16 승인·문서 정리 증거는 보존한다. 기술적 앱 배포 PASS와 정식 출시·실제 초보자 관찰·목표 도메인·원본 전체 동등성의 미검증 상태는 구분한다.
+
+## 라이브러리 탐색 개선
+
+앱 `0.17.3`은 누락된 42개 기호를 보완해 337개 블록에 명시적인 기호를 제공한다. 기존 295개 기호는 유지하고 미등록·프로토타입 ID는 안전한 기본 기호를 쓴다. 제목·전체 수·검색을 고정하고 목록만 세로 스크롤한다. 기본으로 자주 쓰는 블록10개만 펼치며 실제29개 카테고리는 접는다. 카테고리 버튼은 마우스·Enter·Space로 동작한다. 검색 결과의 범주는 자동으로 열고 검색을 지우면 이전 펼침을 복원한다.
+
+| 검사 | 실제 결과 |
+| --- | --- |
+| 기호 단위 | [2/2 PASS](evidence/library-navigation-symbol-unit-results.json). 전체337개 명시 기호·누락 사례·프로토타입 fallback을 검증했다. 전체 단위 CI와 구분한다. |
+| 기존 영향 회귀 | [53/53 PASS](evidence/library-navigation-browser-results.json). 기존 계산·편집·블록 검색 회귀를 확인했다. |
+| 새 라이브러리 회귀 | [6/6 PASS](evidence/library-navigation-new-browser-results.json). 기본 접힘·키보드·검색 복원·전체337개·기호 경계·상단 고정·빠른 추가를 확인했다. |
+| 화면 실측 | [10조건·18캡처 PASS](evidence/library-navigation-ui-verification.json). 1440/1024/390/320px의 다크·라이트와 1440px 글자200%에서 전체기호와 상단 고정을 확인했다. 900px 가로 태블릿 배치도 추가 측정했다. |
+| 배포 후보 | [root](evidence/library-navigation-root-release-verification.json)·[project](evidence/library-navigation-project-release-verification.json) 각각91검사·16assets, [프로젝트 경로4/4 PASS](evidence/library-navigation-project-browser-results.json). |
+| 의존성 | [npm audit](evidence/library-navigation-dependency-audit.json) 알려진 취약점0개. |
+
+[초기4/6 결과](evidence/library-navigation-initial-new-browser-results.json)는 기호 하나의 폭 넘침과 동시 테스트 출력 경로 충돌을 기록한다. 기호 크기를 조정하고 출력 경로를 분리했다. 내적·픽셀 처리에 의도된 점 기호를 누락으로 판정하던 검사도 교정했다. [변경·보안·보존 검사](evidence/library-navigation-engineering-checks.json)에 검색100자 제한·React 이스케이프·사용자 브라우저 데이터 미접근·엔진/지원표/과거 증거 보존을 기록했다. 공개 결과는 별도로 기록한다.
+
+[초기 화면 프로브](evidence/library-navigation-initial-ui-verification.json)는 좁은 화면에서 의도적으로 숨긴 저장 표시의 가시성을 기다려6조건이 시간 초과했고, service worker 차단 정책이 안내 배너를 유발했다. 준비 조건을 저장 완료 텍스트로 바꾸고 별도 프로필의 service worker를 허용해 최종10조건을 다시 측정했다. 이 프로브 설정 문제를 제품 결함으로 판정하지 않는다.

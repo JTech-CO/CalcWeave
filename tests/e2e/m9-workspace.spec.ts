@@ -44,7 +44,7 @@ for (const id of ['filter-realizations', 'tapped-history', 'weighted-sample-coun
   });
 }
 test('M9 filter structures, preset search and dynamic ports are usable at desktop and mobile widths', async ({ page }, testInfo) => {
-  await open(page); await expect(page.locator('.library-item')).toHaveCount(blockRegistry.length); await example(page, 'filter-realizations');
+  await open(page); await expect(page.locator('.block-library-header .count-badge')).toHaveText(String(blockRegistry.length)); await example(page, 'filter-realizations');
   await page.locator('.model-node-list button').filter({ hasText: '이산 필터' }).click();
   for (const structure of ['df1', 'df1t', 'df2', 'df2t']) {
     await page.getByRole('combobox', { name: '실현 구조', exact: true }).selectOption(structure);

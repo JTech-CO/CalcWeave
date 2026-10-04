@@ -2,7 +2,8 @@ import { M9_BLOCK_PRESETS } from '../../../../packages/block-library/src/m9';
 import { M8_BLOCK_PRESETS } from '../../../../packages/block-library/src/m8';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { BLOCK_REGISTRY } from '../../../../packages/block-library/src';
-import { BLOCK_SYMBOLS, blockTone } from './BlockNode';
+import { blockTone } from './BlockNode';
+import { getBlockSymbol } from '../block-symbols';
 import { Icon } from './Icon';
 import { useModalDialog } from './ModalDialog';
 
@@ -36,7 +37,7 @@ export function QuickInsert({ onInsert, onClose }: { onInsert: (item: InsertItem
   return <dialog ref={dialog} tabIndex={-1} className="workspace-dialog quick-insert-dialog" aria-modal="true" aria-labelledby="quick-title" onCancel={event => { event.preventDefault(); onClose(); }}>
     <div className="dialog-heading"><div><h2 id="quick-title">블록 빠르게 추가</h2><p>이름 또는 사전 설정을 검색하고 Enter로 추가하세요.</p></div><button className="icon-button" aria-label="빠른 추가 닫기" onClick={onClose}><Icon name="close"/></button></div>
     <label className="quick-search"><Icon name="search"/><input ref={input} aria-label="빠른 추가 검색" role="combobox" aria-controls="quick-options" aria-expanded="true" aria-activedescendant={items[active] ? `quick-${items[active].id}` : undefined} maxLength={100} value={query} placeholder="Pi, 빼기, compare…" onChange={event => setQuery(event.target.value)} onKeyDown={event => { if (event.key === 'ArrowDown') { event.preventDefault(); setActive(index => Math.min(index + 1, items.length - 1)); } if (event.key === 'ArrowUp') { event.preventDefault(); setActive(index => Math.max(index - 1, 0)); } if (event.key === 'Enter' && items[active]) { event.preventDefault(); choose(items[active]); } }}/></label>
-    <div ref={list} id="quick-options" className="quick-options" role="listbox" aria-label="추가할 블록">{items.map((item, index) => <button id={`quick-${item.id}`} key={item.id} role="option" aria-selected={index === active} data-index={index} className={index === active ? 'active' : ''} tabIndex={-1} onMouseEnter={() => setActive(index)} onClick={() => choose(item)}><span className={`library-symbol ${blockTone(item.blockType)}`} aria-hidden="true">{BLOCK_SYMBOLS[item.blockType] ?? '·'}</span><span><strong>{item.title}</strong><small>{item.description}</small></span>{item.parameters && <span className="tag">사전 설정</span>}</button>)}{!items.length && <p className="muted-copy">일치하는 블록이 없습니다. 다른 이름으로 검색하세요.</p>}</div>
+    <div ref={list} id="quick-options" className="quick-options" role="listbox" aria-label="추가할 블록">{items.map((item, index) => { const symbol = getBlockSymbol(item.blockType); return <button id={`quick-${item.id}`} key={item.id} role="option" aria-selected={index === active} data-index={index} className={index === active ? 'active' : ''} tabIndex={-1} onMouseEnter={() => setActive(index)} onClick={() => choose(item)}><span className={`library-symbol ${blockTone(item.blockType)} ${symbol.length > 4 ? 'symbol-length-long' : symbol.length > 2 || symbol === '▱↕' ? 'symbol-length-medium' : ''}`} aria-hidden="true">{symbol}</span><span><strong>{item.title}</strong><small>{item.description}</small></span>{item.parameters && <span className="tag">사전 설정</span>}</button>; })}{!items.length && <p className="muted-copy">일치하는 블록이 없습니다. 다른 이름으로 검색하세요.</p>}</div>
     <div className="dialog-footnote">↑ ↓ 선택 · Enter 추가 · Esc 닫기 <span>사전 설정은 기존 블록의 값을 채웁니다.</span></div>
   </dialog>;
 }
