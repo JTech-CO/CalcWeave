@@ -162,8 +162,14 @@ README를 수학 도구의 목적·활용·모델 예제·기술 구조 중심�
 | --- | --- |
 | 관련 단위 검사 | social metadata·오프라인 파일·검증 출력 경로63/63 PASS |
 | TypeScript | `tsc --noEmit` PASS |
-| 문서 링크 | 현재10문서·로컬688링크·4앵커 PASS·퇴역44문서 재생성 없음 |
+| 문서 링크 | 현재10문서·로컬690링크·4앵커 PASS·퇴역44문서 재생성 없음 |
 | 배포 후보 | [root](evidence/og-readme-root-release-verification.json)·[project](evidence/og-readme-project-release-verification.json) 각각95검사·17자산 PASS |
 | OG 메타와 이미지 | canonical·OG·Twitter 메타의 실제 HTTPS 주소와 PNG 크기 일치. 원본·양쪽 빌드·manifest의 사이트 이미지 SHA-256 일치 |
 
-사이트 이미지 [원본 파일](../apps/web/public/assets/social/calcweave-og.png)과 [저장소 이미지](../assets/branding/calcweave-github-og.png)는 실제 소개에 사용되는 자산이며 과거 QA 캡처와 구분하여 보관한다. 기존 preview 산출물·정책 HTML·M16 라이선스·과거 JSON331개는 바이트를 보존했다. 공개 반영 결과는 배포 완료 후 별도로 확인한다.
+사이트 이미지 [원본 파일](../apps/web/public/assets/social/calcweave-og.png)과 [저장소 이미지](../assets/branding/calcweave-github-og.png)는 실제 소개에 사용되는 자산이며 과거 QA 캡처와 구분하여 보관한다. 기존 preview 산출물·정책 HTML·M16 라이선스·과거 JSON331개는 바이트를 보존했다. 공개 반영 결과는 아래 검증으로 확인했다.
+
+### 공개 OG 반영 결과
+
+2026-10-04, [Pages CI37177565334](https://github.com/JTech-CO/CalcWeave/actions/runs/37177565334)에서 단위3909개·브라우저210개·프로젝트 경로4개가 통과했고 verify·deploy가 모두 성공했다. 배포 소스는 `fe2931091da17de64be0991a314eb857c4ad0169`이다. [공개 파일 검증](evidence/og-readme-public-release.json)에서 OG·Twitter·canonical 메타, PNG 형식·크기·SHA-256, manifest17자산과 서비스 워커가 격리 project 빌드와 모두 일치했다. 사용자 브라우저 저장 데이터는 접근하지 않았다.
+
+저장소용 이미지는 README에 적용되어 표시된다. GitHub Settings의 별도 Social preview 등록은 브라우저 확장의 로컬 파일 접근 권한이 꺼져 있어 미완료이며, 이미지 제작·사이트 OG 적용·README 반영과 구분해 기록한다.
