@@ -47,7 +47,7 @@ test('M8 dynamic saturation clamps every recorded raw sample', async ({ page }) 
   for (const sample of record.result.samples) { const original = 3 * Math.sin(2 * Math.PI * sample.time); near(sample.values.original, original); near(sample.values.limited, Math.max(-1, Math.min(1, original))); }
 });
 test('M8 preset search, registry support and nD settings remain usable on a narrow screen', async ({ page }, testInfo) => {
-  await open(page); await expect(page.locator('.library-item')).toHaveCount(blockRegistry.length);
+  await open(page); await expect(page.locator('.block-library-header .count-badge')).toHaveText(String(blockRegistry.length));
   await page.getByRole('button', { name: '빠른 추가', exact: true }).click(); await page.getByLabel('빠른 추가 검색').fill('Euler');
   await expect(page.getByRole('option')).toHaveCount(1); await page.keyboard.press('Enter'); await expect(page.locator('.block-node')).toHaveCount(4);
   await example(page, 'nd-lookup'); await page.locator('.model-node-list button').filter({ hasText: '3차원 조회 표' }).click();

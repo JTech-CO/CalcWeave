@@ -1,0 +1,55 @@
+/* Keep the library controls visible while only its catalog scrolls. */
+.library-panel.block-library { display:flex; flex-direction:column; overflow:hidden; min-height:0; }
+.block-library .block-library-header { flex:none; min-width:0; background:var(--surface); padding-bottom:8px; border-bottom:1px solid var(--line); }
+.block-library .panel-heading { display:block; padding:20px 18px 0; }
+.block-library .panel-heading h2 { display:flex; flex-wrap:wrap; gap:8px; margin:0; font-size:var(--text-body); line-height:1.6; }
+.block-library .count-badge { flex:none; margin-left:auto; font-variant-numeric:tabular-nums; }
+.block-library .search-field { position:static; margin:14px 16px 4px; width:auto; height:auto; min-height:42px; }
+.block-library .search-field input { font-size:var(--text-body); padding:8px 0; }
+.block-library .library-search-count { color:var(--muted); font-size:var(--text-small); padding:4px 18px 0; }
+.block-library .library-list { display:block; flex:1 1 0; min-height:0; height:auto; overflow-x:hidden; overflow-y:auto; overscroll-behavior-y:contain; scrollbar-gutter:stable; padding:8px 10px 16px; }
+.block-library .library-category { display:block; margin:0 0 6px; }
+.block-library .library-category h3 { display:block; margin:0; padding:0; font-size:var(--text-body); }
+.block-library .library-category-toggle { width:100%; min-height:44px; display:flex; align-items:center; gap:8px; padding:10px 8px; border:1px solid transparent; border-radius:6px; color:var(--text); background:transparent; font-size:var(--text-body); font-weight:600; text-align:left; }
+.block-library .library-category-toggle:hover { background:var(--subtle); }
+.block-library .library-category-toggle>span:first-child { flex:1; min-width:0; overflow-wrap:anywhere; font-size:inherit; opacity:1; }
+.block-library .library-category-toggle .library-category-count { flex:none; color:var(--muted); font-size:var(--text-small); font-weight:400; font-variant-numeric:tabular-nums; }
+.block-library .library-category-toggle>svg { flex:none; transform:rotate(-90deg); }
+.block-library .library-category-toggle[aria-expanded="true"]>svg { transform:rotate(0deg); }
+.block-library .library-category-items { min-width:0; }
+.block-library .library-category-items[hidden] { display:none; }
+.block-library .library-item { width:100%; max-width:100%; padding:10px 8px; gap:10px; }
+.block-library .library-copy { min-width:0; flex:1; overflow-wrap:anywhere; }
+.block-library .library-copy strong { font-size:var(--text-body); }
+.block-library .library-copy small { font-size:var(--text-small); line-height:1.5; }
+.block-library .library-symbol { width:2.25rem; height:2.25rem; padding:2px; font-size:var(--text-heading); line-height:1; white-space:nowrap; }
+.block-library .library-symbol.symbol-length-medium { font-size:.875rem; font-weight:600; letter-spacing:-.035em; }
+.block-library .library-symbol.symbol-length-long { font-size:.6875rem; font-weight:600; letter-spacing:-.04em; }
+.block-library .library-add { flex:none; }
+.block-library .library-footnote { flex:none; }
+
+/* Search and inspector symbols share the same fit rule at larger text sizes. */
+.quick-options .library-symbol { width:2.25rem; height:2.25rem; padding:2px; white-space:nowrap; line-height:1; }
+.quick-options .library-symbol.symbol-length-medium { font-size:.875rem; font-weight:600; letter-spacing:-.035em; }
+.quick-options .library-symbol.symbol-length-long { font-size:.6875rem; font-weight:600; letter-spacing:-.04em; }
+.selected-block-summary .large-block-symbol { width:2.6875rem; height:2.6875rem; padding:2px; white-space:nowrap; line-height:1; }
+.selected-block-summary .large-block-symbol.symbol-length-medium { font-size:1.125rem; letter-spacing:-.035em; }
+.selected-block-summary .large-block-symbol.symbol-length-long { font-size:.875rem; letter-spacing:-.04em; }
+.model-node-list .mini-symbol { width:1.75rem; height:1.75rem; padding:1px; white-space:nowrap; line-height:1; }
+.model-node-list .mini-symbol.symbol-length-medium { font-size:.75rem; font-weight:600; letter-spacing:-.035em; }
+.model-node-list .mini-symbol.symbol-length-long { font-size:.5625rem; font-weight:600; letter-spacing:-.04em; }
+
+@media (max-width:1150px) {
+  .library-panel.block-library { height:clamp(280px,40dvh,420px); border-right:0; border-bottom:1px solid var(--line); }
+  .block-library .panel-heading { padding:14px 18px 0; }
+  .block-library .library-footnote { display:none; }
+  .block-library .library-item { width:100%; }
+  .block-library .library-add { display:flex; }
+}
+
+@media (max-width:420px) {
+  .block-library .panel-heading { padding-left:14px; padding-right:14px; }
+  .block-library .search-field { margin-left:12px; margin-right:12px; }
+  .block-library .library-list { padding-left:6px; padding-right:6px; }
+  .block-library .library-search-count { padding-left:14px; padding-right:14px; }
+}

@@ -1032,7 +1032,11 @@ test('Korean aliases are searchable without adding new engine blocks', async ({ 
   await search.fill('없는_블럭_이름');
   await expect(page.locator('.search-empty')).toBeVisible();
   await page.getByRole('button', { name: '전체 블록 보기' }).click();
-  await expect(page.locator('.library-item')).toHaveCount(BLOCK_REGISTRY.length);
+  await expect(search).toHaveValue('');
+  await expect(page.locator('.block-library-header .count-badge')).toHaveText(String(BLOCK_REGISTRY.length));
+  await expect(page.locator('.library-category[data-library-category="frequent"] .library-category-toggle')).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.locator('.library-item')).toHaveCount(10);
+  await expect(page.locator('.library-category:not([data-library-category="frequent"]) .library-category-toggle[aria-expanded="true"]')).toHaveCount(0);
 });
 
 test('Default dark theme and the chosen theme survive reload', async ({ page }) => {

@@ -5,7 +5,7 @@ import { SOLVER_LIMITS } from '../../model/src/continuous';
 import { PYTHON_TARGET } from '../../codegen-python/src/capabilities';
 import { WASM_TARGET, C_CPP_TARGET } from '../../codegen-wasm/src/capabilities';
 
-export const APP_VERSION = '0.17.2';
+export const APP_VERSION = '0.17.3';
 export const RELEASE = Object.freeze({
   version: APP_VERSION, engineVersion: ENGINE_VERSION, schemaVersion: 1,
   stage: 'public-beta', domain: 'calcweave.com', deploymentUrl: 'https://jtech-co.github.io/CalcWeave/', operator: 'JTech-Co',
