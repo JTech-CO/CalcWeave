@@ -75,6 +75,6 @@ GitHub Pages의 `/CalcWeave/` 경로 빌드, 오프라인 검사와 공개 파�
 | `packages/release`, `support-matrix` | 현행 릴리스·원본별 선택 지원 메타데이터 |
 | `tests`, `fixtures`, `scripts` | 독립 oracle, 실제 생성 프로그램 실행, 브라우저·배포·무결성 검증 |
 
-기능 변경은 실제 코드·파라미터 schema·독립 fixture·타깃 검사·지원표를 함께 갱신합니다. 과거 증거를 현재 실행 결과로 덮어쓰지 않습니다. 동결한 [원자료](dataset/Simulink_Basic_Blocks_R2024b.md), [계획 JSON](docs/simulink-coverage-roadmap.json), `docs/baselines`와 `docs/evidence`는 당시 source identity와 검증을 보존하는 자료입니다. 이 보존 자료에 담긴 과거 상대 문서 링크·계약 경로·버전은 그 기록 시점의 참조이며, 현행 설명은 위 통합 문서를 읽습니다.
+기능 변경은 실제 코드·파라미터 schema·독립 fixture·타깃 검사·지원표를 함께 갱신합니다. 과거 증거를 현재 실행 결과로 덮어쓰지 않습니다. 동결한 [원자료](dataset/Simulink_Basic_Blocks_R2024b.md), [계획 JSON](docs/simulink-coverage-roadmap.json), `docs/baselines`와 `docs/evidence`의 JSON은 당시 source identity와 검증을 보존하는 자료입니다. 화면 캡처는 현행 버전의 최종 검증 화면만 유지하며, 과거 캡처의 정리·복구 기준은 [캡처 보관 안내](docs/validation.md#화면-캡처-보관)를 따릅니다. 보존 자료에 담긴 과거 상대 문서 링크·계약 경로·버전은 그 기록 시점의 참조이며, 현행 설명은 위 통합 문서를 읽습니다.
 
 목표 도메인 소유·DNS·HTTPS 설정, 실제 초보자 관찰, 문의 메일 운영 정책과 전체 원본 실행 동등성은 각각 별도 gate입니다. 기술적 빌드·배포 PASS를 이 항목들의 완료로 해석하지 않습니다.
