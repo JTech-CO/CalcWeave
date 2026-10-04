@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-04T01:04:41.272Z",
+  "targetURL": "https://jtech-co.github.io/CalcWeave/",
+  "status": "failed",
+  "verified": false,
+  "timeoutMs": 60000,
+  "elapsedMs": 60216,
+  "isolatedFreshContext": true,
+  "screenshot": null,
+  "checks": [],
+  "requests": [
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/index-BtkJpMZO.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/schemas-B44qH8my.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-DSgLMJ8v.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/index-BOcLy6hb.css",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/sw.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/engine.worker-BYNS5Yfw.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/index-BOcLy6hb.css",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/index-BtkJpMZO.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/schemas-B44qH8my.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-Bcx-wexT.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-Bd0Bv9Dd.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-Cpqc65D7.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-CrvpDVwg.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-DMZDtvpy.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-DSgLMJ8v.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-Dv0_AZGC.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/cookies/index.html",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/index.html",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/notices/index.html",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/privacy/index.html",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/terms/index.html",
+      "method": "GET",
+      "type": "fetch"
+    }
+  ],
+  "workerURLs": [],
+  "pageErrors": [],
+  "outsideAppRequests": [],
+  "error": "Public Pages browser verification exceeded the explicit 60-second limit."
+}

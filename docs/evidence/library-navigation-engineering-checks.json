@@ -55,7 +55,8 @@
     "tests/e2e/library-navigation.spec.ts": "27fd5ec56bbd4746042b5863729d0d2307e7a91e690e777cdac3de398ce25bd9",
     "tests/e2e/workspace.spec.ts": "6920517991ad3cf429a1e4567b8faa7c827c847494716cd965a85364c7bf2dd9",
     "tests/e2e/m8-workspace.spec.ts": "4b0231f7b005e4f59b1778604f8c8d9d6a1700788faa31e060d5d7b5fae3a631",
-    "tests/e2e/m9-workspace.spec.ts": "e48409da076a43c262aa35bfd66bc1b8a0b0ac92c27f73e54e7fa0338bdabde5"
+    "tests/e2e/m9-workspace.spec.ts": "e48409da076a43c262aa35bfd66bc1b8a0b0ac92c27f73e54e7fa0338bdabde5",
+    "scripts/verify-public-pages.ts": "76f1a8c625d9ea4b79139d3243aa0369a1537c69772ec7b6850b66f417bcf7bc"
   },
   "coreContractsUnchanged": {
     "packages/model/src/types.ts": "2c67ce9470b7b040945ecea2a9d2eb1afc826aaaa732959c61425e25bd3e5f3f",
@@ -10273,15 +10274,66 @@
   "supportMatrixSha256": "e5d706d7fc127081fc8470189b3f580d03ed61ba938a8168a5aa8e3730bb875e",
   "userBrowserAndDataUntouched": true,
   "wholeBrowser": {
-    "status": "pending-CI",
-    "expectedCount": 210
+    "status": "passed-final-CI",
+    "passed": 210,
+    "total": 210,
+    "evidence": {
+      "path": "docs/evidence/library-navigation-actions-verification.json",
+      "sha256": "a180e2ae8fddff868417cf7d330b5c01e17e274427905ea10f31606bebc982dd"
+    }
   },
   "finalWholeUnit": {
-    "status": "pending-CI",
-    "expectedCount": 3885
+    "status": "passed-final-CI",
+    "passed": 3885,
+    "total": 3885,
+    "evidence": {
+      "path": "docs/evidence/library-navigation-actions-verification.json",
+      "sha256": "a180e2ae8fddff868417cf7d330b5c01e17e274427905ea10f31606bebc982dd"
+    }
   },
   "publicDeployment": {
-    "status": "pending-verification"
+    "status": "passed-library-navigation-release",
+    "checkedAt": "2026-10-04T01:08:01.742Z",
+    "appVersion": "0.17.3",
+    "engineVersion": "0.17.0-m16",
+    "url": "https://jtech-co.github.io/CalcWeave/",
+    "headSha": "f1df5c724da1ccf67b861ad535f89cdb4957a976",
+    "actionsRunId": 37165531788,
+    "releaseId": "21d9c36d4d2f80dad06d52baa7d5f4ad70b0334ea59941fde5dab2a2f5167f73",
+    "supportMatrixSha256": "e5d706d7fc127081fc8470189b3f580d03ed61ba938a8168a5aa8e3730bb875e",
+    "exactLocalProjectArtifactParity": true,
+    "assetCount": 16,
+    "totalStaticBytes": 6788631,
+    "publicBrowserChecks": 9,
+    "publicFeatureCases": 6,
+    "ciUnit": 3885,
+    "ciUnitFiles": 69,
+    "ciWholeBrowser": 210,
+    "ciProjectBrowser": 4,
+    "records": {
+      "docs/evidence/library-navigation-deployment-verification.json": "d1060a488aa53e277904b3b893c6947fc886a080844ff6fda7f40789f1a24d7e",
+      "docs/evidence/library-navigation-public-browser-verification.json": "2306315773bd372bd518d7667f8cea6dc2b565e524774c24ace6fcfe674355b0",
+      "docs/evidence/library-navigation-public-feature-browser-results.json": "0d2182aeff7dccbd87185bda5d8602524752562723e3df21271917d55cc62e44",
+      "docs/evidence/library-navigation-actions-verification.json": "a180e2ae8fddff868417cf7d330b5c01e17e274427905ea10f31606bebc982dd",
+      "docs/evidence/library-navigation-project-release-verification.json": "b4fe4f2e90b146182ce37cb88739fc1f52684607954ba60ee5f90064844c5e3a"
+    },
+    "verifiedApplicationDeployment": true,
+    "verifiedPublicLaunch": false
   },
-  "verifiedPublicLaunch": false
+  "verifiedPublicLaunch": false,
+  "uiEvidence": {
+    "path": "docs/evidence/library-navigation-ui-verification.json",
+    "sha256": "ea4d91caaec4af031fb667994d81bf0ce9b210688cebeb89436abe8eec134931",
+    "directlyReviewedScreenshots": 18
+  },
+  "publicVerifierUpdate": {
+    "previousCriterion": "All 337 block rows rendered initially",
+    "currentCriterion": "Header count 337, frequent category expanded, ten initial block rows",
+    "initialReport": "docs/evidence/library-navigation-initial-public-browser-verification.json",
+    "initialTimeoutMs": 60000,
+    "finalBasicChecks": 9,
+    "finalFocusedLibraryCases": 6,
+    "appArtifactChangedByVerifierCorrection": false,
+    "typecheck": "passed"
+  }
 }

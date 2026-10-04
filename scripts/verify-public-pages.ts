@@ -153,7 +153,9 @@ async function main() {
     assert.equal(response?.status(), 200); await expect(page).toHaveURL(TARGET);
     await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨');
     assert.deepEqual(await history(page), [], 'New browser context has no user model history');
-    await expect(page.locator('.library-item')).toHaveCount(blockRegistry.length);
+    await expect(page.locator('.block-library-header .count-badge')).toHaveText(String(blockRegistry.length));
+    await expect(page.locator('.library-category[data-library-category="frequent"] .library-category-toggle')).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.locator('.library-item')).toHaveCount(10);
     const moduleURL = await page.locator('script[type="module"]').getAttribute('src');
     assert(moduleURL?.startsWith(`${BASE}assets/`));
     await expect(page.locator('.research-badge')).toHaveText(`${APP_VERSION} 작업 공간`);

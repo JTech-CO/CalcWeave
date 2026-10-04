@@ -135,3 +135,13 @@ M16 구현 검사 후 중복된 M0~M15 계약·진행 기록과 이전 계획·�
 [초기4/6 결과](evidence/library-navigation-initial-new-browser-results.json)는 기호 하나의 폭 넘침과 동시 테스트 출력 경로 충돌을 기록한다. 기호 크기를 조정하고 출력 경로를 분리했다. 내적·픽셀 처리에 의도된 점 기호를 누락으로 판정하던 검사도 교정했다. [변경·보안·보존 검사](evidence/library-navigation-engineering-checks.json)에 검색100자 제한·React 이스케이프·사용자 브라우저 데이터 미접근·엔진/지원표/과거 증거 보존을 기록했다. 공개 결과는 별도로 기록한다.
 
 [초기 화면 프로브](evidence/library-navigation-initial-ui-verification.json)는 좁은 화면에서 의도적으로 숨긴 저장 표시의 가시성을 기다려6조건이 시간 초과했고, service worker 차단 정책이 안내 배너를 유발했다. 준비 조건을 저장 완료 텍스트로 바꾸고 별도 프로필의 service worker를 허용해 최종10조건을 다시 측정했다. 이 프로브 설정 문제를 제품 결함으로 판정하지 않는다.
+
+## 라이브러리 탐색 공개 결과
+
+[Actions 37165531788](https://github.com/JTech-CO/CalcWeave/actions/runs/37165531788)는 main `f1df5c724da1ccf67b861ad535f89cdb4957a976`에서 단위3,885/3,885·전체 브라우저210/210·프로젝트 경로4/4와 기존 모든 단계 회귀·release91검사를 통과한 뒤 앱0.17.3/엔진0.17.0-m16을 게시했다. 공개16assets와 service worker는 로컬 프로젝트 artifact와 byte/SHA가 일치했다. release ID는 `21d9c36d4d2f80dad06d52baa7d5f4ad70b0334ea59941fde5dab2a2f5167f73`다.
+
+[공개 기본9검사](evidence/library-navigation-public-browser-verification.json)와 [실제 공개 라이브러리6케이스](evidence/library-navigation-public-feature-browser-results.json)가 통과했다. 처음 추천만 펼침·카테고리 키보드·검색 복원·337개 기호·상단 고정·추가·다크/라이트·화면 크기와 글자200%를 독립 브라우저에서 확인했다. 사용자 브라우저의 저장 데이터는 접근하지 않았다.
+
+[변경·로컬 검증](evidence/library-navigation-engineering-checks.json)·[CI 원본 요약](evidence/library-navigation-actions-verification.json)·[정확한 공개 파일](evidence/library-navigation-deployment-verification.json)·[공개 결과](evidence/library-navigation-public-release.json). 기존 원자료·승인·과거 검증과 M16 문서 정리 결과를 보존했다.
+
+[초기 공개 기본 검사](evidence/library-navigation-initial-public-browser-verification.json)는 이전의 모든337개 초기 펼침 조건을 기다리다가60초 제한에 도달했다. 공개 검사 스크립트를 전체 수337·추천 범주 펼침·초기10개 표시로 교정하고 타입 검사를 통과했다. 이후9개 기본 검사를 모두 통과했으며 실제 앱의 배포 파일은 변경하지 않았다.
