@@ -3,6 +3,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import type { Plugin } from 'vite';
 import { parseDeploymentBase } from './pages-base';
+import { SITE_OG_IMAGE_PATH } from './social-metadata';
 
 export interface OfflineAsset { url: string; sha256: string; bytes: number }
 export interface OfflineManifest { schemaVersion: 1; appVersion: string; engineVersion: string; releaseId: string; scope: string; assets: OfflineAsset[] }
@@ -168,6 +169,12 @@ export async function writeOfflineRelease(outputDirectory: string, fileNames: st
   }
   for (const policy of ['terms', 'privacy', 'cookies', 'notices']) {
     try { files[`${policy}/index.html`] = await readFile(join(outputDirectory, policy, 'index.html')); }
+    catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error; }
+  }
+  // Vite copies public files outside the output bundle. Only this fixed,
+  // repository-owned image joins the cache allowlist; fixtures may omit it.
+  if (!Object.hasOwn(files, SITE_OG_IMAGE_PATH)) {
+    try { files[SITE_OG_IMAGE_PATH] = await readFile(join(outputDirectory, SITE_OG_IMAGE_PATH)); }
     catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error; }
   }
   const manifest = createOfflineManifest(files, versions, scope);

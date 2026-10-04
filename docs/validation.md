@@ -151,3 +151,19 @@ M16 구현 검사 후 중복된 M0~M15 계약·진행 기록과 이전 계획·�
 [변경·로컬 검증](evidence/library-navigation-engineering-checks.json)·[CI 원본 요약](evidence/library-navigation-actions-verification.json)·[정확한 공개 파일](evidence/library-navigation-deployment-verification.json)·[공개 결과](evidence/library-navigation-public-release.json). 기존 원자료·승인·과거 검증과 M16 문서 정리 결과를 보존했다.
 
 [초기 공개 기본 검사](evidence/library-navigation-initial-public-browser-verification.json)는 이전의 모든337개 초기 펼침 조건을 기다리다가60초 제한에 도달했다. 공개 검사 스크립트를 전체 수337·추천 범주 펼침·초기10개 표시로 교정하고 타입 검사를 통과했다. 이후9개 기본 검사를 모두 통과했으며 실제 앱의 배포 파일은 변경하지 않았다.
+
+## 학술·수학 소개와 공유 미리보기
+
+README를 수학 도구의 목적·활용·모델 예제·기술 구조 중심으로 구성하고, Simulink의 블록선도 모델링과 SANE의 정보 우선 설계에서 받은 영향을 명시했다. 배지의337개 블록·75개 예제는 실제 정의와 예제 목록을 기준으로 한다. Python·WASM 지원 범위와 원본 전체 동등성의 미검증 상태를 함께 안내한다.
+
+사이트와 저장소의 소개 이미지는 초기값 문제 `x′ = −x`, `x(0) = 1`을 Gain(−1)·Integrator·Scope와 피드백 연결로 표현한다. 이는 소개용 도식이며 그래프 픽셀을 수치 검증 자료로 사용하지 않는다. 사이트 PNG는1730×909·997,348bytes, 저장소 PNG는1774×887·971,681bytes이다. 원본 생성 이미지의 픽셀을 유지한 무손실 PNG 압축을 적용했다.
+
+| 검사 | 결과 |
+| --- | --- |
+| 관련 단위 검사 | social metadata·오프라인 파일·검증 출력 경로63/63 PASS |
+| TypeScript | `tsc --noEmit` PASS |
+| 문서 링크 | 현재10문서·로컬688링크·4앵커 PASS·퇴역44문서 재생성 없음 |
+| 배포 후보 | [root](evidence/og-readme-root-release-verification.json)·[project](evidence/og-readme-project-release-verification.json) 각각95검사·17자산 PASS |
+| OG 메타와 이미지 | canonical·OG·Twitter 메타의 실제 HTTPS 주소와 PNG 크기 일치. 원본·양쪽 빌드·manifest의 사이트 이미지 SHA-256 일치 |
+
+사이트 이미지 [원본 파일](../apps/web/public/assets/social/calcweave-og.png)과 [저장소 이미지](../assets/branding/calcweave-github-og.png)는 실제 소개에 사용되는 자산이며 과거 QA 캡처와 구분하여 보관한다. 기존 preview 산출물·정책 HTML·M16 라이선스·과거 JSON331개는 바이트를 보존했다. 공개 반영 결과는 배포 완료 후 별도로 확인한다.

@@ -8,6 +8,7 @@ import { canRegisterOffline, registerOfflineSupport } from '../apps/web/src/offl
 import { createOfflineManifest, generateOfflineWorker, isOfflineAssetUrl, offlineCachePrefixForScope, OFFLINE_CACHE_PREFIX, writeOfflineRelease, type OfflineManifest } from '../scripts/offline-build';
 import { getDeploymentBasePath, parseDeploymentBase } from '../scripts/pages-base';
 import { calcWeaveSecurityPlugin, STATIC_CSP } from '../scripts/security-build';
+import { SITE_OG_IMAGE_PATH } from '../scripts/social-metadata';
 
 const origin = 'https://calcweave.test';
 const versions = { appVersion: '0.6.0', engineVersion: '0.6.0-m6' };
@@ -66,6 +67,29 @@ function workerHarness(manifest: OfflineManifest, sources: Record<string, string
 
 afterEach(() => { vi.unstubAllGlobals(); vi.unstubAllEnvs(); });
 describe('M6 final-byte offline releases', () => {
+  it.each(['/', '/CalcWeave/'])('includes the fixed public social PNG in the %s release even when absent from bundler output', async basePath => {
+    const directory = await mkdtemp(join(tmpdir(), 'calcweave-offline-social-'));
+    const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aS1cAAAAASUVORK5CYII=', 'base64');
+    try {
+      await mkdir(join(directory, 'assets/social'), { recursive: true });
+      await writeFile(join(directory, 'index.html'), '<html>social preview</html>');
+      await writeFile(join(directory, SITE_OG_IMAGE_PATH), png);
+      const manifest = await writeOfflineRelease(directory, ['index.html'], versions, basePath);
+      expect(manifest.assets.map(asset => asset.url)).toEqual([basePath + SITE_OG_IMAGE_PATH, basePath + 'index.html']);
+      expect(manifest.assets[0]).toEqual({ url: basePath + SITE_OG_IMAGE_PATH, bytes: png.byteLength, sha256: createHash('sha256').update(png).digest('hex') });
+      expect(JSON.parse(await readFile(join(directory, 'offline-manifest.json'), 'utf8'))).toEqual(manifest);
+      expect(await readFile(join(directory, 'sw.js'), 'utf8')).toContain(manifest.releaseId);
+    } finally {
+      const absoluteDirectory = resolve(directory);
+      if (dirname(absoluteDirectory) !== resolve(tmpdir()) || !basename(absoluteDirectory).startsWith('calcweave-offline-social-')) throw new Error('Unsafe offline social test cleanup directory.');
+      for (const name of ['index.html', SITE_OG_IMAGE_PATH, 'offline-manifest.json', 'sw.js']) {
+        const target = resolve(directory, name), inside = relative(absoluteDirectory, target);
+        if (isAbsolute(inside) || inside === '..' || inside.startsWith('..' + (process.platform === 'win32' ? '\\' : '/'))) throw new Error('Unsafe offline social test cleanup file.');
+        await unlink(target).catch((error: NodeJS.ErrnoException) => { if (error.code !== 'ENOENT') throw error; });
+      }
+      await rmdir(join(directory, 'assets/social')); await rmdir(join(directory, 'assets')); await rmdir(directory);
+    }
+  });
   it.each(['/', '/CalcWeave/'])('uses final written bytes and the %s scope after late bundler replacement', async basePath => {
     const directory = await mkdtemp(join(tmpdir(), 'calcweave-offline-final-')), assetDirectory = join(directory, 'assets');
     try {

@@ -1,80 +1,146 @@
 # CalcWeave
 
-블럭을 연결해 수학 계산과 시뮬레이션을 만들고, 데이터와 실행 가능한 코드를 함께 다루는 로컬 우선 웹 앱입니다. 기본 사용에 MATLAB 설치, 회원가입, 계산 서버가 필요하지 않습니다.
+**블록선도로 수학적 관계를 표현하고, 브라우저에서 계산·시뮬레이션·코드로 실행하는 수학 도구입니다.**
 
-[웹 베타 열기](https://jtech-co.github.io/CalcWeave/) · [기술 백서](docs/01-technical-whitepaper.md) · [디자인 백서](docs/02-design-whitepaper.md) · [운영 안내](docs/operations.md) · [검증과 증거](docs/validation.md)
+[![CalcWeave — Integrator와 Gain으로 구성한 감쇠 모델과 시간 응답](assets/branding/calcweave-github-og.png)](https://jtech-co.github.io/CalcWeave/)
 
-현재 공개 앱은 `0.17.3` / 엔진 `0.17.0-m16`입니다. 전체337개 기호와 라이브러리 상단 고정·카테고리 접기·자주 쓰는 블록을 적용하고 GitHub Pages 갱신을 완료했습니다. [실제 CI·공개 검증 결과](docs/validation.md#라이브러리-탐색-공개-결과)를 확인할 수 있습니다. 목표 브랜드 도메인은 **CalcWeave.com**, 운영자는 **JTech-Co**, 문의는 [jtech-bryan@proton.me](mailto:jtech-bryan@proton.me)입니다.
+[![검증·배포](https://github.com/JTech-CO/CalcWeave/actions/workflows/pages.yml/badge.svg)](https://github.com/JTech-CO/CalcWeave/actions/workflows/pages.yml)
+[![버전 0.17.3 beta](https://img.shields.io/badge/version-0.17.3_beta-9ebded?style=flat-square)](package.json)
+[![블록 337개](https://img.shields.io/badge/blocks-337-a7c7bd?style=flat-square)](docs/support-matrix.md)
+[![예제 75개](https://img.shields.io/badge/examples-75-bbb0d0?style=flat-square)](apps/web/src/examples.ts)
+[![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6?style=flat-square&logo=typescript&logoColor=white)](tsconfig.json)
 
-## 현재 범위
+[웹에서 시작](https://jtech-co.github.io/CalcWeave/) · [기술 백서](docs/01-technical-whitepaper.md) · [디자인 백서](docs/02-design-whitepaper.md) · [지원 범위](docs/support-matrix.md) · [검증 결과](docs/validation.md)
 
-| 지표 | 의미 |
+## 목적
+
+수식을 읽는 것에서 한 걸음 더 나아가, **입력·연산·상태·출력 사이의 관계를 직접 연결하고 결과를 관찰**할 수 있도록 만듭니다. 작은 산술 모델에서 시작해 시간에 따른 변화, 벡터와 행렬, 외부 데이터까지 같은 블록선도 안에서 다룹니다.
+
+CalcWeave는 수학 교육과 자습, 신호·동역학 모델 탐색, 수치 알고리즘 실험에 활용할 수 있습니다. 모델과 파라미터를 함께 보관하고 실행 기록을 비교하여, 계산의 가정과 과정을 다른 사람에게 설명하기에도 적합합니다. 기본 계산은 브라우저의 JavaScript·TypeScript 엔진에서 수행하며 MATLAB 설치, 회원가입, 계산 서버가 필요하지 않습니다.
+
+## 무엇을 할 수 있나요?
+
+| 활용 | 구성과 관찰 방법 |
 | --- | --- |
-| 337개 블럭 정의 | 실제 registry에 등록된 포트·파라미터·실행 계약. 모델별 자료형·모드·옵션 검증이 필요합니다. |
-| 75개 예제 / 12개 범주 | 계산·시간·자료형·계층·데이터·어댑터의 학습 모델. |
-| 원자료 385행 / 339개 이름 | 중복 접근·설정·조건부·레거시가 포함된 R2024b 참고 목록의 추적 단위입니다. |
-| 선택 구성 367행 / 미지원 18행 | 증거가 있는 선택 범위와 지원하지 않는 범위를 나누어 기록합니다. |
-| 전체 옵션 동등 승인 0행 | 전체 원본 옵션 inventory와 MathWorks reference 실행 동등성은 검증하지 않았습니다. |
-| TypeScript / Python / WASM | TypeScript는 승인된 실행 계약, Python은 69개 ID, WASM은 16개 ID의 선택 구성을 내보냅니다. C/C++는 실행 환경·검증이 없어 unavailable입니다. |
+| 수학 개념 학습 | 상수·사칙연산·함수 블록을 연결하고 스칼라·벡터·행렬의 중간값을 확인합니다. |
+| 신호와 동역학 탐색 | 피드백, 지연, 필터, 적분기를 구성하고 연속·이산·혼합 모델의 시간 응답을 Scope와 수치 표로 관찰합니다. |
+| 수치 계산 실험 | LU·Cholesky·QR 등의 행렬 연산, RK4·RK45와 선택 범위의 implicit Euler를 사용하며 설정·오차·진단을 확인합니다. |
+| 데이터 기반 계산 | CSV·JSON·XLSX 데이터를 불러와 시간·단위·자료형을 확인하고 신호로 재생합니다. |
+| 결과 비교와 코드 활용 | 파라미터 실험과 실행 기록을 비교하고, 모델·데이터·결과를 파일로 보관하거나 지원되는 구성을 코드로 내보냅니다. |
 
-[공개 지원표](docs/support-matrix.md)와 [기계 판독 지원표](docs/support-matrix.json)는 원자료 ID, 실제 기능·공유 설정·독립 대체, 파라미터, 자료형, 실행 모드, 타깃과 증거를 분리합니다. 타깃의 ID 목록에 들어 있다는 사실만으로 모든 구성이 실행되는 것은 아닙니다. [상세 원본 대응표](docs/block-coverage.md)는 원본 385행의 식별과 과거 선택 승인을 보존합니다.
+현재 **337개 블록 정의, 75개 예제, 12개 예제 범주**를 제공합니다. 라이브러리 검색, 빠른 추가, 카테고리 접기와 자주 쓰는 블록으로 필요한 연산을 찾을 수 있습니다. 그래프는 계산의 흐름을 보여주고, 속성 패널과 진단은 자료형·설정·실행 조건을 확인하는 데 사용합니다.
 
-## 로컬 실행
+## 첫 모델 실행
 
-Node.js `22.12` 이상이 필요합니다. 잠금 파일의 의존성을 설치하고 개발 서버를 시작합니다.
+1. [CalcWeave](https://jtech-co.github.io/CalcWeave/)를 열고 **예제로 시작 → 첫 배율 계산**을 선택합니다.
+2. Constant와 Gain을 선택해 값을 확인하거나 바꾼 뒤 **시뮬레이션 실행**을 누릅니다.
+3. 출력 포트와 입력 포트를 연결해 연산을 추가합니다. 시간 모델에서는 실행 설정의 시간 범위와 솔버를 함께 확인합니다.
+4. **모델 다운로드**로 도식을 보관합니다. 코드가 필요하면 **코드 내보내기**에서 해당 모델의 지원 여부를 확인합니다.
+
+| 캔버스 조작 | 동작 |
+| --- | --- |
+| 휠 버튼 클릭·드래그 | 캔버스 이동 |
+| 빈 공간에서 왼쪽 버튼 드래그 | 파란 사각형 범위로 블록 선택 |
+| 캔버스에 초점이 있을 때 Space | 전체 도식 맞추기 |
+| Shift를 누른 채 선택 | 여러 블록 선택 |
+| Ctrl / Cmd + C, V | 선택한 블록과 내부 연결 복사·붙여넣기 |
+| Ctrl / Cmd + K | 빠른 추가 |
+
+### 예제 1 · 수식의 계산 흐름
+
+**Constant(2) → Gain(3) → Display**를 연결하면 입력과 배율의 관계를 직접 볼 수 있습니다.
+
+$$
+y = 3u,\qquad u = 2\quad\Longrightarrow\quad y = 6
+$$
+
+입력 또는 배율을 바꾸고 다시 실행해 결과를 비교해 보세요. 덧셈이나 곱셈 블록을 추가하면 같은 방식으로 더 큰 식을 구성할 수 있습니다.
+
+### 예제 2 · 미분방정식을 피드백으로 표현
+
+위 소개 이미지의 도식은 **Integrator의 출력 → Gain(−1) → Integrator의 입력**을 연결하고 Scope에서 상태를 관찰하는 모델입니다. 적분기의 초기값을 1로 두면 다음 초기값 문제를 나타냅니다.
+
+$$
+\frac{dx}{dt} = -x,\qquad x(0) = 1,\qquad x(t) = e^{-t}
+$$
+
+**예제로 시작 → RK45 감쇠와 오차 제어**에서 같은 모델을 실행할 수 있습니다. 0~5초의 계산 결과를 해석해와 비교하고, 솔버의 시간 간격과 오차 허용치를 바꾸며 수치 근사가 어떻게 달라지는지 살펴보세요. 도식·설정·결과를 함께 남기면 실험을 설명하고 재실행하기가 쉽습니다.
+
+## 영향을 받은 도구와 설계 원칙
+
+[MATLAB Simulink](https://www.mathworks.com/products/simulink.html)의 블록선도 모델링 방식에서 출발했습니다. 수학적 관계를 시각적으로 연결하는 경험을 브라우저에서 바로 제공하고, 처음에는 작은 계산부터 시작해 필요한 연산과 설정을 점진적으로 찾아가도록 구성했습니다. CalcWeave는 독립적으로 실행되는 도구이며 MathWorks의 공식 제품이나 전체 호환 구현을 뜻하지 않습니다.
+
+화면 구성에는 [SANE — Signal Above Needless Embellishment](https://github.com/JTech-CO/SANE/blob/main/SKILL-KR.md)의 정보 우선 설계 원칙을 반영했습니다. 읽기 쉬운 글자, 캔버스 중심의 배치, 절제된 카테고리 색상과 간결한 블록을 사용하고, 상세 정보는 필요할 때 속성 패널에서 확인하도록 했습니다.
+
+## 어떻게 구축했나요?
+
+화면은 **React·TypeScript·React Flow·Vite**, 계산은 별도의 TypeScript 패키지로 구성합니다. 블록선도와 실행 엔진 사이에 모델 검증과 중간 표현을 두어, 연결·자료형·설정에 맞지 않는 모델은 실행 전에 진단합니다.
+
+```text
+블록선도와 입력 데이터
+  → 모델·포트·자료형·설정 검사
+  → 컴파일된 중간 표현(IR)
+  → Web Worker 계산 엔진과 솔버
+  → 시간 응답·수치 표·진단·실행 기록
+  → 지원 범위에 따른 모델 보관과 코드 내보내기
+```
+
+| 구성 | 역할 | 소스 |
+| --- | --- | --- |
+| 웹 작업 공간 | 캔버스, 블록 라이브러리, 속성·결과 패널 | [apps/web/src](apps/web/src) |
+| 모델과 컴파일러 | 모델 구조, 블록 정의, 연결 검증, 실행 계획 | [model](packages/model/src) · [block-library](packages/block-library/src) · [compiler](packages/compiler/src) |
+| 계산 엔진 | 신호 실행, 상태 갱신, 솔버, 확장 수학 연산 | [runtime](packages/runtime/src) · [advanced-math](packages/advanced-math/src) |
+| 데이터와 분석 | 데이터 입력, 파라미터 실험, 결과 분석 | [data](packages/data/src) · [experiments](packages/experiments/src) · [analysis](packages/analysis/src) |
+| 코드 생성 | 타깃별 지원 검사와 독립 실행 코드 생성 | [TypeScript](packages/codegen-ts/src) · [Python](packages/codegen-python/src) · [WASM](packages/codegen-wasm/src) |
+| 검증 | 단위·브라우저 검사, 수치 비교와 검증 스크립트 | [tests](tests) · [fixtures](fixtures) · [scripts](scripts) |
+
+모델과 실행 기록은 브라우저의 IndexedDB에 보관합니다. 정적 앱은 Service Worker로 캐시하고 배포 파일의 해시를 확인합니다. 모델·설정·실행 정보의 보관은 계산을 다시 확인하는 데 도움을 주며, 정확도 판단은 사용한 모델과 솔버, 지원 계약 및 비교 기준을 함께 살펴야 합니다.
+
+## 로컬 개발과 검증
+
+Node.js **22.12 이상**이 필요합니다. 잠금 파일의 의존성을 설치하고 개발 서버를 실행합니다.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-화면의 **예제로 시작**에서 작은 모델을 열고 입력값을 바꾼 뒤 실행하세요. 캔버스는 휠 버튼 드래그로 이동하고, 왼쪽 버튼 드래그로 영역을 선택하며, 캔버스에 초점이 있을 때 Space로 도식을 맞춥니다. 블럭의 상세 설정과 제한은 속성 패널에서 확인합니다.
-
-상단 **도움말**은 기본 계산 방법, 실제 블록 검색, 파일 보관과 코드 내보내기를 안내합니다. **앱 정보**에서 버전·문의·정책·백업과 지원 환경을 확인합니다. Simulink 목록과의 비교는 접힌 **호환성 참고**에 있으며 CalcWeave의 설치나 실행 조건을 뜻하지 않습니다.
+기본 검증과 정적 빌드는 다음과 같습니다.
 
 ```sh
 npm run typecheck
 npm test
-npm run verify:coverage
-npm run verify:roadmap
-npm run verify:m16
+npm run verify:docs
 npm run build
 npm run verify:release
-npx playwright install chromium
-npm run test:e2e
 ```
 
-실제 Python 검증은 Python `3.14`를 사용합니다. 필요하면 `CALCWEAVE_PYTHON_PATH`를 지정하세요. `CALCWEAVE_BROWSER_PATH`로 검증용 Chromium 실행 파일을 지정할 수 있습니다. 타깃별 실제 실행, 이전 계약 회귀, frozen 증거 보존 및 명령별 준비 조건은 [검증 안내](docs/validation.md)를 따릅니다.
+브라우저 검사를 실행하려면 `npx playwright install chromium`으로 Chromium을 설치한 뒤 `npm run test:e2e`를 사용합니다. Python 코드의 실행 비교에는 별도의 Python 환경이 필요합니다. 추가 검증 명령, 환경별 조건과 결과는 [검증 안내](docs/validation.md), [운영 안내](docs/operations.md)를 참고하세요.
 
-production preview는 빌드 후 실행합니다.
+상단의 검증·배포 배지는 GitHub Actions의 결과를 나타냅니다. 공개 배포는 `main`에서 워크플로를 직접 실행하여 검증을 통과한 산출물을 게시하는 방식입니다.
 
-```sh
-npm run preview -- --port 4173 --strictPort
-```
+## 지원 범위와 결과 해석
 
-GitHub Pages의 `/CalcWeave/` 경로 빌드, 오프라인 검사와 공개 파일 비교는 [운영 안내](docs/operations.md#배포와-업데이트)를 따릅니다. 서로 다른 base 빌드를 같은 `dist`에서 동시에 검증하지 않습니다.
+현재 앱 버전은 **0.17.3**, 계산 엔진 버전은 **0.17.0-m16**입니다. 블록 수는 등록된 정의의 수이며 모든 자료형·모드·옵션에서 동작한다는 의미는 아닙니다. 실제 모델의 지원 여부는 [공개 지원표](docs/support-matrix.md)와 [기계 판독 지원표](docs/support-matrix.json)에서 확인할 수 있습니다.
 
-## 저장과 파일
+- TypeScript 내보내기는 승인된 실행 계약을 따릅니다. Python은 69개 블록 ID의 정적·이산 구성, WASM은 16개 블록 ID의 실수 스칼라 비순환 구성으로 제한됩니다. C/C++ 내보내기는 제공하지 않습니다.
+- Simulink R2024b 참고 목록 385행을 [원자료 대응표](docs/block-coverage.md)로 추적합니다. 원본의 모든 옵션이나 MathWorks 실행 결과와의 수치적 동등성을 검증한 것은 아닙니다. MAT·SLX·MDL 처리는 선택 범위의 데이터·구조 분석이며 원본 실행 환경을 대체하지 않습니다.
+- 현재 주 검증 환경은 Windows·Chromium입니다. Firefox·Safari 및 실제 초보 사용자 검증의 상태는 [검증 기록](docs/validation.md)에 명시합니다.
 
-작업 공간과 최근 실행 기록은 해당 브라우저에 저장됩니다. 상단 **작업 공간 → 백업·복구**에서 작업을 파일로 보관하거나 다시 불러옵니다. 저장 상태·손상 원본·진단 기록은 접힌 **저장 문제 해결**에서 확인하며, 로컬 삭제는 별도 접힌 영역에서 확인 후 실행합니다. 중요한 작업은 별도 백업으로 보관하세요.
+브라우저 저장 데이터는 기기와 브라우저에 종속됩니다. 보관할 모델은 다운로드하고, 데이터와 실행 기록까지 옮겨야 한다면 작업 공간 백업을 사용하세요. 저장·삭제·백업 방법은 앱의 **도움말**과 [운영 안내](docs/operations.md)에 있습니다.
 
-일반 도식·포함 데이터의 전달은 **모델 다운로드·가져오기**를 사용합니다. CSV/JSON/XLSX 표와 선택 MAT v5/SLX/MDL 파일 분석도 제공합니다. 외부 파일은 지원·미지원 항목과 원본 위치를 검토한 뒤 사본으로 적용합니다. 원본 bytes의 보존과 편집한 native 형식 생성은 다른 기능이며, 후자는 지원하지 않습니다. 출처를 별도로 확인할 서명 패키지는 **작업 공간 → 고급 파일 → 서명된 모델 패키지**에 있습니다. 공개 키 지문은 출처 확인용이며 계산 정확성 인증이 아닙니다.
+저장소의 `docs/evidence`에는 검증 로그와 수치 결과가 포함됩니다. 이미지 캡처는 현재 화면 검증에 필요한 최종본만 보관하며, 과거 캡처를 다시 확인하는 방법은 [증거 보관 안내](docs/validation.md#화면-캡처-보관)에 있습니다.
 
-[이용 안내](docs/legal/terms.md) · [개인정보와 로컬 데이터](docs/legal/privacy.md) · [쿠키·오프라인 캐시](docs/legal/cookies.md)
+## 문서와 문의
 
-## 코드 구조와 유지보수
-
-| 경로 | 역할 |
+| 문서 | 내용 |
 | --- | --- |
-| `apps/web` | React 편집기, Worker, 로컬 저장·복구, 데이터·가져오기·내보내기 UI |
-| `packages/model`, `block-library`, `compiler` | bounded 값·모델·포트·파라미터 계약과 immutable IR |
-| `packages/runtime`, `expression`, `advanced-math`, `quantization` | 실제 계산·상태·solver·안전한 수식·수치 알고리즘 |
-| `packages/data`, `experiments`, `analysis` | 표·시계열, 공유 예산 실험, 해석·비교 |
-| `packages/codegen-ts`, `codegen-python`, `codegen-wasm` | 버전 있는 타깃 검사·생성·manifest |
-| `packages/model-package`, `interop` | 서명·migration·출처 검토와 bounded 외부 형식 분석 |
-| `packages/release`, `support-matrix` | 현행 릴리스·원본별 선택 지원 메타데이터 |
-| `tests`, `fixtures`, `scripts` | 독립 oracle, 실제 생성 프로그램 실행, 브라우저·배포·무결성 검증 |
+| [기술 백서](docs/01-technical-whitepaper.md) | 모델·컴파일러·실행 엔진과 데이터·코드 생성 구조 |
+| [디자인 백서](docs/02-design-whitepaper.md) | 정보 구조, 화면 구성과 상호작용 원칙 |
+| [지원 범위](docs/support-matrix.md) | 블록별 자료형·모드·옵션·내보내기와 검증 근거 |
+| [검증 기록](docs/validation.md) | 자동 검사, 공개 동작 확인과 알려진 제한 |
+| [운영 안내](docs/operations.md) | 빌드·배포·보관·복구 절차 |
 
-기능 변경은 실제 코드·파라미터 schema·독립 fixture·타깃 검사·지원표를 함께 갱신합니다. 과거 증거를 현재 실행 결과로 덮어쓰지 않습니다. 동결한 [원자료](dataset/Simulink_Basic_Blocks_R2024b.md), [계획 JSON](docs/simulink-coverage-roadmap.json), `docs/baselines`와 `docs/evidence`의 JSON은 당시 source identity와 검증을 보존하는 자료입니다. 화면 캡처는 현행 버전의 최종 검증 화면만 유지하며, 과거 캡처의 정리·복구 기준은 [캡처 보관 안내](docs/validation.md#화면-캡처-보관)를 따릅니다. 보존 자료에 담긴 과거 상대 문서 링크·계약 경로·버전은 그 기록 시점의 참조이며, 현행 설명은 위 통합 문서를 읽습니다.
+운영자는 **JTech-Co**입니다. 오류 제보나 기능 제안은 [GitHub Issues](https://github.com/JTech-CO/CalcWeave/issues), 문의는 [jtech-bryan@proton.me](mailto:jtech-bryan@proton.me)로 보내주세요. 오류를 재현할 수 있는 작은 모델과 실행 설정을 함께 제공하면 확인에 도움이 됩니다.
 
-목표 도메인 소유·DNS·HTTPS 설정, 실제 초보자 관찰, 문의 메일 운영 정책과 전체 원본 실행 동등성은 각각 별도 gate입니다. 기술적 빌드·배포 PASS를 이 항목들의 완료로 해석하지 않습니다.
+현재 공개 주소는 [jtech-co.github.io/CalcWeave](https://jtech-co.github.io/CalcWeave/)이며, 목표 브랜드 도메인은 **CalcWeave.com**입니다. 사용·데이터 처리 안내는 [이용약관](docs/legal/terms.md), [개인정보 처리방침](docs/legal/privacy.md), [쿠키 정책](docs/legal/cookies.md)을 참고하세요.

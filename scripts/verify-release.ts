@@ -10,8 +10,11 @@ import { WASM_TARGET } from '../packages/codegen-wasm/src/capabilities';
 import { MODEL_PACKAGE_PERMISSIONS, MODEL_PACKAGE_REGISTRY } from '../packages/model-package/src';
 import { BUILTIN_ADAPTER_PROFILES, UNAVAILABLE_ADAPTER_PROFILES } from '../packages/model/src/m14-adapters';
 import { M14_WASM_BYTES, inspectM14Wasm } from '../packages/runtime/src/m14-wasm';
+import { SITE_OG_IMAGE_PATH, releaseBuildDirectory, releaseEvidencePrefix, verifySocialMetadata } from './social-metadata';
 
 const catalog = getReleaseCatalog(), checks: string[] = [];
+const evidenceStage = releaseEvidencePrefix(APP_VERSION, catalog.engineVersion, process.env.CALCWEAVE_RELEASE_EVIDENCE_PREFIX);
+const buildDirectory = releaseBuildDirectory(process.env.CALCWEAVE_RELEASE_BUILD_DIRECTORY);
 function check(condition: unknown, message: string): void { assert(condition, message); checks.push(message); }
 check(catalog.version === APP_VERSION && /^\d+\.\d+\.\d+-(?:m\d+|catalog)$/.test(catalog.engineVersion), 'app/engine release versions');
 check(catalog.blocks.length >= 144 && new Set(catalog.blocks.map(block => block.id)).size === catalog.blocks.length, 'single registry retains catalog definitions with unique executable IDs');
@@ -27,7 +30,7 @@ for (const profile of BUILTIN_ADAPTER_PROFILES.filter(profile => profile.artifac
 }
 const packageJson = JSON.parse(await readFile('package.json', 'utf8')) as { version: string };
 check(packageJson.version === catalog.version, 'package/release catalog version agreement');
-const manifest = JSON.parse(await readFile('dist/offline-manifest.json', 'utf8')) as OfflineManifest;
+const manifest = JSON.parse(await readFile(join(buildDirectory, 'offline-manifest.json'), 'utf8')) as OfflineManifest;
 const scope = parseDeploymentBase(manifest.scope);
 check(manifest.schemaVersion === 1 && manifest.appVersion === catalog.version && manifest.engineVersion === catalog.engineVersion, 'offline release version and bounded deployment scope agreement');
 const { releaseId, ...meaning } = manifest;
@@ -35,28 +38,31 @@ check(createHash('sha256').update(JSON.stringify(meaning)).digest('hex') === rel
 check(manifest.assets.length <= 128 && new Set(manifest.assets.map(asset => asset.url)).size === manifest.assets.length, 'bounded unique offline allowlist');
 for (const asset of manifest.assets) {
   check(isOfflineAssetUrl(asset.url, scope) && /^[a-f0-9]{64}$/.test(asset.sha256), `safe static asset ${asset.url}`);
-  const bytes = await readFile(join('dist', asset.url.slice(scope.length)));
+  const bytes = await readFile(join(buildDirectory, asset.url.slice(scope.length)));
   check(bytes.byteLength === asset.bytes && createHash('sha256').update(bytes).digest('hex') === asset.sha256, `final built bytes match ${asset.url}`);
 }
 check(manifest.assets.reduce((total, asset) => total + asset.bytes, 0) <= 32 * 1024 * 1024, 'offline shell size limit');
-const html = await readFile('dist/index.html', 'utf8');
+const html = await readFile(join(buildDirectory, 'index.html'), 'utf8');
+const socialMetadata = verifySocialMetadata(html, await readFile(join(buildDirectory, SITE_OG_IMAGE_PATH)));
+check(manifest.assets.some(asset => asset.url === scope + SITE_OG_IMAGE_PATH), 'public social PNG is included in the verified offline release');
+check(socialMetadata.canonicalUrl.startsWith('https://') && socialMetadata.imageUrl.startsWith(socialMetadata.canonicalUrl), 'static Korean OG/Twitter metadata uses actual public HTTPS URLs and PNG dimensions');
 const decodedHtml = html.replaceAll('&#39;', "'").replaceAll('&apos;', "'");
 check(decodedHtml.includes('http-equiv="Content-Security-Policy"') && decodedHtml.includes("script-src 'self' 'wasm-unsafe-eval'") && decodedHtml.includes("object-src 'none'") && !decodedHtml.includes("'unsafe-eval'"), 'production CSP permits pinned WASM while blocking dynamic/inline JavaScript evaluation');
 check(html.indexOf('Content-Security-Policy') < html.indexOf('<script') && !/<script(?![^>]*\bsrc=)[^>]*>/i.test(html), 'CSP precedes external-only application scripts');
 check(html.includes('name="referrer" content="no-referrer"'), 'production referrer policy');
 for (const policy of ['terms', 'privacy', 'cookies', 'notices']) {
-  const path = `${scope}${policy}/index.html`, source = await readFile(`dist/${policy}/index.html`, 'utf8');
+  const path = `${scope}${policy}/index.html`, source = await readFile(join(buildDirectory, policy, 'index.html'), 'utf8');
   check(manifest.assets.some(asset => asset.url === path) && source.includes('Content-Security-Policy') && source.includes('lang="ko"') && source.includes(`href="${scope}"`), `offline accessible protected policy ${policy}`);
   if (policy !== 'notices') check(source.includes('JTech-Co') && source.includes('jtech-bryan@proton.me'), `operator/contact in ${policy}`);
 }
 async function files(directory: string): Promise<string[]> {
   return (await Promise.all((await readdir(directory, { withFileTypes: true })).map(entry => entry.isDirectory() ? files(join(directory, entry.name)) : [join(directory, entry.name)]))).flat();
 }
-const builtFiles = await files('dist');
+const builtFiles = await files(buildDirectory);
 check(!builtFiles.some(path => path.endsWith('.map') || /(?:^|[\\/])\.env/.test(path)), 'no source maps or environment files distributed');
-for (const file of builtFiles.filter(path => /\.(js|css)$/.test(path) && !path.endsWith('sw.js'))) check(manifest.assets.some(asset => asset.url === scope + relative('dist', file).replaceAll('\\', '/')), 'all code/Worker/lazy chunks are in static release');
+for (const file of builtFiles.filter(path => /\.(js|css)$/.test(path) && !path.endsWith('sw.js'))) check(manifest.assets.some(asset => asset.url === scope + relative(buildDirectory, file).replaceAll('\\', '/')), 'all code/Worker/lazy chunks are in static release');
 const secretPattern = /(?:\b(?:sk-(?:proj-)?|gh[pousr]_|github_pat_)[A-Za-z0-9_-]{20,}|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----)/;
-for (const path of builtFiles.filter(path => /\.(js|html|json)$/.test(path))) check(!secretPattern.test(await readFile(path, 'utf8')), `no recognized secret material in ${relative('dist', path)}`);
+for (const path of builtFiles.filter(path => /\.(js|html|json)$/.test(path))) check(!secretPattern.test(await readFile(path, 'utf8')), `no recognized secret material in ${relative(buildDirectory, path)}`);
 const workflow = await readFile('.github/workflows/pages.yml', 'utf8');
 check(!workflow.includes('pull_request_target') && /workflow_dispatch:/.test(workflow) && !/^\s+push:/m.test(workflow), 'publication is explicitly dispatched');
 const approvedActions = new Set([
@@ -74,7 +80,6 @@ const targetValidator = await readFile('scripts/verify-pages-target.ts', 'utf8')
 check(workflow.includes('npx tsx scripts/verify-pages-target.ts') && targetValidator.includes('https://jtech-co.github.io') && targetValidator.includes('/CalcWeave/') && targetValidator.includes('https://calcweave.com'), 'workflow validates the exact approved project/custom-domain destination');
 check(workflow.includes("CALCWEAVE_BASE_PATH: ${{ format('{0}/', steps.pages.outputs.base_path) }}") && workflow.includes('npm run test:e2e:pages') && workflow.indexOf('Verify the exact Pages artifact') < workflow.indexOf('actions/upload-pages-artifact'), 'configured-path build and verification precede artifact publication');
 await mkdir('docs/evidence', { recursive: true });
-const evidence = { generatedAt: new Date().toISOString(), appVersion: catalog.version, engineVersion: catalog.engineVersion, scope, releaseId, checks, files: manifest.assets, totalStaticBytes: manifest.assets.reduce((total, asset) => total + asset.bytes, 0), publicDeploymentClaimed: false };
-const evidenceStage = String(APP_VERSION) === '0.8.1' ? 'pages' : catalog.engineVersion.split('-').at(-1);
+const evidence = { generatedAt: new Date().toISOString(), appVersion: catalog.version, engineVersion: catalog.engineVersion, scope, releaseId, checks, files: manifest.assets, totalStaticBytes: manifest.assets.reduce((total, asset) => total + asset.bytes, 0), socialMetadata, publicDeploymentClaimed: false };
 await writeFile(`docs/evidence/${evidenceStage}-${scope === '/' ? 'root' : 'project'}-release-verification.json`, JSON.stringify(evidence, null, 2) + '\n');
 process.stdout.write(JSON.stringify({ checks: checks.length, staticFiles: manifest.assets.length, totalStaticBytes: evidence.totalStaticBytes, releaseId }) + '\n');
