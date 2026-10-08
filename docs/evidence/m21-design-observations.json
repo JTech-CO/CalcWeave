@@ -1,0 +1,33 @@
+{
+  "browser": "153.0.8010.12",
+  "observations": [
+    {
+      "theme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "bounds": {
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "panelWidth": 770,
+        "scrollWidth": 770
+      },
+      "errors": []
+    },
+    {
+      "theme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "bounds": {
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "panelWidth": 770,
+        "scrollWidth": 770
+      },
+      "errors": []
+    }
+  ]
+}

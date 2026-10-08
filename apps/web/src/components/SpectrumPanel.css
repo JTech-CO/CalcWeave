@@ -1,0 +1,38 @@
+.spectrum-analysis-section { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); min-width: 0; }
+.spectrum-analysis-section > summary { cursor: pointer; color: var(--text); font-size: 17px; font-weight: 600; line-height: 1.7; }
+.spectrum-panel { min-width: 0; padding-top: 16px; color: var(--text); font-size: 16px; }
+.spectrum-panel p { line-height: 1.8; overflow-wrap: anywhere; }
+.spectrum-panel .field { min-width: 0; }
+.spectrum-panel .field-label,.spectrum-panel .field-help { font-size: 16px; }
+.spectrum-panel .field input,.spectrum-panel .field select { font-size: 16px; min-height: 42px; min-width: 0; width: 100%; max-width: 100%; }
+.spectrum-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px 18px; min-width: 0; margin: 18px 0; }
+.spectrum-checkbox { display: flex; align-items: start; gap: 10px; line-height: 1.8; }
+.spectrum-checkbox input[type=checkbox] { width: 18px; height: 18px; flex: none; margin-top: 5px; accent-color: var(--accent); }
+.spectrum-panel .button { min-height: 42px; font-size: 16px; white-space: normal; overflow-wrap: anywhere; }
+.spectrum-source-note,.spectrum-diagnostic { color: var(--muted); font-size: 16px; }
+.spectrum-result { border-top: 1px solid var(--line); margin-top: 22px; padding-top: 18px; min-width: 0; }
+.spectrum-result h3 { font-size: 20px; line-height: 1.7; margin: 0 0 12px; overflow-wrap: anywhere; }
+.spectrum-metrics { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px 18px; margin: 16px 0; }
+.spectrum-metrics > div,.spectrum-provenance > div { min-width: 0; }
+.spectrum-metrics dt,.spectrum-provenance dt { color: var(--muted); font-size: 16px; margin-bottom: 6px; }
+.spectrum-metrics dd,.spectrum-provenance dd { margin: 0; font-size: 18px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.spectrum-provenance { display: grid; gap: 14px; margin: 16px 0; }
+.spectrum-provenance dd { font-size: 16px; }
+.spectrum-view { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0; }
+.spectrum-view .button[aria-pressed=true] { color: var(--accent); border-color: var(--accent); }
+.spectrum-plot { min-width: 0; margin: 18px 0 24px; }
+.spectrum-plot figcaption { color: var(--muted); font-size: 16px; line-height: 1.7; margin-bottom: 10px; overflow-wrap: anywhere; }
+.spectrum-plot svg { display: block; width: 100%; max-width: 100%; height: auto; background: var(--canvas); border: 1px solid var(--line); border-radius: 6px; }
+.spectrum-grid { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.spectrum-axis { stroke: var(--muted); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.spectrum-bin { stroke: var(--accent); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.spectrum-axis-labels { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 12px; color: var(--muted); font-size: 16px; line-height: 1.6; margin: 6px 0; font-variant-numeric: tabular-nums; }
+.spectrum-axis-labels span { overflow-wrap: anywhere; }
+.spectrum-details { margin: 18px 0; min-width: 0; }
+.spectrum-details > summary { color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1.8; overflow-wrap: anywhere; }
+.spectrum-pagination { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 14px 0; }
+.spectrum-pagination span { flex: 1 1 12rem; font-size: 16px; overflow-wrap: anywhere; }
+.spectrum-table-scroll { overflow: auto; max-width: 100%; max-height: 420px; margin: 14px 0; }
+.spectrum-table-scroll table { width: 100%; border-collapse: collapse; font-size: 16px; font-variant-numeric: tabular-nums; }
+.spectrum-table-scroll th,.spectrum-table-scroll td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; min-width: 3.5rem; }
+@media(max-width: 600px) { .spectrum-fields,.spectrum-metrics { grid-template-columns: minmax(0,1fr); } .spectrum-table-scroll th,.spectrum-table-scroll td { padding: 8px; } }

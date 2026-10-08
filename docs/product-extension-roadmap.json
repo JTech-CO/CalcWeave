@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-09",
+  "title": "CalcWeave M21 이후 제품 확장 계획",
+  "basis": "M20까지의 현행 코드에서 확인한 분석 공백과 사용자가 승인한 후속 구축·기획",
+  "appVersion": "0.22.0",
+  "engineVersion": "0.17.0-m16",
+  "historicalCoverageRoadmapUnchanged": true,
+  "calendarCommitment": null,
+  "principles": [
+    "실행 가능한 블록 수와 기록 분석 기능 수를 따로 센다.",
+    "원시 표본·설정·모델 지문을 보존하고 분석만으로 모델을 변경하지 않는다.",
+    "새 외부 계산 서비스 없이 로컬 계산과 공통 자원 제한을 우선 사용한다.",
+    "실제 구현과 독립 수치 검사·브라우저 검증을 마친 범위만 완료로 표시한다."
+  ],
+  "milestones": [
+    {
+      "id": "M21",
+      "title": "완료한 시간 기록의 신호 스펙트럼 분석",
+      "status": "completed-local-verification",
+      "dependsOn": ["M18", "M20"],
+      "scope": ["실수 기록의 선택 성분·연속 표본 구간", "radix-2 FFT의 단측 진폭·위상·periodogram 전력 밀도", "직사각·주기형 Hann 창과 평균 제거", "원시 복소 bin·선택 표본 지문·실제 설정을 포함한 JSON"],
+      "limits": { "samples": 8192, "minimumSamples": 8, "powerOfTwoOnly": true, "work": 2000000, "outputSources": 16, "sourceRecordedElements": 1000000 },
+      "exitGates": ["DC·사인/코사인·Nyquist·Parseval과 독립 직접 DFT oracle", "완료·균일 격자·자료형·형상·출처 지문 검증", "모델/원시 기록 불변과 보고서 스냅샷", "다운로드·잘못된 입력·이전 실행·모바일/테마/글자 확대 회귀"],
+      "excluded": ["정수·fixed·복소수의 자동 변환", "불균일 시각·부분 실행·비유한 값의 보간", "자동 zero padding·표본 개수 조정", "Welch·STFT·확정적인 주파수 추정·aliasing 보정"],
+      "implementation": ["packages/analysis/src/spectrum.ts", "apps/web/src/spectrum-analysis-sources.ts", "apps/web/src/components/SpectrumPanel.tsx"],
+      "evidence": "docs/evidence/m21-verification.json"
+    },
+    {
+      "id": "M22",
+      "title": "이산 SISO 제어계 분석",
+      "status": "planned",
+      "dependsOn": ["M20"],
+      "scope": ["현재 discrete.state-space 설정과 명시적 샘플 주기", "z=exp(jωTs)의 주파수 응답과 단위원 기준 극점 판정", "명시적 단위 음의 피드백에 한정한 표본 여유·근궤적"],
+      "exitGates": ["1~4개 상태와 샘플 주기·Nyquist 범위·직접 전달항의 경계", "해석식이 있는 FIR/IIR·단위원 안/위/밖 극점 oracle", "연속·이산의 단위/안정성 정의를 UI와 JSON에서 구분", "특이점·근 불확실성·지원하지 않는 다중 rate를 명시"],
+      "excluded": ["MIMO·자동 연속/이산 변환·다중 rate 폐루프 추론", "PID 자동 튜닝·전체 폐루프 안정성 보증"]
+    },
+    {
+      "id": "M23",
+      "title": "시드를 고정한 불확실성 앙상블 실험",
+      "status": "planned",
+      "dependsOn": ["M19"],
+      "scope": ["지원 계수의 bounded 확률 표본과 반복 실행", "동일 원시 관측 격자의 평균·표준편차·분위수", "완료/실패/취소별 개수와 seed·분포·실행 설정의 보고서"],
+      "exitGates": ["공유 실행 시간·연산·기록 상한과 취소/늦은 결과 방지", "정해진 seed의 재현성과 독립 선형 모델 통계 oracle", "단위·자료형·시간 격자가 다른 결과의 자동 결합 금지", "실패한 실행을 숨기지 않고 모델 적용은 명시적 동작으로 제한"],
+      "excluded": ["무제한 병렬 실행·전역 최적화·통계적 신뢰도 인증"]
+    },
+    {
+      "id": "M24",
+      "title": "시간 구간 통계와 신호 상관·지연 관측",
+      "status": "planned",
+      "dependsOn": ["M18", "M21"],
+      "scope": ["선택 기록 구간의 평균·분산·RMS·최솟값·최댓값", "같은 균일 격자의 정규화 상관과 제한된 lag", "표본 수·분모·단위·실제 겹친 구간을 표시하는 원시 표"],
+      "exitGates": ["표본 통계와 시간 가중 통계를 구별", "상수 신호·영 분산·정확한 지연·짧은 겹침 oracle", "DC 제거·정규화·lag 부호 규약을 보고서에 보존", "빈 구간·불균일 시각·자료형/단위 불일치를 명시적으로 처리"],
+      "excluded": ["상관을 인과관계로 해석·자동 시간 정렬·무단 보간"]
+    },
+    {
+      "id": "M25",
+      "title": "Welch 전력 밀도와 시간-주파수 관측",
+      "status": "planned",
+      "dependsOn": ["M21"],
+      "scope": ["명시적인 구간 길이·겹침을 사용한 Welch 평균", "bounded STFT와 시간-주파수 표/시각화", "창·겹침·주파수 해상도·실제 구간 시각의 보고서"],
+      "exitGates": ["전체 FFT work·메모리·표시 bin의 합산 제한", "한 구간과 M21의 PSD 일치·Parseval·chirp 원시 시각 oracle", "평균으로 인한 분산/해상도 변화와 끝 구간 정책 공개", "색상 스케일·0 전력·로그 변환·모바일/키보드 관측 검증"],
+      "excluded": ["불균일 시각 분석·실시간 오디오 수집·무제한 스트리밍"]
+    }
+  ],
+  "references": [
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.periodogram.html",
+    "https://numpy.org/doc/stable/reference/routines.fft.html",
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.welch.html"
+  ]
+}

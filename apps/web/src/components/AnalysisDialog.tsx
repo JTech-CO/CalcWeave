@@ -7,6 +7,7 @@ import { ModalDialog } from './ModalDialog';
 import { Icon } from './Icon';
 import { downloadText } from './M4WorkspaceTools';
 import { ControlSystemPanel } from './ControlSystemPanel';
+import { SpectrumPanel } from './SpectrumPanel';
 import type { ControlAnalysisRun } from '../control-analysis-sources';
 
 export function GradientSummary({ result }: { result: ExpressionGradient }) {
@@ -58,6 +59,7 @@ export function AnalysisDialog({ model, invalidDraft, busy, onClose, linearizati
       {pending && <p role="status">{mode === 'resolution' ? '두 실제 solver 실행을 비교하고 있습니다.' : '수식을 평가하고 있습니다.'}</p>}{error && <p className="dialog-error" role="alert">{error}</p>}
       {mode === 'gradient' && gradient && <GradientSummary result={gradient}/>} {mode === 'resolution' && resolution && <ResolutionSummary result={resolution.result} model={resolution.model}/>}
       <details className="control-analysis-section"><summary>제어계 분석</summary><ControlSystemPanel model={model} linearizationRun={linearizationRun} linearizationCurrent={linearizationCurrent} busy={busy || pending} invalidDraft={invalidDraft}/></details>
+      <details className="spectrum-analysis-section"><summary>신호 스펙트럼 분석</summary><SpectrumPanel run={linearizationRun} current={linearizationCurrent} busy={busy || pending} invalidDraft={invalidDraft}/></details>
     </div><div className="dialog-footnote">A/B/C/D는 국소 선형화 블록의 실행 결과에서 확인할 수 있습니다.<button className="text-button" onClick={onClose}>닫기</button></div>
   </ModalDialog></NumericValidityContext.Provider>;
 }

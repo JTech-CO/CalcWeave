@@ -1,6 +1,6 @@
 # CalcWeave 기술 백서
 
-현행 앱 `0.21.0` / 엔진 `0.17.0-m16`의 설계와 실행 경계를 설명한다. 최종 실측·배포 상태는 [검증 문서](validation.md), 화면·상호작용은 [디자인 백서](02-design-whitepaper.md), 정책·복구·배포는 [운영 안내](operations.md)를 따른다. 현재 문서에 과거 단계의 시험 횟수나 납품 목록을 누적하지 않는다.
+현행 앱 `0.22.0` / 엔진 `0.17.0-m16`의 설계와 실행 경계를 설명한다. 최종 실측·배포 상태는 [검증 문서](validation.md), 화면·상호작용은 [디자인 백서](02-design-whitepaper.md), 정책·복구·배포는 [운영 안내](operations.md)를 따른다. 현재 문서에 과거 단계의 시험 횟수나 납품 목록을 누적하지 않는다.
 
 ## 제품과 지원을 세는 방법
 
@@ -145,6 +145,14 @@ Typed 곡선은 float64 근사이고 커서에는 원본 값 또는 고정소수
 
 모델·실행·관측 시각을 변경하지 않으며, 보고서에는 복사한 행렬과 출처·설정을 함께 보존한다. [python-control의 주파수 응답](https://python-control.readthedocs.io/en/latest/generated/control.frequency_response.html), [여유](https://python-control.readthedocs.io/en/latest/generated/control.margin.html), [근궤적](https://python-control.readthedocs.io/en/latest/generated/control.root_locus_map.html), [SciPy의 상태공간 변환](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.ss2tf.html)은 수학적 정의를 참고한다. 해당 라이브러리를 실행하거나 전수 수치 동등성을 제공하는 구현을 뜻하지 않는다.
 
+## 기록의 스펙트럼
+
+[스펙트럼 코어](../packages/analysis/src/spectrum.ts)는 완료한 시간 기록의 선택 성분·연속 구간을 분석한다. 8~8192개의2의 거듭제곱 개수만 허용하며, 시각은 절댓값10⁹ 이하·균일 증가·간격10⁻⁹초 이상, 값은 절댓값10¹² 이하의 유한 실수다. float64의 시간 표현 정밀도가 간격에 비해 부족하면 거부한다. 최소 간격의8eps 이내 계산 반올림만 정규화한다. 원시 시각을 보간하거나 자동으로 표본 수를 조정·0 채우기 하지 않는다.
+
+평균을 제거한 뒤 선택 창을 곱하고 비정규화 forward DFT를 radix-2 FFT로 계산한다. 직사각형 또는 주기형 Hann wᵢ=0.5−0.5cos(2πi/N)을 사용한다. 단측 진폭은 q|Xₖ|/Σwᵢ, PSD는 q|Xₖ|²/(fsΣwᵢ²)이며 DC·Nyquist에서q=1, 나머지는q=2다. 빈 간격은fs/N이고 적분 전력은ΣPSD·fs/N이다. mean·RMS는 창 적용 전 원시 선택 값이며, Hann이나 평균 제거 후 PSD 적분 전력을 원시 RMS²와 같다고 표시하지 않는다. 위상은 첫 선택 표본 기준으로 작은 계수는null로 보존하고, 최대 성분은 DC를 제외한 실제 빈에서 선택한다. 빈 사이의 피크 추정·aliasing 보정은 없다. 이 정의는 [NumPy DFT](https://numpy.org/doc/stable/reference/routines.fft.html)와 [SciPy periodogram](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.periodogram.html)을 참고하며 해당 라이브러리의 모든 기능을 구현하거나 수치 동등성을 인증한 것은 아니다.
+
+[출처 어댑터](../apps/web/src/spectrum-analysis-sources.ts)는 실행 모델의 의미 지문, completed 상태·표본 수·전체 관측 격자·자료형/형상을 대조한다. 실수 legacy 스칼라·벡터·행렬과 Typed float32/float64 스칼라·벡터만 지원한다. 출력은최대16개·투영 원소합1,000,000개, 코어 work는2,000,000 이하이며 접근자·희소 배열·숨김 필드를 실행하지 않는다. 선택한 시각·값을 복사해 SHA-256을 기록하고 출처·창·평균 제거·모든 원시 복소 빈을 JSON에 보존한다. 정수·fixed·복소수·boolean·structured 신호, 부분 실행, 비유한 값과 불균일 격자는 자동 변환하지 않는다. 분석 기능 추가를 실행 블록·schema·코드 타깃 지원 확대와 혼동하지 않는다.
+
 ## 신뢰된 어댑터
 
 외부 사용자 코드 실행 대신 [immutable adapter catalog](../packages/model/src/m14-adapters.ts)의 자체 작성 고정 프로필만 실행한다.
@@ -221,6 +229,18 @@ MAT v5/SLX/MDL은 `calcweave-native-scalar-v1`의 읽기 전용 bounded 분석�
 | trusted WASM·accumulator·entity | [M14 kernel](../packages/runtime/src/m14.ts), [binary inspector](../packages/runtime/src/m14-wasm.ts), [catalog](../packages/model/src/m14-adapters.ts); gain/bias/initial/resetMode/capacity/overflow/maxRelease | [M14 actual TS/lifecycle](evidence/m14-verification.json), [literal fixtures](../tests/m14-independent-fixtures.ts) |
 | targets·migration·MAT/SLX/MDL | [Python](../packages/codegen-python/src/index.ts), [WASM](../packages/codegen-wasm/src/index.ts), [package](../packages/model-package/src/index.ts), [native parser](../packages/interop/src/native.ts); target·explicit inports | [M15 integration](evidence/m15-verification.json), [interop UI](evidence/m15-interop-ui-verification.json) |
 | source 지원 추적·모드·타깃 | [support-matrix API](../packages/support-matrix/src/index.ts); source ID·classification·decision·mode·target | [현행 검증](validation.md), [machine support](support-matrix.json) |
+
+## M21 이후 확장 순서
+
+[제품 확장 계획 JSON](product-extension-roadmap.json)은 M20까지의 구현에서 확인한 공백을 기준으로2026-10-09에 새로 정한 계획이다. 원자료385행의 과거 coverage baseline은 그대로 보존한다. 다음 단계는 구현·검증이 필요한 계획이며, 일정 약속이나 완료한 지원으로 표시하지 않는다.
+
+| 단계 | 사용자 작업과 추가 범위 | 우선 완료 조건 |
+| --- | --- | --- |
+| M21 | 기록의 단측 FFT·진폭/위상·PSD | 실제 원시 기록·독립 DFT/Parseval·출처와 불변 보고서 |
+| M22 | 이산 State-Space의 z영역 SISO 분석 | 명시적 Ts·Nyquist·단위원 극점·특이점/직접 전달항 |
+| M23 | 시드를 고정한 불확실성 앙상블 | 공유 예산·재현성·동일 격자 분위수·실패/취소 보고 |
+| M24 | 시간 구간 통계·상관·lag 관측 | 표본/시간 통계 구분·정규화/lag 부호·영 분산 |
+| M25 | Welch·시간-주파수 관측 | 합산 FFT 예산·구간/겹침·PSD 일치·시간/색상 원시 값 |
 
 ## 유지보수와 열린 gate
 
