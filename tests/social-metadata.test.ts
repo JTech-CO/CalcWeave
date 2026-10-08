@@ -57,6 +57,11 @@ describe('Release evidence destination', () => {
     expect(releaseEvidencePrefix('0.20.0', '0.17.0-m16', 'm19')).toBe('m19');
     expect(releaseBuildDirectory('.test-generated/m19-root-dist')).toBe('.test-generated/m19-root-dist');
     expect(releaseBuildDirectory('.test-generated/m19-project-dist')).toBe('.test-generated/m19-project-dist');
+    expect(releaseEvidencePrefix('0.21.0', '0.17.0-m16')).toBe('m20');
+    expect(releaseEvidencePrefix('0.21.1', '0.17.0-m16')).toBe('m20');
+    expect(releaseEvidencePrefix('0.21.0', '0.17.0-m16', 'm20')).toBe('m20');
+    expect(releaseBuildDirectory('.test-generated/m20-root-dist')).toBe('.test-generated/m20-root-dist');
+    expect(releaseBuildDirectory('.test-generated/m20-project-dist')).toBe('.test-generated/m20-project-dist');
   });
   it.each(['', '../m16', 'm16', '/tmp/result', 'og-readme/../../m16'])('rejects arbitrary or historic report overrides: %s', prefix => {
     expect(() => releaseEvidencePrefix('0.17.3', '0.17.0-m16', prefix)).toThrow('Unsupported release evidence prefix');

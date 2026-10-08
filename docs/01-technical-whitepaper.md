@@ -1,6 +1,6 @@
 # CalcWeave 기술 백서
 
-현행 앱 `0.20.0` / 엔진 `0.17.0-m16`의 설계와 실행 경계를 설명한다. 최종 실측·배포 상태는 [검증 문서](validation.md), 화면·상호작용은 [디자인 백서](02-design-whitepaper.md), 정책·복구·배포는 [운영 안내](operations.md)를 따른다. 현재 문서에 과거 단계의 시험 횟수나 납품 목록을 누적하지 않는다.
+현행 앱 `0.21.0` / 엔진 `0.17.0-m16`의 설계와 실행 경계를 설명한다. 최종 실측·배포 상태는 [검증 문서](validation.md), 화면·상호작용은 [디자인 백서](02-design-whitepaper.md), 정책·복구·배포는 [운영 안내](operations.md)를 따른다. 현재 문서에 과거 단계의 시험 횟수나 납품 목록을 누적하지 않는다.
 
 ## 제품과 지원을 세는 방법
 
@@ -134,6 +134,16 @@ Typed 곡선은 float64 근사이고 커서에는 원본 값 또는 고정소수
 잔차는 예측−측정, SSE는 잔차 제곱 합, RMSE는 평균 제곱 오차의 제곱근이다. 정확한 원시 예측값·측정값·잔차를 보고서에 보관한다. 이 문제 정의의 참고는 [SciPy의 경계를 갖는 최소제곱 문서](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.least_squares.html)이며, CalcWeave가 SciPy/TRF/MINPACK 구현이나 결과 동등성을 제공한다는 의미는 아니다.
 
 모델·측정 자료·결과를 후보마다 복사하며 탐색만으로 원본을 수정하지 않는다. 보고서는 실행 당시 설정과 측정값, 후보 모델·실제 결과·manifest를 JSON에 포함한다. 명시적 적용은 실험 당시와 현재 계산 의미가 같은 경우에만 계수 필드를 변경하고 제목·레이아웃을 보존한다. 편집기 undo에 연결한다. 격자는 기존 최근5개 실행 기록 정책을 따르고, 피팅은 완료한 최적 후보 실행만 보관한다. 전체 보고서는 메모리에서 유지하므로 사용자가 파일로 내려받는다.
+
+### 연속 SISO 제어계 분석
+
+[제어계 분석 코어](../packages/analysis/src/control-system.ts)는 실수 연속 상태공간 A(n×n), B(n×1), C(1×n), D(1×1), 상태1~4개를 지원한다. 행렬 원소의 절댓값은10⁶ 이하이며 접근자·희소 배열·자료형 강제 변환을 허용하지 않는다. [출처 어댑터](../apps/web/src/control-analysis-sources.ts)는 현재 루트 State-Space 설정과 실제 선형화 완료가 확인된 직접 연결 출력만 최대64개 제공한다. 마지막 요청 시각·완료 행렬·마지막 원시 기록 행렬·실행 모델 SHA를 대조한다. 요청 전 영 행렬 placeholder와 실제로 완료한 영 행렬을 구분한다. 이전 실행과 부분 실행의 출처도 보존한다.
+
+주파수 응답은 G(jω)=C(jωI−A)⁻¹B+D의 복소 선형계를 직접 푼다. 10⁻⁶~10⁶ rad/s에서 최대801개 로그 표본을 사용하며 특이점과 표현할 수 없는 응답은 JSON의 null과 상태로 보존한다. 상태 특성식과 미약분 전달함수 계수를 저차 행렬식으로 계산하고 극점·영점을 구한다. 1·2차 근은 해석식, 3·4차는 제한된 반복과 잔차 검증을 사용한다. 확정하지 못한 반복·근접 근과 계수 계산의 표현 범위 초과는 분석을 거부한다. 허수축 근방은 수치 확인이 필요한 상태로 표시하며, 자동 pole-zero 상쇄나 MIMO·이산·descriptor 변환을 수행하지 않는다.
+
+이득·위상 여유는 사용자가 선택 행렬을 개루프로 지정했을 때 단위 음의 피드백의 정의를 적용한다. 유한 주파수 표본의 부호 변화와 구간 내 재평가로 교차를 좁힌다. 접선·좁은 교차·선택 범위 밖의 교차 전수 검출은 보장하지 않는다. 교차 없음·불완전 분석을 무한 여유 또는 전체 폐루프 안정성으로 해석하지 않는다. 근궤적은 det(sI−A)+K·분자의 근을 최대81개 이득에서 계산한 원시 표본이며, 1+KD=0인 잘못 정의된 피드백과 확정하지 못한 근은 별도 상태로 남긴다. 전체 계산은2,000,000 work 상한을 검사한다.
+
+모델·실행·관측 시각을 변경하지 않으며, 보고서에는 복사한 행렬과 출처·설정을 함께 보존한다. [python-control의 주파수 응답](https://python-control.readthedocs.io/en/latest/generated/control.frequency_response.html), [여유](https://python-control.readthedocs.io/en/latest/generated/control.margin.html), [근궤적](https://python-control.readthedocs.io/en/latest/generated/control.root_locus_map.html), [SciPy의 상태공간 변환](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.ss2tf.html)은 수학적 정의를 참고한다. 해당 라이브러리를 실행하거나 전수 수치 동등성을 제공하는 구현을 뜻하지 않는다.
 
 ## 신뢰된 어댑터
 

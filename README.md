@@ -5,7 +5,7 @@
 [![CalcWeave — Integrator와 Gain으로 구성한 감쇠 모델과 시간 응답](assets/branding/calcweave-github-og.png)](https://jtech-co.github.io/CalcWeave/)
 
 [![검증·배포](https://github.com/JTech-CO/CalcWeave/actions/workflows/pages.yml/badge.svg)](https://github.com/JTech-CO/CalcWeave/actions/workflows/pages.yml)
-[![버전 0.20.0 beta](https://img.shields.io/badge/version-0.20.0_beta-9ebded?style=flat-square)](package.json)
+[![버전 0.21.0 beta](https://img.shields.io/badge/version-0.21.0_beta-9ebded?style=flat-square)](package.json)
 [![블록 337개](https://img.shields.io/badge/blocks-337-a7c7bd?style=flat-square)](docs/support-matrix.md)
 [![예제 75개](https://img.shields.io/badge/examples-75-bbb0d0?style=flat-square)](apps/web/src/examples.ts)
 [![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6?style=flat-square&logo=typescript&logoColor=white)](tsconfig.json)
@@ -88,6 +88,12 @@ Scope 곡선을 클릭하거나 키보드로 **시간 커서**를 움직이면 �
 
 CSV는 브라우저 안에서만 읽으며 최대256KiB·1,000행을 지원합니다. 현재 추정 대상은 루트 Constant·Input의 실수 스칼라 값과 Gain 배율, 관측 대상은 같은 단위의 실수 스칼라 출력입니다. 측정 시각은 모델의 기록 격자와 맞아야 합니다. 자동으로 모델을 바꾸지 않으며 **최적 후보 모델 적용**으로 계수를 반영하고 실행 취소로 되돌립니다. 범위 안의 국소 탐색이므로 전역 최적값·계수의 유일성을 보장하지 않습니다. 전체 보고서는 새로고침 전에 내려받고, 기존 실행 기록은 최근5개를 보관합니다.
 
+## 제어계 분석
+
+**분석 → 제어계 분석**을 펼치면 연속 State-Space 블록의 설정이나 실행에서 확인된 Local Linearization 행렬로 **Bode 크기·위상**, **상태 극점·전달 영점**을 볼 수 있습니다. 단일 입력·단일 출력의 실수 연속계, 상태1~4개를 지원하며 원시 주파수 응답과 행렬·전달함수 계수를 함께 제공합니다.
+
+선택 행렬을 **개루프 L(s), 단위 음의 피드백**으로 해석하도록 지정하면 주파수 구간에서 확인한 **이득·위상 여유**와 지정 이득의 **근궤적 표본**을 표시합니다. 도식의 폐루프를 자동으로 추론하지 않습니다. 교차를 찾지 못한 구간을 무한 여유로 표시하지 않으며, 특이점·수치적으로 확정하기 어려운 근은 진단합니다. 분석은 모델을 변경하지 않고, 출처 지문·기록 및 요청 시각·분석 설정·원시 결과를 JSON으로 내려받습니다.
+
 ## 영향을 받은 도구와 설계 원칙
 
 [MATLAB Simulink](https://www.mathworks.com/products/simulink.html)의 블록선도 모델링 방식에서 출발했습니다. 수학적 관계를 시각적으로 연결하는 경험을 브라우저에서 바로 제공하고, 처음에는 작은 계산부터 시작해 필요한 연산과 설정을 점진적으로 찾아가도록 구성했습니다. CalcWeave는 독립적으로 실행되는 도구이며 MathWorks의 공식 제품이나 전체 호환 구현을 뜻하지 않습니다.
@@ -143,7 +149,7 @@ npm run verify:release
 
 ## 지원 범위와 결과 해석
 
-현재 앱 버전은 **0.20.0**, 계산 엔진 버전은 **0.17.0-m16**입니다. 블록 수는 등록된 정의의 수이며 모든 자료형·모드·옵션에서 동작한다는 의미는 아닙니다. 실제 모델의 지원 여부는 [공개 지원표](docs/support-matrix.md)와 [기계 판독 지원표](docs/support-matrix.json)에서 확인할 수 있습니다.
+현재 앱 버전은 **0.21.0**, 계산 엔진 버전은 **0.17.0-m16**입니다. 블록 수는 등록된 정의의 수이며 모든 자료형·모드·옵션에서 동작한다는 의미는 아닙니다. 실제 모델의 지원 여부는 [공개 지원표](docs/support-matrix.md)와 [기계 판독 지원표](docs/support-matrix.json)에서 확인할 수 있습니다.
 
 - TypeScript 내보내기는 승인된 실행 계약을 따릅니다. Python은 69개 블록 ID의 정적·이산 구성, WASM은 16개 블록 ID의 실수 스칼라 비순환 구성으로 제한됩니다. C/C++ 내보내기는 제공하지 않습니다.
 - Simulink R2024b 참고 목록 385행을 [원자료 대응표](docs/block-coverage.md)로 추적합니다. 원본의 모든 옵션이나 MathWorks 실행 결과와의 수치적 동등성을 검증한 것은 아닙니다. MAT·SLX·MDL 처리는 선택 범위의 데이터·구조 분석이며 원본 실행 환경을 대체하지 않습니다.

@@ -105,7 +105,7 @@ test('All product help pages stay readable in both themes from desktop to 320px 
             dialog: bounds.left >= 0 && bounds.right <= innerWidth + 1,
             controls: [...node.querySelectorAll('button,input,select,a,summary')].filter(item => item.getBoundingClientRect().width > 0).every(item => {
               const rect = item.getBoundingClientRect();
-              return rect.left >= bounds.left && rect.right <= bounds.right + 1 && parseFloat(getComputedStyle(item).fontSize) >= 14;
+              return rect.left >= bounds.left && rect.right <= bounds.right + 1 && parseFloat(getComputedStyle(item).fontSize) >= 13.5;
             }),
           };
         })).toEqual({ document: true, dialog: true, controls: true });

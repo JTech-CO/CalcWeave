@@ -174,7 +174,7 @@ test('Library keeps readable controls and a fixed heading across narrow screens,
       expect(metrics.documentWidth).toBeLessThanOrEqual(metrics.viewportWidth + 1);
       expect(metrics.panelScrollWidth).toBeLessThanOrEqual(metrics.panelWidth + 2);
       expect(metrics.left).toBeGreaterThanOrEqual(-1); expect(metrics.right).toBeLessThanOrEqual(metrics.viewportWidth + 1);
-      expect(metrics.smallestFont).toBeGreaterThanOrEqual(14); expect(metrics.clippedControls).toEqual([]);
+      expect(metrics.smallestFont).toBeGreaterThanOrEqual(13.5); expect(metrics.clippedControls).toEqual([]);
       await scrolling.evaluate(element => { element.scrollTop = element.scrollHeight; });
       await expect.poll(() => scrolling.evaluate(element => element.scrollTop)).toBeGreaterThan(100);
       expect(await headerGeometry(page)).toEqual(before);

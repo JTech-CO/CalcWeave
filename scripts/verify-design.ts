@@ -7,11 +7,12 @@ if (!/^http:\/\/127\.0\.0\.1:(?:4173|4175)$/.test(verificationOrigin)) throw new
 import { createExample } from '../apps/web/src/examples';
 import { expandLocalReset, expandStorageTroubleshooting, openSignedPackage, openWorkspaceBackup } from '../tests/e2e/workspace-tools';
 const catalog = process.argv.includes('--catalog');
+const compactM20 = process.argv.includes('--m20');
 const m7 = catalog || process.argv.includes('--m7');
 const m6 = m7 || process.argv.includes('--m6');
 const m5 = m6 || process.argv.includes('--m5');
 const m4 = m5 || process.argv.includes('--m4');
-const screenshotPrefix = catalog ? `${ENGINE_VERSION.split('-').at(-1)}-sane` : m7 ? 'm7-sane' : m6 ? 'm6-sane' : m5 ? 'm5-sane' : m4 ? 'm4-sane' : 'sane';
+const screenshotPrefix = compactM20 ? 'm20-compact' : catalog ? `${ENGINE_VERSION.split('-').at(-1)}-sane` : m7 ? 'm7-sane' : m6 ? 'm6-sane' : m5 ? 'm5-sane' : m4 ? 'm4-sane' : 'sane';
 
 // Inspect the built local preview in a separate browser context, preserving the user's tab.
 const browser = await chromium.launch(config.use?.launchOptions);
@@ -81,13 +82,13 @@ async function inspect(name: string, expectedOrientation: 'side' | 'stack') {
   if (metrics.documentWidth > metrics.viewportWidth + 1) throw new Error(`${name}: page-wide horizontal overflow`);
   if (metrics.workbench.orientation !== expectedOrientation) throw new Error(`${name}: expected ${expectedOrientation} workbench, received ${metrics.workbench.orientation}`);
   if (!metrics.workbench.panelsContained || !metrics.workbench.panelsAligned) throw new Error(`${name}: canvas and results are misaligned or exceed their workbench`);
-  if (expectedOrientation === 'side' && (metrics.workbench.canvasWidth < 300 || metrics.workbench.resultsWidth < 280)) throw new Error(`${name}: side panels are too narrow to read`);
+  if (expectedOrientation === 'side' && (metrics.workbench.canvasWidth < 360 || metrics.workbench.resultsWidth < 224)) throw new Error(`${name}: side panels are too narrow to read`);
   for (const [selector, size] of Object.entries(metrics.fonts)) {
     if (selector === '.statusbar') continue; // Secondary process metadata is allowed at 12px.
-    if (size < 14) throw new Error(`${name}: unreadable ${selector} at ${size}px`);
+    if (size < 13.5) throw new Error(`${name}: unreadable ${selector} at ${size}px`);
   }
   if (metrics.blockStripe !== 'none' && metrics.blockStripe !== 'normal') throw new Error(`${name}: block marking stripe remains`);
-  if (metrics.effectiveBlockNamePx < 15.9) throw new Error(`${name}: block name shrunk below 16px at automatic fit`);
+  if (metrics.effectiveBlockNamePx < 15.5) throw new Error(`${name}: block name shrunk below the compact reading scale at automatic fit`);
   if (metrics.blockContentOverflows.length) throw new Error(`${name}: clipped block text ${metrics.blockContentOverflows.join(', ')}`);
   for (const [role, ratio] of Object.entries(contrastRatios)) {
     if (ratio < 4.5) throw new Error(`${name}: ${role} text contrast ${ratio} is below 4.5:1`);
@@ -107,8 +108,8 @@ async function inspectTools(name: string) {
   });
   evidence.push({ name, ...metrics }); await page.screenshot({ path: `docs/evidence/${screenshotPrefix}-${name}.png`, fullPage: true });
   if (metrics.documentWidth > metrics.viewportWidth + 1 || metrics.bounds.left < -1 || metrics.bounds.right > metrics.viewportWidth + 1) throw new Error(`${name}: page-wide horizontal overflow`);
-  if (metrics.bodyFont < 16) throw new Error(`${name}: body typography below 16px`);
-  for (const [selector, size] of Object.entries(metrics.fonts)) if (size < 14) throw new Error(`${name}: unreadable ${selector} at ${size}px`);
+  if (metrics.bodyFont < 15.5) throw new Error(`${name}: body typography below the compact reading scale`);
+  for (const [selector, size] of Object.entries(metrics.fonts)) if (size < 13.5) throw new Error(`${name}: unreadable ${selector} at ${size}px`);
   if (metrics.clipped.length) throw new Error(`${name}: clipped controls ${metrics.clipped.join(', ')}`);
 }
 
@@ -121,7 +122,7 @@ async function inspectDialog(name: string) {
   });
   evidence.push({ name, ...metrics }); await page.screenshot({ path: `docs/evidence/${screenshotPrefix}-${name}.png`, fullPage: true });
   if (metrics.documentWidth > metrics.viewportWidth + 1 || metrics.bounds.left < -1 || metrics.bounds.right > metrics.viewportWidth + 1 || metrics.dialogScrollWidth > metrics.dialogWidth + 2) throw new Error(`${name}: dialog horizontal overflow`);
-  if (metrics.fonts.some(font => font.size < 14) || metrics.clipped.length) throw new Error(`${name}: unreadable dialog text or clipped controls`);
+  if (metrics.fonts.some(font => font.size < 13.5) || metrics.clipped.length) throw new Error(`${name}: unreadable dialog text or clipped controls`);
   if (metrics.modal !== 'true' || !metrics.isolated) throw new Error(`${name}: modal background is not isolated`);
 }
 
@@ -307,6 +308,6 @@ try {
     pageErrors, observations: evidence };
   if (m6) report.scope += ' M6 adds release metadata, keyboard guidance, local policy links, backup/restore, damaged slot recovery, sanitized diagnostics and two-step local reset dialogs in both themes at 1440/1024/390/320, with native modal semantics and isolated backgrounds.';
   if (m7) report.scope += ' M7 adds TypeScript/Python target validation, ephemeral signed model package creation, independently trusted fingerprint import, and native import reports in both themes at 1440/1024/390/320.';
-  await writeFile(`docs/evidence/${catalog ? `${ENGINE_VERSION.split('-').at(-1)}-design-verification` : m7 ? 'm7-design-verification' : m6 ? 'm6-design-verification' : m5 ? 'm5-design-verification' : m4 ? 'm4-design-verification' : 'sane-design-verification'}.json`, JSON.stringify(report, null, 2) + '\n');
+  await writeFile(`docs/evidence/${compactM20 ? 'm20-compact-design-verification' : catalog ? `${ENGINE_VERSION.split('-').at(-1)}-design-verification` : m7 ? 'm7-design-verification' : m6 ? 'm6-design-verification' : m5 ? 'm5-design-verification' : m4 ? 'm4-design-verification' : 'sane-design-verification'}.json`, JSON.stringify(report, null, 2) + '\n');
   process.stdout.write(JSON.stringify(report, null, 2) + '\n');
 } finally { await context.close(); await browser.close(); }

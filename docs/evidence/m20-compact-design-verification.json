@@ -1,0 +1,2532 @@
+{
+  "generatedAt": "2026-10-08T18:29:41.129Z",
+  "browser": "153.0.8010.12",
+  "scope": "SANE typography, compact blocks, neutral themes, local overflow, actual Korean font and measured canvas/results placement. Desktop 1440/1920 and horizontal tablet 1024/900 require full-height side panels; 390/320 and the 720x450 browser-zoom-equivalent viewport require stacking. Root 200% tests text enlargement separately with stacked panels. M1 measures typed arrays and Quick Insert; M2 FIR/multirate; M3 RK45 settings/statistics, crossing/reset events, long oscillator names and mobile solver settings.",
+  "pageErrors": [],
+  "observations": [
+    {
+      "name": "dark-editor",
+      "theme": "dark",
+      "viewportWidth": 1440,
+      "documentWidth": 1440,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": 0,
+          "right": 1440,
+          "bottom": 72.65625,
+          "width": 1440,
+          "height": 72.65625,
+          "scrollWidth": 1440
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": 72.65625,
+          "right": 1440,
+          "bottom": 114.921875,
+          "width": 1440,
+          "height": 42.265625,
+          "scrollWidth": 1440
+        },
+        ".workspace": {
+          "left": 0,
+          "top": 182.578125,
+          "right": 1440,
+          "bottom": 875,
+          "width": 1440,
+          "height": 692.421875,
+          "scrollWidth": 1440
+        },
+        ".canvas-column": {
+          "left": 175,
+          "top": 182.578125,
+          "right": 1222,
+          "bottom": 875,
+          "width": 1047,
+          "height": 692.421875,
+          "scrollWidth": 1047
+        },
+        ".workbench-layout": {
+          "left": 175,
+          "top": 182.578125,
+          "right": 1222,
+          "bottom": 875,
+          "width": 1047,
+          "height": 692.421875,
+          "scrollWidth": 1047
+        },
+        ".canvas-area": {
+          "left": 175,
+          "top": 182.578125,
+          "right": 998,
+          "bottom": 875,
+          "width": 823,
+          "height": 692.421875,
+          "scrollWidth": 823
+        },
+        ".results-panel": {
+          "left": 998,
+          "top": 182.578125,
+          "right": 1222,
+          "bottom": 875,
+          "width": 224,
+          "height": 692.421875,
+          "scrollWidth": 223
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": 182.578125,
+          "right": 175,
+          "bottom": 875,
+          "width": 175,
+          "height": 692.421875,
+          "scrollWidth": 174
+        },
+        ".inspector-panel": {
+          "left": 1222,
+          "top": 182.578125,
+          "right": 1440,
+          "bottom": 875,
+          "width": 218,
+          "height": 692.421875,
+          "scrollWidth": 217
+        }
+      },
+      "workbench": {
+        "orientation": "side",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 823,
+        "resultsWidth": 224
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 1.05,
+      "effectiveBlockNamePx": 20.37,
+      "blockStripe": "none",
+      "expectedOrientation": "side",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    },
+    {
+      "name": "actual-korean-font",
+      "fonts": [
+        {
+          "familyName": "Segoe UI Semibold",
+          "postScriptName": "SegoeUI-Semibold",
+          "isCustomFont": false,
+          "glyphCount": 4
+        },
+        {
+          "familyName": "Malgun Gothic",
+          "postScriptName": "MalgunGothicBold",
+          "isCustomFont": false,
+          "glyphCount": 7
+        }
+      ]
+    },
+    {
+      "name": "light-editor",
+      "theme": "light",
+      "viewportWidth": 1440,
+      "documentWidth": 1440,
+      "tokens": {
+        "canvas": "#e4e5e7",
+        "surface": "#ececee",
+        "text": "#202124",
+        "muted": "#565a61",
+        "accent": "#355f9b",
+        "strong-line": "#777c84"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": 0,
+          "right": 1440,
+          "bottom": 72.65625,
+          "width": 1440,
+          "height": 72.65625,
+          "scrollWidth": 1440
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": 72.65625,
+          "right": 1440,
+          "bottom": 114.921875,
+          "width": 1440,
+          "height": 42.265625,
+          "scrollWidth": 1440
+        },
+        ".workspace": {
+          "left": 0,
+          "top": 182.578125,
+          "right": 1440,
+          "bottom": 875,
+          "width": 1440,
+          "height": 692.421875,
+          "scrollWidth": 1440
+        },
+        ".canvas-column": {
+          "left": 175,
+          "top": 182.578125,
+          "right": 1222,
+          "bottom": 875,
+          "width": 1047,
+          "height": 692.421875,
+          "scrollWidth": 1047
+        },
+        ".workbench-layout": {
+          "left": 175,
+          "top": 182.578125,
+          "right": 1222,
+          "bottom": 875,
+          "width": 1047,
+          "height": 692.421875,
+          "scrollWidth": 1047
+        },
+        ".canvas-area": {
+          "left": 175,
+          "top": 182.578125,
+          "right": 998,
+          "bottom": 875,
+          "width": 823,
+          "height": 692.421875,
+          "scrollWidth": 823
+        },
+        ".results-panel": {
+          "left": 998,
+          "top": 182.578125,
+          "right": 1222,
+          "bottom": 875,
+          "width": 224,
+          "height": 692.421875,
+          "scrollWidth": 223
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": 182.578125,
+          "right": 175,
+          "bottom": 875,
+          "width": 175,
+          "height": 692.421875,
+          "scrollWidth": 174
+        },
+        ".inspector-panel": {
+          "left": 1222,
+          "top": 182.578125,
+          "right": 1440,
+          "bottom": 875,
+          "width": 218,
+          "height": 692.421875,
+          "scrollWidth": 217
+        }
+      },
+      "workbench": {
+        "orientation": "side",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 823,
+        "resultsWidth": 224
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 1.05,
+      "effectiveBlockNamePx": 20.37,
+      "blockStripe": "none",
+      "expectedOrientation": "side",
+      "contrastRatios": {
+        "text": 12.77216047673279,
+        "muted": 5.497100492120272,
+        "accent": 5.108096722340601
+      }
+    },
+    {
+      "name": "continuous-result",
+      "theme": "dark",
+      "viewportWidth": 1440,
+      "documentWidth": 1440,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".field input": 15.52,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".plot-y-labels": 13.6,
+        ".plot-x-labels": 13.6,
+        ".solver-settings input": 15.52,
+        ".solver-settings select": 15.52,
+        ".solver-statistics dt": 13.6,
+        ".solver-statistics dd": 13.6,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": 0,
+          "right": 1440,
+          "bottom": 72.65625,
+          "width": 1440,
+          "height": 72.65625,
+          "scrollWidth": 1440
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": 72.65625,
+          "right": 1440,
+          "bottom": 114.921875,
+          "width": 1440,
+          "height": 42.265625,
+          "scrollWidth": 1440
+        },
+        ".workspace": {
+          "left": 0,
+          "top": 182.578125,
+          "right": 1440,
+          "bottom": 875,
+          "width": 1440,
+          "height": 692.421875,
+          "scrollWidth": 1440
+        },
+        ".canvas-column": {
+          "left": 175,
+          "top": 182.578125,
+          "right": 1222,
+          "bottom": 875,
+          "width": 1047,
+          "height": 692.421875,
+          "scrollWidth": 1047
+        },
+        ".workbench-layout": {
+          "left": 175,
+          "top": 182.578125,
+          "right": 1222,
+          "bottom": 875,
+          "width": 1047,
+          "height": 692.421875,
+          "scrollWidth": 1047
+        },
+        ".canvas-area": {
+          "left": 175,
+          "top": 182.578125,
+          "right": 998,
+          "bottom": 875,
+          "width": 823,
+          "height": 692.421875,
+          "scrollWidth": 823
+        },
+        ".results-panel": {
+          "left": 998,
+          "top": 182.578125,
+          "right": 1222,
+          "bottom": 875,
+          "width": 224,
+          "height": 692.421875,
+          "scrollWidth": 223
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": 182.578125,
+          "right": 175,
+          "bottom": 875,
+          "width": 175,
+          "height": 692.421875,
+          "scrollWidth": 174
+        },
+        ".inspector-panel": {
+          "left": 1222,
+          "top": 182.578125,
+          "right": 1440,
+          "bottom": 875,
+          "width": 218,
+          "height": 692.421875,
+          "scrollWidth": 217
+        }
+      },
+      "workbench": {
+        "orientation": "side",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 823,
+        "resultsWidth": 224
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 1.05,
+      "effectiveBlockNamePx": 20.37,
+      "blockStripe": "none",
+      "expectedOrientation": "side",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    },
+    {
+      "name": "wide-editor",
+      "theme": "dark",
+      "viewportWidth": 1920,
+      "documentWidth": 1920,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".field input": 15.52,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".plot-y-labels": 13.6,
+        ".plot-x-labels": 13.6,
+        ".solver-settings input": 15.52,
+        ".solver-settings select": 15.52,
+        ".solver-statistics dt": 13.6,
+        ".solver-statistics dd": 13.6,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 50,
+          "width": 1920,
+          "height": 50,
+          "scrollWidth": 1920
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": 50,
+          "right": 1920,
+          "bottom": 92.265625,
+          "width": 1920,
+          "height": 42.265625,
+          "scrollWidth": 1920
+        },
+        ".workspace": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 1920,
+          "height": 895.078125,
+          "scrollWidth": 1920
+        },
+        ".canvas-column": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".workbench-layout": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".canvas-area": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1385,
+          "bottom": 1055,
+          "width": 1189,
+          "height": 895.078125,
+          "scrollWidth": 1189
+        },
+        ".results-panel": {
+          "left": 1385,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 294,
+          "height": 895.078125,
+          "scrollWidth": 293
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 196,
+          "bottom": 1055,
+          "width": 196,
+          "height": 895.078125,
+          "scrollWidth": 195
+        },
+        ".inspector-panel": {
+          "left": 1679,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 241,
+          "height": 895.078125,
+          "scrollWidth": 240
+        }
+      },
+      "workbench": {
+        "orientation": "side",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 1189,
+        "resultsWidth": 294
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 1.05,
+      "effectiveBlockNamePx": 20.37,
+      "blockStripe": "none",
+      "expectedOrientation": "side",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    },
+    {
+      "name": "tablet-editor",
+      "theme": "dark",
+      "viewportWidth": 1024,
+      "documentWidth": 1024,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".field input": 15.52,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".plot-y-labels": 13.6,
+        ".plot-x-labels": 13.6,
+        ".solver-settings input": 15.52,
+        ".solver-settings select": 15.52,
+        ".solver-statistics dt": 13.6,
+        ".solver-statistics dd": 13.6,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": -1467,
+          "right": 1024,
+          "bottom": -1377.8125,
+          "width": 1024,
+          "height": 89.1875,
+          "scrollWidth": 1024
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": -1377.8125,
+          "right": 1024,
+          "bottom": -1301.15625,
+          "width": 1024,
+          "height": 76.65625,
+          "scrollWidth": 1024
+        },
+        ".workspace": {
+          "left": 0,
+          "top": -1233.5,
+          "right": 1024,
+          "bottom": 1707.234375,
+          "width": 1024,
+          "height": 2940.734375,
+          "scrollWidth": 1024
+        },
+        ".canvas-column": {
+          "left": 0,
+          "top": -873.5,
+          "right": 1024,
+          "bottom": 496.671875,
+          "width": 1024,
+          "height": 1370.171875,
+          "scrollWidth": 1024
+        },
+        ".workbench-layout": {
+          "left": 0,
+          "top": -873.5,
+          "right": 1024,
+          "bottom": 496.671875,
+          "width": 1024,
+          "height": 1370.171875,
+          "scrollWidth": 1024
+        },
+        ".canvas-area": {
+          "left": 0,
+          "top": -873.5,
+          "right": 800,
+          "bottom": 496.671875,
+          "width": 800,
+          "height": 1370.171875,
+          "scrollWidth": 800
+        },
+        ".results-panel": {
+          "left": 800,
+          "top": -873.5,
+          "right": 1024,
+          "bottom": 496.671875,
+          "width": 224,
+          "height": 1370.171875,
+          "scrollWidth": 223
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": -1233.5,
+          "right": 1024,
+          "bottom": -873.5,
+          "width": 1024,
+          "height": 360,
+          "scrollWidth": 1024
+        },
+        ".inspector-panel": {
+          "left": 0,
+          "top": 496.671875,
+          "right": 1024,
+          "bottom": 1707.234375,
+          "width": 1024,
+          "height": 1210.5625,
+          "scrollWidth": 1024
+        }
+      },
+      "workbench": {
+        "orientation": "side",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 800,
+        "resultsWidth": 224
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 1.02874,
+      "effectiveBlockNamePx": 19.957555999999997,
+      "blockStripe": "none",
+      "expectedOrientation": "side",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    },
+    {
+      "name": "horizontal-tablet-editor",
+      "theme": "dark",
+      "viewportWidth": 900,
+      "documentWidth": 900,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".field input": 15.52,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".plot-y-labels": 13.6,
+        ".plot-x-labels": 13.6,
+        ".solver-settings input": 15.52,
+        ".solver-settings select": 15.52,
+        ".solver-statistics dt": 13.6,
+        ".solver-statistics dd": 13.6,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": -1467,
+          "right": 900,
+          "bottom": -1377.8125,
+          "width": 900,
+          "height": 89.1875,
+          "scrollWidth": 900
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": -1377.8125,
+          "right": 900,
+          "bottom": -1301.15625,
+          "width": 900,
+          "height": 76.65625,
+          "scrollWidth": 900
+        },
+        ".workspace": {
+          "left": 0,
+          "top": -1233.5,
+          "right": 900,
+          "bottom": 1728.984375,
+          "width": 900,
+          "height": 2962.484375,
+          "scrollWidth": 900
+        },
+        ".canvas-column": {
+          "left": 0,
+          "top": -873.5,
+          "right": 900,
+          "bottom": 496.671875,
+          "width": 900,
+          "height": 1370.171875,
+          "scrollWidth": 900
+        },
+        ".workbench-layout": {
+          "left": 0,
+          "top": -873.5,
+          "right": 900,
+          "bottom": 496.671875,
+          "width": 900,
+          "height": 1370.171875,
+          "scrollWidth": 900
+        },
+        ".canvas-area": {
+          "left": 0,
+          "top": -873.5,
+          "right": 676,
+          "bottom": 496.671875,
+          "width": 676,
+          "height": 1370.171875,
+          "scrollWidth": 676
+        },
+        ".results-panel": {
+          "left": 676,
+          "top": -873.5,
+          "right": 900,
+          "bottom": 496.671875,
+          "width": 224,
+          "height": 1370.171875,
+          "scrollWidth": 223
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": -1233.5,
+          "right": 900,
+          "bottom": -873.5,
+          "width": 900,
+          "height": 360,
+          "scrollWidth": 900
+        },
+        ".inspector-panel": {
+          "left": 0,
+          "top": 496.671875,
+          "right": 900,
+          "bottom": 1728.984375,
+          "width": 900,
+          "height": 1232.3125,
+          "scrollWidth": 900
+        }
+      },
+      "workbench": {
+        "orientation": "side",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 676,
+        "resultsWidth": 224
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 1.02874,
+      "effectiveBlockNamePx": 19.957555999999997,
+      "blockStripe": "none",
+      "expectedOrientation": "side",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    },
+    {
+      "name": "mobile-editor",
+      "theme": "dark",
+      "viewportWidth": 390,
+      "documentWidth": 390,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".field input": 15.52,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".plot-y-labels": 13.6,
+        ".plot-x-labels": 13.6,
+        ".solver-settings input": 15.52,
+        ".solver-settings select": 15.52,
+        ".solver-statistics dt": 13.6,
+        ".solver-statistics dd": 13.6,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": -690,
+          "right": 390,
+          "bottom": -492.578125,
+          "width": 390,
+          "height": 197.421875,
+          "scrollWidth": 390
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": -492.578125,
+          "right": 390,
+          "bottom": -346.265625,
+          "width": 390,
+          "height": 146.3125,
+          "scrollWidth": 390
+        },
+        ".workspace": {
+          "left": 0,
+          "top": -278.609375,
+          "right": 390,
+          "bottom": 2010.65625,
+          "width": 390,
+          "height": 2289.265625,
+          "scrollWidth": 390
+        },
+        ".canvas-column": {
+          "left": 0,
+          "top": 58.984375,
+          "right": 390,
+          "bottom": 838.984375,
+          "width": 390,
+          "height": 780,
+          "scrollWidth": 390
+        },
+        ".workbench-layout": {
+          "left": 0,
+          "top": 58.984375,
+          "right": 390,
+          "bottom": 838.984375,
+          "width": 390,
+          "height": 780,
+          "scrollWidth": 390
+        },
+        ".canvas-area": {
+          "left": 0,
+          "top": 58.984375,
+          "right": 390,
+          "bottom": 468.984375,
+          "width": 390,
+          "height": 410,
+          "scrollWidth": 390
+        },
+        ".results-panel": {
+          "left": 0,
+          "top": 468.984375,
+          "right": 390,
+          "bottom": 838.984375,
+          "width": 390,
+          "height": 370,
+          "scrollWidth": 390
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": -278.609375,
+          "right": 390,
+          "bottom": 58.984375,
+          "width": 390,
+          "height": 337.59375,
+          "scrollWidth": 390
+        },
+        ".inspector-panel": {
+          "left": 0,
+          "top": 838.984375,
+          "right": 390,
+          "bottom": 2010.65625,
+          "width": 390,
+          "height": 1171.671875,
+          "scrollWidth": 390
+        }
+      },
+      "workbench": {
+        "orientation": "stack",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 390,
+        "resultsWidth": 390
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 0.8,
+      "effectiveBlockNamePx": 15.52,
+      "blockStripe": "none",
+      "expectedOrientation": "stack",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    },
+    {
+      "name": "narrow-editor",
+      "theme": "dark",
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".field input": 15.52,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".plot-y-labels": 13.6,
+        ".plot-x-labels": 13.6,
+        ".solver-settings input": 15.52,
+        ".solver-settings select": 15.52,
+        ".solver-statistics dt": 13.6,
+        ".solver-statistics dd": 13.6,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": -497,
+          "right": 320,
+          "bottom": -269.3125,
+          "width": 320,
+          "height": 227.6875,
+          "scrollWidth": 320
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": -269.3125,
+          "right": 320,
+          "bottom": -131.265625,
+          "width": 320,
+          "height": 138.046875,
+          "scrollWidth": 320
+        },
+        ".workspace": {
+          "left": 0,
+          "top": -63.609375,
+          "right": 320,
+          "bottom": 2251.5625,
+          "width": 320,
+          "height": 2315.171875,
+          "scrollWidth": 320
+        },
+        ".canvas-column": {
+          "left": 0,
+          "top": 256.390625,
+          "right": 320,
+          "bottom": 1036.390625,
+          "width": 320,
+          "height": 780,
+          "scrollWidth": 320
+        },
+        ".workbench-layout": {
+          "left": 0,
+          "top": 256.390625,
+          "right": 320,
+          "bottom": 1036.390625,
+          "width": 320,
+          "height": 780,
+          "scrollWidth": 320
+        },
+        ".canvas-area": {
+          "left": 0,
+          "top": 256.390625,
+          "right": 320,
+          "bottom": 666.390625,
+          "width": 320,
+          "height": 410,
+          "scrollWidth": 320
+        },
+        ".results-panel": {
+          "left": 0,
+          "top": 666.390625,
+          "right": 320,
+          "bottom": 1036.390625,
+          "width": 320,
+          "height": 370,
+          "scrollWidth": 320
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": -63.609375,
+          "right": 320,
+          "bottom": 256.390625,
+          "width": 320,
+          "height": 320,
+          "scrollWidth": 320
+        },
+        ".inspector-panel": {
+          "left": 0,
+          "top": 1036.390625,
+          "right": 320,
+          "bottom": 2251.5625,
+          "width": 320,
+          "height": 1215.171875,
+          "scrollWidth": 320
+        }
+      },
+      "workbench": {
+        "orientation": "stack",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 320,
+        "resultsWidth": 320
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 0.8,
+      "effectiveBlockNamePx": 15.52,
+      "blockStripe": "none",
+      "expectedOrientation": "stack",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    },
+    {
+      "name": "zoom-equivalent",
+      "theme": "dark",
+      "viewportWidth": 720,
+      "documentWidth": 720,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".field input": 15.52,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".plot-y-labels": 13.6,
+        ".plot-x-labels": 13.6,
+        ".solver-settings input": 15.52,
+        ".solver-settings select": 15.52,
+        ".solver-statistics dt": 13.6,
+        ".solver-statistics dd": 13.6,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": -693,
+          "right": 720,
+          "bottom": -563.421875,
+          "width": 720,
+          "height": 129.578125,
+          "scrollWidth": 720
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": -563.421875,
+          "right": 720,
+          "bottom": -485.765625,
+          "width": 720,
+          "height": 77.65625,
+          "scrollWidth": 720
+        },
+        ".workspace": {
+          "left": 0,
+          "top": -418.109375,
+          "right": 720,
+          "bottom": 1725.203125,
+          "width": 720,
+          "height": 2143.3125,
+          "scrollWidth": 720
+        },
+        ".canvas-column": {
+          "left": 0,
+          "top": -138.109375,
+          "right": 720,
+          "bottom": 641.890625,
+          "width": 720,
+          "height": 780,
+          "scrollWidth": 720
+        },
+        ".workbench-layout": {
+          "left": 0,
+          "top": -138.109375,
+          "right": 720,
+          "bottom": 641.890625,
+          "width": 720,
+          "height": 780,
+          "scrollWidth": 720
+        },
+        ".canvas-area": {
+          "left": 0,
+          "top": -138.109375,
+          "right": 720,
+          "bottom": 271.890625,
+          "width": 720,
+          "height": 410,
+          "scrollWidth": 720
+        },
+        ".results-panel": {
+          "left": 0,
+          "top": 271.890625,
+          "right": 720,
+          "bottom": 641.890625,
+          "width": 720,
+          "height": 370,
+          "scrollWidth": 720
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": -418.109375,
+          "right": 720,
+          "bottom": -138.109375,
+          "width": 720,
+          "height": 280,
+          "scrollWidth": 720
+        },
+        ".inspector-panel": {
+          "left": 0,
+          "top": 641.890625,
+          "right": 720,
+          "bottom": 1725.203125,
+          "width": 720,
+          "height": 1083.3125,
+          "scrollWidth": 720
+        }
+      },
+      "workbench": {
+        "orientation": "stack",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 720,
+        "resultsWidth": 720
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 0.925287,
+      "effectiveBlockNamePx": 17.950567799999998,
+      "blockStripe": "none",
+      "expectedOrientation": "stack",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    },
+    {
+      "name": "text-200-percent",
+      "theme": "dark",
+      "viewportWidth": 1440,
+      "documentWidth": 1440,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 31.04,
+        ".button": 27.2,
+        ".run-button": 31.04,
+        ".library-copy strong": 31.04,
+        ".library-copy small": 27.2,
+        ".field-label": 27.2,
+        ".field input": 31.04,
+        ".result-status": 27.2,
+        ".block-name": 38.8,
+        ".block-value": 46.56,
+        ".plot-y-labels": 27.2,
+        ".plot-x-labels": 27.2,
+        ".solver-settings input": 31.04,
+        ".solver-settings select": 31.04,
+        ".solver-statistics dt": 27.2,
+        ".solver-statistics dd": 27.2,
+        ".statusbar": 24
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": 0,
+          "right": 1440,
+          "bottom": 147.40625,
+          "width": 1440,
+          "height": 147.40625,
+          "scrollWidth": 1440
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": 147.40625,
+          "right": 1440,
+          "bottom": 267.765625,
+          "width": 1440,
+          "height": 120.359375,
+          "scrollWidth": 1440
+        },
+        ".workspace": {
+          "left": 0,
+          "top": 379.125,
+          "right": 1440,
+          "bottom": 1173,
+          "width": 1440,
+          "height": 793.875,
+          "scrollWidth": 1440
+        },
+        ".canvas-column": {
+          "left": 175,
+          "top": 379.125,
+          "right": 1222,
+          "bottom": 1173,
+          "width": 1047,
+          "height": 793.875,
+          "scrollWidth": 1047
+        },
+        ".workbench-layout": {
+          "left": 175,
+          "top": 379.125,
+          "right": 1222,
+          "bottom": 1173,
+          "width": 1047,
+          "height": 793.875,
+          "scrollWidth": 1047
+        },
+        ".canvas-area": {
+          "left": 175,
+          "top": 379.125,
+          "right": 1222,
+          "bottom": 833,
+          "width": 1047,
+          "height": 453.875,
+          "scrollWidth": 1047
+        },
+        ".results-panel": {
+          "left": 175,
+          "top": 833,
+          "right": 1222,
+          "bottom": 1173,
+          "width": 1047,
+          "height": 340,
+          "scrollWidth": 1047
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": 379.125,
+          "right": 175,
+          "bottom": 1173,
+          "width": 175,
+          "height": 793.875,
+          "scrollWidth": 174
+        },
+        ".inspector-panel": {
+          "left": 1222,
+          "top": 379.125,
+          "right": 1440,
+          "bottom": 1173,
+          "width": 218,
+          "height": 793.875,
+          "scrollWidth": 217
+        }
+      },
+      "workbench": {
+        "orientation": "stack",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 1047,
+        "resultsWidth": 1047
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 1.05,
+      "effectiveBlockNamePx": 40.74,
+      "blockStripe": "none",
+      "expectedOrientation": "stack",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    },
+    {
+      "name": "m1-vector-result",
+      "theme": "dark",
+      "viewportWidth": 1920,
+      "documentWidth": 1920,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".field input": 15.52,
+        ".field textarea": 15.52,
+        ".signal-metadata": 13.6,
+        ".signal-result td": 13.6,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".plot-y-labels": 13.6,
+        ".plot-x-labels": 13.6,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 50,
+          "width": 1920,
+          "height": 50,
+          "scrollWidth": 1920
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": 50,
+          "right": 1920,
+          "bottom": 92.265625,
+          "width": 1920,
+          "height": 42.265625,
+          "scrollWidth": 1920
+        },
+        ".workspace": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 1920,
+          "height": 895.078125,
+          "scrollWidth": 1920
+        },
+        ".canvas-column": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".workbench-layout": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".canvas-area": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1385,
+          "bottom": 1055,
+          "width": 1189,
+          "height": 895.078125,
+          "scrollWidth": 1189
+        },
+        ".results-panel": {
+          "left": 1385,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 294,
+          "height": 895.078125,
+          "scrollWidth": 293
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 196,
+          "bottom": 1055,
+          "width": 196,
+          "height": 895.078125,
+          "scrollWidth": 195
+        },
+        ".inspector-panel": {
+          "left": 1679,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 241,
+          "height": 895.078125,
+          "scrollWidth": 240
+        }
+      },
+      "workbench": {
+        "orientation": "side",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 1189,
+        "resultsWidth": 294
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 1.05,
+      "effectiveBlockNamePx": 20.37,
+      "blockStripe": "none",
+      "expectedOrientation": "side",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    },
+    {
+      "name": "m1-quick-insert",
+      "theme": "dark",
+      "viewportWidth": 1920,
+      "documentWidth": 1920,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".field input": 15.52,
+        ".field textarea": 15.52,
+        ".signal-metadata": 13.6,
+        ".signal-result td": 13.6,
+        ".quick-search input": 15.52,
+        ".workspace-dialog h2": 19.4,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".plot-y-labels": 13.6,
+        ".plot-x-labels": 13.6,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 50,
+          "width": 1920,
+          "height": 50,
+          "scrollWidth": 1920
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": 50,
+          "right": 1920,
+          "bottom": 92.265625,
+          "width": 1920,
+          "height": 42.265625,
+          "scrollWidth": 1920
+        },
+        ".workspace": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 1920,
+          "height": 895.078125,
+          "scrollWidth": 1920
+        },
+        ".canvas-column": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".workbench-layout": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".canvas-area": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1385,
+          "bottom": 1055,
+          "width": 1189,
+          "height": 895.078125,
+          "scrollWidth": 1189
+        },
+        ".results-panel": {
+          "left": 1385,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 294,
+          "height": 895.078125,
+          "scrollWidth": 293
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 196,
+          "bottom": 1055,
+          "width": 196,
+          "height": 895.078125,
+          "scrollWidth": 195
+        },
+        ".inspector-panel": {
+          "left": 1679,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 241,
+          "height": 895.078125,
+          "scrollWidth": 240
+        }
+      },
+      "workbench": {
+        "orientation": "side",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 1189,
+        "resultsWidth": 294
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 1.05,
+      "effectiveBlockNamePx": 20.37,
+      "blockStripe": "none",
+      "expectedOrientation": "side",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    },
+    {
+      "name": "m1-long-block-name",
+      "theme": "dark",
+      "viewportWidth": 1920,
+      "documentWidth": 1920,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".field input": 15.52,
+        ".signal-metadata": 13.6,
+        ".signal-result td": 13.6,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".plot-y-labels": 13.6,
+        ".plot-x-labels": 13.6,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 50,
+          "width": 1920,
+          "height": 50,
+          "scrollWidth": 1920
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": 50,
+          "right": 1920,
+          "bottom": 92.265625,
+          "width": 1920,
+          "height": 42.265625,
+          "scrollWidth": 1920
+        },
+        ".workspace": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 1920,
+          "height": 895.078125,
+          "scrollWidth": 1920
+        },
+        ".canvas-column": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".workbench-layout": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".canvas-area": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1385,
+          "bottom": 1055,
+          "width": 1189,
+          "height": 895.078125,
+          "scrollWidth": 1189
+        },
+        ".results-panel": {
+          "left": 1385,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 294,
+          "height": 895.078125,
+          "scrollWidth": 293
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 196,
+          "bottom": 1055,
+          "width": 196,
+          "height": 895.078125,
+          "scrollWidth": 195
+        },
+        ".inspector-panel": {
+          "left": 1679,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 241,
+          "height": 895.078125,
+          "scrollWidth": 240
+        }
+      },
+      "workbench": {
+        "orientation": "side",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 1189,
+        "resultsWidth": 294
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 1.05,
+      "effectiveBlockNamePx": 20.37,
+      "blockStripe": "none",
+      "expectedOrientation": "side",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    },
+    {
+      "name": "m2-fir-result",
+      "theme": "dark",
+      "viewportWidth": 1920,
+      "documentWidth": 1920,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".field input": 15.52,
+        ".field textarea": 15.52,
+        ".signal-metadata": 13.6,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".plot-y-labels": 13.6,
+        ".plot-x-labels": 13.6,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 50,
+          "width": 1920,
+          "height": 50,
+          "scrollWidth": 1920
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": 50,
+          "right": 1920,
+          "bottom": 92.265625,
+          "width": 1920,
+          "height": 42.265625,
+          "scrollWidth": 1920
+        },
+        ".workspace": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 1920,
+          "height": 895.078125,
+          "scrollWidth": 1920
+        },
+        ".canvas-column": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".workbench-layout": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".canvas-area": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1385,
+          "bottom": 1055,
+          "width": 1189,
+          "height": 895.078125,
+          "scrollWidth": 1189
+        },
+        ".results-panel": {
+          "left": 1385,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 294,
+          "height": 895.078125,
+          "scrollWidth": 293
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 196,
+          "bottom": 1055,
+          "width": 196,
+          "height": 895.078125,
+          "scrollWidth": 195
+        },
+        ".inspector-panel": {
+          "left": 1679,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 241,
+          "height": 895.078125,
+          "scrollWidth": 240
+        }
+      },
+      "workbench": {
+        "orientation": "side",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 1189,
+        "resultsWidth": 294
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 1.05,
+      "effectiveBlockNamePx": 20.37,
+      "blockStripe": "none",
+      "expectedOrientation": "side",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    },
+    {
+      "name": "m2-multirate-result",
+      "theme": "dark",
+      "viewportWidth": 1920,
+      "documentWidth": 1920,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".field input": 15.52,
+        ".signal-metadata": 13.6,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".plot-y-labels": 13.6,
+        ".plot-x-labels": 13.6,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 50,
+          "width": 1920,
+          "height": 50,
+          "scrollWidth": 1920
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": 50,
+          "right": 1920,
+          "bottom": 92.265625,
+          "width": 1920,
+          "height": 42.265625,
+          "scrollWidth": 1920
+        },
+        ".workspace": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 1920,
+          "height": 895.078125,
+          "scrollWidth": 1920
+        },
+        ".canvas-column": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".workbench-layout": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".canvas-area": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1385,
+          "bottom": 1055,
+          "width": 1189,
+          "height": 895.078125,
+          "scrollWidth": 1189
+        },
+        ".results-panel": {
+          "left": 1385,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 294,
+          "height": 895.078125,
+          "scrollWidth": 293
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 196,
+          "bottom": 1055,
+          "width": 196,
+          "height": 895.078125,
+          "scrollWidth": 195
+        },
+        ".inspector-panel": {
+          "left": 1679,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 241,
+          "height": 895.078125,
+          "scrollWidth": 240
+        }
+      },
+      "workbench": {
+        "orientation": "side",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 1189,
+        "resultsWidth": 294
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 1.05,
+      "effectiveBlockNamePx": 20.37,
+      "blockStripe": "none",
+      "expectedOrientation": "side",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    },
+    {
+      "name": "m3-rk45-result",
+      "theme": "dark",
+      "viewportWidth": 1920,
+      "documentWidth": 1920,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".field input": 15.52,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".plot-y-labels": 13.6,
+        ".plot-x-labels": 13.6,
+        ".solver-settings input": 15.52,
+        ".solver-settings select": 15.52,
+        ".solver-statistics dt": 13.6,
+        ".solver-statistics dd": 13.6,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 50,
+          "width": 1920,
+          "height": 50,
+          "scrollWidth": 1920
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": 50,
+          "right": 1920,
+          "bottom": 92.265625,
+          "width": 1920,
+          "height": 42.265625,
+          "scrollWidth": 1920
+        },
+        ".workspace": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 1920,
+          "height": 895.078125,
+          "scrollWidth": 1920
+        },
+        ".canvas-column": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".workbench-layout": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".canvas-area": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1385,
+          "bottom": 1055,
+          "width": 1189,
+          "height": 895.078125,
+          "scrollWidth": 1189
+        },
+        ".results-panel": {
+          "left": 1385,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 294,
+          "height": 895.078125,
+          "scrollWidth": 293
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 196,
+          "bottom": 1055,
+          "width": 196,
+          "height": 895.078125,
+          "scrollWidth": 195
+        },
+        ".inspector-panel": {
+          "left": 1679,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 241,
+          "height": 895.078125,
+          "scrollWidth": 240
+        }
+      },
+      "workbench": {
+        "orientation": "side",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 1189,
+        "resultsWidth": 294
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 1.05,
+      "effectiveBlockNamePx": 20.37,
+      "blockStripe": "none",
+      "expectedOrientation": "side",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    },
+    {
+      "name": "m3-crossing-reset",
+      "theme": "dark",
+      "viewportWidth": 1920,
+      "documentWidth": 1920,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".field input": 15.52,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".plot-y-labels": 13.6,
+        ".plot-x-labels": 13.6,
+        ".solver-settings input": 15.52,
+        ".solver-settings select": 15.52,
+        ".solver-statistics dt": 13.6,
+        ".solver-statistics dd": 13.6,
+        ".solver-events summary": 13.6,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 50,
+          "width": 1920,
+          "height": 50,
+          "scrollWidth": 1920
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": 50,
+          "right": 1920,
+          "bottom": 92.265625,
+          "width": 1920,
+          "height": 42.265625,
+          "scrollWidth": 1920
+        },
+        ".workspace": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 1920,
+          "height": 895.078125,
+          "scrollWidth": 1920
+        },
+        ".canvas-column": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".workbench-layout": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".canvas-area": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1385,
+          "bottom": 1055,
+          "width": 1189,
+          "height": 895.078125,
+          "scrollWidth": 1189
+        },
+        ".results-panel": {
+          "left": 1385,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 294,
+          "height": 895.078125,
+          "scrollWidth": 293
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 196,
+          "bottom": 1055,
+          "width": 196,
+          "height": 895.078125,
+          "scrollWidth": 195
+        },
+        ".inspector-panel": {
+          "left": 1679,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 241,
+          "height": 895.078125,
+          "scrollWidth": 240
+        }
+      },
+      "workbench": {
+        "orientation": "side",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 1189,
+        "resultsWidth": 294
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 1.05,
+      "effectiveBlockNamePx": 20.37,
+      "blockStripe": "none",
+      "expectedOrientation": "side",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    },
+    {
+      "name": "m3-oscillator-long-name",
+      "theme": "dark",
+      "viewportWidth": 1920,
+      "documentWidth": 1920,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".field input": 15.52,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".plot-y-labels": 13.6,
+        ".plot-x-labels": 13.6,
+        ".solver-settings input": 15.52,
+        ".solver-settings select": 15.52,
+        ".solver-statistics dt": 13.6,
+        ".solver-statistics dd": 13.6,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 50,
+          "width": 1920,
+          "height": 50,
+          "scrollWidth": 1920
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": 50,
+          "right": 1920,
+          "bottom": 92.265625,
+          "width": 1920,
+          "height": 42.265625,
+          "scrollWidth": 1920
+        },
+        ".workspace": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 1920,
+          "height": 895.078125,
+          "scrollWidth": 1920
+        },
+        ".canvas-column": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".workbench-layout": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 1483,
+          "height": 895.078125,
+          "scrollWidth": 1483
+        },
+        ".canvas-area": {
+          "left": 196,
+          "top": 159.921875,
+          "right": 1385,
+          "bottom": 1055,
+          "width": 1189,
+          "height": 895.078125,
+          "scrollWidth": 1189
+        },
+        ".results-panel": {
+          "left": 1385,
+          "top": 159.921875,
+          "right": 1679,
+          "bottom": 1055,
+          "width": 294,
+          "height": 895.078125,
+          "scrollWidth": 293
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": 159.921875,
+          "right": 196,
+          "bottom": 1055,
+          "width": 196,
+          "height": 895.078125,
+          "scrollWidth": 195
+        },
+        ".inspector-panel": {
+          "left": 1679,
+          "top": 159.921875,
+          "right": 1920,
+          "bottom": 1055,
+          "width": 241,
+          "height": 895.078125,
+          "scrollWidth": 240
+        }
+      },
+      "workbench": {
+        "orientation": "side",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 1189,
+        "resultsWidth": 294
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 1.05,
+      "effectiveBlockNamePx": 20.37,
+      "blockStripe": "none",
+      "expectedOrientation": "side",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    },
+    {
+      "name": "m3-mobile-settings",
+      "theme": "dark",
+      "viewportWidth": 390,
+      "documentWidth": 390,
+      "tokens": {
+        "canvas": "#111",
+        "surface": "#1b1b1b",
+        "text": "#ededed",
+        "muted": "#b1b1b1",
+        "accent": "#93b8ee",
+        "strong-line": "#707070"
+      },
+      "fonts": {
+        ".app-shell": 15.52,
+        ".button": 13.6,
+        ".run-button": 15.52,
+        ".library-copy strong": 15.52,
+        ".library-copy small": 13.6,
+        ".field-label": 13.6,
+        ".field input": 15.52,
+        ".result-status": 13.6,
+        ".block-name": 19.4,
+        ".block-value": 23.28,
+        ".plot-y-labels": 13.6,
+        ".plot-x-labels": 13.6,
+        ".solver-settings input": 15.52,
+        ".solver-settings select": 15.52,
+        ".solver-statistics dt": 13.6,
+        ".solver-statistics dd": 13.6,
+        ".statusbar": 12
+      },
+      "bounds": {
+        ".app-header": {
+          "left": 0,
+          "top": -690,
+          "right": 390,
+          "bottom": -492.578125,
+          "width": 390,
+          "height": 197.421875,
+          "scrollWidth": 390
+        },
+        ".toolbar": {
+          "left": 0,
+          "top": -492.578125,
+          "right": 390,
+          "bottom": -346.265625,
+          "width": 390,
+          "height": 146.3125,
+          "scrollWidth": 390
+        },
+        ".workspace": {
+          "left": 0,
+          "top": -278.609375,
+          "right": 390,
+          "bottom": 2093.3125,
+          "width": 390,
+          "height": 2371.921875,
+          "scrollWidth": 390
+        },
+        ".canvas-column": {
+          "left": 0,
+          "top": 58.984375,
+          "right": 390,
+          "bottom": 838.984375,
+          "width": 390,
+          "height": 780,
+          "scrollWidth": 390
+        },
+        ".workbench-layout": {
+          "left": 0,
+          "top": 58.984375,
+          "right": 390,
+          "bottom": 838.984375,
+          "width": 390,
+          "height": 780,
+          "scrollWidth": 390
+        },
+        ".canvas-area": {
+          "left": 0,
+          "top": 58.984375,
+          "right": 390,
+          "bottom": 468.984375,
+          "width": 390,
+          "height": 410,
+          "scrollWidth": 390
+        },
+        ".results-panel": {
+          "left": 0,
+          "top": 468.984375,
+          "right": 390,
+          "bottom": 838.984375,
+          "width": 390,
+          "height": 370,
+          "scrollWidth": 390
+        },
+        ".library-panel": {
+          "left": 0,
+          "top": -278.609375,
+          "right": 390,
+          "bottom": 58.984375,
+          "width": 390,
+          "height": 337.59375,
+          "scrollWidth": 390
+        },
+        ".inspector-panel": {
+          "left": 0,
+          "top": 838.984375,
+          "right": 390,
+          "bottom": 2093.3125,
+          "width": 390,
+          "height": 1254.328125,
+          "scrollWidth": 390
+        }
+      },
+      "workbench": {
+        "orientation": "stack",
+        "panelsContained": true,
+        "panelsAligned": true,
+        "canvasWidth": 390,
+        "resultsWidth": 390
+      },
+      "blockContentOverflows": [],
+      "graphZoom": 0.8,
+      "effectiveBlockNamePx": 15.52,
+      "blockStripe": "none",
+      "expectedOrientation": "stack",
+      "contrastRatios": {
+        "text": 14.712464705425159,
+        "muted": 8.032421567276494,
+        "accent": 8.473915761293089
+      }
+    }
+  ]
+}

@@ -843,3 +843,117 @@ textarea:focus-visible { outline:2px solid var(--focus); outline-offset:3px; }
   .source-support-actions { align-items:stretch; flex-direction:column; }
   .source-support-summary { gap:8px; flex-direction:column; }
 }
+
+/* Compact workbench chrome reserves space for the diagram without scaling its contents. */
+.app-shell {
+  --text-small:.85rem; --text-body:.97rem; --text-large:1.09rem;
+  --text-heading:1.2125rem; --text-brand:1.455rem; --text-result:1.94rem;
+}
+.app-header { min-height:50px; padding:6px 16px; gap:10px; }
+.project-name { flex-basis:15rem; min-width:min(100%,15rem); gap:8px; }
+.project-name>input { flex-basis:8rem; padding:3px 4px; }
+.project-divider { height:20px; }
+.header-actions { gap:2px; }
+.app-header .button,.toolbar .button,.offline-banner .button,.inspector-panel .button,.results-panel .button {
+  min-height:28px; padding:3px 8px; gap:5px;
+}
+.app-header .icon-button,.toolbar .icon-button { width:28px; height:28px; }
+.toolbar { min-height:42px; padding:5px 16px; gap:7px; }
+.toolbar-left,.toolbar-right { gap:6px; }
+.toolbar-separator { height:16px; margin:0 3px; }
+.toolbar .run-button { min-width:120px; min-height:31px; font-size:var(--text-body); }
+.button-shortcut { margin-left:6px; padding-left:6px; }
+.toolbar .example-button { min-height:28px; padding:3px 6px; }
+.workspace-tabs { padding:0 14px; }
+.workspace-tabs [role=tablist] { gap:20px; }
+.workspace-tabs button { padding:6px 4px; }
+.offline-banner { padding:4px 16px; gap:5px 10px; }
+.statusbar { min-height:25px; padding:3px 16px; }
+.canvas-topline { top:14px; left:16px; right:16px; }
+.canvas-hint { padding:7px 14px; }
+.react-flow__controls-button { width:28px; height:28px; }
+.react-flow__panel.react-flow__controls { right:14px; bottom:calc(8px + 1.5rem); }
+.block-library .block-library-header { padding-bottom:5px; }
+.block-library .panel-heading { padding:14px 12px 0; }
+.block-library .panel-heading h2 { gap:5px; }
+.block-library .search-field { margin:10px 10px 2px; min-height:30px; padding:3px 7px; gap:5px; }
+.block-library .search-field input { padding:2px 0; }
+.block-library .library-list { padding:5px 6px 10px; }
+.block-library .library-category { margin-top:10px; }
+.block-library .library-category-toggle { min-height:31px; padding:5px; gap:5px; }
+.block-library .library-item { padding:6px 5px; gap:7px; }
+.block-library .library-symbol { width:1.625rem; height:1.625rem; font-size:var(--text-small); border-radius:5px; }
+.block-library .library-symbol.symbol-length-medium { font-size:.7rem; }
+.block-library .library-add { display:none; }
+.block-library .library-search-count { padding:3px 12px 0; }
+.library-footnote { padding:10px 12px; gap:6px; }
+.inspector-heading { height:auto; min-height:42px; padding:8px 14px; gap:6px; }
+.inspector-content { padding:14px; }
+.selected-block-summary { gap:8px; }
+.selected-block-summary .large-block-symbol { width:2rem; height:2rem; font-size:var(--text-heading); border-radius:7px; }
+.block-description { margin-top:10px; line-height:1.6; }
+.inspector-section { margin-top:16px; padding-top:13px; }
+.inspector-section h3 { margin-bottom:10px; gap:5px; }
+.inspector-panel .field { gap:5px; margin-bottom:10px; }
+.inspector-panel .field>input,.inspector-panel .field>select,.inspector-panel .number-field {
+  min-height:30px; padding:4px 7px;
+}
+.inspector-panel .field-pair { gap:7px; }
+.inspector-panel .field-label { flex-wrap:wrap; gap:3px; }
+.inspector-panel .field-help { line-height:1.6; }
+.model-summary { padding:8px 0 5px; }
+.model-summary-icon { width:34px; height:34px; border-radius:8px; margin-bottom:10px; }
+.model-summary p { margin-top:6px; line-height:1.7; }
+.model-node-list { gap:3px; }
+.model-node-list button { padding:5px 3px; gap:7px; }
+.model-node-list .mini-symbol { width:1.375rem; height:1.375rem; font-size:var(--text-small); }
+.execution-settings { margin-top:17px; }
+.execution-note { padding:7px; line-height:1.6; }
+.storage-note { margin:17px 0 5px; }
+.support-note { padding:9px 0; line-height:1.6; }
+.results-panel .results-toolbar { padding:0 14px 5px; gap:0; min-height:62px; }
+.results-panel .results-toolbar .result-tabs { min-height:32px; gap:15px; }
+.results-panel .result-tabs>button { min-height:32px; font-size:var(--text-small); gap:4px; }
+.results-panel .result-status { min-height:23px; }
+.results-content,.diagnostics-content { padding:14px; }
+.result-empty { padding:20px 14px; gap:7px; }
+.empty-result-icon { width:32px; height:32px; border-radius:8px; }
+.results-panel .table-pagination { gap:7px; }
+.results-panel .table-pagination .button { min-height:30px; }
+
+@media (min-width:1151px) {
+  .app-shell { min-height:max(600px,38rem); }
+  .workspace { grid-template-columns:175px minmax(360px,1fr) 218px; }
+  .workspace.library-collapsed { grid-template-columns:minmax(360px,1fr) 218px; }
+}
+@media (min-width:1700px) {
+  .workspace { grid-template-columns:196px minmax(360px,1fr) 241px; }
+  .workspace.library-collapsed { grid-template-columns:minmax(360px,1fr) 241px; }
+}
+@media (min-width:761px) {
+  @container workbench (min-width:44rem) {
+    .workbench-layout { grid-template-columns:minmax(360px,1fr) clamp(224px,21cqi,294px); }
+    .workbench-layout .canvas-topline { left:14px; right:14px; }
+    .workbench-layout .canvas-hint { padding:7px 14px; }
+    .workbench-layout .results-toolbar { min-height:62px; padding:0 14px 5px; }
+    .workbench-layout .result-tabs { gap:10px; }
+    .workbench-layout .results-content,.workbench-layout .diagnostics-content { padding:14px; }
+    .workbench-layout .output-values { gap:14px; }
+    .workbench-layout .plot-table { margin-top:16px; }
+    .workbench-layout .result-table { margin-top:14px; }
+    .workbench-layout .result-empty { padding:20px 14px; }
+  }
+}
+@media (max-width:760px) {
+  .app-header { padding:8px 12px; gap:8px; }
+  .header-actions .button { padding:5px 7px; }
+  .toolbar { padding:5px 12px; }
+  .toolbar .run-button { min-width:120px; }
+  .inspector-content { padding:14px; }
+  .results-panel { min-height:200px; }
+}
+@media (pointer:coarse) {
+  .app-header .button,.toolbar .button,.offline-banner .button,.inspector-panel .button,.results-panel .button,
+  .app-header .icon-button,.toolbar .icon-button,.block-library .library-category-toggle { min-height:40px; }
+  .app-header .icon-button,.toolbar .icon-button { width:40px; }
+}

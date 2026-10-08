@@ -67,7 +67,7 @@ async function expectWorkbench(page: Page, orientation: 'side' | 'stack') {
     const contained = canvas.x >= workbench.x - 2 && results.x + results.width <= workbench.x + workbench.width + 2;
     if (orientation === 'side') return contained && canvas.x + canvas.width <= results.x + 2
       && Math.abs(canvas.y - results.y) <= 2 && Math.abs(canvas.height - results.height) <= 2
-      && canvas.width >= 300 && results.width >= 280;
+      && canvas.width >= 360 && results.width >= 224;
     return contained && canvas.y + canvas.height <= results.y + 2
       && Math.abs(canvas.x - results.x) <= 2 && Math.abs(canvas.width - results.width) <= 2;
   }, { message: `The canvas and results must form a readable ${orientation} workbench` }).toBe(true);

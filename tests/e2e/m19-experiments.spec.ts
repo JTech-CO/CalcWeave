@@ -62,9 +62,11 @@ async function configureFit(page: Page, text = csv) {
   return section;
 }
 async function finishFit(page: Page) {
+  // A fit launches several Workers under a shared 30-second computation budget.
+  test.setTimeout(60_000);
   const section = page.getByTestId('fit-section');
   await section.getByRole('button', { name: '파라미터 피팅 실행', exact: true }).click();
-  await expect(section.getByRole('button', { name: '피팅 보고서 JSON', exact: true })).toBeVisible();
+  await expect(section.getByRole('button', { name: '피팅 보고서 JSON', exact: true })).toBeVisible({ timeout: 30_000 });
   await expect(section.getByRole('button', { name: '파라미터 피팅 실행', exact: true })).toBeEnabled();
   return reportDownload<{ result: FitResult }>(page, '피팅 보고서 JSON');
 }

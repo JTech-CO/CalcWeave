@@ -1,0 +1,43 @@
+.control-analysis-section { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); min-width: 0; }
+.control-analysis-section > summary { cursor: pointer; color: var(--text); font-size: 17px; font-weight: 600; line-height: 1.7; }
+.control-system-panel { min-width: 0; padding-top: 16px; color: var(--text); font-size: 16px; }
+.control-system-panel p { line-height: 1.8; overflow-wrap: anywhere; }
+.control-system-panel .field { min-width: 0; }
+.control-system-panel .field-label,.control-system-panel .field-help { font-size: 16px; }
+.control-system-panel .field input,.control-system-panel .field select { font-size: 16px; min-height: 42px; min-width: 0; width: 100%; max-width: 100%; }
+.control-analysis-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px 18px; min-width: 0; margin: 18px 0; }
+.control-feedback-assumption { border: 1px solid var(--line); border-radius: 8px; padding: 14px; margin: 18px 0; min-width: 0; }
+.control-feedback-assumption > label { display: flex; align-items: start; gap: 10px; line-height: 1.8; }
+.control-feedback-assumption input[type=checkbox] { width: 18px; height: 18px; flex: none; margin-top: 5px; accent-color: var(--accent); }
+.control-feedback-assumption .field-help { color: var(--muted); margin: 10px 0 0; }
+.control-system-panel .button { min-height: 42px; white-space: normal; overflow-wrap: anywhere; }
+.control-source-note { color: var(--muted); font-size: 16px; }
+.control-result { border-top: 1px solid var(--line); margin-top: 22px; padding-top: 18px; min-width: 0; }
+.control-result h3 { font-size: 20px; line-height: 1.7; margin: 0 0 12px; }
+.control-result h4 { font-size: 18px; line-height: 1.7; margin: 16px 0 10px; }
+.control-result-metrics { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px 18px; margin: 16px 0; }
+.control-result-metrics > div { min-width: 0; }
+.control-result-metrics dt { color: var(--muted); font-size: 16px; margin-bottom: 6px; }
+.control-result-metrics dd { margin: 0; font-size: 19px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.control-plot { min-width: 0; margin: 18px 0 24px; }
+.control-plot figcaption { color: var(--muted); font-size: 16px; line-height: 1.7; margin-bottom: 10px; }
+.control-plot svg { display: block; width: 100%; max-width: 100%; height: auto; background: var(--canvas); border: 1px solid var(--line); border-radius: 6px; }
+.control-plot-grid { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.control-plot-axis { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; }
+.control-plot-curve { stroke: var(--accent); stroke-width: 2; fill: none; vector-effect: non-scaling-stroke; }
+.control-plot-point { fill: var(--accent); }
+.control-pole { stroke: var(--accent); stroke-width: 2; fill: none; vector-effect: non-scaling-stroke; }
+.control-zero { stroke: var(--violet); stroke-width: 2; fill: none; vector-effect: non-scaling-stroke; }
+.control-locus-point { fill: var(--accent); fill-opacity: .75; }
+.control-axis-labels { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 12px; color: var(--muted); font-size: 16px; line-height: 1.6; margin: 6px 0; font-variant-numeric: tabular-nums; }
+.control-plot-legend { display: flex; flex-wrap: wrap; gap: 8px 20px; color: var(--muted); font-size: 16px; line-height: 1.7; margin: 10px 0; }
+.control-plot-legend span { overflow-wrap: anywhere; }
+.control-details { margin: 18px 0; min-width: 0; }
+.control-details > summary { color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1.8; }
+.control-table-scroll { overflow: auto; max-width: 100%; max-height: 420px; margin: 14px 0; }
+.control-table-scroll table { width: 100%; border-collapse: collapse; font-size: 16px; font-variant-numeric: tabular-nums; }
+.control-table-scroll caption { color: var(--muted); text-align: left; padding: 8px 0; }
+.control-table-scroll th,.control-table-scroll td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+.control-polynomial { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; font-variant-numeric: tabular-nums; }
+.control-diagnostic { color: var(--muted); font-size: 16px; }
+@media(max-width: 600px) { .control-analysis-fields,.control-result-metrics { grid-template-columns: minmax(0,1fr); } .control-table-scroll th,.control-table-scroll td { padding: 8px; } }
