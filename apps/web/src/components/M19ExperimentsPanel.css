@@ -1,0 +1,40 @@
+.m19-experiments { min-width: 0; color: var(--text); font-size: 16px; }
+.m19-section { min-width: 0; }
+.m19-section > summary { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 16px; min-height: 32px; cursor: pointer; font-weight: 600; line-height: 1.7; }
+.m19-section > summary::before { content: '▸'; color: var(--muted); }
+.m19-section[open] > summary::before { content: '▾'; }
+.m19-section > summary small { color: var(--muted); font-size: 15px; font-weight: 400; }
+.m19-section-content { padding-top: 14px; min-width: 0; }
+.m19-intro { margin: 0 0 20px; color: var(--muted); line-height: 1.8; overflow-wrap: anywhere; }
+.m19-parameter-list { display: grid; gap: 12px; }
+.m19-parameter-row { display: grid; grid-template-columns: minmax(180px,1fr) minmax(240px,2fr) auto; gap: 14px; align-items: end; border-bottom: 1px solid var(--line); padding-bottom: 14px; min-width: 0; }
+.m19-bounds { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; min-width: 0; }
+.m19-experiments .field { min-width: 0; }
+.m19-experiments input:not(.visually-hidden),.m19-experiments select,.m19-experiments textarea { min-width: 0; width: 100%; max-width: 100%; font-size: 16px; }
+.m19-experiments .button { white-space: normal; overflow-wrap: anywhere; min-height: 42px; }
+.m19-experiments .field-label { overflow-wrap: anywhere; }
+.m19-add { justify-self: start; }
+.m19-remove { align-self: end; min-height: 42px; }
+.m19-combination-count { color: var(--muted); line-height: 1.7; }
+.m19-combination-count strong { color: var(--text); margin-left: 8px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.m19-progress { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 15px; color: var(--muted); }
+.m19-report { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); min-width: 0; }
+.m19-report h4,.m19-measurements h4 { margin: 0 0 12px; font-size: 18px; line-height: 1.7; }
+.m19-report h4 small { color: var(--muted); font-size: 15px; font-weight: 400; }
+.m19-parameter-value { display: block; overflow-wrap: anywhere; }
+.m19-fit-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; margin: 20px 0; min-width: 0; }
+.m19-measurements { margin: 20px 0; border: 1px solid var(--line); border-radius: 8px; padding: 18px; min-width: 0; }
+.m19-csv-entry { margin: 16px 0; }
+.m19-csv-entry > summary,.m19-residual-details > summary { color: var(--muted); cursor: pointer; line-height: 1.7; min-height: 32px; }
+.m19-csv-entry .field { margin-top: 10px; }
+.m19-csv-entry textarea { resize: vertical; background: var(--input-bg); color: var(--text); font: inherit; line-height: 1.7; padding: 10px 12px; border: 1px solid var(--line); border-radius: 6px; }
+.m19-metrics { display: flex; flex-wrap: wrap; gap: 20px 40px; margin: 14px 0 20px; }
+.m19-metrics > div { min-width: 0; }
+.m19-metrics span { display: block; color: var(--muted); margin-bottom: 5px; font-size: 15px; }
+.m19-metrics strong { font-size: 23px; font-weight: 500; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.m19-residual-details { margin-top: 18px; }
+.m19-residual-table { max-height: 420px; }
+.m19-experiments .tool-table { font-size: 15px; }
+.m19-experiments .field-help { font-size: 15px; overflow-wrap: anywhere; }
+@media(max-width: 900px) { .m19-parameter-row { grid-template-columns: minmax(0,1fr); gap: 10px; } .m19-remove { justify-self: start; } }
+@media(max-width: 600px) { .m19-fit-fields,.m19-bounds { grid-template-columns: minmax(0,1fr); } .m19-measurements { padding: 12px; } }

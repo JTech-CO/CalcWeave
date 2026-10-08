@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-08T17:01:41.194Z",
+  "localVerificationDate": "2026-10-09",
+  "timezone": "Asia/Seoul",
+  "appVersion": "0.20.0",
+  "engineVersion": "0.17.0-m16",
+  "milestone": "M19",
+  "baseCommit": "2d630be643312bc39387169f7499d534856007d8",
+  "scope": "Up to three root scalar coefficients: Cartesian grid experiments and bounded measured-data least-squares fitting, with actual Worker executions, residual observation and explicit undoable application",
+  "sourceSha256": {
+    "apps/web/src/App.tsx": "66b7dc68ab19018fb75d1ce7d419b54cdd3ac9407d7351d8646e1f908aa82355",
+    "apps/web/src/components/M4WorkspaceTools.tsx": "a24f081588fb969a92149ac8d2cb61148bc04cfc8769f49f5f6bcefd4eb975be",
+    "apps/web/src/components/M19ExperimentsPanel.tsx": "7631fa006e4665a6221b9d1dfc57ad74f356c9d5e1f217f95803b6f0d76e3b8f",
+    "apps/web/src/components/M19ExperimentsPanel.css": "f4c2878408aff690591bad416a2bbbc620dd893ee8868a43f63ea8709804a4d0",
+    "packages/experiments/src/index.ts": "7e9344e06cfc7d83ce82b6d176baadb8a55727ce45d49b313847d2bce91816b0",
+    "packages/experiments/src/internal.ts": "729a9a69727756948f53bbe69453b9c7fe2870b16d7415bd94e054655d8d4f01",
+    "packages/experiments/src/multivariable.ts": "45536495f78bf6aeb8e71b59a4f9cbe24e7ed8931c6bd118516e1d9416f5cfbc",
+    "packages/release/src/index.ts": "17fcfa172f556513321757b13e9f708db768defd807cfc3b128725fc977774c0",
+    "scripts/social-metadata.ts": "67f9fb52e041cdb35a357934c64f637d386d89fb7f9dde127520c89a37d7a17c",
+    "tests/m19-experiments.test.ts": "759b46d0039b7a0e570f735c3170915cf5ee4de01f73dad5f5abcff36dba9d1a",
+    "tests/m19-ui.test.ts": "d232cba394b08b1ca211ad7baa895ec0b99bcfd9959706d84b0ad492af2a5c20",
+    "tests/e2e/m19-experiments.spec.ts": "1d75051ba60c77adbbd1ff93a8a18d06cd205b6b7324fa472d8ab4f10bd10ce9",
+    "tests/social-metadata.test.ts": "32c9a087a9577fed776f69090df15708b32d4d2c268180e49e597219d68b5eae",
+    "package.json": "cda8fd6cefe040aaaa97e79ebea0665a57079893469683bfd078be9ba491f1fe",
+    "package-lock.json": "54f29f1e97c218b2f0752ee24e6f682fed994ef0486ecfe20c0324c0621c7ecc"
+  },
+  "supported": {
+    "parameters": [
+      "Root legacy scalar Constant value",
+      "Root legacy scalar Input value",
+      "Root legacy scalar Gain gain"
+    ],
+    "fitOutput": "One legacy float64 scalar output with matching measurement unit",
+    "measurements": "Strictly increasing unique raw model-grid timestamps, permitting only bounded IEEE roundoff; exact subsets are supported; no interpolation",
+    "algorithm": "Own normalized finite-difference damped Gauss-Newton solve with trust step and bound projection; no SciPy/TRF/MINPACK equivalence claimed"
+  },
+  "limits": {
+    "maxParameters": 3,
+    "maxGridRuns": 64,
+    "maxFitEvaluations": 96,
+    "maxMeasurements": 1000,
+    "maxCsvBytes": 262144,
+    "maxParameterMagnitude": 1000000000000,
+    "sharedWallMs": 30000,
+    "sharedRecordedValues": 1000000,
+    "sharedOperations": 50000000
+  },
+  "unit": {
+    "command": "node node_modules/vitest/vitest.mjs run --reporter=json --outputFile=.test-generated/m19-unit-results.json",
+    "passed": 4078,
+    "failed": 0,
+    "testFiles": 75,
+    "newCoreTests": 55,
+    "newUiAndCsvTests": 27,
+    "rawReportLocation": ".test-generated/m19-unit-results.json",
+    "rawReportSha256": "13bc3725231177cbe62da1e10ca946ba44730068ec6db832765b73812e5b4c3e",
+    "rawReportRetention": "temporary local output",
+    "independentOracles": [
+      "Affine gain2.75 and offset-1.25",
+      "Noisy data against closed-form linear least-squares coefficients",
+      "Continuous amplitude2.3 and decay-0.7 against an analytic exponential"
+    ],
+    "checks": [
+      "Three-axis deterministic enumeration and prevalidation",
+      "Actual bounded outputs, exact raw residuals, SSE, RMSE and maximum absolute error",
+      "Bounds and locally dependent/flat parameter sensitivity",
+      "Measurement units, raw-grid subset and static output",
+      "Large time origin rejects half-step while0.3 decimal roundoff remains valid",
+      "Shared operation, recording, elapsed and hard-wall budgets",
+      "Getters, sparse arrays, unsafe prototypes, cyclic results and false resource reports rejected",
+      "Validated immutable execution snapshots and captured specifications",
+      "Every actual executor call counted including failures and cancellation; only completed candidates ranked",
+      "Pending uncooperative executor cancellation and no fabricated success"
+    ],
+    "correctionBeforeFinal": {
+      "previousRawReport": ".test-generated/m19-unit-before-fixture-fix.json",
+      "sha256": "de465113816fdb99291458094a4cde4d90870ae437da53a57c268f5cb962eb30",
+      "passed": 4077,
+      "failed": 1,
+      "reason": "The full run collected a newly added boundary fixture before its final correction. Its decimal1e-6 interval failed the existing compiler time-grid condition before reaching the intended fitting rejection. A binary2^-20 interval retains the half-step boundary case and passes the existing compiler. The final full run is separate and passes4078/4078."
+    }
+  },
+  "typecheck": {
+    "command": "node node_modules/typescript/bin/tsc --noEmit (npm run build prerequisite)",
+    "status": "passed"
+  },
+  "build": {
+    "command": "npm run build -- --outDir ../../.test-generated/m19-root-dist",
+    "status": "passed",
+    "executionWorkerUnchanged": true,
+    "workerArtifactBytes": 633138,
+    "workerArtifactSha256": "b1569d9f9b1b9db5afab30d75f7c00501c854a903666dfab91bd00e5b704fe3f",
+    "comparison": "docs/evidence/m18-root-release-verification.json",
+    "sourceFormatting": "After the final build, unchanged App lines retained their original endings and new text files were normalized to LF. Only line endings and a trailing blank line changed; TypeScript/CSS tokens are unchanged."
+  },
+  "browser": {
+    "engine": "Windows installed Chromium, headless, isolated browser contexts",
+    "origin": "http://127.0.0.1:4180/",
+    "command": "node node_modules/@playwright/test/cli.js test tests/e2e/m19-experiments.spec.ts tests/e2e/m4-workspace.spec.ts tests/e2e/m18-scope.spec.ts tests/e2e/m13-editor.spec.ts tests/e2e/scope-time-range.spec.ts --config=.test-generated/m19-regression.config.ts",
+    "newM19Passed": 7,
+    "relatedRegressionPassed": 44,
+    "totalPassed": 51,
+    "failedFinal": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "runnerErrors": 0,
+    "suites": [
+      {
+        "file": "m13-editor.spec.ts",
+        "passed": 11
+      },
+      {
+        "file": "m18-scope.spec.ts",
+        "passed": 9
+      },
+      {
+        "file": "m19-experiments.spec.ts",
+        "passed": 7
+      },
+      {
+        "file": "m4-workspace.spec.ts",
+        "passed": 13
+      },
+      {
+        "file": "scope-time-range.spec.ts",
+        "passed": 11
+      }
+    ],
+    "rawReport": {
+      "location": ".test-generated/m19-regression-report.json",
+      "sha256": "5e03054e8bd1af2253e5f3bbc660d6626bce746e9d8fa1609310f659f93543cb",
+      "retention": "temporary local output"
+    },
+    "checks": [
+      "Actual Worker restores gain2.5 and offset-0.75 from independent measured CSV",
+      "Cartesian two-axis outputs3,5,7,9 and unique semantic hashes",
+      "Model unchanged until explicit candidate apply; one undo restores it",
+      "Reports preserve captured settings and survive tab changes",
+      "Changed model disables application without replacing the recorded report",
+      "Unit/off-grid data rejects before a candidate; literal and oversized CSV does not alter the model",
+      "Actual Worker transport cancellation and reset prevent late candidates",
+      "1440px dark,390px light and320px dark with200% text have no page/panel overflow",
+      "Existing data import, dashboards, single-parameter sweep, recorded overlays and Scope simulation-time controls"
+    ],
+    "correctionsBeforeFinal": [
+      "Stale-model test reopens experiment tab after import navigates to the diagram",
+      "Hidden file input excluded from generic full-width input CSS after measured page overflow",
+      "Final combined51-test report supersedes the initial5/7 and focused2/2 runs"
+    ],
+    "initialReport": {
+      "location": ".test-generated/m19-initial-browser-report.json",
+      "sha256": "36097558114af9779a4091b37280f9b3fe295065ed88cb28db888734fd38bcca",
+      "retention": "temporary local output"
+    }
+  },
+  "visualReview": {
+    "inspected": [
+      ".test-generated/m19-ui/fit-1440-dark.png",
+      ".test-generated/m19-ui/fit-320-dark.png"
+    ],
+    "captured": [
+      ".test-generated/m19-ui/fit-1440-dark.png",
+      ".test-generated/m19-ui/fit-390-light.png",
+      ".test-generated/m19-ui/fit-320-dark.png"
+    ],
+    "retention": "temporary local output; not application inputs"
+  },
+  "release": {
+    "status": "passed",
+    "report": "docs/evidence/m19-root-release-verification.json",
+    "reportSha256": "e99a7ab3733d2350525f91c6cfa0ba1abbc18a6f345c46e351ba4872c69cb04d",
+    "checks": 95,
+    "staticFiles": 17,
+    "bytes": 7883841,
+    "releaseId": "0fa24366c616f340273ecc8f5ab915a1030d03c4654444187285fa00e18e08cb",
+    "publicDeploymentClaimed": false,
+    "licenses": {
+      "report": "docs/evidence/m19-licenses.json",
+      "sha256": "85e4f2e24c178e2dfb7dcfa5a1514743fb6c9f826d5f065e82dd65f1beb07fef",
+      "dependencies": 28
+    }
+  },
+  "documentation": {
+    "command": "node node_modules/tsx/dist/cli.mjs scripts/verify-docs.ts",
+    "status": "passed",
+    "currentDocuments": 10,
+    "requiredDocuments": 10,
+    "retiredDocumentsAbsent": 44,
+    "localLinks": 707,
+    "localAnchors": 4,
+    "externalLinksDeclaredOnly": 31,
+    "updaterSources": 13,
+    "historicalBaselinesAndEvidenceExcluded": true,
+    "externalAvailabilityVerified": false
+  },
+  "security": {
+    "rendering": "React-escaped labels, diagnostics and previews; fixed downloads; no added HTML/eval interpolation",
+    "inputs": "Bounded CSV with fatal UTF-8 decoding, plain data validation without getters; units, time grids, finite ranges and duplicate axes checked in the core",
+    "resources": "Whole-experiment computation limits and validated Worker outputs; cancellation and generation guards protect model/history from stale results",
+    "exports": "Every CSV cell uses existing safeCsvCell escaping; JSON captures the executed specification, measurements, model hashes and raw candidate results",
+    "accountsNetworkPersonalData": "No added accounts, server routes, database, external requests, tracking or personal-data collection",
+    "baselineEightPointReview": "Query/auth/rate-limit/cookie/database obligations have no new server surface here; escaping, bounded core inputs, no secrets and the existing production CSP are preserved"
+  },
+  "unchanged": {
+    "engineVersion": "0.17.0-m16",
+    "registryDefinitions": 337,
+    "examples": 75,
+    "modelSchema": true,
+    "originalHistoricalEvidence": true
+  },
+  "notVerified": [
+    "Global optimality, global identifiability or uniqueness of fitted coefficients",
+    "SciPy/TRF/MINPACK numerical equivalence",
+    "Typed/vector/matrix outputs or coefficients inside subsystems",
+    "Arbitrary registered block parameters",
+    "Interpolation or arbitrary measurement-time grids",
+    "Firefox and Safari",
+    "Public deployment of0.20.0",
+    "Full Simulink option/numerical equivalence"
+  ]
+}

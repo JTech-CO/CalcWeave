@@ -63,18 +63,19 @@ export function verifySocialMetadata(html: string, imageBytes: Uint8Array): { ca
 
 export function releaseEvidencePrefix(appVersion: string, engineVersion: string, override?: string): string {
   if (override !== undefined) {
-    assert(['og-readme', 'm17', 'm18'].includes(override), 'Unsupported release evidence prefix; use og-readme, m17 or m18');
+    assert(['og-readme', 'm17', 'm18', 'm19'].includes(override), 'Unsupported release evidence prefix; use og-readme, m17, m18 or m19');
     return override;
   }
   // M17 adds mathematical explanations and learning UI without changing execution semantics.
   if (/^0\.18\.\d+$/.test(appVersion)) return 'm17';
   if (/^0\.19\.\d+$/.test(appVersion)) return 'm18';
+  if (/^0\.20\.\d+$/.test(appVersion)) return 'm19';
   return appVersion === '0.8.1' ? 'pages' : engineVersion.split('-').at(-1)!;
 }
 
 /** Verification accepts only named, workspace-contained release builds. */
 export function releaseBuildDirectory(override?: string): string {
   const directory = override ?? 'dist';
-  assert(['dist', '.test-generated/og-readme-root-dist', '.test-generated/og-readme-project-dist', '.test-generated/m17-root-dist', '.test-generated/m17-project-dist', '.test-generated/m18-root-dist', '.test-generated/m18-project-dist'].includes(directory), 'Unsupported release build directory');
+  assert(['dist', '.test-generated/og-readme-root-dist', '.test-generated/og-readme-project-dist', '.test-generated/m17-root-dist', '.test-generated/m17-project-dist', '.test-generated/m18-root-dist', '.test-generated/m18-project-dist', '.test-generated/m19-root-dist', '.test-generated/m19-project-dist'].includes(directory), 'Unsupported release build directory');
   return directory;
 }

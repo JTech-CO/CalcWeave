@@ -5,7 +5,7 @@
 [![CalcWeave — Integrator와 Gain으로 구성한 감쇠 모델과 시간 응답](assets/branding/calcweave-github-og.png)](https://jtech-co.github.io/CalcWeave/)
 
 [![검증·배포](https://github.com/JTech-CO/CalcWeave/actions/workflows/pages.yml/badge.svg)](https://github.com/JTech-CO/CalcWeave/actions/workflows/pages.yml)
-[![버전 0.19.0 beta](https://img.shields.io/badge/version-0.19.0_beta-9ebded?style=flat-square)](package.json)
+[![버전 0.20.0 beta](https://img.shields.io/badge/version-0.20.0_beta-9ebded?style=flat-square)](package.json)
 [![블록 337개](https://img.shields.io/badge/blocks-337-a7c7bd?style=flat-square)](docs/support-matrix.md)
 [![예제 75개](https://img.shields.io/badge/examples-75-bbb0d0?style=flat-square)](apps/web/src/examples.ts)
 [![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6?style=flat-square&logo=typescript&logoColor=white)](tsconfig.json)
@@ -82,6 +82,12 @@ Scope 곡선을 클릭하거나 키보드로 **시간 커서**를 움직이면 �
 
 **실험**에서 실행 기록을 최대 3개 선택하면 공통 출력을 같은 축에 겹쳐 봅니다. 시간 격자가 달라도 각 곡선은 자기 기록의 시각을 사용하고, 커서 표에도 실행별 실제 시각을 표시합니다. 단위·형상·자료형이 다른 출력은 겹치지 않으며 취소·실패 기록에는 부분 결과임을 표시합니다. 기존 RMSE 비교는 같은 시간 격자의 스칼라 출력에 한정됩니다.
 
+## 다변수 실험과 파라미터 추정
+
+**실험 → 다변수 실험**에서는 최대3개 계수의 값을 조합해 최대64개 후보를 계산합니다. **측정 데이터로 파라미터 피팅**에서는 CSV의 시간·측정값 열과 단위, 계수별 하한·상한·초기값을 지정합니다. 측정값과 모델 출력의 제곱 오차를 줄이는 후보를 찾아 계수·RMSE·최대 오차·원시 잔차와 곡선을 표시합니다. 보고서는 설정·측정값·실제 실행 모델과 결과를 함께 JSON으로 보관할 수 있습니다.
+
+CSV는 브라우저 안에서만 읽으며 최대256KiB·1,000행을 지원합니다. 현재 추정 대상은 루트 Constant·Input의 실수 스칼라 값과 Gain 배율, 관측 대상은 같은 단위의 실수 스칼라 출력입니다. 측정 시각은 모델의 기록 격자와 맞아야 합니다. 자동으로 모델을 바꾸지 않으며 **최적 후보 모델 적용**으로 계수를 반영하고 실행 취소로 되돌립니다. 범위 안의 국소 탐색이므로 전역 최적값·계수의 유일성을 보장하지 않습니다. 전체 보고서는 새로고침 전에 내려받고, 기존 실행 기록은 최근5개를 보관합니다.
+
 ## 영향을 받은 도구와 설계 원칙
 
 [MATLAB Simulink](https://www.mathworks.com/products/simulink.html)의 블록선도 모델링 방식에서 출발했습니다. 수학적 관계를 시각적으로 연결하는 경험을 브라우저에서 바로 제공하고, 처음에는 작은 계산부터 시작해 필요한 연산과 설정을 점진적으로 찾아가도록 구성했습니다. CalcWeave는 독립적으로 실행되는 도구이며 MathWorks의 공식 제품이나 전체 호환 구현을 뜻하지 않습니다.
@@ -137,7 +143,7 @@ npm run verify:release
 
 ## 지원 범위와 결과 해석
 
-현재 앱 버전은 **0.19.0**, 계산 엔진 버전은 **0.17.0-m16**입니다. 블록 수는 등록된 정의의 수이며 모든 자료형·모드·옵션에서 동작한다는 의미는 아닙니다. 실제 모델의 지원 여부는 [공개 지원표](docs/support-matrix.md)와 [기계 판독 지원표](docs/support-matrix.json)에서 확인할 수 있습니다.
+현재 앱 버전은 **0.20.0**, 계산 엔진 버전은 **0.17.0-m16**입니다. 블록 수는 등록된 정의의 수이며 모든 자료형·모드·옵션에서 동작한다는 의미는 아닙니다. 실제 모델의 지원 여부는 [공개 지원표](docs/support-matrix.md)와 [기계 판독 지원표](docs/support-matrix.json)에서 확인할 수 있습니다.
 
 - TypeScript 내보내기는 승인된 실행 계약을 따릅니다. Python은 69개 블록 ID의 정적·이산 구성, WASM은 16개 블록 ID의 실수 스칼라 비순환 구성으로 제한됩니다. C/C++ 내보내기는 제공하지 않습니다.
 - Simulink R2024b 참고 목록 385행을 [원자료 대응표](docs/block-coverage.md)로 추적합니다. 원본의 모든 옵션이나 MathWorks 실행 결과와의 수치적 동등성을 검증한 것은 아닙니다. MAT·SLX·MDL 처리는 선택 범위의 데이터·구조 분석이며 원본 실행 환경을 대체하지 않습니다.
