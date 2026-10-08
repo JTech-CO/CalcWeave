@@ -1,6 +1,6 @@
 # CalcWeave 운영 안내
 
-대상은 앱 `0.18.0` / 엔진 `0.17.0-m16`의 무료·계정 없는 정적 호스팅·브라우저 로컬 계산 웹 베타다. 운영자는 **JTech-Co**, 문의는 [jtech-bryan@proton.me](mailto:jtech-bryan@proton.me)이다. 실제 빌드·게시·공개 파일·브라우저 관측 결과는 [검증 문서](validation.md)에 연결하고 과거 배포 횟수를 현재 상태로 누적하지 않는다.
+대상은 앱 `0.19.0` / 엔진 `0.17.0-m16`의 무료·계정 없는 정적 호스팅·브라우저 로컬 계산 웹 베타다. 운영자는 **JTech-Co**, 문의는 [jtech-bryan@proton.me](mailto:jtech-bryan@proton.me)이다. 실제 빌드·게시·공개 파일·브라우저 관측 결과는 [검증 문서](validation.md)에 연결하고 과거 배포 횟수를 현재 상태로 누적하지 않는다.
 
 ## 정책과 데이터 처리
 

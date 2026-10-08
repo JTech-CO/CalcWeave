@@ -1,12 +1,13 @@
 import { expect, test, type Page } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import { createExample } from '../../apps/web/src/examples';
+import { APP_VERSION } from '../../packages/release/src';
 import type { CalcModel } from '../../packages/model/src';
 
 const panel = (page: Page) => page.getByTestId('equation-learning-panel');
 async function open(page: Page) {
   await page.goto('./');
-  await expect(page.locator('.research-badge')).toContainText('0.18.0');
+  await expect(page.locator('.research-badge')).toContainText(APP_VERSION);
   await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨');
   await page.getByRole('button', { name: '수식·학습', exact: true }).click();
   await expect(panel(page).getByRole('heading', { name: '도식을 수식으로 읽기' })).toBeVisible();

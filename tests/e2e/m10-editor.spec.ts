@@ -141,8 +141,9 @@ test('M10 typed finite curves visualize fixed state-space and uint64 while keepi
   model.layout.state = { x: 300, y: 140 }; model.layout.result = { x: 590, y: 140 };
   await importModel(page, model); await page.getByRole('button', { name: '시뮬레이션 실행', exact: false }).click();
   await expect(page.locator('.result-status')).toContainText('현재 모델의 결과');
-  // State-space outputs are rank-one vectors. Select a scalar output through an explicit reshape.
-  await expect(page.locator('.plot-empty')).toContainText('배열은 아래 결과표');
+  // M18 can observe a rank-one numeric vector directly; raw typed codes remain preserved.
+  await expect(page.locator('.result-plot')).toBeVisible();
+  await expect(page.getByLabel('그래프 성분', { exact: true })).toBeVisible();
   const reshape = { id: 'scalar', blockType: 'tensor.reshape' as const, blockVersion: 1 as const, label: '스칼라 형상', parameters: { dimensions: [] } };
   model.nodes.push(reshape); model.layout.scalar = { x: 500, y: 140 }; model.layout.result = { x: 750, y: 140 };
   model.edges[1] = { id: 'state-scalar', source: { nodeId: 'state', portId: 'out' }, target: { nodeId: 'scalar', portId: 'in' } };

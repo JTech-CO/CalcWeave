@@ -82,7 +82,10 @@ describe('M10 exact result rendering', () => {
     const finite = renderToStaticMarkup(createElement(ResultPlot, { label: '자료형', outputId: 'result', samples: [{ time: 0, values: { result: value } }, { time: 1, values: { result: { ...value, data: [2] } } }] }));
     expect(finite).toContain('float64 시각화'); expect(finite).toContain('<path');
     const special = renderToStaticMarkup(createElement(ResultPlot, { label: '자료형', outputId: 'result', samples: [{ time: 0, values: { result: value } }, { time: 1, values: { result: { ...value, data: ['NaN'] } } }, { time: 2, values: { result: value } }] }));
-    expect(special).toContain('NaN·무한대'); expect(special).not.toContain('<svg');
+    expect(special).toContain('NaN·무한대'); expect(special).toContain('<svg');
+    const path = special.match(/<path d="([^"]*)"/)![1];
+    expect(path.match(/M/g)).toHaveLength(2); expect(path).not.toContain('L');
+    expect(special.match(/<circle/g)).toHaveLength(2);
   });
   it('formats fixed values with exact BigInt decimal scaling', () => {
     expect(fixedCellText('9223372036854775807', 1)).toBe('4611686018427387903.5');

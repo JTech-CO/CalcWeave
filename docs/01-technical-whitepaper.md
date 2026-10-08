@@ -1,6 +1,6 @@
 # CalcWeave 기술 백서
 
-현행 앱 `0.18.0` / 엔진 `0.17.0-m16`의 설계와 실행 경계를 설명한다. 최종 실측·배포 상태는 [검증 문서](validation.md), 화면·상호작용은 [디자인 백서](02-design-whitepaper.md), 정책·복구·배포는 [운영 안내](operations.md)를 따른다. 현재 문서에 과거 단계의 시험 횟수나 납품 목록을 누적하지 않는다.
+현행 앱 `0.19.0` / 엔진 `0.17.0-m16`의 설계와 실행 경계를 설명한다. 최종 실측·배포 상태는 [검증 문서](validation.md), 화면·상호작용은 [디자인 백서](02-design-whitepaper.md), 정책·복구·배포는 [운영 안내](operations.md)를 따른다. 현재 문서에 과거 단계의 시험 횟수나 납품 목록을 누적하지 않는다.
 
 ## 제품과 지원을 세는 방법
 
@@ -116,6 +116,14 @@ record/XY/floating scope/data outputs는 승인된 due 관측과 bounded trace�
 Dashboard의 기존 모델 파라미터 binding과 신규 live control source를 구분한다. live는 discrete에서만 최대 대기256·한 drain32이며 다음 노드 due의 actual time·order·value receipt를 기록한다. order≤1000000이고 미래 schedule과의 충돌을 피한다. raw −0 control publication/receipt는 +0이며 계산으로 생긴 −0은 별도 IEEE 의미다. Worker가 receipt로 만든 replay model이 동일 samples/state를 재현해야 한다. stop sink는 일반 오류가 아니라 `completed`와 `stopReason`을 반환하며 마지막 승인 경계까지만 기록한다.
 
 실험 sweep은 snapshot마다 최대16run·전체 공유 연산/기록/wall 예산을 쓴다. scalar 수치 비교·history 최대5개·복구와 설명 provenance를 제공한다. 결과가 만들어진 모델·데이터·설정과 현재 편집본의 차이를 표시한다.
+
+### Scope 관측과 실행 비교
+
+[관측 투영기](../packages/analysis/src/scope-observation.ts)는 최대3개 실행과 실행당10,001개 원시 샘플을 검증하고, 선택한 수치 성분을 그대로 읽는다. legacy 실수 scalar·vector·2D 및 typed 실수 scalar·vector를 지원하고 행우선 성분을 사용한다. Typed 2D 이상은 원본 표에서 확인한다. boolean·복소수·문자열·버스·메시지를 자동 수치 변환하지 않는다. 출력의 단위·형상·자료형이 다르면 중첩을 거부한다.
+
+Typed 곡선은 float64 근사이고 커서에는 원본 값 또는 고정소수점 저장 코드를 별도로 보존한다. NaN·무한대 구간을 선으로 연결하지 않으며, 표본을 줄여 순간 최대값을 숨기지 않는다. 같은 축은 모든 선택 곡선에서 정하고 큰 float64 값을 정규화하여 유효한 SVG 좌표를 만든다.
+
+보기 구간은 실행 설정과 분리하고 모델·결과·실행 기록을 수정하지 않는다. 커서는 실행마다 가장 가까운 원시 샘플을 선택하며 동률이면 앞선 시각을 사용한다. 요청 시각과 실제 기록 시각은 별도로 표시하고 곡선 사이를 보간한 값을 계산 결과로 제시하지 않는다. 부분 실행 상태도 투영 결과에 보존한다. 기존 동일 격자 scalar RMSE 비교와 이 그래프 중첩은 각각의 검사 경계를 유지한다.
 
 ## 신뢰된 어댑터
 

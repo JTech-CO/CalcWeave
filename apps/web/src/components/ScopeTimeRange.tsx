@@ -28,7 +28,7 @@ export function ScopeTimeRange({ execution, samples, busy, onApply }: {
     finally { applying.current = false; setPending(false); }
   };
   return <form className="scope-time-range" aria-label="Scope 시간 범위" onSubmit={event => void apply(event)}>
-    <h3>시간 범위</h3>
+    <h3>시뮬레이션 시간 범위</h3>
     <div className="scope-time-fields">
       <label className="field"><span className="field-label">시작 시간</span><span className="number-field"><input type="text" inputMode="decimal" maxLength={64} aria-label="Scope 시작 시간" aria-invalid={!!error} aria-describedby={`${id}-help${error ? ` ${id}-error` : ''}`} value={start} disabled={busy || pending} onChange={event => { setStart(event.target.value); setError(''); }}/><span>s</span></span></label>
       <label className="field"><span className="field-label">종료 시간</span><span className="number-field"><input type="text" inputMode="decimal" maxLength={64} aria-label="Scope 종료 시간" aria-invalid={!!error} aria-describedby={`${id}-help${error ? ` ${id}-error` : ''}`} value={stop} disabled={busy || pending} onChange={event => { setStop(event.target.value); setError(''); }}/><span>s</span></span></label>

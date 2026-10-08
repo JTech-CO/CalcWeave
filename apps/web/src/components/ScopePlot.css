@@ -1,0 +1,42 @@
+.scope-observation { --scope-curve-1: var(--accent); --scope-curve-2: #c99be7; --scope-curve-3: #73bc98; min-width: 0; width: 100%; color: var(--text); }
+.scope-observation-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+.scope-component { display: flex; align-items: center; gap: 10px; font-size: var(--text-small); color: var(--muted); min-width: 0; }
+.scope-component select { width: auto; max-width: 100%; min-height: 38px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--text); font: inherit; }
+.scope-unit { color: var(--muted); font-size: var(--text-small); }
+.scope-legend { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; padding: 0; margin: 10px 0 14px; min-width: 0; }
+.scope-legend li { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; min-width: 0; font-size: var(--text-small); }
+.scope-legend li > span { overflow-wrap: anywhere; }
+.scope-legend i,.scope-cursor-readings th i { width: 14px; height: 3px; display: inline-block; flex: 0 0 14px; }
+.scope-legend small { color: var(--muted); font-size: inherit; }
+.scope-interactive-plot { cursor: crosshair; touch-action: pan-y; user-select: none; }
+.scope-interactive-plot:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 3px; }
+.scope-cursor-line { stroke: var(--text); stroke-width: 1; stroke-dasharray: 4 4; opacity: .7; vector-effect: non-scaling-stroke; }
+.scope-selection { fill: var(--accent); fill-opacity: .18; stroke: var(--accent); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.scope-gesture-help,.scope-note { color: var(--muted); font-size: var(--text-small); line-height: 1.7; margin: 9px 0; overflow-wrap: anywhere; }
+.scope-cursor-readings { padding: 12px; border: 1px solid var(--line); border-radius: 8px; margin: 12px 0; min-width: 0; }
+.scope-cursor-readings > p { color: var(--muted); font-size: var(--text-small); margin: 0 0 10px; overflow-wrap: anywhere; }
+.scope-cursor-table-scroll { min-width: 0; overflow: auto; }
+.scope-cursor-readings table { width: 100%; border-collapse: collapse; font-size: var(--text-small); }
+.scope-cursor-readings th,.scope-cursor-readings td { padding: 8px 10px; text-align: left; vertical-align: top; overflow-wrap: anywhere; border-bottom: 1px solid var(--line); }
+.scope-cursor-readings th { font-weight: 500; }
+.scope-cursor-readings th i { margin-right: 7px; vertical-align: middle; }
+.scope-cursor-readings td small { display: block; color: var(--muted); font-size: inherit; margin-top: 5px; }
+.scope-cursor-readings strong { color: var(--text); font-weight: 500; font-variant-numeric: tabular-nums; }
+.scope-exact-value { white-space: pre-wrap; }
+.scope-view-controls { border-top: 1px solid var(--line); margin-top: 14px; padding-top: 12px; }
+.scope-view-controls > summary { color: var(--muted); cursor: pointer; font-size: var(--text-small); min-height: 30px; line-height: 1.7; }
+.scope-controls-content { display: grid; gap: 14px; padding-top: 12px; }
+.scope-cursor-slider { display: grid; gap: 8px; font-size: var(--text-small); color: var(--muted); }
+.scope-cursor-slider input { min-width: 0; width: 100%; margin: 0; accent-color: var(--accent); }
+.scope-fields { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; gap: 10px; }
+.scope-window-fields { grid-template-columns: repeat(2,minmax(0,1fr)); }
+.scope-fields .field { min-width: 0; }
+.scope-fields input { width: 100%; min-width: 0; min-height: 42px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--input-bg); color: var(--text); font: inherit; font-variant-numeric: tabular-nums; }
+.scope-fields .button { min-height: 42px; white-space: normal; }
+.scope-view-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.scope-controls-content .scope-note { margin: 0; }
+.experiment-scope { min-width: 0; }
+.experiment-output-field { max-width: 480px; margin-bottom: 14px; }
+.experiment-output-field select { width: 100%; }
+.app-shell.light .scope-observation { --scope-curve-2: #8b4fb3; --scope-curve-3: #2b805a; }
+@media (max-width: 600px) { .scope-fields { grid-template-columns: minmax(0,1fr); } .scope-window-fields { grid-template-columns: repeat(2,minmax(0,1fr)); } }

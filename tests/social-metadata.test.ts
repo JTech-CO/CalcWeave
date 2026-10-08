@@ -37,7 +37,7 @@ describe('Static Korean social preview metadata', () => {
 describe('Release evidence destination', () => {
   it('checks the ordinary build by default and supports the two isolated OG build directories', () => {
     expect(releaseBuildDirectory()).toBe('dist');
-    for (const directory of ['dist', '.test-generated/og-readme-root-dist', '.test-generated/og-readme-project-dist', '.test-generated/m17-root-dist', '.test-generated/m17-project-dist']) expect(releaseBuildDirectory(directory)).toBe(directory);
+    for (const directory of ['dist', '.test-generated/og-readme-root-dist', '.test-generated/og-readme-project-dist', '.test-generated/m17-root-dist', '.test-generated/m17-project-dist', '.test-generated/m18-root-dist', '.test-generated/m18-project-dist']) expect(releaseBuildDirectory(directory)).toBe(directory);
   });
   it.each(['', '../dist', '/tmp/dist', 'C:/dist', '.test-generated/source-snapshot/dist', '.test-generated/og-readme-root-dist/../../dist'])('rejects arbitrary release build directories: %s', directory => {
     expect(() => releaseBuildDirectory(directory)).toThrow('Unsupported release build directory');
@@ -49,6 +49,9 @@ describe('Release evidence destination', () => {
     expect(releaseEvidencePrefix('0.18.0', '0.17.0-m16')).toBe('m17');
     expect(releaseEvidencePrefix('0.18.1', '0.17.0-m16')).toBe('m17');
     expect(releaseEvidencePrefix('0.18.0', '0.17.0-m16', 'm17')).toBe('m17');
+    expect(releaseEvidencePrefix('0.19.0', '0.17.0-m16')).toBe('m18');
+    expect(releaseEvidencePrefix('0.19.1', '0.17.0-m16')).toBe('m18');
+    expect(releaseEvidencePrefix('0.19.0', '0.17.0-m16', 'm18')).toBe('m18');
   });
   it.each(['', '../m16', 'm16', '/tmp/result', 'og-readme/../../m16'])('rejects arbitrary or historic report overrides: %s', prefix => {
     expect(() => releaseEvidencePrefix('0.17.3', '0.17.0-m16', prefix)).toThrow('Unsupported release evidence prefix');
