@@ -1,3 +1,4 @@
+import { releaseEvidencePrefix } from './social-metadata';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -11,7 +12,7 @@ import type { HistoryRecord } from '../apps/web/src/run-history';
 import type { OfflineManifest } from './offline-build';
 import { APP_VERSION } from '../packages/release/src';
 import { blockRegistry } from '../packages/block-library/src';
-const stage = String(APP_VERSION) === '0.8.1' ? 'pages' : ENGINE_VERSION.split('-').at(-1);
+const stage = releaseEvidencePrefix(APP_VERSION, ENGINE_VERSION);
 
 // This verifier never selects a user's profile, imports their storage, or sends mail.
 // Run only after the approved public deployment has finished: npx tsx scripts/verify-public-pages.ts

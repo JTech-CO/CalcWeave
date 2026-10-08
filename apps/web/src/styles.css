@@ -345,6 +345,11 @@ h1, h2, h3, p { margin: 0; }
 .workbench-layout { flex:1; min-width:0; min-height:0; display:flex; flex-direction:column; }
 .workbench-layout>.canvas-area,.workbench-layout>.results-panel { min-width:0; }
 .result-table { overflow-x:auto; }
+.equation-learning-slot { display:flex; flex:1; min-height:0; min-width:0; }
+.equation-learning-slot[hidden] { display:none; }
+.results-panel .results-toolbar .result-tabs { flex:0 1 auto; min-width:0; height:auto; min-height:45px; flex-wrap:wrap; row-gap:0; }
+.results-panel .result-tabs>button { min-height:45px; white-space:nowrap; }
+.results-toolbar { height:auto; flex:none; flex-wrap:wrap; }
 
 @media (min-width:761px) {
 @container workbench (min-width:44rem) {

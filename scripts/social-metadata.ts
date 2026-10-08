@@ -63,15 +63,17 @@ export function verifySocialMetadata(html: string, imageBytes: Uint8Array): { ca
 
 export function releaseEvidencePrefix(appVersion: string, engineVersion: string, override?: string): string {
   if (override !== undefined) {
-    assert(override === 'og-readme', 'Unsupported release evidence prefix; use og-readme');
+    assert(['og-readme', 'm17'].includes(override), 'Unsupported release evidence prefix; use og-readme or m17');
     return override;
   }
+  // M17 adds mathematical explanations and learning UI without changing execution semantics.
+  if (/^0\.18\.\d+$/.test(appVersion)) return 'm17';
   return appVersion === '0.8.1' ? 'pages' : engineVersion.split('-').at(-1)!;
 }
 
-/** Verification may inspect only the normal build or these two isolated OG builds. */
+/** Verification accepts only named, workspace-contained release builds. */
 export function releaseBuildDirectory(override?: string): string {
   const directory = override ?? 'dist';
-  assert(['dist', '.test-generated/og-readme-root-dist', '.test-generated/og-readme-project-dist'].includes(directory), 'Unsupported release build directory');
+  assert(['dist', '.test-generated/og-readme-root-dist', '.test-generated/og-readme-project-dist', '.test-generated/m17-root-dist', '.test-generated/m17-project-dist'].includes(directory), 'Unsupported release build directory');
   return directory;
 }

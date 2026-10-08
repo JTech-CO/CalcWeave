@@ -1,0 +1,59 @@
+.equation-learning-panel { flex:1; min-height:0; overflow-y:auto; padding:20px; min-width:0; color:var(--text); font-size:var(--text-body); line-height:1.7; }
+.equation-learning-heading { padding-bottom:20px; }
+.equation-learning-heading h2 { font-size:var(--text-large); font-weight:650; margin-bottom:8px; }
+.equation-learning-heading p,.equation-learning-picker>p,.equation-learning-activity>p { color:var(--muted); }
+.equation-report>h3,.equation-learning-picker>h3,.equation-section-heading h3 { font-size:var(--text-body); font-weight:650; margin-bottom:10px; }
+.equation-rows { display:flex; flex-direction:column; gap:12px; }
+.equation-row { padding:15px 14px; border:1px solid var(--line); border-radius:8px; background:var(--canvas); }
+.equation-row.is-selected { border-color:var(--accent); }
+.equation-row-heading { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:9px; }
+.equation-row-heading h4 { font-size:var(--text-body); font-weight:600; margin:0; }
+.equation-row-heading>span { font-size:var(--text-small); color:var(--muted); text-align:right; overflow-wrap:anywhere; }
+.equation-formula { display:flex; align-items:baseline; flex-wrap:wrap; gap:1px; font-family:'Cambria Math',Cambria,'Segoe UI','Malgun Gothic',serif; font-size:1.125rem; line-height:1.9; overflow-wrap:anywhere; }
+.equation-formula>span { white-space:pre-wrap; }
+.equation-term { display:inline; border:0; border-bottom:1px solid transparent; border-radius:3px; background:transparent; color:var(--accent); padding:0 3px; line-height:inherit; text-align:left; white-space:pre-wrap; overflow-wrap:anywhere; font:inherit; }
+.equation-term:hover:not(:disabled),.equation-term[aria-pressed=true] { background:var(--accent-soft); border-bottom-color:var(--accent); }
+.equation-row-note { margin-top:9px; color:var(--muted); font-size:var(--text-small); line-height:1.75; }
+.equation-report-notice,.equation-assessment { padding:12px; border:1px solid var(--line); border-radius:6px; background:var(--canvas); color:var(--muted); margin-bottom:14px; }
+.equation-assessment.is-verified { border-color:color-mix(in srgb,var(--success) 55%,var(--line)); color:var(--success); }
+.equation-text-button { display:inline; border:0; border-radius:3px; padding:1px 0; color:var(--accent); background:transparent; font-size:inherit; text-align:left; text-decoration:underline; text-underline-offset:4px; }
+.equation-variable-legend { margin-top:15px; border-top:1px solid var(--line); padding-top:14px; }
+.equation-variable-legend summary { cursor:pointer; font-weight:600; }
+.equation-variable-legend dl { margin:12px 0 0; display:grid; gap:9px; }
+.equation-variable-legend dl>div { display:grid; grid-template-columns:minmax(48px,auto) minmax(0,1fr); gap:12px; }
+.equation-variable-legend dt { font-family:'Cambria Math',Cambria,serif; }
+.equation-variable-legend dd { margin:0; overflow-wrap:anywhere; }
+.equation-variable-legend dd>span { display:block; color:var(--muted); font-size:var(--text-small); }
+.equation-diagnostics { list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:10px; }
+.equation-diagnostics li { padding:12px; background:var(--canvas); border-left:2px solid var(--warning); color:var(--muted); font-size:var(--text-small); }
+.equation-diagnostics .equation-text-button { margin-top:6px; }
+.equation-learning-picker { margin-bottom:24px; padding:16px 0 20px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.equation-lesson-options { display:flex; flex-direction:column; gap:10px; margin-top:15px; }
+.equation-lesson-option { width:100%; padding:13px; background:var(--canvas); color:var(--text); border:1px solid var(--line); border-radius:8px; text-align:left; line-height:1.6; }
+.equation-lesson-option:hover:not(:disabled) { border-color:var(--accent); background:var(--subtle); }
+.equation-lesson-option strong { display:block; font-size:var(--text-body); font-weight:600; }
+.equation-lesson-option span { display:block; margin-top:5px; color:var(--muted); font-size:var(--text-small); }
+.equation-learning-activity { padding:16px 0 20px; margin-bottom:24px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.equation-section-heading { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:10px; }
+.equation-section-heading .equation-text-button { font-size:var(--text-small); }
+.equation-lesson-steps { margin:18px 0; padding-left:24px; }
+.equation-lesson-steps>li { padding-left:3px; margin-bottom:20px; }
+.equation-lesson-steps h4 { font-size:var(--text-body); font-weight:600; margin:0 0 7px; }
+.equation-lesson-steps p { color:var(--muted); margin-bottom:10px; }
+.equation-edit-actions { display:flex; flex-wrap:wrap; gap:8px; }
+.equation-learning-activity .button { height:auto; min-height:38px; white-space:normal; font-size:var(--text-body); }
+.equation-writing-field { display:flex; flex-direction:column; gap:6px; min-width:0; }
+.equation-writing-field>span { font-size:var(--text-small); color:var(--muted); }
+.equation-optional { margin-left:5px; font-weight:400; }
+.equation-writing-field textarea { resize:vertical; min-height:68px; max-height:260px; width:100%; padding:9px 10px; border:1px solid var(--strong-line); border-radius:6px; background:var(--input-bg); color:var(--text); font:inherit; line-height:1.7; }
+.equation-writing-field textarea:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+.equation-writing-field textarea::placeholder { color:var(--muted); }
+.equation-reveal { margin-bottom:12px; }
+.equation-lesson-explanation { border:1px solid var(--line); background:var(--canvas); border-radius:8px; padding:14px; margin:12px 0; }
+.equation-lesson-formula { font-family:'Cambria Math',Cambria,'Segoe UI',serif; font-size:var(--text-large); margin-bottom:10px; overflow-wrap:anywhere; }
+.equation-table-scroll { overflow-x:auto; margin-top:13px; }
+.equation-table-scroll table { width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; font-size:var(--text-small); white-space:nowrap; }
+.equation-table-scroll th,.equation-table-scroll td { border-bottom:1px solid var(--line); text-align:right; padding:8px 6px; }
+.equation-table-scroll th { color:var(--muted); font-weight:500; }
+.equation-small-note { color:var(--muted); font-size:var(--text-small); line-height:1.7; margin-top:12px; }
+@media(max-width:900px) { .equation-learning-panel { padding:16px; } }

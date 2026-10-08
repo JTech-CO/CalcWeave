@@ -1,5 +1,6 @@
 import { parseExpression, evaluateExpression } from '../../expression/src';
 import { compileModel } from '../../compiler/src';
+export * from './diagram-equations';
 import { ModelError, normalizeSolverSettings, parseModel, type CalcModel, type ExpressionNode, type RunResult, type SignalValue } from '../../model/src';
 import { runModel } from '../../runtime/src';
 

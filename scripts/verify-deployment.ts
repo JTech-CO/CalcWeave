@@ -1,3 +1,4 @@
+import { releaseEvidencePrefix } from './social-metadata';
 import assert from 'node:assert/strict';
 import { lookup } from 'node:dns/promises';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -83,7 +84,7 @@ report.verifiedApplicationDeployment = required.every(check => report.checks[che
 report.checks.actualNoviceStudy = 'Not verified: automation is not an observed F06 novice study.';
 report.checks.customDomain = url.hostname === 'calcweave.com' ? 'Custom-domain ownership must be independently verified in repository settings.' : 'Project URL verified; calcweave.com ownership/DNS remains a separate gate.';
 await mkdir('docs/evidence', { recursive: true });
-const evidenceStage = String(APP_VERSION) === '0.8.1' ? 'pages' : ENGINE_VERSION.split('-').at(-1);
+const evidenceStage = releaseEvidencePrefix(APP_VERSION, ENGINE_VERSION);
 await writeFile(`docs/evidence/${evidenceStage}-deployment-verification.json`, JSON.stringify(report, null, 2) + '\n');
 process.stdout.write(JSON.stringify(report) + '\n');
 if (!report.verifiedApplicationDeployment) process.exitCode = 1;

@@ -4,6 +4,7 @@ import { STATIC_CSP } from './security-build';
 import { APP_VERSION } from '../packages/release/src';
 import { ENGINE_VERSION } from '../packages/model/src/types';
 import { getDeploymentBasePath } from './pages-base';
+import { releaseEvidencePrefix } from './social-metadata';
 
 const deploymentBase = getDeploymentBasePath();
 const policyPath = (path: string): string => deploymentBase + path.replace(/^\//, '');
@@ -48,6 +49,6 @@ const body = `<h1>오픈소스 고지</h1><p>CalcWeave ${escape(APP_VERSION)}의
 await mkdir('apps/web/public/notices', { recursive: true });
 await writeFile('apps/web/public/notices/index.html', html('오픈소스 고지', body));
 await mkdir('docs/evidence', { recursive: true });
-const evidencePrefix = String(APP_VERSION) === '0.8.1' ? 'pages' : ENGINE_VERSION.split('-').at(-1);
+const evidencePrefix = releaseEvidencePrefix(APP_VERSION, ENGINE_VERSION, process.env.CALCWEAVE_RELEASE_EVIDENCE_PREFIX);
 await writeFile(`docs/evidence/${evidencePrefix}-licenses.json`, JSON.stringify({ generatedAt: new Date().toISOString(), appVersion: APP_VERSION, basePath: deploymentBase, source: 'package-lock.json + installed package original license notices', dependencies: notices.map(({ text: _text, ...metadata }) => metadata) }, null, 2) + '\n');
 process.stdout.write(JSON.stringify({ policyPages: 4, productionLicenseNotices: notices.length }) + '\n');
