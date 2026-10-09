@@ -61,6 +61,10 @@ describe('Release evidence destination', () => {
     expect(releaseEvidencePrefix('0.22.0', '0.17.0-m16')).toBe('m21');
     expect(releaseEvidencePrefix('0.22.1', '0.17.0-m16', 'm21')).toBe('m21');
     expect(releaseBuildDirectory('.test-generated/m21-root-dist')).toBe('.test-generated/m21-root-dist');
+    expect(releaseEvidencePrefix('0.23.0', '0.17.0-m16')).toBe('m22');
+    expect(releaseEvidencePrefix('0.23.1', '0.17.0-m16', 'm22')).toBe('m22');
+    expect(releaseBuildDirectory('.test-generated/m22-root-dist')).toBe('.test-generated/m22-root-dist');
+    expect(releaseBuildDirectory('.test-generated/m22-project-dist')).toBe('.test-generated/m22-project-dist');
     expect(releaseEvidencePrefix('0.21.1', '0.17.0-m16')).toBe('m20');
     expect(releaseEvidencePrefix('0.21.0', '0.17.0-m16', 'm20')).toBe('m20');
     expect(releaseBuildDirectory('.test-generated/m20-root-dist')).toBe('.test-generated/m20-root-dist');

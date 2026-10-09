@@ -3,7 +3,7 @@
   "date": "2026-10-09",
   "title": "CalcWeave M21 이후 제품 확장 계획",
   "basis": "M20까지의 현행 코드에서 확인한 분석 공백과 사용자가 승인한 후속 구축·기획",
-  "appVersion": "0.22.0",
+  "appVersion": "0.23.0",
   "engineVersion": "0.17.0-m16",
   "historicalCoverageRoadmapUnchanged": true,
   "calendarCommitment": null,
@@ -29,11 +29,14 @@
     {
       "id": "M22",
       "title": "이산 SISO 제어계 분석",
-      "status": "planned",
+      "status": "completed-local-verification",
       "dependsOn": ["M20"],
       "scope": ["현재 discrete.state-space 설정과 명시적 샘플 주기", "z=exp(jωTs)의 주파수 응답과 단위원 기준 극점 판정", "명시적 단위 음의 피드백에 한정한 표본 여유·근궤적"],
       "exitGates": ["1~4개 상태와 샘플 주기·Nyquist 범위·직접 전달항의 경계", "해석식이 있는 FIR/IIR·단위원 안/위/밖 극점 oracle", "연속·이산의 단위/안정성 정의를 UI와 JSON에서 구분", "특이점·근 불확실성·지원하지 않는 다중 rate를 명시"],
-      "excluded": ["MIMO·자동 연속/이산 변환·다중 rate 폐루프 추론", "PID 자동 튜닝·전체 폐루프 안정성 보증"]
+      "limits": { "states": 4, "minimumSampleTimeSeconds": 1e-9, "maximumSampleTimeSeconds": 1e9, "minimumOmega": 1e-6, "maximumOmega": 1e6, "nyquistBound": "π/Ts", "frequencyPoints": 801, "rootLocusPoints": 81, "sources": 64, "work": 2000000 },
+      "excluded": ["MIMO·자동 연속/이산 변환·다중 rate 폐루프 추론", "연속/하이브리드 모델·실행 중 리셋·초기조건 과도 응답", "PID 자동 튜닝·전체 폐루프 안정성 보증"],
+      "implementation": ["packages/analysis/src/discrete-control-system.ts", "packages/analysis/src/control-analysis-internal.ts", "apps/web/src/discrete-control-analysis-sources.ts", "apps/web/src/components/DiscreteControlSystemPanel.tsx"],
+      "evidence": "docs/evidence/m22-verification.json"
     },
     {
       "id": "M23",
@@ -66,6 +69,8 @@
   "references": [
     "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.periodogram.html",
     "https://numpy.org/doc/stable/reference/routines.fft.html",
-    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.welch.html"
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.welch.html",
+    "https://python-control.readthedocs.io/en/latest/generated/control.frequency_response.html",
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.dfreqresp.html"
   ]
 }

@@ -5,7 +5,7 @@
 [![CalcWeave — Integrator와 Gain으로 구성한 감쇠 모델과 시간 응답](assets/branding/calcweave-github-og.png)](https://jtech-co.github.io/CalcWeave/)
 
 [![검증·배포](https://github.com/JTech-CO/CalcWeave/actions/workflows/pages.yml/badge.svg)](https://github.com/JTech-CO/CalcWeave/actions/workflows/pages.yml)
-[![버전 0.22.0 beta](https://img.shields.io/badge/version-0.22.0_beta-9ebded?style=flat-square)](package.json)
+[![버전 0.23.0 beta](https://img.shields.io/badge/version-0.23.0_beta-9ebded?style=flat-square)](package.json)
 [![블록 337개](https://img.shields.io/badge/blocks-337-a7c7bd?style=flat-square)](docs/support-matrix.md)
 [![예제 75개](https://img.shields.io/badge/examples-75-bbb0d0?style=flat-square)](apps/web/src/examples.ts)
 [![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6?style=flat-square&logo=typescript&logoColor=white)](tsconfig.json)
@@ -94,6 +94,12 @@ CSV는 브라우저 안에서만 읽으며 최대256KiB·1,000행을 지원합�
 
 선택 행렬을 **개루프 L(s), 단위 음의 피드백**으로 해석하도록 지정하면 주파수 구간에서 확인한 **이득·위상 여유**와 지정 이득의 **근궤적 표본**을 표시합니다. 도식의 폐루프를 자동으로 추론하지 않습니다. 교차를 찾지 못한 구간을 무한 여유로 표시하지 않으며, 특이점·수치적으로 확정하기 어려운 근은 진단합니다. 분석은 모델을 변경하지 않고, 출처 지문·기록 및 요청 시각·분석 설정·원시 결과를 JSON으로 내려받습니다.
 
+## 이산 제어계 분석
+
+**분석 → 이산 제어계 분석**은 현재 이산 State-Space 블록의 Bode 크기·위상과 단위원 위의 극점·영점을 표시합니다. 순수 이산 모델의 실수 SISO, 리셋이 꺼진 루트 블록과 상태1~4개를 지원합니다. 샘플 주기는 **블록 period × 기본 실행 간격**, 주파수는 rad/s이며 Nyquist(π/Ts)까지 선택할 수 있습니다.
+
+단위 음의 피드백 가정을 선택하면 표본 여유와 근궤적을 추가합니다. 블록 자체의 영 초기상태 응답이며 주변 연결·다중 속도·Rate Transition의 전체 폐루프를 추론하지 않습니다. 모델을 실행하거나 편집하지 않고, 실제 계산한 행렬·주기·출처 지문·가정·원시 응답을 JSON으로 내려받습니다.
+
 ## 기록의 주파수 분석
 
 시간 시뮬레이션을 마친 뒤 **분석 → 신호 스펙트럼 분석**에서 출력·성분·시작 표본과 표본 수를 선택합니다. FFT의 **단측 진폭·위상·전력 스펙트럼 밀도(PSD)**와 DC 이외의 가장 큰 빈을 확인할 수 있습니다. 주기형 Hann/직사각형 창과 평균 제거를 선택하며, Hz·주파수 간격·Nyquist·원시 복소 계수를 함께 표시합니다.
@@ -102,7 +108,7 @@ CSV는 브라우저 안에서만 읽으며 최대256KiB·1,000행을 지원합�
 
 ## 다음 확장
 
-[M21 이후 계획](docs/product-extension-roadmap.json)은 현행 분석 공백을 기준으로 정한 제품 로드맵입니다. M21은 기록의 스펙트럼, M22는 이산 SISO 제어계, M23은 시드를 고정한 불확실성 실험, M24는 시간 구간 통계·상관/지연, M25는 Welch·시간-주파수 관측을 다룹니다. 각 단계의 입력 범위·제외 항목·독립 검증 조건을 먼저 정하고 실제 완료한 범위만 지원 기능으로 표시합니다.
+[M21 이후 계획](docs/product-extension-roadmap.json)에서 M21 기록의 스펙트럼과 M22 이산 SISO 제어계는 로컬 구현·검증을 완료했습니다. M23 시드를 고정한 불확실성 실험, M24 시간 구간 통계·상관/지연, M25 Welch·시간-주파수 관측은 후속 계획입니다. 각 단계의 입력 범위·제외 항목·독립 검증 조건을 먼저 정하고 실제 완료한 범위만 지원 기능으로 표시합니다.
 
 ## 영향을 받은 도구와 설계 원칙
 
@@ -159,7 +165,7 @@ npm run verify:release
 
 ## 지원 범위와 결과 해석
 
-현재 앱 버전은 **0.22.0**, 계산 엔진 버전은 **0.17.0-m16**입니다. 블록 수는 등록된 정의의 수이며 모든 자료형·모드·옵션에서 동작한다는 의미는 아닙니다. 실제 모델의 지원 여부는 [공개 지원표](docs/support-matrix.md)와 [기계 판독 지원표](docs/support-matrix.json)에서 확인할 수 있습니다.
+현재 앱 버전은 **0.23.0**, 계산 엔진 버전은 **0.17.0-m16**입니다. 블록 수는 등록된 정의의 수이며 모든 자료형·모드·옵션에서 동작한다는 의미는 아닙니다. 실제 모델의 지원 여부는 [공개 지원표](docs/support-matrix.md)와 [기계 판독 지원표](docs/support-matrix.json)에서 확인할 수 있습니다.
 
 - TypeScript 내보내기는 승인된 실행 계약을 따릅니다. Python은 69개 블록 ID의 정적·이산 구성, WASM은 16개 블록 ID의 실수 스칼라 비순환 구성으로 제한됩니다. C/C++ 내보내기는 제공하지 않습니다.
 - Simulink R2024b 참고 목록 385행을 [원자료 대응표](docs/block-coverage.md)로 추적합니다. 원본의 모든 옵션이나 MathWorks 실행 결과와의 수치적 동등성을 검증한 것은 아닙니다. MAT·SLX·MDL 처리는 선택 범위의 데이터·구조 분석이며 원본 실행 환경을 대체하지 않습니다.

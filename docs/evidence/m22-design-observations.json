@@ -1,0 +1,109 @@
+{
+  "status": "PASS",
+  "capturedAt": "2026-10-09T05:10:55.830Z",
+  "applicationVersion": "0.23.0",
+  "browser": "153.0.8010.12",
+  "sourceUrl": "http://127.0.0.1:4173/",
+  "observations": [
+    {
+      "theme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "bounds": {
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "panelWidth": 770,
+        "scrollWidth": 770
+      },
+      "errors": [],
+      "execution": "model imported; simulation not run",
+      "domain": "discrete",
+      "actualSampleTimeSeconds": 0.2,
+      "nyquistOmegaRadPerSecond": 15.707963267948966,
+      "sourceSampleTime": {
+        "period": 4,
+        "offset": 1,
+        "baseStep": 0.05
+      },
+      "units": {
+        "frequency": "rad/s",
+        "sampleTime": "s",
+        "polesAndZeros": "dimensionless z",
+        "stability": "|z| relative to 1"
+      },
+      "metrics": "상태 극점 · 단위원 기준\n안정 · 모든 |z| < 1\n샘플 주기 Ts · s\n0.2\nNyquist · rad/s\n15.707963267948966\n주파수 구간 · rad/s\n0.1 ~ 15.70796",
+      "firstGraphBounds": {
+        "x": 335,
+        "y": 689.59375,
+        "width": 770,
+        "height": 290
+      },
+      "reportKind": "discrete-siso-control-analysis",
+      "frequencyRange": {
+        "minimum": 0.1,
+        "maximum": 15.707963267948966,
+        "points": 101
+      },
+      "feedbackAssumption": "unity-negative-feedback-open-loop",
+      "rootLocusGains": [
+        0,
+        0.5,
+        1,
+        1.5,
+        2
+      ]
+    },
+    {
+      "theme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "bounds": {
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "panelWidth": 770,
+        "scrollWidth": 770
+      },
+      "errors": [],
+      "execution": "model imported; simulation not run",
+      "domain": "discrete",
+      "actualSampleTimeSeconds": 0.2,
+      "nyquistOmegaRadPerSecond": 15.707963267948966,
+      "sourceSampleTime": {
+        "period": 4,
+        "offset": 1,
+        "baseStep": 0.05
+      },
+      "units": {
+        "frequency": "rad/s",
+        "sampleTime": "s",
+        "polesAndZeros": "dimensionless z",
+        "stability": "|z| relative to 1"
+      },
+      "metrics": "상태 극점 · 단위원 기준\n안정 · 모든 |z| < 1\n샘플 주기 Ts · s\n0.2\nNyquist · rad/s\n15.707963267948966\n주파수 구간 · rad/s\n0.1 ~ 15.70796",
+      "firstGraphBounds": {
+        "x": 335,
+        "y": 689.59375,
+        "width": 770,
+        "height": 290
+      },
+      "reportKind": "discrete-siso-control-analysis",
+      "frequencyRange": {
+        "minimum": 0.1,
+        "maximum": 15.707963267948966,
+        "points": 101
+      },
+      "feedbackAssumption": "unity-negative-feedback-open-loop",
+      "rootLocusGains": [
+        0,
+        0.5,
+        1,
+        1.5,
+        2
+      ]
+    }
+  ]
+}

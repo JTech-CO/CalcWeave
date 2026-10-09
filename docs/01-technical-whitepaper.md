@@ -1,6 +1,6 @@
 # CalcWeave 기술 백서
 
-현행 앱 `0.22.0` / 엔진 `0.17.0-m16`의 설계와 실행 경계를 설명한다. 최종 실측·배포 상태는 [검증 문서](validation.md), 화면·상호작용은 [디자인 백서](02-design-whitepaper.md), 정책·복구·배포는 [운영 안내](operations.md)를 따른다. 현재 문서에 과거 단계의 시험 횟수나 납품 목록을 누적하지 않는다.
+현행 앱 `0.23.0` / 엔진 `0.17.0-m16`의 설계와 실행 경계를 설명한다. 최종 실측·배포 상태는 [검증 문서](validation.md), 화면·상호작용은 [디자인 백서](02-design-whitepaper.md), 정책·복구·배포는 [운영 안내](operations.md)를 따른다. 현재 문서에 과거 단계의 시험 횟수나 납품 목록을 누적하지 않는다.
 
 ## 제품과 지원을 세는 방법
 
@@ -145,6 +145,16 @@ Typed 곡선은 float64 근사이고 커서에는 원본 값 또는 고정소수
 
 모델·실행·관측 시각을 변경하지 않으며, 보고서에는 복사한 행렬과 출처·설정을 함께 보존한다. [python-control의 주파수 응답](https://python-control.readthedocs.io/en/latest/generated/control.frequency_response.html), [여유](https://python-control.readthedocs.io/en/latest/generated/control.margin.html), [근궤적](https://python-control.readthedocs.io/en/latest/generated/control.root_locus_map.html), [SciPy의 상태공간 변환](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.ss2tf.html)은 수학적 정의를 참고한다. 해당 라이브러리를 실행하거나 전수 수치 동등성을 제공하는 구현을 뜻하지 않는다.
 
+### 이산 SISO 제어계 분석
+
+[이산 코어](../packages/analysis/src/discrete-control-system.ts)는 연속 분석과 [공통 내부 수치 루틴](../packages/analysis/src/control-analysis-internal.ts)을 공유한다. 순수 이산 모델의 루트 `discrete.state-space`, 리셋 `none`, 실수 SISO 상태1~4개를 [현재 설정 출처](../apps/web/src/discrete-control-analysis-sources.ts)로 읽는다. 컴파일 후 정규화된 period×execution.step을 초 단위 Ts로 사용하고 offset은 due 격자의 시간원점으로 보존한다. 하이브리드 모델의 solver.discreteStep을 관측 간격과 혼동하지 않도록 이 단계에서는 연속·하이브리드 출처를 제외한다. 5~16개 실행 상태를 임의로 축소하지 않는다.
+
+y[k]=Cx[k]+Du[k], x[k+1]=Ax[k]+Bu[k]의 영 초기상태 LTI 응답 H(z)=C(zI−A)⁻¹B+D를 z=exp(jωTs)에서 직접 계산한다. Ts는10⁻⁹~10⁹초, ω는10⁻⁶~min(10⁶,π/Ts) rad/s의 양의 로그 범위다. 유효한 증가 구간이 없으면 거부하고 DC를 로그 축에 끼워 넣거나 Nyquist 초과를 alias 보정하지 않는다. 단위원 안/밖 상태 극점으로 안정/불안정을 구분하며 |z|≈1은 경계로 표시한다. 복소 z 평면과 계수는 무차원이며 전달 다항식은 z의 내림차순이다.
+
+여유는 선택 블록을 개루프 L(z)로 명시한 단위 음의 피드백에서만 표시한다. 근궤적은 det(zI−A)+K·분자의 지정 이득 표본이고 직접 전달항의1+KD=0은 별도 잘못 정의된 상태다. 행렬 원소·주파수 표본·K 표본·work·수치 불확실성의 한도와 특이점의 null 구간은 연속 코어와 같다. 주변 Rate Transition의 버퍼 지연·다중 rate 연결·비영 초기조건·실행 중 리셋을 자동 포함하지 않으며, 교차 없음이나 표본의 안정성으로 전체 폐루프 안정성을 보증하지 않는다.
+
+수학적 정의는 [python-control의 단위원 주파수 응답](https://python-control.readthedocs.io/en/latest/generated/control.frequency_response.html)과 [SciPy 이산 주파수 응답](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.dfreqresp.html)을 참고한다. SciPy의 rad/sample과 이 UI의 물리 rad/s는 ωTs로 구별하며 새 npm 의존성·외부 계산 서비스를 추가하지 않는다.
+
 ## 기록의 스펙트럼
 
 [스펙트럼 코어](../packages/analysis/src/spectrum.ts)는 완료한 시간 기록의 선택 성분·연속 구간을 분석한다. 8~8192개의2의 거듭제곱 개수만 허용하며, 시각은 절댓값10⁹ 이하·균일 증가·간격10⁻⁹초 이상, 값은 절댓값10¹² 이하의 유한 실수다. float64의 시간 표현 정밀도가 간격에 비해 부족하면 거부한다. 최소 간격의8eps 이내 계산 반올림만 정규화한다. 원시 시각을 보간하거나 자동으로 표본 수를 조정·0 채우기 하지 않는다.
@@ -232,7 +242,7 @@ MAT v5/SLX/MDL은 `calcweave-native-scalar-v1`의 읽기 전용 bounded 분석�
 
 ## M21 이후 확장 순서
 
-[제품 확장 계획 JSON](product-extension-roadmap.json)은 M20까지의 구현에서 확인한 공백을 기준으로2026-10-09에 새로 정한 계획이다. 원자료385행의 과거 coverage baseline은 그대로 보존한다. 다음 단계는 구현·검증이 필요한 계획이며, 일정 약속이나 완료한 지원으로 표시하지 않는다.
+[제품 확장 계획 JSON](product-extension-roadmap.json)은 M20까지의 구현에서 확인한 공백을 기준으로2026-10-09에 새로 정한 계획이다. 원자료385행의 과거 coverage baseline은 그대로 보존한다. M21·M22는 로컬 구현·검증을 완료했고 M23~M25는 후속 계획이다. 일정 약속이나 미완료 범위를 지원으로 표시하지 않는다.
 
 | 단계 | 사용자 작업과 추가 범위 | 우선 완료 조건 |
 | --- | --- | --- |

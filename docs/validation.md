@@ -1,6 +1,18 @@
 # CalcWeave 검증 상태
 
-현행 소스는 앱 `0.22.0` · 엔진 `0.17.0-m16`이다. 이 문서는 구현의 검증 범위와 배포 증거를 연결한다. 과거 단계의 수치·실패 기록은 `evidence/`에 보존한다. M16의 공개 결과와 보조 기능·도움말 정리의 검사는 별도로 기록한다.
+현행 소스는 앱 `0.23.0` · 엔진 `0.17.0-m16`이다. 이 문서는 구현의 검증 범위와 배포 증거를 연결한다. 과거 단계의 수치·실패 기록은 `evidence/`에 보존한다. M16의 공개 결과와 보조 기능·도움말 정리의 검사는 별도로 기록한다.
+
+## M22 이산 SISO 제어계 분석 · 로컬 검증 완료
+
+2026-10-09(Asia/Seoul), [제품 확장 계획](product-extension-roadmap.json)의 M22를 앱 `0.23.0`에 구현했다. **분석 → 이산 제어계 분석**은 현재 순수 이산 모델의 루트 State-Space, 리셋이 꺼진 실수 SISO·상태1~4개를 사용한다. Ts=period×기본 실행 간격, z=exp(jωTs)의 Bode·상태 극점·미약분 영점·단위원 판정을 제공하며 단위 음의 피드백을 명시한 경우에만 표본 여유·근궤적을 표시한다. 실제 설정·offset 시간원점·모델 지문·영 초기상태/로컬 rate 가정·원시 결과를 JSON에 보존하고 모델을 실행하거나 변경하지 않는다. M23~M25는 후속 계획으로 남긴다.
+
+[M22 검증 기록](evidence/m22-verification.json)은 코어77개·출처24개·UI34개의 **135개 새 검사**, 전체 단위 **4,438/4,438 PASS · 84개 파일**, 타입 검사·프로덕션 빌드를 기록한다. 독립 해석식 FIR/IIR·1~4차·직접 D·정확 Nyquist 끝점, 실제 실행기의 impulse `[D,1,.5,.25,.125]`, 단위원 안/위/밖·불안정 숨은 상태·반복근 거부·특이점 null 구간·Nyquist 여유·피드백1+KD=0을 대조했다. 연속/이산 wrapper는 수치 코어를 공유하며 [원본과의 별도 비교](evidence/m22-continuous-regression-review.json)에서33개 연속계 전체 JSON 보고서가 M21 HEAD와 일치했다.
+
+실제 Chromium의 M22 **12/12 PASS**, M20 **9/9 PASS**, M21 **7/7 PASS**를 최종 빌드에서 확인했다. 초기 fit1440/1920px·자동 저장·키보드 편집 회귀도 **4/4 PASS**다. 출처 SHA·모델 비실행/불변·직접 전달항·피드백 선택·단위원 안정성·특이 끝점·잘못된 초안에서 보고서 보존·출처 변경 초기화·수치 불확실성 실패·연속/리셋/5상태 거부를 확인했다. 320/390px의 다크·라이트와 패널 전체 글자200%에서 가로 넘침 없이 입력·버튼16px를 유지했다. [다크 결과](evidence/m22-control-desktop-dark-result.png), [라이트 설정](evidence/m22-control-desktop-light-settings.png), [모바일](evidence/m22-discrete-control-390-dark-1x.png), [320px 글자 확대](evidence/m22-discrete-control-320-light-2x.png)와 [화면 관측](evidence/m22-design-observations.json)을 보존한다.
+
+초회 브라우저27개는 통과했고 모바일 검사1개에서 workbench의13.6px 규칙을 상속한 입력/버튼을 발견했다. M22 패널에16px를 명시하고 다시 빌드한 뒤28개가 모두 통과했다. 초회 출처 fixture의 숫자 리셋·출력 없는 모델은 컴파일러가 올바르게 거부했으므로 boolean 리셋·연결 출력으로 교정했다. 수치근의−0과+0을 객체 bytes로 비교하던 검사도 수치 비교로 바꿨다. 수치 구현·oracle를 실패 예상값에 맞춰 변경하지 않았다.
+
+[최종 릴리스 검증](evidence/m22-root-release-verification.json)은103개 검사·19개 정적 자산의 실제 SHA·오프라인 목록·보안 설정을 확인했다. [라이선스 기록](evidence/m22-licenses.json)은 기존28개 프로덕션 의존성을 보존한다. 엔진·schema·registry337개·예제75개와 보안의 입력 상한·React 출력 이스케이프를 유지하며 신규 npm 라이브러리·외부 계산 서비스·서버 API·개인정보 수집을 추가하지 않는다. 하이브리드 discreteStep·리셋·초기조건 과도 응답·다중 rate/버퍼의 전체 폐루프·MIMO·자동 시간영역 변환·PID 튜닝·안정성 보증, Firefox/Safari·공개 배포는 완료 범위 밖이다. 기존 큰 chunk와 정적/동적 import 중복·Vite 향후 config 권고는 빌드 경고로 남는다.
 
 ## M21 기록의 신호 스펙트럼 · 로컬 검증 완료
 

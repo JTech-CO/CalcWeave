@@ -3,6 +3,7 @@ import { compileModel } from '../../compiler/src';
 export * from './diagram-equations';
 export * from './scope-observation';
 export * from './control-system';
+export * from './discrete-control-system';
 export * from './spectrum';
 import { ModelError, normalizeSolverSettings, parseModel, type CalcModel, type ExpressionNode, type RunResult, type SignalValue } from '../../model/src';
 import { runModel } from '../../runtime/src';

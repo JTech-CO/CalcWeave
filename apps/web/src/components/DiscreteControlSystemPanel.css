@@ -1,0 +1,4 @@
+.discrete-control-analysis-section { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); min-width: 0; }
+.discrete-control-analysis-section > summary { cursor: pointer; color: var(--text); font-size: 17px; font-weight: 600; line-height: 1.7; }
+.discrete-control-system-panel :is(input, select, button) { font-size: 16px; }
+.control-unit-circle { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 6 4; vector-effect: non-scaling-stroke; }
