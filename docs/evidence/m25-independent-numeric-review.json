@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-09T09:47:10.546Z",
+  "milestone": "M25",
+  "appVersion": "0.26.0",
+  "passed": true,
+  "publicDeploymentClaimed": false,
+  "method": "Seeded finite real records; independent O(L²) forward DFT, explicit one-sided density and sample-domain windowed Parseval; arithmetic periodogram averages; actual raw frame endpoints/midpoints and discarded tail; four exact M21 single-frame comparisons.",
+  "randomTrials": 160,
+  "comparedFrames": 1075,
+  "comparedBins": 22555,
+  "singleFrameExactComparisons": 4,
+  "maxComplexAbsoluteError": 1.509903313490213e-13,
+  "maxDensityAbsoluteError": 1.3877787807814457e-15,
+  "maxIntegratedAbsoluteError": 3.552713678800501e-15,
+  "tolerance": {
+    "absolute": 2e-9,
+    "relative": 2e-11
+  },
+  "source": {
+    "coreSha256": "a8dc572f89a5bbf98f9a5de052b76d8b2d2a09911f898aa6486116d8abc9bc92",
+    "scriptSha256": "dc9677f9691a88e1d9a59745fe388e72720e7b57f737f18c59f614465c2e15fb"
+  }
+}

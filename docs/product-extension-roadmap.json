@@ -3,7 +3,7 @@
   "date": "2026-10-09",
   "title": "CalcWeave M21 이후 제품 확장 계획",
   "basis": "M20까지의 현행 코드에서 확인한 분석 공백과 사용자가 승인한 후속 구축·기획",
-  "appVersion": "0.25.0",
+  "appVersion": "0.26.0",
   "engineVersion": "0.17.0-m16",
   "historicalCoverageRoadmapUnchanged": true,
   "calendarCommitment": null,
@@ -65,11 +65,14 @@
     {
       "id": "M25",
       "title": "Welch 전력 밀도와 시간-주파수 관측",
-      "status": "planned",
+      "status": "completed-local-verification",
       "dependsOn": ["M21"],
       "scope": ["명시적인 구간 길이·겹침을 사용한 Welch 평균", "bounded STFT와 시간-주파수 표/시각화", "창·겹침·주파수 해상도·실제 구간 시각의 보고서"],
       "exitGates": ["전체 FFT work·메모리·표시 bin의 합산 제한", "한 구간과 M21의 PSD 일치·Parseval·chirp 원시 시각 oracle", "평균으로 인한 분산/해상도 변화와 끝 구간 정책 공개", "색상 스케일·0 전력·로그 변환·모바일/키보드 관측 검증"],
-      "excluded": ["불균일 시각 분석·실시간 오디오 수집·무제한 스트리밍"]
+      "excluded": ["불균일 시각 분석·실시간 오디오 수집·무제한 스트리밍", "경계 연장·0 채움·보간·불완전 구간 계산", "역 STFT·창 복원 조건·확정 주파수/통계 신뢰도 인증", "정수·fixed·복소수·부분 실행의 자동 변환"],
+      "limits": { "samples": 8192, "minimumSamples": 8, "segmentLength": 2048, "minimumSegmentLength": 8, "powerOfTwoSegmentOnly": true, "frames": 128, "totalFrameBins": 65536, "workBudgetUnits": 8000000, "minimumIntervalSeconds": 1e-9, "valueMagnitude": 1e12, "timeMagnitude": 1e9, "outputSources": 16, "sourceRecordedElements": 1000000, "tableRowsPerPage": 128, "displayedWelchBins": 512, "displayedHeatmapCells": 4096 },
+      "implementation": ["packages/analysis/src/time-frequency.ts", "apps/web/src/time-series-analysis-sources.ts", "apps/web/src/time-frequency-settings.ts", "apps/web/src/components/TimeFrequencyPanel.tsx"],
+      "evidence": "docs/evidence/m25-verification.json"
     }
   ],
   "references": [
@@ -83,6 +86,8 @@
     "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.triang.html",
     "https://numpy.org/doc/stable/reference/generated/numpy.var.html",
     "https://numpy.org/doc/stable/reference/generated/numpy.corrcoef.html",
-    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.correlate.html"
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.correlate.html",
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.spectrogram.html",
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.stft.html"
   ]
 }

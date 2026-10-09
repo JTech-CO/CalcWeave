@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-09T09:53:03.602Z",
+  "localVerificationDate": "2026-10-09",
+  "timezone": "Asia/Seoul",
+  "milestone": "M25",
+  "appVersion": "0.26.0",
+  "engineVersion": "0.17.0-m16",
+  "publicDeploymentClaimed": false,
+  "status": "PASS-with-corrected-findings",
+  "baselineCommit": "5dedbdd",
+  "reviewers": [
+    {
+      "agent": "/root/m25_completion_review",
+      "independentOf": [
+        "core",
+        "UI"
+      ],
+      "method": "Read-only numerical/descriptor/resource/axis/units/JSON/generation review plus independently derived boundary tests."
+    },
+    {
+      "agent": "/root/m25_spectral_ui",
+      "independentOf": [
+        "core"
+      ],
+      "method": "Read-only common-grid/normalization/raw-time/resource and underflow review."
+    },
+    {
+      "agent": "/root",
+      "independentOf": [
+        "core implementation"
+      ],
+      "method": "Seeded direct O(L²) DFT/windowed Parseval and raw-time/one-frame oracle comparisons."
+    }
+  ],
+  "findings": [
+    {
+      "id": "M25-REVIEW-01",
+      "priority": 2,
+      "problem": "Whole-grid tolerance accepted timestamp roundoff that per-frame endpoint revalidation rejected.",
+      "correction": "Validate one whole grid; N>L, including one retained frame with discarded tail, uses sample-index FFT and common global fs/frequencies with original timestamps retained; exact original M21 bins only for N=L.",
+      "validation": "Independent accepted-global-jitter, single retained frame with tail and shifted-origin/time precision regressions; direct DFT and raw centers/tail comparisons."
+    },
+    {
+      "id": "M25-REVIEW-02",
+      "priority": 2,
+      "problem": "Unit-grid intermediate PSD and premature raw-magnitude squares can lose representable tiny density at low sample rate; Float64 underflow was not explicitly explained.",
+      "correction": "For N>L normalize magnitude before squaring with global fs/window power; preserve M21 bins only for N=L; report frame density/RMS and Welch-average representation limits.",
+      "validation": "Analytical subnormal low-fs regression and explicit frame/average underflow diagnostics; existing M21 bit-exact N=L cases."
+    },
+    {
+      "id": "M25-REVIEW-03",
+      "priority": 3,
+      "problem": "PSD integrated-power prose could be read as division by L instead of sum of squared window weights.",
+      "correction": "State Σ[w²(x−μ)²]/Σw² per frame and arithmetic average over F.",
+      "validation": "Independent sample-domain Parseval and final documentation review."
+    }
+  ],
+  "sourceSha256": {
+    "packages/analysis/src/time-frequency.ts": "a8dc572f89a5bbf98f9a5de052b76d8b2d2a09911f898aa6486116d8abc9bc92",
+    "packages/analysis/src/index.ts": "c3b5857fc605e2dd9afaa8d6b25161166c6b0c57374392d03c577248956a7eb3",
+    "apps/web/src/components/TimeFrequencyPanel.tsx": "cd3115e380f775dfbc390c8298d3cb07a2818b23ac8cd048fe6547224fc07351",
+    "apps/web/src/components/TimeFrequencyPanel.css": "6dff45e05538740b51a4656a1e4b4d3d95443fcf08fb09c5360915d55ae94f48",
+    "apps/web/src/time-frequency-settings.ts": "ef3da95f2bbb828ab7793528c210ffafe07f5ef6f5fddfe73f98a6517c4353d7",
+    "apps/web/src/components/AnalysisDialog.tsx": "91762400df2155877f2c9fcc211546c308d9e9a729763ca07ca7664c1203b250",
+    "tests/m25-time-frequency.test.ts": "2e47be429a2470c3f43389f802792c836db38a510e702c8ba5b8cdb5665439a8",
+    "tests/m25-time-frequency-grid.test.ts": "ea6ed21ec68361d88343fdcab0e90b1852e6012c81f1b17508c7a73287740abd",
+    "tests/m25-time-frequency-ui.test.ts": "31ee672f405793ff9b783373ec9879c587980b1d62a10020ead939489d73bec4",
+    "tests/m25-time-frequency-settings.test.ts": "1a719d74546933c98b4cdecb1b1a48242fd7a798f2eba92b54a3dc23e111daf8",
+    "tests/e2e/m25-time-frequency.spec.ts": "74e1b16c11302094385ec08e70ce3c6345c6ca3a824625da4ced521e1bfeac51",
+    "packages/release/src/index.ts": "6527be95c0820a7e0715372c7592f0d2bb319581ebf190340dd1ccd37b592d25",
+    "package.json": "a4b6c1b22ddba98cac1b18b90f6423cd40c383c3ec121442c6a28e9c09241e54",
+    "package-lock.json": "df6f6ec2c824001db6393ef5c45b1a84eb316db8315f18657499a5756c06d8ba",
+    "scripts/social-metadata.ts": "9861550a46d18dffb03514a3c2b099449c6f6d927dc093f150ec1ce5b9d4651f",
+    "tests/social-metadata.test.ts": "bf9274e2e1e85da06a27047aba5ac9d51b9223936a26f11b75ff5e4021d21c69",
+    "apps/web/public/notices/index.html": "a132be500b578b1da44b3515ae2c4b49904172f8285018594c195edad56880d4",
+    "README.md": "7a33fc3a0150e603cf7aa560ac3643c90526a4bc28ea0dd3487b173d4447a07f",
+    "docs/01-technical-whitepaper.md": "25c4fd1baaa06ba3f91dde98601032dacde9adb460ebd98b2fd9af05795db57b",
+    "docs/02-design-whitepaper.md": "e0f8752dfeb43924b3aefbc40919c021d5820c54716f9480322236c9ca781ec4",
+    "docs/operations.md": "7ffafc67023d9db72cb3ef2e6972b4de38959137674fbf71e58f7edf4732d771",
+    "docs/validation.md": "f4eded484e5e4b3d89b49fb6d70189306d72347cdc21fba8ca32bf19a6654662",
+    "docs/product-extension-roadmap.json": "dd0f298384545ac10a0424479304af78962b2f165fb8ad438e6440f5839bc3d8"
+  },
+  "numericalEvidence": "docs/evidence/m25-independent-numeric-review.json"
+}

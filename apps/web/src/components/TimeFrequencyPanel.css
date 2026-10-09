@@ -1,0 +1,41 @@
+.time-frequency-analysis-section { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); min-width: 0; }
+.time-frequency-analysis-section > summary { cursor: pointer; color: var(--text); font-size: 17px; font-weight: 600; line-height: 1.7; }
+.time-frequency-panel { min-width: 0; padding-top: 16px; color: var(--text); font-size: 16px; }
+.time-frequency-panel p { line-height: 1.8; overflow-wrap: anywhere; }
+.workspace-dialog .time-frequency-panel p { font-size: 16px; }
+.time-frequency-panel .field { min-width: 0; }
+.time-frequency-panel .field-label,.time-frequency-panel .field-help { font-size: 16px; }
+.time-frequency-panel .field input,.time-frequency-panel .field select { font-size: 16px; min-height: 42px; min-width: 0; width: 100%; max-width: 100%; }
+.workspace-dialog .time-frequency-panel .field input,.workspace-dialog .time-frequency-panel .field select { font-size: 16px; }
+.time-frequency-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px 18px; min-width: 0; margin: 18px 0; }
+.time-frequency-panel .button { min-height: 42px; font-size: 16px; white-space: normal; overflow-wrap: anywhere; }
+.time-frequency-mode { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.time-frequency-mode .button[aria-pressed=true] { color: var(--accent); border-color: var(--accent); }
+.time-frequency-checkbox { display: flex; align-items: start; gap: 10px; line-height: 1.8; }
+.time-frequency-checkbox input[type=checkbox] { width: 18px; height: 18px; flex: none; margin-top: 5px; accent-color: var(--accent); }
+.time-frequency-source,.time-frequency-diagnostic { color: var(--muted); font-size: 16px; }
+.time-frequency-result { min-width: 0; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
+.time-frequency-result h3 { font-size: 20px; line-height: 1.7; margin: 0 0 12px; overflow-wrap: anywhere; }
+.time-frequency-metrics { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px 18px; margin: 16px 0; }
+.time-frequency-metrics > div,.time-frequency-provenance > div { min-width: 0; }
+.time-frequency-metrics dt,.time-frequency-provenance dt { color: var(--muted); font-size: 16px; margin-bottom: 6px; }
+.time-frequency-metrics dd,.time-frequency-provenance dd { margin: 0; font-size: 18px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.time-frequency-provenance { display: grid; gap: 14px; margin: 16px 0; }
+.time-frequency-provenance dd { font-size: 16px; }
+.time-frequency-details { margin: 18px 0; min-width: 0; }
+.time-frequency-details > summary { color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1.8; overflow-wrap: anywhere; }
+.time-frequency-plot { min-width: 0; margin: 18px 0 24px; }
+.time-frequency-plot figcaption { color: var(--muted); font-size: 16px; line-height: 1.7; margin-bottom: 10px; overflow-wrap: anywhere; }
+.time-frequency-plot svg { display: block; width: 100%; max-width: 100%; height: auto; background: var(--canvas); border: 1px solid var(--line); border-radius: 6px; }
+.time-frequency-grid { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.time-frequency-point { fill: var(--accent); }
+.time-frequency-zero-point { fill: var(--muted); }
+.time-frequency-zero-cell { fill: var(--muted); opacity: .3; }
+.time-frequency-axis-labels { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 12px; color: var(--muted); font-size: 16px; line-height: 1.6; margin: 6px 0; font-variant-numeric: tabular-nums; }
+.time-frequency-axis-labels span { overflow-wrap: anywhere; }
+.time-frequency-pagination { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 14px 0; }
+.time-frequency-pagination span { flex: 1 1 12rem; font-size: 16px; overflow-wrap: anywhere; }
+.time-frequency-table-scroll { overflow: auto; max-width: 100%; max-height: 420px; margin: 14px 0; }
+.time-frequency-table-scroll table { width: 100%; border-collapse: collapse; font-size: 16px; font-variant-numeric: tabular-nums; }
+.time-frequency-table-scroll th,.time-frequency-table-scroll td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; min-width: 5rem; }
+@media(max-width: 600px) { .time-frequency-fields,.time-frequency-metrics { grid-template-columns: minmax(0,1fr); } .time-frequency-table-scroll th,.time-frequency-table-scroll td { padding: 8px; } }

@@ -1,0 +1,906 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-09T09:53:03.602Z",
+  "localVerificationDate": "2026-10-09",
+  "timezone": "Asia/Seoul",
+  "milestone": "M25",
+  "appVersion": "0.26.0",
+  "engineVersion": "0.17.0-m16",
+  "publicDeploymentClaimed": false,
+  "status": "completed-local-verification",
+  "sourceSha256": {
+    "packages/analysis/src/time-frequency.ts": "a8dc572f89a5bbf98f9a5de052b76d8b2d2a09911f898aa6486116d8abc9bc92",
+    "packages/analysis/src/index.ts": "c3b5857fc605e2dd9afaa8d6b25161166c6b0c57374392d03c577248956a7eb3",
+    "apps/web/src/components/TimeFrequencyPanel.tsx": "cd3115e380f775dfbc390c8298d3cb07a2818b23ac8cd048fe6547224fc07351",
+    "apps/web/src/components/TimeFrequencyPanel.css": "6dff45e05538740b51a4656a1e4b4d3d95443fcf08fb09c5360915d55ae94f48",
+    "apps/web/src/time-frequency-settings.ts": "ef3da95f2bbb828ab7793528c210ffafe07f5ef6f5fddfe73f98a6517c4353d7",
+    "apps/web/src/components/AnalysisDialog.tsx": "91762400df2155877f2c9fcc211546c308d9e9a729763ca07ca7664c1203b250",
+    "tests/m25-time-frequency.test.ts": "2e47be429a2470c3f43389f802792c836db38a510e702c8ba5b8cdb5665439a8",
+    "tests/m25-time-frequency-grid.test.ts": "ea6ed21ec68361d88343fdcab0e90b1852e6012c81f1b17508c7a73287740abd",
+    "tests/m25-time-frequency-ui.test.ts": "31ee672f405793ff9b783373ec9879c587980b1d62a10020ead939489d73bec4",
+    "tests/m25-time-frequency-settings.test.ts": "1a719d74546933c98b4cdecb1b1a48242fd7a798f2eba92b54a3dc23e111daf8",
+    "tests/e2e/m25-time-frequency.spec.ts": "74e1b16c11302094385ec08e70ce3c6345c6ca3a824625da4ced521e1bfeac51",
+    "packages/release/src/index.ts": "6527be95c0820a7e0715372c7592f0d2bb319581ebf190340dd1ccd37b592d25",
+    "package.json": "a4b6c1b22ddba98cac1b18b90f6423cd40c383c3ec121442c6a28e9c09241e54",
+    "package-lock.json": "df6f6ec2c824001db6393ef5c45b1a84eb316db8315f18657499a5756c06d8ba",
+    "scripts/social-metadata.ts": "9861550a46d18dffb03514a3c2b099449c6f6d927dc093f150ec1ce5b9d4651f",
+    "tests/social-metadata.test.ts": "bf9274e2e1e85da06a27047aba5ac9d51b9223936a26f11b75ff5e4021d21c69",
+    "apps/web/public/notices/index.html": "a132be500b578b1da44b3515ae2c4b49904172f8285018594c195edad56880d4",
+    "README.md": "7a33fc3a0150e603cf7aa560ac3643c90526a4bc28ea0dd3487b173d4447a07f",
+    "docs/01-technical-whitepaper.md": "25c4fd1baaa06ba3f91dde98601032dacde9adb460ebd98b2fd9af05795db57b",
+    "docs/02-design-whitepaper.md": "e0f8752dfeb43924b3aefbc40919c021d5820c54716f9480322236c9ca781ec4",
+    "docs/operations.md": "7ffafc67023d9db72cb3ef2e6972b4de38959137674fbf71e58f7edf4732d771",
+    "docs/validation.md": "f4eded484e5e4b3d89b49fb6d70189306d72347cdc21fba8ca32bf19a6654662",
+    "docs/product-extension-roadmap.json": "dd0f298384545ac10a0424479304af78962b2f165fb8ad438e6440f5839bc3d8"
+  },
+  "supported": [
+    "Welch arithmetic means of complete-frame one-sided periodogram PSD; explicit rectangular/periodic Hann windows and per-frame mean removal.",
+    "Completed contiguous8..8192 real samples from the existing M24 bounded immutable source adapter.",
+    "Radix-2 L8..2048, overlap0..L-1, discard incomplete tail with original times and midpoint-first-last-sample frame convention.",
+    "One common fs/Hz grid; raw unnormalized forward DFT coefficients, M21 amplitude and phase; exact M21 bins for N=L only.",
+    "Linear/dB PSD display with reference1(sourceunit)²/Hz; exact zero has undefined dB and distinct neutral markers.",
+    "Full raw input/source/hash/options/IEEE bits and all frames/Welch bins in JSON; form/view/stale changes preserve the captured report.",
+    "128-row tables,512 actual Welch bins retainingDC/Nyquist/peak,4096 actual heatmap cells with no averaging/interpolation."
+  ],
+  "limits": {
+    "samples": 8192,
+    "minSamples": 8,
+    "segmentLength": 2048,
+    "minSegmentLength": 8,
+    "frames": 128,
+    "bins": 65536,
+    "work": 8000000,
+    "maxValue": 1000000000000,
+    "maxTime": 1000000000,
+    "sources": 16,
+    "recordedElements": 1000000,
+    "workMeaning": "Conservative deterministic policy budget, not literal FLOPs or measured CPU operations.",
+    "workFormula": "24N+F[10L+(L-1)(2+log2L)+14(L/2)log2L+12B+2L+4B]+4B; B=L/2+1",
+    "tableRowsPerPage": 128,
+    "displayedWelchBins": 512,
+    "displayedHeatmapCells": 4096
+  },
+  "unit": {
+    "command": "npm test -- --maxWorkers=2 --reporter=json --outputFile=.test-generated/m25-unit.json",
+    "files": 93,
+    "passed": 4923,
+    "failed": 0,
+    "newMilestonePassed": 108,
+    "milestoneSuites": [
+      {
+        "file": "tests/m25-time-frequency-grid.test.ts",
+        "cases": 13,
+        "passed": 13,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m25-time-frequency-settings.test.ts",
+        "cases": 29,
+        "passed": 29,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m25-time-frequency-ui.test.ts",
+        "cases": 14,
+        "passed": 14,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m25-time-frequency.test.ts",
+        "cases": 52,
+        "passed": 52,
+        "status": "passed"
+      }
+    ],
+    "suites": [
+      {
+        "file": "tests/block-expansion.test.ts",
+        "cases": 149,
+        "passed": 149,
+        "status": "passed"
+      },
+      {
+        "file": "tests/block-symbols.test.ts",
+        "cases": 2,
+        "passed": 2,
+        "status": "passed"
+      },
+      {
+        "file": "tests/codegen.test.ts",
+        "cases": 132,
+        "passed": 132,
+        "status": "passed"
+      },
+      {
+        "file": "tests/compiler.test.ts",
+        "cases": 26,
+        "passed": 26,
+        "status": "passed"
+      },
+      {
+        "file": "tests/export-download.test.ts",
+        "cases": 5,
+        "passed": 5,
+        "status": "passed"
+      },
+      {
+        "file": "tests/expression.test.ts",
+        "cases": 4,
+        "passed": 4,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m10-compiler.test.ts",
+        "cases": 83,
+        "passed": 83,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m10-history.test.ts",
+        "cases": 9,
+        "passed": 9,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m10-independent-math.test.ts",
+        "cases": 210,
+        "passed": 210,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m10-result-export.test.ts",
+        "cases": 15,
+        "passed": 15,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m10-runtime.test.ts",
+        "cases": 38,
+        "passed": 38,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m10-typed-values.test.ts",
+        "cases": 116,
+        "passed": 116,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m10-ui-values.test.ts",
+        "cases": 23,
+        "passed": 23,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m11-compiler.test.ts",
+        "cases": 79,
+        "passed": 79,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m11-examples.test.ts",
+        "cases": 8,
+        "passed": 8,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m11-hierarchy-editor.test.ts",
+        "cases": 11,
+        "passed": 11,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m11-history.test.ts",
+        "cases": 6,
+        "passed": 6,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m11-runtime.test.ts",
+        "cases": 104,
+        "passed": 104,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m11-structured.test.ts",
+        "cases": 11,
+        "passed": 11,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m11-ui-values.test.ts",
+        "cases": 8,
+        "passed": 8,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m12-analysis.test.ts",
+        "cases": 14,
+        "passed": 14,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m12-compiler.test.ts",
+        "cases": 37,
+        "passed": 37,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m12-examples.test.ts",
+        "cases": 8,
+        "passed": 8,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m12-numerics.test.ts",
+        "cases": 8,
+        "passed": 8,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m12-runtime.test.ts",
+        "cases": 35,
+        "passed": 35,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m12-ui.test.ts",
+        "cases": 9,
+        "passed": 9,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m13-compiler.test.ts",
+        "cases": 31,
+        "passed": 31,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m13-data-import.test.ts",
+        "cases": 30,
+        "passed": 30,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m13-history.test.ts",
+        "cases": 10,
+        "passed": 10,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m13-live.test.ts",
+        "cases": 6,
+        "passed": 6,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m13-runtime.test.ts",
+        "cases": 375,
+        "passed": 375,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m13-ui-models.test.ts",
+        "cases": 48,
+        "passed": 48,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m13-worker.test.ts",
+        "cases": 4,
+        "passed": 4,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m14-compiler.test.ts",
+        "cases": 20,
+        "passed": 20,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m14-history.test.ts",
+        "cases": 13,
+        "passed": 13,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m14-runtime.test.ts",
+        "cases": 61,
+        "passed": 61,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m14-ui-models.test.ts",
+        "cases": 22,
+        "passed": 22,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m15-export-archive.test.ts",
+        "cases": 2,
+        "passed": 2,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m15-interop.test.ts",
+        "cases": 43,
+        "passed": 43,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m15-package.test.ts",
+        "cases": 15,
+        "passed": 15,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m15-python.test.ts",
+        "cases": 104,
+        "passed": 104,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m15-wasm.test.ts",
+        "cases": 59,
+        "passed": 59,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m16-support-matrix.test.ts",
+        "cases": 28,
+        "passed": 28,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m17-equations.test.ts",
+        "cases": 27,
+        "passed": 27,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m17-learning.test.ts",
+        "cases": 20,
+        "passed": 20,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m18-scope.test.ts",
+        "cases": 40,
+        "passed": 40,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m19-experiments.test.ts",
+        "cases": 55,
+        "passed": 55,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m19-ui.test.ts",
+        "cases": 27,
+        "passed": 27,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m2-compiler.test.ts",
+        "cases": 53,
+        "passed": 53,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m20-control.test.ts",
+        "cases": 54,
+        "passed": 54,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m20-sources.test.ts",
+        "cases": 15,
+        "passed": 15,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m20-ui.test.ts",
+        "cases": 28,
+        "passed": 28,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m21-sources.test.ts",
+        "cases": 30,
+        "passed": 30,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m21-spectrum.test.ts",
+        "cases": 68,
+        "passed": 68,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m21-ui.test.ts",
+        "cases": 30,
+        "passed": 30,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m22-control.test.ts",
+        "cases": 77,
+        "passed": 77,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m22-sources.test.ts",
+        "cases": 24,
+        "passed": 24,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m22-ui.test.ts",
+        "cases": 34,
+        "passed": 34,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m23-ensemble.test.ts",
+        "cases": 91,
+        "passed": 91,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m23-ui.test.ts",
+        "cases": 44,
+        "passed": 44,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m24-time-series-sources.test.ts",
+        "cases": 131,
+        "passed": 131,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m24-time-series-statistics.test.ts",
+        "cases": 78,
+        "passed": 78,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m24-time-series-ui.test.ts",
+        "cases": 33,
+        "passed": 33,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m25-time-frequency-grid.test.ts",
+        "cases": 13,
+        "passed": 13,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m25-time-frequency-settings.test.ts",
+        "cases": 29,
+        "passed": 29,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m25-time-frequency-ui.test.ts",
+        "cases": 14,
+        "passed": 14,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m25-time-frequency.test.ts",
+        "cases": 52,
+        "passed": 52,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m3-codegen.test.ts",
+        "cases": 33,
+        "passed": 33,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m3-compiler.test.ts",
+        "cases": 92,
+        "passed": 92,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m3-runtime.test.ts",
+        "cases": 41,
+        "passed": 41,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m4-data.test.ts",
+        "cases": 39,
+        "passed": 39,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m4-experiments.test.ts",
+        "cases": 44,
+        "passed": 44,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m4-hierarchy.test.ts",
+        "cases": 33,
+        "passed": 33,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m4-integration.test.ts",
+        "cases": 8,
+        "passed": 8,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m4-workspace.test.ts",
+        "cases": 5,
+        "passed": 5,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m5-advanced-math.test.ts",
+        "cases": 52,
+        "passed": 52,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m5-integration.test.ts",
+        "cases": 52,
+        "passed": 52,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m5-partial-state.test.ts",
+        "cases": 2,
+        "passed": 2,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m5-quantization.test.ts",
+        "cases": 36,
+        "passed": 36,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m6-offline.test.ts",
+        "cases": 41,
+        "passed": 41,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m6-persistence.test.ts",
+        "cases": 27,
+        "passed": 27,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m7-import.test.ts",
+        "cases": 16,
+        "passed": 16,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m7-package.test.ts",
+        "cases": 27,
+        "passed": 27,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m7-python.test.ts",
+        "cases": 113,
+        "passed": 113,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m8-compiler.test.ts",
+        "cases": 146,
+        "passed": 146,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m8-runtime.test.ts",
+        "cases": 378,
+        "passed": 378,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m9-compiler.test.ts",
+        "cases": 230,
+        "passed": 230,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m9-runtime.test.ts",
+        "cases": 199,
+        "passed": 199,
+        "status": "passed"
+      },
+      {
+        "file": "tests/model.test.ts",
+        "cases": 13,
+        "passed": 13,
+        "status": "passed"
+      },
+      {
+        "file": "tests/runtime.test.ts",
+        "cases": 142,
+        "passed": 142,
+        "status": "passed"
+      },
+      {
+        "file": "tests/social-metadata.test.ts",
+        "cases": 22,
+        "passed": 22,
+        "status": "passed"
+      },
+      {
+        "file": "tests/time-sources.test.ts",
+        "cases": 29,
+        "passed": 29,
+        "status": "passed"
+      },
+      {
+        "file": "tests/worker-client.test.ts",
+        "cases": 15,
+        "passed": 15,
+        "status": "passed"
+      }
+    ],
+    "rawReportSha256": "2a53532e408c3c6262c677a7b8aa50eed455235896056c3f6b5be6c2af00fcd1"
+  },
+  "browser": {
+    "milestone": {
+      "passed": 10,
+      "cases": [
+        {
+          "file": "m25-time-frequency.spec.ts",
+          "title": "M25 no completed recording disables analysis without starting a simulation",
+          "status": "passed"
+        },
+        {
+          "file": "m25-time-frequency.spec.ts",
+          "title": "M25 actual Worker tone has analytic Welch PSD and preserves recording, model and settings",
+          "status": "passed"
+        },
+        {
+          "file": "m25-time-frequency.spec.ts",
+          "title": "M25 selected chirp frames match direct DFT and preserve actual centers and discarded tail",
+          "status": "passed"
+        },
+        {
+          "file": "m25-time-frequency.spec.ts",
+          "title": "M25 one complete frame exposes DC and Nyquist normalization without tail padding",
+          "status": "passed"
+        },
+        {
+          "file": "m25-time-frequency.spec.ts",
+          "title": "M25 malformed drafts retain snapshot while a valid nonfinite component clears old report",
+          "status": "passed"
+        },
+        {
+          "file": "m25-time-frequency.spec.ts",
+          "title": "M25 true zero PSD stays distinct in dB and negative zero retains IEEE input provenance",
+          "status": "passed"
+        },
+        {
+          "file": "m25-time-frequency.spec.ts",
+          "title": "M25 prior execution stays tied to original semantic hash after new model draft",
+          "status": "passed"
+        },
+        {
+          "file": "m25-time-frequency.spec.ts",
+          "title": "M25 large raw tables paginate 128 bins and bounded heatmap preserves exact selected cell PSD",
+          "status": "passed"
+        },
+        {
+          "file": "m25-time-frequency.spec.ts",
+          "title": "M25 mobile themes and 200-percent text preserve readable controls, escaped labels and internal raw scrolling",
+          "status": "passed"
+        },
+        {
+          "file": "m25-time-frequency.spec.ts",
+          "title": "M25 closing pending analysis suppresses a late import and avoids extra runs",
+          "status": "passed"
+        }
+      ]
+    },
+    "previousAnalysisAndWorkspaceRegression": {
+      "passed": 23,
+      "cases": [
+        {
+          "file": "m21-spectrum.spec.ts",
+          "title": "M21 no completed time recording explains the source requirement without launching a simulation",
+          "status": "passed"
+        },
+        {
+          "file": "m21-spectrum.spec.ts",
+          "title": "M21 actual Worker sine produces analytic FFT amplitude, PSD and raw complex bins without editing the model",
+          "status": "passed"
+        },
+        {
+          "file": "m21-spectrum.spec.ts",
+          "title": "M21 invalid sample count and out-of-range start preserve the previous captured report",
+          "status": "passed"
+        },
+        {
+          "file": "m21-spectrum.spec.ts",
+          "title": "M21 an accepted selection containing a nonfinite typed component clears the older successful report",
+          "status": "passed"
+        },
+        {
+          "file": "m21-spectrum.spec.ts",
+          "title": "M21 previous execution stays tied to its original recording while new model and window drafts change",
+          "status": "passed"
+        },
+        {
+          "file": "m21-spectrum.spec.ts",
+          "title": "M21 selected segment and large raw table preserve exact recording times and 128-row pages",
+          "status": "passed"
+        },
+        {
+          "file": "m21-spectrum.spec.ts",
+          "title": "M21 charts, long escaped labels and internal raw tables fit mobile themes and 200-percent text",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 no completed time recording disables analysis without running the model",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 actual Worker recording yields analytic population and sample statistics and arbitrary selected counts",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 actual delayed Worker signal preserves positive lag, per-overlap Pearson normalization and snapshot settings",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 malformed draft preserves captured report and valid nonfinite selection clears it",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 constant energy and insufficient overlap are null while raw cosine remains defined",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 typed negative zero survives JSON through explicit IEEE bits and distinct sample hash",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 previous recording stays tied to its original model after a new draft is imported",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 full lag table paginates 128 rows, display sampling preserves raw JSON and aggregate work rejects excess",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 mobile themes and 200-percent text keep controls readable, HTML escaped and raw table internally scrolling",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 closing a pending panel ignores the late core import and does not create a new run",
+          "status": "passed"
+        },
+        {
+          "file": "workspace.spec.ts",
+          "title": "Initial fit waits for a delayed positive canvas measurement and preserves later navigation",
+          "status": "passed"
+        },
+        {
+          "file": "workspace.spec.ts",
+          "title": "First autosave keeps the header and initially fitted canvas stable when status labels wrap",
+          "status": "passed"
+        },
+        {
+          "file": "workspace.spec.ts",
+          "title": "Space fits only the focused canvas and leaves field, button, modal, IME and repeated-key behavior intact",
+          "status": "passed"
+        },
+        {
+          "file": "workspace.spec.ts",
+          "title": "Worker calculation, semantic staleness, undo and local restoration",
+          "status": "passed"
+        },
+        {
+          "file": "workspace.spec.ts",
+          "title": "Keyboard-accessible connection editing, undo and unique block IDs",
+          "status": "passed"
+        },
+        {
+          "file": "workspace.spec.ts",
+          "title": "Desktop and horizontal tablet keep full-height results beside the canvas; narrow screens stack them",
+          "status": "passed"
+        }
+      ]
+    },
+    "uniqueCases": 33,
+    "fullRepositoryBrowserSuiteRun": false,
+    "actualWorker": true,
+    "numericalBuildCoreSha256": "af00365da028c8303a98e56d7a87d57dcf82f8d8d5add53704b46c465f13a6c3",
+    "finalFollowUp": "The later core change adds only a Welch-average underflow diagnostic and one focused regression; numerical paths used by these browser fixtures are unchanged. Final production artifact was rebuilt and screenshots recaptured.",
+    "rawReportSha256": {
+      "milestone": "01fa069cf4de5635ea4c31040c71eea266a48fff86acede9b6ab5b70ec7439ab",
+      "regression": "dd22491a79e6742a114cd4896268b380919ac16e5c67e7f292928013e3c7de02"
+    }
+  },
+  "numericalEvidence": "docs/evidence/m25-independent-numeric-review.json",
+  "independentReview": "docs/evidence/m25-independent-review.json",
+  "designEvidence": "docs/evidence/m25-design-observations.json",
+  "typecheck": {
+    "passed": true,
+    "includes": "tsc --noEmit",
+    "command": "npm run build -- --outDir ../../.test-generated/m25-root-dist"
+  },
+  "productionBuild": {
+    "passed": true,
+    "warnings": [
+      "Existing native Vite config import-extension warnings.",
+      "Existing large chunks and control/interop ineffective dynamic imports."
+    ]
+  },
+  "release": {
+    "scope": "/",
+    "checks": 111,
+    "staticFiles": 21,
+    "totalStaticBytes": 8095471,
+    "releaseId": "6b62f91458e0a9b85577cf0022b61d0bae25845f9d4f374d4efe241c82b328e5",
+    "evidence": "docs/evidence/m25-root-release-verification.json",
+    "projectSubpathBuildTestedThisMilestone": false
+  },
+  "historicalCoverage": {
+    "sourceRows": 385,
+    "registryDefinitions": 337,
+    "examples": 75,
+    "schemaVersion": 1,
+    "engineVersion": "0.17.0-m16",
+    "coverageAndRoadmapVerifiersPassed": true,
+    "frozenEvidenceChanged": false
+  },
+  "securityBaseline": {
+    "queryAndOwnership": "No new server/DB/authentication/ownership surface.",
+    "output": "React escaped text; no unsafeHTML/eval callbacks; actual injected-label browser check.",
+    "secrets": "No credentials, serverkeys or remote calculation endpoints.",
+    "validation": "Descriptor-only plain exact fields/dense finite arrays, bounded strict integer text, full grid/type/shape/source validation.",
+    "resourceLimits": "Aggregate FFT work/frames/bins checked before frame computation; bounded raw source projection and displayed cells/pages.",
+    "settings": "Existing CSP/referrer/offline allowlist verified; no new cookies/CORS/environment settings.",
+    "database": "No new DB/schema/RLS surface.",
+    "privacy": "No new account/personal-data collection/tracking/remote model transfer/dependency."
+  },
+  "initialFailures": [
+    {
+      "phase": "Initial M25 browser fixture/assertions",
+      "passed": 8,
+      "failed": 2,
+      "correction": "Use Float64 tolerance for Hann sum0.37500000000000006 and measure the open STFT table rather than the closed Welch table. No production behavior or mathematical oracle changed; clean final rerun10PASS."
+    },
+    {
+      "phase": "Common-grid edge regression after first correction",
+      "failed": 2,
+      "correction": "N>L with a retained single frame still entered the original M21 endpoint-grid path. Restrict bit-exact compatibility to N=L and apply the common grid to single-frame discarded-tail cases; final numerical65/65PASS."
+    }
+  ],
+  "publication": {
+    "requested": false,
+    "dispatched": false,
+    "latestVerifiedPublicAppVersion": "0.24.0",
+    "localPreview": "http://127.0.0.1:4177/",
+    "note": "M25 implementation, local verification and requested local commit. No push or public deployment claim."
+  }
+}

@@ -63,7 +63,7 @@ export function verifySocialMetadata(html: string, imageBytes: Uint8Array): { ca
 
 export function releaseEvidencePrefix(appVersion: string, engineVersion: string, override?: string): string {
   if (override !== undefined) {
-    assert(['og-readme', 'm17', 'm18', 'm19', 'm20', 'm21', 'm22', 'm23', 'm24'].includes(override), 'Unsupported release evidence prefix; use og-readme or m17 through m24');
+    assert(['og-readme', 'm17', 'm18', 'm19', 'm20', 'm21', 'm22', 'm23', 'm24', 'm25'].includes(override), 'Unsupported release evidence prefix; use og-readme or m17 through m25');
     return override;
   }
   // M17 adds mathematical explanations and learning UI without changing execution semantics.
@@ -75,12 +75,13 @@ export function releaseEvidencePrefix(appVersion: string, engineVersion: string,
   if (/^0\.23\.\d+$/.test(appVersion)) return 'm22';
   if (/^0\.24\.\d+$/.test(appVersion)) return 'm23';
   if (/^0\.25\.\d+$/.test(appVersion)) return 'm24';
+  if (/^0\.26\.\d+$/.test(appVersion)) return 'm25';
   return appVersion === '0.8.1' ? 'pages' : engineVersion.split('-').at(-1)!;
 }
 
 /** Verification accepts only named, workspace-contained release builds. */
 export function releaseBuildDirectory(override?: string): string {
   const directory = override ?? 'dist';
-  assert(['dist', '.test-generated/og-readme-root-dist', '.test-generated/og-readme-project-dist', '.test-generated/m17-root-dist', '.test-generated/m17-project-dist', '.test-generated/m18-root-dist', '.test-generated/m18-project-dist', '.test-generated/m19-root-dist', '.test-generated/m19-project-dist', '.test-generated/m20-root-dist', '.test-generated/m20-project-dist', '.test-generated/m21-root-dist', '.test-generated/m21-project-dist', '.test-generated/m22-root-dist', '.test-generated/m22-project-dist', '.test-generated/m23-root-dist', '.test-generated/m23-project-dist', '.test-generated/m24-root-dist', '.test-generated/m24-project-dist'].includes(directory), 'Unsupported release build directory');
+  assert(['dist', '.test-generated/og-readme-root-dist', '.test-generated/og-readme-project-dist', '.test-generated/m17-root-dist', '.test-generated/m17-project-dist', '.test-generated/m18-root-dist', '.test-generated/m18-project-dist', '.test-generated/m19-root-dist', '.test-generated/m19-project-dist', '.test-generated/m20-root-dist', '.test-generated/m20-project-dist', '.test-generated/m21-root-dist', '.test-generated/m21-project-dist', '.test-generated/m22-root-dist', '.test-generated/m22-project-dist', '.test-generated/m23-root-dist', '.test-generated/m23-project-dist', '.test-generated/m24-root-dist', '.test-generated/m24-project-dist', '.test-generated/m25-root-dist', '.test-generated/m25-project-dist'].includes(directory), 'Unsupported release build directory');
   return directory;
 }

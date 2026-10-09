@@ -1,0 +1,51 @@
+import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { readFile, writeFile } from 'node:fs/promises';
+import { analyzeTimeFrequency } from '../packages/analysis/src/time-frequency';
+import { analyzeSpectrum } from '../packages/analysis/src/spectrum';
+
+let seed = 0x25cafe, comparedBins = 0, comparedFrames = 0, maxComplexAbsoluteError = 0, maxDensityAbsoluteError = 0, maxIntegratedAbsoluteError = 0;
+const next = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; };
+const close = (actual: number, expected: number, kind: string) => assert(Math.abs(actual - expected) <= 2e-9 + Math.abs(expected) * 2e-11, `${kind}: ${actual} vs ${expected}`);
+for (let trial = 0; trial < 160; trial++) {
+  const length = [8, 16, 32, 64][trial % 4]!, overlap = [0, length / 2, length - 3][Math.floor(trial / 4) % 3]!, count = length + Math.floor(next() * length * 3);
+  const times = Array.from({ length: count }, (_, i) => 2.37 + i / 96), values = Array.from({ length: count }, (_, i) => 1.3 + 4 * (next() - .5) + Math.sin(2 * Math.PI * (i / 8 + i * i / (count * 16))));
+  const window = trial % 2 ? 'hann' as const : 'rectangular' as const, removeMean = Math.floor(trial / 2) % 2 === 1;
+  const report = analyzeTimeFrequency({ times, values }, { segmentLength: length, overlap, window, removeMean, tail: 'discard' });
+  const fs = (count - 1) / (times[count - 1]! - times[0]!), delta = fs / length, hop = length - overlap, frameCount = Math.floor((count - length) / hop) + 1;
+  assert.equal(report.frameCount, frameCount); assert.equal(report.usedCount, (frameCount - 1) * hop + length); assert.equal(report.discardedCount, count - report.usedCount);
+  const averaged = Array.from({ length: length / 2 + 1 }, () => 0);
+  let averagePower = 0;
+  for (let frameIndex = 0; frameIndex < frameCount; frameIndex++) {
+    const start = frameIndex * hop, raw = values.slice(start, start + length), mean = raw.reduce((a, b) => a + b, 0) / length;
+    const weights = raw.map((_, i) => window === 'hann' ? .5 - .5 * Math.cos(2 * Math.PI * i / length) : 1);
+    const weighted = raw.map((value, i) => (value - (removeMean ? mean : 0)) * weights[i]!), windowSquare = weights.reduce((a, b) => a + b * b, 0);
+    const expectedPower = weighted.reduce((a, b) => a + b * b, 0) / windowSquare;
+    averagePower += expectedPower / frameCount;
+    const frame = report.frames[frameIndex]!;
+    assert.equal(frame.startTime, times[start]); assert.equal(frame.endTime, times[start + length - 1]); assert.equal(frame.centerTime, times[start]! + (times[start + length - 1]! - times[start]!) / 2);
+    close(frame.integratedPower, expectedPower, 'Parseval frame'); maxIntegratedAbsoluteError = Math.max(maxIntegratedAbsoluteError, Math.abs(frame.integratedPower - expectedPower));
+    for (let k = 0; k <= length / 2; k++) {
+      let real = 0, imag = 0;
+      for (let i = 0; i < length; i++) { const angle = 2 * Math.PI * k * i / length; real += weighted[i]! * Math.cos(angle); imag -= weighted[i]! * Math.sin(angle); }
+      const density = (k === 0 || k === length / 2 ? 1 : 2) * (real * real + imag * imag) / (fs * windowSquare), bin = frame.bins[k]!;
+      close(bin.real, real, 'direct DFT real'); close(bin.imag, imag, 'direct DFT imag'); close(bin.powerDensity, density, 'direct PSD'); close(bin.frequency, k * delta, 'global frequency');
+      maxComplexAbsoluteError = Math.max(maxComplexAbsoluteError, Math.abs(bin.real - real), Math.abs(bin.imag - imag)); maxDensityAbsoluteError = Math.max(maxDensityAbsoluteError, Math.abs(bin.powerDensity - density));
+      averaged[k]! += density / frameCount; comparedBins++;
+    }
+    comparedFrames++;
+  }
+  averaged.forEach((value, i) => close(report.welchBins[i]!.powerDensity, value, 'Welch mean direct periodograms'));
+  close(report.integratedPower, averagePower, 'Welch Parseval');
+  maxIntegratedAbsoluteError = Math.max(maxIntegratedAbsoluteError, Math.abs(report.integratedPower - averagePower));
+}
+for (const window of ['hann', 'rectangular'] as const) for (const removeMean of [false, true]) {
+  const times = Array.from({ length: 64 }, (_, i) => 0.31 + i / 96), values = times.map((_, i) => 1 + Math.sin(2 * Math.PI * i / 8));
+  const report = analyzeTimeFrequency({ times, values }, { segmentLength: 64, overlap: 17, window, removeMean, tail: 'discard' });
+  assert.deepEqual(report.frames[0]!.bins, analyzeSpectrum({ times, values }, { window, removeMean }).bins);
+}
+const hash = async (path: string) => createHash('sha256').update(await readFile(path)).digest('hex');
+const result = { schemaVersion: 1, generatedAt: new Date().toISOString(), milestone: 'M25', appVersion: '0.26.0', passed: true, publicDeploymentClaimed: false, method: 'Seeded finite real records; independent O(L²) forward DFT, explicit one-sided density and sample-domain windowed Parseval; arithmetic periodogram averages; actual raw frame endpoints/midpoints and discarded tail; four exact M21 single-frame comparisons.', randomTrials: 160, comparedFrames, comparedBins, singleFrameExactComparisons: 4, maxComplexAbsoluteError, maxDensityAbsoluteError, maxIntegratedAbsoluteError, tolerance: { absolute: 2e-9, relative: 2e-11 }, source: { coreSha256: await hash('packages/analysis/src/time-frequency.ts'), scriptSha256: await hash('.test-generated/m25-independent-numeric.ts') } };
+await writeFile('docs/evidence/m25-independent-numeric-review.json', JSON.stringify(result, null, 2) + '\n');
+await writeFile('docs/evidence/m25-independent-numeric-probe-source.txt', await readFile('.test-generated/m25-independent-numeric.ts'));
+console.log(JSON.stringify(result));

@@ -1,6 +1,6 @@
 # CalcWeave 기술 백서
 
-현행 앱 `0.25.0` / 엔진 `0.17.0-m16`의 설계와 실행 경계를 설명한다. 최종 실측·배포 상태는 [검증 문서](validation.md), 화면·상호작용은 [디자인 백서](02-design-whitepaper.md), 정책·복구·배포는 [운영 안내](operations.md)를 따른다. 현재 문서에 과거 단계의 시험 횟수나 납품 목록을 누적하지 않는다.
+현행 앱 `0.26.0` / 엔진 `0.17.0-m16`의 설계와 실행 경계를 설명한다. 최종 실측·배포 상태는 [검증 문서](validation.md), 화면·상호작용은 [디자인 백서](02-design-whitepaper.md), 정책·복구·배포는 [운영 안내](operations.md)를 따른다. 현재 문서에 과거 단계의 시험 횟수나 납품 목록을 누적하지 않는다.
 
 ## 제품과 지원을 세는 방법
 
@@ -183,6 +183,16 @@ y[k]=Cx[k]+Du[k], x[k+1]=Ax[k]+Bu[k]의 영 초기상태 LTI 응답 H(z)=C(zI−
 
 [출처 어댑터](../apps/web/src/time-series-analysis-sources.ts)는 completed 시간 실행의 모델 의미 SHA·전체 관측 수/시각·자료형/형상을 확인하고 선택 원시 값을 불변 사본으로 보존한다. legacy 실수 scalar/vector/matrix와 Typed float32/64 실수 성분만 지원하며 출력16개·한 번의 투영 원소 합100만개를 제한한다. 상관의 계산 예산 단위는24N+30Σ(N−|k|)+24(2L+1)로 사전 검사하고20,000,000을 넘으면 구간이나 지연을 줄이도록 거부한다. 작은 겹침의 원시 정규화 수치 계산 비용도 합산하며 이 값은 정책상 예산 단위로 실제 JavaScript 연산 횟수나 FLOP 수는 아니다. 구간 SHA는 JSON의 유한 숫자에서 음의 영을 문자열 -0 토큰으로 구별해 계산한다. JSON 숫자가 영의 부호를 잃는 문제를 피하도록 inputFloat64Bits의16자리 big-endian IEEE hex 배열을 시각/값에 함께 제공한다. 설정·원시 입력·성분·단위·구간 SHA·실제 겹침·모든 지연 결과를 JSON에 담으며 새 실행·실행 블록·의존성·외부 서비스를 추가하지 않는다.
 
+## Welch와 시간·주파수 관측
+
+[시간·주파수 코어](../packages/analysis/src/time-frequency.ts)는 M24의 완료 기록 선택과 전체 시간 격자 검증을 재사용한다. N은8~8192의 정수, 창 길이 L은8~2048의2의 거듭제곱이며 L≤N이다. 겹침 O는0~L−1, hop H=L−O, 완전한 구간 수 F=1+floor((N−L)/H)이다. 마지막 사용 표본은 (F−1)H+L−1이며 뒤의 불완전한 구간은 제외한다. 원시 시작/끝 시각을 보존하고 구간 중심은 첫/마지막 실제 표본 시각의 중점이다. FFT 가중 합은 표본 인덱스에서 계산하고 시각을 구간마다 재적합하지 않는다. 밀도와 빈은 전체 격자의 fs로 계산하며 원시 시각·값을 변경하지 않는다. 선택 표본 수가 창 길이와 같을 때는 M21의 동일 입력 빈을 정확히 보존한다. 한 구간에 꼬리가 남는 경우에도 전체 선택 격자의 fs를 적용한다. 경계 연장·0 채우기·보간은 없다.
+
+각 구간에서 선택한 평균 제거와 직사각형/주기형 Hann 창을 적용한다. 순방향 DFT X[k]는 정규화하지 않는다. 단측 밀도는 q·|X[k]|²/(fs·Σw²), q=1(DC·Nyquist) 또는2(그 외)이다. Welch는 F개 밀도의 보정된 산술 평균이고 Δf=fs/L이다. 밀도의 적분 ΣPSD·Δf는 각 구간의 Σ[wᵢ²(xᵢ−μ)²]/Σwᵢ²를 F개 산술 평균한 값이다. μ는 평균 제거를 선택하면 해당 구간의 평균, 아니면0이다. 전체 원시 RMS²와 일반적으로 다르며 선택 기록 전체의 평균/RMS와 구간별 값은 따로 보고한다. 시간 격자 전체에서 구한 fs를 모든 구간에 적용하고 M21의 원시 DFT·진폭·위상을 보존한다.
+
+L이 짧아지면 주파수 간격이 커지고 더 많은 구간을 평균할 수 있다. 겹치는 구간은 독립 표본이 아니므로 평균이 모든 신호에서 분산을 줄이거나 통계적 신뢰도를 보증하지 않는다. DC를 제외한 최대 Welch 빈은 실제 빈의 후보이며 보간된 주파수 추정이 아니다. 참고 정의는 [SciPy Welch](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.welch.html)와 [spectrogram](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.spectrogram.html)이다. [SciPy STFT](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.stft.html)의 기본 경계/0 채움·복소 계수 스케일과 CalcWeave의 원시 DFT/실제 표본 중점 규약은 다르며 전수 결과 동등성·역변환·COLA/NOLA 조건을 제공하지 않는다.
+
+사전 계획에서 F≤128, 전체 구간 빈 F·(L/2+1)≤65,536, 합산 정책 작업량≤8,000,000을 모두 검사한다. B=L/2+1, Q=10L+(L−1)(2+log₂L)+14(L/2)log₂L+12B일 때 예산은24N+F(Q+2L+4B)+4B다. 실제 FLOPs나 CPU 시간 인증이 아닌 보수적 결정 예산이다. 시각 절댓값≤10⁹·값 절댓값≤10¹²·최소 간격1ns·Float64 표현 정밀도 경계도 검사한다. 제곱의 underflow로0이 되는 값은 진단한다. 전체 원시 구간/시각·설정·출처 SHA와 IEEE Float64 비트를 JSON에 보존한다.
+
 ## 신뢰된 어댑터
 
 외부 사용자 코드 실행 대신 [immutable adapter catalog](../packages/model/src/m14-adapters.ts)의 자체 작성 고정 프로필만 실행한다.
@@ -262,7 +272,7 @@ MAT v5/SLX/MDL은 `calcweave-native-scalar-v1`의 읽기 전용 bounded 분석�
 
 ## M21 이후 확장 순서
 
-[제품 확장 계획 JSON](product-extension-roadmap.json)은 M20까지의 구현에서 확인한 공백을 기준으로2026-10-09에 새로 정한 계획이다. 원자료385행의 과거 coverage baseline은 그대로 보존한다. M21~M24는 로컬 구현·검증을 완료했고 M25는 후속 계획이다. 일정 약속이나 미완료 범위를 지원으로 표시하지 않는다.
+[제품 확장 계획 JSON](product-extension-roadmap.json)은 M20까지의 구현에서 확인한 공백을 기준으로2026-10-09에 새로 정한 계획이다. 원자료385행의 과거 coverage baseline은 그대로 보존한다. M21~M25는 로컬 구현·검증을 완료했다. 이후 단계는 별도로 범위를 정하며 일정 약속이나 미완료 범위를 지원으로 표시하지 않는다.
 
 | 단계 | 사용자 작업과 추가 범위 | 우선 완료 조건 |
 | --- | --- | --- |

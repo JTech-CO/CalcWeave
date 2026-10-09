@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-09T09:53:03.602Z",
+  "localVerificationDate": "2026-10-09",
+  "timezone": "Asia/Seoul",
+  "milestone": "M25",
+  "appVersion": "0.26.0",
+  "engineVersion": "0.17.0-m16",
+  "publicDeploymentClaimed": false,
+  "status": "PASS",
+  "releaseId": "6b62f91458e0a9b85577cf0022b61d0bae25845f9d4f374d4efe241c82b328e5",
+  "desktopAndMobile": [
+    {
+      "width": 1440,
+      "height": 1200,
+      "theme": "dark",
+      "scale": 1,
+      "mode": "charts",
+      "file": "m25-time-frequency-dark.png",
+      "pageWidth": 1440,
+      "viewportWidth": 1440,
+      "panelWidth": 770,
+      "panelScrollWidth": 770,
+      "minFieldFont": 16,
+      "minParagraphFont": 16,
+      "rawHeatmapCells": 429,
+      "displayHeatmapCells": 429,
+      "pageErrors": []
+    },
+    {
+      "width": 1440,
+      "height": 1200,
+      "theme": "light",
+      "scale": 1,
+      "mode": "settings",
+      "file": "m25-time-frequency-light-settings.png",
+      "pageWidth": 1440,
+      "viewportWidth": 1440,
+      "panelWidth": 770,
+      "panelScrollWidth": 770,
+      "minFieldFont": 16,
+      "minParagraphFont": 16,
+      "rawHeatmapCells": 429,
+      "displayHeatmapCells": 429,
+      "pageErrors": []
+    },
+    {
+      "width": 320,
+      "height": 1000,
+      "theme": "dark",
+      "scale": 2,
+      "mode": "charts",
+      "file": "m25-time-frequency-mobile-dark-200.png",
+      "pageWidth": 320,
+      "viewportWidth": 320,
+      "panelWidth": 266,
+      "panelScrollWidth": 266,
+      "minFieldFont": 32,
+      "minParagraphFont": 32,
+      "rawHeatmapCells": 429,
+      "displayHeatmapCells": 429,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "height": 1000,
+      "theme": "light",
+      "scale": 1,
+      "mode": "charts",
+      "file": "m25-time-frequency-mobile-light.png",
+      "pageWidth": 390,
+      "viewportWidth": 390,
+      "panelWidth": 336,
+      "panelScrollWidth": 336,
+      "minFieldFont": 16,
+      "minParagraphFont": 16,
+      "rawHeatmapCells": 429,
+      "displayHeatmapCells": 429,
+      "pageErrors": []
+    }
+  ],
+  "mobileThemeAndFontChecks": [
+    {
+      "width": 390,
+      "theme": "dark",
+      "scale": 1,
+      "viewport": 390,
+      "page": 390,
+      "panel": 336,
+      "client": 336,
+      "minimumFieldFont": 16,
+      "minimumParagraphFont": 16,
+      "table": 560,
+      "tableClient": 336
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "scale": 1,
+      "viewport": 390,
+      "page": 390,
+      "panel": 336,
+      "client": 336,
+      "minimumFieldFont": 16,
+      "minimumParagraphFont": 16,
+      "table": 560,
+      "tableClient": 336
+    },
+    {
+      "width": 320,
+      "theme": "dark",
+      "scale": 2,
+      "viewport": 320,
+      "page": 320,
+      "panel": 266,
+      "client": 266,
+      "minimumFieldFont": 32,
+      "minimumParagraphFont": 32,
+      "table": 1120,
+      "tableClient": 266
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "scale": 2,
+      "viewport": 320,
+      "page": 320,
+      "panel": 266,
+      "client": 266,
+      "minimumFieldFont": 32,
+      "minimumParagraphFont": 32,
+      "table": 1120,
+      "tableClient": 266
+    }
+  ],
+  "pageErrors": [],
+  "method": "Isolated actual Chromium/Worker recordings on4177; original user4176 preview preserved; display cells represent actual stored PSD values; desktop dark/light and390px/320px200% screenshot/bounds/font observations.",
+  "images": [
+    {
+      "path": "docs/evidence/m25-time-frequency-dark.png",
+      "sha256": "5dfbc9982a995b44ccc5dcc6ce44393061b3b36549f17c1c713013928b5d7672"
+    },
+    {
+      "path": "docs/evidence/m25-time-frequency-light-settings.png",
+      "sha256": "897fad81bf1e2326074ed49a71c8edac494fd24ef1b8a538b2db946dcfb4a05f"
+    },
+    {
+      "path": "docs/evidence/m25-time-frequency-mobile-dark-200.png",
+      "sha256": "b7036a58370748da567fc230a7f918668ea45bcfff539876b25c470ed9cb7fe2"
+    },
+    {
+      "path": "docs/evidence/m25-time-frequency-mobile-light.png",
+      "sha256": "1177869c40cf92af816c0be2d95564686214c1ca8c6f0825f6cf01a708685d91"
+    }
+  ]
+}

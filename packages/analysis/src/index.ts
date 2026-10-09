@@ -6,6 +6,7 @@ export * from './control-system';
 export * from './discrete-control-system';
 export * from './spectrum';
 export * from './time-series-statistics';
+export * from './time-frequency';
 import { ModelError, normalizeSolverSettings, parseModel, type CalcModel, type ExpressionNode, type RunResult, type SignalValue } from '../../model/src';
 import { runModel } from '../../runtime/src';
 

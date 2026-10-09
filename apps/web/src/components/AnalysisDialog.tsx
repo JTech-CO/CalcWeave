@@ -9,6 +9,7 @@ import { downloadText } from './M4WorkspaceTools';
 import { ControlSystemPanel } from './ControlSystemPanel';
 import { SpectrumPanel } from './SpectrumPanel';
 import { TimeSeriesStatisticsPanel } from './TimeSeriesStatisticsPanel';
+import { TimeFrequencyPanel } from './TimeFrequencyPanel';
 import { DiscreteControlSystemPanel } from './DiscreteControlSystemPanel';
 import type { ControlAnalysisRun } from '../control-analysis-sources';
 
@@ -64,6 +65,7 @@ export function AnalysisDialog({ model, invalidDraft, busy, onClose, linearizati
       <details className="discrete-control-analysis-section"><summary>이산 제어계 분석</summary><DiscreteControlSystemPanel model={model} busy={busy || pending} invalidDraft={invalidDraft}/></details>
       <details className="spectrum-analysis-section"><summary>신호 스펙트럼 분석</summary><SpectrumPanel run={linearizationRun} current={linearizationCurrent} busy={busy || pending} invalidDraft={invalidDraft}/></details>
       <details className="time-series-analysis-section"><summary>시간 구간 통계와 신호 상관</summary><TimeSeriesStatisticsPanel run={linearizationRun} current={linearizationCurrent} busy={busy || pending} invalidDraft={invalidDraft}/></details>
+      <details className="time-frequency-analysis-section"><summary>시간·주파수 분석</summary><TimeFrequencyPanel run={linearizationRun} current={linearizationCurrent} busy={busy || pending} invalidDraft={invalidDraft}/></details>
     </div><div className="dialog-footnote">A/B/C/D는 국소 선형화 블록의 실행 결과에서 확인할 수 있습니다.<button className="text-button" onClick={onClose}>닫기</button></div>
   </ModalDialog></NumericValidityContext.Provider>;
 }
