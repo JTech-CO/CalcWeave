@@ -12,7 +12,7 @@ export const RELEASE = Object.freeze({
   contact: 'jtech-bryan@proton.me',
   repository: 'https://github.com/JTech-CO/CalcWeave',
   policyLinks: Object.freeze({ terms: '/terms/', privacy: '/privacy/', cookies: '/cookies/', notices: '/notices/' }),
-  browserSupport: 'Windows Chromium에서 동작을 확인했습니다. Firefox와 Safari는 아직 검증하지 않았습니다.',
+  browserSupport: 'Windows Chromium과 Linux CI의 Chromium에서 동작을 확인했습니다. Firefox와 Safari는 아직 검증하지 않았습니다.',
 });
 
 export const RELEASE_LIMITATIONS = Object.freeze([
