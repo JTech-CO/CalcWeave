@@ -18,7 +18,7 @@ import { m16UnitEvidenceInput, validateM16UnitResults, UNIT_RESULTS_MAX_BYTES } 
 
 interface ProofFixture { id: string; mode?: string; modelHash?: string; parameters?: Record<string, unknown>; blockIds?: string[]; actualStandaloneTypeScript?: boolean; independentOracle?: boolean; independentLiteralOracle?: boolean; metadataOracleFromDeclaredRegistry?: boolean; modes?: Record<string, { actualStandaloneTypeScript?: boolean }> }
 const stage = /-(m\d+)$/.exec(ENGINE_VERSION)?.[1] ?? 'unknown';
-await verifyM16Presets(false);
+const currentPresetProof = await verifyM16Presets(false);
 const expected = await createSupportMatrix(), actual = validateSupportMatrix(JSON.parse(await readFile(SUPPORT_PATH,'utf8')));
 const bytes = JSON.stringify(expected,null,2)+'\n'; assert.equal(await readFile(SUPPORT_PATH,'utf8'),bytes,'Matrix generation drift'); assert.equal(await readFile(SUPPORT_MD_PATH,'utf8'),supportMarkdown(expected),'Markdown generation drift');
 assert.deepEqual(actual,expected); const second = await createSupportMatrix(); assert.equal(JSON.stringify(second),JSON.stringify(expected),'Generation must be deterministic');
@@ -100,7 +100,8 @@ const report = { schemaVersion:1,stage:'M16',engineVersion:ENGINE_VERSION,genera
     declaredMetadataOracleProfiles:profileAudits.filter(value=>value.declaredMetadataOnly).length,profileParameterSelectorsMatchedActualExecutedFixtures:true,compilerNormalizedProfileChecks,generationByteIdentical:true,sourceSpecificPresetActualPrograms:4},
   verifiedRawFixtureFiles,
   supportUnitEvidence:{path:unitInput.path,sha256:digest(unitBytes),...unitEvidence},
-  profileAudits,presetEvidence:{path:PRESET_PROOF_PATH,sha256:digest(await readFile(PRESET_PROOF_PATH)),actualStandalonePrograms:4,checkedSamples:4},
+  profileAudits,presetEvidence:{path:PRESET_PROOF_PATH,sha256:digest(await readFile(PRESET_PROOF_PATH)),actualStandalonePrograms:4,checkedSamples:4,frozenBytesPreserved:true,
+    currentExecution:{engineVersion:currentPresetProof.engineVersion,actualStandalonePrograms:currentPresetProof.actualStandalonePrograms,checkedSamples:currentPresetProof.checkedSamples,fixtures:currentPresetProof.fixtures}},
   freshActualTargets:{reports:fresh.map(value=>({path:value.path,sha256:digest(value.bytes)})),pythonPrograms:142,pythonDefinitions:69,wasmActualPrograms:128,wasmDefinitions:16,adapterActualTypeScript:32,adapterSamples:85},
   fullSimulinkEquivalenceClaimed:false,nativeSourceReferenceRuntimeExecuted:false,exhaustiveR2024bOptionInventoryComplete:false,
   limitations:['Tracking and declared capability QA does not close any original full options. All385 official inventories remain unverified.','367 existing selected-subset rows and18 unsupported purposes remain unchanged. Missing source-specific early-stage profiles remain explicitly unverified.','Source option selectors are matched against preserved actual fixture parameters; partial selectors do not imply every parameter default or every combination was executed.','Declared-metadata oracle profiles such as Block Support Table verify the public catalog declaration, not independent MathWorks numerical parity.','Fresh target execution reports are verified separately; their nondeterministic timestamps/logs never enter deterministic public matrix generation.','No native C/C++ executable target or MATLAB/Simulink reference runtime is claimed.'] };
