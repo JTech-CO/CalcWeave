@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-09T07:02:46.988Z",
+  "appVersion": "0.24.0",
+  "initialSourceCommit": "56a08d07e4160351018f280865169182fca6d1a8",
+  "initialActions": {
+    "url": "https://github.com/JTech-CO/CalcWeave/actions/runs/37893823331",
+    "conclusion": "failure",
+    "unit": {
+      "passed": 4573,
+      "files": 86
+    },
+    "auditVulnerabilities": 0,
+    "browser": {
+      "passed": 268,
+      "failed": 4,
+      "total": 272
+    },
+    "deployment": "skipped",
+    "artifactUploaded": false,
+    "failures": {
+      "file": "tests/e2e/m6-workspace.spec.ts",
+      "line": 126,
+      "viewports": [
+        320,
+        390
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "assertion": "visible dialog native controls font size >=14px",
+      "observed": 13.6
+    }
+  },
+  "correction": {
+    "file": "apps/web/src/styles.css",
+    "selector": ".workspace-dialog",
+    "token": "--text-small",
+    "value": ".875rem",
+    "pixelsAt16pxRoot": 14,
+    "scope": "Dialogs only; compact workbench dimensions unchanged",
+    "testAssertionsChanged": false,
+    "storageOrServiceWorkerChanged": false
+  },
+  "localVerification": {
+    "productionPreview": "http://127.0.0.1:4176/",
+    "separateFromUserPreview": true,
+    "buildAndTypecheck": "passed",
+    "browser": {
+      "stats": {
+        "startTime": "2026-10-09T06:59:51.026Z",
+        "duration": 57383.036,
+        "expected": 22,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "tests": [
+        {
+          "file": "m20-control.spec.ts",
+          "title": "M20 first-order Bode uses captured state-space matrices and leaves the actual model unchanged",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m20-control.spec.ts",
+          "title": "M20 explicit negative-feedback assumption gives analytic phase margin and raw root-locus gain samples",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m20-control.spec.ts",
+          "title": "M20 second-order complex poles and resonance match the independent analytic system",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m20-control.spec.ts",
+          "title": "M20 actual Worker linearization is confirmed by request memory and its original recorded matrices",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m20-control.spec.ts",
+          "title": "M20 invalid frequency inputs retain the captured report and cannot alter the model",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m20-control.spec.ts",
+          "title": "M20 singular frequencies stay JSON-safe graph gaps with isolated finite markers",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m20-control.spec.ts",
+          "title": "M20 high-order unsupported systems remain explicit and cannot be silently reduced",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m20-control.spec.ts",
+          "title": "M20 accepted analysis failures clear the previous successful snapshot",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m20-control.spec.ts",
+          "title": "M20 chart controls, internal tables and escaped model labels fit narrow themes and 200-percent text",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m6-workspace.spec.ts",
+          "title": "Workspace backup starts with essential actions while storage diagnostics and deletion stay collapsed",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m6-workspace.spec.ts",
+          "title": "M6 support reads all registry metadata, searches parameters and filters actual execution modes",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m6-workspace.spec.ts",
+          "title": "M6 native dialogs trap Tab, isolate background commands and restore the trigger after Escape",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m6-workspace.spec.ts",
+          "title": "M6 keyboard journey selects a canvas block, edits its value and executes without a mouse",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m6-workspace.spec.ts",
+          "title": "M6 complete backup previews atomically, restores the exact model and history and remains usable after reload",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m6-workspace.spec.ts",
+          "title": "M6 corrupted and unsupported backup drafts never change saved model or execution records",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m6-workspace.spec.ts",
+          "title": "M6 damaged slots remain downloadable while closed-field diagnostics exclude model text and values",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m6-workspace.spec.ts",
+          "title": "M6 local reset requires an explicit second step and preserves unrelated browser preferences",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m6-workspace.spec.ts",
+          "title": "M6 support and local management fit 320px in dark with readable native controls",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m6-workspace.spec.ts",
+          "title": "M6 support and local management fit 320px in light with readable native controls",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m6-workspace.spec.ts",
+          "title": "M6 support and local management fit 390px in dark with readable native controls",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m6-workspace.spec.ts",
+          "title": "M6 support and local management fit 390px in light with readable native controls",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        },
+        {
+          "file": "m6-workspace.spec.ts",
+          "title": "M6 policies use local static routes and identify the actual operator without remote form submissions",
+          "ok": true,
+          "status": [
+            "expected"
+          ]
+        }
+      ]
+    },
+    "documentation": {
+      "currentDocuments": 10,
+      "localLinks": 750,
+      "retiredDocumentsAbsent": 44
+    }
+  },
+  "verifiedPublicDeployment": false
+}

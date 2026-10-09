@@ -49,6 +49,15 @@ M23 불확실성 앙상블은 실제 Worker 실행을 순차 호출하며 공유
 
 공개 웹 베타는 [GitHub Pages](https://jtech-co.github.io/CalcWeave/)이며 목표 브랜드 주소 calcweave.com은 소유·DNS·HTTPS gate가 남아 있다. [Pages workflow](../.github/workflows/pages.yml)는 기본 브랜치의 명시 `workflow_dispatch`만 게시한다. PR에는 Pages/OIDC 권한을 주지 않는다. 기본 job `contents:read`, 최종 deploy job `pages:write`/`id-token:write`를 분리하고 공식 action은 SHA로 고정한다.
 
+커밋·push와 공개 게시를 별도로 확인한다. 공개 UI가 이전 모습이면 먼저 새 브라우저와 직접 HTTP 요청으로 `offline-manifest.json`의 앱 버전·releaseId를 확인하고, 마지막 성공 Pages 실행의 소스 commit과 대조한다.
+
+| 구버전 UI 원인 | 확인 후 조치 |
+| --- | --- |
+| 공개 서버의 manifest도 구버전 | 최신 기본 브랜치로 Pages workflow를 실행한다. verify·deploy 성공 뒤 실제 CI artifact와 공개 파일의 byte/SHA를 비교한다. |
+| 공개 서버는 최신이고 기존 탭만 구버전 | 앱의 **업데이트 확인 → 업데이트 적용**을 선택한다. 저장 성공 후 새 service worker를 활성화하고 상단 버전을 확인한다. |
+
+새로고침이나 HTTP 캐시 삭제는 공개 서버에 없는 릴리스를 게시하거나 대기 중인 service worker를 적용하지 않는다. UI 갱신을 위해 모델이 보관된 IndexedDB나 사이트 데이터를 삭제하도록 안내하지 않는다.
+
 workflow는 의존성·audit·unit·source tracking·frozen approvals·실제 TypeScript/Python/WASM·최신 지원표·빌드·release·루트browser를 검사한 뒤 configure-pages에서 실제 origin/base를 확인한다. 승인 조합은 jtech-co.github.io와 `/CalcWeave/`, calcweave.com과 `/`이다. 실제 configured base로 다시 빌드하고 해당 `dist`의 release integrity·project browser를 검사해 정적 artifact만 upload/deploy한다.
 
 HTML/JS/Worker·정책·service worker·manifest·정적 cache는 같은 base를 사용한다. 설정되지 않은 base는 `/`이며 project base는 `/CalcWeave/`다. 여러 경로·대소문자 변형·query/fragment·percent-encoded 우회 경로를 임의 허용하지 않는다. 사용자 모델·데이터·외부 URL을 service-worker cache 대상에 추가하지 않는다.
