@@ -1,6 +1,6 @@
 # CalcWeave 검증 상태
 
-현행 소스는 앱 `0.27.0` · 엔진 `0.17.1-m16`이며 마지막으로 확인한 공개 앱은 `0.24.0`이다. 아래 수치는 해당 검증 기록의 결과이며 새 공개 배포를 뜻하지 않는다. 기능·입력 범위는 [기술 백서](01-technical-whitepaper.md), 화면·접근성 계약은 [디자인 백서](02-design-whitepaper.md), 게시·업데이트 절차는 [운영 안내](operations.md)를 따른다.
+현행 소스는 앱 `0.27.0` · 엔진 `0.17.1-m16`이다. 아래 수치는 해당 검증 기록의 결과이며 최신 공개 반영은 [Pages 실행](https://github.com/JTech-CO/CalcWeave/actions/workflows/pages.yml)의 게시 후 파일·브라우저 검사와 [공개 manifest](https://jtech-co.github.io/CalcWeave/offline-manifest.json)로 확인한다. 기능·입력 범위는 [기술 백서](01-technical-whitepaper.md), 화면·접근성 계약은 [디자인 백서](02-design-whitepaper.md), 게시·업데이트 절차는 [운영 안내](operations.md)를 따른다.
 
 ## 현행 소스 검증
 
@@ -45,7 +45,7 @@ npm run verify:release
 
 지원표의 결정적 재생성은 `verify:support`로 확인한다. 승인 자료를 실제로 변경할 때만 `npx tsx scripts/generate-support-matrix.ts --write`로 재생성하고 변경된 계약과 증거를 함께 검토한다. 초기 단계의 독립 수치·잔차·생성 코드 검사는 전체 단위 검사에 포함되어 별도 보고서 생성 명령이 필요하지 않다.
 
-## 마지막으로 확인한 공개 배포
+## 구버전 게시 문제와 과거 공개 검증
 
 2026-10-09의 [공개 전후 기록](evidence/m23-public-layout-release.json)은 캐시 MISS에서도 공개 서버가 앱0.17.3을 제공하던 원인을 이전 게시 artifact로 확인했다. 새로고침·HTTP 캐시 삭제는 새 릴리스를 게시하지 않는다. 현재 source와 공개 서버의 manifest·releaseId·Pages 소스 commit을 따로 확인한다.
 

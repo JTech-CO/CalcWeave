@@ -9,6 +9,8 @@ import { createOfflineManifest, generateOfflineWorker, isOfflineAssetUrl, offlin
 import { getDeploymentBasePath, parseDeploymentBase } from '../scripts/pages-base';
 import { calcWeaveSecurityPlugin, STATIC_CSP } from '../scripts/security-build';
 import { SITE_OG_IMAGE_PATH } from '../scripts/social-metadata';
+import { APP_VERSION } from '../packages/release/src';
+import { ENGINE_VERSION } from '../packages/model/src';
 
 const origin = 'https://calcweave.test';
 const versions = { appVersion: '0.6.0', engineVersion: '0.6.0-m6' };
@@ -65,7 +67,7 @@ function workerHarness(manifest: OfflineManifest, sources: Record<string, string
   };
 }
 
-afterEach(() => { vi.unstubAllGlobals(); vi.unstubAllEnvs(); });
+afterEach(() => { vi.unstubAllGlobals(); vi.unstubAllEnvs(); vi.restoreAllMocks(); });
 describe('M6 final-byte offline releases', () => {
   it.each(['/', '/CalcWeave/'])('includes the fixed public social PNG in the %s release even when absent from bundler output', async basePath => {
     const directory = await mkdtemp(join(tmpdir(), 'calcweave-offline-social-'));
@@ -298,5 +300,78 @@ describe('M6 explicit saved update client policy', () => {
     let saved = false;
     await controller.applyUpdate(async () => { await Promise.resolve(); saved = true; }); expect(saved).toBe(true); expect(sent.at(-1)).toBe('ACTIVATE_RELEASE');
     listeners.get('controllerchange')!(); expect(reload).toHaveBeenCalledTimes(1); controller.dispose();
+  });
+});
+
+function updateClientFixture() {
+  vi.stubEnv('PROD', true); vi.stubEnv('BASE_URL', '/');
+  const windowListeners = new Map<string, () => void>(), documentListeners = new Map<string, () => void>(), workerListeners = new Map<string, () => void>();
+  const sent: string[] = [], reload = vi.fn();
+  const release = { releaseId: 'a'.repeat(64), appVersion: APP_VERSION, engineVersion: ENGINE_VERSION };
+  const worker = (manifest: unknown) => ({ postMessage(data: { type: string; releaseId?: string }, ports: MessagePort[]) {
+    sent.push(data.type); ports[0]!.postMessage(data.type === 'GET_RELEASE' ? { type: 'OFFLINE_RELEASE', manifest } : { type: 'OFFLINE_ACTIVATING', releaseId: data.releaseId });
+  } });
+  const registration = { active: worker(release), waiting: null as ReturnType<typeof worker> | null, installing: null,
+    update: vi.fn(async () => {}), addEventListener: vi.fn(), removeEventListener: vi.fn() };
+  const serviceWorker = { register: vi.fn(async () => registration), addEventListener: (name: string, fn: () => void) => workerListeners.set(name, fn), removeEventListener: vi.fn() };
+  const window = { isSecureContext: true, addEventListener: (name: string, fn: () => void) => windowListeners.set(name, fn), removeEventListener: vi.fn() };
+  const document = { visibilityState: 'visible', addEventListener: (name: string, fn: () => void) => documentListeners.set(name, fn), removeEventListener: vi.fn() };
+  vi.stubGlobal('navigator', { onLine: true, serviceWorker }); vi.stubGlobal('window', window); vi.stubGlobal('document', document);
+  vi.stubGlobal('location', { protocol: 'https:', hostname: 'calcweave.test', reload });
+  return { release, worker, registration, windowListeners, documentListeners, workerListeners, sent, reload, window, document, serviceWorker };
+}
+
+describe('Release visibility across tabs and revisits', () => {
+  it('shows the waiting version, then offers saved reload when another tab activates it without reloading an unsaved document', async () => {
+    const fixture = updateClientFixture(), controller = await registerOfflineSupport();
+    expect(controller.getStatus()).toMatchObject({ phase: 'ready', appVersion: APP_VERSION, activeAppVersion: APP_VERSION, releaseId: fixture.release.releaseId });
+    const next = { ...fixture.release, appVersion: '0.99.0', releaseId: 'b'.repeat(64) };
+    fixture.registration.waiting = fixture.worker(next); await controller.checkForUpdate();
+    expect(controller.getStatus()).toMatchObject({ phase: 'update-ready', waitingAppVersion: next.appVersion, waitingReleaseId: next.releaseId });
+    fixture.registration.active = fixture.registration.waiting; fixture.registration.waiting = null; fixture.workerListeners.get('controllerchange')!();
+    await vi.waitFor(() => expect(controller.getStatus()).toMatchObject({ phase: 'reload-ready', activeAppVersion: next.appVersion, waitingAppVersion: undefined }));
+    expect(fixture.reload).not.toHaveBeenCalled();
+    await expect(controller.applyUpdate(async () => { throw new Error('Save failed'); })).rejects.toThrow('Save failed');
+    expect(fixture.reload).not.toHaveBeenCalled(); expect(fixture.sent).not.toContain('ACTIVATE_RELEASE');
+    const save = vi.fn(async () => {}); await controller.applyUpdate(save);
+    expect(save).toHaveBeenCalledTimes(1); expect(fixture.reload).toHaveBeenCalledTimes(1); expect(fixture.sent).not.toContain('ACTIVATE_RELEASE'); controller.dispose();
+  });
+
+  it('detects another tab switching to changed release bytes even when the app and engine version strings are unchanged', async () => {
+    const fixture = updateClientFixture(), controller = await registerOfflineSupport();
+    fixture.registration.active = fixture.worker({ ...fixture.release, releaseId: 'c'.repeat(64) }); fixture.workerListeners.get('controllerchange')!();
+    await vi.waitFor(() => expect(controller.getStatus()).toMatchObject({ phase: 'reload-ready', activeAppVersion: APP_VERSION, releaseId: 'c'.repeat(64) }));
+    expect(fixture.reload).not.toHaveBeenCalled(); controller.dispose();
+  });
+
+  it('limits automatic focus, visibility and online checks and deduplicates concurrent manual checks', async () => {
+    const fixture = updateClientFixture(); let now = 1_000; const date = vi.spyOn(Date, 'now').mockImplementation(() => now);
+    const controller = await registerOfflineSupport();
+    fixture.windowListeners.get('focus')!(); expect(fixture.registration.update).not.toHaveBeenCalled();
+    now += 30_001; fixture.document.visibilityState = 'hidden'; fixture.windowListeners.get('focus')!(); expect(fixture.registration.update).not.toHaveBeenCalled();
+    fixture.document.visibilityState = 'visible'; let finish!: () => void;
+    fixture.registration.update.mockImplementation(() => new Promise<void>(resolve => { finish = resolve; }));
+    fixture.documentListeners.get('visibilitychange')!(); fixture.windowListeners.get('focus')!(); fixture.windowListeners.get('online')!();
+    const checks = [controller.checkForUpdate(), controller.checkForUpdate()]; expect(fixture.registration.update).toHaveBeenCalledTimes(1);
+    finish(); await Promise.all(checks); now += 30_001; const next = controller.checkForUpdate(); finish(); await next;
+    expect(fixture.registration.update).toHaveBeenCalledTimes(2);
+    controller.dispose(); expect(fixture.window.removeEventListener).toHaveBeenCalledWith('focus', expect.any(Function));
+    expect(fixture.document.removeEventListener).toHaveBeenCalledWith('visibilitychange', expect.any(Function)); date.mockRestore();
+  });
+
+  it.each([null, [], { releaseId: 'a'.repeat(64), appVersion: '<img>', engineVersion: ENGINE_VERSION },
+    { releaseId: 'a'.repeat(64), appVersion: APP_VERSION, engineVersion: 'x'.repeat(65) }])('rejects malformed release metadata before saving or activating: %j', async manifest => {
+    const fixture = updateClientFixture(); fixture.registration.waiting = fixture.worker(manifest);
+    const controller = await registerOfflineSupport(), save = vi.fn(async () => {});
+    expect(controller.getStatus()).toMatchObject({ phase: 'error', offlineReady: true });
+    await expect(controller.applyUpdate(save)).rejects.toThrow('완전한 오프라인 릴리스');
+    expect(save).not.toHaveBeenCalled(); expect(fixture.sent).not.toContain('ACTIVATE_RELEASE'); expect(fixture.reload).not.toHaveBeenCalled(); controller.dispose();
+  });
+
+  it('does not activate a replacement waiting release if it changes while saving', async () => {
+    const fixture = updateClientFixture(); fixture.registration.waiting = fixture.worker({ ...fixture.release, releaseId: 'b'.repeat(64) });
+    const controller = await registerOfflineSupport();
+    await expect(controller.applyUpdate(async () => { fixture.registration.waiting = fixture.worker({ ...fixture.release, releaseId: 'c'.repeat(64) }); })).rejects.toThrow('업데이트가 바뀌었습니다.');
+    expect(fixture.sent).not.toContain('ACTIVATE_RELEASE'); expect(fixture.reload).not.toHaveBeenCalled(); controller.dispose();
   });
 });

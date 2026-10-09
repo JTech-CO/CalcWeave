@@ -185,7 +185,7 @@ npm run verify:release
 
 ## 지원 범위와 결과 해석
 
-현행 소스의 앱 버전은 **0.27.0**, 계산 엔진 버전은 **0.17.1-m16**입니다. M24~M25와 새 캔버스 편집 기능은 로컬 검증 범위이며 마지막으로 확인한 공개 배포는 **0.24.0**입니다. 블록 수는 등록된 정의의 수이며 모든 자료형·모드·옵션에서 동작한다는 의미는 아닙니다. 기존 [공개 지원표](docs/support-matrix.md)와 [기계 판독 지원표](docs/support-matrix.json)는 0.17.0-m16 엔진의 역사 검증 자료입니다. 이후의 [다중 입력 확장 계약](packages/support-matrix/src/current-extensions.ts)은 별도로 관리하며 실제 모델별 컴파일 검사를 함께 적용합니다.
+현행 소스의 앱 버전은 **0.27.0**, 계산 엔진 버전은 **0.17.1-m16**입니다. `main`의 변경은 자동 검증을 통과한 뒤 공개 사이트에 게시됩니다. 반영 여부는 [배포 실행](https://github.com/JTech-CO/CalcWeave/actions/workflows/pages.yml)과 [공개 릴리스 정보](https://jtech-co.github.io/CalcWeave/offline-manifest.json)로 확인합니다. 블록 수는 등록된 정의의 수이며 모든 자료형·모드·옵션에서 동작한다는 의미는 아닙니다. 기존 [공개 지원표](docs/support-matrix.md)와 [기계 판독 지원표](docs/support-matrix.json)는 0.17.0-m16 엔진의 역사 검증 자료입니다. 이후의 [다중 입력 확장 계약](packages/support-matrix/src/current-extensions.ts)은 별도로 관리하며 실제 모델별 컴파일 검사를 함께 적용합니다.
 
 - TypeScript 내보내기는 승인된 실행 계약을 따릅니다. Python은 69개 블록 ID의 정적·이산 구성, WASM은 16개 블록 ID의 실수 스칼라 비순환 구성으로 제한됩니다. C/C++ 내보내기는 제공하지 않습니다.
 - Simulink R2024b 참고 목록 385행을 [원자료 대응표](docs/block-coverage.md)로 추적합니다. 원본의 모든 옵션이나 MathWorks 실행 결과와의 수치적 동등성을 검증한 것은 아닙니다. MAT·SLX·MDL 처리는 선택 범위의 데이터·구조 분석이며 원본 실행 환경을 대체하지 않습니다.

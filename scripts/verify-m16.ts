@@ -14,6 +14,7 @@ import { M12_INDEPENDENT_DEFINITION_FIXTURES, M12_INDEPENDENT_BOUNDARY_FIXTURES 
 import { M13_INDEPENDENT_DEFINITION_FIXTURES, M13_INDEPENDENT_BOUNDARY_FIXTURES } from '../tests/m13-independent-fixtures';
 import { M14_INDEPENDENT_DEFINITION_FIXTURES, M14_INDEPENDENT_BOUNDARY_FIXTURES } from '../tests/m14-independent-fixtures';
 import { validateSupportMatrix } from '../packages/support-matrix/src/validate';
+import { m16UnitEvidenceInput, validateM16UnitResults, UNIT_RESULTS_MAX_BYTES } from './m16-unit-evidence';
 
 interface ProofFixture { id: string; mode?: string; modelHash?: string; parameters?: Record<string, unknown>; blockIds?: string[]; actualStandaloneTypeScript?: boolean; independentOracle?: boolean; independentLiteralOracle?: boolean; metadataOracleFromDeclaredRegistry?: boolean; modes?: Record<string, { actualStandaloneTypeScript?: boolean }> }
 const stage = /-(m\d+)$/.exec(ENGINE_VERSION)?.[1] ?? 'unknown';
@@ -87,17 +88,18 @@ assert.equal(adapters.counts.actualTypeScript,32); assert.equal(adapters.counts.
 assert.equal(adapters.fullSimulinkEquivalenceClaimed,false);
 for (const row of actual.rows) for (const target of row.capabilities.targets) assert.equal(target.allConfigurationsVerified,false);
 
-const sources = ['packages/support-matrix/src/types.ts','packages/support-matrix/src/validate.ts','packages/support-matrix/src/index.ts','scripts/m16-support-source.ts','scripts/generate-support-matrix.ts','scripts/m16-presets.ts','scripts/verify-m16.ts','tests/m16-independent-presets.ts','tests/m16-support-matrix.test.ts'];
+const sources = ['packages/support-matrix/src/types.ts','packages/support-matrix/src/validate.ts','packages/support-matrix/src/index.ts','scripts/m16-support-source.ts','scripts/generate-support-matrix.ts','scripts/m16-presets.ts','scripts/verify-m16.ts','scripts/m16-unit-evidence.ts','tests/m16-independent-presets.ts','tests/m16-support-matrix.test.ts'];
 const sourceHashes = Object.fromEntries(await Promise.all(sources.map(async path=>[path,digest(await readFile(path))])));
-const unitPath='docs/evidence/m16-support-unit-results.json',unitBytes=await readFile(unitPath),unit=JSON.parse(unitBytes.toString()) as {success:boolean;numPassedTests:number;numFailedTests:number;testResults:{assertionResults:{status:string}[]}[]};
-assert(unit.success); assert.equal(unit.numPassedTests,28); assert.equal(unit.numFailedTests,0); assert.equal(unit.testResults.length,1); assert(unit.testResults.every(result=>result.assertionResults.length===28&&result.assertionResults.every(test=>test.status==='passed')));
+const unitInput=m16UnitEvidenceInput(process.env.CALCWEAVE_UNIT_RESULTS),unitBytes=await readFile(unitInput.path);
+assert(unitBytes.length<=UNIT_RESULTS_MAX_BYTES,'Unit evidence exceeds bounded JSON size');
+const unitEvidence=validateM16UnitResults(JSON.parse(unitBytes.toString('utf8')),unitInput.mode);
 const report = { schemaVersion:1,stage:'M16',engineVersion:ENGINE_VERSION,generatedAt:new Date().toISOString(),status:'passed-selected-tracking-contract',counts:actual.counts,
   matrix:{path:SUPPORT_PATH,sha256:digest(bytes),utf8Bytes:Buffer.byteLength(bytes)},markdown:{path:SUPPORT_MD_PATH,sha256:digest(await readFile(SUPPORT_MD_PATH))},sourceArtifactHashes:sourceHashes,protectedArtifacts:actual.protectedArtifacts,
   qa:{sourceIdentityRowsChecked:385,sourceDecisionRowsChecked:385,canonicalParameterContractsChecked:352,registryDefinitionsObjectExact:337,officialSourceOptionInventoriesVerified:0,unverifiedSourceInventoryRows:385,
     sourceRowsWithActualLinkedProfiles:new Set(profileAudits.map(value=>value.sourceId)).size,linkedProfiles:profileAudits.length,selectedRowsWithoutLinkedOptionProfile:actual.rows.filter(row=>row.decision.status==='selected-subset'&&!row.capabilities.optionProfiles.length).length,
     declaredMetadataOracleProfiles:profileAudits.filter(value=>value.declaredMetadataOnly).length,profileParameterSelectorsMatchedActualExecutedFixtures:true,compilerNormalizedProfileChecks,generationByteIdentical:true,sourceSpecificPresetActualPrograms:4},
   verifiedRawFixtureFiles,
-  supportUnitEvidence:{path:unitPath,sha256:digest(unitBytes),passed:28,failed:0,files:1},
+  supportUnitEvidence:{path:unitInput.path,sha256:digest(unitBytes),...unitEvidence},
   profileAudits,presetEvidence:{path:PRESET_PROOF_PATH,sha256:digest(await readFile(PRESET_PROOF_PATH)),actualStandalonePrograms:4,checkedSamples:4},
   freshActualTargets:{reports:fresh.map(value=>({path:value.path,sha256:digest(value.bytes)})),pythonPrograms:142,pythonDefinitions:69,wasmActualPrograms:128,wasmDefinitions:16,adapterActualTypeScript:32,adapterSamples:85},
   fullSimulinkEquivalenceClaimed:false,nativeSourceReferenceRuntimeExecuted:false,exhaustiveR2024bOptionInventoryComplete:false,

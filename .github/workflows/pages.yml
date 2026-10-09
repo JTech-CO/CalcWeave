@@ -1,20 +1,22 @@
 name: Verify and publish CalcWeave Pages
 
-# Publication is an explicit action on the default branch. Untrusted PRs cannot
-# obtain the Pages OIDC/deployment permissions.
+# Every trusted main update is verified and published. PRs and forks cannot
+# obtain Pages OIDC/deployment permissions.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: calcweave-pages
-  cancel-in-progress: false
+  group: calcweave-pages-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   verify:
-    if: github.ref_name == github.event.repository.default_branch
+    if: github.repository == 'JTech-CO/CalcWeave' && github.ref == 'refs/heads/main' && github.event.repository.default_branch == 'main'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -30,7 +32,8 @@ jobs:
           python-version: '3.14'
       - run: npm ci
       - run: npm audit --audit-level=moderate
-      - run: npm test
+      - name: Verify current unit tests and write their actual results
+        run: npm test -- --maxWorkers=2 --reporter=default --reporter=json --outputFile.json=.test-generated/ci-unit-results.json
       - run: npm run verify:coverage
       - run: npm run verify:roadmap
       - run: npm run verify:docs
@@ -50,6 +53,8 @@ jobs:
       - run: npx tsx scripts/update-m14-coverage.ts --verify
       - run: npm run verify:m15
       - run: npm run verify:m16
+        env:
+          CALCWEAVE_UNIT_RESULTS: .test-generated/ci-unit-results.json
       - run: npm run build
       - run: npm run verify:release
       - run: npx playwright install --with-deps chromium
@@ -77,15 +82,64 @@ jobs:
           path: dist
   deploy:
     needs: verify
+    if: github.repository == 'JTech-CO/CalcWeave' && github.ref == 'refs/heads/main' && github.event.repository.default_branch == 'main'
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     permissions:
+      contents: read
       pages: write
       id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Download this run's exact verified Pages artifact
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: github-pages
+          path: .test-generated/pages-artifact
+          digest-mismatch: error
+      - name: Extract the bounded static artifact safely
+        run: |
+          python - <<'PY'
+          from pathlib import Path, PurePosixPath
+          import tarfile
+
+          target = Path('.test-generated/published-artifact').resolve()
+          workspace = Path('.').resolve()
+          if not target.is_relative_to(workspace):
+              raise ValueError('Artifact target must stay in the workspace.')
+          target.mkdir(parents=True, exist_ok=True)
+          with tarfile.open('.test-generated/pages-artifact/artifact.tar') as archive:
+              members = archive.getmembers()
+              if len(members) > 256 or sum(item.size for item in members) > 40 * 1024 * 1024:
+                  raise ValueError('Static artifact exceeds its resource limits.')
+              for item in members:
+                  path = PurePosixPath(item.name)
+                  if path.is_absolute() or '..' in path.parts or '\\' in item.name or not (item.isfile() or item.isdir()):
+                      raise ValueError('Artifact contains an unsafe path or entry.')
+              archive.extractall(target, members=members, filter='data')
+          PY
+      - name: Refuse publication of a superseded main revision
+        run: |
+          current_main="$(git ls-remote --exit-code origin refs/heads/main | cut -f1)"
+          test "$current_main" = "$GITHUB_SHA"
       - name: Publish verified static artifact
         id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+      - name: Verify the public release against this exact artifact and commit
+        env:
+          CALCWEAVE_PAGES_URL: ${{ steps.deployment.outputs.page_url }}
+        run: npx tsx scripts/verify-published-release.ts "$CALCWEAVE_PAGES_URL" .test-generated/published-artifact "$GITHUB_SHA"
+      - run: npx playwright install --with-deps chromium
+      - name: Verify the actual public application in a fresh browser
+        if: steps.deployment.outputs.page_url == 'https://jtech-co.github.io/CalcWeave/'
+        run: npm run verify:pages:browser

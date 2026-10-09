@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { registryWithoutApprovedObserverInputs } from './m16-support-source';
 import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import { blockRegistry, getBlockDefinition } from '../packages/block-library/src';
@@ -40,7 +41,8 @@ assert.equal(evidence.newDefinitions, 34); assert.equal(evidence.newDefinitions,
 assert.equal(evidence.rawFixtures, M10_INDEPENDENT_FIXTURES.length); assert.equal(evidence.rawPresetFixtures, M10_INDEPENDENT_PRESET_FIXTURES.length); assert.equal(evidence.datasetSha256, datasetSha256); assert.equal(evidence.fullSimulinkEquivalenceClaimed, false);
 assert.deepEqual([...evidence.strictTypeScriptModes].sort(), ['continuous', 'discrete', 'static']); assert.equal(evidence.strictTypeScriptPrograms, 3);
 const predecessor = JSON.parse(await readFile('docs/baselines/m9-registry.json', 'utf8')) as typeof blockRegistry;
-assert.equal(predecessor.length, 211); for (const definition of predecessor) assert.deepEqual(getBlockDefinition(definition.id), definition, `${definition.id}: predecessor definition drift`);
+const historicalRegistry = registryWithoutApprovedObserverInputs(blockRegistry);
+assert.equal(predecessor.length, 211); for (const definition of predecessor) assert.deepEqual(historicalRegistry.find(block => block.id === definition.id), definition, `${definition.id}: historical predecessor changed beyond two approved observer inputCount declarations`);
 assert.deepEqual([...new Set(M10_INDEPENDENT_DEFINITION_FIXTURES.flatMap(entry => entry.model.nodes.map(node => node.blockType)).filter(id => (M10_BLOCK_IDS as readonly string[]).includes(id)))].sort(), [...M10_BLOCK_IDS].sort());
 const actualFixtures = [...M10_INDEPENDENT_FIXTURES, ...M10_INDEPENDENT_PRESET_FIXTURES].flatMap(entry => entry.declaredModes.map(mode => m10IndependentMode(entry, mode)));
 const all = [...evidence.fixtures, ...evidence.presetEvidence];

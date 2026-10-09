@@ -446,6 +446,7 @@ textarea:focus-visible { outline:2px solid var(--focus); outline-offset:3px; }
 .offline-banner .button { padding:6px 10px; min-height:34px; }
 .offline-message { overflow-wrap:anywhere; }
 .offline-banner.has-error { color:var(--warning); }
+.offline-banner.has-update>span:first-child { color:var(--text); }
 .management-check { display:flex; align-items:flex-start; gap:10px; font-size:var(--text-body); line-height:1.7; margin:16px 0; }
 .management-check input { flex:none; width:18px; height:18px; margin-top:5px; accent-color:var(--accent); }
 .management-actions { display:flex; flex-wrap:wrap; gap:12px; margin:16px 0; }

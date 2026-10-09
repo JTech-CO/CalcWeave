@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { registryWithoutApprovedObserverInputs } from './m16-support-source';
 import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import { blockRegistry, getBlockDefinition } from '../packages/block-library/src';
@@ -29,7 +30,8 @@ const evidenceBytes = await readFile(evidencePath), evidence = JSON.parse(eviden
 assert.equal(evidence.engineVersion, '0.15.0-m14'); if (args[0] === '--write') assert.equal(ENGINE_VERSION, evidence.engineVersion);
 assert.equal(evidence.registryDefinitions, 337); assert.equal(evidence.addedDefinitions, 3); assert.equal(evidence.predecessorDefinitionsUnchanged, 334); assert.equal(evidence.fullSimulinkEquivalenceClaimed, false); assert.equal(evidence.parityTolerance, 3e-12);
 const predecessor = JSON.parse(await readFile('docs/baselines/m13-registry.json', 'utf8')) as typeof blockRegistry;
-assert.equal(predecessor.length, 334); for (const definition of predecessor) assert.deepEqual(getBlockDefinition(definition.id), definition, definition.id); assert(blockRegistry.length >= 337);
+const historicalRegistry = registryWithoutApprovedObserverInputs(blockRegistry);
+assert.equal(predecessor.length, 334); for (const definition of predecessor) assert.deepEqual(historicalRegistry.find(block => block.id === definition.id), definition, `${definition.id}: historical predecessor changed beyond two approved observer inputCount declarations`); assert(blockRegistry.length >= 337);
 assert.equal(BUILTIN_ADAPTER_PROFILES.length, 3); assert.equal(UNAVAILABLE_ADAPTER_PROFILES.length, 8); assert.equal(ADAPTER_PROFILES.length, 11);
 for (const profile of ADAPTER_PROFILES) { assert(Object.isFrozen(profile)); assert.equal(profile.rights.license, 'NOASSERTION'); assert.equal(profile.rights.externalCodeRedistribution, 'NOASSERTION'); assert.equal(profile.nativeRuntimeEquivalenceClaimed, false); assert(Object.values(profile.capabilities).every(value => value === false)); }
 for (const profile of BUILTIN_ADAPTER_PROFILES.filter(value => value.artifact)) {

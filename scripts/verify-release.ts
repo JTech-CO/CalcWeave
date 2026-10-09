@@ -11,6 +11,7 @@ import { MODEL_PACKAGE_PERMISSIONS, MODEL_PACKAGE_REGISTRY } from '../packages/m
 import { BUILTIN_ADAPTER_PROFILES, UNAVAILABLE_ADAPTER_PROFILES } from '../packages/model/src/m14-adapters';
 import { M14_WASM_BYTES, inspectM14Wasm } from '../packages/runtime/src/m14-wasm';
 import { SITE_OG_IMAGE_PATH, releaseBuildDirectory, releaseEvidencePrefix, verifySocialMetadata } from './social-metadata';
+import { readSourceCommit, sourceCommitFromEnvironment } from './release-provenance';
 
 const catalog = getReleaseCatalog(), checks: string[] = [];
 const evidenceStage = releaseEvidencePrefix(APP_VERSION, catalog.engineVersion, process.env.CALCWEAVE_RELEASE_EVIDENCE_PREFIX);
@@ -43,6 +44,9 @@ for (const asset of manifest.assets) {
 }
 check(manifest.assets.reduce((total, asset) => total + asset.bytes, 0) <= 32 * 1024 * 1024, 'offline shell size limit');
 const html = await readFile(join(buildDirectory, 'index.html'), 'utf8');
+const expectedSourceCommit = sourceCommitFromEnvironment(process.env);
+const sourceCommit = readSourceCommit(html, expectedSourceCommit !== undefined);
+check(expectedSourceCommit === undefined || sourceCommit === expectedSourceCommit, 'release source identity matches the build environment');
 const socialMetadata = verifySocialMetadata(html, await readFile(join(buildDirectory, SITE_OG_IMAGE_PATH)));
 check(manifest.assets.some(asset => asset.url === scope + SITE_OG_IMAGE_PATH), 'public social PNG is included in the verified offline release');
 check(socialMetadata.canonicalUrl.startsWith('https://') && socialMetadata.imageUrl.startsWith(socialMetadata.canonicalUrl), 'static Korean OG/Twitter metadata uses actual public HTTPS URLs and PNG dimensions');
@@ -64,7 +68,12 @@ for (const file of builtFiles.filter(path => /\.(js|css)$/.test(path) && !path.e
 const secretPattern = /(?:\b(?:sk-(?:proj-)?|gh[pousr]_|github_pat_)[A-Za-z0-9_-]{20,}|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----)/;
 for (const path of builtFiles.filter(path => /\.(js|html|json)$/.test(path))) check(!secretPattern.test(await readFile(path, 'utf8')), `no recognized secret material in ${relative(buildDirectory, path)}`);
 const workflow = await readFile('.github/workflows/pages.yml', 'utf8');
-check(!workflow.includes('pull_request_target') && /workflow_dispatch:/.test(workflow) && !/^\s+push:/m.test(workflow), 'publication is explicitly dispatched');
+check(!workflow.includes('pull_request_target') && !/^\s+pull_request:/m.test(workflow) && /workflow_dispatch:/.test(workflow)
+  && /^  push:\r?\n    branches: \[main\]/m.test(workflow), 'publication follows trusted main pushes or explicit main dispatch only');
+const trustedMain = "if: github.repository == 'JTech-CO/CalcWeave' && github.ref == 'refs/heads/main' && github.event.repository.default_branch == 'main'";
+check(workflow.split(trustedMain).length === 3 && workflow.includes('group: calcweave-pages-${{ github.ref }}') && workflow.includes('cancel-in-progress: true'), 'both jobs reject untrusted refs and newer main runs cancel obsolete main releases');
+check(/^permissions:\r?\n  contents: read\r?\n/m.test(workflow) && /    permissions:\r?\n      contents: read\r?\n      pages: write\r?\n      id-token: write\r?\n/m.test(workflow)
+  && !workflow.includes('contents: write') && !workflow.includes('actions: write'), 'verification is read-only and only deployment receives Pages OIDC permissions');
 const approvedActions = new Set([
   'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1',
   'actions/setup-node@820762786026740c76f36085b0efc47a31fe5020',
@@ -72,14 +81,23 @@ const approvedActions = new Set([
   'actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b',
   'actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b',
   'actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e',
+  'actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333',
 ]);
 const actualActions = [...workflow.matchAll(/uses:\s+([^\s#]+)/g)].map(match => match[1]!);
-check(actualActions.length === approvedActions.size && actualActions.every(action => approvedActions.has(action)), 'only official Actions at the independently verified commit allowlist');
+check(new Set(actualActions).size === approvedActions.size && actualActions.every(action => approvedActions.has(action)), 'only official Actions at the independently verified commit allowlist');
 check(workflow.includes("python-version: '3.14'") && workflow.includes('npm run verify:m7'), 'workflow executes actual approved Python target parity');
 const targetValidator = await readFile('scripts/verify-pages-target.ts', 'utf8');
 check(workflow.includes('npx tsx scripts/verify-pages-target.ts') && targetValidator.includes('https://jtech-co.github.io') && targetValidator.includes('/CalcWeave/') && targetValidator.includes('https://calcweave.com'), 'workflow validates the exact approved project/custom-domain destination');
 check(workflow.includes("CALCWEAVE_BASE_PATH: ${{ format('{0}/', steps.pages.outputs.base_path) }}") && workflow.includes('npm run test:e2e:pages') && workflow.indexOf('Verify the exact Pages artifact') < workflow.indexOf('actions/upload-pages-artifact'), 'configured-path build and verification precede artifact publication');
+check(workflow.includes('npm test -- --maxWorkers=2 --reporter=default --reporter=json --outputFile.json=.test-generated/ci-unit-results.json')
+  && workflow.includes('CALCWEAVE_UNIT_RESULTS: .test-generated/ci-unit-results.json'), 'M16 gate consumes current bounded-worker CI test results');
+check(workflow.includes('git ls-remote --exit-code origin refs/heads/main') && workflow.includes('test "$current_main" = "$GITHUB_SHA"')
+  && workflow.indexOf('Refuse publication of a superseded main revision') < workflow.indexOf('Publish verified static artifact'), 'publication refuses a commit superseded on main immediately before deploy');
+check(workflow.includes('name: github-pages') && workflow.includes('digest-mismatch: error') && workflow.includes("filter='data'")
+  && workflow.includes('scripts/verify-published-release.ts "$CALCWEAVE_PAGES_URL" .test-generated/published-artifact "$GITHUB_SHA"')
+  && workflow.indexOf('Verify the public release against this exact artifact and commit') > workflow.indexOf('Publish verified static artifact')
+  && workflow.includes('npm run verify:pages:browser'), 'published bytes and fresh public app are checked against the same run artifact and commit');
 await mkdir('docs/evidence', { recursive: true });
-const evidence = { generatedAt: new Date().toISOString(), appVersion: catalog.version, engineVersion: catalog.engineVersion, scope, releaseId, checks, files: manifest.assets, totalStaticBytes: manifest.assets.reduce((total, asset) => total + asset.bytes, 0), socialMetadata, publicDeploymentClaimed: false };
+const evidence = { generatedAt: new Date().toISOString(), appVersion: catalog.version, engineVersion: catalog.engineVersion, scope, releaseId, sourceCommit: sourceCommit ?? null, checks, files: manifest.assets, totalStaticBytes: manifest.assets.reduce((total, asset) => total + asset.bytes, 0), socialMetadata, publicDeploymentClaimed: false };
 await writeFile(`docs/evidence/${evidenceStage}-${scope === '/' ? 'root' : 'project'}-release-verification.json`, JSON.stringify(evidence, null, 2) + '\n');
 process.stdout.write(JSON.stringify({ checks: checks.length, staticFiles: manifest.assets.length, totalStaticBytes: evidence.totalStaticBytes, releaseId }) + '\n');

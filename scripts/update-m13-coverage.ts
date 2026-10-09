@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { registryWithoutApprovedObserverInputs } from './m16-support-source';
 import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import { blockRegistry, getBlockDefinition } from '../packages/block-library/src';
@@ -32,7 +33,8 @@ assert.equal(implementation.baseline.datasetSha256, protectedArtifacts[sourcePat
 assert.equal(evidence.engineVersion, '0.14.0-m13'); if (args[0] === '--write') assert.equal(ENGINE_VERSION, evidence.engineVersion, 'Write only from final M13 implementation');
 assert.equal(evidence.registryDefinitions, 334); assert.equal(evidence.addedDefinitions, 30); assert.equal(evidence.predecessorDefinitionsUnchanged, 304); assert.equal(evidence.fullSimulinkEquivalenceClaimed, false); assert.equal(evidence.parityTolerance, 3e-12);
 const predecessor = JSON.parse(await readFile('docs/baselines/m12-registry.json', 'utf8')) as typeof blockRegistry;
-assert.equal(predecessor.length, 304); for (const definition of predecessor) assert.deepEqual(getBlockDefinition(definition.id), definition, definition.id); assert(blockRegistry.length >= 334);
+const historicalRegistry = registryWithoutApprovedObserverInputs(blockRegistry);
+assert.equal(predecessor.length, 304); for (const definition of predecessor) assert.deepEqual(historicalRegistry.find(block => block.id === definition.id), definition, `${definition.id}: historical predecessor changed beyond two approved observer inputCount declarations`); assert(blockRegistry.length >= 334);
 const stageDefinitions = [...predecessor, ...M13_BLOCK_IDS.map(id => getBlockDefinition(id)!)];
 const stageCatalog = { kind: 'bus', fields: [
   { name: 'blockCount', value: 334 }, { name: 'engine', value: { kind: 'typed', dtype: 'string', shape: [], data: [evidence.engineVersion] } },

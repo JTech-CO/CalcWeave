@@ -1,6 +1,6 @@
 # CalcWeave 운영 안내
 
-대상은 소스 앱 `0.27.0` / 엔진 `0.17.1-m16`의 무료·계정 없는 정적 호스팅·브라우저 로컬 계산 웹 베타다. M24~M25와 캔버스 편집 확장은 로컬 검증 범위이며 마지막 확인 공개 배포는0.24.0이다. 운영자는 **JTech-Co**, 문의는 [jtech-bryan@proton.me](mailto:jtech-bryan@proton.me)이다. 실제 빌드·게시·공개 파일·브라우저 관측 결과는 [검증 문서](validation.md)에 연결하고 과거 배포 횟수를 현재 상태로 누적하지 않는다.
+대상은 소스 앱 `0.27.0` / 엔진 `0.17.1-m16`의 무료·계정 없는 정적 호스팅·브라우저 로컬 계산 웹 베타다. 공개 반영은 최신 Pages 실행의 검증·게시·공개 파일 확인 결과로 판단한다. 운영자는 **JTech-Co**, 문의는 [jtech-bryan@proton.me](mailto:jtech-bryan@proton.me)이다. 실제 빌드·게시·공개 파일·브라우저 관측 결과는 [검증 문서](validation.md)에 연결하고 과거 배포 횟수를 현재 상태로 누적하지 않는다.
 
 ## 정책과 데이터 처리
 
@@ -45,14 +45,16 @@
 
 ## 배포와 업데이트
 
-공개 웹 베타는 [GitHub Pages](https://jtech-co.github.io/CalcWeave/)이며 목표 브랜드 주소 calcweave.com은 소유·DNS·HTTPS gate가 남아 있다. [Pages workflow](../.github/workflows/pages.yml)는 기본 브랜치의 명시 `workflow_dispatch`만 게시한다. PR에는 Pages/OIDC 권한을 주지 않는다. 기본 job `contents:read`, 최종 deploy job `pages:write`/`id-token:write`를 분리하고 공식 action은 SHA로 고정한다.
+공개 웹 베타는 [GitHub Pages](https://jtech-co.github.io/CalcWeave/)이며 목표 브랜드 주소 calcweave.com은 소유·DNS·HTTPS gate가 남아 있다. [Pages workflow](../.github/workflows/pages.yml)는 `main` push와 기본 브랜치의 수동 실행에서 검증 후 게시한다. 저장소·브랜치를 고정하고 PR에는 Pages/OIDC 권한을 주지 않는다. 기본 job `contents:read`, 최종 deploy job `pages:write`/`id-token:write`를 분리하고 공식 action은 SHA로 고정한다.
+
+같은 브랜치의 새 실행은 이전 실행을 취소하며, 게시 직전 원격 `main` SHA와 실행 SHA를 대조한다. CI가 HTML에 넣은 소스 commit은 최종 manifest의 SHA에 포함된다. 게시 후에는 같은 실행에서 업로드한 Pages artifact를 받아 공개 디렉터리·index·manifest·SW·모든 정적 파일을 바이트 단위로 비교하고 새 브라우저에서 실제 앱을 실행한다. CDN 반영 지연은 최대5분 재시도하며 불일치가 남으면 배포 실행을 실패로 표시한다. Actions의 publish step 성공만으로 최신 앱 반영을 선언하지 않는다.
 
 커밋·push와 공개 게시를 별도로 확인한다. 공개 UI가 이전 모습이면 먼저 새 브라우저와 직접 HTTP 요청으로 `offline-manifest.json`의 앱 버전·releaseId를 확인하고, 마지막 성공 Pages 실행의 소스 commit과 대조한다.
 
 | 구버전 UI 원인 | 확인 후 조치 |
 | --- | --- |
-| 공개 서버의 manifest도 구버전 | 최신 기본 브랜치로 Pages workflow를 실행한다. verify·deploy 성공 뒤 실제 CI artifact와 공개 파일의 byte/SHA를 비교한다. |
-| 공개 서버는 최신이고 기존 탭만 구버전 | 앱의 **업데이트 확인 → 업데이트 적용**을 선택한다. 저장 성공 후 새 service worker를 활성화하고 상단 버전을 확인한다. |
+| 공개 서버의 manifest도 구버전 | 최신 `main` push의 Pages 실행이 시작되었는지 확인하고 실패한 검증을 수정한다. 필요하면 최신 기본 브랜치에서 수동 재실행한다. verify·deploy와 게시 후 검사 성공을 확인한다. |
+| 공개 서버는 최신이고 기존 탭만 구버전 | 앱의 **업데이트 확인 → 저장 후 업데이트 적용**을 선택한다. 다른 탭이 이미 적용했으면 **저장 후 새로고침**을 선택하고 상단 버전을 확인한다. |
 
 새로고침이나 HTTP 캐시 삭제는 공개 서버에 없는 릴리스를 게시하거나 대기 중인 service worker를 적용하지 않는다. UI 갱신을 위해 모델이 보관된 IndexedDB나 사이트 데이터를 삭제하도록 안내하지 않는다.
 
@@ -69,7 +71,7 @@ HTML/JS/Worker·정책·service worker·manifest·정적 cache는 같은 base를
 
 base가 다른 빌드는 마지막 build가 `dist`를 덮어쓴다. 루트/프로젝트를 동시에 검사할 때 별도 source copy/workdir와 별도 port를 사용하고 환경 변수를 정리한다. repo의 열려 있는 사용자4173 서버·현재 artifact를 다른 base로 덮어쓰지 않는다. Windows/Linux의 byte 차이가 있을 수 있으므로 공개 비교 기준은 실제 게시한 CI Pages artifact이며 로컬 다른 build의 SHA로 공개 실패를 판정하지 않는다.
 
-release manifest는 최종 static allowlist·각 byteLength/SHA·releaseId를 고정한다. service worker는 hash를 확인한 승인 static 파일만 준비하고 실패 hash·missing file이면 기존 버전을 유지한다. 사용자 저장 성공 후 업데이트를 선택하며 자동 skipWaiting으로 현재 작업을 교체하지 않는다. 이전 탭을 위한 cache 보존과 영구/무제한 cache 저장 보장은 다르다. offline 상태의 편집·계산·정책 탐색을 검사하며 첫 방문부터 offline 가능하다고 안내하지 않는다.
+release manifest는 최종 static allowlist·각 byteLength/SHA·releaseId를 고정한다. service worker는 hash를 확인한 승인 static 파일만 준비하고 실패 hash·missing file이면 기존 버전을 유지한다. 앱은 대기·활성 릴리스 버전을 표시하고 온라인 복귀·탭 재진입 때 제한된 빈도로 다시 확인한다. 다른 탭에서 활성화된 경우에도 이전 앱에 저장 후 새로고침을 제공한다. 사용자 저장 성공 후 업데이트를 선택하며 자동 skipWaiting으로 현재 작업을 교체하지 않는다. 이전 탭을 위한 cache 보존과 영구/무제한 cache 저장 보장은 다르다. offline 상태의 편집·계산·정책 탐색을 검사하며 첫 방문부터 offline 가능하다고 안내하지 않는다.
 
 custom domain은 origin을 바꾸므로 이전 origin의 로컬 저장이 자동 이동하지 않는다. 전환 전에 백업을 받고 새 origin에서 복구를 확인한다. CNAME/DNS/TXT·Pages 설정을 바꾸는 작업과 코드 build를 분리한다. 목표 도메인 소유권을 검증하지 않은 상태에서 link/branding만으로 연결 완료를 주장하지 않는다.
 
@@ -79,7 +81,7 @@ custom domain은 origin을 바꾸므로 이전 origin의 로컬 저장이 자동
 
 release마다 commit·workflow run·origin/base·artifact/release identity·각 gate 결과·공개 관측을 기록한다. rollback 후 HTTPS·allowlist 전체 byte·release manifest·Worker·offline·백업/복구·새 browser를 다시 확인한다. 완료/취소/실패 어댑터 termination과 실행 partial은 이미 승인한 상태를 바꾸지 않아야 한다.
 
-문제 보고는 고정 diagnostic·앱/engine·브라우저·재현 단계와 비개인 최소 예제를 우선 받는다. secret 유출은 접근 차단·폐기/교체·공개 기록 검토를, 개인정보 사건은 실제 영향 조사와 해당 통지/신고 판단을 수행한다. 원격 로그·모니터링·백업이 없는 것을 자동화된 운영 체계가 있다고 설명하지 않는다. 자동 재배포·예약 모니터링·메일 발송은 별도 사용자/운영 설정과 권한이 필요하다.
+문제 보고는 고정 diagnostic·앱/engine·브라우저·재현 단계와 비개인 최소 예제를 우선 받는다. secret 유출은 접근 차단·폐기/교체·공개 기록 검토를, 개인정보 사건은 실제 영향 조사와 해당 통지/신고 판단을 수행한다. 원격 로그·모니터링·백업이 없는 것을 자동화된 운영 체계가 있다고 설명하지 않는다. 예약 모니터링·메일 발송은 별도 사용자/운영 설정과 권한이 필요하다.
 
 ## 완료와 구분하는 외부 gate
 

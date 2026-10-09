@@ -5,6 +5,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { calcWeaveOfflinePlugin } from './scripts/offline-build.ts';
 import { calcWeaveSecurityPlugin } from './scripts/security-build.ts';
+import { calcWeaveProvenancePlugin } from './scripts/release-provenance.ts';
 import { ENGINE_VERSION } from './packages/model/src/types.ts';
 import { getDeploymentBasePath } from './scripts/pages-base.ts';
 
@@ -27,7 +28,7 @@ export default defineConfig(({ command, isPreview }) => {
   return {
     base: getDeploymentBasePath(),
     root: fileURLToPath(new URL('./apps/web', import.meta.url)),
-    plugins: [react(), calcWeaveSecurityPlugin(), calcWeaveOfflinePlugin({ appVersion: APP_VERSION, engineVersion: ENGINE_VERSION })], html: { cspNonce: nonce },
+    plugins: [react(), calcWeaveSecurityPlugin(), calcWeaveProvenancePlugin(), calcWeaveOfflinePlugin({ appVersion: APP_VERSION, engineVersion: ENGINE_VERSION })], html: { cspNonce: nonce },
     server: { host: '127.0.0.1', port: 5173, strictPort: true, headers, cors: false,
       fs: { allow: [fileURLToPath(new URL('.', import.meta.url))] } },
     preview: { host: '127.0.0.1', port: 4173, strictPort: true, headers, cors: false },

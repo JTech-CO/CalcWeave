@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import { createServer, type Server } from 'node:http';
+import { join, resolve } from 'node:path';
 import { createExample } from '../../apps/web/src/examples';
 import type { CalcModel } from '../../packages/model/src';
 import { ENGINE_VERSION } from '../../packages/model/src';
@@ -117,5 +118,65 @@ test('M6 an incomplete real update is rejected while the previous installed shel
     await context.setOffline(true); await page.reload(); await expect(page.locator('#version')).toHaveText('old');
     const output = await page.evaluate(() => new Promise<string>((resolve, reject) => { const worker = new Worker('/assets/engine.worker-old.js'); worker.onmessage = event => { worker.terminate(); resolve(event.data); }; worker.onerror = reject; worker.postMessage('run'); }));
     expect(output).toBe('old');
+  } finally { await context.close(); await server.close(); }
+});
+
+async function applicationReleaseServer() {
+  const buildDirectory = resolve(process.env.CALCWEAVE_TEST_BUILD_DIR ?? 'dist');
+  const manifest = JSON.parse(await readFile(join(buildDirectory, 'offline-manifest.json'), 'utf8')) as OfflineManifest;
+  if (manifest.scope !== '/' || manifest.appVersion !== APP_VERSION) throw new Error('The update browser regression requires the current root-path application build.');
+  const initial: Record<string, Buffer> = {};
+  for (const asset of manifest.assets) initial[asset.url.slice(1)] = await readFile(join(buildDirectory, asset.url.slice(1)));
+  const html = initial['index.html']!.toString('utf8'), entry = html.match(/<script\b[^>]*\bsrc="(\/assets\/[^"?]+\.js)"/);
+  if (!entry) throw new Error('Missing current application entry module.');
+  const oldEntry = entry[1]!.slice(1), newEntry = oldEntry.replace(/\.js$/, '-update-test.js');
+  const version = APP_VERSION.split('.').map(Number); version[2]! += 1; const nextVersion = version.join('.');
+  const source = initial[oldEntry]!.toString('utf8');
+  if (!source.includes(APP_VERSION)) throw new Error('The application version must be embedded in its entry module.');
+  // Only this repository-owned compiled app is transformed into a second fixture
+  // release. It exercises the real UI/controller instead of a mocked update banner.
+  const updated = { ...initial, 'index.html': Buffer.from(html.replace(entry[1]!, '/' + newEntry)), [newEntry]: Buffer.from(source.replaceAll(APP_VERSION, nextVersion)) };
+  delete updated[oldEntry];
+  const nextManifest = createOfflineManifest(updated, { appVersion: nextVersion, engineVersion: ENGINE_VERSION });
+  let newer = false;
+  const server = createServer((request, response) => {
+    const path = new URL(request.url!, 'http://localhost').pathname;
+    response.setHeader('Cache-Control', 'no-store'); response.setHeader('Service-Worker-Allowed', '/');
+    if (path === '/sw.js') { response.setHeader('Content-Type', 'text/javascript'); response.end(generateOfflineWorker(newer ? nextManifest : manifest)); return; }
+    if (path === '/offline-manifest.json') { response.setHeader('Content-Type', 'application/json'); response.end(JSON.stringify(newer ? nextManifest : manifest)); return; }
+    const name = path === '/' ? 'index.html' : path.slice(1), body = (newer ? updated : initial)[name] ?? initial[name];
+    if (body === undefined) { response.statusCode = 404; response.end('Not found'); return; }
+    response.setHeader('Content-Type', path.endsWith('.js') ? 'text/javascript' : path.endsWith('.css') ? 'text/css' : path.endsWith('.png') ? 'image/png' : path.endsWith('.svg') ? 'image/svg+xml' : 'text/html'); response.end(body);
+  });
+  await new Promise<void>((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve); });
+  const address = server.address(); if (!address || typeof address === 'string') throw new Error('No isolated update browser port.');
+  return { url: `http://127.0.0.1:${address.port}`, nextVersion, nextManifest, update: () => { newer = true; }, close: () => new Promise<void>((resolve, reject) => server.close(error => error ? reject(error) : resolve())) };
+}
+
+test('A deployed update names its version and another tab activation leaves a saved reload available without losing the edited model', async ({ browser }) => {
+  test.setTimeout(90_000);
+  const server = await applicationReleaseServer(), context = await browser.newContext({ serviceWorkers: 'allow' });
+  try {
+    const oldTab = await context.newPage(); await oldTab.goto(server.url); await waitForControlled(oldTab);
+    await expect(oldTab.locator('.offline-banner')).toContainText('오프라인 사용 준비됨');
+    const approvalTab = await context.newPage(); await approvalTab.goto(server.url); await waitForControlled(approvalTab);
+    await expect(approvalTab.locator('.save-indicator')).toContainText('브라우저에 저장됨');
+    server.update(); await oldTab.getByRole('button', { name: '업데이트 확인', exact: true }).click();
+    await expect(oldTab.locator('.offline-banner')).toContainText(`새 릴리스 ${server.nextVersion}가 준비되었습니다.`);
+    await expect(approvalTab.getByRole('button', { name: '저장 후 업데이트 적용', exact: true })).toBeVisible();
+    await approvalTab.getByRole('button', { name: '저장 후 업데이트 적용', exact: true }).click();
+    await expect(approvalTab.locator('.research-badge')).toContainText(server.nextVersion);
+    await expect(oldTab.locator('.research-badge')).toContainText(APP_VERSION);
+    await expect(oldTab.locator('.offline-banner')).toContainText(`${server.nextVersion} 적용을 위해 새로고침이 필요합니다.`);
+    await oldTab.getByLabel('모델 이름', { exact: true }).fill('새 릴리스로 이어갈 작업'); await oldTab.getByLabel('모델 이름', { exact: true }).press('Enter');
+    await oldTab.locator('.model-node-list').getByRole('button', { name: '배율', exact: true }).click();
+    await oldTab.getByLabel('배율', { exact: true }).fill('5'); await oldTab.getByLabel('배율', { exact: true }).press('Enter');
+    await expect(oldTab.locator('.save-indicator')).toContainText('브라우저에 저장됨'); const stored = await currentModel(oldTab);
+    await oldTab.getByRole('button', { name: '저장 후 새로고침', exact: true }).click();
+    await expect(oldTab.locator('.research-badge')).toContainText(server.nextVersion);
+    expect(await currentModel(oldTab)).toEqual(stored); await expect(oldTab.getByLabel('모델 이름')).toHaveValue(stored.name);
+    await oldTab.getByRole('button', { name: /^계산하기(?:\s|$)/ }).click(); await expect(oldTab.locator('.result-status')).toContainText('현재 모델의 결과');
+    await expect(oldTab.locator('.react-flow__node[data-id="result"] .block-value')).toHaveText('10');
+    await expect(oldTab.getByRole('button', { name: '저장 후 새로고침', exact: true })).toHaveCount(0);
   } finally { await context.close(); await server.close(); }
 });

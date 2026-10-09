@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { registryWithoutApprovedObserverInputs } from './m16-support-source';
 import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import { blockRegistry, getBlockDefinition } from '../packages/block-library/src';
@@ -26,7 +27,9 @@ const evidenceBytes=await readFile(evidencePath),evidence=JSON.parse(evidenceByt
 assert.equal(implementation.baseline.sourceRows,385);assert.equal(implementation.baseline.uniqueSourceNameStrings,339);assert.equal(implementation.baseline.datasetSha256,protectedArtifacts[sourcePath]);
 assert.equal(evidence.engineVersion,'0.13.0-m12');if(args[0]==='--write')assert.equal(ENGINE_VERSION,evidence.engineVersion,'Write only from final M12 implementation');
 assert.equal(evidence.registryDefinitions,304);assert.equal(evidence.addedDefinitions,11);assert.equal(evidence.predecessorDefinitionsUnchanged,293);assert.equal(evidence.fullSimulinkEquivalenceClaimed,false);assert.equal(evidence.parityTolerance,3e-12);
-const predecessor=JSON.parse(await readFile('docs/baselines/m11-registry.json','utf8'))as typeof blockRegistry;assert.equal(predecessor.length,293);for(const definition of predecessor)assert.deepEqual(getBlockDefinition(definition.id),definition,definition.id);assert(blockRegistry.length>=304);
+const predecessor=JSON.parse(await readFile('docs/baselines/m11-registry.json','utf8'))as typeof blockRegistry;
+const historicalRegistry=registryWithoutApprovedObserverInputs(blockRegistry);
+assert.equal(predecessor.length,293);for(const definition of predecessor)assert.deepEqual(historicalRegistry.find(block=>block.id===definition.id),definition,`${definition.id}: historical predecessor changed beyond two approved observer inputCount declarations`);assert(blockRegistry.length>=304);
 const rawFixtures=[...M12_INDEPENDENT_DEFINITION_FIXTURES,...M12_INDEPENDENT_BOUNDARY_FIXTURES];
 assert.equal(evidence.counts.rawFixtures,rawFixtures.length);assert.equal(evidence.counts.modeExecutions,evidence.fixtures.length);assert.equal(evidence.counts.failures,evidence.failures.length);assert.equal(evidence.counts.actualTypeScript,evidence.fixtures.length+evidence.failures.filter(entry=>entry.phase==='runtime').length);
 const proofKey=(proof:Proof)=>`${proof.id}/${proof.mode}`;assert.equal(new Set(evidence.fixtures.map(proofKey)).size,evidence.fixtures.length);

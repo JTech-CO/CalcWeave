@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { registryWithoutApprovedObserverInputs } from './m16-support-source';
 import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import { blockRegistry, getBlockDefinition } from '../packages/block-library/src';
@@ -44,7 +45,8 @@ assert.equal(evidence.tolerance, 3e-12); assert(evidence.counts.strictTypeScript
 assert.equal(evidence.counts.modeExecutions, evidence.fixtures.length); assert.equal(evidence.counts.failures, evidence.failures.length);
 assert.equal(evidence.counts.actualTypeScript, evidence.fixtures.length + evidence.failures.filter(entry => entry.phase === 'runtime').length);
 const predecessor = JSON.parse(await readFile('docs/baselines/m10-registry.json', 'utf8')) as typeof blockRegistry;
-assert.equal(predecessor.length, 245); for (const definition of predecessor) assert.deepEqual(getBlockDefinition(definition.id), definition, `${definition.id}: predecessor definition changed`);
+const historicalRegistry = registryWithoutApprovedObserverInputs(blockRegistry);
+assert.equal(predecessor.length, 245); for (const definition of predecessor) assert.deepEqual(historicalRegistry.find(block => block.id === definition.id), definition, `${definition.id}: historical predecessor changed beyond two approved observer inputCount declarations`);
 assert(blockRegistry.length >= evidence.registryDefinitions);
 const rawFixtures = [...M11_INDEPENDENT_DEFINITION_FIXTURES, ...M11_INDEPENDENT_BOUNDARY_FIXTURES];
 assert.equal(evidence.counts.rawFixtures, rawFixtures.length); assert.equal(evidence.counts.definitionFixtures, 48); assert.equal(evidence.counts.boundaryFixtures, M11_INDEPENDENT_BOUNDARY_FIXTURES.length);
