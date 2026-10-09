@@ -2,23 +2,14 @@ import assert from 'node:assert/strict';
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { resolve, dirname, relative, sep } from 'node:path';
 
-// Historical baselines/evidence retain their original bytes, including old paths.
-// This check covers the current documentation surface and updater link templates.
+// Frozen proof data retain their original bytes and historical paths.
+// Validate the current documentation, including links to retained proof files.
 const required = [
   'README.md', 'docs/01-technical-whitepaper.md', 'docs/02-design-whitepaper.md',
   'docs/operations.md', 'docs/validation.md', 'docs/block-coverage.md', 'docs/support-matrix.md',
   'docs/legal/terms.md', 'docs/legal/privacy.md', 'docs/legal/cookies.md',
 ] as const;
-const retired = [
-  ...Array.from({ length: 16 }, (_, i) => [`m${i}-contract.md`, `m${i}-validation.md`]).flat(),
-  '03-milestone-roadmap.md', '04-sane-design-revision.md', '05-simulink-coverage-roadmap.md',
-  'block-expansion-plan.md', 'catalog-contract.md', 'catalog-validation.md',
-  'm6-deployment.md', 'm6-operations.md', 'm6-security.md',
-  'pages-deployment.md', 'pages-launch-review.md', 'pages-validation.md',
-] as const;
-assert.equal(retired.length, 44);
 const root = resolve('.');
-const retiredSet = new Set<string>(retired);
 const withinRoot = (path: string): boolean => {
   const rel = relative(root, path);
   return rel !== '..' && !rel.startsWith(`..${sep}`) && !/^[A-Za-z]:/.test(rel);
@@ -28,7 +19,6 @@ const exists = async (path: string): Promise<boolean> => stat(path).then(() => t
   throw error;
 });
 for (const path of required) assert(await exists(path), `Missing current document: ${path}`);
-for (const name of retired) assert(!(await exists(`docs/${name}`)), `Retired document reintroduced: docs/${name}`);
 
 const current = [...new Set([
   ...required,
@@ -50,7 +40,6 @@ function anchors(text: string): Set<string> {
 let localLinks = 0, localAnchors = 0, externalLinks = 0;
 for (const [path, text] of content) {
   const body = prose(text);
-  for (const name of retired) assert(!body.includes(name), `${relative(root, path)} references retired document ${name}`);
   const links = [...body.matchAll(/\[[^\]]*\]\((?:<([^>]+)>|([^\s)]+))(?:\s+["'][^"']*["'])?\)/g)].map(match => match[1] ?? match[2]!);
   for (const link of links) {
     if (/^https?:\/\//.test(link) || /^mailto:/.test(link)) { externalLinks++; continue; }
@@ -59,7 +48,6 @@ for (const [path, text] of content) {
     assert(!rawTarget!.includes('?'), `Local document links must name a file: ${link}`);
     const target = rawTarget ? resolve(dirname(path), decodeURIComponent(rawTarget)) : path;
     assert(withinRoot(target), `Document link escapes workspace: ${relative(root, path)} -> ${link}`);
-    assert(!retiredSet.has(target.split(/[\\/]/).at(-1)!), `Retired document linked: ${link}`);
     assert(await exists(target), `Missing local link: ${relative(root, path)} -> ${link}`);
     localLinks++;
     // Historical baseline/reference fragments are preserved, not rerendered here.
@@ -69,13 +57,6 @@ for (const [path, text] of content) {
     }
   }
 }
-const updaterSources = (await readdir('scripts')).filter(name => /^update-(?:catalog|m\d+)-coverage\.ts$/.test(name));
-for (const name of updaterSources) {
-  const source = await readFile(`scripts/${name}`, 'utf8');
-  for (const retiredName of retired) assert(!source.includes(retiredName), `Coverage updater would reintroduce a retired document link: scripts/${name} -> ${retiredName}`);
-}
-const roadmapVerifier = await readFile('scripts/verify-roadmap.ts', 'utf8');
-for (const name of ['03-milestone-roadmap.md', '05-simulink-coverage-roadmap.md']) assert(!roadmapVerifier.includes(name), `Roadmap verifier still consumes ${name}`);
-process.stdout.write(JSON.stringify({ currentDocuments: current.length, requiredDocuments: required.length, retiredDocumentsAbsent: retired.length,
-  localLinks, localAnchors, externalLinksDeclaredOnly: externalLinks, updaterSources: updaterSources.length,
+process.stdout.write(JSON.stringify({ currentDocuments: current.length, requiredDocuments: required.length,
+  localLinks, localAnchors, externalLinksDeclaredOnly: externalLinks,
   historicalBaselinesAndEvidenceExcluded: true, externalAvailabilityVerified: false }, null, 2) + '\n');

@@ -12,3 +12,6 @@ playwright-report/
 *.tsbuildinfo
 .vsf/
 *-run.log
+
+# Repeat-run reports are generated locally or in CI; approved proofs stay tracked.
+docs/evidence/*-regression-on-*.json

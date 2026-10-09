@@ -278,20 +278,8 @@ MAT v5/SLX/MDL은 `calcweave-native-scalar-v1`의 읽기 전용 bounded 분석�
 | targets·migration·MAT/SLX/MDL | [Python](../packages/codegen-python/src/index.ts), [WASM](../packages/codegen-wasm/src/index.ts), [package](../packages/model-package/src/index.ts), [native parser](../packages/interop/src/native.ts); target·explicit inports | [M15 integration](evidence/m15-verification.json), [interop UI](evidence/m15-interop-ui-verification.json) |
 | source 지원 추적·모드·타깃 | [support-matrix API](../packages/support-matrix/src/index.ts); source ID·classification·decision·mode·target | [현행 검증](validation.md), [machine support](support-matrix.json) |
 
-## M21 이후 확장 순서
-
-[제품 확장 계획 JSON](product-extension-roadmap.json)은 M20까지의 구현에서 확인한 공백을 기준으로2026-10-09에 새로 정한 계획이다. 원자료385행의 과거 coverage baseline은 그대로 보존한다. M21~M25는 로컬 구현·검증을 완료했다. 이후 단계는 별도로 범위를 정하며 일정 약속이나 미완료 범위를 지원으로 표시하지 않는다.
-
-| 단계 | 사용자 작업과 추가 범위 | 우선 완료 조건 |
-| --- | --- | --- |
-| M21 | 기록의 단측 FFT·진폭/위상·PSD | 실제 원시 기록·독립 DFT/Parseval·출처와 불변 보고서 |
-| M22 | 이산 State-Space의 z영역 SISO 분석 | 명시적 Ts·Nyquist·단위원 극점·특이점/직접 전달항 |
-| M23 | 시드를 고정한 불확실성 앙상블 | 공유 예산·재현성·동일 격자 분위수·실패/취소 보고 |
-| M24 | 시간 구간 통계·상관·lag 관측 | 표본/시간 통계 구분·정규화/lag 부호·영 분산 |
-| M25 | Welch·시간-주파수 관측 | 합산 FFT 예산·구간/겹침·PSD 일치·시간/색상 원시 값 |
-
 ## 유지보수와 열린 gate
 
 기능 추가는 이름·별칭을 늘리는 작업으로 완료되지 않는다. 포트/파라미터·dtype/shape/unit·rate/state·오류 위치·자원 상한을 먼저 정하고 독립 literal 또는 analytic oracle, 실제 native/generated 전체 기록과 실패 rollback을 검증한다. 테스트 expected를 production helper로 계산해 독립성을 없애지 않는다. source 승인은 실행한 configured profile에만 붙이고 미검증 옵션·원본 실행 환경·외부 권리를 승격하지 않는다.
 
-frozen registry·source identity·baseline·과거 JSON 증거는 byte/hash 그대로 보존한다. 후속 엔진에서는 별도 regression-on-stage 보고서를 만든다. 현행 설명은 이 문서·디자인·운영·검증·support matrix를 함께 갱신하며 milestone MD 복제와 납품 숫자 누적을 피한다. 실제 공개 도메인/호스트 설정, 초보자 관찰, 문의 메일 운영 정책, 원본 옵션 inventory와 reference 실행은 [운영의 열린 gate](operations.md#완료와-구분하는-외부-gate)에 남긴다.
+지원 검증과 과거 패키지 호환 검사에서 읽는 frozen registry·source identity·baseline·승인 증거는 byte/hash 그대로 보존한다. 현행 설명은 이 문서·디자인·운영·검증·support matrix를 함께 갱신한다. 역할이 끝난 기획과 중복 실행 산출물은 정리하고, 기존 승인에 영향을 주는 변경은 실제 회귀 결과를 따로 기록한다. 실제 공개 도메인/호스트 설정, 초보자 관찰, 문의 메일 운영 정책, 원본 옵션 inventory와 reference 실행은 [운영의 열린 gate](operations.md#완료와-구분하는-외부-gate)에 남긴다.

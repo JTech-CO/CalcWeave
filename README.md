@@ -130,10 +130,6 @@ CSV는 브라우저 안에서만 읽으며 최대256KiB·1,000행을 지원합�
 
 Welch 그래프와 시간·주파수 열 지도에서 선형/dB PSD를 고를 수 있습니다. dB의 기준은 원래 신호 단위의 제곱/Hz이고 0 전력은 별도로 표시합니다. 화면은 최대512개 실제 Welch 빈·4096개 실제 열 지도 셀로 제한하며, 전체 구간·빈·원시 시각·IEEE 값·설정·지문은 128행 표와 JSON에서 확인합니다. 겹치는 구간의 평균이 모든 신호에서 분산을 줄이거나 주파수를 확정한다는 뜻은 아닙니다.
 
-## 다음 확장
-
-[M21 이후 계획](docs/product-extension-roadmap.json)은 M21 기록의 스펙트럼, M22 이산 SISO 제어계, M23 시드를 고정한 불확실성 앙상블, M24 구간 통계·상관, M25 Welch·시간-주파수 관측의 입력 범위·제외 항목·독립 검증 조건을 정합니다. 실제 완료한 범위만 지원 기능으로 표시하며 이후 단계는 별도로 범위를 정합니다.
-
 ## 영향을 받은 도구와 설계 원칙
 
 [MATLAB Simulink](https://www.mathworks.com/products/simulink.html)의 블록선도 모델링 방식에서 출발했습니다. 수학적 관계를 시각적으로 연결하는 경험을 브라우저에서 바로 제공하고, 처음에는 작은 계산부터 시작해 필요한 연산과 설정을 점진적으로 찾아가도록 구성했습니다. CalcWeave는 독립적으로 실행되는 도구이며 MathWorks의 공식 제품이나 전체 호환 구현을 뜻하지 않습니다.
@@ -160,7 +156,7 @@ Welch 그래프와 시간·주파수 열 지도에서 선형/dB PSD를 고를 �
 | 계산 엔진 | 신호 실행, 상태 갱신, 솔버, 확장 수학 연산 | [runtime](packages/runtime/src) · [advanced-math](packages/advanced-math/src) |
 | 데이터와 분석 | 데이터 입력, 파라미터 실험, 결과 분석 | [data](packages/data/src) · [experiments](packages/experiments/src) · [analysis](packages/analysis/src) |
 | 코드 생성 | 타깃별 지원 검사와 독립 실행 코드 생성 | [TypeScript](packages/codegen-ts/src) · [Python](packages/codegen-python/src) · [WASM](packages/codegen-wasm/src) |
-| 검증 | 단위·브라우저 검사, 수치 비교와 검증 스크립트 | [tests](tests) · [fixtures](fixtures) · [scripts](scripts) |
+| 검증 | 단위·브라우저 검사, 독립 수치 비교와 검증 스크립트 | [tests](tests) · [독립 수치 검증](tests/numerical-oracle-regression.test.ts) · [scripts](scripts) |
 
 모델과 실행 기록은 브라우저의 IndexedDB에 보관합니다. 정적 앱은 Service Worker로 캐시하고 배포 파일의 해시를 확인합니다. 모델·설정·실행 정보의 보관은 계산을 다시 확인하는 데 도움을 주며, 정확도 판단은 사용한 모델과 솔버, 지원 계약 및 비교 기준을 함께 살펴야 합니다.
 
