@@ -1,0 +1,183 @@
+{
+  "mode": "after",
+  "target": "https://jtech-co.github.io/CalcWeave/index.html",
+  "isolatedProfile": "$WORKSPACE/.test-generated/public-layout-profile",
+  "startedAt": "2026-10-09T07:33:24.600Z",
+  "status": "failed",
+  "error": "AssertionError [ERR_ASSERTION]: Compact header is 50px.\n    at assertCompact ($WORKSPACE/.test-generated/public-layout-browser.ts:106:3)\n    at <anonymous> ($WORKSPACE/.test-generated/public-layout-browser.ts:178:5)",
+  "completedAt": "2026-10-09T07:33:36.299Z",
+  "requests": [
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/index.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/index-BtkJpMZO.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/schemas-B44qH8my.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-DSgLMJ8v.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/index-BOcLy6hb.css",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/sw.js",
+      "method": "GET",
+      "type": "other"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/engine.worker-BYNS5Yfw.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/index-BiCRGh3e.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/index-DtFBFHky.css",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/schemas-B44qH8my.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/social/calcweave-og.png",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/spectrum-GRghBTNX.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-Bcx-wexT.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-BfFTC6ad.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-Ca_oOQVs.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-CceCToPv.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-ChoyeFg_.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-DTyhufXD.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-DyPOowQo.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-ScdBBkUh.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/cookies/index.html",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/index.html",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/notices/index.html",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/privacy/index.html",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/terms/index.html",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/offline-manifest.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/index.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/index-BiCRGh3e.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/schemas-B44qH8my.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-ChoyeFg_.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-DTyhufXD.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/index-DtFBFHky.css",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/offline-manifest.json",
+      "method": "GET",
+      "type": "fetch"
+    }
+  ],
+  "violations": [],
+  "pageErrors": [],
+  "workerURLs": [],
+  "normalization": {
+    "localWorkspacePathsReplaced": true,
+    "originalSha256": "12942cd6e7ee007e41e968fb79e0b435fda562de80111e0a7359156769cf3d3a"
+  }
+}

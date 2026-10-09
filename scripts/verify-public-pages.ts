@@ -276,6 +276,7 @@ async function main() {
   finally {
     if (timer) clearTimeout(timer);
     if (browser) { try { await browser.close(); } catch (error) { verified = false; errorMessage ??= `Browser close failed: ${String(error)}`; } }
+    verified = verified && !timedOut && !errorMessage;
     await mkdir(resolve('docs/evidence'), { recursive: true });
     await writeFile(EVIDENCE, JSON.stringify({ schemaVersion: 1, checkedAt: new Date().toISOString(), targetURL: TARGET, status: verified ? 'passed' : 'failed', verified, timeoutMs: TIMEOUT_MS, elapsedMs: Date.now() - started, isolatedFreshContext: true, screenshot: verified ? `docs/evidence/${stage}-public-desktop.png` : null, checks, requests, workerURLs: workers, pageErrors, outsideAppRequests: violations, ...(errorMessage ? { error: errorMessage } : {}) }, null, 2) + '\n', 'utf8');
   }

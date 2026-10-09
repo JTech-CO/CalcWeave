@@ -1,6 +1,6 @@
 # CalcWeave 검증 상태
 
-현행 소스는 앱 `0.24.0` · 엔진 `0.17.0-m16`이다. 이 문서는 구현의 검증 범위와 배포 증거를 연결한다. 과거 단계의 수치·실패 기록은 `evidence/`에 보존한다. M16의 공개 결과와 보조 기능·도움말 정리의 검사는 별도로 기록한다.
+현행 소스와 최신 공개 앱은 `0.24.0` · 엔진 `0.17.0-m16`이다. 이 문서는 구현의 검증 범위와 배포 증거를 연결한다. 과거 단계의 수치·실패 기록은 `evidence/`에 보존한다. M23의 최신 공개 결과와 이전 단계의 공개 결과는 별도로 기록한다.
 
 ## M23 시드를 고정한 불확실성 앙상블 · 로컬 검증 완료
 
@@ -12,7 +12,29 @@
 
 [독립 검토](evidence/m23-independent-review.json)에서 대시보드의 실시간 입력이 실험 Worker 조건을 바꿔도 원래 모델 지문으로 집계되는 경로를 발견했다. 실험 중 live 입력을 거부하고 Worker의 모델 SHA·엔진 버전·replay 모델을 확인하도록 수정했다. 실제 Worker를 일시정지하고 입력 변경을 시도하는 검사와 실제 결과 패킷의 지문을 바꾸는 검사가 이를 검증하며 일반 단독 실행의 대시보드 입력은 유지된다. 최초 패치가 유사한 M19 래퍼에 들어갔던 위치도 교정해 M23 경로를 재검토했다. 화면 관측에서 공통 CSS의15.52px 입력 글자 상속을 발견해 해당 패널의 우선순위를 높여16px로 고정했다. 처음 보고서 모델을 UI의 생략된 기본값과 비교하던 oracle는 컴파일러의 정규화된 sampleTime·sum.signs를 기준으로 교정하되 UI 모델 전후 불변 검사는 유지했다. 단일 실행 상한에 먼저 걸리던 기록 preflight fixture도 단일 실행은 허용되고 전체 앙상블은 초과하도록 고쳤다. 수치 구현·독립 oracle를 실패 예상값에 맞춰 변경하지 않았다.
 
-[최종 릴리스 검증](evidence/m23-root-release-verification.json)은103개 검사·19개 정적 자산의 실제 bytes/SHA·오프라인 목록·보안 설정을 확인한다. [라이선스 기록](evidence/m23-licenses.json)은 기존28개 프로덕션 의존성을 유지한다. 엔진·schema·registry337개·예제75개를 유지하고 신규 npm 라이브러리·서버 API·외부 계산 서비스·개인정보 수집을 추가하지 않는다. 상관/정규 분포·모델 내부 난수 seed 자동 변경·비legacy 기록 출력·다른 격자의 보간·통계적 신뢰도 인증·전역 최적화·Firefox/Safari·공개 배포는 완료 범위 밖이다. 기존 큰 chunk·정적/동적 import 중복·Vite 향후 config 권고는 빌드 경고로 남는다.
+[최종 릴리스 검증](evidence/m23-root-release-verification.json)은103개 검사·19개 정적 자산의 실제 bytes/SHA·오프라인 목록·보안 설정을 확인한다. [라이선스 기록](evidence/m23-licenses.json)은 기존28개 프로덕션 의존성을 유지한다. 엔진·schema·registry337개·예제75개를 유지하고 신규 npm 라이브러리·서버 API·외부 계산 서비스·개인정보 수집을 추가하지 않는다. 상관/정규 분포·모델 내부 난수 seed 자동 변경·비legacy 기록 출력·다른 격자의 보간·통계적 신뢰도 인증·전역 최적화·Firefox/Safari는 완료 범위 밖이다. 당시 로컬 검증에는 공개 배포를 포함하지 않았으며 이후 공개 결과는 아래에 기록한다. 기존 큰 chunk·정적/동적 import 중복·Vite 향후 config 권고는 빌드 경고로 남는다.
+
+## M23 공개 배포와 구버전 UI 수정
+
+2026-10-09(Asia/Seoul), 공개 서버는 캐시 MISS·age0 응답에서도 앱0.17.3과10월4일 게시 파일을 제공했다. 저장소의 최신 코드와 공개 게시가 분리되어 있었고 [Pages workflow](../.github/workflows/pages.yml)는 명시적인 `workflow_dispatch`만 게시한다. [공개 전후 기록](evidence/m23-public-layout-release.json)에 서버 응답·releaseId·화면 실측을 보존했다. 운영 안내에 [구버전 UI 확인·조치](operations.md#배포와-업데이트)를 추가했다.
+
+첫 [Actions 37893823331](https://github.com/JTech-CO/CalcWeave/actions/runs/37893823331)은 브라우저268/272 PASS 후 모바일 도움말·백업 대화상자4개 검사에서13.6px 글자 크기로 실패해 게시를 건너뛰었다. 대화상자 내부의 작은 글자만14px로 복원하고 같은 검사 기준을 유지했다. [수정 검증](evidence/m23-public-layout-fix-verification.json)은 별도 production preview의 M6·M20 브라우저22/22 PASS를 기록한다.
+
+최종 [Actions 37896847510](https://github.com/JTech-CO/CalcWeave/actions/runs/37896847510)은 소스 `db718b30341fa92f526bc22b837b82f94c64b4c5`에서 단위4,573/4,573·전체 브라우저272/272·프로젝트 경로4/4·루트/프로젝트 release 각각103검사를 통과한 뒤0.24.0을 게시했다. [CI 원본 요약](evidence/m23-actions-verification.json)과 [정확한 공개 파일 검사](evidence/m23-deployment-verification.json)는 Linux CI의 실제 Pages artifact를 기준으로 한다. `/CalcWeave/`와 `/CalcWeave/index.html` HTML,19개 정적 자산, manifest와 service worker가 일치했다. [게시 manifest](evidence/m23-published-manifest.json)의 releaseId는 `9b0718b018d6f90dc12c1a4882dbdb2a360ef39f1fd89171de038dd85f1e13e5`다. [알려진 credential 형식 검사](evidence/m23-public-artifact-secret-check.json)는 artifact21파일에서 일치0개이며 모든 시크릿 부재를 보증하는 검사는 아니다.
+
+| 1440px 공개 화면 실측 | 구버전 | 새 버전 |
+| --- | --- | --- |
+| 중앙 캔버스 너비 | 558px | 823px |
+| 좌측 라이브러리 너비 | 250px | 175px |
+| 우측 설정 너비 | 312px | 218px |
+| 상단 높이 | 119px | 약73px |
+| 도구 모음 높이 | 65px | 약42px |
+
+[이전 화면](evidence/m23-public-layout-before.png)·[새 화면](evidence/m23-public-layout-after.png)은 같은 격리 프로필과 모델을 사용한다. 최초 실행에서0.17.3의 active worker·새 waiting worker·명시적 업데이트·0.24.0 재열기·전체 IndexedDB 모델 일치까지 통과한 뒤, CSS의 최소 높이50px를 실제 높이로 잘못 가정한 검사에서 실패했다. [최초 관측](evidence/m23-public-layout-initial-probe.json)과 [당시 검사 원문](evidence/m23-public-layout-initial-probe-source.txt)을 보존했다. 이후 이미 업데이트된 프로필에서 실측 축소를 비교했으며, 단축키가 포함된 버튼 accessible name을 exact 일치로 찾던 [두 번째 관측 실패](evidence/m23-public-layout-control-probe.json)도 기록했다. 앱 동작을 바꾸지 않고 관측 조건을 교정했다. 최종 후속 검증은 새로운 구버전 전환을 다시 수행했다고 주장하지 않는다.
+
+최종 후속 검증에서 전체 모델과 실제 모델 다운로드의 SHA가 이전과 같고, 실제 Worker 결과6과 새 브라우저의 두 접속 경로를 확인했다. 적용 직전 미저장 편집은 이 관측의 검증 범위에 포함하지 않았다. 별도의 [공개 기능9검사](evidence/m23-public-browser-verification.json)는 실제 Worker6·오프라인 편집 후10·337개 도움말 목록·정책4페이지·정확한 scoped cache·Python 실행 묶음의 실제 다운로드를 확인했다. 사용자 브라우저·저장 자료에 접근하지 않았고 페이지 오류·범위 밖 요청은0이다.
+
+공개 검증 도구는 디렉터리 HTML의 byte/SHA도 필수 조건에 포함하고, 브라우저 시간 초과가 성공으로 기록되지 않도록 보강했다. 이후 검증 도구·증거 문서 정리는 같은 앱 artifact를 다시 게시하지 않는다. 기술적 앱 배포는 PASS이며 목표 도메인·실제 초보자 관찰·정식 출시의 별도 미확인 gate는 유지한다.
 
 ## M22 이산 SISO 제어계 분석 · 로컬 검증 완료
 

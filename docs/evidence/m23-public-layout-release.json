@@ -1,0 +1,413 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-09T07:40:07.880Z",
+  "status": "passed",
+  "target": "https://jtech-co.github.io/CalcWeave/index.html",
+  "cause": {
+    "codeAlreadyOnRemoteMain": true,
+    "workflow": "workflow_dispatch only",
+    "publicServerVersion": "0.17.3",
+    "publicServerLastModified": "Sun, 04 Oct 2026 05:01:58 GMT",
+    "publicServerCache": "MISS",
+    "httpCacheClearCouldNotPublishNewCode": true
+  },
+  "initialActions": "https://github.com/JTech-CO/CalcWeave/actions/runs/37893823331",
+  "fixVerification": "docs/evidence/m23-public-layout-fix-verification.json",
+  "release": {
+    "runId": 37896847510,
+    "sourceCommit": "db718b30341fa92f526bc22b837b82f94c64b4c5",
+    "artifact": "github-pages",
+    "archiveBytes": 8058880,
+    "archiveSha256": "55b5370a539a4e1976d1507c48af12ebaaf26bd177e24b8f7a1a515fdec61aae",
+    "entries": 28,
+    "directory": ".test-generated/public-layout-ci-dist",
+    "appVersion": "0.24.0",
+    "releaseId": "9b0718b018d6f90dc12c1a4882dbdb2a360ef39f1fd89171de038dd85f1e13e5",
+    "artifactDirectory": ".test-generated/public-layout-ci-dist",
+    "actions": "https://github.com/JTech-CO/CalcWeave/actions/runs/37896847510",
+    "exactCIArtifactAndPublicBytesMatched": true
+  },
+  "publishedManifest": "docs/evidence/m23-published-manifest.json",
+  "knownCredentialPatternScan": "docs/evidence/m23-public-artifact-secret-check.json",
+  "before": {
+    "http": {
+      "observedAt": "2026-10-09T06:27:54.081Z",
+      "result": [
+        {
+          "name": "index.html",
+          "url": "https://jtech-co.github.io/CalcWeave/index.html",
+          "status": 200,
+          "bytes": 3296,
+          "sha256": "84e349451e6e83ad7860f002df987dbb592ac44045684ef48b2220176e3fe628",
+          "headers": {
+            "date": "Fri, 09 Oct 2026 06:27:57 GMT",
+            "etag": "W/\"6ac1ddc6-ce0\"",
+            "last-modified": "Sun, 04 Oct 2026 05:01:58 GMT",
+            "cache-control": "max-age=600",
+            "age": "0",
+            "x-cache": "MISS"
+          },
+          "assets": [
+            "/CalcWeave/assets/index-BtkJpMZO.js",
+            "/CalcWeave/assets/schemas-B44qH8my.js",
+            "/CalcWeave/assets/src-DSgLMJ8v.js",
+            "/CalcWeave/assets/index-BOcLy6hb.css"
+          ]
+        },
+        {
+          "name": "offline-manifest.json",
+          "url": "https://jtech-co.github.io/CalcWeave/offline-manifest.json",
+          "status": 200,
+          "bytes": 3068,
+          "sha256": "4ac797a14cc86a4a688462965be85998ef7ab80e2fb08cc44dbf3394eb062543",
+          "headers": {
+            "date": "Fri, 09 Oct 2026 06:27:57 GMT",
+            "etag": "W/\"6ac1ddc6-bfc\"",
+            "last-modified": "Sun, 04 Oct 2026 05:01:58 GMT",
+            "cache-control": "max-age=600",
+            "age": "0",
+            "x-cache": "MISS"
+          },
+          "manifest": {
+            "appVersion": "0.17.3",
+            "engineVersion": "0.17.0-m16",
+            "releaseId": "1a3d8191364d03f2d09f8f5fdb8c48ca9a2d018e2b64cb8bc3dbfa0718aa286b",
+            "scope": "/CalcWeave/",
+            "assets": 17
+          }
+        },
+        {
+          "name": "sw.js",
+          "url": "https://jtech-co.github.io/CalcWeave/sw.js",
+          "status": 200,
+          "bytes": 9969,
+          "sha256": "bd5b537a11bc55b760483ed7dbc0036ed86aad5f02207b83027547b089bb2dc9",
+          "headers": {
+            "date": "Fri, 09 Oct 2026 06:27:57 GMT",
+            "etag": "W/\"6ac1ddc6-26f1\"",
+            "last-modified": "Sun, 04 Oct 2026 05:01:58 GMT",
+            "cache-control": "max-age=600",
+            "age": "0",
+            "x-cache": "MISS"
+          }
+        }
+      ]
+    },
+    "layout": {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "appVersion": "0.17.3 작업 공간",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 119
+      },
+      "toolbar": {
+        "x": 0,
+        "y": 119,
+        "width": 1440,
+        "height": 65
+      },
+      "library": {
+        "x": 0,
+        "y": 273,
+        "width": 250,
+        "height": 691
+      },
+      "inspector": {
+        "x": 1128,
+        "y": 273,
+        "width": 312,
+        "height": 691
+      },
+      "canvas": {
+        "x": 250,
+        "y": 273,
+        "width": 558,
+        "height": 691
+      },
+      "results": {
+        "x": 808,
+        "y": 273,
+        "width": 320,
+        "height": 691
+      },
+      "documentWidth": 1440
+    },
+    "screenshot": "docs/evidence/m23-public-layout-before.png"
+  },
+  "after": {
+    "http": {
+      "observedAt": "2026-10-09T07:31:43.908Z",
+      "result": [
+        {
+          "name": "index.html",
+          "url": "https://jtech-co.github.io/CalcWeave/index.html",
+          "status": 200,
+          "bytes": 3380,
+          "sha256": "21a84d149b968d1050cbb87ab0d7db2ee3b7cc35a44538c0dc354d69fe969612",
+          "headers": {
+            "date": "Fri, 09 Oct 2026 07:31:47 GMT",
+            "etag": "W/\"6ac89843-d34\"",
+            "last-modified": "Fri, 09 Oct 2026 07:31:15 GMT",
+            "cache-control": "max-age=600",
+            "age": "0",
+            "x-cache": "MISS"
+          },
+          "assets": [
+            "/CalcWeave/assets/index-BiCRGh3e.js",
+            "/CalcWeave/assets/schemas-B44qH8my.js",
+            "/CalcWeave/assets/src-ChoyeFg_.js",
+            "/CalcWeave/assets/src-DTyhufXD.js",
+            "/CalcWeave/assets/index-DtFBFHky.css"
+          ]
+        },
+        {
+          "name": "offline-manifest.json",
+          "url": "https://jtech-co.github.io/CalcWeave/offline-manifest.json",
+          "status": 200,
+          "bytes": 3408,
+          "sha256": "0911e04ced64978eedef61fdc58af704f401336c89643ebf8ec75cef76a8aaf0",
+          "headers": {
+            "date": "Fri, 09 Oct 2026 07:31:47 GMT",
+            "etag": "W/\"6ac89843-d50\"",
+            "last-modified": "Fri, 09 Oct 2026 07:31:15 GMT",
+            "cache-control": "max-age=600",
+            "age": "0",
+            "x-cache": "MISS"
+          },
+          "manifest": {
+            "appVersion": "0.24.0",
+            "engineVersion": "0.17.0-m16",
+            "releaseId": "9b0718b018d6f90dc12c1a4882dbdb2a360ef39f1fd89171de038dd85f1e13e5",
+            "scope": "/CalcWeave/",
+            "assets": 19
+          }
+        },
+        {
+          "name": "sw.js",
+          "url": "https://jtech-co.github.io/CalcWeave/sw.js",
+          "status": 200,
+          "bytes": 10241,
+          "sha256": "8849f4b60e2dcbf5a389f5b888bf4e950a88983e64597e38aaed1ca1cbd1fab4",
+          "headers": {
+            "date": "Fri, 09 Oct 2026 07:31:47 GMT",
+            "etag": "W/\"6ac89843-2801\"",
+            "last-modified": "Fri, 09 Oct 2026 07:31:15 GMT",
+            "cache-control": "max-age=600",
+            "age": "0",
+            "x-cache": "MISS"
+          }
+        }
+      ]
+    },
+    "layout": {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "appVersion": "0.24.0 작업 공간",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 72.65625
+      },
+      "toolbar": {
+        "x": 0,
+        "y": 72.65625,
+        "width": 1440,
+        "height": 42.265625
+      },
+      "library": {
+        "x": 0,
+        "y": 182.578125,
+        "width": 175,
+        "height": 792.421875
+      },
+      "inspector": {
+        "x": 1222,
+        "y": 182.578125,
+        "width": 218,
+        "height": 792.421875
+      },
+      "canvas": {
+        "x": 175,
+        "y": 182.578125,
+        "width": 823,
+        "height": 792.421875
+      },
+      "results": {
+        "x": 998,
+        "y": 182.578125,
+        "width": 224,
+        "height": 792.421875
+      },
+      "documentWidth": 1440
+    },
+    "screenshot": "docs/evidence/m23-public-layout-after.png"
+  },
+  "canvasWidthIncreasePixels": 265,
+  "update": {
+    "retainedOldWorker": true,
+    "waitingWorkerInstalled": true,
+    "explicitSaveAndApply": true,
+    "indexedDBModelDeepEqual": true,
+    "actualModelDownloadDeepEqual": true,
+    "unsavedEditAtActivationTested": false,
+    "transitionEvidence": {
+      "provenance": "Initial actual after run, before its incorrect fixed-header-height assertion failed.",
+      "initialFailureReport": {
+        "path": "docs/evidence/m23-public-layout-initial-probe.json",
+        "originalSha256": "12942cd6e7ee007e41e968fb79e0b435fda562de80111e0a7359156769cf3d3a"
+      },
+      "initialHelperSource": {
+        "path": "docs/evidence/m23-public-layout-initial-probe-source.txt",
+        "sha256": "02ac496ee9ad2854d6bce68553f0ee659ebf939db2923fc94962dd686ffe1863"
+      },
+      "verifiedInInitialRunBeforeFailure": [
+        "Old 0.17.3 badge and preserved model name",
+        "Update check requested",
+        "Update apply button enabled",
+        "Old active offline manifest 0.17.3 and installed waiting worker",
+        "Explicit update apply clicked",
+        "Reloaded 0.24.0 ready badge and scoped controller",
+        "All preserved IndexedDB model fields exactly equal the before download"
+      ],
+      "limitation": "The initial run preserved its request trace and failed assertion/source order; intermediate transition objects were not written before the assertion failed.",
+      "subsequentRun": "Already updated persistent profile; no second old-to-new transition claimed.",
+      "headerFixtureFailure": "Fixed 50px expectation incorrectly treated CSS min-height as actual content height.",
+      "subsequentAlreadyUpdatedProfile": true
+    },
+    "isolatedModelName": "UI 업데이트 검증",
+    "nodes": 3,
+    "actualWorkerResult": 6,
+    "modelDownloads": {
+      "before": {
+        "bytes": 1267,
+        "sha256": "9462a6d6aff0812aaf0d6ea35f94e211663c4ee425ca804d897b5844d4d45512",
+        "provenance": "Actual UI model download from the first before attempt; reused after a subsequent measurement-helper failure."
+      },
+      "after": {
+        "bytes": 1267,
+        "sha256": "9462a6d6aff0812aaf0d6ea35f94e211663c4ee425ca804d897b5844d4d45512",
+        "context": "Fresh isolated context importing the exact model preserved in the update profile."
+      }
+    }
+  },
+  "freshRoutes": [
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/",
+      "layout": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "appVersion": "0.24.0 작업 공간",
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 72.65625
+        },
+        "toolbar": {
+          "x": 0,
+          "y": 72.65625,
+          "width": 1440,
+          "height": 42.265625
+        },
+        "library": {
+          "x": 0,
+          "y": 182.578125,
+          "width": 175,
+          "height": 792.421875
+        },
+        "inspector": {
+          "x": 1222,
+          "y": 182.578125,
+          "width": 218,
+          "height": 792.421875
+        },
+        "canvas": {
+          "x": 175,
+          "y": 182.578125,
+          "width": 823,
+          "height": 792.421875
+        },
+        "results": {
+          "x": 998,
+          "y": 182.578125,
+          "width": 224,
+          "height": 792.421875
+        },
+        "documentWidth": 1440
+      },
+      "appVersion": "0.24.0",
+      "releaseId": "9b0718b018d6f90dc12c1a4882dbdb2a360ef39f1fd89171de038dd85f1e13e5",
+      "serviceWorkerScope": "https://jtech-co.github.io/CalcWeave/"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/index.html",
+      "layout": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "appVersion": "0.24.0 작업 공간",
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 72.65625
+        },
+        "toolbar": {
+          "x": 0,
+          "y": 72.65625,
+          "width": 1440,
+          "height": 42.265625
+        },
+        "library": {
+          "x": 0,
+          "y": 182.578125,
+          "width": 175,
+          "height": 792.421875
+        },
+        "inspector": {
+          "x": 1222,
+          "y": 182.578125,
+          "width": 218,
+          "height": 792.421875
+        },
+        "canvas": {
+          "x": 175,
+          "y": 182.578125,
+          "width": 823,
+          "height": 792.421875
+        },
+        "results": {
+          "x": 998,
+          "y": 182.578125,
+          "width": 224,
+          "height": 792.421875
+        },
+        "documentWidth": 1440
+      },
+      "appVersion": "0.24.0",
+      "releaseId": "9b0718b018d6f90dc12c1a4882dbdb2a360ef39f1fd89171de038dd85f1e13e5",
+      "serviceWorkerScope": "https://jtech-co.github.io/CalcWeave/"
+    }
+  ],
+  "isolatedProfilesOnly": true,
+  "userBrowserOrStorageAccessed": false,
+  "pageErrors": [],
+  "outsideAppRequests": [],
+  "publicFunctionalChecks": {
+    "report": "docs/evidence/m23-public-browser-verification.json",
+    "passed": 9
+  },
+  "verifiedApplicationDeployment": true,
+  "verifiedPublicLaunch": false
+}

@@ -1,0 +1,443 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-09T07:33:48.340Z",
+  "targetURL": "https://jtech-co.github.io/CalcWeave/",
+  "status": "passed",
+  "verified": true,
+  "timeoutMs": 60000,
+  "elapsedMs": 4630,
+  "isolatedFreshContext": true,
+  "screenshot": "docs/evidence/m23-public-desktop.png",
+  "checks": [
+    {
+      "name": "fresh public workspace and current registered blocks",
+      "evidence": {
+        "url": "https://jtech-co.github.io/CalcWeave/",
+        "moduleURL": "/CalcWeave/assets/index-BiCRGh3e.js",
+        "isolatedContext": true,
+        "visibleAppVersion": "0.24.0",
+        "initialDiagramFit": {
+          "canvas": {
+            "x": 175,
+            "y": 182.578125,
+            "width": 823,
+            "height": 757.03125
+          },
+          "nodes": [
+            {
+              "x": 231.60000610351562,
+              "y": 510.6781311035156,
+              "width": 184.79998779296875,
+              "height": 100.80001831054688
+            },
+            {
+              "x": 494.1000061035156,
+              "y": 510.6781311035156,
+              "width": 184.80001831054688,
+              "height": 100.80001831054688
+            },
+            {
+              "x": 756.5999755859375,
+              "y": 510.6781311035156,
+              "width": 184.79998779296875,
+              "height": 100.80001831054688
+            }
+          ],
+          "contained": true,
+          "centerError": {
+            "x": -0.0000152587890625,
+            "y": -0.0156097412109375
+          }
+        }
+      }
+    },
+    {
+      "name": "real Worker baseline calculation",
+      "evidence": {
+        "raw": [
+          {
+            "time": 0,
+            "values": {
+              "result": 6
+            }
+          }
+        ],
+        "workerURLs": [
+          "https://jtech-co.github.io/CalcWeave/assets/engine.worker-BYNS5Yfw.js"
+        ],
+        "modelId": "first-calculation"
+      }
+    },
+    {
+      "name": "current product help and block catalog",
+      "evidence": {
+        "appVersion": "0.24.0",
+        "engineVersion": "0.17.0-m16",
+        "blockCount": 337
+      }
+    },
+    {
+      "name": "four actual public static policy pages",
+      "evidence": [
+        {
+          "url": "https://jtech-co.github.io/CalcWeave/terms/",
+          "status": 200,
+          "contentType": "text/html",
+          "contentSecurityPolicyMeta": true,
+          "heading": "CalcWeave 베타 이용 안내",
+          "scopedNavigation": [
+            "/CalcWeave/",
+            "/CalcWeave/terms/",
+            "/CalcWeave/privacy/",
+            "/CalcWeave/cookies/",
+            "/CalcWeave/notices/"
+          ]
+        },
+        {
+          "url": "https://jtech-co.github.io/CalcWeave/privacy/",
+          "status": 200,
+          "contentType": "text/html",
+          "contentSecurityPolicyMeta": true,
+          "heading": "개인정보와 로컬 데이터 안내",
+          "scopedNavigation": [
+            "/CalcWeave/",
+            "/CalcWeave/terms/",
+            "/CalcWeave/privacy/",
+            "/CalcWeave/cookies/",
+            "/CalcWeave/notices/"
+          ]
+        },
+        {
+          "url": "https://jtech-co.github.io/CalcWeave/cookies/",
+          "status": 200,
+          "contentType": "text/html",
+          "contentSecurityPolicyMeta": true,
+          "heading": "쿠키와 브라우저 저장소 안내",
+          "scopedNavigation": [
+            "/CalcWeave/",
+            "/CalcWeave/terms/",
+            "/CalcWeave/privacy/",
+            "/CalcWeave/cookies/",
+            "/CalcWeave/notices/"
+          ]
+        },
+        {
+          "url": "https://jtech-co.github.io/CalcWeave/notices/",
+          "status": 200,
+          "contentType": "text/html",
+          "contentSecurityPolicyMeta": true,
+          "heading": "오픈소스 고지",
+          "scopedNavigation": [
+            "/CalcWeave/",
+            "/CalcWeave/terms/",
+            "/CalcWeave/privacy/",
+            "/CalcWeave/cookies/",
+            "/CalcWeave/notices/"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "offline release ready with exact project scope",
+      "evidence": {
+        "scope": "https://jtech-co.github.io/CalcWeave/",
+        "releaseId": "9b0718b018d6f90dc12c1a4882dbdb2a360ef39f1fd89171de038dd85f1e13e5",
+        "cachedFiles": 20,
+        "cacheNames": [
+          "calcweave-static-v1-%2FCalcWeave%2F-9b0718b018d6f90dc12c1a4882dbdb2a360ef39f1fd89171de038dd85f1e13e5"
+        ]
+      }
+    },
+    {
+      "name": "offline reload, editable gain 5, and real Worker result 10",
+      "evidence": {
+        "raw": [
+          {
+            "time": 0,
+            "values": {
+              "result": 10
+            }
+          }
+        ],
+        "modelHash": "bc7f3d4019d9373f5e7160c4a8c9662e3adc554c4c98446a6b3272d343ee7bec",
+        "gain": 5
+      }
+    },
+    {
+      "name": "offline policy navigation",
+      "evidence": true
+    },
+    {
+      "name": "offline Python ZIP agrees with model, manifest, embedded IR and complete raw expected output",
+      "evidence": {
+        "filename": "CalcWeave-python-execution.zip",
+        "bytes": 62053,
+        "sha256": "28c74d7412411321f0c49ee3a27e5f34db786885956ee2f6cda2872ccd732ae3",
+        "files": [
+          "model.py",
+          "model.cw.json",
+          "manifest.json",
+          "run-example.py",
+          "README.md",
+          "expected-output.json"
+        ],
+        "modelHash": "bc7f3d4019d9373f5e7160c4a8c9662e3adc554c4c98446a6b3272d343ee7bec",
+        "artifactDataHash": "fc73dcc5db614fe715e1e7aadba7c2dc5d2a480556a7e3cb524e316b0aa97c1e",
+        "raw": [
+          {
+            "time": 0,
+            "values": {
+              "result": 10
+            }
+          }
+        ],
+        "codeExecuted": false
+      }
+    },
+    {
+      "name": "no page errors or requests outside the approved app",
+      "evidence": {
+        "pageErrors": [],
+        "observedRequests": 46
+      }
+    }
+  ],
+  "requests": [
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/index-BiCRGh3e.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/schemas-B44qH8my.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-ChoyeFg_.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-DTyhufXD.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/index-DtFBFHky.css",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/sw.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/engine.worker-BYNS5Yfw.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/index-BiCRGh3e.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/index-DtFBFHky.css",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/schemas-B44qH8my.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/social/calcweave-og.png",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/spectrum-GRghBTNX.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-Bcx-wexT.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-BfFTC6ad.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-Ca_oOQVs.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-CceCToPv.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-ChoyeFg_.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-DTyhufXD.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-DyPOowQo.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-ScdBBkUh.js",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/cookies/index.html",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/index.html",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/notices/index.html",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/privacy/index.html",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/terms/index.html",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/engine.worker-BYNS5Yfw.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/terms/",
+      "method": "GET",
+      "type": "direct-policy"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/terms/",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/privacy/",
+      "method": "GET",
+      "type": "direct-policy"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/privacy/",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/cookies/",
+      "method": "GET",
+      "type": "direct-policy"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/cookies/",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/notices/",
+      "method": "GET",
+      "type": "direct-policy"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/notices/",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/offline-manifest.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-ChoyeFg_.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/index-DtFBFHky.css",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/schemas-B44qH8my.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-DTyhufXD.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/index-BiCRGh3e.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/engine.worker-BYNS5Yfw.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/privacy/",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-CceCToPv.js",
+      "method": "GET",
+      "type": "script"
+    },
+    {
+      "url": "https://jtech-co.github.io/CalcWeave/assets/src-BfFTC6ad.js",
+      "method": "GET",
+      "type": "script"
+    }
+  ],
+  "workerURLs": [
+    "https://jtech-co.github.io/CalcWeave/assets/engine.worker-BYNS5Yfw.js",
+    "https://jtech-co.github.io/CalcWeave/assets/engine.worker-BYNS5Yfw.js"
+  ],
+  "pageErrors": [],
+  "outsideAppRequests": []
+}

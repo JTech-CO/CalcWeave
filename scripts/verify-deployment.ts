@@ -22,10 +22,12 @@ assert(localManifest.assets.every(asset => isOfflineAssetUrl(asset.url, scope) &
 assert(localManifest.assets.reduce((sum, asset) => sum + asset.bytes, 0) <= 32 * 1024 * 1024, 'Artifact size limit.');
 const { releaseId, ...meaning } = localManifest;
 assert(createHash('sha256').update(JSON.stringify(meaning)).digest('hex') === releaseId, 'Artifact manifest digest.');
+const shellExpected = localManifest.assets.find(asset => asset.url === `${scope}index.html`);
+assert(shellExpected, 'Artifact must include its application shell.');
 const localWorker = await readFile(join(artifactDirectory, 'sw.js'));
 const workerExpected = { bytes: localWorker.byteLength, sha256: createHash('sha256').update(localWorker).digest('hex') };
 const report = { generatedAt: new Date().toISOString(), url: url.href, appVersion: localManifest.appVersion, engineVersion: localManifest.engineVersion, scope, releaseId, artifactDirectory: artifactRelative.replaceAll('\\', '/'), dns: [] as { address: string; family: number }[], checks: {} as Record<string, boolean | string | null>, verifiedApplicationDeployment: false, verifiedPublicLaunch: false };
-const required = ['dnsResolved', 'https200', 'httpRedirectsToHttps', 'calcWeaveHtml', 'privacy/', 'terms/', 'cookies/', 'notices/', 'offline-manifest.json', 'sw.js', 'serviceWorkerParity', 'currentRelease', 'releaseParity', 'staticAssetsParity', 'privatePathsAbsent'];
+const required = ['dnsResolved', 'https200', 'httpRedirectsToHttps', 'calcWeaveHtml', 'directoryShellParity', 'privacy/', 'terms/', 'cookies/', 'notices/', 'offline-manifest.json', 'sw.js', 'serviceWorkerParity', 'currentRelease', 'releaseParity', 'staticAssetsParity', 'privatePathsAbsent'];
 async function responseMatchesBytes(response: Response, expected: { bytes: number; sha256: string }): Promise<boolean> {
   if (response.status !== 200 || !response.body) return false;
   const reader = response.body.getReader(), digest = createHash('sha256'); let bytes = 0;
@@ -49,6 +51,7 @@ if (report.checks.dnsResolved) {
   try {
     const response = await fetch(url, { redirect: 'error', signal: AbortSignal.timeout(15_000) });
     report.checks.https200 = response.status === 200;
+    report.checks.directoryShellParity = await responseMatchesBytes(response.clone(), shellExpected);
     const source = await boundedText(response, 512 * 1024);
     report.checks.calcWeaveHtml = source.includes('<title>CalcWeave') && source.includes('Content-Security-Policy') && source.includes(`${scope}assets/`) && !source.includes('jekyll');
     for (const header of ['content-security-policy', 'x-content-type-options', 'x-frame-options', 'strict-transport-security', 'referrer-policy', 'permissions-policy']) report.checks[header] = response.headers.get(header);

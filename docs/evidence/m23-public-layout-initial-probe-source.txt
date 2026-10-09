@@ -1,0 +1,227 @@
+import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { chromium, expect as browserExpect, type BrowserContext, type Page } from '@playwright/test';
+import config from '../playwright.config';
+
+// Isolated repository-owned profile only. Never opens a user's browser or reads its storage.
+const ORIGIN = 'https://jtech-co.github.io';
+const BASE = '/CalcWeave/';
+const TARGET = ORIGIN + BASE;
+const INDEX = TARGET + 'index.html';
+const ROOT = resolve('.test-generated');
+const PROFILE = resolve('.test-generated/public-layout-profile');
+const MODEL_NAME = 'UI 업데이트 검증';
+const TIMEOUT = 90_000;
+const expect = browserExpect.configure({ timeout: TIMEOUT });
+const mode = process.argv[2];
+assert(mode === 'before' || mode === 'after', 'Use before or after mode. Run after only once deployment has completed.');
+const sha = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
+const approved = (url: string) => { const value = new URL(url); return value.origin === ORIGIN && value.pathname.startsWith(BASE) && !value.search && !value.hash; };
+
+async function model(page: Page) {
+  return page.evaluate(() => new Promise<Record<string, unknown>>((resolveModel, reject) => {
+    const opening = indexedDB.open('calcweave-m0', 1);
+    opening.onerror = () => reject(new Error('Isolated model database unavailable.'));
+    opening.onsuccess = () => {
+      const db = opening.result, transaction = db.transaction('models', 'readonly'), request = transaction.objectStore('models').get('current');
+      request.onsuccess = () => resolveModel(request.result);
+      transaction.oncomplete = () => db.close();
+      transaction.onerror = () => { db.close(); reject(new Error('Isolated model read failed.')); };
+    };
+  }));
+}
+
+async function latestRun(page: Page) {
+  return page.evaluate(() => new Promise<any>((resolveRun, reject) => {
+    const opening = indexedDB.open('calcweave-m0', 1);
+    opening.onerror = () => reject(new Error('Run history unavailable.'));
+    opening.onsuccess = () => {
+      const db = opening.result, tx = db.transaction('models', 'readonly'), reading = tx.objectStore('models').get('run-history-v1');
+      reading.onsuccess = () => resolveRun(reading.result?.[0]);
+      tx.oncomplete = () => db.close(); tx.onerror = () => { db.close(); reject(new Error('Run history read failed.')); };
+    };
+  }));
+}
+
+async function downloadModel(page: Page, suffix: string) {
+  const downloading = page.waitForEvent('download');
+  await page.getByRole('button', { name: '모델 다운로드', exact: true }).click();
+  const download = await downloading;
+  const destination = resolve(ROOT, `public-layout-${suffix}-model.cw.json`);
+  await download.saveAs(destination);
+  const bytes = await readFile(destination);
+  assert(bytes.length <= 16 * 1024 * 1024, 'Bounded isolated model export.');
+  return { value: JSON.parse(bytes.toString('utf8')), file: destination, sha256: sha(bytes), bytes: bytes.length, url: download.url() };
+}
+
+async function layout(page: Page) {
+  return page.evaluate(() => {
+    const measurements: Record<string, { x: number; y: number; width: number; height: number }> = {};
+    for (const selector of ['.app-header', '.toolbar', '.library-panel', '.inspector-panel', '.canvas-area', '.results-panel']) {
+      const element = document.querySelector(selector);
+      if (!element) throw new Error('Missing layout element: ' + selector);
+      const { x, y, width, height } = element.getBoundingClientRect();
+      measurements[selector] = { x, y, width, height };
+    }
+    return {
+      viewport: { width: innerWidth, height: innerHeight },
+      header: measurements['.app-header'], toolbar: measurements['.toolbar'], library: measurements['.library-panel'],
+      inspector: measurements['.inspector-panel'], canvas: measurements['.canvas-area'], results: measurements['.results-panel'],
+      workspaceColumns: getComputedStyle(document.querySelector('.workspace')!).gridTemplateColumns,
+      workbenchColumns: getComputedStyle(document.querySelector('.workbench-layout')!).gridTemplateColumns,
+      appVersion: document.querySelector('.research-badge')?.textContent?.trim(),
+      modelName: (document.querySelector('[aria-label="모델 이름"]') as HTMLInputElement).value,
+      documentWidth: document.documentElement.scrollWidth,
+      module: (document.querySelector('script[type="module"]') as HTMLScriptElement)?.src,
+    };
+  });
+}
+
+async function offline(page: Page) {
+  return page.evaluate(async () => {
+    const registration = await navigator.serviceWorker.getRegistration();
+    const cacheNames = await caches.keys(), cacheURLs: string[] = [];
+    for (const name of cacheNames) cacheURLs.push(...(await (await caches.open(name)).keys()).map(request => request.url));
+    const response = await fetch('/CalcWeave/offline-manifest.json');
+    if (!response.ok) throw new Error('Offline manifest unavailable.');
+    return { manifest: await response.json(), registrationScope: registration?.scope,
+      active: registration?.active?.state, controllerURL: navigator.serviceWorker.controller?.scriptURL,
+      waiting: registration?.waiting?.state ?? null, cacheNames, cacheURLs };
+  });
+}
+
+async function ready(page: Page, version: string) {
+  await expect(page.locator('.research-badge')).toHaveText(version + ' 작업 공간');
+  await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨');
+  await expect(page.getByLabel('오프라인 상태')).toContainText('오프라인 사용 준비됨');
+  await expect.poll(() => page.evaluate(() => navigator.serviceWorker.controller?.scriptURL)).toBe(TARGET + 'sw.js');
+}
+
+function assertCompact(value: Awaited<ReturnType<typeof layout>>) {
+  assert.equal(value.viewport.width, 1440);
+  assert(Math.abs(value.library.width - 175) <= 1, 'Compact left column is 175px.');
+  assert(Math.abs(value.inspector.width - 218) <= 1, 'Compact right column is 218px.');
+  assert(Math.abs(value.header.height - 50) <= 1, 'Compact header is 50px.');
+  assert(Math.abs(value.toolbar.height - 42) <= 1, 'Compact toolbar is 42px.');
+  assert(value.canvas.width >= 800, 'Central canvas has expanded beyond 800px.');
+  assert(value.documentWidth <= 1440, 'No document horizontal overflow.');
+}
+
+const requests: { url: string; method: string; type: string }[] = [];
+const violations: string[] = [], pageErrors: string[] = [], workerURLs: string[] = [];
+function observe(context: BrowserContext) {
+  context.setDefaultTimeout(TIMEOUT); context.setDefaultNavigationTimeout(TIMEOUT);
+  context.on('page', page => {
+    page.on('pageerror', error => pageErrors.push(error.message));
+    page.on('worker', worker => workerURLs.push(worker.url()));
+  });
+  context.on('request', request => {
+    const url = request.url(); requests.push({ url, method: request.method(), type: request.resourceType() });
+    if (!approved(url) || request.method() !== 'GET') violations.push(request.method() + ' ' + url);
+  });
+}
+
+await mkdir(ROOT, { recursive: true });
+let persistent: BrowserContext | undefined;
+let report: Record<string, unknown> = { mode, target: INDEX, isolatedProfile: PROFILE, startedAt: new Date().toISOString(), status: 'failed' };
+try {
+  persistent = await chromium.launchPersistentContext(PROFILE, { ...config.use?.launchOptions, headless: true,
+    viewport: { width: 1440, height: 1000 }, serviceWorkers: 'allow', acceptDownloads: true,
+    downloadsPath: resolve(ROOT, 'public-layout-downloads'), timeout: TIMEOUT });
+  observe(persistent);
+  const page = await persistent.newPage();
+  await page.goto(INDEX); await expect(page).toHaveURL(INDEX);
+  if (mode === 'before') {
+    await ready(page, '0.17.3');
+    await page.getByLabel('모델 이름', { exact: true }).fill(MODEL_NAME);
+    await page.getByLabel('모델 이름', { exact: true }).press('Enter');
+    await expect(page.locator('.save-indicator')).toContainText('브라우저에 저장됨');
+    await expect.poll(async () => (await model(page)).name).toBe(MODEL_NAME);
+    const saved = await model(page);
+    // The first attempt downloaded these bytes successfully before its later measurement-helper error.
+    // Repeated native downloads from this persistent Windows Chromium profile crash the browser.
+    const priorDownload = resolve(ROOT, 'public-layout-before-model.cw.json');
+    let exported;
+    try {
+      const bytes = await readFile(priorDownload);
+      exported = { value: JSON.parse(bytes.toString('utf8')), file: priorDownload, sha256: sha(bytes), bytes: bytes.length,
+        provenance: 'Actual UI model download from the first before attempt; reused after a subsequent measurement-helper failure.' };
+      assert.deepEqual(exported.value, saved, 'Prior actual UI download exactly matches the currently saved isolated model.');
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error;
+      exported = await downloadModel(page, 'before');
+    }
+    const bounds = await layout(page), state = await offline(page);
+    assert.deepEqual(exported.value, saved);
+    assert.equal((saved.nodes as unknown[]).length, 3);
+    assert.equal(state.manifest.appVersion, '0.17.3');
+    assert.equal(state.registrationScope, TARGET); assert.equal(state.active, 'activated');
+    assert(state.cacheURLs.every(approved));
+    await page.screenshot({ path: resolve(ROOT, 'public-layout-before.png'), fullPage: true });
+    report = { ...report, model: exported, layout: bounds, offline: state, screenshot: resolve(ROOT, 'public-layout-before.png'), status: 'passed' };
+  } else {
+    const before = JSON.parse(await readFile(resolve(ROOT, 'public-layout-before.json'), 'utf8'));
+    assert.equal(before.status, 'passed');
+    // The saved old worker controls this first load. Its waiting successor must save before activation.
+    await expect(page.locator('.research-badge')).toHaveText('0.17.3 작업 공간');
+    await expect(page.getByLabel('모델 이름', { exact: true })).toHaveValue(MODEL_NAME);
+    await page.getByRole('button', { name: '업데이트 확인', exact: true }).click();
+    await expect(page.getByRole('button', { name: '업데이트 적용', exact: true })).toBeEnabled();
+    const waiting = await offline(page);
+    assert.equal(waiting.manifest.appVersion, '0.17.3'); assert.equal(waiting.waiting, 'installed');
+    await page.getByRole('button', { name: '업데이트 적용', exact: true }).click();
+    await ready(page, '0.24.0');
+    const saved = await model(page), bounds = await layout(page), state = await offline(page);
+    assert.deepEqual(saved, before.model.value, 'IndexedDB model is preserved through explicit update.');
+    assertCompact(bounds);
+    assert.equal(state.manifest.appVersion, '0.24.0'); assert.equal(state.registrationScope, TARGET);
+    assert.equal(state.waiting, null); assert(state.cacheURLs.every(approved));
+    await page.getByRole('button', { name: '계산하기', exact: true }).click();
+    await expect(page.locator('.result-status.current')).toBeVisible();
+    await expect.poll(async () => (await latestRun(page))?.result?.status).toBe('completed');
+    const run = await latestRun(page);
+    assert.equal(run.result.status, 'completed'); assert.equal(run.result.samples[0].values.result, 6);
+    assert(workerURLs.some(url => approved(url) && new URL(url).pathname.includes('/assets/engine.worker-')));
+    await page.screenshot({ path: resolve(ROOT, 'public-layout-after.png'), fullPage: true });
+    const fresh = [];
+    let exported;
+    const browser = await chromium.launch({ ...config.use?.launchOptions, headless: true, timeout: TIMEOUT });
+    try {
+      for (const url of [TARGET, INDEX]) {
+        const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, serviceWorkers: 'allow', acceptDownloads: true });
+        observe(context);
+        try {
+          const freshPage = await context.newPage(); await freshPage.goto(url); await ready(freshPage, '0.24.0');
+          const freshBounds = await layout(freshPage), freshState = await offline(freshPage);
+          assertCompact(freshBounds); assert.equal(freshState.manifest.appVersion, '0.24.0');
+          assert.equal(freshState.registrationScope, TARGET); assert(freshState.cacheURLs.every(approved));
+          fresh.push({ url, layout: freshBounds, offline: freshState });
+          if (url === TARGET) {
+            // Native download retries crash this persistent Windows Chromium profile.
+            // Verify the current exporter in a fresh isolated context with the exact preserved model.
+            await freshPage.getByLabel('CalcWeave 모델 파일 선택').setInputFiles({ name: 'preserved-model.cw.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(saved)) });
+            await expect(freshPage.getByLabel('모델 이름', { exact: true })).toHaveValue(MODEL_NAME);
+            await expect.poll(async () => (await model(freshPage)).name).toBe(MODEL_NAME);
+            assert.deepEqual(await model(freshPage), saved);
+            exported = { ...await downloadModel(freshPage, 'after'), context: 'Fresh isolated context importing the exact model preserved in the update profile.' };
+            assert.deepEqual(exported.value, before.model.value, 'Current actual model download preserves all coefficients, nodes and settings.');
+          }
+        } finally { await context.close(); }
+      }
+    } finally { await browser.close(); }
+    assert(exported, 'Fresh-context current model download was captured.');
+    report = { ...report, retainedOldWorker: true, explicitSaveAndApply: true, waiting, model: exported, preservedIndexedDBModel: saved, layout: bounds, offline: state,
+      actualWorkerResult: run.result.samples, fresh, screenshot: resolve(ROOT, 'public-layout-after.png'), status: 'passed' };
+  }
+  assert.deepEqual(pageErrors, []); assert.deepEqual(violations, []);
+} catch (error) {
+  report = { ...report, status: 'failed', error: error instanceof Error ? error.stack : String(error) };
+  throw error;
+} finally {
+  if (persistent) await persistent.close();
+  const file = resolve(ROOT, `public-layout-${mode}.json`);
+  await writeFile(file, JSON.stringify({ ...report, completedAt: new Date().toISOString(), requests, violations, pageErrors, workerURLs }, null, 2) + '\n');
+  console.log(JSON.stringify({ mode, status: report.status, report: file, error: report.error }, null, 2));
+}
