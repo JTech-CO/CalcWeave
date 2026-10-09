@@ -63,7 +63,7 @@ export function verifySocialMetadata(html: string, imageBytes: Uint8Array): { ca
 
 export function releaseEvidencePrefix(appVersion: string, engineVersion: string, override?: string): string {
   if (override !== undefined) {
-    assert(['og-readme', 'm17', 'm18', 'm19', 'm20', 'm21', 'm22'].includes(override), 'Unsupported release evidence prefix; use og-readme, m17, m18, m19, m20, m21 or m22');
+    assert(['og-readme', 'm17', 'm18', 'm19', 'm20', 'm21', 'm22', 'm23'].includes(override), 'Unsupported release evidence prefix; use og-readme, m17, m18, m19, m20, m21, m22 or m23');
     return override;
   }
   // M17 adds mathematical explanations and learning UI without changing execution semantics.
@@ -73,12 +73,13 @@ export function releaseEvidencePrefix(appVersion: string, engineVersion: string,
   if (/^0\.21\.\d+$/.test(appVersion)) return 'm20';
   if (/^0\.22\.\d+$/.test(appVersion)) return 'm21';
   if (/^0\.23\.\d+$/.test(appVersion)) return 'm22';
+  if (/^0\.24\.\d+$/.test(appVersion)) return 'm23';
   return appVersion === '0.8.1' ? 'pages' : engineVersion.split('-').at(-1)!;
 }
 
 /** Verification accepts only named, workspace-contained release builds. */
 export function releaseBuildDirectory(override?: string): string {
   const directory = override ?? 'dist';
-  assert(['dist', '.test-generated/og-readme-root-dist', '.test-generated/og-readme-project-dist', '.test-generated/m17-root-dist', '.test-generated/m17-project-dist', '.test-generated/m18-root-dist', '.test-generated/m18-project-dist', '.test-generated/m19-root-dist', '.test-generated/m19-project-dist', '.test-generated/m20-root-dist', '.test-generated/m20-project-dist', '.test-generated/m21-root-dist', '.test-generated/m21-project-dist', '.test-generated/m22-root-dist', '.test-generated/m22-project-dist'].includes(directory), 'Unsupported release build directory');
+  assert(['dist', '.test-generated/og-readme-root-dist', '.test-generated/og-readme-project-dist', '.test-generated/m17-root-dist', '.test-generated/m17-project-dist', '.test-generated/m18-root-dist', '.test-generated/m18-project-dist', '.test-generated/m19-root-dist', '.test-generated/m19-project-dist', '.test-generated/m20-root-dist', '.test-generated/m20-project-dist', '.test-generated/m21-root-dist', '.test-generated/m21-project-dist', '.test-generated/m22-root-dist', '.test-generated/m22-project-dist', '.test-generated/m23-root-dist', '.test-generated/m23-project-dist'].includes(directory), 'Unsupported release build directory');
   return directory;
 }

@@ -7,6 +7,7 @@ import { sha256 } from '../../model/src/sha256';
 import { runModel } from '../../runtime/src';
 import { fail, plainOptions, diagnosticsFor, freezeSnapshot, validatedResult } from './internal';
 export * from './multivariable';
+export * from './uncertainty';
 
 export const SWEEP_LIMITS = Object.freeze({ maxRuns: 16, maxWallMs: 30_000, maxRecordedValues: 1_000_000, maxOperations: 50_000_000 });
 export interface SweepSpec { nodeId: string; parameter: string; values: number[] }

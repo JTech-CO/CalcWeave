@@ -3,7 +3,7 @@
   "date": "2026-10-09",
   "title": "CalcWeave M21 이후 제품 확장 계획",
   "basis": "M20까지의 현행 코드에서 확인한 분석 공백과 사용자가 승인한 후속 구축·기획",
-  "appVersion": "0.23.0",
+  "appVersion": "0.24.0",
   "engineVersion": "0.17.0-m16",
   "historicalCoverageRoadmapUnchanged": true,
   "calendarCommitment": null,
@@ -41,11 +41,14 @@
     {
       "id": "M23",
       "title": "시드를 고정한 불확실성 앙상블 실험",
-      "status": "planned",
+      "status": "completed-local-verification",
       "dependsOn": ["M19"],
-      "scope": ["지원 계수의 bounded 확률 표본과 반복 실행", "동일 원시 관측 격자의 평균·표준편차·분위수", "완료/실패/취소별 개수와 seed·분포·실행 설정의 보고서"],
-      "exitGates": ["공유 실행 시간·연산·기록 상한과 취소/늦은 결과 방지", "정해진 seed의 재현성과 독립 선형 모델 통계 oracle", "단위·자료형·시간 격자가 다른 결과의 자동 결합 금지", "실패한 실행을 숨기지 않고 모델 적용은 명시적 동작으로 제한"],
-      "excluded": ["무제한 병렬 실행·전역 최적화·통계적 신뢰도 인증"]
+      "scope": ["지원 계수의 bounded 확률 표본과 반복 실행","동일 원시 관측 격자의 평균·표준편차·분위수","완료/실패/취소별 개수와 seed·분포·실행 설정의 보고서"],
+      "exitGates": ["공유 실행 시간·연산·기록 상한과 취소/늦은 결과 방지","정해진 seed의 재현성과 독립 선형 모델 통계 oracle","단위·자료형·시간 격자가 다른 결과의 자동 결합 금지","실패한 실행을 숨기지 않고 모델 적용은 명시적 동작으로 제한"],
+      "excluded": ["무제한 병렬 실행·전역 최적화·통계적 신뢰도 인증","상관·정규 분포와 모델 내부 난수 seed 자동 변경","typed·fixed·complex·bus 기록 출력과 다른 시간 격자의 보간","응답 없는 중단 실행의 미보고 자원 사용량 추정"],
+      "limits": {"parameters":3,"minimumSamples":2,"samples":64,"seed":"uint32","parameterMagnitude":1000000000000,"sharedWallMs":30000,"sharedRecordedValuesIncludingTimes":1000000,"sharedRuntimeOperations":50000000,"candidateModelSnapshotsBytes":33554432,"tableRowsPerPage":128,"displayedGraphPoints":512},
+      "implementation": ["packages/experiments/src/uncertainty.ts","apps/web/src/components/UncertaintyEnsemblePanel.tsx","apps/web/src/App.tsx"],
+      "evidence": "docs/evidence/m23-verification.json"
     },
     {
       "id": "M24",
@@ -71,6 +74,9 @@
     "https://numpy.org/doc/stable/reference/routines.fft.html",
     "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.welch.html",
     "https://python-control.readthedocs.io/en/latest/generated/control.frequency_response.html",
-    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.dfreqresp.html"
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.dfreqresp.html",
+    "https://numpy.org/doc/stable/reference/generated/numpy.quantile.html",
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.uniform.html",
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.triang.html"
   ]
 }

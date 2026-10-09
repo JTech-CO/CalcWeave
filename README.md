@@ -5,7 +5,7 @@
 [![CalcWeave — Integrator와 Gain으로 구성한 감쇠 모델과 시간 응답](assets/branding/calcweave-github-og.png)](https://jtech-co.github.io/CalcWeave/)
 
 [![검증·배포](https://github.com/JTech-CO/CalcWeave/actions/workflows/pages.yml/badge.svg)](https://github.com/JTech-CO/CalcWeave/actions/workflows/pages.yml)
-[![버전 0.23.0 beta](https://img.shields.io/badge/version-0.23.0_beta-9ebded?style=flat-square)](package.json)
+[![버전 0.24.0 beta](https://img.shields.io/badge/version-0.24.0_beta-9ebded?style=flat-square)](package.json)
 [![블록 337개](https://img.shields.io/badge/blocks-337-a7c7bd?style=flat-square)](docs/support-matrix.md)
 [![예제 75개](https://img.shields.io/badge/examples-75-bbb0d0?style=flat-square)](apps/web/src/examples.ts)
 [![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6?style=flat-square&logo=typescript&logoColor=white)](tsconfig.json)
@@ -88,6 +88,12 @@ Scope 곡선을 클릭하거나 키보드로 **시간 커서**를 움직이면 �
 
 CSV는 브라우저 안에서만 읽으며 최대256KiB·1,000행을 지원합니다. 현재 추정 대상은 루트 Constant·Input의 실수 스칼라 값과 Gain 배율, 관측 대상은 같은 단위의 실수 스칼라 출력입니다. 측정 시각은 모델의 기록 격자와 맞아야 합니다. 자동으로 모델을 바꾸지 않으며 **최적 후보 모델 적용**으로 계수를 반영하고 실행 취소로 되돌립니다. 범위 안의 국소 탐색이므로 전역 최적값·계수의 유일성을 보장하지 않습니다. 전체 보고서는 새로고침 전에 내려받고, 기존 실행 기록은 최근5개를 보관합니다.
 
+## 불확실성 앙상블
+
+**실험 → 불확실성 앙상블**에서 최대3개 계수의 균등·삼각 분포, seed와2~64회 표본 수를 지정합니다. 같은 seed·순서·분포로 같은 계수 표본을 만들고 실제 모델을 순차 실행합니다. 같은 원시 시간 격자의 완료한 실수 스칼라 출력에서 평균·표본 표준편차·5/50/95% 분위수를 표시합니다.
+
+전체 실행은30초·100만 기록 원소·5천만 연산을 공유합니다. 실패·취소·미시작을 숨기지 않고 실제 계수·출처·원시 결과·집계 규약을 JSON으로 보존합니다. 실패 표본을 제외한 통계는 편향될 수 있으며 분위수 구간은 신뢰구간이나 안정성 보증이 아닙니다. 취소·시간 초과 때는 완료 기록을 보존하되 통계를 제공하지 않을 수 있습니다. 모델은 **이 표본 적용**을 누를 때만 변경하며 실행 취소(Undo)로 되돌릴 수 있습니다.
+
 ## 제어계 분석
 
 **분석 → 제어계 분석**을 펼치면 연속 State-Space 블록의 설정이나 실행에서 확인된 Local Linearization 행렬로 **Bode 크기·위상**, **상태 극점·전달 영점**을 볼 수 있습니다. 단일 입력·단일 출력의 실수 연속계, 상태1~4개를 지원하며 원시 주파수 응답과 행렬·전달함수 계수를 함께 제공합니다.
@@ -108,7 +114,7 @@ CSV는 브라우저 안에서만 읽으며 최대256KiB·1,000행을 지원합�
 
 ## 다음 확장
 
-[M21 이후 계획](docs/product-extension-roadmap.json)에서 M21 기록의 스펙트럼과 M22 이산 SISO 제어계는 로컬 구현·검증을 완료했습니다. M23 시드를 고정한 불확실성 실험, M24 시간 구간 통계·상관/지연, M25 Welch·시간-주파수 관측은 후속 계획입니다. 각 단계의 입력 범위·제외 항목·독립 검증 조건을 먼저 정하고 실제 완료한 범위만 지원 기능으로 표시합니다.
+[M21 이후 계획](docs/product-extension-roadmap.json)에서 M21 기록의 스펙트럼, M22 이산 SISO 제어계, M23 시드를 고정한 불확실성 앙상블은 로컬 구현·검증을 완료했습니다. M24 시간 구간 통계·상관/지연과 M25 Welch·시간-주파수 관측은 후속 계획입니다. 각 단계의 입력 범위·제외 항목·독립 검증 조건을 먼저 정하고 실제 완료한 범위만 지원 기능으로 표시합니다.
 
 ## 영향을 받은 도구와 설계 원칙
 
@@ -165,7 +171,7 @@ npm run verify:release
 
 ## 지원 범위와 결과 해석
 
-현재 앱 버전은 **0.23.0**, 계산 엔진 버전은 **0.17.0-m16**입니다. 블록 수는 등록된 정의의 수이며 모든 자료형·모드·옵션에서 동작한다는 의미는 아닙니다. 실제 모델의 지원 여부는 [공개 지원표](docs/support-matrix.md)와 [기계 판독 지원표](docs/support-matrix.json)에서 확인할 수 있습니다.
+현재 앱 버전은 **0.24.0**, 계산 엔진 버전은 **0.17.0-m16**입니다. 블록 수는 등록된 정의의 수이며 모든 자료형·모드·옵션에서 동작한다는 의미는 아닙니다. 실제 모델의 지원 여부는 [공개 지원표](docs/support-matrix.md)와 [기계 판독 지원표](docs/support-matrix.json)에서 확인할 수 있습니다.
 
 - TypeScript 내보내기는 승인된 실행 계약을 따릅니다. Python은 69개 블록 ID의 정적·이산 구성, WASM은 16개 블록 ID의 실수 스칼라 비순환 구성으로 제한됩니다. C/C++ 내보내기는 제공하지 않습니다.
 - Simulink R2024b 참고 목록 385행을 [원자료 대응표](docs/block-coverage.md)로 추적합니다. 원본의 모든 옵션이나 MathWorks 실행 결과와의 수치적 동등성을 검증한 것은 아닙니다. MAT·SLX·MDL 처리는 선택 범위의 데이터·구조 분석이며 원본 실행 환경을 대체하지 않습니다.
