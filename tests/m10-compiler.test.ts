@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs';
+import { registryWithoutApprovedObserverInputs } from '../scripts/m16-support-source';
 import { describe, expect, it } from 'vitest';
 import { blockRegistry, getBlockDefinition, getBlockPorts, getDirectFeedthroughPorts } from '../packages/block-library/src';
 import { M10_BLOCK_IDS, M10_BLOCK_PRESETS } from '../packages/block-library/src/m10';
@@ -73,7 +74,8 @@ const contracts: { id: string; model: CalcModel; dtype: string; shape: number[] 
 describe('M10 exact dtype, shape, constraint and boundary compiler', () => {
   it('keeps preceding definitions and distinguishes34 operations from10 presets', () => {
     const baseline = JSON.parse(readFileSync(new URL('../docs/baselines/m8-registry.json', import.meta.url), 'utf8')) as Record<string, unknown>[];
-    for (const definition of baseline) expect(getBlockDefinition(String(definition.id))).toEqual(definition);
+    const historical = new Map<string, (typeof blockRegistry)[number]>(registryWithoutApprovedObserverInputs(blockRegistry).map(definition => [definition.id, definition]));
+    for (const definition of baseline) expect(historical.get(String(definition.id))).toEqual(definition);
     expect(M10_BLOCK_IDS).toHaveLength(34); expect(M10_BLOCK_PRESETS).toHaveLength(10);
     expect(blockRegistry.filter(definition => M10_BLOCK_IDS.includes(definition.id as typeof M10_BLOCK_IDS[number]))).toHaveLength(34);
     expect(new Set(contracts.map(contract => contract.id))).toEqual(new Set(M10_BLOCK_IDS));

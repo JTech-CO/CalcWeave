@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs';
+import { registryWithoutApprovedObserverInputs } from '../scripts/m16-support-source';
 import { describe, expect, it } from 'vitest';
 import { blockPresets, blockRegistry, getBlockDefinition, getBlockPorts } from '../packages/block-library/src';
 import { M8_BLOCK_IDS } from '../packages/block-library/src/m8';
@@ -29,7 +30,8 @@ describe('M8 bounded stateless compiler contracts', () => {
   it('preserves all 144 previous definitions exactly and counts presets separately', () => {
     const baseline = JSON.parse(readFileSync(new URL('../docs/baselines/catalog-registry.json', import.meta.url), 'utf8')) as { definitions: Record<string, unknown>[] };
     expect(baseline.definitions).toHaveLength(144);
-    for (const definition of baseline.definitions) expect(getBlockDefinition(String(definition.id))).toEqual(definition);
+    const historical = new Map<string, (typeof blockRegistry)[number]>(registryWithoutApprovedObserverInputs(blockRegistry).map(definition => [definition.id, definition]));
+    for (const definition of baseline.definitions) expect(historical.get(String(definition.id))).toEqual(definition);
     expect(M8_BLOCK_IDS).toHaveLength(41);
     const baselineIds = new Set(baseline.definitions.map(definition => definition.id));
     expect(blockRegistry.filter(definition => baselineIds.has(definition.id) || (M8_BLOCK_IDS as readonly string[]).includes(definition.id))).toHaveLength(185);

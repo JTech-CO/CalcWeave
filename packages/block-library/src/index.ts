@@ -78,7 +78,7 @@ const definitions: BlockDefinition[] = [
   { ...common, id: 'route.demux', label: '벡터 나누기', englishName: 'Demux', description: '길이 count의 vector를 scalar 출력 포트로 나눕니다.', category: '신호 처리', inputs: ['in'], outputs: ['out1', 'out2'], parameters: { count: integer('출력 개수', 2, 1, 16) } },
   { ...common, id: 'math.concatenate', label: '벡터 연결', englishName: 'Concatenate', description: '같은 타입·단위의 scalar 또는 vector 두 입력을 연결합니다.', category: '신호 처리', inputs: ['a', 'b'], outputs: ['out'], parameters: {} },
   { ...common, id: 'matrix.reshape', label: '형상 변경', englishName: 'Reshape', description: '원소 순서를 유지하며 row-major vector 또는 2D matrix로 변경합니다.', category: '신호 처리', inputs: ['in'], outputs: ['out'], parameters: { form: choice('형상', 'vector', ['vector', 'matrix']), rows: integer('행 수', 1, 1, 1_024), columns: integer('열 수', 2, 1, 1_024) } },
-  { ...common, id: 'sink.display', label: '결과', englishName: 'Display', description: '신호 값을 실행 결과에 기록합니다.', category: '결과', aliases: ['값 표시', '값표시', 'display', '그래프'], inputs: ['in'], outputs: [], parameters: {}, supportedModes: modes },
+  { ...common, id: 'sink.display', label: '결과', englishName: 'Display', description: '신호 값을 실행 결과에 기록합니다.', category: '결과', aliases: ['값 표시', '값표시', 'display', '그래프'], inputs: ['in'], outputs: [], parameters: { inputCount: integer('입력 개수', 1, 1, 16) }, supportedModes: modes },
   { ...common, id: 'io.output', label: '출력', englishName: 'Outport', description: '모델 출력을 실행 결과에 기록합니다.', category: '결과', aliases: ['output', 'outport'], inputs: ['in'], outputs: [], parameters: {} },
   { ...common, id: 'io.terminator', label: '신호 종료', englishName: 'Terminator', description: '입력 신호를 검증하고 종료합니다. 결과에는 기록하지 않습니다.', category: '결과', inputs: ['in'], outputs: [], parameters: {} },
   { ...common, id: 'math.expression', label: '수식', englishName: 'Expression', description: 'x와 허용 함수만 사용하는 제한 수식을 각 숫자 원소에 적용합니다.', category: '계산', aliases: ['fcn', 'formula', '함수', '식'], inputs: ['in'], outputs: ['out'], parameters: { expression: { kind: 'expression', label: '수식', default: 'x', maxLength: 512 } } },
@@ -103,7 +103,7 @@ const definitions: BlockDefinition[] = [
   { ...discrete, id: 'time.rate-transition', label: '샘플시간 연결', englishName: 'Rate Transition', description: '다른 rate를 read-before-write 경계 버퍼로 연결합니다. 동시 hit에도 이전 publication을 읽습니다.', category: '신호 처리', directFeedthrough: false, parameters: { initial: value('초기값', 0) } },
   { ...common, id: 'lookup.interpolated', label: '1D 보간표', englishName: '1D Lookup', description: '단위 없는 입력에 linear/previous 1D 보간표를 적용합니다.', category: '계산', inputs: ['in'], outputs: ['out'], parameters: { breakpoints: value('입력 기준점', [0, 1]), values: value('출력 값', [0, 1]), interpolation: choice('보간', 'linear', ['linear', 'previous']), extrapolation: choice('범위 밖', 'clip', ['clip', 'error']) } },
   { ...common, id: 'logic.bitwise', label: '비트 연산', englishName: 'Bitwise', description: '1~32bit unsigned scalar 정수의 마스크·논리·shift 연산입니다.', category: '논리', valueType: 'float64', shape: 'scalar', unit: 'dimensionless', inputs: ['a', 'b'], outputs: ['out'], parameters: { operation: choice('연산', 'and', ['and', 'or', 'xor', 'not', 'shift-left', 'shift-right']), width: integer('비트 폭', 8, 1, 32), shift: integer('shift 수', 1, 0, 31) } },
-  { ...common, id: 'sink.scope', label: '시간 그래프', englishName: 'Scope', description: '전체 원시 typed 시계열을 기록하고 scalar 숫자를 그래프로 봅니다.', category: '결과', inputs: ['in'], outputs: [], parameters: {} },
+  { ...common, id: 'sink.scope', label: '시간 그래프', englishName: 'Scope', description: '전체 원시 typed 시계열을 기록하고 scalar 숫자를 그래프로 봅니다.', category: '결과', inputs: ['in'], outputs: [], parameters: { inputCount: integer('입력 개수', 1, 1, 16) } },
   { ...continuous, id: 'continuous.second-order-integrator', label: '2차 적분', englishName: 'Second Order Integrator', description: '가속도 입력을 위치와 속도의 두 상태로 적분합니다.', outputs: ['out', 'velocity'], parameters: { initialPosition: scalar('초기 위치', 0), initialVelocity: scalar('초기 속도', 0) } },
   { ...continuous, id: 'continuous.state-space', label: '연속 상태 공간', englishName: 'State Space', description: '최대 16개 상태의 단위 없는 scalar SISO 연속 상태 공간입니다.', parameters: { A: value('A 행렬', [[-1]]), B: roots('B 벡터', [1], 1), C: roots('C 벡터', [1], 1), D: scalar('D', 0), initial: roots('초기 상태', [0], 1) } },
   { ...continuous, id: 'continuous.transfer-function', label: '연속 전달 함수', englishName: 'Transfer Fcn', description: 's의 내림차순 실수 다항식 계수를 제어 정준형으로 계산합니다. 최대 차수 16입니다.', parameters: { numerator: coefficients('분자 계수', [1]), denominator: coefficients('분모 계수', [1, 1]), initial: roots('초기 상태', [0]) } },
@@ -161,6 +161,11 @@ export function getBlockPorts(node: Pick<CalcNode, 'blockType' | 'parameters'>, 
   if (m12Ports) return m12Ports;
   const definition = getBlockDefinition(node.blockType);
   if (!definition) return { inputs: [], outputs: [] };
+  if (node.blockType === 'sink.display' || node.blockType === 'sink.scope') {
+    const value = node.parameters.inputCount;
+    const count = typeof value === 'number' && Number.isSafeInteger(value) && value >= 1 && value <= 16 ? value : 1;
+    return { inputs: Array.from({ length: count }, (_, index) => index === 0 ? 'in' : `in${index + 1}`), outputs: [] };
+  }
   const m11Ports = getM11Ports(node, context);
   if (m11Ports) return m11Ports;
   const m10Ports = getM10Ports(node);

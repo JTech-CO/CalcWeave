@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { registryWithoutApprovedObserverInputs } from './m16-support-source';
 import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { mkdir,readFile,writeFile,readdir } from 'node:fs/promises';
@@ -17,7 +18,8 @@ const stage=ENGINE_VERSION.split('-').at(-1)!;
 const evidenceName=stage==='m15'&&!existsSync('docs/evidence/m15-engineering-checks.json')?'m15-wasm-verification':`m15-wasm-regression-on-${stage}`;
 const directory=resolve(`.test-generated/${evidenceName}`);await mkdir(directory,{recursive:true});
 const predecessor=JSON.parse(await readFile('docs/baselines/m14-registry.json','utf8')) as typeof blockRegistry;
-assert.equal(predecessor.length,337);assert.equal(blockRegistry.length,337);for(const definition of predecessor) assert.deepEqual(getBlockDefinition(definition.id),definition);
+const historicalRegistry = registryWithoutApprovedObserverInputs(blockRegistry);
+assert.equal(predecessor.length,337);assert.equal(blockRegistry.length,337);for(const definition of predecessor) assert.deepEqual(historicalRegistry.find(item=>item.id===definition.id),definition,`${definition.id}: historical canonical changed beyond two approved observer inputCount declarations`);
 const units=(result:RunResult)=>({samples:result.samples,finalState:result.finalState,...(result.stateMemory?{stateMemory:result.stateMemory}:{})});
 function equal(actual:unknown,expected:unknown,path='value'):void {
   if(typeof expected==='number') {assert.equal(typeof actual,'number',path);assert(Number.isFinite(actual));if(expected===0) assert(Object.is(actual,expected),`${path}:signed zero`);else assert(Math.abs((actual as number)-expected)/Math.max(1,Math.abs(expected))<=1e-12,`${path}:literal numeric oracle`);return;}

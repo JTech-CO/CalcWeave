@@ -8,6 +8,7 @@ import { M14_BLOCK_IDS } from '../../../../packages/block-library/src/m14';
 import type { CalcNode, SignalValue } from '../../../../packages/model/src';
 import { validateTypedSignal } from '../../../../packages/model/src';
 import { fixedCellText, signalSummary, typedCellText } from './SignalResult';
+import { isMultiInputObserver, observerInputCount } from '../observer-connections';
 
 // A compact preview; the complete number remains in the inspector/result and tooltip.
 function compactNumber(value: number) {
@@ -43,7 +44,7 @@ export function BlockNode({ id, data, selected }: NodeProps<FlowBlock>) {
   useEffect(() => { updateNodeInternals(id); }, [id, portKey, updateNodeInternals]);
   const definition = getBlockDefinition(data.block.blockType);
   if (!definition) return <div className="block-node name-only error" role="group" aria-label={`${data.block.label}: 지원되지 않는 블럭 ${data.block.blockType}`} title={data.block.label}><div className="block-name">Unknown</div></div>;
-  const firstParameter = data.block.blockType === 'dashboard.control' ? ['initial', definition.parameters.initial] as const : Object.entries(definition.parameters)[0];
+  const firstParameter = isMultiInputObserver(data.block) ? undefined : data.block.blockType === 'dashboard.control' ? ['initial', definition.parameters.initial] as const : Object.entries(definition.parameters)[0];
   const parameter = firstParameter && ['number', 'integer', 'value', 'numeric-vector', 'typed-value', 'signal-value'].includes(firstParameter[1].kind) || data.block.blockType === 'source.string-constant' && firstParameter ? firstParameter : undefined;
   const value = parameter ? Object.hasOwn(data.block.parameters, parameter[0]) ? data.block.parameters[parameter[0]] : parameter[1].default : undefined;
   const hasValue = !data.boundary && (Boolean(parameter) || ['sink.display', 'sink.scope', 'io.output', 'sink.sequence-viewer', 'io.structured-output'].includes(data.block.blockType));
@@ -52,7 +53,10 @@ export function BlockNode({ id, data, selected }: NodeProps<FlowBlock>) {
   let typedPreview: string | undefined;
   if (preview && typeof preview === 'object' && !Array.isArray(preview)) {
     try {
-      if ('kind' in preview && (preview.kind === 'bus' || preview.kind === 'messages')) typedPreview = signalSummary(preview as SignalValue);
+      if ('kind' in preview && preview.kind === 'bus' && isMultiInputObserver(data.block) && observerInputCount(data.block) > 1) {
+        const fields = (preview as Extract<SignalValue, { kind: 'bus' }>).fields;
+        typedPreview = fields.slice(0, 2).map(field => typeof field.value === 'number' && Number.isFinite(field.value) ? compactNumber(field.value) : signalSummary(field.value)).join(' · ') + (fields.length > 2 ? ' · …' : '');
+      } else if ('kind' in preview && (preview.kind === 'bus' || preview.kind === 'messages')) typedPreview = signalSummary(preview as SignalValue);
       else if ('kind' in preview && preview.kind === 'typed') { const typed = validateTypedSignal(preview), dimensions = `[${typed.shape.join('×')}]`; typedPreview = typed.shape.length ? dimensions.length <= 14 ? dimensions : `${typed.shape.length}D · ${typed.data.length}` : typed.dtype === 'fixed' ? fixedCellText(typed.data[0] as string, typed.fixed!.fractionLength) : typedCellText(typed.data[0]!, typed); }
     } catch { /* Imported invalid configuration is diagnosed by the compiler. */ }
   }
@@ -64,7 +68,7 @@ export function BlockNode({ id, data, selected }: NodeProps<FlowBlock>) {
     <div className={`block-name${canvasName.length > 12 ? ' wrap-name' : ''}`}>{canvasName}</div>
     {hasValue && <div className={`block-value${typedPreview !== undefined ? ' typed-preview' : ''}`} title={exactValue} aria-label={exactValue}>{visibleValue}</div>}
     {data.error && <span className="block-error" role="img" aria-label="입력 또는 설정 확인 필요" title="입력 또는 설정 확인 필요">!</span>}
-    {ports.inputs.map((port, index) => <div className="port-row input-port" key={port} style={{ top: `${(index + 1) * 100 / (ports.inputs.length + 1)}%` }}><Handle type="target" position={Position.Left} id={port} aria-label={`${data.block.label} 입력 ${port}`} /></div>)}
+    {ports.inputs.map((port, index) => <div className="port-row input-port" key={port} style={{ top: `${(index + 1) * 100 / (ports.inputs.length + 1)}%` }}><Handle type="target" position={Position.Left} id={port} className={!getBlockPorts(data.block).inputs.includes(port) && isMultiInputObserver(data.block) ? 'spare-input' : undefined} title={!getBlockPorts(data.block).inputs.includes(port) && isMultiInputObserver(data.block) ? '여기에 연결하면 입력이 추가됩니다' : `입력 ${port}`} aria-label={`${data.block.label} 입력 ${port}`} /></div>)}
     {ports.outputs.map((port, index) => <div className="port-row output-port" key={port} style={{ top: `${(index + 1) * 100 / (ports.outputs.length + 1)}%` }}><Handle type="source" position={Position.Right} id={port} aria-label={`${data.block.label} 출력 ${port}`} /></div>)}
   </div>;
 }

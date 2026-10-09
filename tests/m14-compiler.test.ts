@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs';
+import { registryWithoutApprovedObserverInputs } from '../scripts/m16-support-source';
 import { describe, expect, it } from 'vitest';
 import { blockRegistry, getBlockDefinition, getDirectFeedthroughPorts } from '../packages/block-library/src';
 import { M14_BLOCK_IDS } from '../packages/block-library/src/m14';
@@ -26,7 +27,8 @@ function nested(type: string, wrapper = 'hierarchy.atomic'): CalcModel {
 describe('M14 trusted adapter compiler and immutable availability catalog', () => {
   it('preserves all334 preceding definition objects and adds exactly3 substantive contracts', () => {
     const baseline = JSON.parse(readFileSync(new URL('../docs/baselines/m13-registry.json', import.meta.url), 'utf8')) as { id: string }[];
-    expect(baseline).toHaveLength(334); for (const definition of baseline) expect(getBlockDefinition(definition.id)).toEqual(definition);
+    const historical = new Map<string, (typeof blockRegistry)[number]>(registryWithoutApprovedObserverInputs(blockRegistry).map(definition => [definition.id, definition]));
+    expect(baseline).toHaveLength(334); for (const definition of baseline) expect(historical.get(definition.id)).toEqual(definition);
     expect(M14_BLOCK_IDS).toHaveLength(3); expect(new Set(M14_BLOCK_IDS).size).toBe(3); expect(blockRegistry.length).toBeGreaterThanOrEqual(337);
   });
   it.each(['static', 'discrete', 'continuous'] as const)('compiles fixed finite scalar affine in %s without writing pins into the portable model', mode => {

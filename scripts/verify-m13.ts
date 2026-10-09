@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { registryWithoutApprovedObserverInputs } from './m16-support-source';
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
@@ -23,7 +24,8 @@ const predecessor = JSON.parse(await readFile('docs/baselines/m12-registry.json'
 assert.equal(predecessor.length, 304);
 assert.equal(new Set(M13_BLOCK_IDS).size, 30);
 assert(blockRegistry.length >= predecessor.length + M13_BLOCK_IDS.length);
-for (const definition of predecessor) assert.deepEqual(blockRegistry.find(block => block.id === definition.id), definition, `${definition.id}: predecessor definition changed`);
+const historicalRegistry = registryWithoutApprovedObserverInputs(blockRegistry);
+for (const definition of predecessor) assert.deepEqual(historicalRegistry.find(block => block.id === definition.id), definition, `${definition.id}: historical predecessor changed beyond two approved observer inputCount declarations`);
 assert.deepEqual([...new Set(M13_INDEPENDENT_DEFINITION_FIXTURES.flatMap(entry => entry.model.nodes.map(node => node.blockType)).filter(id => (M13_BLOCK_IDS as readonly string[]).includes(id)))].sort(), [...M13_BLOCK_IDS].sort(), 'Each M13 definition needs an executed raw numerical oracle');
 
 const parityTolerance = 3e-12;

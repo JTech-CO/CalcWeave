@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { registryWithoutApprovedObserverInputs } from './m16-support-source';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { blockRegistry } from '../packages/block-library/src';
@@ -142,7 +143,8 @@ assert(Object.keys(actual.assignmentCounts).every(id => order.has(id as StageId)
 assert(Object.keys(actual.unimplementedAssignmentCounts).every(id => order.has(id as StageId)), 'Unknown unimplemented summary stage');
 const registryBaseline = JSON.parse(await readFile(registryBaselinePath, 'utf8')) as { engineVersion: string; registryDefinitions: number; definitions: unknown[] };
 assert.equal(registryBaseline.engineVersion, '0.8.0-catalog'); assert.equal(registryBaseline.registryDefinitions, 144); assert.equal(registryBaseline.definitions.length, 144);
-for (const definition of registryBaseline.definitions) { const original = definition as { id: string }; assert.deepEqual(blockRegistry.find(block => block.id === original.id), definition, `Catalog contract changed: ${original.id}`); }
+const historicalRegistry = registryWithoutApprovedObserverInputs(blockRegistry);
+for (const definition of registryBaseline.definitions) { const original = definition as { id: string }; assert.deepEqual(historicalRegistry.find(block => block.id === original.id), definition, `Historical catalog contract changed beyond two approved observer inputs: ${original.id}`); }
 assert(blockRegistry.length >= 144 && new Set(blockRegistry.map(block => block.id)).size === blockRegistry.length, 'Current registry must retain the unique catalog definitions');
 for (const stage of milestones) for (const dependency of stage.dependsOn) assert(order.has(dependency) && order.get(dependency)! < order.get(stage.id)!, `Invalid stage dependency: ${stage.id}/${dependency}`);
 for (const row of actual.rows) {

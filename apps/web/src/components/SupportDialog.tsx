@@ -3,6 +3,7 @@ import { type ParameterDefinition } from '../../../../packages/block-library/src
 import { type ExecutionMode } from '../../../../packages/model/src';
 import { getReleaseCatalog } from '../../../../packages/release/src';
 import type { CanonicalSupport, SourceSupportRow, SupportClassification, SupportDecision, SupportTarget, SupportTargetStatus } from '../../../../packages/support-matrix/src';
+import { getCurrentObserverExtension } from '../../../../packages/support-matrix/src/current-extensions';
 import { Icon } from './Icon';
 import { ModalDialog } from './ModalDialog';
 import { appResourcePath } from '../app-path';
@@ -69,6 +70,7 @@ export function SupportDialog({ onClose, onManage }: { onClose: () => void; onMa
   }, [page, detail]);
   const blocks = useMemo(() => BLOCK_REGISTRY.filter(block => (!mode || block.supportedModes.includes(mode)) && (block.id + ' ' + block.label + ' ' + block.englishName + ' ' + block.aliases?.join(' ') + ' ' + block.description + ' ' + block.category + ' ' + Object.entries(block.parameters).map(([key, parameter]) => key + ' ' + parameter.label + ' ' + parameter.kind + ' ' + parameter.options?.join(' ')).join(' ') + ' ' + block.valueType + ' ' + block.shape + ' ' + block.unit).toLocaleLowerCase().includes(query.trim().toLocaleLowerCase())), [query, mode]);
   const selected = BLOCK_REGISTRY.find(block => block.id === selectedId)!;
+  const selectedExtension = getCurrentObserverExtension(selected.id);
   function openPage(next: HelpPage) { aboutButton.current?.closest('dialog')?.scrollTo(0, 0); setPage(next); setDetail(null); }
   function openDetail(next: Exclude<HelpDetail, null>) { aboutButton.current?.focus({ preventScroll: true }); setDetail(next); }
   function backToAbout() { setDetail(null); aboutButton.current?.focus({ preventScroll: true }); }
@@ -85,7 +87,7 @@ export function SupportDialog({ onClose, onManage }: { onClose: () => void; onMa
       {page === 'guide' && <section className="help-guide" aria-labelledby="help-guide-title">
         <div className="help-guide-layout">
           <div><h3 id="help-guide-title">첫 계산을 만들어 보세요</h3><p>상수에 배율을 곱하고 결과를 표시하는 작은 도식부터 시작할 수 있습니다.</p>
-            <ol className="help-steps"><li><strong>블록을 놓습니다</strong><span>라이브러리 또는 빠른 추가에서 상수, 배율, 결과(Display) 블록을 추가하세요. 준비된 도식은 상단의 예제로 시작에서 고를 수 있습니다.</span></li><li><strong>선을 연결하고 값을 정합니다</strong><span>상수 → 배율 → 결과 순서로 출력과 입력 포트를 연결하세요. 블록 속성에서 상수를 2, 배율을 3으로 바꿔 보세요.</span></li><li><strong>실행하고 결과를 확인합니다</strong><span>상단의 실행 버튼을 누르면 계산 결과에 6이 나타납니다. 시간에 따른 변화는 이산 또는 연속 실행 방식과 시간 그래프(Scope)로 확인하세요.</span></li></ol>
+            <ol className="help-steps"><li><strong>블록을 놓습니다</strong><span>라이브러리의 블록을 클릭해 추가하거나 캔버스의 원하는 위치로 끌어 놓으세요. 빠른 추가에서도 상수, 배율, 결과(Display) 블록을 추가할 수 있습니다. 준비된 도식은 상단의 예제로 시작에서 고를 수 있습니다.</span></li><li><strong>선을 연결하고 값을 정합니다</strong><span>상수 → 배율 → 결과 순서로 출력과 입력 포트를 연결하세요. 블록 속성에서 상수를 2, 배율을 3으로 바꿔 보세요.</span></li><li><strong>실행하고 결과를 확인합니다</strong><span>상단의 실행 버튼을 누르면 계산 결과에 6이 나타납니다. 시간에 따른 변화는 이산 또는 연속 실행 방식과 시간 그래프(Scope)로 확인하세요.</span></li></ol>
             <button className="button" onClick={findBlocks}>필요한 블록 찾기<Icon name="arrow" size={16}/></button>
           </div>
           <section className="help-next-steps" aria-labelledby="help-next-title"><h3 id="help-next-title">작업을 이어가는 방법</h3><dl>
@@ -96,6 +98,7 @@ export function SupportDialog({ onClose, onManage }: { onClose: () => void; onMa
         </div>
         <details className="help-disclosure"><summary>마우스·키보드 조작</summary><dl className="support-metadata help-shortcuts">
           <div><dt>도식 이동</dt><dd>마우스 휠 버튼을 누른 채 드래그</dd></div><div><dt>영역 선택</dt><dd>캔버스 빈 곳에서 마우스 왼쪽 버튼으로 드래그</dd></div><div><dt>도식 맞추기</dt><dd>캔버스에서 <kbd>Space</kbd></dd></div>
+          <div><dt>자동 정렬</dt><dd>캔버스에서 <kbd>Space</kbd>를 누른 상태로 <kbd>Z</kbd> · <kbd>Ctrl + Z</kbd>로 정렬 취소</dd></div>
           <div><dt>키보드로 블록 편집</dt><dd><kbd>Tab</kbd>으로 블록 이동 · <kbd>Enter</kbd>로 속성 편집 · 입력값과 연결 메뉴는 <kbd>Tab</kbd>으로 이동</dd></div>
           <div><dt>빠른 추가</dt><dd><kbd>Ctrl + K</kbd> · <kbd>↑ / ↓</kbd> 선택 · <kbd>Enter</kbd> 추가 · <kbd>Escape</kbd> 닫기</dd></div>
           <div><dt>선택과 복사</dt><dd><kbd>Ctrl + A</kbd> 전체 선택 · <kbd>Ctrl + C / V</kbd> 복사·붙여넣기 · <kbd>Ctrl + D</kbd> 복제 · <kbd>Delete</kbd> 삭제</dd></div>
@@ -107,7 +110,8 @@ export function SupportDialog({ onClose, onManage }: { onClose: () => void; onMa
         <p className="support-result-count" role="status">{blocks.length} / {BLOCK_REGISTRY.length}개 블록</p>
         <div className="support-layout"><div className="support-block-list" aria-label="지원 블록 목록">{blocks.map(block => <button key={block.id} aria-pressed={selectedId === block.id} onClick={() => setSelectedId(block.id)}><strong>{block.label}<span className="help-block-english">{block.englishName}</span></strong><span>{block.category} · {block.supportedModes.map(item => MODES[item]).join(' / ')}</span></button>)}{!blocks.length && <p className="muted-copy">일치하는 블록이 없습니다.</p>}</div>
           <section className="support-block-detail" aria-label="선택한 블록의 지원 정보"><h3>{selected.label}<span className="help-detail-english">{selected.englishName}</span></h3><p>{selected.description}</p>
-            <dl className="support-metadata"><div><dt>실행 방식</dt><dd>{selected.supportedModes.map(item => MODES[item]).join(' · ')}</dd></div><div><dt>입력 / 출력</dt><dd>{selected.inputs.length}개 / {selected.outputs.length}개<small>포트 수는 블록 설정과 하위 도식에 따라 바뀔 수 있습니다.</small></dd></div><div><dt>코드 내보내기</dt><dd>{selected.exportTargets.map(target => target === 'typescript' ? 'TypeScript' : target === 'python' ? 'Python' : 'WASM').join(' · ')}<small>내보낼 때 모델의 실행 방식·연결·자료형과 설정을 확인합니다. 하위 도식은 내부 계산 블록이 모두 지원되어야 합니다.</small></dd></div></dl>
+            <dl className="support-metadata"><div><dt>실행 방식</dt><dd>{selected.supportedModes.map(item => MODES[item]).join(' · ')}</dd></div><div><dt>입력 / 출력</dt><dd>{selectedExtension ? `${selectedExtension.minimumInputs} ~ ${selectedExtension.maximumInputs}` : selected.inputs.length}개 / {selected.outputs.length}개<small>포트 수는 블록 설정과 하위 도식에 따라 바뀔 수 있습니다.</small></dd></div><div><dt>코드 내보내기</dt><dd>{selected.exportTargets.map(target => target === 'typescript' ? 'TypeScript' : target === 'python' ? 'Python' : 'WASM').join(' · ')}<small>내보낼 때 모델의 실행 방식·연결·자료형과 설정을 확인합니다. 하위 도식은 내부 계산 블록이 모두 지원되어야 합니다.</small></dd></div></dl>
+            {selectedExtension && <p className="field-help" data-testid="observer-extension-support">브라우저 계산·TypeScript는 입력을 {selectedExtension.maximumInputs}개까지 기록하고, Python·WASM 내보내기는 입력 1개만 지원합니다. 입력 개수는 블록 속성에서 조절할 수 있습니다.</p>}
             <h4>설정과 기본값</h4>{Object.keys(selected.parameters).length ? <><div className="support-parameter-list help-parameter-list">{Object.entries(selected.parameters).map(([key, parameter]) => <div key={key}><strong>{parameter.label}</strong><p>기본값 <span className="help-default-value">{displayDefault(parameter.default)}</span></p><p>{readableParameterConstraint(parameter)}</p></div>)}</div><details className="help-disclosure"><summary>파라미터 기술 정보</summary><div className="support-parameter-list">{Object.entries(selected.parameters).map(([key, parameter]) => <div key={key}><strong>{parameter.label} <code>{key}</code></strong><p>{parameter.kind} · 기본값 <code>{JSON.stringify(parameter.default)}</code></p><p>{parameterConstraint(parameter)}</p></div>)}</div></details></> : <p>설정할 파라미터가 없습니다.</p>}
             <details className="help-disclosure"><summary>기술 정보</summary><dl className="support-metadata">
               <div><dt>ID · 버전</dt><dd>{selected.id} · v{selected.version}</dd></div><div><dt>포트 이름</dt><dd>{selected.inputs.join(', ') || '없음'} / {selected.outputs.join(', ') || '없음'}</dd></div><div><dt>타입 · 모양</dt><dd>{selected.valueType} · {selected.shape}</dd></div><div><dt>단위</dt><dd>{selected.unit === 'dimensionless' ? '단위 없음' : '입력·파라미터에서 추론'}</dd></div><div><dt>시간 · 상태</dt><dd>{selected.sampleTime} · {selected.state}</dd></div>
@@ -194,6 +198,7 @@ function SourceSupportContent({ api }: { api: SupportMatrixApi }) {
     <h3 id="source-matrix-title">참고 자료와 CalcWeave 기능 비교</h3>
     <p>CalcWeave는 MATLAB 설치가 필요 없는 독립적인 웹 계산 도구입니다. 이 비교표는 Simulink 관련 참고 자료를 확인하기 위한 정보이며 기본 사용 조건이 아닙니다.</p>
     <p>R2024b에서 선택한 참고 자료의 원자료 {summary.trackedSourceRows}행을 추적합니다. 같은 이름이나 같은 계산 블록을 사용하는 항목도 원자료 ID로 구분합니다. 전체 Simulink 라이브러리 전수 목록이나 원본 전체 옵션의 동등성을 뜻하지 않으며, 원본 환경의 수치 동등성은 검증하지 않았습니다.</p>
+    <p className="field-help" data-testid="historical-support-notice">이 표는 엔진 {api.SUPPORT_MATRIX.engineVersion}의 검증 기록입니다. 현재 엔진 {api.CURRENT_SUPPORT_EXTENSIONS.engineVersion}의 Display·Scope 다중 입력은 별도 확장 계약으로 제공됩니다. 브라우저 계산·TypeScript는 1~16개, Python·WASM 내보내기는 입력 1개를 지원합니다.</p>
     <div className="source-support-summary" data-testid="source-support-summary"><span>원자료 {summary.trackedSourceRows}행 · 이름 {summary.uniqueSourceNames}개</span><span>등록 계산 블록 {summary.registryDefinitions}개</span><span>선택 subset {summary.selectedSubsetRows}행 · 미지원 {summary.unsupportedRows}행</span><span>원본 옵션 inventory 미검증 {summary.unverifiedInventoryRows}행 · 전체 동등 승인 {summary.fullOptionEquivalentRows}행</span></div>
     <div className="source-support-filters">
       <label className="field source-support-search"><span className="field-label">원자료 이름·ID·구현 검색</span><input aria-label="원자료 검색" maxLength={120} value={query} onChange={event => setQuery(event.target.value.slice(0, 120))} placeholder="Display, 06-001, string…"/></label>

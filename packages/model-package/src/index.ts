@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { blockRegistry } from '../../block-library/src';
 import { compileModel } from '../../compiler/src';
 import { ENGINE_VERSION, MODEL_LIMITS, ModelError, parseModel, type CalcModel, type Diagnostic } from '../../model/src';
-import { PACKAGE_MIGRATION_BASELINES, type PackageMigrationReport } from './migrations';
+import { currentEntryForLegacyPackage, PACKAGE_MIGRATION_BASELINES, type PackageMigrationReport } from './migrations';
 export { PACKAGE_MIGRATION_BASELINES, type PackageMigrationReport } from './migrations';
 
 /** A declarative model container. It cannot extend the executable block registry. */
@@ -218,10 +218,12 @@ export async function inspectModelPackage(text: string): Promise<ModelPackageIns
     const originalRegistrySha256 = await hashBytes(encoder.encode(canonicalJson(envelope.registry)));
     const baseline = PACKAGE_MIGRATION_BASELINES.find(entry => entry.engineVersion === envelope.engineVersion);
     if (!baseline || envelope.registry.length !== baseline.entries || originalRegistrySha256 !== baseline.registrySha256) fail('PACKAGE_REGISTRY_MISMATCH', '이전 패키지의 블럭 계약이 승인된 기준 snapshot과 일치하지 않습니다.');
-    const currentById = new Map<string, unknown>(MODEL_PACKAGE_REGISTRY.map(entry => [entry.blockId, entry]));
+    const currentById = new Map<string, unknown>(MODEL_PACKAGE_REGISTRY.map(entry => [entry.blockId, currentEntryForLegacyPackage(entry, blockRegistry.find(definition => definition.id === entry.blockId)?.parameters.inputCount)]));
     if (envelope.registry.some(entry => canonicalJson(entry) !== canonicalJson(currentById.get(entry.blockId)))) fail('PACKAGE_MIGRATION_CONTRACT_CHANGED', '이전 패키지의 포트·파라미터 계약을 현재 엔진에 그대로 대응할 수 없습니다.');
     const originalIds = new Set(envelope.registry.map(entry => entry.blockId));
     if ([model, ...(model.subsystems ?? [])].some(graph => graph.nodes.some(node => !originalIds.has(node.blockType)))) fail('PACKAGE_MIGRATION_UNDECLARED_BLOCK', '이전 서명 registry에 없는 블럭을 변환할 수 없습니다.');
+    const originalParameters = new Map(envelope.registry.map(entry => [entry.blockId, new Set(entry.parameters.map(parameter => parameter.name))]));
+    if ([model, ...(model.subsystems ?? [])].some(graph => graph.nodes.some(node => Object.keys(node.parameters).some(name => !originalParameters.get(node.blockType)!.has(name))))) fail('PACKAGE_MIGRATION_UNDECLARED_PARAMETER', '이전 서명 registry에 선언하지 않은 파라미터를 변환할 수 없습니다. 원본 옵션을 확인해 주세요.');
     migration = { fromEngineVersion: envelope.engineVersion, toEngineVersion: ENGINE_VERSION, originalRegistrySha256, currentRegistrySha256: await hashBytes(encoder.encode(canonicalJson(MODEL_PACKAGE_REGISTRY))), originalModelHash: envelope.modelHash, normalizedModelHash: await hashBytes(encoder.encode(canonicalJson(model))), currentSemanticHash: '', schemaVersion: 1, signatureAppliesTo: 'original-payload', originalIntegrityVerified: true, originalBytesMustBeRetained: true, normalizedModelChanged: canonicalJson(envelope.model) !== canonicalJson(model), currentCompilationPassed: false, numericalParityWithOriginalEngineVerified: false, optionCoercionPerformed: false };
   }
   let diagnostics: Diagnostic[] = [];

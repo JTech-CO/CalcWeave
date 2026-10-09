@@ -18,7 +18,8 @@
 .block-library .library-category-toggle[aria-expanded="true"]>svg { transform:rotate(0deg); }
 .block-library .library-category-items { min-width:0; }
 .block-library .library-category-items[hidden] { display:none; }
-.block-library .library-item { width:100%; max-width:100%; padding:10px 8px; gap:10px; }
+.block-library .library-item { width:100%; max-width:100%; padding:10px 8px; gap:10px; cursor:grab; }
+.block-library .library-item:active { cursor:grabbing; }
 .block-library .library-copy { min-width:0; flex:1; overflow-wrap:anywhere; }
 .block-library .library-copy strong { font-size:var(--text-body); }
 .block-library .library-copy small { font-size:var(--text-small); line-height:1.5; }

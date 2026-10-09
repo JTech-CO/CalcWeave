@@ -1,4 +1,4 @@
-export const ENGINE_VERSION = '0.17.0-m16';
+export const ENGINE_VERSION = '0.17.1-m16';
 
 export type ExecutionMode = 'static' | 'discrete' | 'continuous';
 export type BlockType =

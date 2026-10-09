@@ -959,3 +959,5 @@ textarea:focus-visible { outline:2px solid var(--focus); outline-offset:3px; }
   .app-header .icon-button,.toolbar .icon-button,.block-library .library-category-toggle { min-height:40px; }
   .app-header .icon-button,.toolbar .icon-button { width:40px; }
 }
+
+.block-node .react-flow__handle.spare-input { border-style:dashed; opacity:.65; }

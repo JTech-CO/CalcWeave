@@ -1,6 +1,6 @@
 # CalcWeave 기술 백서
 
-현행 앱 `0.26.0` / 엔진 `0.17.0-m16`의 설계와 실행 경계를 설명한다. 최종 실측·배포 상태는 [검증 문서](validation.md), 화면·상호작용은 [디자인 백서](02-design-whitepaper.md), 정책·복구·배포는 [운영 안내](operations.md)를 따른다. 현재 문서에 과거 단계의 시험 횟수나 납품 목록을 누적하지 않는다.
+현행 앱 `0.27.0` / 엔진 `0.17.1-m16`의 설계와 실행 경계를 설명한다. 최종 실측·배포 상태는 [검증 문서](validation.md), 화면·상호작용은 [디자인 백서](02-design-whitepaper.md), 정책·복구·배포는 [운영 안내](operations.md)를 따른다. 현재 문서에 과거 단계의 시험 횟수나 납품 목록을 누적하지 않는다.
 
 ## 제품과 지원을 세는 방법
 
@@ -8,7 +8,7 @@ CalcWeave는 블럭과 연결선으로 값·계산·상태·관측을 표현하�
 
 337개 registry 정의와 75개 예제/12개 범주를 제공한다. [R2024b 원자료](../dataset/Simulink_Basic_Blocks_R2024b.md)의 21개 분류·385개 행·339개 영어 이름 문자열은 서로 다른 추적 지표다. 바로가기·공유 설정·조건부·레거시를 독립 계산 엔진으로 합산하지 않는다. 현재 선택 승인 367행·미지원 18행과 전체 옵션 동등 승인 0행을 구분한다.
 
-[support-matrix.json](support-matrix.json)은 원본 ID·위치·identity SHA, 분류, 선택 파라미터 profile, 자료형, 모드, 타깃, 외부 조건과 증거를 담는다. 현행 [지원표](support-matrix.md)와 [상세 대응표](block-coverage.md)를 함께 읽는다. `selected-config-eligible`은 실제 모델을 compiler로 검증할 수 있는 후보라는 뜻이며 모든 파라미터 조합을 승인한 상태가 아니다. 원본 전수 옵션 inventory·MathWorks reference 실행·전체 수치/seed/bit parity는 미검증이다. [계획 JSON](simulink-coverage-roadmap.json)은 당시 배정 baseline으로 보존하며 현행 진척표로 재작성하지 않는다.
+[support-matrix.json](support-matrix.json)은 원본 ID·위치·identity SHA, 분류, 선택 파라미터 profile, 자료형, 모드, 타깃, 외부 조건과 증거를 담는다. 역사 검증 [지원표](support-matrix.md)와 [상세 대응표](block-coverage.md)를 함께 읽는다. `selected-config-eligible`은 실제 모델을 compiler로 검증할 수 있는 후보라는 뜻이며 모든 파라미터 조합을 승인한 상태가 아니다. 원본 전수 옵션 inventory·MathWorks reference 실행·전체 수치/seed/bit parity는 미검증이다. [계획 JSON](simulink-coverage-roadmap.json)은 당시 배정 baseline으로 보존하며 현행 진척표로 재작성하지 않는다.
 
 ## 시스템 구조
 
@@ -53,6 +53,14 @@ flowchart LR
 typed rounding은 floor/ceil/zero/nearest(동률 +∞)/away(동률 0에서 멀어짐)/even, overflow는 wrap/saturate/error로 구분한다. `real-world`와 `stored-integer` 변환을 혼동하지 않는다. Scaling Strip은 real-world float64가 아니라 stored code와 이를 담는 최소 builtin 정수 폭을 뜻한다. Stored Integer 증감은 real 값 ±1이 아닌 code ±1과 wrap이다. complex conjugate·Hermitian·dot의 수학 의미, tensor reshape/permute/squeeze의 row-major 순서는 실제 typed helper와 compiler shape 검사를 따른다.
 
 [unit 검사](../packages/model/src/units.ts)는 지원된 물리 차원과 곱·나눗셈·제곱·무차원 조건을 검증한다. 자동 단위 추정만으로 값의 scale을 바꾸지 않으며 `unit.convert`가 scale/offset을 명시한다. 온도 affine 변환도 일반 gain과 구분한다. 배열 인덱스는 각 블럭의 `indexBase`/out-of-range 계약으로 결정하고 임의 MATLAB 인덱스 규칙을 전역 적용하지 않는다.
+
+## 관측 입력과 캔버스 편집 확장
+
+Display·Scope는 `inputCount` 정수 1~16으로 `in`, `in2`…`in16` 포트를 선언한다. 입력 1개는 기존 신호와 descriptor를 그대로 기록하며 여러 입력은 각 신호의 자료형·형상·단위를 유지한 bus 필드로 기록한다. 실제 설정한 입력은 모두 필수다. 모든 포트가 연결된 블록의 다음 점선 포트는 편집기에만 표시하고, 선을 추가하는 순간 입력 개수·연결을 하나의 실행 취소 단위로 반영한다. 기존 입력이나 블록 몸체로 놓은 선은 빈 입력을 먼저 쓰고 필요할 때 입력을 늘린다. 관측 묶음도 전체 원소 1024·중첩 깊이 8·가중 저장 100000의 기존 제한을 통과해야 한다.
+
+라이브러리 드래그는 등록된 블록 ID만 받아 현재 뷰의 확대·이동 좌표를 모델 좌표로 변환하고 16px 격자에 맞춘다. 현재 도식에만 노드를 추가하며 클릭·키보드 추가도 유지한다. Space를 누른 채 Z는 측정한 블록 크기와 입력 위치 수를 반영해 방향별 계층·피드백 그룹·연결되지 않은 그룹을 배치한다. 연결·파라미터·계산 의미는 바꾸지 않으며 한 번의 실행 취소로 이전 배치를 복원한다.
+
+다중 입력은 브라우저·TypeScript에서 지원하고 Python·WASM은 단일 입력 구성만 지원한다. 원시 기록·저장·모델 JSON·현재 패키지를 유지하며, 승인된 이전 엔진 패키지는 원래 서명과 계약을 검사한 뒤 입력 1개의 호환 확장으로 가져온다. 과거 엔진과의 수치 동등성을 승인하는 의미는 아니다. [현재 확장 계약](../packages/support-matrix/src/current-extensions.ts)을 역사 지원표와 별도로 관리한다.
 
 ## 그래프와 정적 계산
 

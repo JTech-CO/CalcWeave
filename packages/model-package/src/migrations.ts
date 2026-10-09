@@ -8,7 +8,27 @@ export const PACKAGE_MIGRATION_BASELINES = Object.freeze([
   Object.freeze({ stage: 'M13', engineVersion: '0.14.0-m13', entries: 334, registrySha256: '66efa7ee48cddca607af560e153acdab42802f9e2c9b2d9e1cec9795d24261d6' }),
   Object.freeze({ stage: 'M14', engineVersion: '0.15.0-m14', entries: 337, registrySha256: '19aa84816ba8be1d3ea10536efb6f65caab0922f67b02ce8783f15b11e52165b' }),
   Object.freeze({ stage: 'M15', engineVersion: '0.16.0-m15', entries: 337, registrySha256: '19aa84816ba8be1d3ea10536efb6f65caab0922f67b02ce8783f15b11e52165b' }),
+  // M16 changed support tracking metadata only; its signed executable registry is the frozen M15 projection.
+  Object.freeze({ stage: 'M16', engineVersion: '0.17.0-m16', entries: 337, registrySha256: '19aa84816ba8be1d3ea10536efb6f65caab0922f67b02ce8783f15b11e52165b' }),
 ]);
+
+interface MigrationRegistryEntry {
+  blockId: string;
+  blockVersion: number;
+  inputs: readonly string[];
+  outputs: readonly string[];
+  parameters: readonly { name: string; kind: string }[];
+}
+
+/** The only approved schema addition: legacy observers acquire semantic default inputCount=1 at compilation.
+ * This projection never changes the historical signed registry or the imported model parameter payload.
+ * The caller must first verify the exact original registry hash and reject undeclared historical parameters.
+ */
+export function currentEntryForLegacyPackage(entry: MigrationRegistryEntry, countSchema?: { kind: string; default: unknown; min?: number; max?: number }): MigrationRegistryEntry {
+  if (!['sink.display', 'sink.scope'].includes(entry.blockId)) return entry;
+  if (countSchema?.kind !== 'integer' || countSchema.default !== 1 || countSchema.min !== 1 || countSchema.max !== 16) return entry;
+  return { ...entry, parameters: entry.parameters.filter(parameter => parameter.name !== 'inputCount' || parameter.kind !== 'integer') };
+}
 
 export interface PackageMigrationReport {
   fromEngineVersion: string;

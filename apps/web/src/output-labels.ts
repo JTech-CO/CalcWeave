@@ -1,5 +1,6 @@
 import type { CalcModel } from '../../../packages/model/src';
 import { flattenHierarchy } from '../../../packages/compiler/src/hierarchy';
+import { isMultiInputObserver, observerInputCount } from './observer-connections';
 
 const cache = new WeakMap<CalcModel, Record<string, string>>();
 /** Resolve names from the immutable execution snapshot, including internal sinks. */
@@ -22,4 +23,14 @@ export function outputLabels(model: CalcModel): Record<string, string> {
     }
   } catch { /* Root names remain available for unsupported historical snapshots. */ }
   cache.set(model, labels); return labels;
+}
+
+const multiInputCache = new WeakMap<CalcModel, ReadonlySet<string>>();
+/** Identify observation inputs from the run snapshot, never from bus field names. */
+export function multiInputOutputIds(model: CalcModel): ReadonlySet<string> {
+  const previous = multiInputCache.get(model); if (previous) return previous;
+  let nodes = model.nodes;
+  try { nodes = flattenHierarchy(model).model.nodes; } catch { /* Preserve usable root history. */ }
+  const ids = new Set(nodes.filter(node => isMultiInputObserver(node) && observerInputCount(node) > 1).map(node => node.id));
+  multiInputCache.set(model, ids); return ids;
 }

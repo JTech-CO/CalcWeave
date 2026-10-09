@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { registryWithoutApprovedObserverInputs } from './m16-support-source';
 import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -35,7 +36,8 @@ for (const [path, expected] of Object.entries(pins)) assert.equal(digest(await r
 const approval = await json('docs/evidence/m14-source-approvals.json');
 for (const [path, expected] of Object.entries(approval.protectedArtifacts)) assert.equal(digest(await readFile(path)), expected, path);
 const predecessor = await json('docs/baselines/m14-registry.json'); assert.equal(predecessor.length, 337);
-for (const definition of predecessor) assert.deepEqual(blockRegistry.find(item => item.id === definition.id), definition, `${definition.id}: immutable canonical definition`);
+const historicalRegistry = registryWithoutApprovedObserverInputs(blockRegistry);
+for (const definition of predecessor) assert.deepEqual(historicalRegistry.find(item => item.id === definition.id), definition, `${definition.id}: historical canonical changed beyond two approved observer inputCount declarations`);
 const catalog = getReleaseCatalog(); assert.equal(PYTHON_TARGET.blockIds.length, 69); assert.equal(PYTHON_M7_TARGET.blockIds.length, 51); assert(PYTHON_M7_TARGET.blockIds.every(id => PYTHON_TARGET.blockIds.includes(id))); assert.equal(WASM_TARGET.blockIds.length, 16); assert.equal(C_CPP_TARGET.available, false);
 assert(catalog.blocks.every(item => item.exportTargets.includes('python') === PYTHON_TARGET.blockIds.includes(item.id) && item.exportTargets.includes('wasm') === WASM_TARGET.blockIds.includes(item.id)));
 

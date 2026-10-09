@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { registryWithoutApprovedObserverInputs } from './m16-support-source';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
@@ -23,7 +24,8 @@ const predecessor = JSON.parse(await readFile('docs/baselines/m8-registry.json',
 assert.equal(predecessor.length, 185);
 const predecessorIds = new Set(predecessor.map(definition => definition.id));
 assert.equal(blockRegistry.filter(definition => predecessorIds.has(definition.id) || (M9_BLOCK_IDS as readonly string[]).includes(definition.id)).length, predecessor.length + M9_BLOCK_IDS.length);
-for (const definition of predecessor) assert.deepEqual(blockRegistry.find(block => block.id === definition.id), definition, `${definition.id}: predecessor contract changed`);
+const historicalRegistry = registryWithoutApprovedObserverInputs(blockRegistry);
+for (const definition of predecessor) assert.deepEqual(historicalRegistry.find(block => block.id === definition.id), definition, `${definition.id}: historical predecessor changed beyond two approved observer inputCount declarations`);
 assert.deepEqual([...new Set(M9_FIXTURES.flatMap(entry => entry.model.nodes.map(node => node.blockType)).filter(id => (M9_BLOCK_IDS as readonly string[]).includes(id)))].sort(), [...M9_BLOCK_IDS].sort(), 'Every M9 definition needs an independent raw oracle');
 assert.deepEqual([...new Set(M9_PRESET_FIXTURES.map(entry => entry.presetId))].sort(), M9_BLOCK_PRESETS.map(entry => entry.id).sort(), 'Every M9 preset needs an independent raw oracle');
 const tolerance = 3e-12, strictModes = new Set<string>();

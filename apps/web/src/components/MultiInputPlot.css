@@ -1,0 +1,11 @@
+.multi-input-plot { min-width: 0; width: 100%; }
+.multi-input-view-options,.multi-input-components { display: flex; flex-wrap: wrap; gap: 8px 12px; margin: 10px 0; }
+.multi-input-view-options .button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--text); }
+.multi-input-separate { display: grid; gap: 16px; min-width: 0; }
+.multi-input-channel { min-width: 0; border-top: 1px solid var(--line); padding-top: 12px; }
+.multi-input-channel h4 { font-size: 16px; font-weight: 600; margin: 0 0 8px; overflow-wrap: anywhere; }
+.multi-input-plot .scope-observation { --scope-curve-4: #e4ad71; --scope-curve-5: #e58aa4; --scope-curve-6: #67c7d5; --scope-curve-7: #c4ca70; --scope-curve-8: #b798ef; --scope-curve-9: #f19164; --scope-curve-10: #83aecb; --scope-curve-11: #d190cd; --scope-curve-12: #78cbad; --scope-curve-13: #dabd91; --scope-curve-14: #dd95a1; --scope-curve-15: #8cbbf1; --scope-curve-16: #b3ca98; }
+.app-shell.light .multi-input-plot .scope-observation { --scope-curve-4: #99631e; --scope-curve-5: #b63867; --scope-curve-6: #168598; --scope-curve-7: #777d24; --scope-curve-8: #8050bd; --scope-curve-9: #b85620; --scope-curve-10: #387899; --scope-curve-11: #a04798; --scope-curve-12: #247d64; --scope-curve-13: #987139; --scope-curve-14: #af4357; --scope-curve-15: #3c77b6; --scope-curve-16: #627c34; }
+.multi-input-plot p.multi-input-preservation-note { margin: 12px 0 0; color: var(--muted); overflow-wrap: anywhere; line-height: 1.7; }
+.multi-input-plot p,.multi-input-plot .button,.multi-input-plot .scope-component,.multi-input-plot .scope-unit,.multi-input-plot .scope-legend li,.multi-input-plot .scope-cursor-readings table,.multi-input-plot .scope-view-controls > summary,.multi-input-plot .scope-cursor-slider,.multi-input-plot .scope-fields input,.multi-input-plot .scope-fields .field-label { font-size: 16px; }
+.multi-input-plot .scope-component select { font-size: 16px; }

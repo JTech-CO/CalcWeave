@@ -1,7 +1,7 @@
 import { getBlockDefinition, getBlockPorts, getDirectFeedthroughPorts, isDirectFeedthrough, type BlockDefinition } from '../../block-library/src';
 import { parseExpression } from '../../expression/src';
 import {
-  adapterAvailabilityDiagnostic, getAdapterProfile, canonicalSemantic, continuousStateElementCount, conversionCoefficients, divideUnits, discreteMemoryElementCount, isSafeIdentifier, MODEL_LIMITS, ModelError, multiplyUnits, normalizeSolverSettings, parseModel, reciprocalUnit, SIGNAL_LIMITS, signalElementCount, sqrtUnit, squareUnit, validateSignal, validateAnySignal, zeroAnySignal,
+  adapterAvailabilityDiagnostic, getAdapterProfile, canonicalSemantic, continuousStateElementCount, conversionCoefficients, divideUnits, discreteMemoryElementCount, isSafeIdentifier, MODEL_LIMITS, ModelError, multiplyUnits, normalizeSolverSettings, parseModel, reciprocalUnit, SIGNAL_LIMITS, signalElementCount, sqrtUnit, squareUnit, validateSignal, validateAnySignal, validateAnyDescriptor, zeroAnySignal,
   type CalcModel, type CompiledModel, type Diagnostic, type IRNode, type SignalDescriptor,
 } from '../../model/src';
 import { initialDiscreteDescriptor, validateDiscreteParameters } from './discrete';
@@ -74,6 +74,9 @@ function parseParameters(definition: BlockDefinition, values: Record<string, unk
     parsed[key] = value;
   }
   if (definition.id === 'nonlinear.saturation' && (parsed.lower as number) > (parsed.upper as number)) fail();
+  // Legacy observers with parameters:{} keep their original snapshot and semantic hash.
+  // Explicit counts are validated above and retained; all execution paths use implicit default 1.
+  if (['sink.display', 'sink.scope'].includes(definition.id) && !Object.hasOwn(values, 'inputCount')) delete parsed.inputCount;
   return parsed;
 }
 
@@ -341,7 +344,23 @@ function inferSignals(model: CalcModel, ordered: IRNode[], byId: Map<string, IRN
         }
         output = scalarState(); break;
       }
-      case 'sink.display': case 'io.output': case 'io.terminator': case 'sink.scope': output = clone(input('in')); break;
+      case 'sink.display': case 'sink.scope': {
+        const ports = getBlockPorts(node).inputs;
+        if (ports.length === 1) output = clone(input('in'));
+        else {
+          output = { valueType: 'bus', shape: [], unit: '1', bus: { fields: ports.map(name => ({ name, descriptor: structuredClone(input(name)) })) } };
+          // Adding the observation wrapper must still satisfy the existing structured signal limits.
+          // Check declared maximum message batches as well as present scalar/vector elements.
+          const logicalWidth = (descriptor: SignalDescriptor): number => descriptor.valueType === 'bus'
+            ? descriptor.bus!.fields.reduce((count, field) => count + logicalWidth(field.descriptor), 0)
+            : descriptor.valueType === 'messages' ? descriptor.message!.maxBatch * logicalWidth(descriptor.message!.payload)
+              : descriptor.shape.reduce((count, axis) => count * axis, 1);
+          try { validateAnyDescriptor(output); } catch { fail('OBSERVER_SIGNAL_LIMIT', '다중 입력 기록은 구조화 신호 깊이 8·가중 저장 100000 이하여야 합니다.'); }
+          if (logicalWidth(output) > SIGNAL_LIMITS.maxElements) fail('OBSERVER_SIGNAL_LIMIT', '다중 입력 기록의 전체 신호 원소는 1024개 이하여야 합니다.');
+        }
+        break;
+      }
+      case 'io.output': case 'io.terminator': output = clone(input('in')); break;
       default: {
         const declaredUnit = originals.get(node.id)!.unit ?? '1';
         const m8Outputs = inferM10Outputs(node, input, declaredUnit) ?? inferM8Outputs(node, input, declaredUnit) ?? inferM9Outputs(node, input, declaredUnit);

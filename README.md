@@ -5,7 +5,7 @@
 [![CalcWeave — Integrator와 Gain으로 구성한 감쇠 모델과 시간 응답](assets/branding/calcweave-github-og.png)](https://jtech-co.github.io/CalcWeave/)
 
 [![검증·배포](https://github.com/JTech-CO/CalcWeave/actions/workflows/pages.yml/badge.svg)](https://github.com/JTech-CO/CalcWeave/actions/workflows/pages.yml)
-[![버전 0.26.0 beta](https://img.shields.io/badge/version-0.26.0_beta-9ebded?style=flat-square)](package.json)
+[![버전 0.27.0 beta](https://img.shields.io/badge/version-0.27.0_beta-9ebded?style=flat-square)](package.json)
 [![블록 337개](https://img.shields.io/badge/blocks-337-a7c7bd?style=flat-square)](docs/support-matrix.md)
 [![예제 75개](https://img.shields.io/badge/examples-75-bbb0d0?style=flat-square)](apps/web/src/examples.ts)
 [![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6?style=flat-square&logo=typescript&logoColor=white)](tsconfig.json)
@@ -42,9 +42,15 @@ CalcWeave는 수학 교육과 자습, 신호·동역학 모델 탐색, 수치 �
 | 휠 버튼 클릭·드래그 | 캔버스 이동 |
 | 빈 공간에서 왼쪽 버튼 드래그 | 파란 사각형 범위로 블록 선택 |
 | 캔버스에 초점이 있을 때 Space | 전체 도식 맞추기 |
+| Space를 누른 상태에서 Z | 현재 도식의 블록 자동 정렬 · 실행 취소로 위치 복원 |
+| 라이브러리 블록 클릭·드래그 | 원하는 캔버스 위치에 추가 · 16px 격자 적용 |
 | Shift를 누른 채 선택 | 여러 블록 선택 |
 | Ctrl / Cmd + C, V | 선택한 블록과 내부 연결 복사·붙여넣기 |
 | Ctrl / Cmd + K | 빠른 추가 |
+
+Display·Scope의 **입력 개수**는 속성에서 1~16개로 설정합니다. 모든 입력에 연결하면 다음 입력 위치가 나타나며, 추가 선을 기존 입력이나 블록 몸체에 놓아도 기존 선을 보존하면서 입력을 늘립니다. 입력 개수를 줄여 사라진 포트의 연결은 한 번의 실행 취소로 복원할 수 있습니다.
+
+여러 입력을 계산한 뒤 결과에서 **그래프 중첩 / 그래프 각각 보기**를 선택합니다. 각 입력의 자료형·형상·단위를 유지하며 수치 성분을 선택해 비교할 수 있습니다. 다중 입력 기록은 브라우저와 TypeScript에서 지원하고 Python·WASM 내보내기는 입력 1개로 제한됩니다.
 
 ### 예제 1 · 수식의 계산 흐름
 
@@ -183,7 +189,7 @@ npm run verify:release
 
 ## 지원 범위와 결과 해석
 
-현행 소스의 앱 버전은 **0.26.0**, 계산 엔진 버전은 **0.17.0-m16**입니다. M24~M25는 로컬 검증·커밋 범위이며 최신 공개 배포는 **0.24.0**입니다. 블록 수는 등록된 정의의 수이며 모든 자료형·모드·옵션에서 동작한다는 의미는 아닙니다. 실제 모델의 지원 여부는 [공개 지원표](docs/support-matrix.md)와 [기계 판독 지원표](docs/support-matrix.json)에서 확인할 수 있습니다.
+현행 소스의 앱 버전은 **0.27.0**, 계산 엔진 버전은 **0.17.1-m16**입니다. M24~M25와 새 캔버스 편집 기능은 로컬 검증 범위이며 마지막으로 확인한 공개 배포는 **0.24.0**입니다. 블록 수는 등록된 정의의 수이며 모든 자료형·모드·옵션에서 동작한다는 의미는 아닙니다. 기존 [공개 지원표](docs/support-matrix.md)와 [기계 판독 지원표](docs/support-matrix.json)는 0.17.0-m16 엔진의 역사 검증 자료입니다. 이후의 [다중 입력 확장 계약](packages/support-matrix/src/current-extensions.ts)은 별도로 관리하며 실제 모델별 컴파일 검사를 함께 적용합니다.
 
 - TypeScript 내보내기는 승인된 실행 계약을 따릅니다. Python은 69개 블록 ID의 정적·이산 구성, WASM은 16개 블록 ID의 실수 스칼라 비순환 구성으로 제한됩니다. C/C++ 내보내기는 제공하지 않습니다.
 - Simulink R2024b 참고 목록 385행을 [원자료 대응표](docs/block-coverage.md)로 추적합니다. 원본의 모든 옵션이나 MathWorks 실행 결과와의 수치적 동등성을 검증한 것은 아닙니다. MAT·SLX·MDL 처리는 선택 범위의 데이터·구조 분석이며 원본 실행 환경을 대체하지 않습니다.

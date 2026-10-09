@@ -33,6 +33,9 @@ export function getPythonDiagnostics(compiled: CompiledModel, target: PythonTarg
   }
   for (const node of compiled.nodes) if (!supported.has(node.blockType)) diagnostics.push(location(node.id, 'PYTHON_UNSUPPORTED_BLOCK',
     `${node.blockType}는 Python export의 승인 지원 범위에 없습니다. TypeScript를 선택해 주세요.`));
+  for (const node of compiled.nodes) if (['sink.display', 'sink.scope'].includes(node.blockType) && Number(node.parameters.inputCount ?? 1) > 1) {
+    diagnostics.push(location(node.id, 'PYTHON_MULTI_INPUT_OBSERVER_UNSUPPORTED', '다중 입력 Display·Scope 기록은 이 Python 타깃에서 지원하지 않습니다. TypeScript를 선택해 주세요.'));
+  }
   if (target.id === 'python-m15-v1') for (const node of compiled.nodes) for (const [port, descriptor] of Object.entries(node.outputs)) {
     if (descriptor.valueType === 'bus' || descriptor.valueType === 'messages' || descriptor.typed?.dtype === 'complex128') {
       diagnostics.push(location(node.id, 'PYTHON_UNSUPPORTED_DTYPE', `${port}: structured bus·messages·complex 자료형은 이 Python 타깃에서 지원하지 않습니다.`));

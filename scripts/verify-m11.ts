@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { registryWithoutApprovedObserverInputs } from './m16-support-source';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
@@ -22,7 +23,8 @@ const predecessor = JSON.parse(await readFile('docs/baselines/m10-registry.json'
 assert.equal(predecessor.length, 245);
 assert.equal(new Set(M11_BLOCK_IDS).size, M11_BLOCK_IDS.length);
 assert(blockRegistry.length >= predecessor.length + M11_BLOCK_IDS.length);
-for (const definition of predecessor) assert.deepEqual(blockRegistry.find(block => block.id === definition.id), definition, `${definition.id}: predecessor definition changed`);
+const historicalRegistry = registryWithoutApprovedObserverInputs(blockRegistry);
+for (const definition of predecessor) assert.deepEqual(historicalRegistry.find(block => block.id === definition.id), definition, `${definition.id}: historical predecessor changed beyond two approved observer inputCount declarations`);
 assert.deepEqual([...new Set(M11_INDEPENDENT_DEFINITION_FIXTURES.flatMap(entry => entry.model.nodes.map(node => node.blockType)).filter(id => (M11_BLOCK_IDS as readonly string[]).includes(id)))].sort(), [...M11_BLOCK_IDS].sort(), 'Each M11 definition needs a literal raw execution oracle');
 
 const tolerance = 3e-12;

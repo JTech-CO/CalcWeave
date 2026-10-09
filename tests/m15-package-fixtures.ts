@@ -9,7 +9,8 @@ export const canonical = (value: unknown): string => {
 const hash = async (bytes: Uint8Array<ArrayBuffer>) => [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(value => value.toString(16).padStart(2, '0')).join('');
 const base64url = (bytes: Uint8Array) => Buffer.from(bytes).toString('base64url');
 export async function signedLegacyPackage(model: CalcModel, engineVersion: string, stage: string, override: Record<string, unknown> = {}) {
-  const definitions = JSON.parse(await readFile(`docs/baselines/${stage.toLowerCase()}-registry.json`, 'utf8')) as { id: string; version: number; inputs: string[]; outputs: string[]; parameters: Record<string, { kind: string }> }[];
+  const registryStage = stage === 'M16' ? 'm15' : stage.toLowerCase();
+  const definitions = JSON.parse(await readFile(`docs/baselines/${registryStage}-registry.json`, 'utf8')) as { id: string; version: number; inputs: string[]; outputs: string[]; parameters: Record<string, { kind: string }> }[];
   const registry = definitions.map(definition => ({ blockId: definition.id, blockVersion: definition.version, inputs: definition.inputs, outputs: definition.outputs, parameters: Object.entries(definition.parameters).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0).map(([name, parameter]) => ({ name, kind: parameter.kind })) })).sort((a, b) => a.blockId < b.blockId ? -1 : a.blockId > b.blockId ? 1 : 0);
   const payload = { format: MODEL_PACKAGE_FORMAT, packageVersion: MODEL_PACKAGE_VERSION, modelSchemaVersion: 1, engineVersion, registry, permissions: ['local-model'], modelHash: await hash(new TextEncoder().encode(canonical(model))), model, ...override };
   const pair = await crypto.subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, false, ['sign', 'verify']);

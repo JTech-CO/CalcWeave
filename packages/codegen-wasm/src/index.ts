@@ -33,6 +33,7 @@ export function getWasmDiagnostics(compiled: CompiledModel): Diagnostic[] {
   if (compiled.stateIds.length) for (const id of compiled.stateIds) add('WASM_STATE_UNSUPPORTED','WASM 선택 타깃은 저장 상태·solver를 지원하지 않습니다.',id);
   for (const node of compiled.nodes) {
     if (!supported.has(node.blockType)) { add('WASM_UNSUPPORTED_BLOCK',`${node.blockType}는 선택 WASM 타깃에 없습니다.`,node.id); continue; }
+    if (['sink.display', 'sink.scope'].includes(node.blockType) && Number(node.parameters.inputCount ?? 1) > 1) add('WASM_MULTI_INPUT_OBSERVER_UNSUPPORTED', '다중 입력 Display·Scope 기록은 scalar WASM 타깃에서 지원하지 않습니다. TypeScript를 선택해 주세요.', node.id);
     if (node.sampleTime.period !== 1 || node.sampleTime.offset !== 0) add('WASM_RATE_UNSUPPORTED','WASM의 모든 노드는 base tick period1/offset0이어야 합니다.',node.id);
     for (const [port,descriptor] of Object.entries(node.outputs)) if (descriptor.valueType !== 'float64' || descriptor.shape.length) add('WASM_SCALAR_REQUIRED','WASM ABI는 legacy float64 scalar만 받습니다. typed·boolean·배열은 별도 타깃을 선택하세요.',node.id,port);
     if (node.blockType === 'math.function' && !['square','reciprocal'].includes(String(node.parameters.operation))) add('WASM_UNSUPPORTED_OPTION','Math Function WASM은 square/reciprocal만 지원합니다.',node.id);

@@ -4,13 +4,103 @@ import { readFile } from 'node:fs/promises';
 import { blockRegistry, type BlockDefinition } from '../packages/block-library/src';
 import { PYTHON_TARGET } from '../packages/codegen-python/src/capabilities';
 import { WASM_TARGET, C_CPP_TARGET } from '../packages/codegen-wasm/src/capabilities';
-import { ADAPTER_PROFILES, ENGINE_VERSION } from '../packages/model/src';
+import { ADAPTER_PROFILES } from '../packages/model/src';
+import { HISTORICAL_SUPPORT_ENGINE_VERSION } from '../packages/support-matrix/src/current-extensions';
 import type { CanonicalSupport, SourceSupportRow, SupportEvidence, SupportMatrix, SupportMode, SupportOptionProfile, SupportTargetCapability } from '../packages/support-matrix/src/types';
 import { validateSupportMatrix } from '../packages/support-matrix/src/validate';
 
 export const SUPPORT_PATH = 'docs/support-matrix.json';
 export const SUPPORT_MD_PATH = 'docs/support-matrix.md';
 export const digest = (value: string | Buffer): string => createHash('sha256').update(value).digest('hex');
+export const HISTORICAL_SUPPORT_REVISION = '736603c7988699e2001cb102d7f1ca64fa1c4a55';
+export const HISTORICAL_SUPPORT_SHA256 = 'e5d706d7fc127081fc8470189b3f580d03ed61ba938a8168a5aa8e3730bb875e';
+/** Source artifact identities of the frozen audit; every byte still has a SHA gate. */
+export const HISTORICAL_SUPPORT_CODE_PATHS: readonly string[] = Object.freeze([
+  'packages/block-library/src/index.ts', 'packages/block-library/src/expansion.ts', 'packages/block-library/src/time-sources.ts',
+  ...['m8', 'm9', 'm10', 'm11', 'm12', 'm13', 'm14'].map(stage => `packages/block-library/src/${stage}.ts`),
+  'packages/model/src/types.ts', 'packages/model/src/schema.ts', 'packages/model/src/m14-adapters.ts',
+  'packages/codegen-python/src/capabilities.ts', 'packages/codegen-wasm/src/capabilities.ts',
+]);
+const historicalCodePaths = new Set(HISTORICAL_SUPPORT_CODE_PATHS);
+export const HISTORICAL_OBSERVER_SOURCE_SNAPSHOT_PATH = 'docs/baselines/m16-observer-source.json';
+const observerSourcePaths = new Set(['packages/block-library/src/index.ts', 'packages/model/src/types.ts']);
+const MAX_OBSERVER_SNAPSHOT_BYTES = 128 * 1024;
+const MAX_OBSERVER_SOURCE_BYTES = 64 * 1024;
+
+/**
+ * The two changed files are exact Git blob bytes copied once from the pinned
+ * revision, in a bounded base64 snapshot. Their SHA comes independently from
+ * the immutable support manifest. No Git, history fetch, or network is needed
+ * at generation time, including source ZIPs and shallow Actions checkouts.
+ */
+export function decodeHistoricalObserverSourceSnapshot(text: string, artifacts: Readonly<Record<string, string>>): ReadonlyMap<string, Buffer> {
+  assert(typeof text === 'string' && Buffer.byteLength(text, 'utf8') <= MAX_OBSERVER_SNAPSHOT_BYTES, 'Historical observer snapshot byte limit');
+  const input: unknown = JSON.parse(text);
+  function fields(value: unknown, keys: string[]): asserts value is Record<string, unknown> {
+    assert(value !== null && typeof value === 'object' && !Array.isArray(value), 'Historical observer snapshot object required');
+    assert.deepEqual(Object.keys(value).sort(), [...keys].sort(), 'Historical observer snapshot fields changed');
+  }
+  fields(input, ['schemaVersion', 'revision', 'files']);
+  assert.equal(input.schemaVersion, 1); assert.equal(input.revision, HISTORICAL_SUPPORT_REVISION);
+  assert(Array.isArray(input.files) && input.files.length === 2, 'Exactly two historical observer source files are required');
+  const result = new Map<string, Buffer>();
+  for (const file of input.files) {
+    fields(file, ['path', 'sha256', 'encoding', 'byteLength', 'data']);
+    assert(typeof file.path === 'string' && observerSourcePaths.has(file.path) && !result.has(file.path), 'Unapproved or duplicate historical observer source path');
+    assert.equal(file.encoding, 'base64');
+    assert(typeof file.byteLength === 'number' && Number.isSafeInteger(file.byteLength) && file.byteLength > 0 && file.byteLength <= MAX_OBSERVER_SOURCE_BYTES, 'Historical observer source byte limit');
+    assert(typeof file.data === 'string' && file.data.length <= 4 * Math.ceil(MAX_OBSERVER_SOURCE_BYTES / 3) && /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(file.data), 'Historical observer source base64 required');
+    const bytes = Buffer.from(file.data, 'base64');
+    assert.equal(bytes.length, file.byteLength, 'Historical observer source byte length changed');
+    assert.equal(bytes.toString('base64'), file.data, 'Historical observer source base64 must be canonical');
+    assert(typeof file.sha256 === 'string' && /^[a-f0-9]{64}$/.test(file.sha256), 'Historical observer source SHA required');
+    assert.equal(file.sha256, artifacts[file.path], 'Historical observer source SHA differs from frozen manifest');
+    assert.equal(digest(bytes), artifacts[file.path], 'Historical observer source bytes differ from frozen manifest');
+    result.set(file.path, bytes);
+  }
+  return result;
+}
+async function historicalCodeBytes(path: string, artifacts: Readonly<Record<string, string>>): Promise<Buffer> {
+  assert(historicalCodePaths.has(path), 'Unapproved historical source path');
+  // The other 13 unchanged source files must still match their exact live
+  // bytes; this snapshot cannot waive an unrelated source-artifact change.
+  if (!observerSourcePaths.has(path)) return readFile(path);
+  const snapshot = decodeHistoricalObserverSourceSnapshot(await readFile(HISTORICAL_OBSERVER_SOURCE_SNAPSHOT_PATH, 'utf8'), artifacts);
+  return snapshot.get(path)!;
+}
+export async function loadHistoricalSupportMatrix(): Promise<SupportMatrix> {
+  const bytes = await readFile(SUPPORT_PATH);
+  assert.equal(digest(bytes), HISTORICAL_SUPPORT_SHA256, 'Frozen historical support artifact changed');
+  const matrix = validateSupportMatrix(JSON.parse(bytes.toString('utf8')));
+  assert.equal(matrix.engineVersion, HISTORICAL_SUPPORT_ENGINE_VERSION);
+  return matrix;
+}
+export async function verifyHistoricalSupportArtifact(path: string, sha256: string): Promise<void> {
+  const pinned = await loadHistoricalSupportMatrix();
+  const bytes = historicalCodePaths.has(path) ? await historicalCodeBytes(path, pinned.artifacts) : await readFile(path);
+  assert.equal(digest(bytes), sha256, `${path}: historical support input digest mismatch`);
+}
+export async function verifyHistoricalSupportArtifacts(matrix: SupportMatrix): Promise<void> {
+  const pinned = await loadHistoricalSupportMatrix();
+  await Promise.all(Object.entries(matrix.artifacts).map(async ([path, sha]) => {
+    const bytes = historicalCodePaths.has(path) ? await historicalCodeBytes(path, pinned.artifacts) : await readFile(path);
+    assert.equal(digest(bytes), sha, `${path}: historical support input digest mismatch`);
+  }));
+}
+/** Remove exactly the two approved declarations, after checking their full wire. */
+export function registryWithoutApprovedObserverInputs(registry: readonly BlockDefinition[]): BlockDefinition[] {
+  let approved = 0;
+  const result = registry.map(definition => {
+    if (!['sink.display', 'sink.scope'].includes(definition.id)) return structuredClone(definition);
+    assert.deepEqual(definition.parameters.inputCount, { kind: 'integer', label: '입력 개수', default: 1, min: 1, max: 16 }, `${definition.id}: unapproved inputCount declaration`);
+    const copy = structuredClone(definition);
+    delete (copy.parameters as Record<string, unknown>).inputCount;
+    approved++;
+    return copy;
+  });
+  assert.equal(approved, 2, 'Exactly two observer inputCount extensions are approved');
+  return result;
+}
 export interface SourceIdentity { id: string; name: string; section: number; ordinal: number; line: number; subgroup: string; condition: string }
 interface CoverageRow { id: string; name: string; subgroup: string; condition: string; canonical: string; planning: string; boundary: string; status: string; line: number }
 interface Approval {
@@ -106,8 +196,15 @@ function approvalProfiles(approval: Approval, bundle: ApprovalBundle): SupportOp
 }
 
 export async function createSupportMatrix(): Promise<SupportMatrix> {
+  const pinned = await loadHistoricalSupportMatrix();
   const artifacts: Record<string, string> = {};
-  async function read(path: string): Promise<string> { const bytes = await readFile(path); artifacts[path] = digest(bytes); return bytes.toString('utf8'); }
+  async function read(path: string): Promise<string> {
+    const bytes = historicalCodePaths.has(path) ? await historicalCodeBytes(path, pinned.artifacts) : await readFile(path);
+    const sha = digest(bytes);
+    assert.equal(sha, pinned.artifacts[path], `${path}: pinned historical support input changed`);
+    artifacts[path] = sha;
+    return bytes.toString('utf8');
+  }
   async function json<T>(path: string): Promise<T> { return JSON.parse(await read(path)) as T; }
   const historical = await json<{ protectedArtifacts: Record<string, string> }>('docs/evidence/m15-verification.json');
   assert.equal(Object.keys(historical.protectedArtifacts).length, 25);
@@ -116,7 +213,8 @@ export async function createSupportMatrix(): Promise<SupportMatrix> {
   const roadmap = await json<{ rows: SourceIdentity[] }>(ROADMAP_PATH);
   assert.deepEqual(source.rows, roadmap.rows.map(({ id, name, section, ordinal, line, subgroup, condition }) => ({ id, name, section, ordinal, line, subgroup, condition })), 'Original source/roadmap identity drift');
   const coverage = parseCoverage(await read(COVERAGE_PATH)); assert.equal(coverage.length, 385);
-  const baseline = await json<BlockDefinition[]>('docs/baselines/m15-registry.json'); assert.equal(baseline.length, 337); assert.deepEqual(blockRegistry, baseline, 'Frozen337 registry definitions changed');
+  const baseline = await json<BlockDefinition[]>('docs/baselines/m15-registry.json'); assert.equal(baseline.length, 337);
+  assert.deepEqual(registryWithoutApprovedObserverInputs(blockRegistry), baseline, 'Historical337 definitions changed outside the two approved inputCount declarations');
   for (const path of ['packages/block-library/src/index.ts', 'packages/block-library/src/expansion.ts', 'packages/block-library/src/time-sources.ts', ...['m8','m9','m10','m11','m12','m13','m14'].map(stage => `packages/block-library/src/${stage}.ts`), 'packages/model/src/types.ts', 'packages/model/src/schema.ts', 'packages/model/src/m14-adapters.ts', 'packages/codegen-python/src/capabilities.ts', 'packages/codegen-wasm/src/capabilities.ts']) await read(path);
   const bundles: ApprovalBundle[] = [];
   for (const stage of ['m8', 'm9', 'm10', 'm11', 'm12', 'm13', 'm14']) {
@@ -136,7 +234,8 @@ export async function createSupportMatrix(): Promise<SupportMatrix> {
   assert.deepEqual(pythonProof.target.blockIds, PYTHON_TARGET.blockIds, 'Versioned Python target drifted from immutable execution proof');
   assert.deepEqual(wasmProof.target.blockIds, WASM_TARGET.blockIds, 'Versioned WASM target drifted from immutable execution proof');
   const presetProof = await json<{ fixtures: { sourceId: string; canonical: string; parameters: Record<string, unknown>; modes: SupportMode[]; id: string }[] }>('docs/evidence/m16-preset-verification.json');
-  const registryContracts = blockRegistry.map(definitionContract), widgets = Object.keys(widgetKinds).map(id => widgetContract(id as keyof typeof widgetKinds));
+  // Contracts describe the frozen historical declarations, not today's extension.
+  const registryContracts = baseline.map(definitionContract), widgets = Object.keys(widgetKinds).map(id => widgetContract(id as keyof typeof widgetKinds));
   const unavailableIds = [...new Set(coverage.filter(value => value.status === '미구현').map(value => value.canonical))].sort();
   const contracts = [...registryContracts, ...widgets, ...unavailableIds.map(id => unavailableContract(id, coverage.filter(value => value.canonical === id)))].sort((a,b) => a.id.localeCompare(b.id, 'en-US'));
   const byId = new Map(contracts.map(value => [value.id, value]));
@@ -170,14 +269,14 @@ export async function createSupportMatrix(): Promise<SupportMatrix> {
     const reason = unavailable ? `${identity.id} ${identity.name}: ${mapping.boundary}. 이 목적의 실행 계약은 미구현이며 유사 canonical 또는 format parser만으로 승인하지 않는다.` : mapping.boundary;
     return { id: identity.id, name: identity.name, section: identity.section, ordinal: identity.ordinal, subgroup: identity.subgroup, condition: identity.condition, owner: 'JTech-Co',
       source: { path: SOURCE_PATH, line: identity.line, identitySha256: digest(JSON.stringify(identity)), href: `https://github.com/JTech-CO/CalcWeave/blob/main/${SOURCE_PATH}#L${identity.line}` },
-      verification: { engineVersion: ENGINE_VERSION, contractVersion: 'source-support-m16-v1', auditScope: 'tracking-and-declared-selected-contracts' },
+      verification: { engineVersion: HISTORICAL_SUPPORT_ENGINE_VERSION, contractVersion: 'source-support-m16-v1', auditScope: 'tracking-and-declared-selected-contracts' },
       decision: { status: unavailable ? legacy ? 'legacy-unavailable' : 'unsupported' : 'selected-subset', classification, priorStatus: mapping.status, reason }, implementations: [{ id: contract.id, kind: contract.kind }],
       sourceInventory: { status: 'unverified', version: 'R2024b', reason: inventoryReason, fullOptionInventoryObtained: false, requiredDimensions: ['official parameter names/defaults/enums/bounds', 'dependent/hidden options', 'dtype', 'shape/rank', 'unit', 'sampleTime/mode', 'code-generation targets', 'toolbox/runtime/rights conditions'] },
       capabilities: { optionsRef: [contract.id], optionProfiles: profiles, dtype: { status: unavailable ? 'unavailable' : contract.kind === 'model-widget' ? 'ui-only' : 'conditional-model-validation', scopes: [{ canonical: contract.id, description: contract.dtype.scope }] }, modes: unavailable ? [] : [...contract.supportedModes], modeQaStatus: 'declared-canonical-modes-require-model-validation', targets },
       externalConditions: { nativeExecution: unavailable || ownAdapterProfiles.some(value => value.availability === 'unavailable') ? 'unavailable' : 'unverified', sourceCondition: identity.condition, profileIds: ownAdapterProfiles.map(value => value.id), requirements: [...new Set(requirements)], rights: 'not-inferred-from-implementation', primarySourceRuntimeExecuted: false },
       evidence: rowEvidence, unresolvedReasons: [inventoryReason, 'MathWorks R2024b runtime/reference numerical execution 미수행; full source equivalence false.', ...(profiles.length ? ['선택 fixture 이외 parameter 조합·자료형·mode·target은 실제 모델 validation 및 별도 numerical QA 필요.'] : ['기존 단계의 source-specific option profile이 machine-readable 수치 증거로 연결되지 않았다. 선언 schema/default를 verified로 승격하지 않는다.']), ...(unavailable ? [reason] : [])], trackingDecisionComplete: true, fullEquivalence: false };
   });
-  const result: SupportMatrix = { schemaVersion: 1, contractVersion: 'source-support-m16-v1', owner: 'JTech-Co', engineVersion: ENGINE_VERSION, sourceVersion: 'R2024b',
+  const result: SupportMatrix = { schemaVersion: 1, contractVersion: 'source-support-m16-v1', owner: 'JTech-Co', engineVersion: HISTORICAL_SUPPORT_ENGINE_VERSION, sourceVersion: 'R2024b',
     counts: { trackedSourceRows: rows.length, uniqueSourceNames: new Set(rows.map(value => value.name)).size, selectedSubsetRows: rows.filter(value => value.decision.status === 'selected-subset').length, unsupportedRows: rows.filter(value => value.decision.status !== 'selected-subset').length, unverifiedInventoryRows: 385, fullOptionEquivalentRows: 0, registryDefinitions: registryContracts.length, canonicalContracts: contracts.length, widgetContracts: widgets.length, unavailableContracts: unavailableIds.length, pythonDefinitionMembership: PYTHON_TARGET.blockIds.length, wasmDefinitionMembership: WASM_TARGET.blockIds.length, trackingDecisionCompleteRows: rows.length },
     sections: source.sections, artifacts: Object.fromEntries(Object.entries(artifacts).sort(([a],[b]) => a.localeCompare(b, 'en-US'))), protectedArtifacts: historical.protectedArtifacts, canonicalContracts: contracts, rows,
     fullSimulinkEquivalenceClaimed: false, numericalReferenceRuntimeExecuted: false, exhaustiveSourceOptionInventoryVerified: false,

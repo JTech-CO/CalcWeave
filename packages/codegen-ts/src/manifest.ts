@@ -54,7 +54,7 @@ export function manifestForHash(compiled: CompiledModel, hash: string): ExportMa
   const m9Ids: ReadonlySet<string> = new Set(M9_BLOCK_IDS);
   const m9 = executableNodes.some(node => m9Ids.has(node.blockType));
   const m11Ids: ReadonlySet<string> = new Set(M11_BLOCK_IDS);
-  const m11 = executableNodes.some(node => m11Ids.has(node.blockType));
+  const m11 = executableNodes.some(node => m11Ids.has(node.blockType) || ['sink.display', 'sink.scope'].includes(node.blockType) && Number(node.parameters.inputCount ?? 1) > 1);
   const m12Ids: ReadonlySet<string> = new Set(M12_BLOCK_IDS);
   const m12 = executableNodes.some(node => m12Ids.has(node.blockType)) || solver?.method === 'implicit-euler';
   const m13Ids: ReadonlySet<string> = new Set(M13_BLOCK_IDS);

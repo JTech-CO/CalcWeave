@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs';
+import { registryWithoutApprovedObserverInputs } from '../scripts/m16-support-source';
 import { describe, expect, it } from 'vitest';
 import { blockRegistry, getBlockDefinition, getBlockPorts, getDirectFeedthroughPorts } from '../packages/block-library/src';
 import { M12_BLOCK_IDS } from '../packages/block-library/src/m12';
@@ -20,7 +21,8 @@ const indexOne = { E: [[2, 0], [0, 0]], A: [[-6, 2], [1, -1]], B: [[2], [0]], C:
 describe('M12 real numerical compiler contracts', () => {
   it('preserves293 definitions exactly, registers11 kernels, and keeps per-block public parameter cap16', () => {
     const baseline = JSON.parse(readFileSync(new URL('../docs/baselines/m11-registry.json', import.meta.url), 'utf8')) as { id: string }[]; expect(baseline).toHaveLength(293);
-    for (const definition of baseline) expect(getBlockDefinition(definition.id)).toEqual(definition);
+    const historical = new Map<string, (typeof blockRegistry)[number]>(registryWithoutApprovedObserverInputs(blockRegistry).map(definition => [definition.id, definition]));
+    for (const definition of baseline) expect(historical.get(definition.id)).toEqual(definition);
     expect(M12_BLOCK_IDS).toHaveLength(11); expect(blockRegistry.length).toBeGreaterThanOrEqual(304); expect(new Set(blockRegistry.map(definition => definition.id)).size).toBe(blockRegistry.length);
     for (const id of M12_BLOCK_IDS) expect(Object.keys(getBlockDefinition(id)!.parameters).length).toBeLessThanOrEqual(16);
     expect(Object.keys(getBlockDefinition('continuous.pid-2dof')!.parameters)).toHaveLength(16);

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react';
-import { nearestScopeSamples, normalizeScopeCoordinate, prepareScopeObservation, type ScopeObservationRun } from '../../../../packages/analysis/src/scope-observation';
+import { nearestScopeSamples, normalizeScopeCoordinate, prepareScopeObservation, type ScopeObservationRun, type ScopeObservationReport, type ScopeTimeWindow } from '../../../../packages/analysis/src/scope-observation';
 import { formatNumber } from './ResultPlot';
 import './ScopePlot.css';
 
@@ -15,7 +15,7 @@ function snapshotId(samples: ScopeObservationRun['samples']): number {
 }
 
 /** A viewing window and cursor over recorded samples; never modifies execution settings. */
-export function ScopePlot({ series, outputId, label }: { series: ScopeObservationRun[]; outputId: string; label: string }) {
+export function ScopePlot({ series, outputId, label, prepareObservation = prepareScopeObservation }: { series: ScopeObservationRun[]; outputId: string; label: string; prepareObservation?: (series: ScopeObservationRun[], outputId: string, componentIndex: number, window?: ScopeTimeWindow) => ScopeObservationReport }) {
   const [component, setComponent] = useState(0);
   const [window, setWindow] = useState<{ start: number; end: number } | undefined>();
   const [cursor, setCursor] = useState<number | null>(null);
@@ -25,7 +25,7 @@ export function ScopePlot({ series, outputId, label }: { series: ScopeObservatio
   const pointer = useRef<{ id: number; clientX: number; start: number } | null>(null);
   const identity = `${outputId}|${series.map(run => `${run.id}:${snapshotId(run.samples)}`).join('|')}`;
   useEffect(() => { setComponent(0); setWindow(undefined); setCursor(null); setError(''); setDrag(null); pointer.current = null; }, [identity]);
-  const report = useMemo(() => prepareScopeObservation(series, outputId, component, window), [series, outputId, component, window]);
+  const report = useMemo(() => prepareObservation(series, outputId, component, window), [series, outputId, component, window, prepareObservation]);
   useEffect(() => { setStartDraft(String(report.window.start)); setEndDraft(String(report.window.end)); }, [report.window.start, report.window.end]);
   useEffect(() => { setCursorDraft(cursor === null ? '' : String(cursor)); }, [cursor]);
   const readings = useMemo(() => cursor === null ? [] : nearestScopeSamples(report, cursor), [report, cursor]);

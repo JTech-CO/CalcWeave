@@ -4,9 +4,8 @@ import { describe, expect, it } from 'vitest';
 import { blockRegistry } from '../packages/block-library/src';
 import { PYTHON_TARGET } from '../packages/codegen-python/src/capabilities';
 import { WASM_TARGET } from '../packages/codegen-wasm/src/capabilities';
-import { ENGINE_VERSION } from '../packages/model/src';
-import { SUPPORT_MATRIX, getSourceSupport, getCanonicalSupport, getSupportSummary, listSourceSupport, serializeSupportMatrix, validateSupportMatrix, type SupportFilter } from '../packages/support-matrix/src';
-import { parseSourceInventory } from '../scripts/m16-support-source';
+import { SUPPORT_MATRIX, HISTORICAL_SUPPORT_ENGINE_VERSION, getSourceSupport, getCanonicalSupport, getSupportSummary, listSourceSupport, serializeSupportMatrix, validateSupportMatrix, type SupportFilter } from '../packages/support-matrix/src';
+import { parseSourceInventory, registryWithoutApprovedObserverInputs } from '../scripts/m16-support-source';
 
 describe('M16 source support matrix decisions and bounded public metadata API', () => {
   it('tracks every original source identity/line/condition without collecting ancillary sections22..25', () => {
@@ -17,12 +16,12 @@ describe('M16 source support matrix decisions and bounded public metadata API', 
   });
   it('separates385 tracked/367 selected/18 unavailable and declares every official inventory unverified', () => {
     expect(getSupportSummary()).toEqual({ trackedSourceRows:385,uniqueSourceNames:339,selectedSubsetRows:367,unsupportedRows:18,unverifiedInventoryRows:385,fullOptionEquivalentRows:0,registryDefinitions:337,canonicalContracts:352,widgetContracts:5,unavailableContracts:10,pythonDefinitionMembership:69,wasmDefinitionMembership:16,trackingDecisionCompleteRows:385 });
-    expect(SUPPORT_MATRIX.engineVersion).toBe(ENGINE_VERSION);
-    for (const row of SUPPORT_MATRIX.rows) { expect(row.owner).toBe('JTech-Co'); expect(row.fullEquivalence).toBe(false); expect(row.trackingDecisionComplete).toBe(true); expect(row.sourceInventory.fullOptionInventoryObtained).toBe(false); expect(row.sourceInventory.status).toBe('unverified'); expect(row.verification.engineVersion).toBe(ENGINE_VERSION); }
+    expect(SUPPORT_MATRIX.engineVersion).toBe(HISTORICAL_SUPPORT_ENGINE_VERSION);
+    for (const row of SUPPORT_MATRIX.rows) { expect(row.owner).toBe('JTech-Co'); expect(row.fullEquivalence).toBe(false); expect(row.trackingDecisionComplete).toBe(true); expect(row.sourceInventory.fullOptionInventoryObtained).toBe(false); expect(row.sourceInventory.status).toBe('unverified'); expect(row.verification.engineVersion).toBe(HISTORICAL_SUPPORT_ENGINE_VERSION); }
   });
   it('preserves337 historical definitions and labels every parameter declaration rather than approving all enum choices', () => {
-    const baseline = JSON.parse(readFileSync('docs/baselines/m15-registry.json','utf8')); expect(blockRegistry).toEqual(baseline);
-    for (const definition of blockRegistry) {
+    const baseline = JSON.parse(readFileSync('docs/baselines/m15-registry.json','utf8')); expect(registryWithoutApprovedObserverInputs(blockRegistry)).toEqual(baseline);
+    for (const definition of registryWithoutApprovedObserverInputs(blockRegistry)) {
       const contract = getCanonicalSupport(definition.id)!; expect(contract.kind).toBe('registry-block');
       for (const [name,parameter] of Object.entries(definition.parameters)) { const local = contract.parameters[name]!; expect(local.default).toEqual(parameter.default); expect(local.options).toEqual(parameter.options); expect(local.min).toBe(parameter.min); expect(local.max).toBe(parameter.max); expect(local.qaStatus).toBe('declared-local-schema-not-exhaustive-source-inventory'); }
     }

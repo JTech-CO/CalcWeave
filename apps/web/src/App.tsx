@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ChangeEvent, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent as ReactPointerEvent } from 'react';
-import { Background, BackgroundVariant, Controls, MarkerType, ReactFlow, ReactFlowProvider, useReactFlow, useStore, type Connection, type Edge, type NodeChange } from '@xyflow/react';
+import { Background, BackgroundVariant, Controls, MarkerType, ReactFlow, ReactFlowProvider, useReactFlow, useStore, type Connection, type Edge, type NodeChange, type OnConnectEnd } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { getBlockDefinition, getBlockPorts } from '../../../packages/block-library/src';
 import { getDefinitionReference, isDefinitionReference } from '../../../packages/block-library/src/m11';
@@ -20,7 +20,10 @@ import { createExportArchive, exportArchiveReadme, EXPORT_RUN_EXAMPLE, pythonArc
 import { loadLocalModel, saveLocalModel, loadRecoverySnapshot, loadRunHistory, saveRunHistory, loadRawRunHistory, subscribeLocalWorkspace, waitForLocalWrites, type RecoverySnapshot } from './persistence';
 import { appendHistory, historySnapshot, type HistoryRecord } from './run-history';
 import { hierarchyView, diagnosticLocation, applyHierarchyView, renameDefinitionPort, updateSubsystemInstances } from './hierarchy-editor';
-import { outputLabels } from './output-labels';
+import { outputLabels, multiInputOutputIds } from './output-labels';
+import { editorBlockPorts, isMultiInputObserver, planEditorConnection } from './observer-connections';
+import { BLOCK_DRAG_MIME, canvasDropPosition, parseDraggedBlock } from './block-library-drag';
+import { autoArrangeDiagram } from './auto-layout';
 import { M4WorkspaceTools, WorkspaceTabs, downloadText, type WorkspaceTab } from './components/M4WorkspaceTools';
 import { copySelection, deleteSelection, pasteSelection, type ModelClipboard } from './editor-commands';
 import { BlockNode, blockTone, type FlowBlock } from './components/BlockNode';
@@ -63,9 +66,9 @@ import './styles.css';
 const nodeTypes = { calcBlock: BlockNode };
 const READABLE_VIEW = { padding: 0.12, minZoom: 0.8, maxZoom: 1.05 };
 const CANVAS_ARIA_LABELS = {
-  'node.a11yDescription.default': 'Enter로 블록 속성을 편집합니다. 방향키로 이동하고 Space로 도식을 맞춥니다. Delete로 삭제하고 Esc로 선택을 취소합니다.',
-  'node.a11yDescription.keyboardDisabled': 'Enter로 블록 속성을 편집합니다. 방향키로 이동하고 Space로 도식을 맞춥니다. Delete로 삭제하고 Esc로 선택을 취소합니다.',
-  'edge.a11yDescription.default': 'Enter로 연결을 선택합니다. Space로 도식을 맞춥니다. Delete로 삭제하고 Esc로 선택을 취소합니다.',
+  'node.a11yDescription.default': 'Enter로 블록 속성을 편집합니다. 방향키로 이동하고 Space로 도식을 맞추고 Space를 누른 채 Z로 자동 정렬합니다. Delete로 삭제하고 Esc로 선택을 취소합니다.',
+  'node.a11yDescription.keyboardDisabled': 'Enter로 블록 속성을 편집합니다. 방향키로 이동하고 Space로 도식을 맞추고 Space를 누른 채 Z로 자동 정렬합니다. Delete로 삭제하고 Esc로 선택을 취소합니다.',
+  'edge.a11yDescription.default': 'Enter로 연결을 선택합니다. Space로 도식을 맞추고 Space를 누른 채 Z로 자동 정렬합니다. Delete로 삭제하고 Esc로 선택을 취소합니다.',
   'controls.ariaLabel': '캔버스 보기 도구',
   'controls.zoomIn.ariaLabel': '캔버스 확대',
   'controls.zoomOut.ariaLabel': '캔버스 축소',
@@ -231,7 +234,7 @@ function Workspace() {
   const fileRef = useRef<HTMLInputElement>(null);
   const examplesTrigger = useRef<HTMLButtonElement>(null);
   const activeRun = useRef(0);
-  const { fitView, viewportInitialized } = useReactFlow<FlowBlock>();
+  const { fitView, viewportInitialized, screenToFlowPosition, getNodes } = useReactFlow<FlowBlock>();
   // Measurements live in React Flow; they are deliberately excluded from model/history.
   const nodesMeasured = useStore(state => state.nodeLookup.size === model.nodes.length && model.nodes.every(block => {
     const node = state.nodeLookup.get(block.id);
@@ -243,6 +246,15 @@ function Workspace() {
   const initialFitRequested = useRef(false);
   const diagnosticFit = useRef<{ pathKey: string; nodeId: string } | null>(null);
   const lastSubsystemClick = useRef<{ id: string; time: number; x: number; y: number } | null>(null);
+  const spaceHeld = useRef(false);
+  const arrangementConsumed = useRef(false);
+  const arrangeFitRequested = useRef(false);
+  const resetCanvasChord = useCallback(() => { spaceHeld.current = false; arrangementConsumed.current = false; }, []);
+  useEffect(() => {
+    const release = (event: KeyboardEvent) => { if (event.code === 'Space' || event.key === ' ') resetCanvasChord(); };
+    window.addEventListener('keyup', release); window.addEventListener('blur', resetCanvasChord);
+    return () => { window.removeEventListener('keyup', release); window.removeEventListener('blur', resetCanvasChord); };
+  }, [resetCanvasChord]);
 
   useEffect(() => {
     document.documentElement.style.colorScheme = theme;
@@ -355,6 +367,15 @@ function Workspace() {
     return () => { alive = false; window.clearTimeout(timer); };
   }, [rootModel, loaded, localSavingEnabled]);
 
+  useEffect(() => {
+    if (!arrangeFitRequested.current || !nodesMeasured || canvasWidth <= 0 || canvasHeight <= 0) return;
+    let frame = window.requestAnimationFrame(() => { frame = window.requestAnimationFrame(() => {
+      arrangeFitRequested.current = false;
+      void fitView({ padding: 0.12, minZoom: 0.25, maxZoom: 1.05, duration: 0 });
+    }); });
+    return () => window.cancelAnimationFrame(frame);
+  }, [model, nodesMeasured, canvasWidth, canvasHeight, fitView]);
+
   const compiledPreview = useMemo(() => { try { return compileModel(rootModel); } catch { return null; } }, [rootModel]);
   const semanticKey = compiledPreview?.semanticKey ?? null;
   const currentResult = !!lastRun && lastRun.semanticKey === semanticKey && invalidNumericCount === 0;
@@ -375,16 +396,16 @@ function Workspace() {
     id: block.id, type: 'calcBlock', position: model.layout[block.id] ?? { x: 100 + index * 240, y: 140 },
     selected: selectedIds.includes(block.id),
     ariaLabel: `${block.label}, ${getBlockDefinition(block.blockType)?.englishName ?? block.blockType}, ${errorIds.has(block.id) ? '설정 확인 필요' : '블록'}`,
-    data: { block, boundary: !!view.definition && [...view.definition.inputs, ...view.definition.outputs].some(port => port.nodeId === block.id), ports: getBlockPorts(block, model), error: errorIds.has(block.id), result: finalSample?.values[block.id], current: currentResult },
+    data: { block, boundary: !!view.definition && [...view.definition.inputs, ...view.definition.outputs].some(port => port.nodeId === block.id), ports: editorBlockPorts(block, model), error: errorIds.has(block.id), result: finalSample?.values[block.id], current: currentResult },
   })), [model, view.definition, selectedIds, errorIds, finalSample, currentResult]);
   const edges = useMemo<Edge[]>(() => model.edges.map((edge) => ({ id: edge.id, source: edge.source.nodeId, sourceHandle: edge.source.portId, target: edge.target.nodeId, targetHandle: edge.target.portId, selected: selectedEdgeIds.includes(edge.id), type: 'smoothstep', markerEnd: { type: MarkerType.ArrowClosed, width: 15, height: 15 }, ariaLabel: `${model.nodes.find((node) => node.id === edge.source.nodeId)?.label ?? '블록'}에서 ${model.nodes.find((node) => node.id === edge.target.nodeId)?.label ?? '블록'} ${edge.target.portId} 입력으로 연결` })), [model, selectedEdgeIds]);
 
 
-  const addBlock = (type: string, parameters?: Record<string, unknown>) => {
+  const addBlock = (type: string, parameters?: Record<string, unknown>, position?: { x: number; y: number }) => {
     if (modelRef.current.nodes.length >= 1000) { setNotice('최대 1,000개의 블록을 만들 수 있습니다.'); return; }
     const node = createBlockNode(type, modelRef.current.nodes.length);
     if (parameters) node.parameters = { ...node.parameters, ...parameters };
-    commit((current) => ({ ...current, nodes: [...current.nodes, node], layout: { ...current.layout, [node.id]: { x: 100 + current.nodes.length % 3 * 240, y: 100 + Math.floor(current.nodes.length / 3) * 170 } } }));
+    commit((current) => ({ ...current, nodes: [...current.nodes, node], layout: { ...current.layout, [node.id]: position ?? { x: 100 + current.nodes.length % 3 * 240, y: 100 + Math.floor(current.nodes.length / 3) * 170 } } }));
     setSelectedId(node.id); setSelectedEdgeId(null); setNotice(`${node.label} 블록을 추가했습니다.`);
   };
   const removeSelection = useCallback(() => {
@@ -418,17 +439,26 @@ function Workspace() {
       return { ...current, nodes: current.nodes.map(node => node.id === next.id ? next : node), edges };
     });
   };
-  const isValidConnection = (connection: Connection | Edge) => {
-    const source = modelRef.current.nodes.find((node) => node.id === connection.source);
-    const target = modelRef.current.nodes.find((node) => node.id === connection.target);
-    if (!source || !target || !connection.sourceHandle || !connection.targetHandle) return false;
-    if (!getBlockPorts(source, modelRef.current).outputs.includes(connection.sourceHandle) || !getBlockPorts(target, modelRef.current).inputs.includes(connection.targetHandle)) return false;
-    return !modelRef.current.edges.some((edge) => edge.target.nodeId === target.id && edge.target.portId === connection.targetHandle);
-  };
+  const isValidConnection = (connection: Connection | Edge) => !!planEditorConnection(modelRef.current, connection);
   const connect = (connection: Connection) => {
-    if (!isValidConnection(connection)) { setNotice('연결할 입력이 이미 사용 중이거나 포트 방향이 다릅니다. 기존 연결을 지운 뒤 연결하세요.'); return; }
-    commit((current) => ({ ...current, edges: [...current.edges, { id: `edge-${crypto.randomUUID()}`, source: { nodeId: connection.source!, portId: connection.sourceHandle! }, target: { nodeId: connection.target!, portId: connection.targetHandle! } }] }));
+    const plan = planEditorConnection(modelRef.current, connection);
+    if (!plan) { setNotice('사용 가능한 입력이 없습니다. Display·Scope는 최대 16개 입력을 연결할 수 있습니다.'); return; }
+    commit((current) => ({ ...current, nodes: current.nodes.map(node => node.id === plan.targetNode.id ? plan.targetNode : node), edges: [...current.edges, { id: `edge-${crypto.randomUUID()}`, source: { nodeId: connection.source!, portId: connection.sourceHandle! }, target: { nodeId: plan.targetNode.id, portId: plan.targetPort } }] }));
     setNotice('블록을 연결했습니다.');
+  };
+  const connectToObserverBody: OnConnectEnd = (event, state) => {
+    if (state.isValid || state.fromHandle?.type !== 'source' || !(event.target instanceof Element) || event.target.closest('.react-flow__handle')) return;
+    const target = event.target.closest('.react-flow__node')?.getAttribute('data-id');
+    if (!target || !state.fromNode || !state.fromHandle?.id) return;
+    const node = modelRef.current.nodes.find(node => node.id === target);
+    if (node && isMultiInputObserver(node)) connect({ source: state.fromNode.id, sourceHandle: state.fromHandle.id, target, targetHandle: null });
+  };
+  const dropLibraryBlock = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const type = parseDraggedBlock(event.dataTransfer.getData(BLOCK_DRAG_MIME));
+    if (!type) return;
+    const position = canvasDropPosition(screenToFlowPosition({ x: event.clientX, y: event.clientY }, { snapToGrid: false }));
+    if (position) { addBlock(type, undefined, position); event.currentTarget.focus({ preventScroll: true }); }
   };
   const onNodesChange = (changes: NodeChange<FlowBlock>[]) => {
     for (const change of changes) {
@@ -812,14 +842,31 @@ function Workspace() {
       const id = (event.target as Element).closest('.react-flow__node')?.getAttribute('data-id');
       if (id) { event.preventDefault(); event.stopPropagation(); setSelectedId(id); setSelectedEdgeId(null); window.requestAnimationFrame(() => document.querySelector<HTMLElement>('.inspector-content input, .inspector-content textarea, .inspector-content select, .inspector-content button')?.focus()); return; }
     }
-    if (event.code !== 'Space' && event.key !== ' ') return;
+    const space = event.code === 'Space' || event.key === ' ';
+    const arrange = (event.code === 'KeyZ' || event.key.toLowerCase() === 'z') && spaceHeld.current;
+    if (!space && !arrange) return;
     if (event.defaultPrevented || event.nativeEvent.isComposing || event.nativeEvent.keyCode === 229
       || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey
-      || quickInsertOpen || recovery || helpOpen || codeExportOpen || packageOpen || interopOpen || importReportOpen || isCanvasControl(event.target)) return;
+      || quickInsertOpen || recovery || helpOpen || managementOpen || analysisOpen || codeExportOpen || packageOpen || interopOpen || importReportOpen || isCanvasControl(event.target)) { resetCanvasChord(); return; }
     // Capture Space before React Flow can select a focused block or scroll the page.
     event.preventDefault();
     event.stopPropagation();
-    if (!event.repeat) void fitView({ ...READABLE_VIEW, duration: 0 });
+    if (space) {
+      spaceHeld.current = true;
+      if (!event.repeat) void fitView({ ...READABLE_VIEW, duration: 0 });
+    } else if (!event.repeat && !arrangementConsumed.current) {
+      arrangementConsumed.current = true;
+      const current = modelRef.current;
+      const layout = autoArrangeDiagram(current, {
+        dimensions: Object.fromEntries(getNodes().map(node => [node.id, node.measured ?? {}])),
+        boundaryNodeIds: view.definition ? [...view.definition.inputs, ...view.definition.outputs].map(port => port.nodeId) : [],
+      });
+      arrangeFitRequested.current = true;
+      commit(model => ({ ...model, layout }));
+      // A repeated arrangement can leave the model unchanged; fit still works then.
+      if (JSON.stringify(current.layout) === JSON.stringify(layout)) { arrangeFitRequested.current = false; void fitView({ padding: 0.12, minZoom: 0.25, maxZoom: 1.05, duration: 0 }); }
+      setNotice('현재 도식의 블록을 자동 정렬했습니다. 실행 취소로 위치를 복원할 수 있습니다.');
+    }
   };
   const openCanvasSubsystem = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as Element;
@@ -858,6 +905,8 @@ function Workspace() {
 
   const displayPlotId = lastRun?.outputIds.includes(plotId) ? plotId : lastRun?.outputIds[0] ?? '';
   const runOutputLabels = useMemo(() => lastRun ? outputLabels(lastRun.model) : {}, [lastRun]);
+  const multiInputOutputs = useMemo(() => lastRun ? multiInputOutputIds(lastRun.model) : new Set<string>(), [lastRun]);
+  const displayMultiInput = multiInputOutputs.has(displayPlotId);
   const outputLabel = (id: string) => runOutputLabels[id] ?? id;
   const modelOutputOptions = model.nodes.flatMap((node) => getBlockPorts(node, model).outputs.map((port) => ({ value: `${node.id}:${port}`, nodeId: node.id, portId: port, label: `${node.label} · ${port}` })));
   const applyOfflineUpdate = async () => {
@@ -905,9 +954,9 @@ function Workspace() {
     <main className={`workspace ${libraryOpen ? '' : 'library-collapsed'} ${workspaceTab !== 'diagram' ? 'tools-open' : ''}`} id="workspace">
       {libraryOpen && <BlockLibrary search={search} searchRef={searchRef} onSearch={setSearch} expandedCategories={expandedLibraryCategories} onToggleCategory={toggleLibraryCategory} onAdd={addBlock}/>}
 
-      <section className="canvas-column" aria-label="도식 편집 및 계산 결과"><div className="workbench-layout"><div className="canvas-area"><div className="canvas-topline"><div><Icon name="layers" size={14}/><strong>{model.name || '이름 없는 모델'}</strong><span className="breadcrumb-separator">/</span><nav className="hierarchy-breadcrumb" aria-label="도식 경로"><button onClick={() => navigateHierarchy([])}>루트 모델</button>{view.trail.map((entry, index) => <span key={`${entry.nodeId}-${index}`}> / <button onClick={() => navigateHierarchy(hierarchyPath.slice(0, index + 1))}>{entry.label}</button></span>)}</nav></div><span>{model.nodes.length} 블록 <i/> {model.edges.length} 연결</span></div><ReactFlow<FlowBlock> tabIndex={0} aria-label="도식 캔버스" aria-describedby="canvas-interaction-hint" aria-keyshortcuts="Space" onPointerDownCapture={focusCanvas} onKeyDownCapture={handleCanvasKeyDown} onDoubleClickCapture={openCanvasSubsystem} nodes={nodes} edges={edges} nodeTypes={nodeTypes} onNodesChange={onNodesChange} onEdgesChange={changes => { changes.forEach(change => { if (change.type === 'select') setSelectedEdgeIds(current => change.selected ? [...new Set([...current, change.id])] : current.filter(id => id !== change.id)); if (change.type === 'remove') commit(current => ({ ...current, edges: current.edges.filter(edge => edge.id !== change.id) })); }); }} onNodeClick={(event, node) => { lastSubsystemClick.current = isDefinitionReference(node.data.block) ? { id: node.id, time: performance.now(), x: event.clientX, y: event.clientY } : null; if (!event.shiftKey && !event.ctrlKey && !event.metaKey) setSelectedId(node.id); setSelectedEdgeId(null); }} onNodeDoubleClick={(_event, node) => { if (isDefinitionReference(node.data.block)) navigateHierarchy([...hierarchyPath, node.id]); }} onEdgeClick={(event, edge) => { if (!event.shiftKey && !event.ctrlKey && !event.metaKey) { setSelectedEdgeId(edge.id); setSelectedId(null); } }} onPaneClick={() => { setSelectedId(null); setSelectedEdgeId(null); }} multiSelectionKeyCode={['Shift', 'Control', 'Meta']} selectionOnDrag selectionKeyCode={null} panOnDrag={[1]} panActivationKeyCode={null} onConnect={connect} isValidConnection={isValidConnection} connectOnClick nodesFocusable edgesFocusable onNodeDragStart={() => { dragSnapshot.current = rootRef.current; }} onNodeDragStop={() => { const snapshot = dragSnapshot.current; dragSnapshot.current = null; if (snapshot && JSON.stringify(snapshot) !== JSON.stringify(rootRef.current)) { past.current = [...past.current.slice(-49), snapshot]; future.current = []; setHistoryVersion((value) => value + 1); } }} fitViewOptions={READABLE_VIEW} minZoom={0.25} maxZoom={1.75} snapToGrid snapGrid={[16, 16]} deleteKeyCode={null} proOptions={{ hideAttribution: false }} colorMode={theme} ariaLabelConfig={CANVAS_ARIA_LABELS}><Background variant={BackgroundVariant.Dots} gap={20} size={1.2} color="var(--grid-dot)"/><Controls showInteractive={false} position="bottom-right" fitViewOptions={READABLE_VIEW}/>{model.nodes.length === 0 && <div className="empty-canvas"><span className="empty-canvas-icon"><Icon name="layers" size={30}/></span><h2>첫 계산을 연결해 보세요</h2><p>왼쪽에서 값, 배율, 결과 블록을 추가하고<br/>출력 포트와 입력 포트를 연결하세요.</p><button className="button primary" onClick={() => openExample(EXAMPLES[0].id)}>첫 계산 예제 열기<Icon name="arrow" size={16}/></button></div>}</ReactFlow><div className="canvas-hint" id="canvas-interaction-hint"><span className="hint-dot"/><span>휠 버튼 드래그 이동 · 왼쪽 드래그 영역 선택 · Space 도식 맞추기 · Ctrl+C/V 복사</span></div></div>
+      <section className="canvas-column" aria-label="도식 편집 및 계산 결과"><div className="workbench-layout"><div className="canvas-area"><div className="canvas-topline"><div><Icon name="layers" size={14}/><strong>{model.name || '이름 없는 모델'}</strong><span className="breadcrumb-separator">/</span><nav className="hierarchy-breadcrumb" aria-label="도식 경로"><button onClick={() => navigateHierarchy([])}>루트 모델</button>{view.trail.map((entry, index) => <span key={`${entry.nodeId}-${index}`}> / <button onClick={() => navigateHierarchy(hierarchyPath.slice(0, index + 1))}>{entry.label}</button></span>)}</nav></div><span>{model.nodes.length} 블록 <i/> {model.edges.length} 연결</span></div><ReactFlow<FlowBlock> tabIndex={0} aria-label="도식 캔버스" aria-describedby="canvas-interaction-hint" aria-keyshortcuts="Space" onPointerDownCapture={focusCanvas} onKeyDownCapture={handleCanvasKeyDown} onBlurCapture={resetCanvasChord} onDragOver={event => { event.preventDefault(); event.dataTransfer.dropEffect = event.dataTransfer.types.includes(BLOCK_DRAG_MIME) ? 'copy' : 'none'; }} onDrop={dropLibraryBlock} onDoubleClickCapture={openCanvasSubsystem} nodes={nodes} edges={edges} nodeTypes={nodeTypes} onNodesChange={onNodesChange} onEdgesChange={changes => { changes.forEach(change => { if (change.type === 'select') setSelectedEdgeIds(current => change.selected ? [...new Set([...current, change.id])] : current.filter(id => id !== change.id)); if (change.type === 'remove') commit(current => ({ ...current, edges: current.edges.filter(edge => edge.id !== change.id) })); }); }} onNodeClick={(event, node) => { lastSubsystemClick.current = isDefinitionReference(node.data.block) ? { id: node.id, time: performance.now(), x: event.clientX, y: event.clientY } : null; if (!event.shiftKey && !event.ctrlKey && !event.metaKey) setSelectedId(node.id); setSelectedEdgeId(null); }} onNodeDoubleClick={(_event, node) => { if (isDefinitionReference(node.data.block)) navigateHierarchy([...hierarchyPath, node.id]); }} onEdgeClick={(event, edge) => { if (!event.shiftKey && !event.ctrlKey && !event.metaKey) { setSelectedEdgeId(edge.id); setSelectedId(null); } }} onPaneClick={() => { setSelectedId(null); setSelectedEdgeId(null); }} multiSelectionKeyCode={['Shift', 'Control', 'Meta']} selectionOnDrag selectionKeyCode={null} panOnDrag={[1]} panActivationKeyCode={null} onConnect={connect} onConnectEnd={connectToObserverBody} isValidConnection={isValidConnection} connectOnClick nodesFocusable edgesFocusable onNodeDragStart={() => { dragSnapshot.current = rootRef.current; }} onNodeDragStop={() => { const snapshot = dragSnapshot.current; dragSnapshot.current = null; if (snapshot && JSON.stringify(snapshot) !== JSON.stringify(rootRef.current)) { past.current = [...past.current.slice(-49), snapshot]; future.current = []; setHistoryVersion((value) => value + 1); } }} fitViewOptions={READABLE_VIEW} minZoom={0.25} maxZoom={1.75} snapToGrid snapGrid={[16, 16]} deleteKeyCode={null} proOptions={{ hideAttribution: false }} colorMode={theme} ariaLabelConfig={CANVAS_ARIA_LABELS}><Background variant={BackgroundVariant.Dots} gap={20} size={1.2} color="var(--grid-dot)"/><Controls showInteractive={false} position="bottom-right" fitViewOptions={READABLE_VIEW}/>{model.nodes.length === 0 && <div className="empty-canvas"><span className="empty-canvas-icon"><Icon name="layers" size={30}/></span><h2>첫 계산을 연결해 보세요</h2><p>왼쪽에서 값, 배율, 결과 블록을 추가하고<br/>출력 포트와 입력 포트를 연결하세요.</p><button className="button primary" onClick={() => openExample(EXAMPLES[0].id)}>첫 계산 예제 열기<Icon name="arrow" size={16}/></button></div>}</ReactFlow><div className="canvas-hint" id="canvas-interaction-hint"><span className="hint-dot"/><span>휠 버튼 드래그 이동 · 왼쪽 드래그 영역 선택 · Space 도식 맞추기 · Space 누른 채 Z 자동 정렬 · Ctrl+C/V 복사</span></div></div>
 
-        <section id="calculation-results" tabIndex={-1} className={`results-panel${lastRun?.model.execution.mode === 'static' ? ' static-results' : ''}`} aria-label="계산 결과"><div className="results-toolbar"><div className="result-tabs"><button className={resultsTab === 'results' ? 'selected' : ''} onClick={() => setResultsTab('results')}><Icon name="chart" size={16}/>계산 결과</button><button className={resultsTab === 'diagnostics' ? 'selected' : ''} onClick={() => setResultsTab('diagnostics')}>진단{diagnostics.length > 0 && <span className="diagnostic-count">{diagnostics.length}</span>}</button><button className={resultsTab === 'equations' ? 'selected' : ''} aria-pressed={resultsTab === 'equations'} onClick={() => setResultsTab('equations')}>수식·학습</button></div><span className={`result-status ${runState === 'paused' ? 'paused' : busy ? 'running' : diagnostics.length && runState === 'failed' ? 'failed' : lastRun && !currentResult ? 'stale' : lastRun ? 'current' : ''}`}>{busy ? <>{runState !== 'paused' && <span className="spinner"/>}{RUN_LABELS[runState]}</> : diagnostics.length && runState === 'failed' ? <>! 설정 확인 필요</> : lastRun ? currentResult ? <><Icon name="check" size={14}/>현재 모델의 결과{lastRun.result.status !== 'completed' ? ' · 부분 결과' : ''}</> : <>△ 다시 계산 필요 · 이전 결과</> : '아직 계산하지 않았습니다'}</span></div><div className="equation-learning-slot" hidden={resultsTab !== 'equations'}><EquationLearningPanel model={model} selectedIds={selectedIds} onSelectNodes={selectEquationNodes} activeLessonId={activeLessonId} onStartLesson={startLesson} onEndLesson={() => setActiveLessonId(null)} result={hierarchyPath.length === 0 ? lastRun?.result ?? null : null} resultCurrent={hierarchyPath.length === 0 && currentResult && !busy && runState === 'completed'} busy={busy} invalidDraft={invalidNumericCount > 0} onRun={() => void run()}/></div>{resultsTab === 'equations' ? null : resultsTab === 'diagnostics' ? <div className="diagnostics-content">{diagnostics.length ? <><h3>{diagnostics.some(diagnostic => diagnostic.tick !== undefined || diagnostic.time !== undefined) ? '계산이 멈춘 위치를 확인하세요.' : '계산 전에 다음 항목을 확인하세요.'}</h3>{diagnostics.map((diagnostic, index) => <button key={`${diagnostic.code}-${index}`} className="diagnostic-item" onClick={() => openDiagnostic(diagnostic)}><span className="diagnostic-icon">!</span><span><strong>{diagnostic.message}</strong><small>{diagnostic.nodeId ? `${model.nodes.find((node) => node.id === diagnostic.nodeId)?.label ?? diagnostic.nodeId}${diagnostic.portId ? ` · ${diagnostic.portId} 입력` : ''}` : '모델 설정'} · {diagnostic.code}</small>{(diagnostic.tick !== undefined || diagnostic.time !== undefined) && <small className="diagnostic-time">{diagnostic.tick !== undefined && `tick ${diagnostic.tick}`}{diagnostic.tick !== undefined && diagnostic.time !== undefined && ' · '}{diagnostic.time !== undefined && `t = ${formatNumber(diagnostic.time)} s`}</small>}</span>{diagnostic.nodeId && <Icon name="arrow" size={16}/>}</button>)}</> : <div className="result-empty"><Icon name="check" size={24}/><strong>현재 표시할 진단이 없습니다.</strong><span>계산하기를 누르면 연결과 설정을 확인합니다.</span></div>}</div> : busy ? <div className="result-empty">{runState === 'paused' ? <span className="pause-summary"><Icon name="pause" size={28}/></span> : <span className="large-spinner"/>}<strong>{RUN_LABELS[runState]}</strong><span>{progress.steps ? `${progress.steps.toLocaleString()} 샘플 · t = ${formatNumber(progress.time)} s` : '계산을 준비하고 있습니다.'}</span>{runState === 'paused' && <span className="pause-note">재개하면 같은 입력·초기값·seed의 실행을 이어갑니다. 편집한 설정은 다음 실행부터 적용됩니다.</span>}</div> : lastRun && finalSample ? <div className="results-content"><div className="output-values">{lastRun.outputIds.map((id) => <button key={id} className={`output-card ${displayPlotId === id ? 'selected' : ''}`} onClick={() => setPlotId(id)}><span><i/>{outputLabel(id)}</span><strong>{signalSummary(finalSample.values[id])}</strong><small className="result-type">{descriptorLabel(lastRun.outputTypes[id])}</small><small>{lastRun.model.execution.mode === 'static' ? '계산값' : '마지막 샘플'}</small></button>)}<div className="run-metadata"><span>{MODE_LABELS[lastRun.model.execution.mode]}</span><strong>{lastRun.result.samples.length.toLocaleString()} 샘플</strong><small>{formatNumber(lastRun.result.elapsedMs)} ms · {lastRun.completedAt}</small></div></div>{lastRun.result.status === 'failed' && <p className="partial-result-note" role="status">실행이 멈추기 전의 마지막 유효 기록입니다. 진단에서 중단 원인과 시점을 확인하세요.</p>}<SolverRunDetails result={lastRun.result} model={lastRun.model}/><AdapterLifecycleSummary result={lastRun.result}/>{displayPlotId && <div className="plot-table"><div className="plot-heading"><span><i/>{outputLabel(displayPlotId)}</span><small>실행한 모델의 수치 기록</small></div>{(lastRun.outputTypes[displayPlotId]?.valueType === 'float64' || plotSignalNumber(finalSample.values[displayPlotId]) !== undefined) && <ScopeTimeRange execution={rootModel.execution} samples={lastRun.result.samples} busy={busy} onApply={applyScopeRange}/>} {(lastRun.result.samples.length > 1 || lastRun.outputTypes[displayPlotId]?.shape.length > 0) && <ResultPlot key={displayPlotId} samples={lastRun.result.samples} outputId={displayPlotId} label={outputLabel(displayPlotId)} descriptor={lastRun.outputTypes[displayPlotId]} status={lastRun.result.status}/>}<ResultTable samples={lastRun.result.samples} outputId={displayPlotId} label={outputLabel(displayPlotId)}/>{(Array.isArray(finalSample.values[displayPlotId]) || typeof finalSample.values[displayPlotId] === 'object') && <TemporalSignalResult samples={lastRun.result.samples} outputId={displayPlotId} label={outputLabel(displayPlotId)} descriptor={lastRun.outputTypes[displayPlotId]}/>}</div>}</div> : <div className="result-empty"><span className="empty-result-icon"><Icon name="chart" size={24}/></span><strong>{runState === 'cancelled' ? '계산이 취소되었습니다.' : '연결한 생각이, 수치가 되는 순간'}</strong><span>도식을 확인하고 {model.execution.mode === 'static' ? '계산하기' : '시뮬레이션 실행'}를 눌러 결과를 확인하세요.</span></div>}</section>
+        <section id="calculation-results" tabIndex={-1} className={`results-panel${lastRun?.model.execution.mode === 'static' ? ' static-results' : ''}`} aria-label="계산 결과"><div className="results-toolbar"><div className="result-tabs"><button className={resultsTab === 'results' ? 'selected' : ''} onClick={() => setResultsTab('results')}><Icon name="chart" size={16}/>계산 결과</button><button className={resultsTab === 'diagnostics' ? 'selected' : ''} onClick={() => setResultsTab('diagnostics')}>진단{diagnostics.length > 0 && <span className="diagnostic-count">{diagnostics.length}</span>}</button><button className={resultsTab === 'equations' ? 'selected' : ''} aria-pressed={resultsTab === 'equations'} onClick={() => setResultsTab('equations')}>수식·학습</button></div><span className={`result-status ${runState === 'paused' ? 'paused' : busy ? 'running' : diagnostics.length && runState === 'failed' ? 'failed' : lastRun && !currentResult ? 'stale' : lastRun ? 'current' : ''}`}>{busy ? <>{runState !== 'paused' && <span className="spinner"/>}{RUN_LABELS[runState]}</> : diagnostics.length && runState === 'failed' ? <>! 설정 확인 필요</> : lastRun ? currentResult ? <><Icon name="check" size={14}/>현재 모델의 결과{lastRun.result.status !== 'completed' ? ' · 부분 결과' : ''}</> : <>△ 다시 계산 필요 · 이전 결과</> : '아직 계산하지 않았습니다'}</span></div><div className="equation-learning-slot" hidden={resultsTab !== 'equations'}><EquationLearningPanel model={model} selectedIds={selectedIds} onSelectNodes={selectEquationNodes} activeLessonId={activeLessonId} onStartLesson={startLesson} onEndLesson={() => setActiveLessonId(null)} result={hierarchyPath.length === 0 ? lastRun?.result ?? null : null} resultCurrent={hierarchyPath.length === 0 && currentResult && !busy && runState === 'completed'} busy={busy} invalidDraft={invalidNumericCount > 0} onRun={() => void run()}/></div>{resultsTab === 'equations' ? null : resultsTab === 'diagnostics' ? <div className="diagnostics-content">{diagnostics.length ? <><h3>{diagnostics.some(diagnostic => diagnostic.tick !== undefined || diagnostic.time !== undefined) ? '계산이 멈춘 위치를 확인하세요.' : '계산 전에 다음 항목을 확인하세요.'}</h3>{diagnostics.map((diagnostic, index) => <button key={`${diagnostic.code}-${index}`} className="diagnostic-item" onClick={() => openDiagnostic(diagnostic)}><span className="diagnostic-icon">!</span><span><strong>{diagnostic.message}</strong><small>{diagnostic.nodeId ? `${model.nodes.find((node) => node.id === diagnostic.nodeId)?.label ?? diagnostic.nodeId}${diagnostic.portId ? ` · ${diagnostic.portId} 입력` : ''}` : '모델 설정'} · {diagnostic.code}</small>{(diagnostic.tick !== undefined || diagnostic.time !== undefined) && <small className="diagnostic-time">{diagnostic.tick !== undefined && `tick ${diagnostic.tick}`}{diagnostic.tick !== undefined && diagnostic.time !== undefined && ' · '}{diagnostic.time !== undefined && `t = ${formatNumber(diagnostic.time)} s`}</small>}</span>{diagnostic.nodeId && <Icon name="arrow" size={16}/>}</button>)}</> : <div className="result-empty"><Icon name="check" size={24}/><strong>현재 표시할 진단이 없습니다.</strong><span>계산하기를 누르면 연결과 설정을 확인합니다.</span></div>}</div> : busy ? <div className="result-empty">{runState === 'paused' ? <span className="pause-summary"><Icon name="pause" size={28}/></span> : <span className="large-spinner"/>}<strong>{RUN_LABELS[runState]}</strong><span>{progress.steps ? `${progress.steps.toLocaleString()} 샘플 · t = ${formatNumber(progress.time)} s` : '계산을 준비하고 있습니다.'}</span>{runState === 'paused' && <span className="pause-note">재개하면 같은 입력·초기값·seed의 실행을 이어갑니다. 편집한 설정은 다음 실행부터 적용됩니다.</span>}</div> : lastRun && finalSample ? <div className="results-content"><div className="output-values">{lastRun.outputIds.map((id) => <button key={id} className={`output-card ${displayPlotId === id ? 'selected' : ''}`} onClick={() => setPlotId(id)}><span><i/>{outputLabel(id)}</span><strong>{multiInputOutputs.has(id) ? `입력 ${lastRun.outputTypes[id]?.bus?.fields.length}개` : signalSummary(finalSample.values[id])}</strong><small className="result-type">{descriptorLabel(lastRun.outputTypes[id])}</small><small>{lastRun.model.execution.mode === 'static' ? '계산값' : '마지막 샘플'}</small></button>)}<div className="run-metadata"><span>{MODE_LABELS[lastRun.model.execution.mode]}</span><strong>{lastRun.result.samples.length.toLocaleString()} 샘플</strong><small>{formatNumber(lastRun.result.elapsedMs)} ms · {lastRun.completedAt}</small></div></div>{lastRun.result.status === 'failed' && <p className="partial-result-note" role="status">실행이 멈추기 전의 마지막 유효 기록입니다. 진단에서 중단 원인과 시점을 확인하세요.</p>}<SolverRunDetails result={lastRun.result} model={lastRun.model}/><AdapterLifecycleSummary result={lastRun.result}/>{displayPlotId && <div className="plot-table"><div className="plot-heading"><span><i/>{outputLabel(displayPlotId)}</span><small>실행한 모델의 수치 기록</small></div>{(displayMultiInput || lastRun.outputTypes[displayPlotId]?.valueType === 'float64' || plotSignalNumber(finalSample.values[displayPlotId]) !== undefined) && <ScopeTimeRange execution={rootModel.execution} samples={lastRun.result.samples} busy={busy} onApply={applyScopeRange}/>} {(displayMultiInput || lastRun.result.samples.length > 1 || lastRun.outputTypes[displayPlotId]?.shape.length > 0) && <ResultPlot key={displayPlotId} samples={lastRun.result.samples} outputId={displayPlotId} label={outputLabel(displayPlotId)} descriptor={lastRun.outputTypes[displayPlotId]} status={lastRun.result.status} multiInput={displayMultiInput}/>}<ResultTable samples={lastRun.result.samples} outputId={displayPlotId} label={outputLabel(displayPlotId)}/>{(Array.isArray(finalSample.values[displayPlotId]) || typeof finalSample.values[displayPlotId] === 'object') && <TemporalSignalResult samples={lastRun.result.samples} outputId={displayPlotId} label={outputLabel(displayPlotId)} descriptor={lastRun.outputTypes[displayPlotId]}/>}</div>}</div> : <div className="result-empty"><span className="empty-result-icon"><Icon name="chart" size={24}/></span><strong>{runState === 'cancelled' ? '계산이 취소되었습니다.' : '연결한 생각이, 수치가 되는 순간'}</strong><span>도식을 확인하고 {model.execution.mode === 'static' ? '계산하기' : '시뮬레이션 실행'}를 눌러 결과를 확인하세요.</span></div>}</section>
         </div>
       </section>
 

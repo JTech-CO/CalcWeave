@@ -1,0 +1,570 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-09T11:21:38.424766+00:00",
+  "appVersion": "0.27.0",
+  "engineVersion": "0.17.1-m16",
+  "status": "passed-local-verification",
+  "baseCommit": "afcd71788e77d6b9eadfef8de86ca41da9cc5591",
+  "features": {
+    "observerInputCount": [
+      1,
+      16
+    ],
+    "observerPorts": [
+      "in",
+      "in2..in16"
+    ],
+    "autoAddedPortPersistsOnlyAfterConnection": true,
+    "occupiedInputAndBodyDropPreserveExistingEdges": true,
+    "numericGraphModes": [
+      "overlay",
+      "separate"
+    ],
+    "libraryDrag": "registered ID, viewport coordinates, 16px snap, current hierarchy view",
+    "autoArrange": "Space held while Z, current view, positions only, single undo",
+    "autoArrangeButtonAdded": false
+  },
+  "compatibility": {
+    "implicitSingleInputModelAndSemanticShaPreserved": true,
+    "currentSignedPackagesPreserveMultipleInputs": true,
+    "approvedHistoricalSignedPackageVersions": [
+      "0.10.0-m9",
+      "0.10.1-m9",
+      "0.11.0-m10",
+      "0.12.0-m11",
+      "0.13.0-m12",
+      "0.14.0-m13",
+      "0.15.0-m14",
+      "0.16.0-m15",
+      "0.17.0-m16"
+    ],
+    "legacyParameterSmugglingRejected": true,
+    "multipleInputTargets": [
+      "runtime",
+      "typescript"
+    ],
+    "pythonAndWasmMaximumInputs": 1,
+    "numericalParityWithOriginalEnginesClaimed": false
+  },
+  "limits": {
+    "nodes": 1000,
+    "edges": 5000,
+    "inputs": 16,
+    "combinedSignalElements": 1024,
+    "structuredDepth": 8,
+    "weightedStorage": 100000,
+    "graphSamples": 10001,
+    "graphRecordedElements": 1000000
+  },
+  "validation": {
+    "unit": {
+      "passed": 5062,
+      "failed": 0,
+      "files": 99,
+      "elapsedSeconds": 152.37,
+      "fileResults": [
+        {
+          "path": "tests/block-expansion.test.ts",
+          "passed": 149
+        },
+        {
+          "path": "tests/block-symbols.test.ts",
+          "passed": 2
+        },
+        {
+          "path": "tests/canvas-auto-layout.test.ts",
+          "passed": 20
+        },
+        {
+          "path": "tests/codegen.test.ts",
+          "passed": 132
+        },
+        {
+          "path": "tests/compiler.test.ts",
+          "passed": 26
+        },
+        {
+          "path": "tests/current-support-extensions.test.ts",
+          "passed": 13
+        },
+        {
+          "path": "tests/editor-connections.test.ts",
+          "passed": 16
+        },
+        {
+          "path": "tests/editor-package-migration.test.ts",
+          "passed": 14
+        },
+        {
+          "path": "tests/export-download.test.ts",
+          "passed": 5
+        },
+        {
+          "path": "tests/expression.test.ts",
+          "passed": 4
+        },
+        {
+          "path": "tests/m10-compiler.test.ts",
+          "passed": 83
+        },
+        {
+          "path": "tests/m10-history.test.ts",
+          "passed": 9
+        },
+        {
+          "path": "tests/m10-independent-math.test.ts",
+          "passed": 210
+        },
+        {
+          "path": "tests/m10-result-export.test.ts",
+          "passed": 15
+        },
+        {
+          "path": "tests/m10-runtime.test.ts",
+          "passed": 38
+        },
+        {
+          "path": "tests/m10-typed-values.test.ts",
+          "passed": 116
+        },
+        {
+          "path": "tests/m10-ui-values.test.ts",
+          "passed": 23
+        },
+        {
+          "path": "tests/m11-compiler.test.ts",
+          "passed": 79
+        },
+        {
+          "path": "tests/m11-examples.test.ts",
+          "passed": 8
+        },
+        {
+          "path": "tests/m11-hierarchy-editor.test.ts",
+          "passed": 11
+        },
+        {
+          "path": "tests/m11-history.test.ts",
+          "passed": 6
+        },
+        {
+          "path": "tests/m11-runtime.test.ts",
+          "passed": 104
+        },
+        {
+          "path": "tests/m11-structured.test.ts",
+          "passed": 11
+        },
+        {
+          "path": "tests/m11-ui-values.test.ts",
+          "passed": 8
+        },
+        {
+          "path": "tests/m12-analysis.test.ts",
+          "passed": 14
+        },
+        {
+          "path": "tests/m12-compiler.test.ts",
+          "passed": 37
+        },
+        {
+          "path": "tests/m12-examples.test.ts",
+          "passed": 8
+        },
+        {
+          "path": "tests/m12-numerics.test.ts",
+          "passed": 8
+        },
+        {
+          "path": "tests/m12-runtime.test.ts",
+          "passed": 35
+        },
+        {
+          "path": "tests/m12-ui.test.ts",
+          "passed": 9
+        },
+        {
+          "path": "tests/m13-compiler.test.ts",
+          "passed": 31
+        },
+        {
+          "path": "tests/m13-data-import.test.ts",
+          "passed": 30
+        },
+        {
+          "path": "tests/m13-history.test.ts",
+          "passed": 10
+        },
+        {
+          "path": "tests/m13-live.test.ts",
+          "passed": 6
+        },
+        {
+          "path": "tests/m13-runtime.test.ts",
+          "passed": 375
+        },
+        {
+          "path": "tests/m13-ui-models.test.ts",
+          "passed": 48
+        },
+        {
+          "path": "tests/m13-worker.test.ts",
+          "passed": 4
+        },
+        {
+          "path": "tests/m14-compiler.test.ts",
+          "passed": 20
+        },
+        {
+          "path": "tests/m14-history.test.ts",
+          "passed": 13
+        },
+        {
+          "path": "tests/m14-runtime.test.ts",
+          "passed": 61
+        },
+        {
+          "path": "tests/m14-ui-models.test.ts",
+          "passed": 22
+        },
+        {
+          "path": "tests/m15-export-archive.test.ts",
+          "passed": 2
+        },
+        {
+          "path": "tests/m15-interop.test.ts",
+          "passed": 43
+        },
+        {
+          "path": "tests/m15-package.test.ts",
+          "passed": 16
+        },
+        {
+          "path": "tests/m15-python.test.ts",
+          "passed": 104
+        },
+        {
+          "path": "tests/m15-wasm.test.ts",
+          "passed": 59
+        },
+        {
+          "path": "tests/m16-support-matrix.test.ts",
+          "passed": 28
+        },
+        {
+          "path": "tests/m17-equations.test.ts",
+          "passed": 27
+        },
+        {
+          "path": "tests/m17-learning.test.ts",
+          "passed": 20
+        },
+        {
+          "path": "tests/m18-scope.test.ts",
+          "passed": 40
+        },
+        {
+          "path": "tests/m19-experiments.test.ts",
+          "passed": 55
+        },
+        {
+          "path": "tests/m19-ui.test.ts",
+          "passed": 27
+        },
+        {
+          "path": "tests/m2-compiler.test.ts",
+          "passed": 53
+        },
+        {
+          "path": "tests/m20-control.test.ts",
+          "passed": 54
+        },
+        {
+          "path": "tests/m20-sources.test.ts",
+          "passed": 15
+        },
+        {
+          "path": "tests/m20-ui.test.ts",
+          "passed": 28
+        },
+        {
+          "path": "tests/m21-sources.test.ts",
+          "passed": 30
+        },
+        {
+          "path": "tests/m21-spectrum.test.ts",
+          "passed": 68
+        },
+        {
+          "path": "tests/m21-ui.test.ts",
+          "passed": 30
+        },
+        {
+          "path": "tests/m22-control.test.ts",
+          "passed": 77
+        },
+        {
+          "path": "tests/m22-sources.test.ts",
+          "passed": 24
+        },
+        {
+          "path": "tests/m22-ui.test.ts",
+          "passed": 34
+        },
+        {
+          "path": "tests/m23-ensemble.test.ts",
+          "passed": 91
+        },
+        {
+          "path": "tests/m23-ui.test.ts",
+          "passed": 44
+        },
+        {
+          "path": "tests/m24-time-series-sources.test.ts",
+          "passed": 131
+        },
+        {
+          "path": "tests/m24-time-series-statistics.test.ts",
+          "passed": 78
+        },
+        {
+          "path": "tests/m24-time-series-ui.test.ts",
+          "passed": 33
+        },
+        {
+          "path": "tests/m25-time-frequency-grid.test.ts",
+          "passed": 13
+        },
+        {
+          "path": "tests/m25-time-frequency-settings.test.ts",
+          "passed": 29
+        },
+        {
+          "path": "tests/m25-time-frequency-ui.test.ts",
+          "passed": 14
+        },
+        {
+          "path": "tests/m25-time-frequency.test.ts",
+          "passed": 52
+        },
+        {
+          "path": "tests/m3-codegen.test.ts",
+          "passed": 33
+        },
+        {
+          "path": "tests/m3-compiler.test.ts",
+          "passed": 92
+        },
+        {
+          "path": "tests/m3-runtime.test.ts",
+          "passed": 41
+        },
+        {
+          "path": "tests/m4-data.test.ts",
+          "passed": 39
+        },
+        {
+          "path": "tests/m4-experiments.test.ts",
+          "passed": 44
+        },
+        {
+          "path": "tests/m4-hierarchy.test.ts",
+          "passed": 33
+        },
+        {
+          "path": "tests/m4-integration.test.ts",
+          "passed": 8
+        },
+        {
+          "path": "tests/m4-workspace.test.ts",
+          "passed": 5
+        },
+        {
+          "path": "tests/m5-advanced-math.test.ts",
+          "passed": 52
+        },
+        {
+          "path": "tests/m5-integration.test.ts",
+          "passed": 52
+        },
+        {
+          "path": "tests/m5-partial-state.test.ts",
+          "passed": 2
+        },
+        {
+          "path": "tests/m5-quantization.test.ts",
+          "passed": 36
+        },
+        {
+          "path": "tests/m6-offline.test.ts",
+          "passed": 41
+        },
+        {
+          "path": "tests/m6-persistence.test.ts",
+          "passed": 27
+        },
+        {
+          "path": "tests/m7-import.test.ts",
+          "passed": 16
+        },
+        {
+          "path": "tests/m7-package.test.ts",
+          "passed": 27
+        },
+        {
+          "path": "tests/m7-python.test.ts",
+          "passed": 113
+        },
+        {
+          "path": "tests/m8-compiler.test.ts",
+          "passed": 146
+        },
+        {
+          "path": "tests/m8-runtime.test.ts",
+          "passed": 378
+        },
+        {
+          "path": "tests/m9-compiler.test.ts",
+          "passed": 230
+        },
+        {
+          "path": "tests/m9-runtime.test.ts",
+          "passed": 199
+        },
+        {
+          "path": "tests/model.test.ts",
+          "passed": 13
+        },
+        {
+          "path": "tests/multi-input-observation.test.ts",
+          "passed": 15
+        },
+        {
+          "path": "tests/multi-input-observers.test.ts",
+          "passed": 60
+        },
+        {
+          "path": "tests/runtime.test.ts",
+          "passed": 142
+        },
+        {
+          "path": "tests/social-metadata.test.ts",
+          "passed": 22
+        },
+        {
+          "path": "tests/time-sources.test.ts",
+          "passed": 29
+        },
+        {
+          "path": "tests/worker-client.test.ts",
+          "passed": 15
+        }
+      ]
+    },
+    "typecheck": "passed",
+    "browser": {
+      "features": 9,
+      "existingRegression": 21,
+      "additionalVisualScopeCase": 1,
+      "failures": 0,
+      "cases": [
+        "Display grows by spare handle, occupied input and body drop; undo preserves every original connection",
+        "Explicit observer input count is bounded, required and shrinking removes only deleted ports with one undo",
+        "Scope overlays independent signals and separate plots while retaining execution data across reload",
+        "Native library drag honors zoom and pan, adds once at snapped pointer position, and click insertion still works",
+        "Unregistered drag data and a drop outside the canvas leave the model intact",
+        "Hold Space then Z arranges layout only, keeps results current and one undo restores all positions",
+        "Space release then Z and Z alone do not arrange; input focus, modifier and focus loss cancel the chord",
+        "A full 16-input observer cannot grow or overwrite its previous inputs",
+        "Drag insertion and Space+Z affect only the open subsystem and undo restores its definition",
+        "Product help starts with everyday use and keeps implementation evidence out of the first screen",
+        "Product block help searches the real registry by name and parameters and preserves mode filtering",
+        "Compatibility references stay optional and retain the complete source report behind app information",
+        "Product help traps focus and prevents editing or simulation shortcuts from changing the canvas",
+        "All product help pages stay readable in both themes from desktop to 320px with 200 percent text",
+        "M25 no completed recording disables analysis without starting a simulation",
+        "M25 actual Worker tone has analytic Welch PSD and preserves recording, model and settings",
+        "M25 selected chirp frames match direct DFT and preserve actual centers and discarded tail",
+        "M25 one complete frame exposes DC and Nyquist normalization without tail padding",
+        "M25 malformed drafts retain snapshot while a valid nonfinite component clears old report",
+        "M25 true zero PSD stays distinct in dB and negative zero retains IEEE input provenance",
+        "M25 prior execution stays tied to original semantic hash after new model draft",
+        "M25 large raw tables paginate 128 bins and bounded heatmap preserves exact selected cell PSD",
+        "M25 mobile themes and 200-percent text preserve readable controls, escaped labels and internal raw scrolling",
+        "M25 closing pending analysis suppresses a late import and avoids extra runs",
+        "Initial fit waits for a delayed positive canvas measurement and preserves later navigation",
+        "First autosave keeps the header and initially fitted canvas stable when status labels wrap",
+        "Space fits only the focused canvas and leaves field, button, modal, IME and repeated-key behavior intact",
+        "Worker calculation, semantic staleness, undo and local restoration",
+        "Keyboard-accessible connection editing, undo and unique block IDs",
+        "Desktop and horizontal tablet keep full-height results beside the canvas; narrow screens stack them"
+      ]
+    },
+    "release": [
+      {
+        "scope": "/",
+        "checks": 107,
+        "staticFiles": 20,
+        "totalBytes": 8118814,
+        "releaseId": "916603fce74c5b81d3436b7c486927eb157d36db539c54842ba7311a9daca13b"
+      },
+      {
+        "scope": "/CalcWeave/",
+        "checks": 107,
+        "staticFiles": 20,
+        "totalBytes": 8119084,
+        "releaseId": "2582b169de9e2754b789c87d074f744733eb191b97201bff785edaebfe17c7e7"
+      }
+    ],
+    "docs": "passed",
+    "coverage": "385 rows preserved",
+    "roadmap": "passed"
+  },
+  "historicalPreservation": {
+    "changedTrackedBaselineOrEvidenceFiles": [],
+    "supportMatrixSha256": "e5d706d7fc127081fc8470189b3f580d03ed61ba938a8168a5aa8e3730bb875e",
+    "portableSourceSnapshotRequiresGit": false,
+    "historicalNumericOraclesChanged": false
+  },
+  "security": {
+    "externalDependenciesAdded": false,
+    "serverApiAuthDbTrackingOrPersonalDataCollectionAdded": false,
+    "dragIdsAllowlisted": true,
+    "inputCoordinatesAndCountsBounded": true,
+    "frameworkHtmlEscapingPreserved": true,
+    "legacySignaturesAndHashesVerifiedBeforeMigration": true,
+    "baselineEightChecksReviewed": true
+  },
+  "initialFailuresAndCorrections": [
+    "Full unit run exposed four existing single-input snapshot/hash failures. Implicit inputCount=1 insertion was removed after validation; original fixture expectations remain unchanged. Final full suite5062/5062 passed.",
+    "Browser fixtures used an exact run-button label excluding its shortcut and initially expected bus field names in a compact preview. Assertions were corrected and the canvas now previews actual latest input values.",
+    "Subsystem insertion advances its semantic version by design; browser expectation now verifies that increment while preserving root layout and edges.",
+    "Project release must generate protected policy HTML for its /CalcWeave/ base; the full project build passed after doing so. Root policy source was restored."
+  ],
+  "sourceSha256": {
+    "apps/web/src/App.tsx": "05180c2c218436866fd25db2a40f096d558662935df03a221993aad3fe90cf96",
+    "apps/web/src/components/BlockNode.tsx": "1265e482e74e49363b168cfbdc718b7c230cbcbf3ce3596950a65cfcf3abb5ae",
+    "apps/web/src/components/BlockLibrary.tsx": "c3e56f68baefa2a78fec92807abc385c78bf633005ff1fe65cdd7ca94ff056f2",
+    "apps/web/src/components/MultiInputPlot.tsx": "65e9e954d45d33512d6b693e8bc6d6940c555405acf5e5bc1a762cde4a84738a",
+    "apps/web/src/auto-layout.ts": "94caab28e4331d0048ee496eaaaaa88ffbd87aa920595327679a9b7618c8b711",
+    "apps/web/src/observer-connections.ts": "cce68c6a4c8ed63bedcd0b90e50b8c2d8caf0c531ce000aed938c51e4046a74e",
+    "apps/web/src/block-library-drag.ts": "964d1b3cd3d123e6f208ca5498f987f3f1d8b56094c97e832207dd8609da4a50",
+    "apps/web/src/multi-input-observation.ts": "7dd2facbf45917b206e7d646f7f8095b681862993c4ee1b5f1cb45782d671926",
+    "packages/block-library/src/index.ts": "0dc4b59578b730e5357c974bae70d5437c7638167bc499da1e63f7b7a61e32e9",
+    "packages/compiler/src/index.ts": "5b27234503d0a4f7b5810389f7cf2867529b1dca9d0e3f165ab7dbbbff5ba09f",
+    "packages/runtime/src/kernels.ts": "5ca048d71d16ac46d372d1aa5859edb346080ece2cceabfe622d373806e8c8b9",
+    "packages/codegen-ts/src/kernels-template.ts": "cc3b77e50d1a9a8e59e0526a5b192b6b8178bfd315bba572699fb6b98692ad7c",
+    "packages/codegen-ts/src/manifest.ts": "15b1df1832b7479add80ac607a076269e2d6ae8b4d7ce0b5398469cd1685cc14",
+    "packages/codegen-python/src/index.ts": "08b37e7f7f7dabecd3f6008e9c562636d911d4976eff12faa1d288d1359622e8",
+    "packages/codegen-wasm/src/index.ts": "faba753e77ecae329348580440f8353dd3162e4d83a9510be48bf3077b1d3994",
+    "packages/model-package/src/index.ts": "57fc8fb8b8a0cb14ba06f8c03130c9bc19721fadc51b25261037f0c5cd606f31",
+    "packages/model-package/src/migrations.ts": "4adcdc7e867d83e8457f0b4b619818deb503cbbc22fc91d4a50703f631a33c8b",
+    "packages/model/src/types.ts": "30094886521467449fc1f1ca854c3a132a76134db6038b11642b4b4d4c3e158b",
+    "packages/support-matrix/src/current-extensions.ts": "c38d6ebabe9e023c240f08ba5396c28aa04533289830d25b32f2e4a5481a67a5",
+    "scripts/m16-support-source.ts": "4fed412897efa129fdaac6733b219609fa4e961ff66cca9e864a1a4ce94dd298",
+    "docs/baselines/m16-observer-source.json": "45f420c3298370f07e1e28a837b1a50045b937a80bf31922b8784b759ca321c0",
+    "tests/e2e/editor-interactions.spec.ts": "da959a74b0e30d9d99ff6bc1fe61afe989fe257d0633649f1c02fe6d1eadc868"
+  },
+  "previewUrl": "http://127.0.0.1:4178/",
+  "publicDeploymentClaimed": false
+}

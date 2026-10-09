@@ -293,7 +293,12 @@ export function evaluateSignalNode(node: IRNode, input: (port: string) => Signal
       const codes = flatten(input('in')).map(element => quantizeFixed(finiteNumber(element, id), node.parameters as unknown as FixedQuantizationOptions));
       return { out: shaped(codes.map(code => code.value), shape), stored: shaped(codes.map(code => code.stored), shape) };
     });
-    case 'sink.display': case 'sink.scope': case 'io.output': case 'io.terminator': value = input('in'); break;
+    case 'sink.display': case 'sink.scope':
+      value = node.outputs.out!.valueType === 'bus' && Number(node.parameters.inputCount ?? 1) > 1
+        ? { kind: 'bus', fields: node.outputs.out!.bus!.fields.map(field => ({ name: field.name, value: copySignal(input(field.name)) })) }
+        : input('in');
+      break;
+    case 'io.output': case 'io.terminator': value = input('in'); break;
     case 'lookup.interpolated': value = unary((x) => interpolateTable(x, node.parameters.breakpoints as number[], node.parameters.values as number[], option('interpolation'), option('extrapolation'), id)); break;
     case 'logic.bitwise': {
       const width = parameter('width'), mask = width === 32 ? 0xffffffff : 2 ** width - 1;

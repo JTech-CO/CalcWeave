@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { decodeTypedFloat, isIntegerDataType, validateTypedSignal, type RunSample, type RunResult, type SignalDescriptor, type SignalValue, type TypedFloat } from '../../../../packages/model/src';
 import { ScopePlot } from './ScopePlot';
+import { MultiInputPlot } from './MultiInputPlot';
 
 export function formatNumber(value: number) {
   if (!Number.isFinite(value)) return String(value);
@@ -20,7 +21,8 @@ export function plotSignalNumber(value: SignalValue | undefined): number | undef
   return Number.isFinite(number) ? number : undefined;
 }
 
-export function ResultPlot({ samples, outputId, label, descriptor, status }: { samples: RunSample[]; outputId: string; label: string; descriptor?: SignalDescriptor; status?: RunResult['status'] }) {
+export function ResultPlot({ samples, outputId, label, descriptor, status, multiInput = false }: { samples: RunSample[]; outputId: string; label: string; descriptor?: SignalDescriptor; status?: RunResult['status']; multiInput?: boolean }) {
   const series = useMemo(() => [{ id: 'current', label, samples, descriptor, status }], [samples, label, descriptor, status]);
+  if (multiInput) return <MultiInputPlot samples={samples} outputId={outputId} label={label} descriptor={descriptor} status={status}/>;
   return <ScopePlot series={series} outputId={outputId} label={label}/>;
 }

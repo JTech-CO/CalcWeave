@@ -3,6 +3,7 @@ import type { CanonicalSupport, SourceSupportRow, SupportFilter, SupportMatrix }
 import { SUPPORT_MATRIX_LIMITS, validateSupportMatrix } from './validate';
 export type * from './types';
 export { SUPPORT_MATRIX_LIMITS, validateSupportMatrix } from './validate';
+export * from './current-extensions';
 
 function freeze<T>(value: T): T {
   if (value && typeof value === 'object') {
@@ -11,7 +12,7 @@ function freeze<T>(value: T): T {
   }
   return value;
 }
-/** Generated repository metadata, not an executable extension or user model. */
+/** Frozen 0.17.0-m16 source audit. Current extensions are exported separately. */
 export const SUPPORT_MATRIX: Readonly<SupportMatrix> = freeze(validateSupportMatrix(artifact));
 const bySource = new Map(SUPPORT_MATRIX.rows.map(row => [row.id, row]));
 const byCanonical = new Map(SUPPORT_MATRIX.canonicalContracts.map(contract => [contract.id, contract]));

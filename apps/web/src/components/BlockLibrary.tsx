@@ -1,9 +1,10 @@
-import { useEffect, useId, useState, type RefObject } from 'react';
+import { useEffect, useId, useRef, useState, type RefObject } from 'react';
 import { BLOCK_REGISTRY, type BlockDefinition } from '../../../../packages/block-library/src';
 import { APP_VERSION } from '../../../../packages/release/src';
 import { getBlockSymbol } from '../block-symbols';
 import { blockTone } from './BlockNode';
 import { Icon } from './Icon';
+import { BLOCK_DRAG_MIME } from '../block-library-drag';
 import './BlockLibrary.css';
 
 const FREQUENT_BLOCK_IDS = ['source.constant', 'io.input', 'math.gain', 'math.sum', 'math.multiply', 'sink.display', 'sink.scope', 'continuous.integrator', 'discrete.unit-delay', 'route.switch'] as const;
@@ -24,6 +25,7 @@ interface BlockLibraryProps {
 
 export function BlockLibrary({ search, searchRef, onSearch, expandedCategories, onToggleCategory, onAdd }: BlockLibraryProps) {
   const instanceId = useId();
+  const dragClickSuppressed = useRef(false);
   const [searchCollapsedCategories, setSearchCollapsedCategories] = useState<ReadonlySet<string>>(new Set());
   const query = search.trim().toLocaleLowerCase();
   const searching = query.length > 0;
@@ -48,7 +50,11 @@ export function BlockLibrary({ search, searchRef, onSearch, expandedCategories, 
   const blockItem = (definition: BlockDefinition) => {
     const symbol = getBlockSymbol(definition.id);
     const symbolClass = symbol.length > 4 ? 'symbol-length-long' : symbol.length > 2 || symbol === '▱↕' ? 'symbol-length-medium' : '';
-    return <button className="library-item" key={definition.id} data-block-id={definition.id} onClick={() => onAdd(definition.id)} title={`${definition.description} · 클릭하여 추가`}>
+    return <button className="library-item" key={definition.id} data-block-id={definition.id} draggable
+      onPointerDown={() => { dragClickSuppressed.current = false; }}
+      onDragStart={event => { dragClickSuppressed.current = true; event.dataTransfer.effectAllowed = 'copy'; event.dataTransfer.setData(BLOCK_DRAG_MIME, definition.id); }}
+      onClick={event => { if (dragClickSuppressed.current && event.detail > 0) { event.preventDefault(); return; } onAdd(definition.id); }}
+      title={`${definition.description} · 클릭하거나 캔버스로 끌어서 추가`}>
       <span className={`library-symbol ${blockTone(definition.id)} ${symbolClass}`} aria-hidden="true">{symbol}</span>
       <span className="library-copy"><strong>{definition.label}</strong><small>{definition.englishName}</small></span>
       <span className="library-add"><Icon name="plus" size={15}/></span>

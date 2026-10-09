@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs';
+import { registryWithoutApprovedObserverInputs } from '../scripts/m16-support-source';
 import { describe, expect, it } from 'vitest';
 import { blockRegistry, getBlockDefinition, getBlockPorts, getDirectFeedthroughPorts } from '../packages/block-library/src';
 import { M9_BLOCK_IDS, M9_BLOCK_PRESETS } from '../packages/block-library/src/m9';
@@ -51,7 +52,8 @@ describe('M9 state, rate, shape and closed compiler boundaries', () => {
   it('preserves all185 preceding definitions and separates26 new definitions from15 presets', () => {
     const baseline = JSON.parse(readFileSync(new URL('../docs/baselines/m8-registry.json', import.meta.url), 'utf8')) as Record<string, unknown>[];
     expect(baseline).toHaveLength(185);
-    for (const definition of baseline) expect(getBlockDefinition(String(definition.id))).toEqual(definition);
+    const historical = new Map<string, (typeof blockRegistry)[number]>(registryWithoutApprovedObserverInputs(blockRegistry).map(definition => [definition.id, definition]));
+    for (const definition of baseline) expect(historical.get(String(definition.id))).toEqual(definition);
     const baselineIds = new Set(baseline.map(definition => definition.id));
     expect(M9_BLOCK_IDS).toHaveLength(26); expect(blockRegistry.filter(definition => baselineIds.has(definition.id) || (M9_BLOCK_IDS as readonly string[]).includes(definition.id))).toHaveLength(211); expect(M9_BLOCK_PRESETS).toHaveLength(15);
     expect(new Set(contractGraphs.map(([id]) => id))).toEqual(new Set(M9_BLOCK_IDS));
