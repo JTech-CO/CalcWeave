@@ -160,7 +160,6 @@ async function main() {
     const moduleURL = await page.locator('script[type="module"]').getAttribute('src');
     assert(moduleURL?.startsWith(`${BASE}assets/`));
     await expect(page.locator('.research-badge')).toHaveText(`${APP_VERSION} 작업 공간`);
-    await expect(page.locator('.library-footnote .small-square')).toHaveText(APP_VERSION);
     let initialDiagramFit: Awaited<ReturnType<typeof diagramBounds>> = null;
     await expect.poll(async () => {
       initialDiagramFit = await diagramBounds(page!);

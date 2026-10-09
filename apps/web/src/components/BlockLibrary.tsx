@@ -1,6 +1,5 @@
 import { useEffect, useId, useRef, useState, type RefObject } from 'react';
 import { BLOCK_REGISTRY, type BlockDefinition } from '../../../../packages/block-library/src';
-import { APP_VERSION } from '../../../../packages/release/src';
 import { getBlockSymbol } from '../block-symbols';
 import { blockTone } from './BlockNode';
 import { Icon } from './Icon';
@@ -78,6 +77,5 @@ export function BlockLibrary({ search, searchRef, onSearch, expandedCategories, 
       })}
       {filteredBlocks.length === 0 && <div className="search-empty"><Icon name="search" size={24}/><strong>블록을 찾지 못했습니다.</strong><span>‘값’, ‘gain’, ‘적분’으로 검색해 보세요.</span><button className="text-button" onClick={() => onSearch('')}>전체 블록 보기</button></div>}
     </div>
-    <div className="library-footnote"><span className="small-square">{APP_VERSION}</span><p>수학·신호를 연결하고<br/>예제에서 계산을 시작합니다.</p></div>
   </aside>;
 }

@@ -27,7 +27,6 @@
 .block-library .library-symbol.symbol-length-medium { font-size:.875rem; font-weight:600; letter-spacing:-.035em; }
 .block-library .library-symbol.symbol-length-long { font-size:.6875rem; font-weight:600; letter-spacing:-.04em; }
 .block-library .library-add { flex:none; }
-.block-library .library-footnote { flex:none; }
 
 /* Search and inspector symbols share the same fit rule at larger text sizes. */
 .quick-options .library-symbol { width:2.25rem; height:2.25rem; padding:2px; white-space:nowrap; line-height:1; }
@@ -43,7 +42,6 @@
 @media (max-width:1150px) {
   .library-panel.block-library { height:clamp(280px,40dvh,420px); border-right:0; border-bottom:1px solid var(--line); }
   .block-library .panel-heading { padding:14px 18px 0; }
-  .block-library .library-footnote { display:none; }
   .block-library .library-item { width:100%; }
   .block-library .library-add { display:flex; }
 }
