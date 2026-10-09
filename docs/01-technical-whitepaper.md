@@ -1,6 +1,6 @@
 # CalcWeave 기술 백서
 
-현행 앱 `0.24.0` / 엔진 `0.17.0-m16`의 설계와 실행 경계를 설명한다. 최종 실측·배포 상태는 [검증 문서](validation.md), 화면·상호작용은 [디자인 백서](02-design-whitepaper.md), 정책·복구·배포는 [운영 안내](operations.md)를 따른다. 현재 문서에 과거 단계의 시험 횟수나 납품 목록을 누적하지 않는다.
+현행 앱 `0.25.0` / 엔진 `0.17.0-m16`의 설계와 실행 경계를 설명한다. 최종 실측·배포 상태는 [검증 문서](validation.md), 화면·상호작용은 [디자인 백서](02-design-whitepaper.md), 정책·복구·배포는 [운영 안내](operations.md)를 따른다. 현재 문서에 과거 단계의 시험 횟수나 납품 목록을 누적하지 않는다.
 
 ## 제품과 지원을 세는 방법
 
@@ -173,6 +173,16 @@ y[k]=Cx[k]+Du[k], x[k+1]=Ax[k]+Bu[k]의 영 초기상태 LTI 응답 H(z)=C(zI−
 
 [출처 어댑터](../apps/web/src/spectrum-analysis-sources.ts)는 실행 모델의 의미 지문, completed 상태·표본 수·전체 관측 격자·자료형/형상을 대조한다. 실수 legacy 스칼라·벡터·행렬과 Typed float32/float64 스칼라·벡터만 지원한다. 출력은최대16개·투영 원소합1,000,000개, 코어 work는2,000,000 이하이며 접근자·희소 배열·숨김 필드를 실행하지 않는다. 선택한 시각·값을 복사해 SHA-256을 기록하고 출처·창·평균 제거·모든 원시 복소 빈을 JSON에 보존한다. 정수·fixed·복소수·boolean·structured 신호, 부분 실행, 비유한 값과 불균일 격자는 자동 변환하지 않는다. 분석 기능 추가를 실행 블록·schema·코드 타깃 지원 확대와 혼동하지 않는다.
 
+## 기록의 구간 통계와 상관
+
+[시계열 코어](../packages/analysis/src/time-series-statistics.ts)는 2~8192개의 임의 정수 길이 구간에서 표본 통계를 계산한다. 시각·값·균일 격자의 유한성/정밀도 경계는 스펙트럼과 같으며 접근자·희소 배열·추가 속성을 거부한다. 평균은 Σxᵢ/N, 모집단 분산은 Σ(xᵢ−μ)²/N, 표본 분산은 같은 합을 N−1로 나눈 값이며 RMS는 √(Σxᵢ²/N)이다. 표준편차·분모·최소/최대·단위를 함께 보존한다. [NumPy 분산](https://numpy.org/doc/stable/reference/generated/numpy.var.html)의 분모 구분을 참고하며 독립 표본이나 통계 추론의 적합성을 자동 보장하지 않는다. 모두 동일 표본 가중치로 시간 가중 평균·적분은 제공하지 않는다.
+
+상관은 같은 원시 시각·단위의 X/Y만 허용하고 k∈[−L,L], L≤min(512,N−1)에서 실제로 겹치는 X[i]·Y[i+k]를 비교한다. **양의 k는 Y가 X 뒤에 오는 방향**이며 [SciPy correlate(x,y)](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.correlate.html)의 부호와 반대다. 평균 제거를 선택하면 각 겹침 구간의 두 평균을 따로 빼고 교차곱 합/√(X 에너지×Y 에너지)를 계산한다. 이 정규화는 [NumPy 상관계수](https://numpy.org/doc/stable/reference/generated/numpy.corrcoef.html)의 에너지 비율과 같은 정의다. 평균 유지 모드는 원시 표본 코사인 상관이다. 겹침이 지정 최소 수보다 작거나 영 에너지이면 coefficient는 null이며 실제 겹침 수·인덱스·시각·평균·분자·에너지는 보존한다.
+
+큰 offset의 작은 차이는 실제 첫 표본을 기준으로 뺀 뒤 스케일과 보상 합을 사용한다. 극소 값의 제곱 에너지가 Float64에서 0으로 반올림되어도 스케일 에너지로 영 분산/상관을 판정하며 raw·scaled 분자/분모를 모두 보고한다. 유한한 |계수|≤1만 허용하고 수 eps 이내의 경계 반올림만 보정한다. 최대 절대 계수의 동률은 실제 겹침 수·작은 |k|·음의 k 순으로 결정한다. 이는 요청 범위의 후보 관측이며 인과관계·확정 지연·자동 정렬·보간을 제공하지 않는다.
+
+[출처 어댑터](../apps/web/src/time-series-analysis-sources.ts)는 completed 시간 실행의 모델 의미 SHA·전체 관측 수/시각·자료형/형상을 확인하고 선택 원시 값을 불변 사본으로 보존한다. legacy 실수 scalar/vector/matrix와 Typed float32/64 실수 성분만 지원하며 출력16개·한 번의 투영 원소 합100만개를 제한한다. 상관의 계산 예산 단위는24N+30Σ(N−|k|)+24(2L+1)로 사전 검사하고20,000,000을 넘으면 구간이나 지연을 줄이도록 거부한다. 작은 겹침의 원시 정규화 수치 계산 비용도 합산하며 이 값은 정책상 예산 단위로 실제 JavaScript 연산 횟수나 FLOP 수는 아니다. 구간 SHA는 JSON의 유한 숫자에서 음의 영을 문자열 -0 토큰으로 구별해 계산한다. JSON 숫자가 영의 부호를 잃는 문제를 피하도록 inputFloat64Bits의16자리 big-endian IEEE hex 배열을 시각/값에 함께 제공한다. 설정·원시 입력·성분·단위·구간 SHA·실제 겹침·모든 지연 결과를 JSON에 담으며 새 실행·실행 블록·의존성·외부 서비스를 추가하지 않는다.
+
 ## 신뢰된 어댑터
 
 외부 사용자 코드 실행 대신 [immutable adapter catalog](../packages/model/src/m14-adapters.ts)의 자체 작성 고정 프로필만 실행한다.
@@ -252,7 +262,7 @@ MAT v5/SLX/MDL은 `calcweave-native-scalar-v1`의 읽기 전용 bounded 분석�
 
 ## M21 이후 확장 순서
 
-[제품 확장 계획 JSON](product-extension-roadmap.json)은 M20까지의 구현에서 확인한 공백을 기준으로2026-10-09에 새로 정한 계획이다. 원자료385행의 과거 coverage baseline은 그대로 보존한다. M21~M23은 로컬 구현·검증을 완료했고 M24~M25는 후속 계획이다. 일정 약속이나 미완료 범위를 지원으로 표시하지 않는다.
+[제품 확장 계획 JSON](product-extension-roadmap.json)은 M20까지의 구현에서 확인한 공백을 기준으로2026-10-09에 새로 정한 계획이다. 원자료385행의 과거 coverage baseline은 그대로 보존한다. M21~M24는 로컬 구현·검증을 완료했고 M25는 후속 계획이다. 일정 약속이나 미완료 범위를 지원으로 표시하지 않는다.
 
 | 단계 | 사용자 작업과 추가 범위 | 우선 완료 조건 |
 | --- | --- | --- |

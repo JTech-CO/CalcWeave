@@ -5,7 +5,7 @@
 [![CalcWeave — Integrator와 Gain으로 구성한 감쇠 모델과 시간 응답](assets/branding/calcweave-github-og.png)](https://jtech-co.github.io/CalcWeave/)
 
 [![검증·배포](https://github.com/JTech-CO/CalcWeave/actions/workflows/pages.yml/badge.svg)](https://github.com/JTech-CO/CalcWeave/actions/workflows/pages.yml)
-[![버전 0.24.0 beta](https://img.shields.io/badge/version-0.24.0_beta-9ebded?style=flat-square)](package.json)
+[![버전 0.25.0 beta](https://img.shields.io/badge/version-0.25.0_beta-9ebded?style=flat-square)](package.json)
 [![블록 337개](https://img.shields.io/badge/blocks-337-a7c7bd?style=flat-square)](docs/support-matrix.md)
 [![예제 75개](https://img.shields.io/badge/examples-75-bbb0d0?style=flat-square)](apps/web/src/examples.ts)
 [![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6?style=flat-square&logo=typescript&logoColor=white)](tsconfig.json)
@@ -112,9 +112,15 @@ CSV는 브라우저 안에서만 읽으며 최대256KiB·1,000행을 지원합�
 
 실수 기록8~8192개 중2의 거듭제곱 개수의 연속 표본을 분석합니다. 실수 스칼라·벡터·행렬의 선택 성분과 Typed float32/float64 스칼라·벡터를 지원합니다. 부분 실행·불균일 시각·선택 구간의 비유한 값은 거부하며 보간·0 채우기·정수나 fixed의 자동 변환을 하지 않습니다. 모델과 실행 기록은 그대로 보존하고, 실제 선택 표본의 지문·출처·설정·전체 빈을 JSON으로 저장합니다.
 
+## 기록의 구간 통계와 상관
+
+**분석 → 시간 구간 통계와 신호 상관**에서 완료한 기록의 출력·성분과 2~8192개 표본 구간을 선택합니다. 평균·RMS·최소/최대와 **N 모집단 분산·N−1 표본 분산**을 함께 표시합니다. 각 표본에 같은 가중치를 주며 시간 적분이나 시간 가중 통계로 해석하지 않습니다. FFT와 달리 표본 수가 2의 거듭제곱일 필요는 없습니다.
+
+같은 단위·시각의 두 성분은 제한된 지연 범위에서 상관을 비교합니다. 평균 제거는 각 지연의 실제 겹침 구간에서 수행합니다. **양의 지연 k는 X[i]와 Y[i+k]**, 즉 Y가 X 뒤에 오는 방향입니다. 영 에너지·겹침 부족은 정의되지 않은 값으로 표시하며 피크를 인과관계나 확정 지연으로 해석하지 않습니다. 원시 구간·SHA-256·설정·겹침 범위·정규화 수치를 JSON으로 보존합니다.
+
 ## 다음 확장
 
-[M21 이후 계획](docs/product-extension-roadmap.json)에서 M21 기록의 스펙트럼, M22 이산 SISO 제어계, M23 시드를 고정한 불확실성 앙상블은 로컬 구현·검증을 완료했습니다. M24 시간 구간 통계·상관/지연과 M25 Welch·시간-주파수 관측은 후속 계획입니다. 각 단계의 입력 범위·제외 항목·독립 검증 조건을 먼저 정하고 실제 완료한 범위만 지원 기능으로 표시합니다.
+[M21 이후 계획](docs/product-extension-roadmap.json)에서 M21 기록의 스펙트럼, M22 이산 SISO 제어계, M23 시드를 고정한 불확실성 앙상블, M24 구간 통계·상관은 로컬 구현·검증을 완료했습니다. M25 Welch·시간-주파수 관측은 후속 계획입니다. 각 단계의 입력 범위·제외 항목·독립 검증 조건을 먼저 정하고 실제 완료한 범위만 지원 기능으로 표시합니다.
 
 ## 영향을 받은 도구와 설계 원칙
 
@@ -171,7 +177,7 @@ npm run verify:release
 
 ## 지원 범위와 결과 해석
 
-현재 앱 버전은 **0.24.0**, 계산 엔진 버전은 **0.17.0-m16**입니다. 블록 수는 등록된 정의의 수이며 모든 자료형·모드·옵션에서 동작한다는 의미는 아닙니다. 실제 모델의 지원 여부는 [공개 지원표](docs/support-matrix.md)와 [기계 판독 지원표](docs/support-matrix.json)에서 확인할 수 있습니다.
+현행 소스의 앱 버전은 **0.25.0**, 계산 엔진 버전은 **0.17.0-m16**입니다. M24는 로컬 검증·커밋 범위이며 최신 공개 배포는 **0.24.0**입니다. 블록 수는 등록된 정의의 수이며 모든 자료형·모드·옵션에서 동작한다는 의미는 아닙니다. 실제 모델의 지원 여부는 [공개 지원표](docs/support-matrix.md)와 [기계 판독 지원표](docs/support-matrix.json)에서 확인할 수 있습니다.
 
 - TypeScript 내보내기는 승인된 실행 계약을 따릅니다. Python은 69개 블록 ID의 정적·이산 구성, WASM은 16개 블록 ID의 실수 스칼라 비순환 구성으로 제한됩니다. C/C++ 내보내기는 제공하지 않습니다.
 - Simulink R2024b 참고 목록 385행을 [원자료 대응표](docs/block-coverage.md)로 추적합니다. 원본의 모든 옵션이나 MathWorks 실행 결과와의 수치적 동등성을 검증한 것은 아닙니다. MAT·SLX·MDL 처리는 선택 범위의 데이터·구조 분석이며 원본 실행 환경을 대체하지 않습니다.

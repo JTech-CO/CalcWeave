@@ -1,0 +1,226 @@
+{
+  "generatedAt": "2026-10-09T09:05:07.417Z",
+  "appVersion": "0.25.0",
+  "engineVersion": "0.17.0-m16",
+  "scope": "/",
+  "releaseId": "bbf2a98efc02deafcf15d52d02697605a0cccbf7b7fa04dfcc999d64923a0fde",
+  "checks": [
+    "app/engine release versions",
+    "single registry retains catalog definitions with unique executable IDs",
+    "Python release metadata matches versioned capabilities and preserves all51 predecessor IDs",
+    "WASM release metadata matches selected scalar target capabilities",
+    "C/C++ emission is not advertised as verified execution",
+    "Python target does not claim continuous solver support",
+    "model packages bind approved immutable registry and local-only permissions",
+    "trusted adapter execution and unavailable native requirements remain distinct",
+    "pinned straight-line WASM artifact calcweave.wasm-affine-f64-v1",
+    "pinned straight-line WASM artifact calcweave.wasm-accumulator-f64-v1",
+    "package/release catalog version agreement",
+    "offline release version and bounded deployment scope agreement",
+    "releaseId binds complete static asset manifest",
+    "bounded unique offline allowlist",
+    "safe static asset /assets/engine.worker-BYNS5Yfw.js",
+    "final built bytes match /assets/engine.worker-BYNS5Yfw.js",
+    "safe static asset /assets/index-CAe5W0Pu.js",
+    "final built bytes match /assets/index-CAe5W0Pu.js",
+    "safe static asset /assets/index-D6E6r-56.css",
+    "final built bytes match /assets/index-D6E6r-56.css",
+    "safe static asset /assets/schemas-B44qH8my.js",
+    "final built bytes match /assets/schemas-B44qH8my.js",
+    "safe static asset /assets/social/calcweave-og.png",
+    "final built bytes match /assets/social/calcweave-og.png",
+    "safe static asset /assets/spectrum-GRghBTNX.js",
+    "final built bytes match /assets/spectrum-GRghBTNX.js",
+    "safe static asset /assets/src-Bch_Yk5-.js",
+    "final built bytes match /assets/src-Bch_Yk5-.js",
+    "safe static asset /assets/src-Bcx-wexT.js",
+    "final built bytes match /assets/src-Bcx-wexT.js",
+    "safe static asset /assets/src-CRsg4hif.js",
+    "final built bytes match /assets/src-CRsg4hif.js",
+    "safe static asset /assets/src-ChoyeFg_.js",
+    "final built bytes match /assets/src-ChoyeFg_.js",
+    "safe static asset /assets/src-DTyhufXD.js",
+    "final built bytes match /assets/src-DTyhufXD.js",
+    "safe static asset /assets/src-D_LuUTj8.js",
+    "final built bytes match /assets/src-D_LuUTj8.js",
+    "safe static asset /assets/src-bbicJXzs.js",
+    "final built bytes match /assets/src-bbicJXzs.js",
+    "safe static asset /assets/src-ikHHRnfJ.js",
+    "final built bytes match /assets/src-ikHHRnfJ.js",
+    "safe static asset /assets/time-series-statistics-C0SFueGw.js",
+    "final built bytes match /assets/time-series-statistics-C0SFueGw.js",
+    "safe static asset /cookies/index.html",
+    "final built bytes match /cookies/index.html",
+    "safe static asset /index.html",
+    "final built bytes match /index.html",
+    "safe static asset /notices/index.html",
+    "final built bytes match /notices/index.html",
+    "safe static asset /privacy/index.html",
+    "final built bytes match /privacy/index.html",
+    "safe static asset /terms/index.html",
+    "final built bytes match /terms/index.html",
+    "offline shell size limit",
+    "public social PNG is included in the verified offline release",
+    "static Korean OG/Twitter metadata uses actual public HTTPS URLs and PNG dimensions",
+    "production CSP permits pinned WASM while blocking dynamic/inline JavaScript evaluation",
+    "CSP precedes external-only application scripts",
+    "production referrer policy",
+    "offline accessible protected policy terms",
+    "operator/contact in terms",
+    "offline accessible protected policy privacy",
+    "operator/contact in privacy",
+    "offline accessible protected policy cookies",
+    "operator/contact in cookies",
+    "offline accessible protected policy notices",
+    "no source maps or environment files distributed",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "all code/Worker/lazy chunks are in static release",
+    "no recognized secret material in assets\\engine.worker-BYNS5Yfw.js",
+    "no recognized secret material in assets\\index-CAe5W0Pu.js",
+    "no recognized secret material in assets\\schemas-B44qH8my.js",
+    "no recognized secret material in assets\\spectrum-GRghBTNX.js",
+    "no recognized secret material in assets\\src-bbicJXzs.js",
+    "no recognized secret material in assets\\src-Bch_Yk5-.js",
+    "no recognized secret material in assets\\src-Bcx-wexT.js",
+    "no recognized secret material in assets\\src-ChoyeFg_.js",
+    "no recognized secret material in assets\\src-CRsg4hif.js",
+    "no recognized secret material in assets\\src-DTyhufXD.js",
+    "no recognized secret material in assets\\src-D_LuUTj8.js",
+    "no recognized secret material in assets\\src-ikHHRnfJ.js",
+    "no recognized secret material in assets\\time-series-statistics-C0SFueGw.js",
+    "no recognized secret material in cookies\\index.html",
+    "no recognized secret material in index.html",
+    "no recognized secret material in notices\\index.html",
+    "no recognized secret material in offline-manifest.json",
+    "no recognized secret material in privacy\\index.html",
+    "no recognized secret material in sw.js",
+    "no recognized secret material in terms\\index.html",
+    "publication is explicitly dispatched",
+    "only official Actions at the independently verified commit allowlist",
+    "workflow executes actual approved Python target parity",
+    "workflow validates the exact approved project/custom-domain destination",
+    "configured-path build and verification precede artifact publication"
+  ],
+  "files": [
+    {
+      "url": "/assets/engine.worker-BYNS5Yfw.js",
+      "bytes": 633138,
+      "sha256": "b1569d9f9b1b9db5afab30d75f7c00501c854a903666dfab91bd00e5b704fe3f"
+    },
+    {
+      "url": "/assets/index-CAe5W0Pu.js",
+      "bytes": 1469706,
+      "sha256": "39fe204819f08a37d7a45ab8f4420f657c4fcca8a1ddef5e3d621ace1ab87a14"
+    },
+    {
+      "url": "/assets/index-D6E6r-56.css",
+      "bytes": 143747,
+      "sha256": "944f9269ce0b39c84614f8b4964287181aec8c24002bc192c9ad8b89d0f5f19f"
+    },
+    {
+      "url": "/assets/schemas-B44qH8my.js",
+      "bytes": 89575,
+      "sha256": "3fe9116fec43c1e03dfdcbfb3d962963c6399c72fec836d781706a228d67b6b6"
+    },
+    {
+      "url": "/assets/social/calcweave-og.png",
+      "bytes": 997348,
+      "sha256": "0bc543faaa649f1a71c69db06c0ef561d732041176149cb80a5de00ae7410ec0"
+    },
+    {
+      "url": "/assets/spectrum-GRghBTNX.js",
+      "bytes": 5435,
+      "sha256": "cb5ab5baec4766b8a48dc55e08a7d8a17b1be426b7bafd0b7a4947426c4f3ae2"
+    },
+    {
+      "url": "/assets/src-Bch_Yk5-.js",
+      "bytes": 4154,
+      "sha256": "9582409f696212529968ed43b4ace16eb5ae23ea488cd7dbdb9eddd3b9816790"
+    },
+    {
+      "url": "/assets/src-Bcx-wexT.js",
+      "bytes": 3849878,
+      "sha256": "e8ffe226096710de03e621ccd2e869d2939d89e7a72cc1eb716898ea0bc6cb07"
+    },
+    {
+      "url": "/assets/src-CRsg4hif.js",
+      "bytes": 13633,
+      "sha256": "3db1790495643a0eb1f52cd00684dfa5cc8d08a6ccbad53e4ab34cb9839ad4d8"
+    },
+    {
+      "url": "/assets/src-ChoyeFg_.js",
+      "bytes": 63527,
+      "sha256": "0a18702cea5941991a912e8d1525d15195d1d2bd4373932d81d3546b7ad02a03"
+    },
+    {
+      "url": "/assets/src-DTyhufXD.js",
+      "bytes": 143291,
+      "sha256": "cf77f4cef60e5b2b03d825517396206921c47bf10ae205f1a753dd7c0bc53081"
+    },
+    {
+      "url": "/assets/src-D_LuUTj8.js",
+      "bytes": 10211,
+      "sha256": "6688a0af49ebacffcbaac72b106a6a116cbfde924857cae503a6e9f8dbe1eb2c"
+    },
+    {
+      "url": "/assets/src-bbicJXzs.js",
+      "bytes": 514268,
+      "sha256": "cb615a73321a3b36b2b1493a8086ea0ec777ffc01d6e9312174fdb2923382397"
+    },
+    {
+      "url": "/assets/src-ikHHRnfJ.js",
+      "bytes": 58162,
+      "sha256": "3cab04458c94414bf7337a0fb9a359255f11324af231675f5aff4360dc113e9a"
+    },
+    {
+      "url": "/assets/time-series-statistics-C0SFueGw.js",
+      "bytes": 8507,
+      "sha256": "b8dc0e331497cf3f6840e26ee5d8abe970d9d6df05cc23bcd5bb9be06daec4a8"
+    },
+    {
+      "url": "/cookies/index.html",
+      "bytes": 4343,
+      "sha256": "0fe04dffb9d2c788dc24f7be52310f615801be87b2e02ed010f869e264ff6f55"
+    },
+    {
+      "url": "/index.html",
+      "bytes": 3330,
+      "sha256": "978fada862d2c5c804803e60c6eac0417c0b64e5d47b6a8bf2fad205753a596b"
+    },
+    {
+      "url": "/notices/index.html",
+      "bytes": 35154,
+      "sha256": "376c98820e1aaf55830e1e7c2c68352ab213bf2f683718983e6a9f4ee6f488d3"
+    },
+    {
+      "url": "/privacy/index.html",
+      "bytes": 6817,
+      "sha256": "fbf8327c0b16c23e30d40d026d09aa8f6fb5d6d51c108f39b4422e83b36f0b7e"
+    },
+    {
+      "url": "/terms/index.html",
+      "bytes": 4860,
+      "sha256": "f1bafd10c40a29950dbbb6b554accdd6802eaf422f983392bc4dd026fcd3008c"
+    }
+  ],
+  "totalStaticBytes": 8059084,
+  "socialMetadata": {
+    "canonicalUrl": "https://jtech-co.github.io/CalcWeave/",
+    "imageUrl": "https://jtech-co.github.io/CalcWeave/assets/social/calcweave-og.png",
+    "width": 1730,
+    "height": 909
+  },
+  "publicDeploymentClaimed": false
+}

@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-09T09:08:42.018Z",
+  "localVerificationDate": "2026-10-09",
+  "timezone": "Asia/Seoul",
+  "milestone": "M24",
+  "appVersion": "0.25.0",
+  "engineVersion": "0.17.0-m16",
+  "publicDeploymentClaimed": false,
+  "status": "PASS",
+  "desktop": [
+    {
+      "theme": "dark",
+      "state": "correlation-result",
+      "viewport": 1440,
+      "page": 1440,
+      "panel": 770,
+      "panelClient": 770,
+      "dialogWidth": 820,
+      "minimumFieldFont": 16,
+      "minimumParagraphFont": 16,
+      "renderedPoints": 17
+    },
+    {
+      "theme": "light",
+      "state": "correlation-settings",
+      "viewport": 1440,
+      "page": 1440,
+      "panel": 770,
+      "panelClient": 770,
+      "dialogWidth": 820,
+      "minimumFieldFont": 16,
+      "minimumParagraphFont": 16,
+      "renderedPoints": 0
+    }
+  ],
+  "mobile": [
+    {
+      "width": 390,
+      "theme": "dark",
+      "scale": 1,
+      "viewport": 390,
+      "page": 390,
+      "panel": 336,
+      "client": 336,
+      "minimumFieldFont": 16,
+      "table": 1680,
+      "tableClient": 336,
+      "minimumParagraphFont": 16
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "scale": 1,
+      "viewport": 390,
+      "page": 390,
+      "panel": 336,
+      "client": 336,
+      "minimumFieldFont": 16,
+      "table": 1680,
+      "tableClient": 336,
+      "minimumParagraphFont": 16
+    },
+    {
+      "width": 320,
+      "theme": "dark",
+      "scale": 2,
+      "viewport": 320,
+      "page": 320,
+      "panel": 266,
+      "client": 266,
+      "minimumFieldFont": 32,
+      "table": 3360,
+      "tableClient": 266,
+      "minimumParagraphFont": 32
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "scale": 2,
+      "viewport": 320,
+      "page": 320,
+      "panel": 266,
+      "client": 266,
+      "minimumFieldFont": 32,
+      "table": 3360,
+      "tableClient": 266,
+      "minimumParagraphFont": 32
+    }
+  ],
+  "actualWorkerUrls": [
+    "http://127.0.0.1:4176/assets/engine.worker-BYNS5Yfw.js"
+  ],
+  "pageErrors": [],
+  "method": "Isolated actual Chromium contexts; real Worker recording; full panel font scaling on mobile; screenshot and bounds checks. User preview/profile on4173 untouched.",
+  "images": [
+    {
+      "path": "docs/evidence/m24-statistics-desktop-dark-result.png",
+      "sha256": "e628119a50563de13aca853fa02fa2f3f88e607a5886bcd8ffe999134ae3c892"
+    },
+    {
+      "path": "docs/evidence/m24-statistics-desktop-light-settings.png",
+      "sha256": "6eae792127ecb0afb908852a1319a5563766efc1573fa912430c258854618570"
+    },
+    {
+      "path": "docs/evidence/m24-statistics-320-dark-2x.png",
+      "sha256": "f223cee754f710f3da7b0df77c1579584512bb043934d946970047e2f850803b"
+    },
+    {
+      "path": "docs/evidence/m24-statistics-390-light-1x.png",
+      "sha256": "3cf490b2f69829904b6120abba53051fd86ec3b5cdc016b6ed9f1596ef54a883"
+    }
+  ]
+}

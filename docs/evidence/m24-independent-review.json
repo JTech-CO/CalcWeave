@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-09T09:08:42.018Z",
+  "localVerificationDate": "2026-10-09",
+  "timezone": "Asia/Seoul",
+  "milestone": "M24",
+  "appVersion": "0.25.0",
+  "engineVersion": "0.17.0-m16",
+  "publicDeploymentClaimed": false,
+  "status": "PASS-with-corrected-findings",
+  "baselineCommit": "5b07e47",
+  "reviewers": [
+    {
+      "agent": "/root/m24_record_sources",
+      "independentOf": [
+        "numerical core",
+        "UI"
+      ],
+      "method": "Read-only review plus2,000 integer-coordinate correlation/1,000 pairwise variance oracle comparisons."
+    },
+    {
+      "agent": "/root/m24_statistics_ui",
+      "independentOf": [
+        "source adapter"
+      ],
+      "method": "Read-only descriptor/provenance/resource inspection and actual signed-zero getter probes."
+    },
+    {
+      "agent": "/root/m24_statistics_core",
+      "independentOf": [
+        "integration",
+        "documentation",
+        "browser tests"
+      ],
+      "method": "Read-only mathematical sign/unit/independent-oracle/commit-only publication-scope review."
+    }
+  ],
+  "findings": [
+    {
+      "id": "M24-REVIEW-01",
+      "priority": 2,
+      "problem": "JSON.stringify merged raw IEEE negative and positive zero in the selected-sample hash and raw JSON input.",
+      "correction": "Distinct -0 hash token and explicit16-digit big-endian Float64 bits for all raw input arrays.",
+      "validation": "Actual typed negative-zero Worker JSON and hash E2E, source hash-sign regression, UI exact-bit roundtrip."
+    },
+    {
+      "id": "M24-REVIEW-02",
+      "priority": 2,
+      "problem": "Composite squared units such as m/s were written m/s² instead of (m/s)².",
+      "correction": "Parenthesize whole variance and raw correlation-energy units; retain original source units.",
+      "validation": "SSR compound-unit regression in both modes; full unit suite."
+    },
+    {
+      "id": "M24-REVIEW-03",
+      "priority": 2,
+      "problem": "Global dialog paragraph CSS reduced source/diagnostic help to14px.",
+      "correction": "Strong scoped paragraph rule at16px, and explicit paragraph-size browser checks.",
+      "validation": "Final mobile dark/light390px and320px200% floor16/32, desktop16px; no page/panel horizontal overflow."
+    }
+  ],
+  "sourceSha256": {
+    "packages/analysis/src/time-series-statistics.ts": "1b53c1f385e9f3ab690463b212e69d9ca9d9eb8b711997c4172e3bc6a1a8ab73",
+    "packages/analysis/src/index.ts": "76e619f75526dffe377d572184b3bf8fe626e08530747b8c3b5879169130fff0",
+    "apps/web/src/time-series-analysis-sources.ts": "156ad0bd1391027bc745a81e19403bbcba685ba6f7c49a8e9ce18144ae729c20",
+    "apps/web/src/components/TimeSeriesStatisticsPanel.tsx": "ae771b2a2dec49e2079687743d1ad5958ede2a0f2f8c4f4b81b3216dad76f3ee",
+    "apps/web/src/components/TimeSeriesStatisticsPanel.css": "1d673095a66cb797e210af265827a49d5a71b10e42bc6337729decd1b39b5ef4",
+    "apps/web/src/components/AnalysisDialog.tsx": "36bfa80cabc8727feb94ba4dc3c4ab160968565ae29762a5a8942cb2c56270ba",
+    "tests/m24-time-series-statistics.test.ts": "65b3cf70e21ecbdede25d2ce1ce139761ebb2a7e34d001c8ac988869a64cf482",
+    "tests/m24-time-series-sources.test.ts": "98fe287626aa4b865f6f0634e33e2baa1dc88ec3adba1ffa1ee6ad2b94effaa9",
+    "tests/m24-time-series-ui.test.ts": "78940eba3e5f9a20533b4e66c403817340da47a10e1920c4e248f85ce68f73d1",
+    "tests/e2e/m24-statistics.spec.ts": "634cc76ea266383f95a988b09729285201319c2465787d9b45187d79f27c079b",
+    "packages/release/src/index.ts": "9559dfd9af01b1264983c2f6a5b06f8131badf0232d89fe13fe112affd8b22b5",
+    "package.json": "26204d501ea5532294887f3651295845893c1889f40eb347b886a39ef9d98ee6",
+    "package-lock.json": "5f99e7285a67df4b1bb09425dfab3527bac368b1869904f39cb99d1c922a860e",
+    "scripts/social-metadata.ts": "ac39abb4becdba99d9a91d58db1a4bc9d541c008de9a91b34033f443f34b2f50",
+    "tests/social-metadata.test.ts": "28828b022e4d388f7787c2b0c078d7c1b78a5a6db73dabf37e2006e69b314736",
+    "apps/web/public/notices/index.html": "376c98820e1aaf55830e1e7c2c68352ab213bf2f683718983e6a9f4ee6f488d3",
+    "README.md": "1eeb35828a690745e4b0b06fcb6dcf97b90701ee501b6defec80a7f3f3876632",
+    "docs/01-technical-whitepaper.md": "854abc54353ef6b791ce78d84e9772d78bdb42f8f7b0da4ba88b152d9a5d4422",
+    "docs/02-design-whitepaper.md": "b056d1fad31fbc0d7e57b70b6c74a134f30a25ccc6f6f1f713c1cdda4c69f438",
+    "docs/operations.md": "0097243a3b7b8b1ee81afa640a53bf5b5e4b724260791a5e66fd9299cee389ca",
+    "docs/validation.md": "9bba670e296411d90de8062d75b987336e9a84cd88c82a782ed2a471186b920a",
+    "docs/product-extension-roadmap.json": "d8cb6ac295f34defa12d26899e1f9250b531a3d5ba2ffcab3c9dfe0e450c93a2"
+  },
+  "numericEvidence": "docs/evidence/m24-independent-numeric-review.json",
+  "preservedBoundaries": [
+    "Completed-only same raw grid and unit; no automatic casting/alignment/interpolation.",
+    "Detached captures before lazy import; unmount invalidates generation.",
+    "Plain descriptor-only input validation and aggregate preflight work budget.",
+    "No external service, account, server, personal-data collection or new dependency."
+  ]
+}

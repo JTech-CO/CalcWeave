@@ -5,6 +5,7 @@ export * from './scope-observation';
 export * from './control-system';
 export * from './discrete-control-system';
 export * from './spectrum';
+export * from './time-series-statistics';
 import { ModelError, normalizeSolverSettings, parseModel, type CalcModel, type ExpressionNode, type RunResult, type SignalValue } from '../../model/src';
 import { runModel } from '../../runtime/src';
 

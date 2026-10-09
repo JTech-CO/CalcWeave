@@ -1,0 +1,875 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-09T09:08:42.018Z",
+  "localVerificationDate": "2026-10-09",
+  "timezone": "Asia/Seoul",
+  "milestone": "M24",
+  "appVersion": "0.25.0",
+  "engineVersion": "0.17.0-m16",
+  "publicDeploymentClaimed": false,
+  "status": "completed-local-verification",
+  "sourceSha256": {
+    "packages/analysis/src/time-series-statistics.ts": "1b53c1f385e9f3ab690463b212e69d9ca9d9eb8b711997c4172e3bc6a1a8ab73",
+    "packages/analysis/src/index.ts": "76e619f75526dffe377d572184b3bf8fe626e08530747b8c3b5879169130fff0",
+    "apps/web/src/time-series-analysis-sources.ts": "156ad0bd1391027bc745a81e19403bbcba685ba6f7c49a8e9ce18144ae729c20",
+    "apps/web/src/components/TimeSeriesStatisticsPanel.tsx": "ae771b2a2dec49e2079687743d1ad5958ede2a0f2f8c4f4b81b3216dad76f3ee",
+    "apps/web/src/components/TimeSeriesStatisticsPanel.css": "1d673095a66cb797e210af265827a49d5a71b10e42bc6337729decd1b39b5ef4",
+    "apps/web/src/components/AnalysisDialog.tsx": "36bfa80cabc8727feb94ba4dc3c4ab160968565ae29762a5a8942cb2c56270ba",
+    "tests/m24-time-series-statistics.test.ts": "65b3cf70e21ecbdede25d2ce1ce139761ebb2a7e34d001c8ac988869a64cf482",
+    "tests/m24-time-series-sources.test.ts": "98fe287626aa4b865f6f0634e33e2baa1dc88ec3adba1ffa1ee6ad2b94effaa9",
+    "tests/m24-time-series-ui.test.ts": "78940eba3e5f9a20533b4e66c403817340da47a10e1920c4e248f85ce68f73d1",
+    "tests/e2e/m24-statistics.spec.ts": "634cc76ea266383f95a988b09729285201319c2465787d9b45187d79f27c079b",
+    "packages/release/src/index.ts": "9559dfd9af01b1264983c2f6a5b06f8131badf0232d89fe13fe112affd8b22b5",
+    "package.json": "26204d501ea5532294887f3651295845893c1889f40eb347b886a39ef9d98ee6",
+    "package-lock.json": "5f99e7285a67df4b1bb09425dfab3527bac368b1869904f39cb99d1c922a860e",
+    "scripts/social-metadata.ts": "ac39abb4becdba99d9a91d58db1a4bc9d541c008de9a91b34033f443f34b2f50",
+    "tests/social-metadata.test.ts": "28828b022e4d388f7787c2b0c078d7c1b78a5a6db73dabf37e2006e69b314736",
+    "apps/web/public/notices/index.html": "376c98820e1aaf55830e1e7c2c68352ab213bf2f683718983e6a9f4ee6f488d3",
+    "README.md": "1eeb35828a690745e4b0b06fcb6dcf97b90701ee501b6defec80a7f3f3876632",
+    "docs/01-technical-whitepaper.md": "854abc54353ef6b791ce78d84e9772d78bdb42f8f7b0da4ba88b152d9a5d4422",
+    "docs/02-design-whitepaper.md": "b056d1fad31fbc0d7e57b70b6c74a134f30a25ccc6f6f1f713c1cdda4c69f438",
+    "docs/operations.md": "0097243a3b7b8b1ee81afa640a53bf5b5e4b724260791a5e66fd9299cee389ca",
+    "docs/validation.md": "9bba670e296411d90de8062d75b987336e9a84cd88c82a782ed2a471186b920a",
+    "docs/product-extension-roadmap.json": "d8cb6ac295f34defa12d26899e1f9250b531a3d5ba2ffcab3c9dfe0e450c93a2"
+  },
+  "supported": [
+    "Equal-sample mean, population/sample variance and standard deviation, RMS, min/max and explicit N/N-1 divisors.",
+    "Completed contiguous2..8192 real samples with legacy scalar/vector/matrix and typed float32/float64 scalar/vector component projection.",
+    "Per-overlap mean removal or raw cosine normalization on exactly same raw timestamps and source units.",
+    "Positive lag k pairsX[i]andY[i+k]; actual overlap ranges/means/raw+scaled normalization; undefined coefficients remain null.",
+    "Deterministic maximum absolute coefficient candidate with greater overlap/smaller absolute lag/negative lag tie preference; no causal or exact-delay claim.",
+    "Captured raw values/times/source/hash/options and exact IEEE bits through JSON; model/history unchanged.",
+    "128-row raw pages and512 display-only actual lag points retaining endpoints, zero lag and peak."
+  ],
+  "limits": {
+    "samples": 8192,
+    "minSamples": 2,
+    "maxLag": 512,
+    "minOverlap": 2,
+    "maxValue": 1000000000000,
+    "maxTime": 1000000000,
+    "work": 20000000,
+    "sources": 16,
+    "recordedElements": 1000000,
+    "workMeaning": "Deterministic policy budget units, not literal JavaScript operation count/FLOPs.",
+    "workFormula": "24*N+30*((2*L+1)*N-L*(L+1))+24*(2*L+1)",
+    "rawTableRowsPerPage": 128,
+    "maximumDisplayedLagPoints": 512
+  },
+  "unit": {
+    "command": "npm test -- --maxWorkers=2 --reporter=json --outputFile=.test-generated/m24-unit.json",
+    "files": 89,
+    "passed": 4815,
+    "failed": 0,
+    "newMilestonePassed": 242,
+    "core": 78,
+    "sources": 131,
+    "ui": 33,
+    "suites": [
+      {
+        "file": "tests/block-expansion.test.ts",
+        "cases": 149,
+        "passed": 149,
+        "status": "passed"
+      },
+      {
+        "file": "tests/block-symbols.test.ts",
+        "cases": 2,
+        "passed": 2,
+        "status": "passed"
+      },
+      {
+        "file": "tests/codegen.test.ts",
+        "cases": 132,
+        "passed": 132,
+        "status": "passed"
+      },
+      {
+        "file": "tests/compiler.test.ts",
+        "cases": 26,
+        "passed": 26,
+        "status": "passed"
+      },
+      {
+        "file": "tests/export-download.test.ts",
+        "cases": 5,
+        "passed": 5,
+        "status": "passed"
+      },
+      {
+        "file": "tests/expression.test.ts",
+        "cases": 4,
+        "passed": 4,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m10-compiler.test.ts",
+        "cases": 83,
+        "passed": 83,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m10-history.test.ts",
+        "cases": 9,
+        "passed": 9,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m10-independent-math.test.ts",
+        "cases": 210,
+        "passed": 210,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m10-result-export.test.ts",
+        "cases": 15,
+        "passed": 15,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m10-runtime.test.ts",
+        "cases": 38,
+        "passed": 38,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m10-typed-values.test.ts",
+        "cases": 116,
+        "passed": 116,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m10-ui-values.test.ts",
+        "cases": 23,
+        "passed": 23,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m11-compiler.test.ts",
+        "cases": 79,
+        "passed": 79,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m11-examples.test.ts",
+        "cases": 8,
+        "passed": 8,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m11-hierarchy-editor.test.ts",
+        "cases": 11,
+        "passed": 11,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m11-history.test.ts",
+        "cases": 6,
+        "passed": 6,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m11-runtime.test.ts",
+        "cases": 104,
+        "passed": 104,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m11-structured.test.ts",
+        "cases": 11,
+        "passed": 11,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m11-ui-values.test.ts",
+        "cases": 8,
+        "passed": 8,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m12-analysis.test.ts",
+        "cases": 14,
+        "passed": 14,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m12-compiler.test.ts",
+        "cases": 37,
+        "passed": 37,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m12-examples.test.ts",
+        "cases": 8,
+        "passed": 8,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m12-numerics.test.ts",
+        "cases": 8,
+        "passed": 8,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m12-runtime.test.ts",
+        "cases": 35,
+        "passed": 35,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m12-ui.test.ts",
+        "cases": 9,
+        "passed": 9,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m13-compiler.test.ts",
+        "cases": 31,
+        "passed": 31,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m13-data-import.test.ts",
+        "cases": 30,
+        "passed": 30,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m13-history.test.ts",
+        "cases": 10,
+        "passed": 10,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m13-live.test.ts",
+        "cases": 6,
+        "passed": 6,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m13-runtime.test.ts",
+        "cases": 375,
+        "passed": 375,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m13-ui-models.test.ts",
+        "cases": 48,
+        "passed": 48,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m13-worker.test.ts",
+        "cases": 4,
+        "passed": 4,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m14-compiler.test.ts",
+        "cases": 20,
+        "passed": 20,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m14-history.test.ts",
+        "cases": 13,
+        "passed": 13,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m14-runtime.test.ts",
+        "cases": 61,
+        "passed": 61,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m14-ui-models.test.ts",
+        "cases": 22,
+        "passed": 22,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m15-export-archive.test.ts",
+        "cases": 2,
+        "passed": 2,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m15-interop.test.ts",
+        "cases": 43,
+        "passed": 43,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m15-package.test.ts",
+        "cases": 15,
+        "passed": 15,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m15-python.test.ts",
+        "cases": 104,
+        "passed": 104,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m15-wasm.test.ts",
+        "cases": 59,
+        "passed": 59,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m16-support-matrix.test.ts",
+        "cases": 28,
+        "passed": 28,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m17-equations.test.ts",
+        "cases": 27,
+        "passed": 27,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m17-learning.test.ts",
+        "cases": 20,
+        "passed": 20,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m18-scope.test.ts",
+        "cases": 40,
+        "passed": 40,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m19-experiments.test.ts",
+        "cases": 55,
+        "passed": 55,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m19-ui.test.ts",
+        "cases": 27,
+        "passed": 27,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m2-compiler.test.ts",
+        "cases": 53,
+        "passed": 53,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m20-control.test.ts",
+        "cases": 54,
+        "passed": 54,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m20-sources.test.ts",
+        "cases": 15,
+        "passed": 15,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m20-ui.test.ts",
+        "cases": 28,
+        "passed": 28,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m21-sources.test.ts",
+        "cases": 30,
+        "passed": 30,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m21-spectrum.test.ts",
+        "cases": 68,
+        "passed": 68,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m21-ui.test.ts",
+        "cases": 30,
+        "passed": 30,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m22-control.test.ts",
+        "cases": 77,
+        "passed": 77,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m22-sources.test.ts",
+        "cases": 24,
+        "passed": 24,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m22-ui.test.ts",
+        "cases": 34,
+        "passed": 34,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m23-ensemble.test.ts",
+        "cases": 91,
+        "passed": 91,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m23-ui.test.ts",
+        "cases": 44,
+        "passed": 44,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m24-time-series-sources.test.ts",
+        "cases": 131,
+        "passed": 131,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m24-time-series-statistics.test.ts",
+        "cases": 78,
+        "passed": 78,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m24-time-series-ui.test.ts",
+        "cases": 33,
+        "passed": 33,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m3-codegen.test.ts",
+        "cases": 33,
+        "passed": 33,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m3-compiler.test.ts",
+        "cases": 92,
+        "passed": 92,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m3-runtime.test.ts",
+        "cases": 41,
+        "passed": 41,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m4-data.test.ts",
+        "cases": 39,
+        "passed": 39,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m4-experiments.test.ts",
+        "cases": 44,
+        "passed": 44,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m4-hierarchy.test.ts",
+        "cases": 33,
+        "passed": 33,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m4-integration.test.ts",
+        "cases": 8,
+        "passed": 8,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m4-workspace.test.ts",
+        "cases": 5,
+        "passed": 5,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m5-advanced-math.test.ts",
+        "cases": 52,
+        "passed": 52,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m5-integration.test.ts",
+        "cases": 52,
+        "passed": 52,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m5-partial-state.test.ts",
+        "cases": 2,
+        "passed": 2,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m5-quantization.test.ts",
+        "cases": 36,
+        "passed": 36,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m6-offline.test.ts",
+        "cases": 41,
+        "passed": 41,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m6-persistence.test.ts",
+        "cases": 27,
+        "passed": 27,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m7-import.test.ts",
+        "cases": 16,
+        "passed": 16,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m7-package.test.ts",
+        "cases": 27,
+        "passed": 27,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m7-python.test.ts",
+        "cases": 113,
+        "passed": 113,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m8-compiler.test.ts",
+        "cases": 146,
+        "passed": 146,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m8-runtime.test.ts",
+        "cases": 378,
+        "passed": 378,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m9-compiler.test.ts",
+        "cases": 230,
+        "passed": 230,
+        "status": "passed"
+      },
+      {
+        "file": "tests/m9-runtime.test.ts",
+        "cases": 199,
+        "passed": 199,
+        "status": "passed"
+      },
+      {
+        "file": "tests/model.test.ts",
+        "cases": 13,
+        "passed": 13,
+        "status": "passed"
+      },
+      {
+        "file": "tests/runtime.test.ts",
+        "cases": 142,
+        "passed": 142,
+        "status": "passed"
+      },
+      {
+        "file": "tests/social-metadata.test.ts",
+        "cases": 22,
+        "passed": 22,
+        "status": "passed"
+      },
+      {
+        "file": "tests/time-sources.test.ts",
+        "cases": 29,
+        "passed": 29,
+        "status": "passed"
+      },
+      {
+        "file": "tests/worker-client.test.ts",
+        "cases": 15,
+        "passed": 15,
+        "status": "passed"
+      }
+    ],
+    "rawReportSha256": "ba9428b706bdfebef294fbfd02123da7bede8ff5d42ac491642fa43db1f1a94a"
+  },
+  "browser": {
+    "currentMilestoneAndWorkspace": {
+      "passed": 16,
+      "cases": [
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 no completed time recording disables analysis without running the model",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 actual Worker recording yields analytic population and sample statistics and arbitrary selected counts",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 actual delayed Worker signal preserves positive lag, per-overlap Pearson normalization and snapshot settings",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 malformed draft preserves captured report and valid nonfinite selection clears it",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 constant energy and insufficient overlap are null while raw cosine remains defined",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 typed negative zero survives JSON through explicit IEEE bits and distinct sample hash",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 previous recording stays tied to its original model after a new draft is imported",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 full lag table paginates 128 rows, display sampling preserves raw JSON and aggregate work rejects excess",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 mobile themes and 200-percent text keep controls readable, HTML escaped and raw table internally scrolling",
+          "status": "passed"
+        },
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 closing a pending panel ignores the late core import and does not create a new run",
+          "status": "passed"
+        },
+        {
+          "file": "workspace.spec.ts",
+          "title": "Initial fit waits for a delayed positive canvas measurement and preserves later navigation",
+          "status": "passed"
+        },
+        {
+          "file": "workspace.spec.ts",
+          "title": "First autosave keeps the header and initially fitted canvas stable when status labels wrap",
+          "status": "passed"
+        },
+        {
+          "file": "workspace.spec.ts",
+          "title": "Space fits only the focused canvas and leaves field, button, modal, IME and repeated-key behavior intact",
+          "status": "passed"
+        },
+        {
+          "file": "workspace.spec.ts",
+          "title": "Worker calculation, semantic staleness, undo and local restoration",
+          "status": "passed"
+        },
+        {
+          "file": "workspace.spec.ts",
+          "title": "Keyboard-accessible connection editing, undo and unique block IDs",
+          "status": "passed"
+        },
+        {
+          "file": "workspace.spec.ts",
+          "title": "Desktop and horizontal tablet keep full-height results beside the canvas; narrow screens stack them",
+          "status": "passed"
+        }
+      ]
+    },
+    "spectrumAndEnsembleRegression": {
+      "passed": 18,
+      "cases": [
+        {
+          "file": "m21-spectrum.spec.ts",
+          "title": "M21 no completed time recording explains the source requirement without launching a simulation",
+          "status": "passed"
+        },
+        {
+          "file": "m21-spectrum.spec.ts",
+          "title": "M21 actual Worker sine produces analytic FFT amplitude, PSD and raw complex bins without editing the model",
+          "status": "passed"
+        },
+        {
+          "file": "m21-spectrum.spec.ts",
+          "title": "M21 invalid sample count and out-of-range start preserve the previous captured report",
+          "status": "passed"
+        },
+        {
+          "file": "m21-spectrum.spec.ts",
+          "title": "M21 an accepted selection containing a nonfinite typed component clears the older successful report",
+          "status": "passed"
+        },
+        {
+          "file": "m21-spectrum.spec.ts",
+          "title": "M21 previous execution stays tied to its original recording while new model and window drafts change",
+          "status": "passed"
+        },
+        {
+          "file": "m21-spectrum.spec.ts",
+          "title": "M21 selected segment and large raw table preserve exact recording times and 128-row pages",
+          "status": "passed"
+        },
+        {
+          "file": "m21-spectrum.spec.ts",
+          "title": "M21 charts, long escaped labels and internal raw tables fit mobile themes and 200-percent text",
+          "status": "passed"
+        },
+        {
+          "file": "m23-ensemble.spec.ts",
+          "title": "M23 actual Worker uniform ensemble reproduces independent affine samples and point statistics without editing the model",
+          "status": "passed"
+        },
+        {
+          "file": "m23-ensemble.spec.ts",
+          "title": "M23 repeating the captured seed reproduces raw samples and statistics while a different seed changes the plan",
+          "status": "passed"
+        },
+        {
+          "file": "m23-ensemble.spec.ts",
+          "title": "M23 three-parameter uniform and triangular draws preserve their specified bounds and the analytic transformed output",
+          "status": "passed"
+        },
+        {
+          "file": "m23-ensemble.spec.ts",
+          "title": "M23 failed negative square-root samples stay visible, consume the shared budget and never enter the completed-only statistics",
+          "status": "passed"
+        },
+        {
+          "file": "m23-ensemble.spec.ts",
+          "title": "M23 report export retains its captured inputs after edits and invalid seed, sample counts and distributions cannot replace it",
+          "status": "passed"
+        },
+        {
+          "file": "m23-ensemble.spec.ts",
+          "title": "M23 model changes require an explicit completed sample apply, support undo and disable stale candidates",
+          "status": "passed"
+        },
+        {
+          "file": "m23-ensemble.spec.ts",
+          "title": "M23 boolean, vector and explicit typed outputs cannot be silently aggregated as real scalar outputs",
+          "status": "passed"
+        },
+        {
+          "file": "m23-ensemble.spec.ts",
+          "title": "M23 cancellation preserves completed work, reports cancelled and unstarted samples, and ignores a queued late actual Worker result",
+          "status": "passed"
+        },
+        {
+          "file": "m23-ensemble.spec.ts",
+          "title": "M23 long escaped labels, paged results and all panel text fit narrow themes at 200 percent text size",
+          "status": "passed"
+        },
+        {
+          "file": "m23-ensemble.spec.ts",
+          "title": "M23 live dashboard edits are rejected during an ensemble and actual Worker samples keep the captured model provenance",
+          "status": "passed"
+        },
+        {
+          "file": "m23-ensemble.spec.ts",
+          "title": "M23 a mismatched semantic hash on an actual Worker result stops the plan without admitting fabricated provenance",
+          "status": "passed"
+        }
+      ]
+    },
+    "finalParagraphFontVerification": {
+      "passed": 1,
+      "cases": [
+        {
+          "file": "m24-statistics.spec.ts",
+          "title": "M24 mobile themes and 200-percent text keep controls readable, HTML escaped and raw table internally scrolling",
+          "status": "passed"
+        }
+      ]
+    },
+    "uniqueCases": 34,
+    "fullRepositoryBrowserSuiteRun": false,
+    "actualWorker": true,
+    "rawReportSha256": {
+      "main": "d715ce3ce48f9fb95e2ffef9db5233f60a1dc5afbb6e04ed209f777fba70ba0b",
+      "regression": "8175310877ba175a9c720c12fbd93e266aae82dfc32f479cb93f757787bb4fc1",
+      "fonts": "4bba2a7518f2d3cac42d6fe783b22cc44ad138d6c6ebd5f14a6882544633a2a8"
+    }
+  },
+  "independentNumericalEvidence": "docs/evidence/m24-independent-numeric-review.json",
+  "independentReview": "docs/evidence/m24-independent-review.json",
+  "designEvidence": "docs/evidence/m24-design-observations.json",
+  "typecheck": {
+    "passed": true,
+    "command": "npm run build -- --outDir ../../.test-generated/m24-root-dist",
+    "includes": "tsc --noEmit"
+  },
+  "productionBuild": {
+    "passed": true,
+    "warnings": [
+      "Existing Vite native-config extension warnings.",
+      "Existing large chunks and ineffective dynamic imports in control/interop modules."
+    ]
+  },
+  "release": {
+    "scope": "/",
+    "checks": 107,
+    "staticFiles": 20,
+    "totalStaticBytes": 8059084,
+    "releaseId": "bbf2a98efc02deafcf15d52d02697605a0cccbf7b7fa04dfcc999d64923a0fde",
+    "evidence": "docs/evidence/m24-root-release-verification.json",
+    "projectSubpathBuildTestedThisMilestone": false
+  },
+  "historicalCoverage": {
+    "sourceRows": 385,
+    "registryDefinitions": 337,
+    "examples": 75,
+    "schemaVersion": 1,
+    "engineVersion": "0.17.0-m16",
+    "coverageAndRoadmapVerifiersPassed": true,
+    "frozenEvidenceChanged": false
+  },
+  "securityBaseline": {
+    "queryAndOwnership": "No new server/DB queries or ownership/authentication surface.",
+    "output": "React escaped text; no HTML/eval callback rendering; browser injection-label checks.",
+    "secrets": "No credentials/serverkeys or new network endpoints.",
+    "validation": "Own descriptor-only exact field/array/type/grid/value/draft bounds; no getter execution or silent type conversion.",
+    "resourceLimits": "Aggregate20million policy work units preflight,8192samples/512lag/16sources/1million projection elements.",
+    "settings": "Existing protected static CSP/referrer/offline allowlist verified; no new cookie/CORS/environment configuration.",
+    "database": "No new DB/schema/RLS surface.",
+    "privacy": "No new personal-data collection/account/tracking/remote model transfer."
+  },
+  "initialFailures": [
+    {
+      "phase": "Early unit run during implementation",
+      "failures": 3,
+      "correction": "Two exact unit-coefficient assertions and absolute large-variance tolerance were corrected to relative Float64 comparisons; independent expected arithmetic retained."
+    },
+    {
+      "phase": "Initial M24 browser",
+      "passed": 7,
+      "failed": 1,
+      "correction": "Typed fixture retained layout for a deleted delay node; repaired fixture model, production behavior unchanged."
+    },
+    {
+      "phase": "Concurrent full units and browsers",
+      "passed": 4810,
+      "failed": 4,
+      "correction": "Existing codegen/Python cases failed at~15seconds with STACK_TRACE_ERROR. No affected implementation/test timeout was changed. Final isolated2-worker run4815/4815PASS; sole environmental root cause not asserted."
+    }
+  ],
+  "publication": {
+    "requested": false,
+    "dispatched": false,
+    "latestVerifiedPublicAppVersion": "0.24.0",
+    "localPreview": "http://127.0.0.1:4176/",
+    "note": "Local verification and requested commit only. No M24 public deployment claim."
+  }
+}

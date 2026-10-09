@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "method": "deterministic-independent-integer-coordinate-oracles",
+  "passed": true,
+  "seed": 19,
+  "generatedIntegerPatterns": 1000,
+  "sampleCounts": {
+    "minimum": 2,
+    "maximum": 19
+  },
+  "integerCoordinateRange": [
+    -20,
+    20
+  ],
+  "variants": [
+    {
+      "name": "high-offset",
+      "offsetX": 900000000000,
+      "offsetY": -900000000000,
+      "unit": 0.0001220703125
+    },
+    {
+      "name": "subnormal",
+      "offsetX": 0,
+      "offsetY": 0,
+      "unit": 5e-324
+    }
+  ],
+  "caseCount": 2000,
+  "correlationCaseCount": 2000,
+  "highOffsetStatisticsCaseCount": 1000,
+  "maxVarianceRelativeError": 3.9213175262698684e-16,
+  "maxCoefficientError": 3.3306690738754696e-16,
+  "undefinedMismatchCount": 0,
+  "tolerances": {
+    "varianceRelativeError": 1e-13,
+    "coefficientAbsoluteError": 1e-13
+  },
+  "oracle": {
+    "variance": "sum over i<j of (a[i]-a[j])^2 / N^2, scaled by exact binary unit squared",
+    "correlation": "direct centered integer-coordinate covariance divided by sqrt of energy product"
+  },
+  "source": {
+    "script": ".test-generated/m24-independent-numeric-review.ts",
+    "scriptSha256": "004beb623bde2cd9de211118677048f48866c8ea5f0bdda05fd676382185500e",
+    "core": "packages/analysis/src/time-series-statistics.ts",
+    "coreSha256": "1b53c1f385e9f3ab690463b212e69d9ca9d9eb8b711997c4172e3bc6a1a8ab73"
+  }
+}

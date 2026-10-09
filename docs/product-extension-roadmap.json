@@ -3,7 +3,7 @@
   "date": "2026-10-09",
   "title": "CalcWeave M21 이후 제품 확장 계획",
   "basis": "M20까지의 현행 코드에서 확인한 분석 공백과 사용자가 승인한 후속 구축·기획",
-  "appVersion": "0.24.0",
+  "appVersion": "0.25.0",
   "engineVersion": "0.17.0-m16",
   "historicalCoverageRoadmapUnchanged": true,
   "calendarCommitment": null,
@@ -53,11 +53,14 @@
     {
       "id": "M24",
       "title": "시간 구간 통계와 신호 상관·지연 관측",
-      "status": "planned",
+      "status": "completed-local-verification",
       "dependsOn": ["M18", "M21"],
       "scope": ["선택 기록 구간의 평균·분산·RMS·최솟값·최댓값", "같은 균일 격자의 정규화 상관과 제한된 lag", "표본 수·분모·단위·실제 겹친 구간을 표시하는 원시 표"],
       "exitGates": ["표본 통계와 시간 가중 통계를 구별", "상수 신호·영 분산·정확한 지연·짧은 겹침 oracle", "DC 제거·정규화·lag 부호 규약을 보고서에 보존", "빈 구간·불균일 시각·자료형/단위 불일치를 명시적으로 처리"],
-      "excluded": ["상관을 인과관계로 해석·자동 시간 정렬·무단 보간"]
+      "excluded": ["상관을 인과관계·확정 지연으로 해석", "자동 시간 정렬·보간·재표본화", "시간 가중 평균·적분", "부분 실행·정수·fixed·complex·boolean·bus의 자동 변환"],
+      "limits": { "samples": 8192, "minimumSamples": 2, "maximumLag": 512, "minimumOverlap": 2, "minimumIntervalSeconds": 1e-9, "valueMagnitude": 1e12, "timeMagnitude": 1e9, "workBudgetUnits": 20000000, "outputSources": 16, "sourceRecordedElements": 1000000, "tableRowsPerPage": 128, "displayedGraphPoints": 512 },
+      "implementation": ["packages/analysis/src/time-series-statistics.ts", "apps/web/src/time-series-analysis-sources.ts", "apps/web/src/components/TimeSeriesStatisticsPanel.tsx"],
+      "evidence": "docs/evidence/m24-verification.json"
     },
     {
       "id": "M25",
@@ -77,6 +80,9 @@
     "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.dfreqresp.html",
     "https://numpy.org/doc/stable/reference/generated/numpy.quantile.html",
     "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.uniform.html",
-    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.triang.html"
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.triang.html",
+    "https://numpy.org/doc/stable/reference/generated/numpy.var.html",
+    "https://numpy.org/doc/stable/reference/generated/numpy.corrcoef.html",
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.correlate.html"
   ]
 }

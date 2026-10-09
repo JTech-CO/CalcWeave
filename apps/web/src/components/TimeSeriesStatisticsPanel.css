@@ -1,0 +1,40 @@
+.time-series-analysis-section { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); min-width: 0; }
+.time-series-analysis-section > summary { cursor: pointer; color: var(--text); font-size: 17px; font-weight: 600; line-height: 1.7; }
+.time-series-panel { min-width: 0; padding-top: 16px; color: var(--text); font-size: 16px; }
+.time-series-panel p { line-height: 1.8; overflow-wrap: anywhere; }
+.workspace-dialog .time-series-panel p { font-size: 16px; }
+.time-series-panel .field { min-width: 0; }
+.time-series-panel .field-label,.time-series-panel .field-help { font-size: 16px; }
+.time-series-panel .field input,.time-series-panel .field select { font-size: 16px; min-height: 42px; min-width: 0; width: 100%; max-width: 100%; }
+.workspace-dialog .time-series-panel .field input,.workspace-dialog .time-series-panel .field select { font-size: 16px; }
+.time-series-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px 18px; min-width: 0; margin: 18px 0; }
+.time-series-panel .button { min-height: 42px; font-size: 16px; white-space: normal; overflow-wrap: anywhere; }
+.time-series-mode { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.time-series-mode .button[aria-pressed=true] { color: var(--accent); border-color: var(--accent); }
+.time-series-checkbox { display: flex; align-items: start; gap: 10px; line-height: 1.8; }
+.time-series-checkbox input[type=checkbox] { width: 18px; height: 18px; flex: none; margin-top: 5px; accent-color: var(--accent); }
+.time-series-source,.time-series-diagnostic { color: var(--muted); font-size: 16px; }
+.time-series-result { min-width: 0; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
+.time-series-result h3 { font-size: 20px; line-height: 1.7; margin: 0 0 12px; overflow-wrap: anywhere; }
+.time-series-result h4 { font-size: 16px; line-height: 1.7; margin: 16px 0; overflow-wrap: anywhere; }
+.time-series-metrics { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px 18px; margin: 16px 0; }
+.time-series-metrics > div,.time-series-provenance > div { min-width: 0; }
+.time-series-metrics dt,.time-series-provenance dt { color: var(--muted); font-size: 16px; margin-bottom: 6px; }
+.time-series-metrics dd,.time-series-provenance dd { margin: 0; font-size: 18px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.time-series-provenance { display: grid; gap: 14px; margin: 16px 0; }
+.time-series-provenance dd { font-size: 16px; }
+.time-series-details { margin: 18px 0; min-width: 0; }
+.time-series-details > summary { color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1.8; overflow-wrap: anywhere; }
+.time-series-plot { min-width: 0; margin: 18px 0 24px; }
+.time-series-plot figcaption { color: var(--muted); font-size: 16px; line-height: 1.7; margin-bottom: 10px; overflow-wrap: anywhere; }
+.time-series-plot svg { display: block; width: 100%; max-width: 100%; height: auto; background: var(--canvas); border: 1px solid var(--line); border-radius: 6px; }
+.time-series-grid { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.time-series-point { fill: var(--accent); }
+.time-series-axis-labels { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 12px; color: var(--muted); font-size: 16px; line-height: 1.6; margin: 6px 0; font-variant-numeric: tabular-nums; }
+.time-series-axis-labels span { overflow-wrap: anywhere; }
+.time-series-pagination { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 14px 0; }
+.time-series-pagination span { flex: 1 1 12rem; font-size: 16px; overflow-wrap: anywhere; }
+.time-series-table-scroll { overflow: auto; max-width: 100%; max-height: 420px; margin: 14px 0; }
+.time-series-table-scroll table { width: 100%; border-collapse: collapse; font-size: 16px; font-variant-numeric: tabular-nums; }
+.time-series-table-scroll th,.time-series-table-scroll td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; min-width: 5rem; }
+@media(max-width: 600px) { .time-series-fields,.time-series-metrics { grid-template-columns: minmax(0,1fr); } .time-series-table-scroll th,.time-series-table-scroll td { padding: 8px; } }
